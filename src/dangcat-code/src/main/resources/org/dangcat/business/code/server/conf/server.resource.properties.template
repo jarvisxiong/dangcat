@@ -1,0 +1,5 @@
+# MySql database config
+database.${serverName}.driver=com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
+database.${serverName}.url=jdbc:mysql://${r"${"}database.${serverName}.server}:${r"${"}database.${serverName}.port}/${serverName}_test
+database.${serverName}.user=${r"${"}database.${serverName}.user}
+database.${serverName}.password=${r"${"}database.${serverName}.password}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- server configuration -->
+<Configuration Id="1">
+	<Version>v1.0</Version>
+	<MainService>${packageName}.${serverName?capitalize}Server</MainService>
+	<Properties>
+		dangcat.src.dir=../../../../dangcat/trunk/src
+	</Properties>
+	<WebService>
+		<Enabled>true</Enabled>
+		<WebApp>src/main/webapp</WebApp>
+		<Resources>${r"${"}dangcat.src.dir}/dangcat-business/src/main/webapp;${r"${"}dangcat.src.dir}/dangcat-web/src/main/webapp</Resources>
+		<Port>${r"${"}server.WebService.port}</Port>
+		<ContextRoot>${serverName}</ContextRoot>
+        <ThreadPoolSize>40</ThreadPoolSize>
+	</WebService>
+</Configuration>

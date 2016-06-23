@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/highcharts.min.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/themes/grid.js"></script>
+</head>
+<body>
+<div id="container" style="height: 400px"></div>
+<button id="button" class="autocompare">Set new data</button>
+<script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'pie'
+            },
+
+            series: [
+                {
+                    data: [29.9, 71.5, 106.4]
+                }
+            ]
+        });
+
+        // the button action
+        $('#button').click(function () {
+            var chart = $('#container').highcharts();
+            chart.series[0].setData([129.2, 144.0, 176.0]);
+        });
+    });
+</script>
+</body>
+</html>

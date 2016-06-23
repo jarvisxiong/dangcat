@@ -1,0 +1,36 @@
+<taglib
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1">
+    <description>DangCat Web tag library.</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>DangCat-Web-TLB</short-name>
+    <uri>/DangCat-Web-TLB</uri>
+    <tag>
+        <name>entity</name>
+        <tag-class>org.dangcat.web.tags.EntityTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>classType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>resource</name>
+        <tag-class>org.dangcat.web.tags.ResourceTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>key</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>isMap</name>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

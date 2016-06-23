@@ -1,0 +1,14 @@
+package ${packageName}.domain;
+
+import ${packageName}.calculator.${JndiName}Calculator;
+import org.dangcat.persistence.annotation.Calculator;
+
+/**
+ * The service Query for ${JndiName}.
+ * 
+ */
+@Calculator(${JndiName}Calculator.class)
+public class ${JndiName}Query extends ${JndiName}
+{
+    private static final long serialVersionUID = 1L;
+}

@@ -1,0 +1,50 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    serviceProperties : {
+        toolBar_resetPassword_ItemClick: function (toolBar, item) {
+            var currentRow = this.dataSet.operatorInfo.getCurrentRow();
+            if (currentRow != undefined && currentRow != null) {
+                isc.ResetPasswordWindow.open(item, {
+                    no: currentRow.no,
+                    jndiName: "Staff/OperatorInfo"
+                });
+            }
+            return true;
+        },
+
+        operatorInfo_password2_OnFieldValidate : function(table, column, row, value) {
+            if (value != undefined && value != null && row.password1 != value)
+                return '<z:resource key="OperatorInfoException.104"/>';
+        }
+    },
+
+    toolBarProperties: {
+        functionsMenuData : [
+            isc.ToolButton.ButtonTypes.ResetPassword
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "operatorInfo",
+        fieldNames : [
+            "name",
+            "no",
+            "password1",
+            "password2",
+            "description",
+			"groupId",
+            "roleId",
+            "useAble",
+            "tel",
+            "mobile",
+            "email",
+            "expiryTime",
+            "registerTime"
+        ]
+    },
+
+    dataSetProperties : {
+        <z:entity name="operatorInfo" classType="org.dangcat.business.staff.domain.OperatorInfoCreate"/>
+    }
+});

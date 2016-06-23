@@ -1,0 +1,17 @@
+package ${packageName}.simulate;
+
+import org.dangcat.persistence.simulate.table.EntityData;
+import ${packageName}.domain.${JndiName};
+
+/**
+ * The simulator for ${JndiName}
+ *
+ */
+public class ${JndiName}Simulator extends EntityData<${JndiName}>
+{
+    public ${JndiName}Simulator()
+    {
+        super(${JndiName}.class);
+    }
+}
+

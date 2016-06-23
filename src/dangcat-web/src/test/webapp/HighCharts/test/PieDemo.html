@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Highcharts StackedBarChart Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="../css/chart.css" rel="stylesheet" media="screen" type="text/css"/>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../js/highcharts-tutorial.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container1').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Browser market shares at a specific website, 2010'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                xAxis: {
+                    categories: ['Firefox', 'IE', 'Safari', 'Opera', 'Others']
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function () {
+                                return "<b>" + this.key + "</b>: " + this.y;
+                            }
+                        },
+                        events: {
+                            click: function (e) {
+                                alert("x = " + e.point.name + ", y = " + e.point.y);
+                            }
+                        }
+                    }
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        name: 'Browser share',
+                        data: [ 45.0, 26.8, 12.8, 8.5, 6.2, 0.7]
+                    }
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td style="width:30%">
+            <div id="container1"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container2"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container3"></div>
+        </td>
+    </tr>
+</table>
+<script src="../js/highcharts-3.0.7/highcharts.js"></script>
+<script src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+<script src="../js/highcharts-3.0.7/themes/grid.js"></script>
+</body>
+</html>

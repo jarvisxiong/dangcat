@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Highcharts StackedBarChart Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/highcharts-3.0.7/highcharts.src.js"></script>
+    <script type="text/javascript">
+		(function (H) {
+		    var createAreaSplinePath = function () {
+		        if (this.options.stacking && this.closedStacks) {
+		            var graphPath;
+		            for (var i = this.index + 1; i < this.chart.series.length; i++) {
+		                if (this.chart.series[i].visible) {
+		                    graphPath = this.chart.series[i].graphPath;
+		                    break;
+		                }
+		            }
+		            if (graphPath) {
+		                var areaPath = [].concat(this.graphPath);
+		                var segmentPath = [];
+		                var lastIndex = graphPath.length - 1;
+		                for (var i = lastIndex; i >= 0; i--) {
+		                    var value = graphPath[i];
+		                    if (typeof (value) != "number") {
+		                        segmentPath.push(value);
+		                        if (value == "C")
+		                            segmentPath.push(graphPath[i + 3], graphPath[i + 4], graphPath[i + 1], graphPath[i + 2], graphPath[i - 2], graphPath[i - 1]);
+		                        else {
+		                            for (var j = lastIndex; j > i; j -= 2)
+		                                segmentPath.push(graphPath[j - 1], graphPath[j]);
+		                        }
+		                        lastIndex = i - 1;
+		                    }
+		                }
+		                areaPath.push('L', graphPath[graphPath.length - 2], segmentPath[graphPath.length - 1]);
+		                this.areaPath = areaPath.concat(segmentPath);
+		            }
+		        }
+		    };
+
+		    H.wrap(H.Series.prototype, 'drawGraph', function (proceed) {
+		        proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+		        if (this.chart.options.chart.type == "areaspline")
+		            createAreaSplinePath.call(this);
+		    });
+		}(Highcharts));
+
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'areaspline'
+                },
+                xAxis: {
+                    categories: [
+                        'Monday',
+                        'Tuesday',
+                        'Wednesday',
+                        'Thursday',
+                        'Friday',
+                        'Saturday',
+                        'Sunday'
+                    ]
+                },
+                plotOptions: {
+                    areaspline: {
+                        stacking: "normal",
+                        fillOpacity: 0.5
+                    },
+                    series: {
+                        marker: {
+                            enabled: false,
+                            radius: 1.5
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'John',
+                        closedStacks: false,
+                        data: [3, 4, 3, 5, 4, 10, 12]
+                    },
+                    {
+                        name: 'Jane',
+                        closedStacks: false,
+                        data: [1, 0, 4, 3, 3, 5, 4]
+                    },
+                    {
+                        name: 'Tom',
+                        closedStacks: false,
+                        data: [2, 1, 0, 2, 1, 6, 2]
+                    },
+                    {
+                        name: 'Jerry',
+                        closedStacks: false,
+                        data: [2, 1, 2, 4, 0, 9, 1]
+                    }
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>

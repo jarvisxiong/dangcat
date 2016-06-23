@@ -1,0 +1,61 @@
+package ${packageName}.service;
+
+import java.util.Map;
+
+import org.dangcat.business.service.QueryResult;
+import ${packageName}.domain.${JndiName}Query;
+import ${packageName}.domain.${JndiName}View;
+import ${packageName}.filter.${JndiName}Filter;
+import org.dangcat.commons.reflect.Parameter;
+import org.dangcat.framework.exception.ServiceException;
+import org.dangcat.framework.service.annotation.JndiName;
+
+/**
+ * The service interface for ${JndiName}Service.
+ * 
+ */
+@JndiName(module = "${ModuleName}", name = "${JndiName}")
+public interface ${JndiName}Service
+{
+    /**
+     * 新增实体数据。
+     * @param ${JndiName? uncap_first} 实体对象。
+     * @return 运行结果。
+     */
+    public ${JndiName}View create(@Parameter(name = "${JndiName? uncap_first}") ${JndiName}View ${JndiName? uncap_first}) throws ServiceException;
+
+    /**
+     * 删除指定条件的数据。
+     * @param id 主键。
+     * @return 执行结果。
+     */
+    public boolean delete(@Parameter(name = "id") Integer id) throws ServiceException;
+
+    /**
+     * 查询指定条件的数据。
+     * @param ${JndiName? uncap_first}Filter 查询条件。
+     * @return 查询结果。
+     */
+    public QueryResult<${JndiName}Query> query(@Parameter(name = "${JndiName? uncap_first}Filter") ${JndiName}Filter ${JndiName? uncap_first}Filter) throws ServiceException;
+
+    /**
+     * 保存实体数据。
+     * @param ${JndiName? uncap_first} 实体对象。
+     * @return 运行结果。
+     */
+    public ${JndiName}View save(@Parameter(name = "${JndiName? uncap_first}") ${JndiName}View ${JndiName? uncap_first}) throws ServiceException;
+
+    /**
+     * 查询指定条件的列表。
+     * @param ${JndiName? uncap_first}Filter 查询条件。
+     * @return 查询结果。
+     */
+    public Map<Integer, String> select(@Parameter(name = "${JndiName? uncap_first}Filter") ${JndiName}Filter ${JndiName? uncap_first}Filter) throws ServiceException;
+
+    /**
+     * 查看指定主键的数据。
+     * @param id 主键值。
+     * @return 查看结果。
+     */
+    public ${JndiName}View view(@Parameter(name = "id") Integer id) throws ServiceException;
+}

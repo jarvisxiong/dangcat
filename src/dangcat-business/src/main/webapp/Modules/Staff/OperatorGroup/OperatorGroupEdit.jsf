@@ -1,0 +1,23 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    serviceProperties : {
+        operatorGroup_parentId_OnFieldValidate : function(table, column, row, value) {
+            if (value != undefined && value != null && row.id == value)
+                return '<z:resource key="OperatorGroupException.100"/>';
+        }
+    },
+
+    dataFormProperties : {
+        tableName : "operatorGroup",
+        fieldNames : [
+            "name",
+            "description",
+            "parentId"
+        ]
+    },
+
+    dataSetProperties : {
+        <z:entity classType="org.dangcat.business.staff.domain.OperatorGroup"/>
+    }
+});

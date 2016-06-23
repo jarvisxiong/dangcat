@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Highcharts PieChart Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="../css/chart.css" rel="stylesheet" media="screen" type="text/css"/>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../js/highcharts-tutorial.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("../data/CategoryRowData.json", function (data) {
+                HighChartsFactory.createPieChart('container1', {
+                    primaryKeyColumns: primaryKeyColumns,
+                    valueColumn: valueColumn,
+                    showPercent: true,
+                    itemClick: itemClick
+                }, data);
+            });
+            $.getJSON("../data/CategoryColumnData.json", function (data) {
+                HighChartsFactory.createPieChart('container2', {
+                    logic: "octets",
+                    valueColumns: valueColumns,
+                    legend: {
+                        enabled: false
+                    },
+                    itemClick: itemClick
+                }, data);
+            });
+            $.getJSON("../data/CategoryColumnData.json", function (data) {
+                HighChartsFactory.createPieChart('container3', {
+                    logic: "octets",
+                    valueColumns: valueColumns,
+                    plotOptions: {
+                        pie: {
+                            dataLabels: {
+                                enabled: false
+                            }
+                        }
+                    },
+                    itemClick: itemClick
+                }, data);
+            });
+        });
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td style="width:30%">
+            <div id="container1"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container2"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container3"></div>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript" src="../js/highcharts-3.0.7/highcharts.js"></script>
+<script type="text/javascript" src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+<script type="text/javascript" src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+</body>
+</html>

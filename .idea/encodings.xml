@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-boot" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-boot/src/main/java/org/dangcat/boot/security/impl/SignResolveProvider.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-business" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-chart" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-code" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-commons" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-document" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-framework" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-install" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-jms" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-jmsservice" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-net" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-persistence" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-persistence/src/main/java/org/dangcat/persistence/model/Columns.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-swing" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/dangcat-web" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>

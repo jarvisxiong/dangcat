@@ -1,0 +1,15 @@
+@ECHO off
+IF "%OS%" == "Windows_NT" (
+    SET DIRNAME=%~dp0%
+)ELSE (
+    SET DIRNAME=.
+)
+   
+SET SERVICE_NAME=${serverName}-service
+SET SERVICE_DISPLAYNAME=${serverName}-service
+SET SERVICE_DESCRIPTION=Starts and stops ${serverName}-service Service. used to provide remote services.
+SET SERVICE_CONFIGNAME=${serverName}
+SET COMMAND=%1
+IF "%COMMAND%" == "" SET COMMAND=console
+SET DANGCAT_HOME=%DIRNAME%..
+CALL "%DIRNAME%/jsw/bin/service.bat"

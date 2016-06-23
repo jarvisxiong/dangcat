@@ -1,0 +1,65 @@
+log4j.rootLogger=INFO, RollFileRoot, ConsoleAppender
+log4j.appender.ConsoleAppender = org.apache.log4j.ConsoleAppender
+log4j.appender.ConsoleAppender.Threshold = INFO
+log4j.appender.ConsoleAppender.layout = org.apache.log4j.PatternLayout
+log4j.appender.ConsoleAppender.layout.ConversionPattern =%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+log4j.appender.ConsoleAppender.ImmediateFlush = true
+
+log4j.appender.RollFileRoot=org.apache.log4j.RollingFileAppender
+log4j.appender.RollFileRoot.Append=true
+log4j.appender.RollFileRoot.File=log/${serverName}.root.log
+log4j.appender.RollFileRoot.MaxFileSize=2096kb
+log4j.appender.RollFileRoot.MaxBackupIndex=20
+log4j.appender.RollFileRoot.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollFileRoot.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+
+log4j.logger.${packageName}.${serverName}=INFO, RollFileServer, ConsoleAppender
+log4j.additivity.${packageName}.${serverName}=false
+log4j.appender.RollFileServer=org.apache.log4j.RollingFileAppender
+log4j.appender.RollFileServer.Append=true
+log4j.appender.RollFileServer.File=log/${serverName}.server.log
+log4j.appender.RollFileServer.MaxFileSize=2048kb
+log4j.appender.RollFileServer.MaxBackupIndex=20
+log4j.appender.RollFileServer.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollFileServer.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+
+log4j.logger.${packageName}.${serverName}.business.log=INFO, RollBusinessLog, ConsoleAppender
+log4j.additivity.${packageName}.${serverName}.business.log=false
+log4j.appender.RollBusinessLog=org.apache.log4j.RollingFileAppender
+log4j.appender.RollBusinessLog.Append=true
+log4j.appender.RollBusinessLog.File=log/${serverName}.businesslog.log
+log4j.appender.RollBusinessLog.MaxFileSize=2048kb
+log4j.appender.RollBusinessLog.MaxBackupIndex=20
+log4j.appender.RollBusinessLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollBusinessLog.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+
+log4j.logger.org.dangcat.boot.server.impl.ServerMonitorServiceImpl=DEBUG, RollFileSystemMonitor, ConsoleAppender
+log4j.additivity.org.dangcat.boot.server.impl.ServerMonitorServiceImpl=false
+log4j.appender.RollFileSystemMonitor=org.apache.log4j.RollingFileAppender
+log4j.appender.RollFileSystemMonitor.Append=true
+log4j.appender.RollFileSystemMonitor.File=log/${serverName}.systemmonitor.log
+log4j.appender.RollFileSystemMonitor.MaxFileSize=2048kb
+log4j.appender.RollFileSystemMonitor.MaxBackupIndex=20
+log4j.appender.RollFileSystemMonitor.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollFileSystemMonitor.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+
+log4j.logger.org.dangcat.boot.statistics=INFO, RollFileStatistics, ConsoleAppender
+log4j.additivity.org.dangcat.boot.statistics=false
+log4j.appender.RollFileStatistics=org.apache.log4j.RollingFileAppender
+log4j.appender.RollFileStatistics.Append=true
+log4j.appender.RollFileStatistics.File=log/${serverName}.statistics.log
+log4j.appender.RollFileStatistics.MaxFileSize=2048kb
+log4j.appender.RollFileStatistics.MaxBackupIndex=20
+log4j.appender.RollFileStatistics.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollFileStatistics.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+
+log4j.logger.org.dangcat.boot.service.impl.EntityBatchServiceImpl=DEBUG, RollFileEntityBatch, ConsoleAppender
+log4j.additivity.org.dangcat.boot.service.impl.EntityBatchServiceImpl=false
+log4j.appender.RollFileEntityBatch=org.apache.log4j.RollingFileAppender
+log4j.appender.RollFileEntityBatche.Append=true
+log4j.appender.RollFileEntityBatch.File=log/${serverName}.entitybatch.log
+log4j.appender.RollFileEntityBatch.MaxFileSize=2048kb
+log4j.appender.RollFileEntityBatch.MaxBackupIndex=20
+log4j.appender.RollFileEntityBatch.layout=org.apache.log4j.PatternLayout
+log4j.appender.RollFileEntityBatch.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss.SSS}[%-5p][%t]-%F:%4L - %m%n
+

@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Comments to support chkconfig on RedHat Linux
+# chkconfig: - 20 80
+# description: Starts and stops ${serverName} Service. \
+#	       used to provide remote ${serverName} services.
+
+SERVICE_NAME=${serverName}-service
+SERVICE_DISPLAYNAME="${serverName} Service"
+SERVICE_CONFIGNAME=${serverName}
+COMMAND=$1
+#RUN_AS_USER=damai
+if [ "x$COMMAND" = "x" ]; then
+    COMMAND=console
+fi
+
+#You must set the home path when run as service 
+DANGCAT_HOME=$(cd "$(dirname "$0")/.."; pwd)
+
+SERVICE_SHELL="$DANGCAT_HOME/bin/jsw/bin/service.sh"
+if [ ! -f "$SERVICE_SHELL" ]; then
+    echo "The shell file $SERVICE_SHELL is not exist."
+else
+    PATH=$PATH:$DANGCAT_HOME/bin
+    if [ ! -x "$SERVICE_SHELL" ]; then
+        chmod +x "$SERVICE_SHELL"
+    fi
+    source "$SERVICE_SHELL"
+fi
+
+exit 0

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Caches>
+	<Cache ClassType="org.dangcat.persistence.domain.EntityData" Interval="60" PreLoad="true" LoaderClass="org.dangcat.persistence.domain.EntityDataLoader">
+		<Index>FieldA;FieldB</Index>
+		<Index>FieldD;FieldE</Index>
+	</Cache>
+	<Cache ClassType="org.dangcat.persistence.domain.AccountInfo" Interval="60">
+		<Index>Name;GroupId</Index>
+		<Index>Description;Name</Index>
+	</Cache>
+	<Cache ClassType="org.dangcat.persistence.domain.AccountInfoAlias" DatabaseName="Default" Interval="30">
+		<Index>Name;GroupId</Index>
+		<Index>Description;Name</Index>
+	</Cache>
+</Caches>

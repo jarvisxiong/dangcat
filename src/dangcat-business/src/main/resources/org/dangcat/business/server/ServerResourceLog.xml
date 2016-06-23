@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sqls>
+	<Sql Name="QUERY"><![CDATA[SELECT DateTime, ProcessCpuRatio, TotalCpuRatio, ProcessUsageMemory, TotalUsageMemory - ProcessUsageMemory AS OtherUsageMemory 
+FROM ServerStatusLog
+WHERE ServerId = :serverId AND DateTime > :beginTime AND DateTime <= :endTime
+ORDER BY DateTime]]></Sql>
+</Sqls>

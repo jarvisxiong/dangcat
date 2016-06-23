@@ -1,0 +1,53 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+	
+	detailUrl: "ServerInfoEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="org.dangcat.business.server.ServerInfoFilter" />
+        }
+    },
+
+    dataGridProperties: {
+        tableName : "serverInfo",
+        fieldNames : [
+            "rowNum",
+            "ip",
+            "name",
+            "typeName",
+            "diskUsageSpaceRatio",
+            "totalUsageMemoryRatio",
+            "totalCpuRatio",
+            "isLive"
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "serverInfo",
+        fieldNames : [
+            "rowNum",
+            "ip",
+            "name",
+            "typeName",
+			"statusName",
+            "totalDiskSpace",
+            "diskUsageSpace",
+            "diskUsageSpaceRatio",
+            "totalPhysicalMemory",
+            "totalUsageMemory",
+            "totalUsageMemoryRatio",
+            "processUsageMemory",
+            "processUsageMemoryRatio",
+            "totalCpuRatio",
+            "processCpuRatio",
+            "lastResponseTime",
+            "isLive"
+        ]
+    },
+
+
+    dataSetProperties : {
+        <z:entity name="serverInfo" classType="org.dangcat.business.server.ServerInfoQuery"/>
+    }
+});

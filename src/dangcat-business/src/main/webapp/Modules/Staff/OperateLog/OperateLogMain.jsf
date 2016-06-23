@@ -1,0 +1,30 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    detailUrl: "OperateLogEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="org.dangcat.business.staff.filter.OperateLogFilter" />
+        }
+    },
+
+    dataGridProperties: {
+        tableName : "operatorStat",
+        fieldNames : [
+            "operatorNo",
+            "operatorName",
+            "groupName",
+            "success",
+            "failure"
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "operatorStat"
+    },
+
+    dataSetProperties : {
+        <z:entity name="operatorStat" classType="org.dangcat.business.staff.domain.OperateStat"/>
+    }
+});

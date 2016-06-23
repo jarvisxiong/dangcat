@@ -1,0 +1,81 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    serviceProperties : {
+        operateStat_BeforeView: function (table, id) {
+            var filterProperties = { id : id };
+            var dataFilter = this.owner.dataFilter;
+            if (dataFilter != undefined && dataFilter != null) {
+                if (dataFilter.month != undefined && dataFilter.month != null)
+                    filterProperties["month"] = dataFilter.month
+            }
+            return filterProperties;
+        },
+
+        dataGrid_RowDoubleClick: function (dataGrid, record, rowNum, colNum) {
+            dataGrid.operateToolBar.detail.click();
+            return true;
+        },
+
+        dataGrid_detail_RowButtonClick: function (dataGrid, item, record) {
+            isc.ViewWindow.open(item, {
+                table : dataGrid.getBindTable()
+            });
+            return false;
+        }
+    },
+
+    dataFormProperties : {
+        tableName : "operateStat",
+        columnCount: 2,
+        fieldNames : [
+            "operatorNo",
+            "operatorName",
+            "success",
+            "failure"
+        ]
+    },
+
+    dataGridProperties: {
+        tableName : "operatorOptLog",
+        toolBar : isc.DataGridToolBar.create(),
+        operateToolBar : isc.OperateToolBar.create({
+            buttons : [
+                {
+                    name : "detail",
+                    src: "[isomorphic]/../images/icons/16/detail.png",
+                    title: isc.i18nButton.detail
+                }
+            ]
+        }),
+        fieldNames : [
+            "dateTime",
+            "ipAddress",
+            "serviceName",
+            "methodName",
+            "result"
+        ]
+    },
+
+    dataSetProperties : {
+        overrideProperties : {
+            operatorOptLog : {
+                jndiName : "Staff/OperateLog/load",
+                relation : {
+                    parentName : "operateStat",
+                    getFilter : function(parent) {
+                        var filterProperties = { operatorId : parent.getCurrentRow().operatorId };
+                        var filter = parent.filter;
+                        if (filter != undefined && filter != null) {
+                            if (filter.month != undefined && filter.month != null)
+                                filterProperties["month"] = filter.month;
+                        }
+                        return filterProperties;
+                    }
+                }
+            }
+        },
+        <z:entity name="operateStat" classType="org.dangcat.business.staff.domain.OperateStat"/>,
+        <z:entity name="operatorOptLog" classType="org.dangcat.business.staff.domain.OperatorOptLog"/>
+    }
+});

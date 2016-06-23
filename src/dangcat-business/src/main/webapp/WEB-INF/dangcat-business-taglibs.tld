@@ -1,0 +1,19 @@
+<taglib
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1">
+    <description>DangCat Business tag library.</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>DangCat-Business-TLB</short-name>
+    <uri>/DangCat-Business-TLB</uri>
+    <tag>
+        <name>permissions</name>
+        <tag-class>org.dangcat.business.web.tags.PermissionsTag</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
+        <name>config</name>
+        <tag-class>org.dangcat.business.web.tags.ConfigTag</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+</taglib>

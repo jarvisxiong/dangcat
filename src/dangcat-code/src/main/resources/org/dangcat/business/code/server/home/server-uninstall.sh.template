@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Comments to support chkconfig on RedHat Linux
+# chkconfig: - 20 80
+# description: Starts and stops ${serverName} Service. \
+#	       used to provide remote ${serverName} services.
+cd ../../
+JAVA_HOME=./${serverName}-service/jdk
+$JAVA_HOME/bin/java ${packageName}.install.UninstallFrame
+exit 0

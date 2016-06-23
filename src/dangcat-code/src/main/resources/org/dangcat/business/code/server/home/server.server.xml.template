@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- server configuration -->
+<Configuration Id="1">
+	<Version>v1.0</Version>
+	<MainService>${packageName}.${serverName?capitalize}Server</MainService>
+	<WebService>
+		<Enabled>true</Enabled>
+		<Port>${r"${"}server.WebService.port}</Port>
+		<ContextRoot>${serverName}</ContextRoot>
+        <ThreadPoolSize>40</ThreadPoolSize>
+	</WebService>
+</Configuration>

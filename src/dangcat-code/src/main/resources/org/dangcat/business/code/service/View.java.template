@@ -1,0 +1,11 @@
+package ${packageName}.domain;
+
+import ${packageName}.domain.${JndiName};
+/**
+ * The service View for ${JndiName}.
+ * 
+ */
+public class ${JndiName}View extends ${JndiName}
+{
+    private static final long serialVersionUID = 1L;
+}

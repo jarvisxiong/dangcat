@@ -1,0 +1,37 @@
+package ${packageName}.install;
+
+import java.io.File;
+
+import org.dangcat.boot.ApplicationContext;
+import org.dangcat.install.frame.ConfigFrameBase;
+
+public class ConfigFrame extends ConfigFrameBase
+{
+    private static final String CONFIG_FILENAME = "${serverName}.server.properties";
+    private static final String DATABASE_NAME = "${serverName}";
+    private static final Integer DEFAULT_DATABASE_PORT = 3506;
+    private static final long serialVersionUID = 1L;
+
+    public static void main(final String[] args)
+    {
+        show(new ConfigFrame());
+    }
+
+    private File configFile = null;
+
+    @Override
+    protected File getConfigFile()
+    {
+        if (this.configFile == null)
+            this.configFile = new File(ApplicationContext.getInstance().getContextPath().getConf() + File.separator + CONFIG_FILENAME);
+        return this.configFile;
+    }
+
+    @Override
+    public void initialize()
+    {
+        super.initialize();
+
+        this.createDatabaseConfigModule(DATABASE_NAME, DEFAULT_DATABASE_PORT);
+    }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    document.write("ValueFormator: <br/>");
+    var valueFormator = new ValueFormator();
+    for (var i = 100; i < 100000000000000; i = i * 100)
+        document.write(i + ": " + valueFormator.format(i) + "<br/>");
+
+    document.write("<br/>VelocityFormator: <br/>");
+    var velocityFormator = new VelocityFormator();
+    for (var i = 100; i < 100000000000000; i = i * 100)
+        document.write(i + ": " + velocityFormator.format(i) + "<br/>");
+
+    document.write("<br/>OctetsFormator: <br/>");
+    var octetsFormator = new OctetsFormator();
+    for (var i = 512; i < 1000000000000000; i = i * 1024)
+        document.write(i + ": " + octetsFormator.format(i) + "<br/>");
+
+    document.write("<br/>OctetsVelocityFormator: <br/>");
+    var octetsVelocityFormator = new OctetsVelocityFormator();
+    for (var i = 512; i < 1000000000000000; i = i * 1024)
+        document.write(i + ": " + octetsVelocityFormator.format(i) + "<br/>");
+
+    document.write("<br/>PercentFormator: <br/>");
+    var percentFormator = new PercentFormator();
+    document.write("0.0: " + percentFormator.format(0.0) + "<br/>");
+    document.write("0.001: " + percentFormator.format(0.001) + "<br/>");
+    document.write("-0.001: " + percentFormator.format(-0.001) + "<br/>");
+    document.write("0.025: " + percentFormator.format(0.025) + "<br/>");
+    document.write("12.256: " + percentFormator.format(12.256) + "<br/>");
+
+    document.write("<br/>TimeLengthFormator: <br/>");
+    var timeLengthFormator = new TimeLengthFormator();
+    document.write("100: " + timeLengthFormator.format(100) + "<br/>");
+    document.write("1000: " + timeLengthFormator.format(1000) + "<br/>");
+    document.write("60000: " + timeLengthFormator.format(60000) + "<br/>");
+    document.write("3600000: " + timeLengthFormator.format(3600000) + "<br/>");
+    document.write("7250000: " + timeLengthFormator.format(7250000) + "<br/>");
+</script>
+</body>
+</html>

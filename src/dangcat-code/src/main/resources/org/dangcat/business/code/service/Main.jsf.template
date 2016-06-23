@@ -1,0 +1,29 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    detailUrl: "OperatorInfoEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="${packageName}.filter.${JndiName}Filter" />
+        }
+    },
+
+    dataGridProperties: {
+        tableName : "${JndiName?uncap_first}",
+        fieldNames : [
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "${JndiName?uncap_first}",
+        fieldNames : [
+        ]
+    },
+
+    dataSetProperties : {
+        overrideProperties : {
+        },
+        <z:entity name="${JndiName?uncap_first}" classType="${packageName}.domain.${JndiName}Query"/>
+    }
+});

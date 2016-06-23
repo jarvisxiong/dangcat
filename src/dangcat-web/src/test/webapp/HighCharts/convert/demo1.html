@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript">
+		var options = {
+	        "type": "Pie",
+			"width": 800,
+			"height": 600,
+	        "valueColumns": [
+	            { "name": "Firefox", "title": "火狐" },
+	            { "name": "IE" },
+	            { "name": "Chrome" },
+	            { "name": "Safari" },
+	            { "name": "Opera" },
+	            { "name": "Tom", "title": "老鼠" },
+	            { "name": "Jerry" },
+	            { "name": "Pig" },
+	            { "name": "LittleDog" },
+	            { "name": "Others" }
+	        ],
+	        "showPercent": true,
+	        "showLegend": true
+	    };
+	    var data = {
+	        "Firefox": 450000000.0,
+	        "IE": 260000000.8,
+	        "Chrome": 120000000.8,
+	        "Safari": 80000000.5,
+	        "Opera": 60000000.2,
+	        "Tom": 100000000.2,
+	        "Jerry": 70000000.2,
+	        "Pig": 40000000.2,
+	        "LittleDog": 80000000.2,
+	        "Others": 100000000.7
+	    }
+    </script>
+	<style>
+		body {
+			margin :0px;
+			background: green;
+		};
+		div {
+			width:100%;
+			height:100%;
+		}
+	</style>
+</head>
+<body>
+    <script type="text/javascript">
+        $(function () {
+			//if (!$.defined(chartOptions.options.chart)) 
+			//	chartOptions.options.chart = {};
+			//chartOptions.options.chart.zoomType = "xy";
+			// disable animations
+			Highcharts.SVGRenderer.prototype.Element.prototype.animate = Highcharts.SVGRenderer.prototype.Element.prototype.attr;
+			var highChart = HighChartsFactory.createHighChart("container", options, data);
+			
+			var nodes = document.querySelectorAll('*[stroke-opacity]');
+			for (nodeIter = 0; nodeIter < nodes.length; nodeIter += 1) {
+				var element = nodes[nodeIter];
+				var opacity = element.getAttribute('stroke-opacity');
+				element.removeAttribute('stroke-opacity');
+				element.setAttribute('opacity', opacity);
+			}
+        });
+    </script>
+<div id="container"/>
+
+<script type="text/javascript" src="../../../../main/webapp/js/highcharts-3.0.7/highcharts.src.js"></script>
+<script type="text/javascript" src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+</body>
+</html>

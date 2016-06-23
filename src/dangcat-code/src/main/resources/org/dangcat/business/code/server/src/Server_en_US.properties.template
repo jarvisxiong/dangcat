@@ -1,0 +1,47 @@
+projectTitle=${serverName?capitalize}Server
+masterTitle=${serverName?capitalize}
+secondTitle=
+copyRight=\u00a92015-2020 ${serverName?capitalize} Corporation Copyright
+
+Menu.Home.title=Home
+Menu.Monitor.title=Monitor
+Menu.Report.title=Report
+Menu.System.title=System
+Menu.Staff.title=Staff
+
+Submenu.System.title=System Manager
+Submenu.Staff.title=Staff Manager
+Submenu.SubStaff1.title=Submenu Staff1 
+Submenu.SubStaff2.title=Submenu Staff2
+Submenu.SubStaff3.title=Submenu Staff3
+
+MenuItem.FormDemo.title=Form Demo
+MenuItem.WidgetsDemo.title=Widgets Demo
+MenuItem.FtpDemo.title=File Upload
+MenuItem.ServerInfo.title=Server Info
+MenuItem.OperatorGroup.title=Operator Group
+MenuItem.RoleInfo.title=Role Info
+MenuItem.OperatorInfo.title=Operator Info
+MenuItem.OperateLog.title=Operate Log
+MenuItem.UploadDemo1.title=File upload demo 1
+MenuItem.UploadDemo2.title=File upload demo 2
+MenuItem.UploadDemo3.title=File upload demo 3
+
+Module.Staff.title=Staff Manager
+Module.Device.title=Device Manager
+
+ParamMap.Month.0=This Month
+ParamMap.Month.1=Prior 1 Month
+ParamMap.Month.2=Prior 2 Month
+ParamMap.Month.3=Prior 3 Month
+ParamMap.Month.4=Prior 4 Month
+ParamMap.Month.5=Prior 5 Month
+ParamMap.Month.6=Prior 6 Month
+ParamMap.Month.7=Prior 7 Month
+ParamMap.Month.8=Prior 8 Month
+ParamMap.Month.9=Prior 9 Month
+ParamMap.Month.10=Prior 10 Month
+ParamMap.Month.11=Prior 11 Month
+ParamMap.Month.12=Prior 12 Month
+
+ServerType.ValueMap=100:Radius;
