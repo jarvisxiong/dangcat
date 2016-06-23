@@ -1,0 +1,4 @@
+@ECHO off
+CD %CD%\..
+SET JAVA_HOME=.\jdk
+start %JAVA_HOME%\bin\javaw ${packageName}.install.ConfigFrame

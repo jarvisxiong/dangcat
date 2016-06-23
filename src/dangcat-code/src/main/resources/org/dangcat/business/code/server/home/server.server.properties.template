@@ -1,0 +1,8 @@
+# MySql database config
+database.${serverName}.server=localhost
+database.${serverName}.user=root
+database.${serverName}.port=3506
+database.${serverName}.password=dItSdrQ2Bbw=
+
+# Server config
+server.WebService.port=8080

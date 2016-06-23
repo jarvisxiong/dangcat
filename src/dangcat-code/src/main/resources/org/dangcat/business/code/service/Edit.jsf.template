@@ -1,0 +1,16 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    serviceProperties : {
+    },
+
+    dataFormProperties : {
+        tableName : "${JndiName?uncap_first}",
+        fieldNames : [
+        ]
+    },
+
+    dataSetProperties : {
+        <z:entity name="${JndiName?uncap_first}" classType="${packageName}.domain.${JndiName}View"/>
+    }
+});

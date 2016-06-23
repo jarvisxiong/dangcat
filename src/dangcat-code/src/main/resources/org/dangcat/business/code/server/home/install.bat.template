@@ -1,0 +1,3 @@
+@ECHO off
+SET JAVA_HOME=.\${serverName}-service\jdk
+start %JAVA_HOME%\bin\javaw ${packageName}.install.InstallFrame

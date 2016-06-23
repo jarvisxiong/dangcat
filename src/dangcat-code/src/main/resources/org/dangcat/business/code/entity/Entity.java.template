@@ -1,0 +1,38 @@
+package ${packageName};
+
+<#if hasDateType>
+import java.util.Date;
+</#if>
+import org.dangcat.persistence.annotation.Column;
+import org.dangcat.persistence.annotation.Table;
+<#if baseClassName != "">
+import ${baseClassName};
+</#if>
+
+@Table("${tableName}")
+public class ${entityName} <#if baseClassName != "">extends ${baseClassSimpleName}</#if>
+{
+    private static final long serialVersionUID = 1L;
+    <#list columns as column>
+    public static final String ${column.name} = "${column.name}";
+    </#list>
+    <#list columns as column>
+    
+    @Column(fieldName = "${column.fieldName}", index = ${column.index}<#if column.displaySize != 0>, displaySize = ${column.displaySize}</#if><#if column.autoIncrement>, isAutoIncrement = true</#if><#if column.primaryKey>, isPrimaryKey = true<#else><#if !column.nullable>, isNullable = false</#if></#if>)
+    private ${column.fieldClass.simpleName} ${column.name? uncap_first};
+    </#list>
+    <#list columns as column>
+    
+    public ${column.fieldClass.simpleName} get${column.name}()
+    {
+        return this.${column.name? uncap_first};
+    }
+    </#list>
+    <#list columns as column>
+    
+    public void set${column.name}(${column.fieldClass.simpleName} ${column.name? uncap_first})
+    {
+        this.${column.name? uncap_first} = ${column.name? uncap_first};
+    }
+    </#list>
+}

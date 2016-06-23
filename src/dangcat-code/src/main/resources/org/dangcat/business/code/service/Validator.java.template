@@ -1,0 +1,16 @@
+package ${packageName}.validator;
+
+import ${packageName}.domain.${JndiName}View;
+import org.dangcat.business.validator.BusinessValidator;
+import org.dangcat.framework.exception.ServiceException;
+
+public class ${JndiName}Validator extends BusinessValidator<${JndiName}View>
+{
+    public void beforeDelete(${JndiName}View ${JndiName? uncap_first}) throws ServiceException
+    {
+    }
+
+    public void beforeSave(${JndiName}View ${JndiName? uncap_first}) throws ServiceException
+    {
+    }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Highcharts AreaSplineChart Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="../css/chart.css" rel="stylesheet" media="screen" type="text/css"/>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../data/AreaSplineData.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'areaspline'
+                },
+                title: {
+                    text: 'Average fruit consumption during one week'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 150,
+                    y: 100,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: '#FFFFFF'
+                },
+                xAxis: {
+                    type: "datetime"
+                },
+                yAxis: {
+                    logic: "octets",
+                    title: {
+                        text: 'Fruit units'
+                    },
+                    postProcessTickInterval: function (tickInterval) {
+                        return tickInterval;
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    valueSuffix: ' units'
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        stacking: "normal",
+                        fillOpacity: 0.5,
+                        animation: false,
+                        cursor: "pointer",
+                        lineWidth: 1.5,
+                        marker: {
+                            enabled: false,
+                            radius: 1.5
+                        }
+                    }
+                },
+                series: seriesData
+            });
+        });    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td style="width:30%">
+            <div id="container"></div>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript" src="../js/highcharts-3.0.7/highcharts.src.js"></script>
+<script type="text/javascript" src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+<script type="text/javascript" src="../js/highcharts-3.0.7/themes/grid.js"></script>
+<script type="text/javascript" src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+</body>
+</html>

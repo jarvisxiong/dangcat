@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-boot/dangcat-boot.iml" filepath="$PROJECT_DIR$/src/dangcat-boot/dangcat-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-business/dangcat-business.iml" filepath="$PROJECT_DIR$/src/dangcat-business/dangcat-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-chart/dangcat-chart.iml" filepath="$PROJECT_DIR$/src/dangcat-chart/dangcat-chart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-code/dangcat-code.iml" filepath="$PROJECT_DIR$/src/dangcat-code/dangcat-code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-commons/dangcat-commons.iml" filepath="$PROJECT_DIR$/src/dangcat-commons/dangcat-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-document/dangcat-document.iml" filepath="$PROJECT_DIR$/src/dangcat-document/dangcat-document.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-framework/dangcat-framework.iml" filepath="$PROJECT_DIR$/src/dangcat-framework/dangcat-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-install/dangcat-install.iml" filepath="$PROJECT_DIR$/src/dangcat-install/dangcat-install.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-jms/dangcat-jms.iml" filepath="$PROJECT_DIR$/src/dangcat-jms/dangcat-jms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-jmsservice/dangcat-jmsservice.iml" filepath="$PROJECT_DIR$/src/dangcat-jmsservice/dangcat-jmsservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-net/dangcat-net.iml" filepath="$PROJECT_DIR$/src/dangcat-net/dangcat-net.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-parent.iml" filepath="$PROJECT_DIR$/src/dangcat-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-persistence/dangcat-persistence.iml" filepath="$PROJECT_DIR$/src/dangcat-persistence/dangcat-persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-swing/dangcat-swing.iml" filepath="$PROJECT_DIR$/src/dangcat-swing/dangcat-swing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/dangcat-web/dangcat-web.iml" filepath="$PROJECT_DIR$/src/dangcat-web/dangcat-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/trunk.iml" filepath="$PROJECT_DIR$/.idea/trunk.iml" />
+    </modules>
+  </component>
+</project>

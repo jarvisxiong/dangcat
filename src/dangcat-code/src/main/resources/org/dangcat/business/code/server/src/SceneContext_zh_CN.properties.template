@@ -1,0 +1,6 @@
+﻿isc.ApplicationContext.projectTitle = "${serverName}";
+isc.ApplicationContext.masterTitle = "${serverName}";
+isc.ApplicationContext.secondTitle = "${serverName}";
+isc.ApplicationContext.version = "v1.0";
+isc.ApplicationContext.copyRight = "©2014-2022 ${serverName}科技软件技术有限公司 苏ICP备13952006520号版权所有";
+isc.ApplicationContext.loginInfo = "测试板本";

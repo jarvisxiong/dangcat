@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- server configuration -->
+<Configuration Id="10">
+	<Version>v1.0</Version>
+	<MainService>org.dangcat.business.web.WebServer</MainService>
+	<WebService>
+		<Enabled>true</Enabled>
+		<WebApp>../../dangcat-web/src/main/webapp</WebApp>
+		<Resources>src/main/webapp</Resources>
+		<ConfigFile></ConfigFile>
+		<Port>8080</Port>
+		<ContextRoot>dangcat</ContextRoot>
+	</WebService>
+	<Properties>
+	</Properties>
+</Configuration>

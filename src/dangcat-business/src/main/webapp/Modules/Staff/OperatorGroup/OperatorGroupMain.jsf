@@ -1,0 +1,40 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    detailUrl: "OperatorGroupEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="org.dangcat.business.staff.filter.OperatorGroupFilter" />
+        }
+    },
+
+    getDataGridProperties: function () {
+        return {
+            name: "dataGrid",
+            classType: isc.TreeDataGrid,
+            properties: {
+                nodeIcon:"[SKIN]/../icons/16/person.png",
+                folderIcon:"[SKIN]/../icons/16/person.png",
+                tableName : "operatorGroup",
+                fieldNames : [
+                    "name",
+                    "description"
+                ]
+            }
+        };
+    },
+
+    dataFormProperties : {
+        tableName : "operatorGroup",
+        fieldNames : [
+            "name",
+            "description",
+            "parentName"
+        ]
+    },
+
+    dataSetProperties : {
+        <z:entity classType="org.dangcat.business.staff.domain.OperatorGroup"/>
+    }
+});

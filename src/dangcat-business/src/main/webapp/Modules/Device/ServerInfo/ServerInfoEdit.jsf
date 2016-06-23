@@ -1,0 +1,117 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    serviceProperties : {
+        initialize: function () {
+            this.Super("initialize", arguments);
+            // 定时更新数据
+            this.setInterval("loadChartData", 60000, 60000);
+        },
+        
+        serverInfo_AfterLoad: function (table) {
+            this.loadChartData();
+            return true;
+        },
+        
+        loadChartData: function () {
+            var currentRow = this.dataSet.serverInfo.getCurrentRow();
+            var usageCpuChart = this.usageCpuChart;
+            var usageMemoryChart = this.usageMemoryChart;
+            usageMemoryChart.ajaxLoad({
+                id : currentRow.id
+            }, false, function(data){
+				usageCpuChart.setData(data);
+			});
+            return true;
+        }
+    },
+
+    dataFormProperties : {
+        tableName : "serverInfo",
+        columnCount : 2,
+        fieldNames : [
+            "ip",
+            "name",
+            "typeName",
+			"statusName",
+            "totalDiskSpace",
+            "diskUsageSpace",
+            "diskUsageSpaceRatio",
+            "totalPhysicalMemory",
+            "totalUsageMemory",
+            "totalUsageMemoryRatio",
+            "processUsageMemory",
+            "processUsageMemoryRatio",
+            "totalCpuRatio",
+            "processCpuRatio",
+            "lastResponseTime",
+            "isLive"
+        ]
+    },
+
+    detailMember :  {
+		classType : isc.VPanel,
+		members :[
+			{
+				name: "usageMemoryChart",
+				classType: isc.HighChart,
+				properties: {
+					loadMethodName : "loadServerResourceLogs",
+					chartOptions : {
+						type: "AreaSpline",
+						timeType: "Hour",
+						timePeriod: -24,
+						logic: "octets",
+						exportEnabled : true,
+						yAxisProperties: {
+							baseTitle: '<z:resource key="ServerResourceLog.UsageMemory"/>'
+						},
+						legendAlign : "right",
+						valueColumns: [
+							{
+								name: "otherUsageMemory",
+								title: '<z:resource key="ServerResourceLog.OtherUsageMemory"/>'
+							},
+							{
+								name: "processUsageMemory",
+								title: '<z:resource key="ServerResourceLog.ProcessUsageMemory"/>'
+							}
+						]
+					}
+				}
+			},
+			{
+				name: "usageCpuChart",
+				classType: isc.HighChart,
+				properties: {
+					chartOptions : {
+						type: "Line",
+						timeType: "Hour",
+						timePeriod: -24,
+						logic: "percent",
+						exportEnabled : true,
+						yAxisProperties: {
+							baseTitle: '<z:resource key="ServerResourceLog.CpuRatio"/>',
+							max: 100
+						},
+						legendAlign : "right",
+						valueColumns: [
+							{
+								name: "totalCpuRatio",
+								title: '<z:resource key="ServerResourceLog.TotalCpuRatio"/>'
+							},
+							{
+								name: "processCpuRatio",
+								title: '<z:resource key="ServerResourceLog.ProcessCpuRatio"/>'
+							}
+						]
+					}
+				}
+			}
+		]
+    },
+
+    dataSetProperties : {
+        <z:entity name="serverInfo" classType="org.dangcat.business.server.ServerInfoQuery"/>
+    }
+});

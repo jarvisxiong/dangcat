@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../../../../main/webapp/js/CryptoJS-3.1.2.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery.json-2.4.min.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery.form.min.js" type="text/javascript"></script>
+    <script>
+        var isomorphicDir = "../../../../main/webapp/isomorphic/";
+        var isc_maxCSSLoaders = 200;
+    </script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_History.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/development/ISC_FileLoader.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Core.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Foundation.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Containers.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Grids.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Forms.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_DataBinding.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/skins/Enterprise/load_skin.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/locales/frameworkMessages_zh_CN.properties"></script>
+    <script src="../../../../main/webapp/i18n/Widgets_zh_CN.properties"></script>
+    <script src="../../../../main/webapp/js/jquery.dangcat-1.0.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/highcharts-3.0.7/highcharts.src.js"></script>
+    <script src="../../../../main/webapp/js/highcharts-3.0.7/modules/exporting.js"></script>
+    <script src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+    <script src="../../../../main/webapp/widgets/Widgets.js"></script>
+    <script src="../../../../main/webapp/widgets/DataSet.js"></script>
+    <script src="../../../../main/webapp/widgets/Modules.js"></script>
+    <script src="../../../../main/webapp/widgets/MainLayout.js"></script>
+    <link href="../../../../main/webapp/css/MainLayout.css" rel="stylesheet" media="screen" type="text/css"/>
+    <link href="../../../../main/webapp/isomorphic/css/widgets.css" rel="stylesheet" media="screen" type="text/css"/>
+</HEAD>
+<BODY>
+<select onchange="tileGrid1.setColumnSize(this.value)">
+  <option value ="2">2</option>
+  <option value ="3" selected="true">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>
+<SCRIPT>
+
+var suplItemData =[];
+var maxRecords = 10;
+for (var i=0;i<maxRecords; i++) {
+    suplItemData.push({
+        itemName : "itemName" + i,
+        category : "category" + i,
+        SKU : "SKU" + i,
+        units : "units" + i,
+        description : "description" + i
+    });
+}
+
+var tileGrid1 = isc.DataTileGrid.create({
+    autoDraw: true,
+    top : 30,
+    tileHeight: 100,
+    data:suplItemData, 
+    tileConstructor: "DataForm",
+    tileProperties: {
+        width: "100%",
+        height: "100%",
+        autoSize: false,
+        canDragReposition: false,
+        canDragResize: false,
+        border: "1px solid red",
+        fields:[
+            {name:"itemName"},
+            {name:"category"},
+            {name:"SKU"},
+            {name:"units"},
+            {name:"description"}
+        ]
+    }
+});
+
+</SCRIPT>
+</BODY>
+</HTML>

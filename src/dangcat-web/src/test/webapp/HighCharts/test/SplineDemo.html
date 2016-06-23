@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Highcharts StackedBarChart Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="../css/chart.css" rel="stylesheet" media="screen" type="text/css"/>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+    <script type="text/javascript" src="../js/highcharts-tutorial.js"></script>
+    <script type="text/javascript" src="../data/AreaSplineData.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container1').highcharts({
+                chart: {
+                    renderTo: "container1",
+                    borderWidth: 0,
+                    type: "spline"
+                },
+                title: {
+                    text: ""
+                },
+                legend: {
+                    enabled: true
+                },
+                tooltip: {
+                    //crosshairs: true,
+                    shared: true
+                },
+                xAxis: {
+                    type: "datetime"
+                },
+                plotOptions: {
+                    series: {
+                        animation: false,
+                        cursor: "pointer",
+                        lineWidth: 1.5,
+                        marker: {
+                            enabled: false,
+                            radius: 1.5
+                        }
+                    }
+                },
+                series : seriesData
+            });
+        });
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td style="width:30%">
+            <div id="container1"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container2"></div>
+        </td>
+        <td style="width:30%">
+            <div id="container3"></div>
+        </td>
+    </tr>
+</table>
+<script src="../js/highcharts-3.0.7/highcharts.js"></script>
+<script src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+<script src="../js/highcharts-3.0.7/themes/grid.js"></script>
+</body>
+</html>

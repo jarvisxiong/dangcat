@@ -1,0 +1,38 @@
+package ${packageName};
+
+import org.dangcat.boot.Launcher;
+import org.dangcat.boot.security.annotation.ExtendSecurities;
+import org.dangcat.boot.security.annotation.LocalSecurity;
+import org.dangcat.business.staff.security.OperatorSecurityServiceImpl;
+import org.dangcat.framework.service.MainServiceBase;
+import org.dangcat.framework.service.ServiceProvider;
+
+@LocalSecurity
+@ExtendSecurities( { OperatorSecurityServiceImpl.class })
+public class ${serverName?capitalize}Server extends MainServiceBase
+{
+    public static final String SERVICE_NAME = "${serverName}";
+
+    public static void main(String[] args)
+    {
+        Launcher.start(${serverName?capitalize}Server.class, SERVICE_NAME, false);
+    }
+
+    /**
+     * 构建服务。
+     * @param parent 所属父服务。
+     */
+    public ${serverName?capitalize}Server(ServiceProvider parent)
+    {
+        super(parent);
+    }
+
+    /**
+     * 初始化服务。
+     */
+    @Override
+    public void initialize()
+    {
+        super.initialize();
+    }
+}

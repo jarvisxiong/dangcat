@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+}
+
+#container td {
+    border:1px solid #3c92e6;
+    width: 33%;
+}
+
+div {
+    height: 300px;
+    width: 100%;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var date = new Date();
+    document.write("date: " + date.format() +"<br/>");
+    document.write("getFirstTimeOfDay: " + date.getFirstTimeOfDay().format() +"<br/>");
+    document.write("getLastTimeOfDay: " + date.getLastTimeOfDay().format() +"<br/>");
+    document.write("getFirstTimeOfWeek: " + date.getFirstTimeOfWeek().format() +"<br/>");
+    document.write("getLastTimeOfWeek: " + date.getLastTimeOfWeek().format() +"<br/>");
+    document.write("getFirstTimeOfMonth: " + date.getFirstTimeOfMonth().format() +"<br/>");
+    document.write("getLastTimeOfMonth: " + date.getLastTimeOfMonth().format() +"<br/>");
+    document.write("getFirstTimeOfYear: " + date.getFirstTimeOfYear().format() +"<br/>");
+    document.write("getLastTimeOfYear: " + date.getLastTimeOfYear().format() +"<br/>");
+    document.write("addMonths 1: " + date.addMonths(1).format() +"<br/>");
+    document.write("addMonths -1: " + date.addMonths(-1).format() +"<br/>");
+    document.write("addMonths 12: " + date.addMonths(12).format() +"<br/>");
+    document.write("addMonths -12: " + date.addMonths(-12).format() +"<br/>");
+    document.write("firstDay: " +  $.global.culture.calendar.firstDay +"<br/>");
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script type="text/javascript" src="../../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/highcharts.min.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/modules/exporting.js"></script>
+    <script type="text/javascript" src="../js/highcharts-3.0.7/themes/grid.js"></script>
+</head>
+<body>
+
+<div id="container" style="height: 400px"></div>
+<button id="button" class="autocompare">Update first slice</button>
+<script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'pie'
+            },
+            series: [
+                {
+                    data: [29.9, 71.5, 106.4],
+                    dataLabels: {
+                        format: '{point.y}'
+                    }
+                }
+            ]
+        });
+
+        // button handler
+        var chart = $('#container').highcharts(),
+                y = 30;
+        $('#button').click(function () {
+            chart.series[0].data[0].update(y += 10);
+        });
+    });
+</script>
+</body>
+</html>

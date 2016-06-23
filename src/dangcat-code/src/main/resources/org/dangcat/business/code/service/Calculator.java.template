@@ -1,0 +1,23 @@
+package ${packageName}.calculator;
+
+import java.util.Collection;
+import org.dangcat.persistence.calculate.Calculator;
+
+/**
+ * The service Calculator for ${JndiName}.
+ * 
+ */
+public class ${JndiName}Calculator implements Calculator
+{
+    private static final long serialVersionUID = 1L;
+    
+    @Override
+    public void calculate(Collection<?> entityCollection)
+    {
+    }
+
+    @Override
+    public void calculate(Object entity)
+    {
+    }
+}

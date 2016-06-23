@@ -1,0 +1,78 @@
+package ${packageName}.service;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import ${packageName}.domain.${JndiName};
+import ${packageName}.domain.${JndiName}Query;
+import ${packageName}.domain.${JndiName}View;
+import ${packageName}.filter.${JndiName}Filter;
+import ${packageName}.simulate.${JndiName}Simulator;
+import ${packageName}.service.impl.${JndiName}ServiceImpl;
+import org.dangcat.business.test.QueryAssert;
+import org.dangcat.business.test.BusinessServiceTestBase;
+import org.dangcat.business.test.TestServiceQuery;
+import org.dangcat.framework.exception.ServiceException;
+import org.dangcat.persistence.simulate.DatabaseSimulator;
+
+/**
+ * The service test for ${JndiName}
+ *
+ */
+public class Test${JndiName}Service extends BusinessServiceTestBase<${JndiName}Service, ${JndiName}Query, ${JndiName}View, ${JndiName}Filter>
+{
+    private static final int TEST_COUNT = 100;
+
+    @Override
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
+    {
+		// TODO: 初始化需要使用的数据库配置。
+		databaseSimulator.add(new ${JndiName}Simulator(), TEST_COUNT);
+    }
+
+    @Before
+    @Override
+    public void initialize()
+    {
+        // 添加要测试的服务。
+        this.addService(${JndiName}Service.class, ${JndiName}ServiceImpl.class);
+
+        super.initialize();
+    }
+
+    @Test
+    public void testDefaultNew() throws ServiceException
+    {
+		// TODO: 测试新增功能
+        ${JndiName} entity = new ${JndiName}();
+        this.testDefaultNew(${JndiName}View.class, entity);
+    }
+
+    @Test
+    public void testDelete() throws ServiceException
+    {
+        this.testDelete(${JndiName}View.class, TEST_COUNT);
+    }
+
+    @Test
+    public void testQuery() throws ServiceException
+    {
+        TestServiceQuery<${JndiName}Query, ${JndiName}View, ${JndiName}Filter> testServiceQuery = new TestServiceQuery<${JndiName}Query, ${JndiName}View, ${JndiName}Filter>(this.getBusinessService());
+        QueryAssert<${JndiName}Filter> queryAssert = new QueryAssert<${JndiName}Filter>(${JndiName}.class);
+        queryAssert.setDataFilter(new ${JndiName}Filter());
+        queryAssert.setExpectTotaleSize(TEST_COUNT);
+        this.testQuery(testServiceQuery, queryAssert);
+    }
+
+    @Test
+    public void testSave() throws ServiceException
+    {
+        this.testSave(${JndiName}View.class, TEST_COUNT);
+    }
+
+    @Test
+    public void testView() throws ServiceException
+    {
+        this.testView(${JndiName}View.class, TEST_COUNT);
+    }
+}

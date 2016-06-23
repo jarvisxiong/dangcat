@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Menus BaseUrl="REST" Dir="Modules">
+	<Menu Name="Home" Icon="[SKIN]/icons/16/world.png"
+		Url="[isomorphic]/../Modules/home/BoardMain.js" />
+
+	<Menu Name="Monitor" Icon="[SKIN]/icons/16/chart_bar.png">
+		<Submenu Name="System">
+			<MenuItem Name="FormDemo" Url="Modules/Demo/UserMain.js" />
+			<MenuItem Name="WidgetsDemo" Url="Modules/Demo/WidgetsMain.js" />
+			<MenuItem Name="UploadDemo1" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadBytes</Param>
+					<Param Name="fileSuffix">rar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo2" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadFile</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo3" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadInputStream</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+		</Submenu>
+
+		<Submenu Name="Staff">
+			<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+			<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+			<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+			<Submenu Name="SubStaff1">
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<Submenu Name="SubStaff3">
+					<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+					<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+					<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+				</Submenu>
+			</Submenu>
+			<Submenu Name="SubStaff2">
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+			</Submenu>
+			<MenuItem Name="OperateLog" JndiName="Staff/OperateLog" />
+		</Submenu>
+	</Menu>
+
+	<Menu Name="Config" Icon="[SKIN]/icons/16/detail.png">
+		<Submenu Name="System">
+			<MenuItem Name="FormDemo" Url="Modules/Demo/UserMain.js" />
+			<MenuItem Name="WidgetsDemo" Url="Modules/Demo/WidgetsMain.js" />
+			<MenuItem Name="UploadDemo1" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadBytes</Param>
+					<Param Name="fileSuffix">rar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo2" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadFile</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo3" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadInputStream</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+		</Submenu>
+
+		<Submenu Name="Staff">
+			<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+			<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+			<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+			<Submenu Name="SubStaff1">
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<Submenu Name="SubStaff3">
+					<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+					<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+					<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+				</Submenu>
+			</Submenu>
+			<Submenu Name="SubStaff2">
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+			</Submenu>
+			<MenuItem Name="OperateLog" JndiName="Staff/OperateLog" />
+		</Submenu>
+	</Menu>
+
+	<Menu Name="System" Icon="[SKIN]/icons/16/download.png">
+		<Submenu Name="System">
+			<MenuItem Name="FormDemo" Url="/Modules/Demo/UserMain.js" />
+			<MenuItem Name="WidgetsDemo" Url="/Modules/Demo/WidgetsMain.js" />
+			<MenuItem Name="UploadDemo1" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadBytes</Param>
+					<Param Name="fileSuffix">rar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo2" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadFile</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+			<MenuItem Name="UploadDemo3" Url="UploadWindow">
+				<Params>
+					<Param Name="action">System/UploadDemo/uploadInputStream</Param>
+					<Param Name="fileSuffix">jar;xls;xlsx</Param>
+				</Params>
+			</MenuItem>
+		</Submenu>
+
+		<Submenu Name="Staff">
+			<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+			<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+			<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+			<Submenu Name="SubStaff1">
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<Submenu Name="SubStaff3">
+					<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+					<MenuItem Name="RoleInfo" JndiName="Staff/RoleInfo" />
+					<MenuItem Name="OperatorInfo" JndiName="Staff/OperatorInfo" />
+				</Submenu>
+			</Submenu>
+			<Submenu Name="SubStaff2">
+				<MenuItem Name="OperatorGroup" JndiName="Staff/OperatorGroup" />
+				<MenuItem Name="ServerInfo" JndiName="Device/ServerInfo" />
+			</Submenu>
+			<MenuItem Name="OperateLog" JndiName="Staff/OperateLog" />
+		</Submenu>
+	</Menu>
+</Menus>

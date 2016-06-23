@@ -1,0 +1,1 @@
+phantomjs highcharts-phantomjs-convert.js -infile ../convert/inputOptions1.json -outfile ../convert/inputOptions1.png

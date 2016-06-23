@@ -1,0 +1,548 @@
+* {
+    font-family: "courier new", Arial, Verdana, Bitstream Vera Sans, sans-serif;
+    font-size: 12px;
+}
+
+.flatbutton {
+    padding: 3px;
+    border: none;
+    text-align: left;
+}
+
+.flatbuttonOver,
+.flatbuttonFocused,
+.flatbuttonFocusedOver,
+.flatbuttonDown,
+.flatbuttonFocusedDown,
+.flatbuttonSelected,
+.flatbuttonSelectedFocused,
+.flatbuttonSelectedDown,
+.flatbuttonSelectedFocusedDown,
+.flatbuttonSelectedOver,
+.flatbuttonSelectedFocusedOver,
+.flatbuttonDisabled,
+.flatbuttonSelectedDisabled {
+    padding: 2px;
+    background: #DDDDDD url(../images/cssButton/button_stretch.png) repeat-x;
+    color: #000000;
+    text-align: left;
+    border: 1px solid #A6ABB4;
+}
+
+.flatbuttonDisabled {
+    border: none;
+}
+
+.flatbuttonDisabled,
+.flatbuttonSelectedDisabled {
+    font-weight: normal;
+    color: #AAAAAA;
+}
+
+.flatbuttonFocused,
+.flatbuttonFocusedOver,
+.flatbuttonSelectedFocused,
+.flatbuttonSelectedFocusedOver,
+.flatbuttonSelectedFocusedDown {
+    border-left: 1px solid #9BC8FF;
+    border-right: 1px solid #9BC8FF;
+    border-top: 1px solid #B2D3FC;
+    border-bottom: 1px solid #AACBF6;
+}
+
+.flatbuttonOver,
+.flatbuttonFocusedOver,
+.flatbuttonSelectedFocused,
+.flatbuttonSelectedFocusedOver {
+    background: #B2D7FF url(../images/cssButton/button_Over_stretch.png) repeat-x;
+    border: 1px solid #577CB0;
+}
+
+.flatbuttonDown,
+.flatbuttonFocusedDown,
+.flatbuttonSelectedDown,
+.flatbuttonSelectedFocusedDown {
+    background: #BEDDFF url(../images/cssButton/button_Down_stretch.png) repeat-x;
+    border-left: 1px solid #577cb0;
+    border-right: 1px solid #577cb0;
+    border-top: 1px solid #577cb0;
+    border-bottom: 1px solid #577cb0;
+}
+
+.flatbuttonSelected,
+.flatbuttonSelectedFocused,
+.flatbuttonSelectedOver,
+.flatbuttonSelectedFocusedOver,
+.flatbuttonSelectedDisabled {
+    background: #B2D7FF url(../images/cssButton/button_Over_stretch.png) repeat-x;
+    border: 1px solid #577CB0;
+}
+
+/*============================================================
+    2) Button
+		button.baseStyle
+		buttonStrip.baseStyle
+		buttonTable.baseButtonStyle
+		listBar.labelStyle
+		listGrid.headerBaseStyle (not in this skin)
+============================================================*/
+.toolButton,
+.toolButtonOver,
+.toolButtonFocused,
+.toolButtonFocusedOver,
+.toolButtonDown,
+.toolButtonFocusedDown,
+.toolButtonSelected,
+.toolButtonSelectedFocused,
+.toolButtonSelectedDown,
+.toolButtonSelectedFocusedDown,
+.toolButtonSelectedOver,
+.toolButtonSelectedFocusedOver,
+.toolButtonDisabled,
+.toolButtonSelectedDisabled {
+    padding: 2px 10px;
+    background: #DDDDDD url(../images/cssButton/button_stretch.png) repeat-x;
+    color: #000000;
+    border: 1px solid #A6ABB4;
+}
+
+.toolButtonDisabled {
+    background: #E9E9E9 url(../images/cssButton/button_Disabled_stretch.png) repeat-x;
+    border-left: 1px solid #A7ABB4;
+    border-right: 1px solid #A6AAB3;
+    border-top: 1px solid #BABDC4;
+    border-bottom: 1px solid #B4B8C1;
+}
+
+.toolButtonDisabled,
+.toolButtonSelectedDisabled {
+    font-weight: normal;
+    color: #AAAAAA;
+}
+
+.toolButtonFocused,
+.toolButtonFocusedOver,
+.toolButtonSelectedFocused,
+.toolButtonSelectedFocusedOver,
+.toolButtonSelectedFocusedDown {
+    border-left: 1px solid #9BC8FF;
+    border-right: 1px solid #9BC8FF;
+    border-top: 1px solid #B2D3FC;
+    border-bottom: 1px solid #AACBF6;
+}
+
+.toolButtonOver,
+.toolButtonFocusedOver,
+.toolButtonSelectedFocused,
+.toolButtonSelectedFocusedOver {
+    background: #B2D7FF url(../images/cssButton/button_Over_stretch.png) repeat-x;
+    border: 1px solid #577CB0;
+}
+
+.toolButtonDown,
+.toolButtonFocusedDown,
+.toolButtonSelectedDown,
+.toolButtonSelectedFocusedDown {
+    background: #BEDDFF url(../images/cssButton/button_Down_stretch.png) repeat-x;
+    border-left: 1px solid #577cb0;
+    border-right: 1px solid #577cb0;
+    border-top: 1px solid #577cb0;
+    border-bottom: 1px solid #577cb0;
+}
+
+.toolButtonSelected,
+.toolButtonSelectedFocused,
+.toolButtonSelectedOver,
+.toolButtonSelectedFocusedOver,
+.toolButtonSelectedDisabled {
+    background: #B2D7FF url(../images/cssButton/button_Over_stretch.png) repeat-x;
+    border: 1px solid #577CB0;
+}
+
+/* menu header buttons */
+.menuButton,
+.menuButtonOver,
+.menuButtonDown,
+.menuButtonDisabled,
+.menuButtonFocused,
+.menuButtonFocusedDown,
+.menuButtonFocusedOver,
+.menuButtonSelected,
+.menuButtonSelectedDown,
+.menuButtonSelectedOver,
+.menuButtonSelectedDisabled {
+    font-family: "courier new", Arial, sans-serif;
+    font-size: 12px;
+    color: #000000;
+    background: #DDDDDD url(../images/cssButton/button_stretch.png) repeat-x scroll;
+    padding-left: 4px;
+    padding-right: 4px;
+    border: 1px solid #A6ABB4;
+    text-align: left;
+}
+
+.menuButton {
+    background: none;
+}
+
+/* text-based items common props */
+.textItemFocused,
+.textItemDisabled,
+.textItemDisabledHint,
+.textItemError,
+.textItemHint,
+.selectItemText,
+.selectItemTextError,
+.selectItemTextFocused,
+.selectItemTextDisabled,
+.selectItemTextHint {
+    padding: 2px;
+    border: 1px solid #C0C0C0;
+    background: #FFFFFF;
+    color: black;
+}
+
+.textItem {
+    padding: 2px;
+    border: 1px solid #abadb3;
+    background: #FFFFFF;
+    color: black;
+}
+
+/* selectItem */
+.selectItemTextFocused {
+    color: black;
+    -moz-outline-offset: -1;
+    border: 1px solid #afc6e2;
+}
+
+.textItemFocused,
+.selectItemTextFocused {
+    color: black;
+    -moz-outline-offset: -1;
+    border: 1px solid #1E90FF;
+}
+
+.toolBar {
+    background-color: #FFFFFF;
+    background-image: url(../images/ToolStrip/background.png);
+    border: 1px solid #A7ABB4;
+}
+
+.menuSeparatorDisabled {
+    font-size: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url(../../images/menu/menuSeparator.png);
+    background-repeat: no-repeat;
+}
+
+.viewForm {
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+    border-top: 1px solid red;
+}
+
+.viewformTitle,
+.viewformTitleFocused,
+.viewformTitleDisabled,
+.viewformTitleError {
+    color: black;
+    background-color: #E6E6FA;
+}
+
+.viewformTitle,
+.viewformTitleFocused,
+.viewformTitleDisabled,
+.viewformTitleError,
+.viewformCell,
+.viewformCellError,
+.viewformCell,
+.viewformCellFocused,
+.viewformCellDisabled {
+    font-family: "courier new", Arial, sans-serif;
+    font-size: 12px;
+    border-right: 1px solid #A7ABB4;
+    border-bottom: 1px solid #A7ABB4;
+    word-break: break-all;
+}
+
+.viewformTitle,
+.viewformTitleFocused {
+    padding: 2px;
+    color: black;
+}
+
+.formCellError {
+    font-weight: normal;
+    color: red;
+}
+
+.textItemDisabled,
+.textItemDisabledHint,
+.selectItemTextDisabled {
+    border: 1px solid #C0C0C0;
+}
+
+.selectItemText,
+.selectItemTextError,
+.selectItemTextFocused,
+.selectItemTextDisabled {
+    border-right: 0px none;
+}
+
+.formTitleError {
+    font-weight: normal;
+    color: #204268;
+}
+
+.staticTextItem {
+    margin-top: 2px;
+}
+
+.statusBar {
+    border: 1px solid #A6ABB4;
+    background-image: url("../images/ToolStrip/background.png");
+}
+
+.statusBarContent {
+    font-family: "courier new", Arial, sans-serif;
+    font-size: 12px;
+    border: 1px solid #D3D3D3;
+    padding-left: 4px;
+}
+
+.dataGrid {
+    color: black;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #ffffff;
+    vertical-align: top;
+}
+
+.dataGridDark {
+    color: black;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #E6E6FA;
+    vertical-align: top;
+}
+
+.dataGridOver,
+.dataGridOverDark {
+    color: black;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #E2E6EF;
+    vertical-align: top;
+}
+
+.dataGridSelected,
+.dataGridSelectedDark {
+    color: black;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #a7d1ff;
+    vertical-align: top;
+}
+
+.dataGridSelectedOver,
+.dataGridSelectedOverDark {
+    color: black;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #e0e0ff;
+    vertical-align: top;
+}
+
+.dataGridDisabled {
+    color: #808080;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #ffffff;
+    vertical-align: top;
+}
+
+.dataGridDisabledDark {
+    color: #808080;
+    border-bottom: 1px solid #A7ABB4;
+    border-right: 1px solid #A7ABB4;
+    background-color: #f0f0e8;
+    vertical-align: top;
+}
+
+.headerButtonDisabled {
+    background: url("../images/ListGrid/header.png") repeat-x scroll left top transparent;
+    color: black;
+}
+
+.menuSeparatorDisabled nobr {
+    display: none;
+}
+
+.listTable td {
+    word-break: break-all;
+}
+
+.dataGridToolBar {
+    border-top: 1px solid #A7ABB4;
+    background-color: #FFFFFF;
+    background-image: url("../images/ToolStrip/background.png");
+}
+
+.percent {
+    padding-left: 0px;
+    padding-right: 0px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 1px;
+}
+
+.percentStart {
+    width: 2px;
+    height: 13px;
+    background: url("../images/Progressbar/progressbar_h_start.gif");
+}
+
+.percentStretch {
+    height: 13px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: url("../images/Progressbar/progressbar_h_stretch.gif") repeat-x scroll left top transparent;
+}
+
+.percentEnd {
+    width: 2px;
+    height: 13px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: url("../images/Progressbar/progressbar_h_end.gif");
+}
+
+.percentEmptyStart {
+    width: 2px;
+    height: 13px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: url("../images/Progressbar/progressbar_h_empty_start.gif") repeat-x scroll left top transparent;
+}
+
+.percentEmptyStretch {
+    height: 13px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: url("../images/Progressbar/progressbar_h_empty_stretch.gif") repeat-x scroll left top transparent;
+}
+
+.percentEmptyEnd {
+    width: 2px;
+    height: 13px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: url("../images/Progressbar/progressbar_h_empty_end.gif") repeat-x scroll left top transparent;
+}
+
+.imgChart {
+    border: 1px solid #A6ABB4;
+}
+
+.tabButton,
+.tabButtonOver,
+.tabButtonFocused,
+.tabButtonFocusedOver,
+.tabButtonDown,
+.tabButtonFocusedDown,
+.tabButtonSelected,
+.tabButtonSelectedFocused,
+.tabButtonSelectedDown,
+.tabButtonSelectedFocusedDown,
+.tabButtonSelectedOver,
+.tabButtonSelectedFocusedOver,
+.tabButtonDisabled,
+.tabButtonSelectedDisabled {
+    padding: 2px 10px;
+    color: white;
+    text-align: left;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.tabButtonDisabled,
+.tabButtonSelectedDisabled {
+    font-weight: normal;
+    color: #AAAAAA;
+}
+
+.tabButtonOver,
+.tabButtonFocusedOver,
+.tabButtonSelectedFocused,
+.tabButtonSelectedFocusedOver {
+    color: yellow;
+}
+
+.tabButtonSelected,
+.tabButtonSelectedFocused,
+.tabButtonSelectedOver,
+.tabButtonSelectedFocusedOver,
+.tabButtonSelectedDisabled {
+    color: darkblue;
+    background-color: rgb(223, 237, 255);
+    border: 1px solid rgb(192, 195, 199);
+    border-radius: 5px 5px 0px 0px;
+}
+
+.tabPanel {
+    background-color: white;
+    margin: 1px;
+    padding: 2px;
+    border: 1px solid rgb(192, 195, 199);
+}
+
+.tabHeader {
+}
+
+.toolStripButtonDisabled {
+    background-color: transparent;
+    background-image: none;
+}
+
+.menuSection {
+    background-color: #F0F0F0;
+    border-bottom: 1px solid #ababab;
+    border-left: 1px solid #ababab;
+    border-right: 1px solid #ababab;
+}
+
+.dataGridPickerBody {
+    border-left: 1px solid #A7ABB4;
+    border-bottom: 1px solid #A7ABB4;
+}
+
+.dataGridPicker {
+    color: black;
+    background-color: white;
+    vertical-align: top;
+}
+
+.dataGridPickerOver,
+.dataGridPickerDark {
+    color: black;
+    background-color: #E2E6EF;
+    vertical-align: top;
+}
+
+.dataGridPickerSelected,
+.dataGridPickerSelectedDark {
+    color: black;
+    background-color: #a7d1ff;
+    vertical-align: top;
+}
+
+.dataGridPickerSelectedOver,
+.dataGridPickerSelectedOverDark {
+    color: black;
+    background-color: #e0e0ff;
+    vertical-align: top;
+}

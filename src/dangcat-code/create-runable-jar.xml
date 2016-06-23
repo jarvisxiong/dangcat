@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" basedir="."  name="Create Runnable Jar for Project dangcat-code with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+	<property environment="env" />
+    <target name="create_run_jar">
+        <jar destfile="target/dangcat-code-1.0.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="org.dangcat.business.code.CodeGeneratorFrame"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ junit-4.4.jar log4j-1.2.14.jar spring-core-2.5.6.jar commons-logging-1.1.1.jar commons-io-2.1.jar commons-compress-1.4.1.jar xz-1.1.jar dom4j-1.6.1.jar xml-apis-1.0.b2.jar jaxen-1.1.4.jar quartz-1.6.5.jar gson-2.2.2.jar freemarker-2.3.13.jar ojdbc6-11.1.0.7.0.jar sqljdbc-4.0.jar mysql-connector-java-5.1.29.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="${basedir}/target/classes"/>
+            <fileset dir="${basedir}/../dangcat-commons/target/classes"/>
+            <fileset dir="${basedir}/../dangcat-swing/target/classes"/>
+            <zipfileset dir="${env.M2_REPO}/log4j/log4j/1.2.14" includes="log4j-1.2.14.jar"/>
+            <zipfileset dir="${env.M2_REPO}/org/springframework/spring-core/3.0.6.RELEASE" includes="spring-core-3.0.6.RELEASE.jar"/>
+            <zipfileset dir="${env.M2_REPO}/org/springframework/spring-asm/3.0.6.RELEASE" includes="spring-asm-3.0.6.RELEASE.jar"/>
+            <zipfileset dir="${env.M2_REPO}/commons-logging/commons-logging/1.1.1" includes="commons-logging-1.1.1.jar"/>
+            <zipfileset dir="${env.M2_REPO}/commons-io/commons-io/2.1" includes="commons-io-2.1.jar"/>
+            <zipfileset dir="${env.M2_REPO}/org/apache/commons/commons-compress/1.4.1" includes="commons-compress-1.4.1.jar"/>
+            <zipfileset dir="${env.M2_REPO}/org/tukaani/xz/1.1" includes="xz-1.1.jar"/>
+            <zipfileset dir="${env.M2_REPO}/dom4j/dom4j/1.6.1" includes="dom4j-1.6.1.jar"/>
+            <zipfileset dir="${env.M2_REPO}/xml-apis/xml-apis/1.0.b2" includes="xml-apis-1.0.b2.jar"/>
+            <zipfileset dir="${env.M2_REPO}/jaxen/jaxen/1.1.4" includes="jaxen-1.1.4.jar"/>
+            <zipfileset dir="${env.M2_REPO}/quartz/quartz/1.6.5" includes="quartz-1.6.5.jar"/>
+            <zipfileset dir="${env.M2_REPO}/com/google/code/gson/gson/2.2.2" includes="gson-2.2.2.jar"/>
+            <zipfileset dir="${env.M2_REPO}/org/freemarker/freemarker/2.3.13" includes="freemarker-2.3.13.jar"/>
+            <zipfileset dir="${env.M2_REPO}/com/oracle/ojdbc6/11.1.0.7.0" includes="ojdbc6-11.1.0.7.0.jar"/>
+            <zipfileset dir="${env.M2_REPO}/com/microsoft/sqljdbc/4.0" includes="sqljdbc-4.0.jar"/>
+            <zipfileset dir="${env.M2_REPO}/mysql/mysql-connector-java/5.1.29" includes="mysql-connector-java-5.1.29.jar"/>
+        </jar>
+    </target>
+</project>

@@ -1,0 +1,33 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    detailUrl: "RoleInfoEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="org.dangcat.business.staff.filter.RoleInfoFilter" />
+        }
+    },
+
+    dataGridProperties: {
+        tableName : "roleInfo",
+        fieldNames : [
+            "rowNum",
+            "name",
+            "description"
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "roleInfo",
+        fieldNames : [
+            "rowNum",
+            "name",
+            "description"
+        ]
+    },
+
+    dataSetProperties : {
+        <z:entity name="roleInfo" classType="org.dangcat.business.staff.domain.RoleBasic"/>
+    }
+});

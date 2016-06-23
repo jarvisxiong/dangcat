@@ -1,0 +1,64 @@
+isc.QueryForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    detailUrl: "OperatorInfoEdit.jsf",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+	        <z:entity name="dataFilter" classType="org.dangcat.business.staff.filter.OperatorInfoFilter" />
+        }
+    },
+
+    toolBarProperties: {
+        functionsMenuData : [
+            isc.ToolButton.ButtonTypes.Config
+        ]
+    },
+
+    dataGridProperties: {
+        tableName : "operatorInfo",
+        fieldNames : [
+            "rowNum",
+            "no",
+            "name",
+            "groupName",
+            "useAble",
+            "mobile",
+            "tel",
+            "email",
+            "expiryTime"
+        ]
+    },
+
+    dataFormProperties : {
+        tableName : "operatorInfo",
+        fieldNames : [
+            "rowNum",
+            "no",
+            "name",
+            "description",
+            "groupName",
+            "roleName",
+            "useAble",
+            "tel",
+            "mobile",
+            "email",
+            "expiryTime",
+            "registerTime"
+        ]
+    },
+
+    dataSetProperties : {
+        overrideProperties : {
+            operatorInfo : {
+                columns : {
+                    name: {
+                        name: "name",
+                        frozen: true
+                    }
+                }
+            }
+        },
+        <z:entity name="operatorInfo" classType="org.dangcat.business.staff.domain.OperatorInfo"/>
+    }
+});

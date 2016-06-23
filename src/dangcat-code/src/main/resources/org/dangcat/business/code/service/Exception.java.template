@@ -1,0 +1,28 @@
+package ${packageName}.exception;
+
+import org.dangcat.business.exceptions.BusinessException;
+import ${packageName}.domain.${JndiName};
+
+/**
+ * The service exception for ${JndiName}.
+ * 
+ */
+public class ${JndiName}Exception extends BusinessException
+{
+    private static final long serialVersionUID = 1L;
+
+    public ${JndiName}Exception(Class<?> classType, String fieldName, Integer messageId, Object... params)
+    {
+        super(classType, fieldName, messageId, params);
+    }
+
+    public ${JndiName}Exception(Integer messageId, Object... params)
+    {
+        super(messageId, params);
+    }
+
+    public ${JndiName}Exception(String fieldName, Integer messageId, Object... params)
+    {
+        super(${JndiName}.class, fieldName, messageId, params);
+    }
+}

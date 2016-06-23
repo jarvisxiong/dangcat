@@ -1,0 +1,29 @@
+package ${packageName}.service.impl;
+
+import org.dangcat.commons.resource.Resources;
+import org.dangcat.business.annotation.BusinessValidator;
+import org.dangcat.business.security.BusinessPermissionProvider;
+import org.dangcat.business.service.impl.BusinessServiceBase;
+import ${packageName}.domain.${JndiName}Query;
+import ${packageName}.domain.${JndiName}View;
+import ${packageName}.exception.${JndiName}Exception;
+import ${packageName}.filter.${JndiName}Filter;
+import ${packageName}.service.${JndiName}Service;
+import ${packageName}.validator.${JndiName}Validator;
+import org.dangcat.framework.service.ServiceProvider;
+import org.dangcat.framework.service.annotation.PermissionProvider;
+
+/**
+ * The service implements for ${JndiName}Service.
+ * 
+ */
+@Resources( { ${JndiName}Exception.class })
+@BusinessValidator(${JndiName}Validator.class)
+@PermissionProvider(BusinessPermissionProvider.class)
+public class ${JndiName}ServiceImpl extends BusinessServiceBase<${JndiName}Query, ${JndiName}View, ${JndiName}Filter> implements ${JndiName}Service
+{
+    public ${JndiName}ServiceImpl(ServiceProvider parent)
+    {
+        super(parent);
+    }
+}

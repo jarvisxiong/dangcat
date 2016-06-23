@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="css/chart.css" rel="stylesheet" media="screen" type="text/css"/>
+    <script type="text/javascript" src="../../../main/webapp/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../main/webapp/js/jquery.dangcat-1.0.js"></script>
+    <script type="text/javascript" src="js/highcharts-tutorial.js"></script>
+    <script type="text/javascript">
+        var chartOptions, highCharts;
+
+        $(function () {
+            $("input[type='checkbox']").prop("checked", true);
+            $("#initData").prop("checked", false);
+            $("input[type='checkbox']").click(function () {
+                createHighCharts();
+            });
+
+            createHighCharts();
+
+            var timerId;
+            $("#chartTimer").click(function () {
+                if ($(this).val() == "StartTimer") {
+                    timerId = setInterval(function () {
+                        refreshChart();
+                    }, RandomUtils.interval);
+                    $(this).attr("value", "StopTimer");
+                    refreshChart();
+                } else {
+                    clearInterval(timerId);
+                    $(this).attr("value", "StartTimer");
+                }
+            });
+        })
+
+        function createHighCharts() {
+            highCharts = RandomUtils.createHighCharts(getChartOptions(), $("#initData").prop("checked"));
+        }
+        
+        function refreshChart() {
+            RandomUtils.refreshCharts(highCharts);
+        }
+
+        function getChartOptions() {
+            RandomUtils.destroyCharts(highCharts);
+            $("#container").empty();
+            
+            chartOptions = [];
+            if ($("#pie").prop("checked") == true)
+                chartOptions = chartOptions.concat(pieChartOptions);
+            if ($("#bar").prop("checked") == true)
+                chartOptions = chartOptions.concat(barChartOptions);
+            if ($("#stackedBar").prop("checked") == true)
+                chartOptions = chartOptions.concat(stackedBarChartOptions);
+            if ($("#line").prop("checked") == true)
+                chartOptions = chartOptions.concat(lineChartOptions);
+            if ($("#areSpline").prop("checked") == true)
+                chartOptions = chartOptions.concat(areSplineChartOptions);
+            if ($("#are").prop("checked") == true)
+                chartOptions = chartOptions.concat(areChartOptions);
+            return chartOptions;
+        }
+    </script>
+</head>
+<body>
+<input type="button" id="chartTimer" value="StartTimer"/>
+<input type="button" value="Refresh Data" onclick="refreshChart();"/>
+<input type="checkbox" id="initData">Init Data</input>
+<input type="checkbox" id="pie">Pie</input>
+<input type="checkbox" id="bar">Bar</input>
+<input type="checkbox" id="stackedBar">StackedBar</input>
+<input type="checkbox" id="line">Line</input>
+<input type="checkbox" id="areSpline">AreSpline</input>
+<input type="checkbox" id="are">Are</input>
+
+<table id="container" style="width:100%;"/>
+
+<script type="text/javascript" src="js/highcharts-3.0.7/highcharts.src.js"></script>
+<script type="text/javascript" src="../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+</body>
+</html>

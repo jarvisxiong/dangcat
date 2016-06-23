@@ -1,0 +1,29 @@
+isc.EditForm.create({
+	<jsp:include page="/templates/form-template.jspf"/>
+
+    dataFormProperties : {
+        tableName : "roleInfo",
+        fieldNames : [
+            "name",
+            "description"
+        ]
+    },
+
+    detailMember :  {
+        name: "permissionsSelect",
+        classType: isc.TreeSelect,
+        properties: {
+            tableName: "permissions",
+            jndiName: "System/SystemInfo/loadPermissions",
+            typeValueMap: {
+                "0": "[SKIN]/../png/module.gif",
+                "1": "[SKIN]/../png/menu.gif",
+                "2": "[SKIN]/../png/permission.gif"
+            }
+        }
+    },
+
+    dataSetProperties : {
+        <z:entity classType="org.dangcat.business.staff.domain.RoleInfo"/>
+    }
+});

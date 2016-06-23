@@ -1,0 +1,173 @@
+﻿<HTML>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../../../../main/webapp/js/CryptoJS-3.1.2.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery.json-2.4.min.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/jquery.form.min.js" type="text/javascript"></script>
+    <script>
+        var isomorphicDir = "../../../../main/webapp/isomorphic/";
+        var isc_maxCSSLoaders = 200;
+    </script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_History.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/development/ISC_FileLoader.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Core.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Foundation.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Containers.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Grids.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_Forms.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_DataBinding.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/skins/Enterprise/load_skin.js?isc_version=v9.1p_2014-03-25.js"></script>
+    <script src="../../../../main/webapp/isomorphic/locales/frameworkMessages_zh_CN.properties"></script>
+    <script src="../../../../main/webapp/i18n/Widgets_zh_CN.properties"></script>
+    <script src="../../../../main/webapp/js/jquery.dangcat-1.0.js" type="text/javascript"></script>
+    <script src="../../../../main/webapp/js/highcharts-3.0.7/highcharts.min.js"></script>
+    <script src="../../../../main/webapp/js/highcharts-3.0.7/modules/exporting.js"></script>
+    <script src="../../../../main/webapp/js/highcharts-dangcat-1.0.js"></script>
+    <script src="../../../../main/webapp/widgets/Widgets.js"></script>
+    <script src="../../../../main/webapp/widgets/DataSet.js"></script>
+    <script src="../../../../main/webapp/widgets/Modules.js"></script>
+    <script src="../../../../main/webapp/widgets/MainLayout.js"></script>
+    <link href="../../../../main/webapp/isomorphic/skins/Enterprise/css/MainLayout.css" rel="stylesheet" media="screen" type="text/css"/>
+    <link href="../../../../main/webapp/isomorphic/skins/Enterprise/css/widgets.css" rel="stylesheet" media="screen" type="text/css"/>
+</HEAD>
+<BODY>
+<script>
+var view = isc.QueryForm.create({
+    autoDraw: true,
+    detailUrl: "../../../../main/webapp/Modules/Demo/UserEdit.js",
+
+    dataFilterProperties: {
+        dataSetProperties: {
+            dataFilter: {
+                columns: {
+                    name: {
+                        title: "账户名称",
+                        name: "name",
+                        length: 40,
+                        dataType: "string",
+                        nullable: false
+                    },
+                    group: {
+                        title: "账户组",
+                        name: "group",
+                        length: 40,
+                        dataType: "string",
+                        nullable: false
+                    }
+                }
+            }
+        }
+    },
+
+    dataGridProperties: {
+        tableName: "accountInfo",
+        selectionType: "multiple",
+        fieldNames: [
+            "name",
+            "group",
+            "country",
+            "balance",
+            "email",
+            "tel",
+            "fool",
+            "height"
+        ]
+    },
+
+    dataFormProperties: {
+        tableName: "accountInfo"
+    },
+
+    dataSetProperties: {
+        accountInfo: {
+            dataURL: "[isomorphic]/../share/data/accountInfo.data.json",
+            columns: {
+                "id": {
+                    "visible": false,
+                    "name": "id",
+                    "dataType": "integer"
+                },
+                "name": {
+                    "title": "账户名称",
+                    "primaryKey": true,
+                    "name": "name",
+                    "length": 40,
+                    "dataType": "string",
+                    "nullable": false,
+                    "frozen": true
+                },
+                "group": {
+                    "title": "账户组",
+                    "name": "group",
+                    "length": 40,
+                    "dataType": "string",
+                    "nullable": false
+                },
+                "description": {
+                    "title": "账户描述",
+                    "name": "description",
+                    "length": 2000,
+                    "dataType": "string"
+                },
+                "email": {
+                    "title": "邮件",
+                    "name": "email",
+                    "length": 40,
+                    "dataType": "string",
+                    "nullable": false
+                },
+                "tel": {
+                    "title": "电话",
+                    "name": "tel",
+                    "dataType": "integer",
+					"visible": false,
+                    "nullable": false
+                },
+                "country": {
+                    "title": "国家",
+                    "valueMap": {
+                        "0": "Roll",
+                        "1": "Ea",
+                        "2": "Pkt",
+                        "3": "Set",
+                        "4": "Tube",
+                        "5": "Pad",
+                        "6": "Ream",
+                        "7": "Tin",
+                        "8": "Bag",
+                        "9": "Ctn",
+                        "10": "Box"
+                    },
+                    "name": "country",
+                    "length": 5,
+                    "dataType": "integer"
+                },
+                "balance": {
+                    "title": "账户余额",
+                    "name": "balance",
+                    "dataType": "float"
+                },
+                "fool": {
+                    "title": "是否傻瓜",
+                    "name": "fool",
+                    "dataType": "boolean"
+                },
+                "height": {
+                    "title": "身高",
+                    "name": "height",
+                    "dataType": "float"
+                },
+                "registeTime": {
+                    "title": "注册时间",
+                    "name": "registeTime",
+                    "dataType": "date"
+                }
+            }
+        }
+    }
+});
+view.initialize();
+</script>
+</BODY>
+</HTML>

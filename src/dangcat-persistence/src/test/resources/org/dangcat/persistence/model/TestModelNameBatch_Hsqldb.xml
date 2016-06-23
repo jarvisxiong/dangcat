@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sqls>
+	<Sql Name="UPDATE"><![CDATA[UPDATE ModelData 
+SET FieldA=:FieldA, FieldB=:FieldB, FieldC=:FieldC, FieldD=:FieldD, FieldE=:FieldE, FieldF=:FieldF, FieldG=:FieldG, FieldH=:FieldH 
+WHERE Id=:Id]]></Sql>
+	<Sql Name="INSERT"><![CDATA[INSERT INTO ModelData(Id, FieldA, FieldB, FieldC, FieldD, FieldE, FieldF, FieldG, FieldH) 
+VALUES(:Id, :FieldA, :FieldB, :FieldC, :FieldD, :FieldE, :FieldF, :FieldG, :FieldH)]]></Sql>
+	<Sql Name="DELETE"><![CDATA[DELETE FROM ModelData WHERE Id=:Id]]></Sql>
+	<Sql Name="EXECUTE"><![CDATA[INSERT INTO ModelData(Id, FieldA, FieldB, FieldC, FieldD, FieldE, FieldF, FieldG, FieldH) 
+VALUES(:Id, :FieldA, :FieldB, :FieldC, :FieldD, :FieldE, :FieldF, :FieldG, :FieldH);
+UPDATE ModelData 
+SET FieldA=:FieldA, FieldB=:FieldB, FieldC=:FieldC, FieldD=:FieldD, FieldE=:FieldE, FieldF=:FieldF, FieldG=:FieldG, FieldH=:FieldH 
+WHERE Id=:Id;
+DELETE FROM ModelData WHERE Id=:Id]]></Sql>
+</Sqls>
