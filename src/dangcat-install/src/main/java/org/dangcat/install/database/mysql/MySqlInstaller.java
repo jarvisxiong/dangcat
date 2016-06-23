@@ -10,24 +10,21 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MySqlInstaller extends DatabaseInstaller
-{
+public class MySqlInstaller extends DatabaseInstaller {
     private static final String BASEDIR = "basedir";
     private static final String DATADIR = "datadir";
     private static final String DEFAULT_CHARACTERSET = System.getProperty("file.encoding");
     private static final int DEFAULT_PORT = 3306;
     private static final String DEFAULT_USER = "root";
 
-    public MySqlInstaller()
-    {
+    public MySqlInstaller() {
         this.setDefaultPort(DEFAULT_PORT);
         this.setDefaultUser(DEFAULT_USER);
         this.setCharacterSet(DEFAULT_CHARACTERSET);
     }
 
     @Override
-    public void config() throws Exception
-    {
+    public void config() throws Exception {
         this.logService("service.config");
 
         String myTemplateName = this.getMyTemplateFile().getName();
@@ -40,8 +37,7 @@ public class MySqlInstaller extends DatabaseInstaller
     }
 
     @Override
-    public void createDatabase() throws Exception
-    {
+    public void createDatabase() throws Exception {
         this.sortScripts();
 
         this.logDatabase("database.create", this.getDatabaseName());
@@ -49,8 +45,7 @@ public class MySqlInstaller extends DatabaseInstaller
         fileMarker.setEncoding(this.getCharacterSet());
         fileMarker.getDataMap().putAll(this.getParams());
         File scriptFile = File.createTempFile("mysql", ".sql");
-        try
-        {
+        try {
             fileMarker.process(MySqlInstaller.class.getSimpleName() + ".sql", scriptFile);
 
             StringBuilder params = new StringBuilder();
@@ -65,16 +60,13 @@ public class MySqlInstaller extends DatabaseInstaller
             this.execute(this.getMySqlFile(), params.toString());
             this.logDatabase("database.success", this.getDatabaseName());
             scriptFile.delete();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logDatabase("database.error", this.getDatabaseName(), e.getMessage());
             this.logger.error(this.getDatabaseName(), e);
         }
     }
 
-    public String getBaseDir()
-    {
+    public String getBaseDir() {
         return (String) this.getParams().get(BASEDIR);
     }
 
@@ -82,13 +74,11 @@ public class MySqlInstaller extends DatabaseInstaller
         this.getParams().put(BASEDIR, baseDir);
     }
 
-    private String getBinDir()
-    {
+    private String getBinDir() {
         return this.getBaseDir() + File.separator + "bin";
     }
 
-    public String getDataDir()
-    {
+    public String getDataDir() {
         return (String) this.getParams().get(DATADIR);
     }
 
@@ -96,13 +86,11 @@ public class MySqlInstaller extends DatabaseInstaller
         this.getParams().put(DATADIR, dataDir);
     }
 
-    private File getMyFile()
-    {
+    private File getMyFile() {
         return new File(this.getDataDir() + File.separator + this.getMyFileName());
     }
 
-    private String getMyFileName()
-    {
+    private String getMyFileName() {
         String myFileName = null;
         OSType osType = OSType.getOSType();
         if (OSType.Linux.equals(osType))
@@ -112,27 +100,23 @@ public class MySqlInstaller extends DatabaseInstaller
         return myFileName;
     }
 
-    private File getMySqlFile()
-    {
+    private File getMySqlFile() {
         String mySqlFile = this.getBinDir() + File.separator + "mysql";
         if (OSType.Windows.equals(OSType.getOSType()))
             mySqlFile += ".exe";
         return new File(mySqlFile);
     }
 
-    private File getMyTemplateFile()
-    {
+    private File getMyTemplateFile() {
         return new File(this.getMyFile().getAbsolutePath() + ".template");
     }
 
     @Override
-    protected File getServiceFile()
-    {
+    protected File getServiceFile() {
         return new File(this.getBinDir() + File.separator + this.getServiceFileName());
     }
 
-    private String getServiceFileName()
-    {
+    private String getServiceFileName() {
         String serviceFileName = "service";
         OSType osType = OSType.getOSType();
         if (OSType.Linux.equals(osType))
@@ -142,19 +126,16 @@ public class MySqlInstaller extends DatabaseInstaller
         return serviceFileName;
     }
 
-    private File getServiceTemplateFile()
-    {
+    private File getServiceTemplateFile() {
         return new File(this.getServiceFile().getAbsolutePath() + ".template");
     }
 
-    private String getSocketFile()
-    {
+    private String getSocketFile() {
         String socketFile = this.getDataDir() + File.separator + "mysql.sock";
         return socketFile.replace("\\", "/");
     }
 
-    private void processFileMarker(File templatePath, String templateName, File outputFile) throws Exception
-    {
+    private void processFileMarker(File templatePath, String templateName, File outputFile) throws Exception {
         FileMarker fileMarker = new FileMarker(templatePath);
         fileMarker.getDataMap().putAll(this.getParams());
         fileMarker.getDataMap().put(DATADIR, this.getDataDir().replace("\\", "/"));
@@ -162,24 +143,20 @@ public class MySqlInstaller extends DatabaseInstaller
         fileMarker.process(templateName, outputFile);
     }
 
-    protected void sortScripts()
-    {
+    protected void sortScripts() {
         List<String> scripts = this.getScripts();
         List<String> processScripts = new LinkedList<String>();
         for (String script : scripts)
             processScripts.add(script.replace("\\", "/"));
         scripts.clear();
         scripts.addAll(processScripts);
-        Collections.sort(scripts, new Comparator<String>()
-        {
+        Collections.sort(scripts, new Comparator<String>() {
             @Override
-            public int compare(String src, String dest)
-            {
+            public int compare(String src, String dest) {
                 return this.getSortValue(src) - this.getSortValue(dest);
             }
 
-            private int getSortValue(String value)
-            {
+            private int getSortValue(String value) {
                 value = value.toLowerCase();
                 int sortValue = value.hashCode();
                 if (value.endsWith("create.sql"))

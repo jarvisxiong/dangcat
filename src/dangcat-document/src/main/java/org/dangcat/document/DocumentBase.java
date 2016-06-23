@@ -9,35 +9,28 @@ import java.io.*;
 
 /**
  * 文档输入输出。
+ *
  * @author dangcat
- * 
  */
-public abstract class DocumentBase
-{
+public abstract class DocumentBase {
     protected final Logger logger = Logger.getLogger(this.getClass());
     protected int lineCount = 0;
     private InputStream inputStream = null;
     private OutputStream outputStream = null;
 
-    public void close()
-    {
+    public void close() {
         this.lineCount = 0;
-        try
-        {
-            if (this.outputStream != null)
-            {
+        try {
+            if (this.outputStream != null) {
                 this.outputStream.close();
                 this.outputStream = null;
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
         }
         this.inputStream = FileUtils.close(this.inputStream);
     }
 
-    public InputStream getInputStream()
-    {
+    public InputStream getInputStream() {
         return this.inputStream;
     }
 
@@ -45,13 +38,11 @@ public abstract class DocumentBase
         this.inputStream = inputStream;
     }
 
-    public int getLineCount()
-    {
+    public int getLineCount() {
         return this.lineCount;
     }
 
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         return this.outputStream;
     }
 
@@ -61,6 +52,7 @@ public abstract class DocumentBase
 
     /**
      * 从文件加载数据。
+     *
      * @param dataWriter 数据输出接口。
      * @return 读入的行数。
      */
@@ -68,24 +60,19 @@ public abstract class DocumentBase
 
     /**
      * 从文件加载数据。
-     * @param file 目标文件。
+     *
+     * @param file       目标文件。
      * @param dataWriter 数据输出接口。
      * @return 读入的行数。
      */
-    public int read(File file, DataWriter dataWriter)
-    {
+    public int read(File file, DataWriter dataWriter) {
         int result = 0;
-        try
-        {
+        try {
             this.inputStream = new FileInputStream(file);
             result = this.read(dataWriter);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             this.logger.error(file, e);
-        }
-        finally
-        {
+        } finally {
             this.close();
         }
         return result;
@@ -93,32 +80,28 @@ public abstract class DocumentBase
 
     /**
      * 导出实体对象数据到数据流。
+     *
      * @param outputStream 输出流。
-     * @param dataReader 数据来源。
+     * @param dataReader   数据来源。
      * @param 输出数量。
      */
     public abstract int write(DataReader dataReader);
 
     /**
      * 导出实体对象数据到数据流。
-     * @param file 输出文件。
-     * @param dataReader 来源数据。
+     *
+     * @param file         输出文件。
+     * @param dataReader   来源数据。
      * @param exportHeader 是否输出头。
      */
-    public int write(File file, DataReader dataReader)
-    {
+    public int write(File file, DataReader dataReader) {
         int result = 0;
-        try
-        {
+        try {
             this.outputStream = new FileOutputStream(file);
             result = this.write(dataReader);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             this.logger.error(file, e);
-        }
-        finally
-        {
+        } finally {
             this.close();
         }
         return result;

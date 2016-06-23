@@ -9,18 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestLocalSignResolveProvider
-{
+public class TestLocalSignResolveProvider {
     private TestHttpServletRequest httpServletRequest = new TestHttpServletRequest("192.168.5.6");
     private Map<String, LoginUser> localeUserMap = null;
     private SignResolveProvider signResolveProvider = null;
 
     @Before
-    public void initialize()
-    {
+    public void initialize() {
         Map<String, LoginUser> localeUserMap = new HashMap<String, LoginUser>();
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             LoginUser loginUser = new LoginUser("no" + i, "role" + i, "password" + i, "type" + i);
             localeUserMap.put(loginUser.getNo(), loginUser);
         }
@@ -32,8 +29,7 @@ public class TestLocalSignResolveProvider
     }
 
     @Test
-    public void testSignResolveProviderError()
-    {
+    public void testSignResolveProviderError() {
         Assert.assertNull(this.signResolveProvider.parseLoginUser(null));
         Assert.assertNull(this.signResolveProvider.parseLoginUser("adsfgdg"));
 
@@ -44,8 +40,7 @@ public class TestLocalSignResolveProvider
     }
 
     @Test
-    public void testSignResolveProviderNormal()
-    {
+    public void testSignResolveProviderNormal() {
         LoginUser srcLoginUser = this.localeUserMap.get("no1");
         String signId = this.signResolveProvider.createSignId(srcLoginUser);
         Assert.assertNotNull(signId);

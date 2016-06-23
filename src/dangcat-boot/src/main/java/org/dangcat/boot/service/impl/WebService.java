@@ -28,28 +28,25 @@ import java.util.List;
 
 /**
  * Web 服务。
+ *
  * @author dangcat
- * 
  */
-public class WebService extends ServiceControlBase
-{
+public class WebService extends ServiceControlBase {
     private static final String SERVICE_NAME = "WebServiceThread";
     private Server server = null;
 
     /**
      * 构建服务。
+     *
      * @param parent 所属父服务。
      */
-    public WebService(ServiceProvider parent)
-    {
+    public WebService(ServiceProvider parent) {
         super(parent);
     }
 
-    private void createSelectChannelConnector(Server server) throws Exception
-    {
+    private void createSelectChannelConnector(Server server) throws Exception {
         Integer port = WebServiceConfig.getInstance().getPort();
-        if (port != null)
-        {
+        if (port != null) {
             if (!NetUtils.isPortValid(port))
                 throw new SocketException("The port " + port + " is invalid.");
 
@@ -59,8 +56,7 @@ public class WebService extends ServiceControlBase
         }
     }
 
-    private Server createServerFromConfig() throws Exception
-    {
+    private Server createServerFromConfig() throws Exception {
         Server server = new Server();
 
         this.createThreadPool(server);
@@ -76,12 +72,10 @@ public class WebService extends ServiceControlBase
         return server;
     }
 
-    private Server createServerFromXml() throws Exception
-    {
+    private Server createServerFromXml() throws Exception {
         Server server = null;
         File configFile = this.getConfigFile();
-        if (configFile != null && configFile.exists())
-        {
+        if (configFile != null && configFile.exists()) {
             Resource resource = Resource.newResource(configFile);
             XmlConfiguration configuration = new XmlConfiguration(resource.getInputStream());
             server = (Server) configuration.configure();
@@ -89,12 +83,10 @@ public class WebService extends ServiceControlBase
         return server;
     }
 
-    private void createSslConnector(Server server) throws Exception
-    {
+    private void createSslConnector(Server server) throws Exception {
         WebServiceConfig webServiceConfig = WebServiceConfig.getInstance();
         Integer sslPort = webServiceConfig.getSslPort();
-        if (sslPort != null && !ValueUtils.isEmpty(webServiceConfig.getKeyStore()))
-        {
+        if (sslPort != null && !ValueUtils.isEmpty(webServiceConfig.getKeyStore())) {
             if (!NetUtils.isPortValid(sslPort))
                 throw new SocketException("The sslPort " + sslPort + " is invalid.");
 
@@ -110,8 +102,7 @@ public class WebService extends ServiceControlBase
         }
     }
 
-    private void createThreadPool(Server server) throws Exception
-    {
+    private void createThreadPool(Server server) throws Exception {
         WebServiceConfig webServiceConfig = WebServiceConfig.getInstance();
         QueuedThreadPool queuedThreadPool = new QueuedThreadPool();
         queuedThreadPool.setName(SERVICE_NAME);
@@ -120,8 +111,7 @@ public class WebService extends ServiceControlBase
         server.setThreadPool(queuedThreadPool);
     }
 
-    private boolean createWebAppHandler(HandlerList handlers)
-    {
+    private boolean createWebAppHandler(HandlerList handlers) {
         WebServiceConfig webServiceConfig = WebServiceConfig.getInstance();
         String webApp = webServiceConfig.getWebApp();
         File webAppPath = new File(webApp);
@@ -130,22 +120,17 @@ public class WebService extends ServiceControlBase
         return this.createWebContext(handlers, webServiceConfig.getContextRoot(), webAppPath);
     }
 
-    private void createWebAppsHandlers(HandlerList handlers)
-    {
+    private void createWebAppsHandlers(HandlerList handlers) {
         File webAppsPath = new File(ApplicationContext.getInstance().getContextPath().getWebApps());
         this.createWebAppsHandlers(handlers, webAppsPath);
     }
 
-    private void createWebAppsHandlers(HandlerList handlers, File directory)
-    {
-        if (directory.exists() && directory.isDirectory())
-        {
-            for (File file : directory.listFiles())
-            {
+    private void createWebAppsHandlers(HandlerList handlers, File directory) {
+        if (directory.exists() && directory.isDirectory()) {
+            for (File file : directory.listFiles()) {
                 if (file.isDirectory())
                     this.createWebContext(handlers, file.getName(), file);
-                else if (file.isFile() && file.getName().toLowerCase().endsWith(".war"))
-                {
+                else if (file.isFile() && file.getName().toLowerCase().endsWith(".war")) {
                     WebAppContext webAppContext = new WebAppContext();
                     webAppContext.setContextPath("/" + file.getName().replaceAll(".war", ""));
                     webAppContext.setWar(file.getAbsolutePath());
@@ -156,12 +141,10 @@ public class WebService extends ServiceControlBase
         }
     }
 
-    private boolean createWebContext(HandlerList handlers, String contextPath, File webAppPath)
-    {
+    private boolean createWebContext(HandlerList handlers, String contextPath, File webAppPath) {
         Collection<File> resourceDirs = this.findResourceDirs(webAppPath);
         File webXmlFile = this.findWebXmlFile(resourceDirs);
-        if (webXmlFile != null && webXmlFile.exists())
-        {
+        if (webXmlFile != null && webXmlFile.exists()) {
             WebAppContext webAppContext = new WebAppContext();
             webAppContext.setContextPath("/" + contextPath);
             webAppContext.setDescriptor(webXmlFile.getAbsolutePath());
@@ -173,18 +156,14 @@ public class WebService extends ServiceControlBase
         return webXmlFile != null && webXmlFile.exists();
     }
 
-    private Collection<File> findResourceDirs(File webAppPath)
-    {
+    private Collection<File> findResourceDirs(File webAppPath) {
         Collection<File> resourceDirs = new LinkedHashSet<File>();
         resourceDirs.add(webAppPath);
         String resources = WebServiceConfig.getInstance().getResources();
-        if (!ValueUtils.isEmpty(resources))
-        {
+        if (!ValueUtils.isEmpty(resources)) {
             String[] paths = resources.split(";");
-            if (paths != null)
-            {
-                for (String path : paths)
-                {
+            if (paths != null) {
+                for (String path : paths) {
                     File resourcePath = new File(path);
                     if (resourcePath.exists() && resourcePath.isDirectory())
                         resourceDirs.add(resourcePath);
@@ -194,11 +173,9 @@ public class WebService extends ServiceControlBase
         return resourceDirs;
     }
 
-    private File findWebXmlFile(Collection<File> resourceDirs)
-    {
+    private File findWebXmlFile(Collection<File> resourceDirs) {
         File webXmlFile = null;
-        for (File file : resourceDirs)
-        {
+        for (File file : resourceDirs) {
             webXmlFile = new File(file.getAbsolutePath() + File.separator + "/WEB-INF/web.xml");
             if (webXmlFile.exists())
                 break;
@@ -206,8 +183,7 @@ public class WebService extends ServiceControlBase
         return webXmlFile;
     }
 
-    private File getConfigFile()
-    {
+    private File getConfigFile() {
         File configFile = null;
         String configFileName = WebServiceConfig.getInstance().getConfigFile();
         if (!ValueUtils.isEmpty(configFileName))
@@ -215,11 +191,9 @@ public class WebService extends ServiceControlBase
         return configFile;
     }
 
-    private ResourceCollection getResourceCollection(Collection<File> resourceDirs)
-    {
+    private ResourceCollection getResourceCollection(Collection<File> resourceDirs) {
         List<String> resourceList = new ArrayList<String>();
-        for (File file : resourceDirs)
-        {
+        for (File file : resourceDirs) {
             if (file.exists() && file.isDirectory())
                 resourceList.add(file.getAbsolutePath());
         }
@@ -227,44 +201,34 @@ public class WebService extends ServiceControlBase
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
-        WebServiceConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        WebServiceConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 WebService.this.restart();
             }
         });
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         super.start();
 
-        synchronized (Server.class)
-        {
-            if (this.server == null && WebServiceConfig.getInstance().isEnabled())
-            {
-                try
-                {
+        synchronized (Server.class) {
+            if (this.server == null && WebServiceConfig.getInstance().isEnabled()) {
+                try {
                     System.setProperty("jetty.home", ApplicationContext.getInstance().getContextPath().getBaseDir());
 
                     Server server = this.createServerFromXml();
                     if (server == null)
                         server = this.createServerFromConfig();
-                    if (server != null)
-                    {
+                    if (server != null) {
                         server.start();
                         this.server = server;
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     this.logger.error("The web service start error.", e);
                 }
             }
@@ -272,22 +236,16 @@ public class WebService extends ServiceControlBase
     }
 
     @Override
-    public void stop()
-    {
+    public void stop() {
         super.stop();
 
-        synchronized (Server.class)
-        {
-            if (this.server != null)
-            {
-                try
-                {
+        synchronized (Server.class) {
+            if (this.server != null) {
+                try {
                     this.server.stop();
                     this.server.join();
                     this.server = null;
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     this.logger.error(this, e);
                 }
             }

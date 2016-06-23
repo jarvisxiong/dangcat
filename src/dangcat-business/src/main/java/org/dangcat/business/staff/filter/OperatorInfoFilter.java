@@ -16,12 +16,11 @@ import org.dangcat.web.annotation.Picker;
 
 /**
  * The service filter for Operator.
+ *
  * @author dangcat
- * 
  */
 @Table("OperatorInfo")
-public class OperatorInfoFilter extends DataFilter
-{
+public class OperatorInfoFilter extends DataFilter {
     @Column(index = 2, displaySize = 20)
     @Picker(OperatorGroupPicker.class)
     private Integer groupId = null;
@@ -40,8 +39,7 @@ public class OperatorInfoFilter extends DataFilter
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         if (!ValueUtils.isEmpty(this.getNo()))
             filterGroup.add(new FilterUnit(OperatorInfo.No, FilterType.like, this.getNo()));
@@ -56,8 +54,7 @@ public class OperatorInfoFilter extends DataFilter
         return this.getFilterExpress(filterGroup);
     }
 
-    public Integer getGroupId()
-    {
+    public Integer getGroupId() {
         return this.groupId;
     }
 
@@ -66,43 +63,35 @@ public class OperatorInfoFilter extends DataFilter
     }
 
     @Serialize(ignore = true)
-    public Integer[] getGroupIds()
-    {
+    public Integer[] getGroupIds() {
         return this.groupIds;
     }
 
-    public void setGroupIds(Integer[] groupIds)
-    {
+    public void setGroupIds(Integer[] groupIds) {
         this.groupIds = groupIds;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getNo()
-    {
+    public String getNo() {
         return this.no;
     }
 
-    public void setNo(String no)
-    {
+    public void setNo(String no) {
         this.no = no;
     }
 
-    public Boolean getUseAble()
-    {
+    public Boolean getUseAble() {
         return this.useAble;
     }
 
-    public void setUseAble(Boolean useAble)
-    {
+    public void setUseAble(Boolean useAble) {
         this.useAble = useAble;
     }
 }

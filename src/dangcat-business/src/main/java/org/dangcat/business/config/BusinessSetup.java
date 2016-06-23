@@ -7,8 +7,7 @@ import org.dangcat.persistence.model.DataState;
 import org.dangcat.persistence.model.DataStatus;
 
 @Table
-public class BusinessSetup extends EntityBase implements DataStatus
-{
+public class BusinessSetup extends EntityBase implements DataStatus {
     public static final String ConfigName = "ConfigName";
     public static final String Name = "Name";
     public static final String Value = "Value";
@@ -22,8 +21,7 @@ public class BusinessSetup extends EntityBase implements DataStatus
     @Column(displaySize = 60, index = 2)
     private String value = null;
 
-    public String getConfigName()
-    {
+    public String getConfigName() {
         return configName;
     }
 
@@ -32,28 +30,23 @@ public class BusinessSetup extends EntityBase implements DataStatus
     }
 
     @Override
-    public DataState getDataState()
-    {
+    public DataState getDataState() {
         return DataState.Insert;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(String value)
-    {
+    public void setValue(String value) {
         this.value = value;
     }
 }

@@ -14,19 +14,16 @@ import java.util.Date;
 
 /**
  * 账户管理服务接口。
+ *
  * @author dangcat
- * 
  */
-public class AccountServiceImpl extends BusinessServiceBase<AccountBasic, AccountInfo, AccountFilter> implements AccountService
-{
-    public AccountServiceImpl(ServiceProvider parent)
-    {
+public class AccountServiceImpl extends BusinessServiceBase<AccountBasic, AccountInfo, AccountFilter> implements AccountService {
+    public AccountServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     @Override
-    public Person createPerson(String name, int age, double balance, Date borthDay) throws ServiceException
-    {
+    public Person createPerson(String name, int age, double balance, Date borthDay) throws ServiceException {
         Person person = new Person();
         person.setName(name);
         person.setAge(age);
@@ -36,8 +33,7 @@ public class AccountServiceImpl extends BusinessServiceBase<AccountBasic, Accoun
     }
 
     @Override
-    protected void onCreate(AccountInfo accountInfo)
-    {
+    protected void onCreate(AccountInfo accountInfo) {
         accountInfo.setName("Monkey hou");
         accountInfo.setAddress("中国深圳");
         accountInfo.setEmail("houxx@h3c.com.cn");
@@ -50,8 +46,7 @@ public class AccountServiceImpl extends BusinessServiceBase<AccountBasic, Accoun
     }
 
     @Override
-    public String printPerson(Person person) throws ServiceException
-    {
+    public String printPerson(Person person) throws ServiceException {
         StringBuilder info = new StringBuilder();
         info.append("Name : " + person.getName() + "\r\n");
         info.append("Age : " + person.getAge() + "\r\n");

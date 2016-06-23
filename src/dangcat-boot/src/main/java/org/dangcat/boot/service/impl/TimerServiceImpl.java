@@ -16,11 +16,10 @@ import java.util.List;
 
 /**
  * 定时服务接口。
+ *
  * @author dangcat
- * 
  */
-public class TimerServiceImpl extends ServiceControlBase implements TimerService
-{
+public class TimerServiceImpl extends ServiceControlBase implements TimerService {
     private static final int DEFAULT_INTERVAL = 1000;
     private static final int MAX_INTERVAL = 60000;
     private static TimerServiceImpl instance = null;
@@ -29,6 +28,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
 
     /**
      * 构建服务。
+     *
      * @param parent 所属服务。
      */
     public TimerServiceImpl(ServiceProvider parent) {
@@ -37,13 +37,12 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
 
     /**
      * 建立服务实例。
+     *
      * @param parent 所属父服务。
      * @return
      */
-    public static synchronized TimerService createInstance(ServiceProvider parent)
-    {
-        if (instance == null)
-        {
+    public static synchronized TimerService createInstance(ServiceProvider parent) {
+        if (instance == null) {
             instance = new TimerServiceImpl(parent);
             instance.initialize();
         }
@@ -52,61 +51,53 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
 
     /**
      * 读取服务实例。
+     *
      * @return
      */
-    public static TimerService getInstance()
-    {
+    public static TimerService getInstance() {
         return instance;
     }
 
     /**
      * 取消定时器，
+     *
      * @param alarmClock 定时器对象。
      */
-    public synchronized void cancelTimer(AlarmClock alarmClock)
-    {
+    public synchronized void cancelTimer(AlarmClock alarmClock) {
         this.removeTimer(alarmClock);
     }
 
     /**
      * 注册定时器，
+     *
      * @param alarmClock 定时器对象。
      */
-    public synchronized void createTimer(AlarmClock alarmClock)
-    {
-        if (alarmClock != null)
-        {
+    public synchronized void createTimer(AlarmClock alarmClock) {
+        if (alarmClock != null) {
             this.removeTimer(alarmClock);
             this.alarmClockList.add(alarmClock);
             Collections.sort(this.alarmClockList);
         }
     }
 
-    private void execute(AlarmClock alarmClock)
-    {
-        try
-        {
+    private void execute(AlarmClock alarmClock) {
+        try {
             Object target = alarmClock.getTarget();
             // 独立线程模式。
-            if (target instanceof ThreadService)
-            {
+            if (target instanceof ThreadService) {
                 ThreadService threadService = (ThreadService) target;
-                if (threadService.isEnabled())
-                {
+                if (threadService.isEnabled()) {
                     threadService.resume();
                     return;
                 }
             }
             // 实现了线程接口。
             Runnable runnable = alarmClock.getRunnable();
-            if (runnable != null)
-            {
+            if (runnable != null) {
                 if (alarmClock.couldRun())
                     ThreadPoolFactory.getInstance().execute(runnable);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
         }
     }
@@ -114,13 +105,11 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     /**
      * 定时执行接口。
      */
-    public synchronized void intervalExec()
-    {
+    public synchronized void intervalExec() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(DateUtils.now());
         long waitingTime = MAX_INTERVAL;
-        for (AlarmClock alarmClock : this.alarmClockList)
-        {
+        for (AlarmClock alarmClock : this.alarmClockList) {
             if (!alarmClock.isEnabled())
                 continue;
 
@@ -128,8 +117,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
                 this.execute(alarmClock);
 
             // 计算最小等待时间。
-            if (alarmClock.getNextAlramTime() != null)
-            {
+            if (alarmClock.getNextAlramTime() != null) {
                 long distanceTime = alarmClock.getNextAlramTime().getTime() - calendar.getTimeInMillis();
                 if (distanceTime > 0)
                     waitingTime = Math.min(distanceTime, waitingTime);
@@ -139,19 +127,14 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
             this.timer.setPeriod(waitingTime);
     }
 
-    private void removeTimer(AlarmClock alarmClock)
-    {
-        if (alarmClock != null)
-        {
+    private void removeTimer(AlarmClock alarmClock) {
+        if (alarmClock != null) {
             if (this.alarmClockList.contains(alarmClock))
                 this.alarmClockList.remove(alarmClock);
-            else
-            {
+            else {
                 AlarmClock found = null;
-                for (AlarmClock childAlarmClock : this.alarmClockList)
-                {
-                    if (childAlarmClock.getTarget() == alarmClock.getTarget())
-                    {
+                for (AlarmClock childAlarmClock : this.alarmClockList) {
+                    if (childAlarmClock.getTarget() == alarmClock.getTarget()) {
                         found = childAlarmClock;
                         break;
                     }
@@ -166,21 +149,15 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
      * 启动定时器
      */
     @Override
-    public void start()
-    {
-        if (this.getServiceStatus().equals(ServiceStatus.Stopped))
-        {
+    public void start() {
+        if (this.getServiceStatus().equals(ServiceStatus.Stopped)) {
             this.setServiceStatus(ServiceStatus.Starting);
-            synchronized (this)
-            {
-                if (!Environment.isTestEnabled() && this.timer == null)
-                {
+            synchronized (this) {
+                if (!Environment.isTestEnabled() && this.timer == null) {
                     // 监控定时器。
-                    this.timer = new Timer(TimerService.class.getSimpleName(), new Runnable()
-                    {
+                    this.timer = new Timer(TimerService.class.getSimpleName(), new Runnable() {
                         @Override
-                        public void run()
-                        {
+                        public void run() {
                             TimerServiceImpl.this.intervalExec();
                         }
                     }, DEFAULT_INTERVAL, DEFAULT_INTERVAL);
@@ -195,15 +172,11 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
      * 停止定时器
      */
     @Override
-    public void stop()
-    {
-        if (this.getServiceStatus().equals(ServiceStatus.Started))
-        {
+    public void stop() {
+        if (this.getServiceStatus().equals(ServiceStatus.Started)) {
             this.setServiceStatus(ServiceStatus.Starting);
-            synchronized (this)
-            {
-                if (this.timer != null)
-                {
+            synchronized (this) {
+                if (this.timer != null) {
                     this.timer.stop();
                     this.timer = null;
                 }

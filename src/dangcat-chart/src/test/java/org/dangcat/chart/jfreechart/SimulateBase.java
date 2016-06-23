@@ -9,8 +9,7 @@ import org.dangcat.persistence.model.Table;
 
 import java.util.Date;
 
-class SimulateBase
-{
+class SimulateBase {
     protected static final String DateTime = "DateTime";
     protected static final String DownOctets = "DownOctets";
     protected static final String FieldName = "FieldName";
@@ -25,18 +24,15 @@ class SimulateBase
     protected static final String Velocity = "Velocity";
     protected static String[] FieldNames = new String[]{"Octets", "UpOctets", "DownOctets", "OctetsVelocity", "Percent", "Value", "Velocity", "TimeLength"};
 
-    private static void addColumn(Table table, String fieldName, String logic, Class<?> classType)
-    {
+    private static void addColumn(Table table, String fieldName, String logic, Class<?> classType) {
         Column column = table.getColumns().add(fieldName, classType);
         column.setLogic(logic);
         column.setDataFormator(DataFormatorFactory.getDataFormator(column.getLogic()));
     }
 
-    protected static Table createTable(String... fieldNames)
-    {
+    protected static Table createTable(String... fieldNames) {
         Table table = new Table();
-        for (String fieldName : fieldNames)
-        {
+        for (String fieldName : fieldNames) {
             if (Name.equalsIgnoreCase(fieldName))
                 table.getColumns().add(Name, String.class, 20, true);
             else if (FieldName.equalsIgnoreCase(fieldName))
@@ -61,20 +57,17 @@ class SimulateBase
         return table;
     }
 
-    protected static void initField(Field field, int i, double value)
-    {
+    protected static void initField(Field field, int i, double value) {
         if (field != null)
             field.setDouble((i + 1) * value + Math.random() * 10);
     }
 
-    private static void initField(Field field, int i, long value)
-    {
+    private static void initField(Field field, int i, long value) {
         if (field != null)
             field.setLong((long) ((i + 1) * value + Math.random() * 10));
     }
 
-    protected static void initRow(Row row, int i)
-    {
+    protected static void initRow(Row row, int i) {
         initField(row.getField(Percent), i, 10.0);
         initField(row.getField(Octets), i, 30l);
         initField(row.getField(UpOctets), i, 40l);
@@ -85,10 +78,9 @@ class SimulateBase
         initField(row.getField(Velocity), i, 90l);
     }
 
-    protected static Date[] today()
-    {
+    protected static Date[] today() {
         Date beginTime = DateUtils.clear(DateUtils.HOUR, DateUtils.now());
         Date endTime = DateUtils.add(DateUtils.DAY, beginTime, 1);
-        return new Date[] { beginTime, endTime };
+        return new Date[]{beginTime, endTime};
     }
 }

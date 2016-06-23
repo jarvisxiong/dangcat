@@ -35,34 +35,28 @@ import java.util.List;
 
 /**
  * The service test for Operator
+ *
  * @author dangcat
- * 
  */
-public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInfoService, OperatorInfo, OperatorInfo, OperatorInfoFilter>
-{
+public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInfoService, OperatorInfo, OperatorInfo, OperatorInfoFilter> {
     private static final int TEST_COUNT = 100;
 
-    private void changePassword(String orgPassword, String newPassword, String fieldName, Integer messageId) throws ServiceException
-    {
-        try
-        {
+    private void changePassword(String orgPassword, String newPassword, String fieldName, Integer messageId) throws ServiceException {
+        try {
             String no = this.getServicePrincipal().getNo();
             String password1 = orgPassword == null ? null : SecurityUtils.encryptPassword(no, orgPassword);
             String password2 = newPassword == null ? null : SecurityUtils.encryptPassword(no, newPassword);
             this.getService().changePassword(password1, password2);
             if (messageId != null)
                 throw new ServiceException("changePassword execute error.");
-        }
-        catch (OperatorInfoException e)
-        {
+        } catch (OperatorInfoException e) {
             Assert.assertEquals(fieldName, e.getFieldName());
             Assert.assertEquals(messageId, e.getMessageId());
         }
     }
 
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new RolePermissionSimulator(), 0);
         databaseSimulator.add(new RoleInfoSimulator(), 10);
         databaseSimulator.add(new OperatorGroupSimulator(), 10);
@@ -71,8 +65,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(OperatorGroupService.class, OperatorGroupServiceImpl.class);
         this.addService(RoleInfoService.class, RoleInfoServiceImpl.class);
@@ -81,18 +74,14 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
         super.initialize();
     }
 
-    private void resetPassword(String no, String password, String fieldName, Integer messageId) throws ServiceException
-    {
-        try
-        {
+    private void resetPassword(String no, String password, String fieldName, Integer messageId) throws ServiceException {
+        try {
             String operatorNo = no == null ? null : SecurityUtils.encryptContent(no);
             String password1 = password == null ? null : SecurityUtils.encryptPassword(no, password);
             this.getService().resetPassword(operatorNo, password1);
             if (messageId != null)
                 throw new ServiceException("changePassword execute error.");
-        }
-        catch (OperatorInfoException e)
-        {
+        } catch (OperatorInfoException e) {
             Assert.assertEquals(fieldName, e.getFieldName());
             Assert.assertEquals(messageId, e.getMessageId());
         }
@@ -102,8 +91,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 测试特殊修改权限。
      */
     @Test
-    public void testAdvancedModify() throws ServiceException
-    {
+    public void testAdvancedModify() throws ServiceException {
         OperatorInfo operatorInfo = this.getEntityManager().load(OperatorInfo.class, 0);
         this.login(operatorInfo.getNo(), 0);
 
@@ -132,8 +120,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testChangePassword() throws ServiceException
-    {
+    public void testChangePassword() throws ServiceException {
         String oldPassword = "dangcat2014";
         OperatorInfoCreate operatorInfo = this.getEntityManager().load(OperatorInfoCreate.class, 0);
         operatorInfo.setPassword(SecurityUtils.storePassword(operatorInfo.getNo(), oldPassword));
@@ -152,13 +139,11 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testDefaultNew() throws ServiceException
-    {
+    public void testDefaultNew() throws ServiceException {
         OperatorInfo operatorInfo = new OperatorInfo();
         StaffConfig operatorInfoConfig = StaffConfig.getInstance();
         operatorInfo.setUseAble(operatorInfoConfig.getDefaultUseAble());
-        if (operatorInfoConfig.getValidDays() != null && operatorInfoConfig.getValidDays() > 0)
-        {
+        if (operatorInfoConfig.getValidDays() != null && operatorInfoConfig.getValidDays() > 0) {
             Date expiryTime = DateUtils.add(DateUtils.DAY, DateUtils.now(), operatorInfoConfig.getValidDays());
             operatorInfo.setExpiryTime(expiryTime);
         }
@@ -166,8 +151,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testDelete() throws ServiceException
-    {
+    public void testDelete() throws ServiceException {
         this.testDelete(OperatorInfo.class, TEST_COUNT);
     }
 
@@ -175,8 +159,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 只能删除本组和子组成员账号。
      */
     @Test
-    public void testDeleteOtherGroup() throws ServiceException
-    {
+    public void testDeleteOtherGroup() throws ServiceException {
         OperatorInfo operatorInfo1 = this.getEntityManager().load(OperatorInfo.class, 1);
         OperatorInfo operatorInfo2 = this.getEntityManager().load(OperatorInfo.class, 2);
         Assert.assertNotNull(operatorInfo1);
@@ -189,8 +172,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 操作员不能删除自己的账号。
      */
     @Test
-    public void testDeleteSelf() throws ServiceException
-    {
+    public void testDeleteSelf() throws ServiceException {
         OperatorInfo operatorInfo = this.getEntityManager().load(OperatorInfo.class, 0);
         Assert.assertNotNull(operatorInfo);
         this.login(operatorInfo.getNo());
@@ -198,8 +180,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testFilter() throws ServiceException
-    {
+    public void testFilter() throws ServiceException {
         TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery = new TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter>(this.getBusinessService());
         QueryAssert<OperatorInfoFilter> queryAssert = new QueryAssert<OperatorInfoFilter>(OperatorInfo.class);
         OperatorInfoFilter operatorInfoFilter = new OperatorInfoFilter();
@@ -217,10 +198,8 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     private void testFilter_GroupId(TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery, QueryAssert<OperatorInfoFilter> queryAssert,
-            OperatorInfoFilter operatorInfoFilter) throws ServiceException
-    {
-        for (Object entity : this.loadSamples(OperatorGroup.class))
-        {
+                                    OperatorInfoFilter operatorInfoFilter) throws ServiceException {
+        for (Object entity : this.loadSamples(OperatorGroup.class)) {
             OperatorGroup operatorGroup = (OperatorGroup) entity;
             operatorInfoFilter.setGroupId(operatorGroup.getId());
             queryAssert.setExpectFilterExpress(new FilterUnit(OperatorInfo.GroupId, FilterType.eq, operatorGroup.getId()));
@@ -230,10 +209,8 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     private void testFilter_Name(TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery, QueryAssert<OperatorInfoFilter> queryAssert, OperatorInfoFilter operatorInfoFilter)
-            throws ServiceException
-    {
-        for (Object entity : this.loadSamples(OperatorInfo.class))
-        {
+            throws ServiceException {
+        for (Object entity : this.loadSamples(OperatorInfo.class)) {
             OperatorInfo operatorInfo = (OperatorInfo) entity;
             operatorInfoFilter.setName(operatorInfo.getName());
             FilterGroup filterGroup = new FilterGroup();
@@ -247,10 +224,8 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     private void testFilter_No(TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery, QueryAssert<OperatorInfoFilter> queryAssert, OperatorInfoFilter operatorInfoFilter)
-            throws ServiceException
-    {
-        for (Object entity : this.loadSamples(OperatorInfo.class))
-        {
+            throws ServiceException {
+        for (Object entity : this.loadSamples(OperatorInfo.class)) {
             OperatorInfo operatorInfo = (OperatorInfo) entity;
             operatorInfoFilter.setNo(operatorInfo.getNo());
             FilterGroup filterGroup = new FilterGroup();
@@ -264,8 +239,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     private void testFilter_UseAble(TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery, QueryAssert<OperatorInfoFilter> queryAssert,
-            OperatorInfoFilter operatorInfoFilter) throws ServiceException
-    {
+                                    OperatorInfoFilter operatorInfoFilter) throws ServiceException {
         operatorInfoFilter.setUseAble(Boolean.TRUE);
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(OperatorInfo.UseAble, FilterType.eq, Boolean.TRUE));
@@ -286,11 +260,11 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
 
     /**
      * 只能新增本组和子组成员信息。
+     *
      * @throws ServiceException
      */
     @Test
-    public void testInsertOperator() throws ServiceException
-    {
+    public void testInsertOperator() throws ServiceException {
         this.truncate(OperatorInfo.class);
         // 建立三个组：1、无关联；2、登陆用户组；3、登陆用户子组。
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
@@ -343,8 +317,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 只能修改本组和子组成员信息。
      */
     @Test
-    public void testModifyOperator() throws ServiceException
-    {
+    public void testModifyOperator() throws ServiceException {
         this.truncate(OperatorInfo.class, OperatorGroup.class);
         // 建立三个组：1、无关联；2、登陆用户组；3、登陆用户子组。
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
@@ -400,8 +373,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 测试修改密码。
      */
     @Test
-    public void testModifyPassword() throws ServiceException
-    {
+    public void testModifyPassword() throws ServiceException {
         this.truncate(OperatorInfo.class);
         EntitySimulator operatorInfoSimulator = this.getEntitySimulator(OperatorInfoCreate.class);
         OperatorInfoCreate operatorInfo = (OperatorInfoCreate) operatorInfoSimulator.create(TEST_COUNT + 1);
@@ -424,8 +396,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 操作员的账号不能重复。
      */
     @Test
-    public void testOperatorNoRepeat() throws ServiceException
-    {
+    public void testOperatorNoRepeat() throws ServiceException {
         OperatorInfo operatorInfo0 = this.getEntityManager().load(OperatorInfo.class, 0);
         Assert.assertNotNull(operatorInfo0);
 
@@ -446,8 +417,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 操作员组和角色不存在。
      */
     @Test
-    public void testOperatorNotExist() throws ServiceException
-    {
+    public void testOperatorNotExist() throws ServiceException {
         this.truncate(OperatorInfo.class);
         EntitySimulator operatorInfoSimulator = this.getEntitySimulator(OperatorInfo.class);
         OperatorInfoCreate operatorInfo1 = (OperatorInfoCreate) operatorInfoSimulator.create(TEST_COUNT + 1);
@@ -466,8 +436,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testQuery() throws ServiceException
-    {
+    public void testQuery() throws ServiceException {
         TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter> testServiceQuery = new TestServiceQuery<OperatorInfo, OperatorInfo, OperatorInfoFilter>(this.getBusinessService());
         QueryAssert<OperatorInfoFilter> queryAssert = new QueryAssert<OperatorInfoFilter>(OperatorInfo.class);
         queryAssert.setDataFilter(new OperatorInfoFilter());
@@ -479,8 +448,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
      * 只能查询本组和子组成员账号。
      */
     @Test
-    public void testQuerySameGroup() throws ServiceException
-    {
+    public void testQuerySameGroup() throws ServiceException {
         this.truncate(OperatorInfo.class);
 
         int count = 4;
@@ -488,8 +456,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
         List<OperatorInfo> operatorInfoList = new ArrayList<OperatorInfo>();
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         EntitySimulator operatorInfoSimulator = this.getEntitySimulator(OperatorInfo.class);
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1 + i);
             if (i == 0 || i == count - 1)
                 operatorGroup.setParentId(null);
@@ -504,8 +471,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
             operatorInfoList.add(operatorInfo);
         }
 
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             OperatorInfo operatorInfo = operatorInfoList.get(i);
             this.login(operatorInfo.getNo());
             QueryResult<OperatorInfo> queryResult = this.getService().query(new OperatorInfoFilter());
@@ -519,8 +485,7 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testResetPassword() throws ServiceException
-    {
+    public void testResetPassword() throws ServiceException {
         this.resetPassword(null, null, OperatorInfoCreate.No, OperatorInfoException.INVALIDATE_NOTNULL);
 
         String oldPassword = "dangcat2014";
@@ -538,14 +503,12 @@ public class TestOperatorInfoService extends BusinessServiceTestBase<OperatorInf
     }
 
     @Test
-    public void testSave() throws ServiceException
-    {
+    public void testSave() throws ServiceException {
         this.testSave(OperatorInfo.class, TEST_COUNT);
     }
 
     @Test
-    public void testView() throws ServiceException
-    {
+    public void testView() throws ServiceException {
         this.testView(OperatorInfo.class, TEST_COUNT);
     }
 }

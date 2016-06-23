@@ -20,26 +20,26 @@ import org.dangcat.net.udp.service.UDPListener;
 
 /**
  * UDP报文处理服务基础类。
+ *
  * @author dangcat
- * 
  */
-public abstract class PacketProcessServiceBase<T extends Packet> extends QueueThreadService<DatagramEvent> implements DatagramReceiveListener
-{
+public abstract class PacketProcessServiceBase<T extends Packet> extends QueueThreadService<DatagramEvent> implements DatagramReceiveListener {
     private PacketProcessStatistics packetProcessStatistics = null;
     private DataProcessService<PacketSession<?>> replyPacketService = null;
     private UDPListener udpListener = null;
 
     /**
      * 构建服务。
+     *
      * @param parent 所属服务。
      */
-    public PacketProcessServiceBase(ServiceProvider parent, String serviceName)
-    {
+    public PacketProcessServiceBase(ServiceProvider parent, String serviceName) {
         super(parent, serviceName);
     }
 
     /**
      * 产生会话对象。
+     *
      * @param datagramEvent 接收的数据报文。
      * @return 包会话对象。
      */
@@ -49,53 +49,41 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
      * 多线程并发处理接口。
      */
     @Override
-    protected void execute(DatagramEvent datagramEvent)
-    {
+    protected void execute(DatagramEvent datagramEvent) {
         this.executeProcess(datagramEvent);
     }
 
-    protected PacketSession<T> executeProcess(DatagramEvent datagramEvent)
-    {
+    protected PacketSession<T> executeProcess(DatagramEvent datagramEvent) {
         // 记录接收的数据数
         PacketProcessStatistics packetProcessStatistics = this.getPacketProcessStatistics();
 
         T packet = null;
         PacketSession<T> packetSession = null;
-        try
-        {
+        try {
             packetSession = this.createPacketSession(datagramEvent);
             packetSession.parse();
             packetSession.logTimeCost("parse");
 
-            if (packetSession.getRequestPacket() != null)
-            {
+            if (packetSession.getRequestPacket() != null) {
                 packetSession.validate();
                 packetSession.logTimeCost("validate");
 
                 packetSession = this.executeProcess(packetSession);
                 packetProcessStatistics.increaseSuccess();
             }
-        }
-        catch (ProtocolParseException e)
-        {
+        } catch (ProtocolParseException e) {
             packetProcessStatistics.increaseParseError();
             packetSession.logError("Parse the packet error: ", datagramEvent, e);
-        }
-        catch (ProtocolValidateException e)
-        {
+        } catch (ProtocolValidateException e) {
             packetProcessStatistics.increaseValidError();
             packetSession.logError("Validate the packet error: ", packet, e);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             packetProcessStatistics.increaseError();
             if (packetSession != null)
                 packetSession.logError("the packet error: ", packet, e);
             else
                 this.getLogger().error(this, e);
-        }
-        finally
-        {
+        } finally {
             if (packetSession != null)
                 packetSession.end();
         }
@@ -106,8 +94,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
 
     protected abstract ListenerConfig getListenerConfig();
 
-    protected PacketProcessStatistics getPacketProcessStatistics()
-    {
+    protected PacketProcessStatistics getPacketProcessStatistics() {
         if (this.packetProcessStatistics == null)
             this.packetProcessStatistics = new PacketProcessStatistics(this.getServiceName());
         return this.packetProcessStatistics;
@@ -115,26 +102,23 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
 
     /**
      * 发送响应数据包服务。
+     *
      * @return
      */
-    protected DataProcessService<PacketSession<?>> getReplyPacketService()
-    {
+    protected DataProcessService<PacketSession<?>> getReplyPacketService() {
         if (this.replyPacketService == null)
             this.replyPacketService = new ReplyPacketServiceImpl(this);
         return this.replyPacketService;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         // 绑定端口修改事件。
-        this.getListenerConfig().addConfigChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        this.getListenerConfig().addConfigChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 if (ListenerConfig.Port.equals(event.getId()) || ListenerConfig.BindAddress.equals(event.getId()))
                     PacketProcessServiceBase.this.restart();
                 else if (ListenerConfig.MaxConcurrentSize.equals(event.getId()) || ListenerConfig.MaxQueueCapacity.equals(event.getId()))
@@ -148,15 +132,13 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
             statisticsService.addStatistics(this.getPacketProcessStatistics());
     }
 
-    private void listenerConfigChanged()
-    {
+    private void listenerConfigChanged() {
         this.setMaxConcurrentSize(this.getListenerConfig().getMaxConcurrentSize());
         this.setMaxQueueCapacity(this.getListenerConfig().getMaxQueueCapacity());
     }
 
     @Override
-    protected void onIgnoreProcess(DatagramEvent data)
-    {
+    protected void onIgnoreProcess(DatagramEvent data) {
         // 统计因为性能不足开始忽略的数据。
         this.getPacketProcessStatistics().increaseIgnore();
 
@@ -167,8 +149,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
      * 接收数据包。
      */
     @Override
-    public void onReceive(DatagramEvent datagramEvent)
-    {
+    public void onReceive(DatagramEvent datagramEvent) {
         // 记录接收的数据数
         this.getPacketProcessStatistics().increaseReceive();
 
@@ -179,11 +160,9 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
      * 启动服务。
      */
     @Override
-    public void start()
-    {
+    public void start() {
         super.start();
-        if (this.udpListener == null)
-        {
+        if (this.udpListener == null) {
             ListenerConfig listenerConfig = this.getListenerConfig();
             UDPListener udpListener = new UDPListener(this.getServiceName(), listenerConfig.getPort(), this);
             udpListener.setBindAddress(listenerConfig.getBindAddress());
@@ -201,10 +180,8 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
      * 解除绑定计费端口。
      */
     @Override
-    public void stop()
-    {
-        if (this.udpListener != null)
-        {
+    public void stop() {
+        if (this.udpListener != null) {
             this.udpListener.stopListener();
             this.udpListener = null;
         }

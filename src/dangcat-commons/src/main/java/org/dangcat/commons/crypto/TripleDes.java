@@ -7,8 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * TripleDes加密工具的封装类
  */
-class TripleDes
-{
+class TripleDes {
     /**
      * 加密算法的名称
      */
@@ -26,8 +25,8 @@ class TripleDes
     // (byte) 0x1A, (byte) 0xC2, (byte) 0x46, (byte) 0x5E, (byte) 0x58,
     // (byte) 0x40, (byte) 0x23, (byte) 0x64, (byte) 0x1A, (byte) 0xBA,
     // (byte) 0x61, (byte) 0x76 };
-    private static final byte[] KEYBYTES = { (byte) 0x5A, (byte) 0x84, (byte) 0x78, (byte) 0x9F, (byte) 0xC7, (byte) 0x94, (byte) 0xC7, (byte) 0x48, (byte) 0xC0, (byte) 0x3A, (byte) 0x09,
-            (byte) 0xB6, (byte) 0xB6, (byte) 0x05, (byte) 0xF6, (byte) 0xB9, (byte) 0x66, (byte) 0x09, (byte) 0x86, (byte) 0x6A, (byte) 0x3D, (byte) 0x7B, (byte) 0x3F, (byte) 0x4B };
+    private static final byte[] KEYBYTES = {(byte) 0x5A, (byte) 0x84, (byte) 0x78, (byte) 0x9F, (byte) 0xC7, (byte) 0x94, (byte) 0xC7, (byte) 0x48, (byte) 0xC0, (byte) 0x3A, (byte) 0x09,
+            (byte) 0xB6, (byte) 0xB6, (byte) 0x05, (byte) 0xF6, (byte) 0xB9, (byte) 0x66, (byte) 0x09, (byte) 0x86, (byte) 0x6A, (byte) 0x3D, (byte) 0x7B, (byte) 0x3F, (byte) 0x4B};
 
     /**
      * 转换：包括加密算法的名称（例如，DES），后面可能跟有一个反馈模式和填充方案。 DESede/ECB/NoPadding
@@ -36,23 +35,22 @@ class TripleDes
 
     /**
      * 解密
-     * 
+     *
      * @param sourceBytes 密文
      * @return 原文，出错返回null
      */
-    protected static byte[] decrypt(byte[] sourceBytes)
-    {
+    protected static byte[] decrypt(byte[] sourceBytes) {
         return decrypt(KEYBYTES, sourceBytes);
     }
 
     /**
      * 解密
-     * @param keys 密钥
+     *
+     * @param keys        密钥
      * @param sourceBytes 密文
      * @return 原文，出错返回null
      */
-    private static byte[] decrypt(byte[] keys, byte[] sourceBytes)
-    {
+    private static byte[] decrypt(byte[] keys, byte[] sourceBytes) {
         if (keys == null || keys.length != 24)
             return null;
 
@@ -60,8 +58,7 @@ class TripleDes
         if (sourceBytes == null || sourceBytes.length % 8 != 0)
             return null;
 
-        try
-        {
+        try {
             // 生成密钥
             SecretKey deskey = new SecretKeySpec(keys, ALGORITHM);
 
@@ -85,9 +82,7 @@ class TripleDes
             byte[] returnBytes = new byte[index + 1];
             System.arraycopy(decryptBytes, 0, returnBytes, 0, index + 1);
             return returnBytes;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -95,31 +90,29 @@ class TripleDes
 
     /**
      * 加密
+     *
      * @param sourceBytes 原文
      * @return 密文，出错返回null
      */
-    protected static byte[] encrypt(byte[] sourceBytes)
-    {
+    protected static byte[] encrypt(byte[] sourceBytes) {
         return encrypt(KEYBYTES, sourceBytes);
     }
 
     /**
      * 加密
-     * 
-     * @param keys 密钥
+     *
+     * @param keys        密钥
      * @param sourceBytes 原文
      * @return 密文，出错返回null
      */
-    private static byte[] encrypt(byte[] keys, byte[] sourceBytes)
-    {
+    private static byte[] encrypt(byte[] keys, byte[] sourceBytes) {
         if (keys == null || keys.length != 24)
             return null;
 
         if (sourceBytes == null)
             return null;
 
-        try
-        {
+        try {
             // 生成密钥
             SecretKey deskey = new SecretKeySpec(keys, ALGORITHM);
 
@@ -140,9 +133,7 @@ class TripleDes
             // 填充‘\0’造成解密后的串带‘\0’
             return cipher.doFinal(srcPadded);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -152,14 +143,13 @@ class TripleDes
 
     /**
      * 找出最后一个不为指定字符的位置
-     * @param bytes 串
+     *
+     * @param bytes     串
      * @param byteValue 指定字符
-     * @return 索引,找不到返回-1
+     * @return 索引, 找不到返回-1
      */
-    private static int findLastNotof(byte[] bytes, byte byteValue)
-    {
-        for (int index = bytes.length - 1; index >= 0; --index)
-        {
+    private static int findLastNotof(byte[] bytes, byte byteValue) {
+        for (int index = bytes.length - 1; index >= 0; --index) {
             if (bytes[index] != byteValue)
                 return index;
         }

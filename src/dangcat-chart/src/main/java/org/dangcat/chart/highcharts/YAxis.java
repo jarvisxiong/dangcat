@@ -1,17 +1,14 @@
 package org.dangcat.chart.highcharts;
 
-public class YAxis
-{
+public class YAxis {
     private String baseTitle = null;
 
-    public YAxis(String baseTitle)
-    {
+    public YAxis(String baseTitle) {
         this.baseTitle = baseTitle;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -19,18 +16,15 @@ public class YAxis
         if (getClass() != obj.getClass())
             return false;
         YAxis other = (YAxis) obj;
-        if (baseTitle == null)
-        {
+        if (baseTitle == null) {
             if (other.baseTitle != null)
                 return false;
-        }
-        else if (!baseTitle.equals(other.baseTitle))
+        } else if (!baseTitle.equals(other.baseTitle))
             return false;
         return true;
     }
 
-    public String getBaseTitle()
-    {
+    public String getBaseTitle() {
         return baseTitle;
     }
 
@@ -39,8 +33,7 @@ public class YAxis
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((baseTitle == null) ? 0 : baseTitle.hashCode());

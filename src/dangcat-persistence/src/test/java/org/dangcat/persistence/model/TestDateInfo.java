@@ -14,10 +14,8 @@ import org.junit.Assert;
 
 import java.util.Date;
 
-public class TestDateInfo extends TestEntityBase
-{
-    private void assertSave(Table table, Date date)
-    {
+public class TestDateInfo extends TestEntityBase {
+    private void assertSave(Table table, Date date) {
         table.save();
         table.getRows().clear();
         table.load();
@@ -31,8 +29,7 @@ public class TestDateInfo extends TestEntityBase
         Assert.assertEquals(0, ValueUtils.compare(date, row.getField(DateInfo.Day).getDate()));
     }
 
-    private Table getTable()
-    {
+    private Table getTable() {
         Table table = null;
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(DateInfo.class);
         if (entityMetaData != null)
@@ -41,8 +38,7 @@ public class TestDateInfo extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -55,8 +51,7 @@ public class TestDateInfo extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testInsert() throws EntityException
-    {
+    private void testInsert() throws EntityException {
         Table table = this.getTable();
         Row row = table.getRows().createNewRow();
         row.getField(DateInfo.Full).setDate(DateUtils.now());
@@ -67,8 +62,7 @@ public class TestDateInfo extends TestEntityBase
         this.assertSave(table, row.getField(DateInfo.Full).getDate());
     }
 
-    private void testModify() throws EntityException
-    {
+    private void testModify() throws EntityException {
         Table table = this.getTable();
         table.getRows().clear();
         table.load();
@@ -84,8 +78,7 @@ public class TestDateInfo extends TestEntityBase
         this.assertSave(table, date);
     }
 
-    private void testTableCreate() throws TableException
-    {
+    private void testTableCreate() throws TableException {
         Table table = this.getTable();
 
         if (table.exists())
@@ -95,8 +88,7 @@ public class TestDateInfo extends TestEntityBase
         table.create();
     }
 
-    private void testTableDrop() throws TableException
-    {
+    private void testTableDrop() throws TableException {
         Table table = this.getTable();
         table.drop();
         Assert.assertFalse(table.exists());

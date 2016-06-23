@@ -9,27 +9,22 @@ import org.dangcat.commons.resource.ResourceReader;
 import java.io.File;
 import java.util.Map.Entry;
 
-public class FileCopyTask extends FileCopyProcess implements ProcessTask, FileCopyCallback
-{
+public class FileCopyTask extends FileCopyProcess implements ProcessTask, FileCopyCallback {
     private Logger currentLogger = null;
     private boolean enabled = true;
     private ResourceReader resourceReader = ResourceManager.getInstance().getResourceReader(this.getClass());
 
-    public FileCopyTask()
-    {
+    public FileCopyTask() {
         super();
         this.setFileCopyCallback(this);
     }
 
     @Override
-    public void afterCopy(File source, File dest)
-    {
+    public void afterCopy(File source, File dest) {
         File sourceDir = null;
         File destDir = null;
-        for (Entry<File, File> entry : this.getTaskMap().entrySet())
-        {
-            if (source.getAbsolutePath().startsWith(entry.getKey().getAbsolutePath()))
-            {
+        for (Entry<File, File> entry : this.getTaskMap().entrySet()) {
+            if (source.getAbsolutePath().startsWith(entry.getKey().getAbsolutePath())) {
                 sourceDir = entry.getKey();
                 destDir = entry.getValue();
                 break;
@@ -40,8 +35,7 @@ public class FileCopyTask extends FileCopyProcess implements ProcessTask, FileCo
         String message = null;
         if (source.isDirectory())
             message = this.resourceReader.getText(FileCopyTask.class.getSimpleName() + ".mkdir", destFile);
-        else if (source.isFile())
-        {
+        else if (source.isFile()) {
             String srcFile = source.getAbsolutePath().replace(sourceDir.getAbsolutePath(), "");
             message = this.resourceReader.getText(FileCopyTask.class.getSimpleName() + ".copy", srcFile, destFile);
         }
@@ -49,43 +43,36 @@ public class FileCopyTask extends FileCopyProcess implements ProcessTask, FileCo
     }
 
     @Override
-    public boolean beforeCopy(File source, File dest)
-    {
+    public boolean beforeCopy(File source, File dest) {
         return true;
     }
 
     @Override
-    public void cancel()
-    {
+    public void cancel() {
         this.setCancel(true);
     }
 
     @Override
-    public void execute(Logger logger)
-    {
+    public void execute(Logger logger) {
         this.currentLogger = logger;
         this.innerExecute();
     }
 
     @Override
-    protected long getFileSize(File file)
-    {
+    protected long getFileSize(File file) {
         return 1l;
     }
 
     @Override
-    public long getTaskSize()
-    {
+    public long getTaskSize() {
         return this.getTotalSize();
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

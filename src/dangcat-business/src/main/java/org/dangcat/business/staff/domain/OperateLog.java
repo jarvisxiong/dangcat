@@ -11,8 +11,7 @@ import java.util.Date;
 
 @Table(tableName = DateTimeTableName.class)
 @Index("OperatorId")
-public class OperateLog extends EntityBase
-{
+public class OperateLog extends EntityBase {
     public static final String DateTime = "DateTime";
     public static final String ErrorCode = "ErrorCode";
     public static final String Id = "Id";
@@ -43,73 +42,59 @@ public class OperateLog extends EntityBase
     @Column(index = 11, displaySize = 200)
     private String remark = null;
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime)
-    {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public Integer getErrorCode()
-    {
+    public Integer getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(Integer errorCode)
-    {
+    public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getIpAddress()
-    {
+    public String getIpAddress() {
         return ipAddress;
     }
 
-    public void setIpAddress(String ipAddress)
-    {
+    public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
-    public Integer getMethodId()
-    {
+    public Integer getMethodId() {
         return methodId;
     }
 
-    public void setMethodId(Integer methodId)
-    {
+    public void setMethodId(Integer methodId) {
         this.methodId = methodId;
     }
 
-    public Integer getOperatorId()
-    {
+    public Integer getOperatorId() {
         return operatorId;
     }
 
-    public void setOperatorId(Integer operatorId)
-    {
+    public void setOperatorId(Integer operatorId) {
         this.operatorId = operatorId;
     }
 
-    public String getRemark()
-    {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(String remark)
-    {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 }

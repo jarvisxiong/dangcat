@@ -10,11 +10,10 @@ import java.util.Map;
 
 /**
  * 业务权限提供者。
+ *
  * @author dangcat
- * 
  */
-public class BusinessPermissionProvider implements PermissionProvider
-{
+public class BusinessPermissionProvider implements PermissionProvider {
     public static final Integer CONFIG = 6;
     public static final Integer CREATE = 3;
     public static final Integer DELETE = 2;
@@ -29,8 +28,7 @@ public class BusinessPermissionProvider implements PermissionProvider
     private static final String VIEW_NAME = "view";
     private Map<Integer, Permission> permissionMap = null;
 
-    protected void createPermissions(Collection<Permission> permissions)
-    {
+    protected void createPermissions(Collection<Permission> permissions) {
         permissions.add(new Permission(QUERY, QUERY_NAME));
         permissions.add(new Permission(DELETE, DELETE_NAME));
         permissions.add(new Permission(CREATE, CREATE_NAME));
@@ -40,8 +38,7 @@ public class BusinessPermissionProvider implements PermissionProvider
     }
 
     @Override
-    public Permission getMethodPermission(String methodName)
-    {
+    public Permission getMethodPermission(String methodName) {
         Permission permission = null;
         Integer permissionId = this.getMethodPermissionId(methodName);
         if (permissionId != null)
@@ -49,8 +46,7 @@ public class BusinessPermissionProvider implements PermissionProvider
         return permission;
     }
 
-    protected Integer getMethodPermissionId(String methodName)
-    {
+    protected Integer getMethodPermissionId(String methodName) {
         Integer permissionId = null;
         if (QUERY_NAME.equalsIgnoreCase(methodName))
             permissionId = QUERY;
@@ -68,10 +64,8 @@ public class BusinessPermissionProvider implements PermissionProvider
     }
 
     @Override
-    public Map<Integer, Permission> getPermissionMap()
-    {
-        if (this.permissionMap == null)
-        {
+    public Map<Integer, Permission> getPermissionMap() {
+        if (this.permissionMap == null) {
             Collection<Permission> permissions = new HashSet<Permission>();
             this.createPermissions(permissions);
             Map<Integer, Permission> permissionMap = new HashMap<Integer, Permission>();
@@ -83,8 +77,7 @@ public class BusinessPermissionProvider implements PermissionProvider
     }
 
     @Override
-    public Permission getRootPermission()
-    {
+    public Permission getRootPermission() {
         return this.permissionMap.get(QUERY);
     }
 }

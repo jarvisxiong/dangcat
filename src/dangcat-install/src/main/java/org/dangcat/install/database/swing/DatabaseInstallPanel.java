@@ -10,8 +10,7 @@ import org.dangcat.swing.keyadapter.PortKeyAdapter;
 import javax.swing.*;
 import java.awt.*;
 
-public class DatabaseInstallPanel extends ConfigPanel
-{
+public class DatabaseInstallPanel extends ConfigPanel {
     protected static final Logger logger = Logger.getLogger(DatabaseInstallPanel.class);
     private static final String DATABASE_NAME = "DatabaseName";
     private static final String PASSWORD = "Password";
@@ -28,8 +27,7 @@ public class DatabaseInstallPanel extends ConfigPanel
     private JTextField portTextField = null;
     private JTextField userTextField = null;
 
-    protected void addComponents(JPanel panel, int y, JLabel label, Component component, JButton button)
-    {
+    protected void addComponents(JPanel panel, int y, JLabel label, Component component, JButton button) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 10);
@@ -49,8 +47,7 @@ public class DatabaseInstallPanel extends ConfigPanel
             constraints.insets = new Insets(2, 2, 2, 40);
         panel.add(component, constraints);
 
-        if (button != null)
-        {
+        if (button != null) {
             constraints.insets = new Insets(2, 2, 2, 40);
             constraints.gridx = 2;
             constraints.weightx = 0.1;
@@ -62,13 +59,11 @@ public class DatabaseInstallPanel extends ConfigPanel
         }
     }
 
-    protected DatabaseInstallListener createDatabaseInstallListener()
-    {
+    protected DatabaseInstallListener createDatabaseInstallListener() {
         return new DatabaseInstallListener(this);
     }
 
-    protected JPanel createDatabaseInstallPanel(JPanel panel, int y)
-    {
+    protected JPanel createDatabaseInstallPanel(JPanel panel, int y) {
         this.portTextField = new JTextField();
         this.portTextField.setColumns(Short.MAX_VALUE);
         this.portTextField.addKeyListener(new PortKeyAdapter());
@@ -109,8 +104,7 @@ public class DatabaseInstallPanel extends ConfigPanel
         return panel;
     }
 
-    public DatabaseInstaller getDatabaseInstaller()
-    {
+    public DatabaseInstaller getDatabaseInstaller() {
         return this.databaseInstaller;
     }
 
@@ -118,8 +112,7 @@ public class DatabaseInstallPanel extends ConfigPanel
         this.databaseInstaller = databaseInstaller;
     }
 
-    protected void initDatabaseInstall()
-    {
+    protected void initDatabaseInstall() {
         if (this.databaseInstallListener != null)
             this.databaseInstallListener.setEnabled(false);
 
@@ -130,8 +123,7 @@ public class DatabaseInstallPanel extends ConfigPanel
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel panel = new JPanel(new GridBagLayout());
         this.add(this.createDatabaseInstallPanel(panel, 1));
@@ -146,8 +138,7 @@ public class DatabaseInstallPanel extends ConfigPanel
         this.databaseInstallListener.initialize();
     }
 
-    public void update()
-    {
+    public void update() {
         DatabaseInstaller databaseInstaller = this.getDatabaseInstaller();
         this.databaseTextField.setText(databaseInstaller.getDatabaseName());
         this.passwordTextField.setText(databaseInstaller.getPassword());
@@ -156,8 +147,7 @@ public class DatabaseInstallPanel extends ConfigPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         if (!ValidateUtils.validatePort(this, this.portTextField, PORT))
             return false;
         if (!ValidateUtils.validatePortValid(this, this.portTextField, PORT))

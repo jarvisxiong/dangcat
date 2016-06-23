@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import java.net.InetAddress;
 
-public class TestNetFactory implements DatagramReceiveListener
-{
+public class TestNetFactory implements DatagramReceiveListener {
     private static final int PORT = 1541;
     private static final String SERVICE_NAME = "TESTNET";
     private NetListener netListener = null;
@@ -18,8 +17,7 @@ public class TestNetFactory implements DatagramReceiveListener
     private byte[] receiveData = null;
 
     @After
-    public void afterTest()
-    {
+    public void afterTest() {
         if (this.netSender != null)
             this.netSender.close();
 
@@ -27,8 +25,7 @@ public class TestNetFactory implements DatagramReceiveListener
             this.netListener.stopListener();
     }
 
-    private byte[] createTestData(int length)
-    {
+    private byte[] createTestData(int length) {
         byte[] buffer = new byte[length];
         for (int i = 0; i < length; i++)
             buffer[i] = (byte) i;
@@ -36,13 +33,11 @@ public class TestNetFactory implements DatagramReceiveListener
     }
 
     @Override
-    public void onReceive(DatagramEvent datagramEvent)
-    {
+    public void onReceive(DatagramEvent datagramEvent) {
         this.receiveData = datagramEvent.getDataBuffer();
     }
 
-    private void testNet(NetType netType, int length) throws Exception
-    {
+    private void testNet(NetType netType, int length) throws Exception {
         this.netListener = NetServiceFactory.createNetListener(netType, SERVICE_NAME, PORT, this);
         this.netListener.startListener();
 
@@ -61,14 +56,12 @@ public class TestNetFactory implements DatagramReceiveListener
     }
 
     @Test
-    public void testTCP() throws Exception
-    {
+    public void testTCP() throws Exception {
         this.testNet(NetType.TCP, 60 * 1024 * 1024);
     }
 
     @Test
-    public void testUDP() throws Exception
-    {
+    public void testUDP() throws Exception {
         this.testNet(NetType.UDP, 60 * 1024);
     }
 }

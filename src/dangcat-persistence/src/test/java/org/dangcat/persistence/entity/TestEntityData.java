@@ -16,15 +16,12 @@ import org.junit.Assert;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestEntityData extends TestEntityBase
-{
+public class TestEntityData extends TestEntityBase {
     private static final int TEST_COUNT = 1000;
 
-    private void compareTableFieldB(List<EntityData> entityDataList, int beginValue, int endValue, int count)
-    {
+    private void compareTableFieldB(List<EntityData> entityDataList, int beginValue, int endValue, int count) {
         int index = 0;
-        for (EntityData entityData : entityDataList)
-        {
+        for (EntityData entityData : entityDataList) {
             Assert.assertEquals((Integer) (beginValue + index), entityData.getFieldB());
             index++;
         }
@@ -32,8 +29,7 @@ public class TestEntityData extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -49,8 +45,7 @@ public class TestEntityData extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testEntityDelete() throws EntityException
-    {
+    private void testEntityDelete() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         // 检查数据存储正确否
         List<EntityData> entityDataList = entityManager.load(EntityData.class);
@@ -82,8 +77,7 @@ public class TestEntityData extends TestEntityBase
         Assert.assertEquals(2, entityDataList.size());
     }
 
-    private void testEntityInsert() throws EntityException
-    {
+    private void testEntityInsert() throws EntityException {
         List<EntityData> entityDataList = new LinkedList<EntityData>();
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
@@ -103,8 +97,7 @@ public class TestEntityData extends TestEntityBase
         Assert.assertEquals(2, entityData.getAfterLoadCount());
     }
 
-    private void testEntityModify() throws EntityException
-    {
+    private void testEntityModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         // 检查数据存储正确否
         List<EntityData> entityDataList = entityManager.load(EntityData.class);
@@ -138,8 +131,7 @@ public class TestEntityData extends TestEntityBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(saveEntityDataList, entityDataList));
     }
 
-    private void testEntityRange() throws EntityException
-    {
+    private void testEntityRange() throws EntityException {
         OrderBy orderBy = OrderBy.parse("id");
         // 存储数据表。
         EntityManager entityManager = this.getEntityManager();
@@ -172,8 +164,7 @@ public class TestEntityData extends TestEntityBase
         this.compareTableFieldB(entityDataList, TEST_COUNT - 25, TEST_COUNT - 1, 25);
     }
 
-    private void testEntityRefresh() throws EntityException
-    {
+    private void testEntityRefresh() throws EntityException {
         int index = TEST_COUNT + 1;
         EntityData srcEntityData = EntityDataUtils.createEntityData(index);
 
@@ -198,8 +189,7 @@ public class TestEntityData extends TestEntityBase
         Assert.assertNull(entityManager.refresh(srcEntityData));
     }
 
-    private void testTableCreate() throws TableException
-    {
+    private void testTableCreate() throws TableException {
         Table table = EntityDataUtils.getTable();
 
         if (table.exists())
@@ -209,8 +199,7 @@ public class TestEntityData extends TestEntityBase
         table.create();
     }
 
-    private void testTableDrop() throws TableException
-    {
+    private void testTableDrop() throws TableException {
         Table table = EntityDataUtils.getTable();
         table.drop();
         Assert.assertFalse(table.exists());

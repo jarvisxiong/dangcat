@@ -22,29 +22,24 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class TestDivTable extends TestEntityBase
-{
+public class TestDivTable extends TestEntityBase {
     private static final int TEST_COUNT = 100;
     private static TableSimulatorUtils operatorLogUtils = new TableSimulatorUtils();
 
     @BeforeClass
-    public static void createSimulator() throws IOException, SessionException
-    {
+    public static void createSimulator() throws IOException, SessionException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(OperatorLog.class);
         operatorLogUtils.createSimulator(entityMetaData.getTable());
     }
 
-    private Map<String, Collection<Row>> createOperatorLogMap(Collection<Row> rowCollection, int dateType)
-    {
+    private Map<String, Collection<Row>> createOperatorLogMap(Collection<Row> rowCollection, int dateType) {
         DateTimeTableName dateTimeTableName = new DateTimeTableName(OperatorLog.class.getSimpleName());
         dateTimeTableName.setDateType(dateType);
         Map<String, Collection<Row>> operatorLogMap = new HashMap<String, Collection<Row>>();
-        for (Row row : rowCollection)
-        {
+        for (Row row : rowCollection) {
             dateTimeTableName.setDateTime(row.getField(OperatorLog.DateTime).getDate());
             Collection<Row> dataCollection = operatorLogMap.get(dateTimeTableName.getName());
-            if (dataCollection == null)
-            {
+            if (dataCollection == null) {
                 dataCollection = new HashSet<Row>();
                 operatorLogMap.put(dateTimeTableName.getName(), dataCollection);
             }
@@ -54,8 +49,7 @@ public class TestDivTable extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -66,16 +60,14 @@ public class TestDivTable extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testDelete(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException
-    {
+    private void testDelete(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException {
         // 存储数据表。
         table.getRows().removeAll();
         table.save();
 
         DateTimeTableName dateTimeTableName = (DateTimeTableName) table.getTableName();
         // 检查数据存储正确否
-        for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet())
-        {
+        for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             Table operatorLogTable = operatorLogUtils.getTable();
             operatorLogTable.setName(dateTimeTableName.getName());
@@ -84,8 +76,7 @@ public class TestDivTable extends TestEntityBase
         }
     }
 
-    private void testDivTable(int dateType) throws EntityException
-    {
+    private void testDivTable(int dateType) throws EntityException {
         Table table = operatorLogUtils.getTable();
         operatorLogUtils.create(table, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, table.getRows().size());
@@ -104,15 +95,13 @@ public class TestDivTable extends TestEntityBase
         operatorLogUtils.dropTables(operatorLogMap.keySet());
     }
 
-    private void testInsert(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException
-    {
+    private void testInsert(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException {
         // 存储数据表。
         table.save();
 
         DateTimeTableName dateTimeTableName = (DateTimeTableName) table.getTableName();
         // 检查数据存储正确否
-        for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet())
-        {
+        for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             Table operatorLogTable = operatorLogUtils.getTable();
             operatorLogTable.setName(dateTimeTableName.getName());
@@ -123,10 +112,8 @@ public class TestDivTable extends TestEntityBase
         dateTimeTableName.setDateTime(null);
     }
 
-    private void testModify(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException
-    {
-        for (Row row : table.getRows())
-        {
+    private void testModify(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException {
+        for (Row row : table.getRows()) {
             Field operatorId = row.getField(OperatorLog.OperatorId);
             operatorId.setInteger(TEST_COUNT - operatorId.getInteger());
             Field permissionId = row.getField(OperatorLog.PermissionId);

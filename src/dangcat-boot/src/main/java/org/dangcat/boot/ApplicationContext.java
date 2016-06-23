@@ -35,11 +35,10 @@ import java.util.List;
 
 /**
  * 系统上下文。
+ *
  * @author dangcat
- * 
  */
-public class ApplicationContext extends ServiceControlBase
-{
+public class ApplicationContext extends ServiceControlBase {
     private static ApplicationContext instance = new ApplicationContext();
     protected Logger logger = null;
     private List<ChangeEventAdaptor> changeEventAdaptorList = new ArrayList<ChangeEventAdaptor>();
@@ -48,8 +47,8 @@ public class ApplicationContext extends ServiceControlBase
     private ServiceBase mainService;
     private String name = null;
     private ResourceReader resourceReader = null;
-    public ApplicationContext()
-    {
+
+    public ApplicationContext() {
         super(null);
     }
 
@@ -59,10 +58,10 @@ public class ApplicationContext extends ServiceControlBase
 
     /**
      * 添加侦听对象。
+     *
      * @param changedListener
      */
-    public void addChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor)
-    {
+    public void addChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && !this.changeEventAdaptorList.contains(changeEventAdaptor))
             this.changeEventAdaptorList.add(changeEventAdaptor);
     }
@@ -70,38 +69,31 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 增加配置文件监视。
      */
-    private void addConfigFileWatcher()
-    {
+    private void addConfigFileWatcher() {
         if (!this.configureReader.isValid())
             return;
 
-        FileActionMonitor.getInstance().addFileWatcherAdaptor(new FileWatcherAdaptor(this.configureReader.getConfigFile())
-        {
+        FileActionMonitor.getInstance().addFileWatcherAdaptor(new FileWatcherAdaptor(this.configureReader.getConfigFile()) {
             @Override
-            protected void onFileChange(File file)
-            {
+            protected void onFileChange(File file) {
                 ApplicationContext.this.loadConfig();
             }
         });
     }
 
-    public ConfigureReader getConfigureReader()
-    {
+    public ConfigureReader getConfigureReader() {
         return this.configureReader;
     }
 
-    public ContextPath getContextPath()
-    {
+    public ContextPath getContextPath() {
         return this.contextPath;
     }
 
-    public ServiceBase getMainService()
-    {
+    public ServiceBase getMainService() {
         return this.mainService;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -109,8 +101,7 @@ public class ApplicationContext extends ServiceControlBase
         this.name = name;
     }
 
-    public ResourceReader getResourceReader()
-    {
+    public ResourceReader getResourceReader() {
         if (this.resourceReader == null && this.getMainService() != null)
             this.resourceReader = new ResourceReaderImpl(this.getMainService().getClass());
         return this.resourceReader;
@@ -120,10 +111,8 @@ public class ApplicationContext extends ServiceControlBase
      * 初始化服务。
      */
     @Override
-    public void initialize()
-    {
-        try
-        {
+    public void initialize() {
+        try {
             this.addConfigFileWatcher();
             this.loadConfig();
             this.loadProperties();
@@ -136,9 +125,7 @@ public class ApplicationContext extends ServiceControlBase
 
             this.loadCoreServices();
             this.loadMainService();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (this.logger != null)
                 this.logger.error("loadMainService exception:", e);
             else
@@ -150,20 +137,15 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 载入配置内容。
      */
-    private void loadConfig()
-    {
-        try
-        {
+    private void loadConfig() {
+        try {
             this.configureReader.load();
-            if (this.changeEventAdaptorList.size() > 0)
-            {
+            if (this.changeEventAdaptorList.size() > 0) {
                 Event event = new Event();
                 for (ChangeEventAdaptor changeEventAdaptor : this.changeEventAdaptorList)
                     changeEventAdaptor.afterChanged(this, event);
             }
-        }
-        catch (DocumentException e)
-        {
+        } catch (DocumentException e) {
             this.logger.error(this, e);
         }
     }
@@ -171,8 +153,7 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 载入核心服务。
      */
-    private void loadCoreServices()
-    {
+    private void loadCoreServices() {
         // 配置目录设为资源扩展路径
         File confPath = new File(this.getContextPath().getConf());
         ResourceLoader.addExtendDirectory(confPath);
@@ -185,8 +166,7 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 载入扩展目录。
      */
-    private void loadExtension()
-    {
+    private void loadExtension() {
         this.getContextPath().initSystemProperties();
 
         PropertiesManager propertiesManager = PropertiesManager.getInstance();
@@ -205,16 +185,14 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 初始化日志配置。
      */
-    private void loadLogger()
-    {
+    private void loadLogger() {
         String logConfigFileName = this.configureReader.getLogConfigFileName();
         if (ValueUtils.isEmpty(logConfigFileName))
             logConfigFileName = this.getName() + ".log4j.properties";
         File logConfigFile = new File(this.getContextPath().getConf() + File.separator + logConfigFileName);
         if (!logConfigFile.exists())
             System.err.println("The log config file " + logConfigFile.getAbsolutePath() + " is not exist.");
-        else
-        {
+        else {
             PropertyConfigurator.configureAndWatch(logConfigFile.getAbsolutePath(), 1000);
             this.logger = Logger.getLogger(ApplicationContext.class);
             this.logger.info("The log config file " + logConfigFile.getAbsolutePath() + " is load.");
@@ -224,14 +202,12 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 载入模块主服务。
      */
-    private void loadMainService()
-    {
+    private void loadMainService() {
         // 主服务。
         String mainServiceClass = this.getConfigureReader().getXmlValue("MainService");
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        ServiceBase mainService = (ServiceBase) ReflectUtils.newInstance(mainServiceClass, new Class<?>[] { ServiceProvider.class }, new Object[] { serviceFactory });
-        if (mainService == null)
-        {
+        ServiceBase mainService = (ServiceBase) ReflectUtils.newInstance(mainServiceClass, new Class<?>[]{ServiceProvider.class}, new Object[]{serviceFactory});
+        if (mainService == null) {
             this.logger.error("The main service is not found.");
             this.stop();
             System.exit(0);
@@ -255,8 +231,7 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 载入属性配置。
      */
-    private void loadProperties()
-    {
+    private void loadProperties() {
         PropertiesManager propertiesManager = PropertiesManager.getInstance();
         // 解析系统属性。
         String propertiesConfig = this.getConfigureReader().getXmlValue("Properties");
@@ -271,23 +246,20 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 初始化数据库。
      */
-    private void loadResource()
-    {
+    private void loadResource() {
         final String defaultResourceFileName = "resource.properties";
         String resourceConfigFileName = this.configureReader.getResourceConfigFileName();
         if (ValueUtils.isEmpty(resourceConfigFileName))
             resourceConfigFileName = this.getName() + "." + defaultResourceFileName;
         File resourceConfigFile = new File(this.getContextPath().getConf() + File.separator + resourceConfigFileName);
-        if (Environment.isTestEnabled())
-        {
+        if (Environment.isTestEnabled()) {
             File testResourceConfigFile = new File(this.getContextPath().getBaseDir() + File.separator + "target/test-classes/META-INF" + File.separator + defaultResourceFileName);
             if (testResourceConfigFile.exists())
                 resourceConfigFile = testResourceConfigFile;
         }
         if (!resourceConfigFile.exists())
             this.logger.warn("The resource file is not exists : " + resourceConfigFile.getAbsolutePath());
-        else
-        {
+        else {
             // 加载资源配置
             if (!ConfigureManager.getInstance().configure(resourceConfigFile))
                 System.exit(0);
@@ -297,8 +269,7 @@ public class ApplicationContext extends ServiceControlBase
     /**
      * 输出启动日志。
      */
-    private void log()
-    {
+    private void log() {
         FileUtils.mkdir(System.getProperty("java.io.tmpdir"));
         this.configureReader.log();
         this.logger.info(ServerManager.getInstance());
@@ -308,10 +279,10 @@ public class ApplicationContext extends ServiceControlBase
 
     /**
      * 删除侦听对象。
+     *
      * @param changedListener 侦听对象。
      */
-    public void removeChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor)
-    {
+    public void removeChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && this.changeEventAdaptorList.contains(changeEventAdaptor))
             this.changeEventAdaptorList.remove(changeEventAdaptor);
     }
@@ -320,10 +291,8 @@ public class ApplicationContext extends ServiceControlBase
      * 启动服务。
      */
     @Override
-    public void start()
-    {
-        if (this.getServiceStatus().equals(ServiceStatus.Stopped))
-        {
+    public void start() {
+        if (this.getServiceStatus().equals(ServiceStatus.Stopped)) {
             this.setServiceStatus(ServiceStatus.Starting);
             // 服务注入。
             this.inject();
@@ -337,10 +306,8 @@ public class ApplicationContext extends ServiceControlBase
      * 停止服务。
      */
     @Override
-    public void stop()
-    {
-        if (this.getServiceStatus().equals(ServiceStatus.Started))
-        {
+    public void stop() {
+        if (this.getServiceStatus().equals(ServiceStatus.Started)) {
             this.setServiceStatus(ServiceStatus.Stopping);
             FileActionMonitor.getInstance().stop();
             ServiceHelper.stop(this);

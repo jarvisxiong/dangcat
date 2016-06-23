@@ -10,9 +10,8 @@ import org.dangcat.persistence.tablename.DateTimeTableName;
 import java.util.Date;
 
 @Table(tableName = DateTimeTableName.class)
-@Indexes( { @Index("DateTime, OperatorId"), @Index("DateTime, PermissionId, OperatorId") })
-public class OperatorLog extends EntityBase
-{
+@Indexes({@Index("DateTime, OperatorId"), @Index("DateTime, PermissionId, OperatorId")})
+public class OperatorLog extends EntityBase {
     public static final String DateTime = "DateTime";
     public static final String Id = "Id";
     public static final String OperatorId = "OperatorId";
@@ -39,67 +38,54 @@ public class OperatorLog extends EntityBase
     @Column(index = 4)
     private Integer result = null;
 
-    public OperatorLog()
-    {
+    public OperatorLog() {
     }
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime)
-    {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getOperatorId()
-    {
+    public Integer getOperatorId() {
         return operatorId;
     }
 
-    public void setOperatorId(Integer operatorId)
-    {
+    public void setOperatorId(Integer operatorId) {
         this.operatorId = operatorId;
     }
 
-    public Integer getPermissionId()
-    {
+    public Integer getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(Integer permissionId)
-    {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
 
-    public String getRemark()
-    {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(String remark)
-    {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public Integer getResult()
-    {
+    public Integer getResult() {
         return result;
     }
 
-    public void setResult(Integer result)
-    {
+    public void setResult(Integer result) {
         this.result = result;
     }
 }

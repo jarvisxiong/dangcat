@@ -7,8 +7,7 @@ import org.junit.Assert;
 
 import java.io.File;
 
-public class GBKFTP
-{
+public class GBKFTP {
     private static String DOWNLOAD_DIR = "./log/data";
     private static String REMOTE_DIR = "双机";
     private static String REMOTE_FILE = "ZXISAM(Wireline)本地双机安装配置指南_CGSL_Oracle_VCS.zip";
@@ -18,13 +17,11 @@ public class GBKFTP
     private String remoteFile = REMOTE_DIR + "/" + REMOTE_FILE;
     private File uploadFile = new File(UPLOAD_DIR + "/" + REMOTE_FILE);
 
-    public static void main(String[] args) throws FTPSessionException
-    {
+    public static void main(String[] args) throws FTPSessionException {
         new GBKFTP().execute();
     }
 
-    public void execute() throws FTPSessionException
-    {
+    public void execute() throws FTPSessionException {
         Environment.setModuleEnabled(FTPClientPool.class.getSimpleName(), true);
         FTPSession ftpSession = this.getFTPSession();
         ftpSession.delete(REMOTE_DIR);
@@ -36,8 +33,7 @@ public class GBKFTP
         Assert.assertEquals(this.uploadFile.length(), this.downloadFile.length());
     }
 
-    private FTPSession getFTPSession()
-    {
+    private FTPSession getFTPSession() {
         FTPClientSession ftpClientSession = new FTPClientSession();
         ftpClientSession.setServer("10.46.60.135");
         ftpClientSession.setUserName("dangcat");

@@ -4,20 +4,17 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 
-public class ConfigTabPanel extends ConfigPanel
-{
+public class ConfigTabPanel extends ConfigPanel {
     private static final long serialVersionUID = 1L;
     private Collection<ConfigPanel> configPanels = null;
     private JTabbedPane tabbedPane = new JTabbedPane();
 
-    public ConfigTabPanel()
-    {
+    public ConfigTabPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.tabbedPane);
     }
 
-    public Collection<ConfigPanel> getConfigPanels()
-    {
+    public Collection<ConfigPanel> getConfigPanels() {
         return this.configPanels;
     }
 
@@ -26,16 +23,13 @@ public class ConfigTabPanel extends ConfigPanel
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.tabbedPane.removeAll();
 
         Collection<ConfigPanel> configPanels = this.getConfigPanels();
-        if (configPanels != null && !configPanels.isEmpty())
-        {
+        if (configPanels != null && !configPanels.isEmpty()) {
             int index = 1;
-            for (ConfigPanel configPanel : configPanels)
-            {
+            for (ConfigPanel configPanel : configPanels) {
                 String title = index + "." + configPanel.getTitle();
                 this.tabbedPane.add(title, configPanel);
                 int mnemonic = KeyEvent.VK_0 + index;
@@ -47,15 +41,11 @@ public class ConfigTabPanel extends ConfigPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         Collection<ConfigPanel> configPanels = this.getConfigPanels();
-        if (configPanels != null && !configPanels.isEmpty())
-        {
-            for (ConfigPanel configPanel : configPanels)
-            {
-                if (!configPanel.validateData())
-                {
+        if (configPanels != null && !configPanels.isEmpty()) {
+            for (ConfigPanel configPanel : configPanels) {
+                if (!configPanel.validateData()) {
                     this.tabbedPane.setSelectedComponent(configPanel);
                     return false;
                 }

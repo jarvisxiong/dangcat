@@ -7,14 +7,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-class TableUtils
-{
-    protected static Class<?> getFieldType(ResultSet resultSet) throws SQLException
-    {
+class TableUtils {
+    protected static Class<?> getFieldType(ResultSet resultSet) throws SQLException {
         Class<?> fieldClass = null;
         int sqlType = resultSet.getInt("DATA_TYPE");
-        switch (sqlType)
-        {
+        switch (sqlType) {
             case Types.NCLOB:
             case Types.CLOB:
             case Types.NCHAR:
@@ -70,24 +67,19 @@ class TableUtils
         return fieldClass;
     }
 
-    protected static void sortColumns(Table table)
-    {
+    protected static void sortColumns(Table table) {
         int index = 0;
-        for (Column column : table.getColumns())
-        {
+        for (Column column : table.getColumns()) {
             if (column.isPrimaryKey())
                 column.setIndex(index++);
         }
-        for (Column column : table.getColumns())
-        {
+        for (Column column : table.getColumns()) {
             if (!column.isPrimaryKey())
                 column.setIndex(index++);
         }
 
-        Collections.sort(table.getColumns(), new Comparator<Column>()
-        {
-            public int compare(Column srcColumn, Column dstColumn)
-            {
+        Collections.sort(table.getColumns(), new Comparator<Column>() {
+            public int compare(Column srcColumn, Column dstColumn) {
                 if (srcColumn.getIndex() == -1 || dstColumn.getIndex() == -1)
                     return dstColumn.getIndex() - srcColumn.getIndex();
                 return srcColumn.getIndex() - dstColumn.getIndex();
@@ -95,15 +87,12 @@ class TableUtils
         });
     }
 
-    protected static String toPropertyName(String name)
-    {
+    protected static String toPropertyName(String name) {
         name = name.replace("_", "");
         boolean isAllUpperCase = true;
-        for (int i = 0; i < name.length(); i++)
-        {
+        for (int i = 0; i < name.length(); i++) {
             char charValue = name.charAt(i);
-            if (Character.isLetter(charValue) && Character.isLowerCase(charValue))
-            {
+            if (Character.isLetter(charValue) && Character.isLowerCase(charValue)) {
                 isAllUpperCase = false;
                 break;
             }

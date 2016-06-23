@@ -5,8 +5,7 @@ import org.dangcat.persistence.model.DataStatus;
 
 import java.util.*;
 
-public class UserInfo implements DataStatus
-{
+public class UserInfo implements DataStatus {
     private Set<String> addresses = new HashSet<String>();
     private double balance = 0;
     private Date borth;
@@ -18,8 +17,7 @@ public class UserInfo implements DataStatus
     private long total = 0;
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -27,57 +25,44 @@ public class UserInfo implements DataStatus
         if (getClass() != obj.getClass())
             return false;
         UserInfo other = (UserInfo) obj;
-        if (addresses == null)
-        {
+        if (addresses == null) {
             if (other.addresses != null)
                 return false;
-        }
-        else if (!addresses.equals(other.addresses))
+        } else if (!addresses.equals(other.addresses))
             return false;
         if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
             return false;
-        if (borth == null)
-        {
+        if (borth == null) {
             if (other.borth != null)
                 return false;
-        }
-        else if (!borth.equals(other.borth))
+        } else if (!borth.equals(other.borth))
             return false;
-        if (dataState == null)
-        {
+        if (dataState == null) {
             if (other.dataState != null)
                 return false;
-        }
-        else if (!dataState.equals(other.dataState))
+        } else if (!dataState.equals(other.dataState))
             return false;
         if (!Arrays.equals(friends, other.friends))
             return false;
-        if (id == null)
-        {
+        if (id == null) {
             if (other.id != null)
                 return false;
-        }
-        else if (!id.equals(other.id))
+        } else if (!id.equals(other.id))
             return false;
-        if (name == null)
-        {
+        if (name == null) {
             if (other.name != null)
                 return false;
-        }
-        else if (!name.equals(other.name))
+        } else if (!name.equals(other.name))
             return false;
-        if (rooms == null)
-        {
+        if (rooms == null) {
             if (other.rooms != null)
                 return false;
-        }
-        else if (!rooms.equals(other.rooms))
+        } else if (!rooms.equals(other.rooms))
             return false;
         return total == other.total;
     }
 
-    public Set<String> getAddresses()
-    {
+    public Set<String> getAddresses() {
         return addresses;
     }
 
@@ -85,8 +70,7 @@ public class UserInfo implements DataStatus
         this.addresses = addresses;
     }
 
-    public double getBalance()
-    {
+    public double getBalance() {
         return balance;
     }
 
@@ -94,8 +78,7 @@ public class UserInfo implements DataStatus
         this.balance = balance;
     }
 
-    public Date getBorth()
-    {
+    public Date getBorth() {
         return borth;
     }
 
@@ -104,8 +87,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public DataState getDataState()
-    {
+    public DataState getDataState() {
         return dataState;
     }
 
@@ -114,8 +96,7 @@ public class UserInfo implements DataStatus
         this.dataState = dataState;
     }
 
-    public String[] getFriends()
-    {
+    public String[] getFriends() {
         return friends;
     }
 
@@ -123,8 +104,7 @@ public class UserInfo implements DataStatus
         this.friends = friends;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
@@ -132,8 +112,7 @@ public class UserInfo implements DataStatus
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -141,8 +120,7 @@ public class UserInfo implements DataStatus
         this.name = name;
     }
 
-    public List<Integer> getRooms()
-    {
+    public List<Integer> getRooms() {
         return rooms;
     }
 
@@ -150,8 +128,7 @@ public class UserInfo implements DataStatus
         this.rooms = rooms;
     }
 
-    public long getTotal()
-    {
+    public long getTotal() {
         return total;
     }
 
@@ -160,8 +137,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
@@ -179,8 +155,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Id = " + this.getId());
         info.append(", Name = " + this.getName());
@@ -188,25 +163,21 @@ public class UserInfo implements DataStatus
         info.append(", Balance = " + this.getBalance());
         info.append(", Total = " + this.getTotal());
         info.append(", Addresses = [");
-        for (String address : this.addresses)
-        {
+        for (String address : this.addresses) {
             info.append(address);
             info.append(", ");
         }
         info.append("]");
-        if (this.getFriends() != null)
-        {
+        if (this.getFriends() != null) {
             info.append(", Friends = [");
-            for (String friend : this.getFriends())
-            {
+            for (String friend : this.getFriends()) {
                 info.append(friend);
                 info.append(", ");
             }
             info.append("]");
         }
         info.append(", Rooms = [");
-        for (Integer room : rooms)
-        {
+        for (Integer room : rooms) {
             info.append(room);
             info.append(", ");
         }

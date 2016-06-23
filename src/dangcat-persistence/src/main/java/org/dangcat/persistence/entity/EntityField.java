@@ -12,11 +12,10 @@ import java.lang.reflect.Type;
 
 /**
  * ×Ö¶ÎÐÅÏ¢¡£
+ *
  * @author dangcat
- * 
  */
-public class EntityField
-{
+public class EntityField {
     private Class<?> classType = null;
     private Column column;
     private Field field;
@@ -24,23 +23,19 @@ public class EntityField
     private PropertyDescriptor propertyDescriptor = null;
     private TableGenerator tableGenerator;
 
-    public EntityField(Column column)
-    {
+    public EntityField(Column column) {
         this.column = column;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return classType;
     }
 
-    public Column getColumn()
-    {
+    public Column getColumn() {
         return column;
     }
 
-    public Field getField()
-    {
+    public Field getField() {
         return field;
     }
 
@@ -50,8 +45,7 @@ public class EntityField
         this.classType = field.getType();
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return this.column == null ? null : this.column.getFieldName();
     }
 
@@ -60,11 +54,9 @@ public class EntityField
             this.column.setFieldName(fieldName);
     }
 
-    public String getFilterFieldName()
-    {
+    public String getFilterFieldName() {
         StringBuilder info = new StringBuilder();
-        if (this.getTableName() != null)
-        {
+        if (this.getTableName() != null) {
             if (!ValueUtils.isEmpty(this.getTableName().getAlias()))
                 info.append(this.getTableName().getAlias());
             else if (!ValueUtils.isEmpty(this.getTableName().getName()))
@@ -75,27 +67,22 @@ public class EntityField
         return info.toString();
     }
 
-    public Type getGenericType()
-    {
+    public Type getGenericType() {
         Type genericType = null;
-        if (this.propertyDescriptor != null)
-        {
+        if (this.propertyDescriptor != null) {
             Method readMethod = this.propertyDescriptor.getReadMethod();
             if (readMethod != null)
                 genericType = readMethod.getGenericReturnType();
-        }
-        else if (this.field != null)
+        } else if (this.field != null)
             genericType = this.field.getGenericType();
         return genericType;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.column == null ? null : this.column.getName();
     }
 
-    public PropertyDescriptor getPropertyDescriptor()
-    {
+    public PropertyDescriptor getPropertyDescriptor() {
         return propertyDescriptor;
     }
 
@@ -104,8 +91,7 @@ public class EntityField
         this.classType = propertyDescriptor.getPropertyType();
     }
 
-    public TableGenerator getTableGenerator()
-    {
+    public TableGenerator getTableGenerator() {
         return tableGenerator;
     }
 
@@ -113,8 +99,7 @@ public class EntityField
         this.tableGenerator = tableGenerator;
     }
 
-    public TableName getTableName()
-    {
+    public TableName getTableName() {
         return this.column.getTableName();
     }
 
@@ -122,73 +107,54 @@ public class EntityField
         this.column.setTableName(tableName);
     }
 
-    public Object getValue(Object instance)
-    {
+    public Object getValue(Object instance) {
         Object value = null;
-        if (instance != null)
-        {
-            try
-            {
-                if (this.propertyDescriptor != null)
-                {
+        if (instance != null) {
+            try {
+                if (this.propertyDescriptor != null) {
                     Method readMethod = this.propertyDescriptor.getReadMethod();
                     if (readMethod != null)
                         value = readMethod.invoke(instance);
-                }
-                else if (this.field != null)
+                } else if (this.field != null)
                     value = this.field.get(instance);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
         return value;
 
     }
 
-    public boolean isJoin()
-    {
+    public boolean isJoin() {
         return isJoin;
     }
 
-    public void setJoin(boolean isJoin)
-    {
+    public void setJoin(boolean isJoin) {
         this.isJoin = isJoin;
     }
 
-    public boolean isRowNum()
-    {
+    public boolean isRowNum() {
         return this.column.isRowNum();
     }
 
-    public void setValue(Object instance, Object value)
-    {
-        if (instance != null)
-        {
-            try
-            {
-                if (this.propertyDescriptor != null)
-                {
+    public void setValue(Object instance, Object value) {
+        if (instance != null) {
+            try {
+                if (this.propertyDescriptor != null) {
                     Method writeMethod = this.propertyDescriptor.getWriteMethod();
                     if (writeMethod != null)
                         writeMethod.invoke(instance, value);
-                }
-                else if (this.field != null)
+                } else if (this.field != null)
                     this.field.set(instance, value);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(this.getFilterFieldName());
-        if (!this.getFieldName().equalsIgnoreCase(this.getName()))
-        {
+        if (!this.getFieldName().equalsIgnoreCase(this.getName())) {
             info.append(" ");
             info.append(this.getName());
         }

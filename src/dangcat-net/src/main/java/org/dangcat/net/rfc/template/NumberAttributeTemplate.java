@@ -8,24 +8,32 @@ import java.util.Map;
 
 /**
  * 整数类型属性模板。
+ *
  * @author dangcat
- * 
  */
-public abstract class NumberAttributeTemplate<T extends Number> extends AttributeTemplate
-{
-    /** 属性长度。 */
+public abstract class NumberAttributeTemplate<T extends Number> extends AttributeTemplate {
+    /**
+     * 属性长度。
+     */
     private Integer length;
-    /** 最大值。 */
+    /**
+     * 最大值。
+     */
     private T maxValue;
-    /** 最小值。 */
+    /**
+     * 最小值。
+     */
     private T minValue;
-    /** 属性可选列表。 */
+    /**
+     * 属性可选列表。
+     */
     private Map<T, String> options = new HashMap<T, String>();
-    /** 是否进行选项校验。 */
+    /**
+     * 是否进行选项校验。
+     */
     private boolean optionValidate = true;
 
-    public Integer getLength()
-    {
+    public Integer getLength() {
         if (this.length == null || this.length < 1 || this.length > this.getMaxLength())
             return this.getMaxLength();
         return this.length;
@@ -35,8 +43,7 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
         this.length = length;
     }
 
-    public Number getMaxValue()
-    {
+    public Number getMaxValue() {
         return maxValue;
     }
 
@@ -44,8 +51,7 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
         this.maxValue = maxValue;
     }
 
-    public Number getMinValue()
-    {
+    public Number getMinValue() {
         return minValue;
     }
 
@@ -56,26 +62,21 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
     /**
      * 属性可选模板。
      */
-    public Map<T, String> getOptions()
-    {
+    public Map<T, String> getOptions() {
         return this.options;
     }
 
-    public boolean isOptionValidate()
-    {
+    public boolean isOptionValidate() {
         return this.options != null && this.options.size() > 0 && this.optionValidate;
     }
 
-    public void setOptionValidate(boolean optionValidate)
-    {
+    public void setOptionValidate(boolean optionValidate) {
         this.optionValidate = optionValidate;
     }
 
     @Override
-    public String toString(Object value)
-    {
-        if (value instanceof Integer)
-        {
+    public String toString(Object value) {
+        if (value instanceof Integer) {
             if (this.getOptions().containsKey(value))
                 return value + " - " + this.getOptions().get(value);
         }
@@ -86,8 +87,7 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
      * 验证属性是否有效。
      */
     @Override
-    public void validate(Object value) throws ProtocolValidateException
-    {
+    public void validate(Object value) throws ProtocolValidateException {
         super.validate(value);
 
         if (this.minValue != null && ValueUtils.compare(this.minValue, value) > 0)

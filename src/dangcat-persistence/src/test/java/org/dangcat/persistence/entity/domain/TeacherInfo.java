@@ -7,16 +7,14 @@ import org.dangcat.persistence.annotation.Table;
 import java.util.Date;
 
 @Table
-public class TeacherInfo extends PersonInfo
-{
+public class TeacherInfo extends PersonInfo {
     private static final long serialVersionUID = 1L;
 
-    @Relation(parentFieldNames = { Id }, childFieldNames = { Id })
+    @Relation(parentFieldNames = {Id}, childFieldNames = {Id})
     private MemberInfo memberInfo = new MemberInfo();
 
     @Column(isCalculate = true)
-    public Date getExpireTime()
-    {
+    public Date getExpireTime() {
         return this.memberInfo.getExpireTime();
     }
 
@@ -25,8 +23,7 @@ public class TeacherInfo extends PersonInfo
     }
 
     @Column(displaySize = 128, isCalculate = true)
-    public String getNo()
-    {
+    public String getNo() {
         return this.memberInfo.getNo();
     }
 
@@ -35,24 +32,20 @@ public class TeacherInfo extends PersonInfo
     }
 
     @Column(displaySize = 32, isCalculate = true)
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.memberInfo.getPassword();
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.memberInfo.setPassword(password);
     }
 
     @Column(index = 13, isNullable = false, isCalculate = true)
-    public Boolean getUseAble()
-    {
+    public Boolean getUseAble() {
         return this.memberInfo.getUseAble();
     }
 
-    public void setUseAble(Boolean useAble)
-    {
+    public void setUseAble(Boolean useAble) {
         this.memberInfo.setUseAble(useAble);
     }
 }

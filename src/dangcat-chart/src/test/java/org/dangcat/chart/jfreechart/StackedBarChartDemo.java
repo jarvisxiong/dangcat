@@ -4,24 +4,20 @@ import org.dangcat.chart.jfreechart.data.DataModule;
 
 import javax.swing.*;
 
-public class StackedBarChartDemo extends ChartDemoBase
-{
+public class StackedBarChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "¶ÑÕ»Öù×´Í³¼ÆÍ¼";
 
-    public StackedBarChartDemo()
-    {
+    public StackedBarChartDemo() {
         super(StackedBarChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new StackedBarChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         DataModule dataModule1 = SimulateCategoryData.createColumnDataModule(false);
         StackedBarChart stackedBarChart1 = new StackedBarChart();
         stackedBarChart1.setTitle(TITLE);

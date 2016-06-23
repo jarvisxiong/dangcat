@@ -2,8 +2,7 @@ package org.dangcat.net.ftp.conf;
 
 import org.dangcat.boot.config.ServiceConfig;
 
-public class FTPConfig extends ServiceConfig
-{
+public class FTPConfig extends ServiceConfig {
     public static final String Interval = "Interval";
     private static final String CONFIG_NAME = "FTPConfig";
     private static FTPConfig instance = new FTPConfig();
@@ -12,8 +11,7 @@ public class FTPConfig extends ServiceConfig
      */
     private long interval = 30;
 
-    public FTPConfig()
-    {
+    public FTPConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(Interval, long.class, this.interval);
@@ -28,8 +26,7 @@ public class FTPConfig extends ServiceConfig
         return instance;
     }
 
-    public long getInterval()
-    {
+    public long getInterval() {
         return Math.max(this.getLongValue(Interval), 30);
     }
 }

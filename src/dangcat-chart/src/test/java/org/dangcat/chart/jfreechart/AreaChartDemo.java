@@ -7,23 +7,19 @@ import org.dangcat.persistence.filter.FilterUnit;
 import javax.swing.*;
 import java.util.Date;
 
-public class AreaChartDemo extends ChartDemoBase
-{
+public class AreaChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
 
-    public AreaChartDemo()
-    {
+    public AreaChartDemo() {
         super(AreaChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new AreaChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         Date[] dates = SimulateTimeData.today();
         DataModule columnDataModule = SimulateTimeData.createMultiColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));

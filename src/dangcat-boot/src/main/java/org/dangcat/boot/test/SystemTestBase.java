@@ -14,56 +14,46 @@ import org.dangcat.persistence.entity.EntityManagerFactory;
 import org.junit.AfterClass;
 import org.junit.Before;
 
-public abstract class SystemTestBase
-{
+public abstract class SystemTestBase {
     protected static Logger logger = null;
     private static ServiceProvider mainServer = null;
     @Service
     private TimerService timerService;
 
-    protected static void launcher(Class<?> classType, String serviceName)
-    {
-        if (mainServer == null)
-        {
+    protected static void launcher(Class<?> classType, String serviceName) {
+        if (mainServer == null) {
             logger = Logger.getLogger(classType);
             mainServer = Launcher.start(classType, serviceName, true);
         }
     }
 
     @AfterClass
-    public static void stop()
-    {
+    public static void stop() {
         ApplicationContext.getInstance().stop();
     }
 
-    protected void dropEntityTable(Class<?>... classTypes) throws Exception
-    {
+    protected void dropEntityTable(Class<?>... classTypes) throws Exception {
         ServiceTestUtils.dropEntityTable(classTypes);
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 
-    protected ServiceProvider getMainServer()
-    {
+    protected ServiceProvider getMainServer() {
         return mainServer;
     }
 
-    protected TimerService getTimerService()
-    {
+    protected TimerService getTimerService() {
         return this.timerService;
     }
 
-    protected void initEntityTable(Class<?>... classTypes) throws Exception
-    {
+    protected void initEntityTable(Class<?>... classTypes) throws Exception {
         ServiceTestUtils.initEntityTable(classTypes);
     }
 
     @Before
-    public void initialize() throws Exception
-    {
+    public void initialize() throws Exception {
         EntityCacheManager.getInstance().clear(true);
         EntityBatchServiceImpl.getInstance().clear();
         ServiceHelper.inject(this.getMainServer(), this);

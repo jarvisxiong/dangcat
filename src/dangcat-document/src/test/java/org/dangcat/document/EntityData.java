@@ -8,8 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Table("ModelData")
-public class EntityData
-{
+public class EntityData {
     public static final String FieldA = "FieldA";
     public static final String FieldB = "FieldB";
     public static final String FieldC = "FieldC";
@@ -49,104 +48,87 @@ public class EntityData
     private Integer id;
 
     @AfterCommit
-    public void afterCommit()
-    {
+    public void afterCommit() {
         afterCommitCount++;
     }
 
     @AfterCommit
-    public void afterCommit(SaveEntityContext saveEntityContext)
-    {
+    public void afterCommit(SaveEntityContext saveEntityContext) {
         afterCommitCount++;
     }
 
     @AfterDelete
-    public void afterDelete()
-    {
+    public void afterDelete() {
         afterDeleteCount++;
     }
 
     @AfterDelete
-    public void afterDelete(SaveEntityContext saveEntityContext)
-    {
+    public void afterDelete(SaveEntityContext saveEntityContext) {
         afterDeleteCount++;
     }
 
     @AfterInsert
-    public void AfterInsert()
-    {
+    public void AfterInsert() {
         afterInsertCount++;
     }
 
     @AfterInsert
-    public void AfterInsert(SaveEntityContext saveEntityContext)
-    {
+    public void AfterInsert(SaveEntityContext saveEntityContext) {
         afterInsertCount++;
     }
 
     @AfterLoad
-    public void afterLoad()
-    {
+    public void afterLoad() {
         afterLoadCount++;
     }
 
     @AfterLoad
-    public void afterLoad(LoadEntityContext loadEntityContext)
-    {
+    public void afterLoad(LoadEntityContext loadEntityContext) {
         afterLoadCount++;
     }
 
     @AfterSave
-    public void afterSave()
-    {
+    public void afterSave() {
         afterSaveCount++;
     }
 
     @AfterSave
-    public void afterSave(SaveEntityContext saveEntityContext)
-    {
+    public void afterSave(SaveEntityContext saveEntityContext) {
         afterSaveCount++;
     }
 
     @BeforeDelete
-    public void beforeDelete()
-    {
+    public void beforeDelete() {
         beforeDeleteCount++;
     }
 
     @BeforeDelete
-    public void beforeDelete(SaveEntityContext saveEntityContext)
-    {
+    public void beforeDelete(SaveEntityContext saveEntityContext) {
         beforeDeleteCount++;
     }
 
     @BeforeInsert
-    public void beforeInsert()
-    {
+    public void beforeInsert() {
         beforeInsertCount++;
     }
 
     @BeforeInsert
-    public void beforeInsert(SaveEntityContext saveEntityContext)
-    {
+    public void beforeInsert(SaveEntityContext saveEntityContext) {
         beforeInsertCount++;
     }
 
     @BeforeSave
-    public void beforeSave()
-    {
+    public void beforeSave() {
         beforeSaveCount++;
     }
 
     @BeforeSave
-    public void beforeSave(SaveEntityContext saveEntityContext)
-    {
+    public void beforeSave(SaveEntityContext saveEntityContext) {
         beforeSaveCount++;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -158,95 +140,74 @@ public class EntityData
         if (id != null)
             return id.equals(other.id);
 
-        if (fieldA == null)
-        {
+        if (fieldA == null) {
             if (other.fieldA != null)
                 return false;
-        }
-        else if (!fieldA.equals(other.fieldA))
+        } else if (!fieldA.equals(other.fieldA))
             return false;
-        if (fieldB == null)
-        {
+        if (fieldB == null) {
             if (other.fieldB != null)
                 return false;
-        }
-        else if (!fieldB.equals(other.fieldB))
+        } else if (!fieldB.equals(other.fieldB))
             return false;
-        if (fieldC == null)
-        {
+        if (fieldC == null) {
             if (other.fieldC != null)
                 return false;
-        }
-        else if (!fieldC.equals(other.fieldC))
+        } else if (!fieldC.equals(other.fieldC))
             return false;
-        if (fieldD == null)
-        {
+        if (fieldD == null) {
             if (other.fieldD != null)
                 return false;
-        }
-        else if (!fieldD.equals(other.fieldD))
+        } else if (!fieldD.equals(other.fieldD))
             return false;
-        if (fieldE == null)
-        {
+        if (fieldE == null) {
             if (other.fieldE != null)
                 return false;
-        }
-        else if (!fieldE.equals(other.fieldE))
+        } else if (!fieldE.equals(other.fieldE))
             return false;
         if (!Arrays.equals(fieldF, other.fieldF))
             return false;
-        if (fieldG == null)
-        {
+        if (fieldG == null) {
             if (other.fieldG != null)
                 return false;
-        }
-        else if (!fieldG.equals(other.fieldG))
+        } else if (!fieldG.equals(other.fieldG))
             return false;
         return Arrays.equals(fieldH, other.fieldH);
     }
 
-    public int getAfterCommitCount()
-    {
+    public int getAfterCommitCount() {
         return afterCommitCount;
     }
 
-    public int getAfterDeleteCount()
-    {
+    public int getAfterDeleteCount() {
         return afterDeleteCount;
     }
 
-    public int getAfterInsertCount()
-    {
+    public int getAfterInsertCount() {
         return afterInsertCount;
     }
 
-    public int getAfterLoadCount()
-    {
+    public int getAfterLoadCount() {
         return afterLoadCount;
     }
 
-    public int getAfterSaveCount()
-    {
+    public int getAfterSaveCount() {
         return afterSaveCount;
     }
 
-    public int getBeforeDeleteCount()
-    {
+    public int getBeforeDeleteCount() {
         return beforeDeleteCount;
     }
 
-    public int getBeforeInsertCount()
-    {
+    public int getBeforeInsertCount() {
         return beforeInsertCount;
     }
 
-    public int getBeforeSaveCount()
-    {
+    public int getBeforeSaveCount() {
         return beforeSaveCount;
     }
 
-    public String getFieldA()
-    {
+    public String getFieldA() {
         return fieldA;
     }
 
@@ -254,8 +215,7 @@ public class EntityData
         this.fieldA = fieldA;
     }
 
-    public Integer getFieldB()
-    {
+    public Integer getFieldB() {
         return fieldB;
     }
 
@@ -263,8 +223,7 @@ public class EntityData
         this.fieldB = fieldB;
     }
 
-    public Double getFieldC()
-    {
+    public Double getFieldC() {
         return fieldC;
     }
 
@@ -272,8 +231,7 @@ public class EntityData
         this.fieldC = fieldC;
     }
 
-    public Long getFieldD()
-    {
+    public Long getFieldD() {
         return fieldD;
     }
 
@@ -281,8 +239,7 @@ public class EntityData
         this.fieldD = fieldD;
     }
 
-    public Date getFieldE()
-    {
+    public Date getFieldE() {
         return fieldE;
     }
 
@@ -290,8 +247,7 @@ public class EntityData
         this.fieldE = fieldE;
     }
 
-    public char[] getFieldF()
-    {
+    public char[] getFieldF() {
         return fieldF;
     }
 
@@ -299,8 +255,7 @@ public class EntityData
         this.fieldF = fieldF;
     }
 
-    public Short getFieldG()
-    {
+    public Short getFieldG() {
         return fieldG;
     }
 
@@ -308,8 +263,7 @@ public class EntityData
         this.fieldG = fieldG;
     }
 
-    public byte[] getFieldH()
-    {
+    public byte[] getFieldH() {
         return fieldH;
     }
 
@@ -317,8 +271,7 @@ public class EntityData
         this.fieldH = fieldH;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
@@ -327,8 +280,7 @@ public class EntityData
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         if (id != null)
             return id;
 

@@ -8,28 +8,24 @@ import java.util.List;
 
 /**
  * 实体对象数据读取器。
+ *
  * @author dangcat
- * 
  */
-public class EntityDataReader<T> extends EntityDataAccess<T> implements DataReader
-{
+public class EntityDataReader<T> extends EntityDataAccess<T> implements DataReader {
     private List<T> entityList = null;
     private FilterExpress filterExpress = null;
 
-    public EntityDataReader(List<T> entityList)
-    {
+    public EntityDataReader(List<T> entityList) {
         super(entityList);
     }
 
-    public EntityDataReader(List<T> entityList, Class<T> classType)
-    {
+    public EntityDataReader(List<T> entityList, Class<T> classType) {
         super(entityList);
         this.setClassType(classType);
     }
 
     @Override
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         return this.filterExpress;
     }
 
@@ -40,20 +36,16 @@ public class EntityDataReader<T> extends EntityDataAccess<T> implements DataRead
     }
 
     @Override
-    public Object getValue(int index, String fieldName)
-    {
+    public Object getValue(int index, String fieldName) {
         List<T> entityList = this.entityList;
         if (entityList == null)
             entityList = this.getEntityList();
 
         Object value = null;
-        if (index < this.size())
-        {
+        if (index < this.size()) {
             T entity = entityList.get(index);
             value = this.getEntityMetaData().getValue(fieldName, entity);
-        }
-        else if (index == this.size())
-        {
+        } else if (index == this.size()) {
             if (this.getTotal() != null)
                 value = this.getEntityMetaData().getValue(fieldName, this.getTotal());
         }
@@ -61,16 +53,13 @@ public class EntityDataReader<T> extends EntityDataAccess<T> implements DataRead
     }
 
     @Override
-    public void refresh()
-    {
-        if (this.filterExpress == null)
-        {
+    public void refresh() {
+        if (this.filterExpress == null) {
             this.entityList = null;
             return;
         }
         List<T> entityList = new LinkedList<T>();
-        for (T entity : this.getEntityList())
-        {
+        for (T entity : this.getEntityList()) {
             if (this.filterExpress.isValid(entity))
                 entityList.add(entity);
         }
@@ -78,8 +67,7 @@ public class EntityDataReader<T> extends EntityDataAccess<T> implements DataRead
     }
 
     @Override
-    public int size()
-    {
+    public int size() {
         return this.entityList == null ? super.size() : this.entityList.size();
     }
 }

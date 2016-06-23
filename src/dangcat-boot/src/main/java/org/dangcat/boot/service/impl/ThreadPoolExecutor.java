@@ -7,19 +7,16 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor
-{
+class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor {
     private AtomicInteger executingCount = new AtomicInteger();
 
-    ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, String name, BlockingQueue<Runnable> workQueue)
-    {
+    ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, String name, BlockingQueue<Runnable> workQueue) {
         this(corePoolSize, maximumPoolSize, name, workQueue, new AbortPolicy());
     }
 
-    ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, String name, BlockingQueue<Runnable> workQueue, RejectedExecutionHandler rejectedExecutionHandler)
-    {
+    ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, String name, BlockingQueue<Runnable> workQueue, RejectedExecutionHandler rejectedExecutionHandler) {
         super(
-        // the number of threads to keep in the pool, even if they are idle.
+                // the number of threads to keep in the pool, even if they are idle.
                 corePoolSize,
                 // maximumPoolSize the maximum number of threads to allow in the
                 // pool.
@@ -42,15 +39,13 @@ class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor
     }
 
     @Override
-    protected void afterExecute(Runnable runnable, Throwable throwable)
-    {
+    protected void afterExecute(Runnable runnable, Throwable throwable) {
         this.executingCount.decrementAndGet();
         super.afterExecute(runnable, throwable);
     }
 
     @Override
-    protected void beforeExecute(Thread thread, Runnable runnable)
-    {
+    protected void beforeExecute(Thread thread, Runnable runnable) {
         this.executingCount.incrementAndGet();
         super.beforeExecute(thread, runnable);
     }
@@ -58,8 +53,7 @@ class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor
     /**
      * 正在执行的任务数。
      */
-    protected int getExecutingCount()
-    {
+    protected int getExecutingCount() {
         return this.executingCount.get();
     }
 }

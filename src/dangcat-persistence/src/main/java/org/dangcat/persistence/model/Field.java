@@ -8,47 +8,55 @@ import java.util.Date;
 
 /**
  * 基本数据对象。
+ *
  * @author dangcat
- * 
  */
-public class Field implements java.io.Serializable, Comparable<Field>
-{
+public class Field implements java.io.Serializable, Comparable<Field> {
     private static final long serialVersionUID = 1L;
-    /** 数据对象的状态：新增、修改。 */
+    /**
+     * 数据对象的状态：新增、修改。
+     */
     private DataState dataState = DataState.Browse;
-    /** 旧的数据值。 */
+    /**
+     * 旧的数据值。
+     */
     private Object oldValue;
-    /** 所属数据行。 */
+    /**
+     * 所属数据行。
+     */
     private Row parent;
-    /** 当前数据值。 */
+    /**
+     * 当前数据值。
+     */
     private Object value;
+
     /**
      * 构造函数。
      */
-    public Field()
-    {
+    public Field() {
     }
 
     /**
      * 构造函数。
+     *
      * @param value 当前数据值。
      */
-    public Field(Object value)
-    {
+    public Field(Object value) {
         this.value = value;
     }
 
     /**
      * 构造函数。
+     *
      * @param parent 父数据行对象。
      */
-    public Field(Row parent)
-    {
+    public Field(Row parent) {
         this.parent = parent;
     }
 
     /**
      * 建立新的实例。
+     *
      * @return
      */
     public static Field newInstance() {
@@ -57,16 +65,15 @@ public class Field implements java.io.Serializable, Comparable<Field>
 
     /**
      * 改变当前值。
+     *
      * @param newValue 新的值对象。
      */
-    private void changeValue(Object newValue)
-    {
+    private void changeValue(Object newValue) {
         if (this.oldValue == null)
             this.oldValue = this.value;
         this.value = newValue;
 
-        if (this.dataState == DataState.Browse)
-        {
+        if (this.dataState == DataState.Browse) {
             this.dataState = DataState.Modified;
             if (this.parent != null)
                 this.parent.notify(this);
@@ -77,15 +84,13 @@ public class Field implements java.io.Serializable, Comparable<Field>
      * 字段比较：相等返回0，大于返回大于0的数，小于返回小于0的数。
      */
 
-    public int compareTo(Field destField)
-    {
+    public int compareTo(Field destField) {
         if (destField == null)
             return -1;
         return ValueUtils.compare(this.getObject(), destField.getObject());
     }
 
-    public byte[] getBytes()
-    {
+    public byte[] getBytes() {
         return (byte[]) this.value;
     }
 
@@ -93,30 +98,25 @@ public class Field implements java.io.Serializable, Comparable<Field>
         this.changeValue(newValue);
     }
 
-    public Character getChar()
-    {
+    public Character getChar() {
         if (this.value instanceof char[])
             return ((char[]) this.value)[0];
         return (Character) this.value;
     }
 
-    public void setChar(char newValue)
-    {
+    public void setChar(char newValue) {
         this.changeValue(new char[]{newValue});
     }
 
-    public char[] getChars()
-    {
+    public char[] getChars() {
         return (char[]) this.value;
     }
 
-    public void setChars(char[] newValue)
-    {
+    public void setChars(char[] newValue) {
         this.changeValue(newValue);
     }
 
-    public DataState getDataState()
-    {
+    public DataState getDataState() {
         return this.dataState;
     }
 
@@ -172,13 +172,13 @@ public class Field implements java.io.Serializable, Comparable<Field>
         return (T) this.value;
     }
 
-    public void setObject(Object newValue)
-    {
+    public void setObject(Object newValue) {
         this.changeValue(newValue);
     }
 
     /**
      * 取得旧的数据值。
+     *
      * @return 旧的值对象。
      */
     public Object getOldValue() {
@@ -197,8 +197,7 @@ public class Field implements java.io.Serializable, Comparable<Field>
         return (Short) this.value;
     }
 
-    public void setShort(Short newValue)
-    {
+    public void setShort(Short newValue) {
         this.changeValue(newValue);
     }
 
@@ -208,8 +207,7 @@ public class Field implements java.io.Serializable, Comparable<Field>
         return this.toString();
     }
 
-    public void setString(String newValue)
-    {
+    public void setString(String newValue) {
         this.changeValue(newValue);
     }
 
@@ -217,26 +215,24 @@ public class Field implements java.io.Serializable, Comparable<Field>
         return (Time) this.value;
     }
 
-    public void setTime(Time newValue)
-    {
+    public void setTime(Time newValue) {
         this.changeValue(newValue);
     }
 
     /**
      * 把当前值转成SQL表达式。
+     *
      * @param transOldValue 是否转换旧值。
      * @return 表达式。
      */
-    public String toSqlString(boolean transOldValue)
-    {
+    public String toSqlString(boolean transOldValue) {
         return TableStatementHelper.toSqlString(transOldValue ? this.oldValue : this.value);
     }
 
     /**
      * 输出数据内容。
      */
-    public String toString()
-    {
+    public String toString() {
         if (this.value instanceof Date)
             return DateUtils.format((Date) this.value);
         return this.value == null ? null : this.value.toString();

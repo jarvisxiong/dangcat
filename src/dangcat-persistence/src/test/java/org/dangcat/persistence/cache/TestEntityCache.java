@@ -18,13 +18,11 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class TestEntityCache extends TestCacheBase
-{
+public class TestEntityCache extends TestCacheBase {
     private static final String TABLE_NAME = "ModelData";
 
     @Test
-    public void testCacheConfig()
-    {
+    public void testCacheConfig() {
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
         Assert.assertEquals(3, entityCacheManager.size());
 
@@ -35,8 +33,7 @@ public class TestEntityCache extends TestCacheBase
         Assert.assertEquals(30, entityCache.getInterval().intValue());
     }
 
-    private void testCacheFilter1(EntityCache<EntityData> entityCache)
-    {
+    private void testCacheFilter1(EntityCache<EntityData> entityCache) {
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006"));
@@ -113,8 +110,7 @@ public class TestEntityCache extends TestCacheBase
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
-    private void testCacheFilter2(EntityCache<EntityData> entityCache)
-    {
+    private void testCacheFilter2(EntityCache<EntityData> entityCache) {
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006", null, "A-00000000000000000000000000000000000009"));
@@ -122,8 +118,7 @@ public class TestEntityCache extends TestCacheBase
         Collection<EntityData> entityDataList = entityCache.load(filterGroup);
         // 判断过滤内容
         Assert.assertEquals(2, entityDataList.size());
-        for (EntityData entityData : entityDataList)
-        {
+        for (EntityData entityData : entityDataList) {
             if (entityData.getFieldB() == 6)
                 Assert.assertEquals("A-00000000000000000000000000000000000006", entityData.getFieldA());
             else if (entityData.getFieldB() == 9)
@@ -215,28 +210,26 @@ public class TestEntityCache extends TestCacheBase
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
-    private void testCacheFilter3(EntityCache<EntityData> entityCache)
-    {
+    private void testCacheFilter3(EntityCache<EntityData> entityCache) {
         EntityManager entityManager = this.getEntityManager();
         EntityData srcEntityData = entityManager.load(EntityData.class, 6);
 
         // 测试定位数据。
-        Collection<EntityData> entityDataList = entityCache.load(new String[] { EntityData.FieldA }, srcEntityData.getFieldA());
+        Collection<EntityData> entityDataList = entityCache.load(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertEquals(1, entityDataList.size());
         Assert.assertTrue(SimulateUtils.compareData(srcEntityData, entityDataList.iterator().next()));
 
         // 测试删除数据。
         entityCache.delete(entityDataList.iterator().next());
-        Collection<EntityData> entityDataList2 = entityCache.load(new String[] { EntityData.FieldA }, srcEntityData.getFieldA());
+        Collection<EntityData> entityDataList2 = entityCache.load(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertNull(entityDataList2);
     }
 
-    private void testCacheFilter4(EntityCache<EntityData> entityCache)
-    {
+    private void testCacheFilter4(EntityCache<EntityData> entityCache) {
         EntityManager entityManager = this.getEntityManager();
         EntityData srcEntityData = entityManager.load(EntityData.class, 5);
         // 测试定位数据。
-        Collection<EntityData> entityDataList = entityCache.load(new String[] { EntityData.FieldA }, srcEntityData.getFieldA());
+        Collection<EntityData> entityDataList = entityCache.load(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         EntityData destEntityData = entityDataList.iterator().next();
         Assert.assertEquals(1, entityDataList.size());
         Assert.assertTrue(SimulateUtils.compareData(srcEntityData, destEntityData));
@@ -250,8 +243,7 @@ public class TestEntityCache extends TestCacheBase
         Assert.assertTrue(SimulateUtils.compareData(srcEntityData, destEntityData2));
     }
 
-    private void testCacheFilter5(EntityCache<EntityData> entityCache)
-    {
+    private void testCacheFilter5(EntityCache<EntityData> entityCache) {
         EntityManager entityManager = this.getEntityManager();
         EntityData srcEntityData = entityManager.load(EntityData.class, 7);
 
@@ -270,8 +262,7 @@ public class TestEntityCache extends TestCacheBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);

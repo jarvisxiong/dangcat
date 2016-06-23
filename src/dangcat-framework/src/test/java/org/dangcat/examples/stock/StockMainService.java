@@ -5,16 +5,13 @@ import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.framework.service.annotation.JndiName;
 
 @JndiName
-public class StockMainService extends MainServiceBase
-{
-    public StockMainService(ServiceProvider parent)
-    {
+public class StockMainService extends MainServiceBase {
+    public StockMainService(ServiceProvider parent) {
         super(parent);
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         // 用户信息服务。

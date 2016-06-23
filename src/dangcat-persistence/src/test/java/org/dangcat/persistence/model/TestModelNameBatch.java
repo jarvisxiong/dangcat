@@ -8,19 +8,16 @@ import org.dangcat.persistence.orm.SessionFactory;
 import org.dangcat.persistence.sql.Sql;
 import org.junit.Assert;
 
-public class TestModelNameBatch extends TestEntityBase
-{
+public class TestModelNameBatch extends TestEntityBase {
     private static final int TEST_COUNT = 1000;
 
-    private Table createTableData()
-    {
+    private Table createTableData() {
         Table table = TableDataUtils.getTable();
         table.getSqls().read(TestModelNameBatch.class);
         return table;
     }
 
-    private void testBatchCreate() throws TableException
-    {
+    private void testBatchCreate() throws TableException {
         Table table1 = TableDataUtils.getTable();
 
         if (table1.exists())
@@ -38,8 +35,7 @@ public class TestModelNameBatch extends TestEntityBase
         Assert.assertEquals(0, table2.getRows().size());
     }
 
-    private void testBatchDelete() throws TableException
-    {
+    private void testBatchDelete() throws TableException {
         Table table1 = this.createTableData();
         table1.load();
         Assert.assertEquals(DataState.Browse, table1.getDataState());
@@ -55,15 +51,13 @@ public class TestModelNameBatch extends TestEntityBase
         Assert.assertEquals(0, table2.getRows().size());
     }
 
-    private void testBatchDrop() throws TableException
-    {
+    private void testBatchDrop() throws TableException {
         Table table = TableDataUtils.getTable();
         table.drop();
         Assert.assertFalse(table.exists());
     }
 
-    private void testBatchInsert() throws TableException
-    {
+    private void testBatchInsert() throws TableException {
         Table table1 = this.createTableData();
         TableDataUtils.createTableData(table1, TEST_COUNT);
         int index = 0;
@@ -83,8 +77,7 @@ public class TestModelNameBatch extends TestEntityBase
         Assert.assertTrue(TableUtils.equalsContent(table1, table2));
     }
 
-    private void testBatchModify() throws TableException
-    {
+    private void testBatchModify() throws TableException {
         Table table1 = this.createTableData();
         table1.load();
         Assert.assertEquals(DataState.Browse, table1.getDataState());
@@ -103,8 +96,7 @@ public class TestModelNameBatch extends TestEntityBase
         Assert.assertTrue(TableUtils.equalsContent(table1, table2));
     }
 
-    private void testBatchName(boolean useName) throws TableException
-    {
+    private void testBatchName(boolean useName) throws TableException {
         Table table1 = this.createTableData();
 
         if (table1.exists())
@@ -125,8 +117,7 @@ public class TestModelNameBatch extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);

@@ -16,25 +16,26 @@ import java.util.Map;
 
 /**
  * 协议报文。
+ *
  * @author dangcat
- * 
  */
-public abstract class Packet extends AttributeCollection implements Comparable<Packet>
-{
+public abstract class Packet extends AttributeCollection implements Comparable<Packet> {
     private static final long serialVersionUID = 1L;
 
-    /** 解析后的字节数组。 */
+    /**
+     * 解析后的字节数组。
+     */
     private byte[] bytes = null;
 
     /**
      * 添加厂商属性。
+     *
      * @param vendorId 厂商号。
-     * @param type 属性类型。
-     * @param value 属性值。
+     * @param type     属性类型。
+     * @param value    属性值。
      * @throws ProtocolParseException
      */
-    public boolean addVendorAttribute(Integer vendorId, Integer type, Object value) throws ProtocolParseException
-    {
+    public boolean addVendorAttribute(Integer vendorId, Integer type, Object value) throws ProtocolParseException {
         if (vendorId == null || vendorId.equals(AttributeTemplateManager.DEFAULT_VENDORID))
             return this.addAttribute(type, value);
 
@@ -52,8 +53,7 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
      * 比较两个数据包是否相同。
      */
     @Override
-    public int compareTo(Packet packet)
-    {
+    public int compareTo(Packet packet) {
         if (packet == null)
             return 1;
 
@@ -66,31 +66,27 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
         return 0;
     }
 
-    public byte[] createBytes() throws ProtocolParseException
-    {
+    public byte[] createBytes() throws ProtocolParseException {
         this.bytes = this.toBytes();
         return this.bytes;
     }
 
     /**
      * 查找指定厂商属性和属性号的对象。
+     *
      * @param vendorId 厂商编号。
-     * @param type 属性类型。
+     * @param type     属性类型。
      */
-    public AttributeData findVendorAttribute(Integer vendorId, Integer type)
-    {
+    public AttributeData findVendorAttribute(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
             return this.findAttribute(type);
 
         AttributeData findAttributeData = null;
         List<VendorAttribute> vendorAttributeList = this.findVendorAttributes(vendorId);
-        if (vendorAttributeList != null)
-        {
-            for (VendorAttribute vendorAttribute : vendorAttributeList)
-            {
+        if (vendorAttributeList != null) {
+            for (VendorAttribute vendorAttribute : vendorAttributeList) {
                 AttributeData attributeData = vendorAttribute.getAttributeCollection().findAttribute(type);
-                if (attributeData != null)
-                {
+                if (attributeData != null) {
                     findAttributeData = attributeData;
                     break;
                 }
@@ -101,18 +97,15 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
 
     /**
      * 根据指定的厂商号找到厂商属性。
+     *
      * @param vendorId 厂商编号。
      */
-    private List<VendorAttribute> findVendorAttributes(Integer vendorId)
-    {
+    private List<VendorAttribute> findVendorAttributes(Integer vendorId) {
         List<VendorAttribute> vendorAttributeList = null;
-        for (AttributeData attributeData : this)
-        {
-            if (attributeData instanceof VendorAttribute)
-            {
+        for (AttributeData attributeData : this) {
+            if (attributeData instanceof VendorAttribute) {
                 VendorAttribute vendorAttribute = (VendorAttribute) attributeData;
-                if (vendorAttribute.getVendorId().equals(vendorId))
-                {
+                if (vendorAttribute.getVendorId().equals(vendorId)) {
                     if (vendorAttributeList == null)
                         vendorAttributeList = new ArrayList<VendorAttribute>();
                     vendorAttributeList.add(vendorAttribute);
@@ -124,23 +117,20 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
 
     /**
      * 查找厂商属性。
+     *
      * @param vendorId 厂商编号。
-     * @param type 属性类型。
+     * @param type     属性类型。
      */
-    public List<AttributeData> findVendorAttributes(Integer vendorId, Integer type)
-    {
+    public List<AttributeData> findVendorAttributes(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
             return this.findAttributes(type);
 
         List<AttributeData> findAttributeDataList = null;
         List<VendorAttribute> vendorAttributeList = this.findVendorAttributes(vendorId);
-        if (vendorAttributeList != null)
-        {
-            for (VendorAttribute vendorAttribute : vendorAttributeList)
-            {
+        if (vendorAttributeList != null) {
+            for (VendorAttribute vendorAttribute : vendorAttributeList) {
                 List<AttributeData> attributeDataList = vendorAttribute.getAttributeCollection().findAttributes(type);
-                if (attributeDataList != null)
-                {
+                if (attributeDataList != null) {
                     if (findAttributeDataList == null)
                         findAttributeDataList = new ArrayList<AttributeData>();
                     findAttributeDataList.addAll(attributeDataList);
@@ -150,13 +140,11 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
         return findAttributeDataList;
     }
 
-    public AttributeTemplateManager getAttributeTemplateManager()
-    {
+    public AttributeTemplateManager getAttributeTemplateManager() {
         return this.getPacketMetaInfo().getAttributeTemplateManager();
     }
 
-    public byte[] getBytes() throws ProtocolParseException
-    {
+    public byte[] getBytes() throws ProtocolParseException {
         if (this.bytes == null)
             this.bytes = this.toBytes();
         return this.bytes;
@@ -164,18 +152,15 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
 
     public abstract PacketMetaInfo getPacketMetaInfo();
 
-    public String getPacketName()
-    {
+    public String getPacketName() {
         return this.getPacketMetaInfo().getPacketName(this.getPacketType());
     }
 
     public abstract Integer getPacketType();
 
     @Override
-    public VendorAttributeTemplateManager getVendorAttributeTemplateManager()
-    {
-        if (super.getVendorAttributeTemplateManager() == null)
-        {
+    public VendorAttributeTemplateManager getVendorAttributeTemplateManager() {
+        if (super.getVendorAttributeTemplateManager() == null) {
             VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getAttributeTemplateManager().getVendorAttributeTemplateManager(null);
             if (vendorAttributeTemplateManager != null)
                 this.setVendorAttributeTemplateManager(vendorAttributeTemplateManager);
@@ -185,32 +170,31 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
 
     /**
      * 读取厂商属性号。
+     *
      * @param radiusAttributeType 属性类型。
-     * @param value 属性值。
+     * @param value               属性值。
      */
     public abstract Integer getVendorAttributeType();
 
     @Override
-    public void onAttributeChanged(AttributeData attributeData)
-    {
+    public void onAttributeChanged(AttributeData attributeData) {
         this.bytes = null;
         super.onAttributeChanged(attributeData);
     }
 
     /**
      * 删除厂商属性。
+     *
      * @param vendorId 厂商号。
-     * @param type 属性类型。
+     * @param type     属性类型。
      */
-    public int removeVendorAttribute(Integer vendorId, Integer type)
-    {
+    public int removeVendorAttribute(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
             return this.removeAttribute(type);
 
         int result = 0;
         List<VendorAttribute> vendorAttributeList = this.findVendorAttributes(vendorId);
-        if (vendorAttributeList != null)
-        {
+        if (vendorAttributeList != null) {
             for (VendorAttribute vendorAttribute : vendorAttributeList)
                 result += vendorAttribute.getAttributeCollection().removeAttribute(type);
         }
@@ -221,19 +205,17 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
 
     /**
      * 验证包是否争取。
+     *
      * @throws ProtocolValidateException 验证异常。
      */
-    public void validate() throws ProtocolValidateException
-    {
+    public void validate() throws ProtocolValidateException {
         this.validateAttributeData();
         this.validatePacketRule();
     }
 
-    public void validateAttributeData() throws ProtocolValidateException
-    {
+    public void validateAttributeData() throws ProtocolValidateException {
         Map<Integer, List<AttributeData>> attributeDataMap = this.getAttributeDataMap();
-        for (Integer vendorId : attributeDataMap.keySet())
-        {
+        for (Integer vendorId : attributeDataMap.keySet()) {
             List<AttributeData> attributeDataList = attributeDataMap.get(vendorId);
             // 基本校验。
             for (AttributeData attributeData : attributeDataList)
@@ -241,12 +223,10 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
         }
     }
 
-    public void validatePacketRule() throws ProtocolValidateException
-    {
+    public void validatePacketRule() throws ProtocolValidateException {
         AttributeTemplateManager attributeTemplateManager = this.getAttributeTemplateManager();
         Map<Integer, List<AttributeData>> attributeDataMap = this.getAttributeDataMap();
-        for (Integer vendorId : attributeDataMap.keySet())
-        {
+        for (Integer vendorId : attributeDataMap.keySet()) {
             List<AttributeData> attributeDataList = attributeDataMap.get(vendorId);
             // 规则校验。
             PacketRuleValidator packetRuleValidator = attributeTemplateManager.getPacketRuleValidator(vendorId, this.getPacketName());

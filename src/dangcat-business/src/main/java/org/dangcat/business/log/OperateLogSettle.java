@@ -8,16 +8,14 @@ import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
  * 操作日志结算。
+ *
  * @author fanst174766
- * 
  */
-public class OperateLogSettle implements SettleUnit
-{
+public class OperateLogSettle implements SettleUnit {
     private DateTimeTableName sourceTableName = new DateTimeTableName(OperateLog.class.getSimpleName());
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -29,26 +27,22 @@ public class OperateLogSettle implements SettleUnit
     }
 
     @Override
-    public Class<? extends SettleEntity> getClassType()
-    {
+    public Class<? extends SettleEntity> getClassType() {
         return OperateStat.class;
     }
 
     @Override
-    public DateTimeTableName getSourceTableName()
-    {
+    public DateTimeTableName getSourceTableName() {
         return this.sourceTableName;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.sourceTableName.hashCode();
     }
 
     @Override
-    public void merge(Object srcEntity, Object destEntity)
-    {
+    public void merge(Object srcEntity, Object destEntity) {
         OperateStat srcOperateStat = (OperateStat) srcEntity;
         OperateStat destOperateStat = (OperateStat) destEntity;
 

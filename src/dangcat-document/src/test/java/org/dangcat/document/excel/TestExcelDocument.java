@@ -21,13 +21,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestExcelDocument extends TestEntityBase
-{
+public class TestExcelDocument extends TestEntityBase {
     private static final int TEST_COUNT = 100;
 
     @Test
-    public void testExcelForEntity() throws IOException, EntityException
-    {
+    public void testExcelForEntity() throws IOException, EntityException {
         List<EntityData> srcEntityDataList = new LinkedList<EntityData>();
         EntityDataUtils.createEntityDataList(srcEntityDataList, TEST_COUNT);
         File file = File.createTempFile("Entity", ".xls");
@@ -46,8 +44,7 @@ public class TestExcelDocument extends TestEntityBase
     }
 
     @Test
-    public void testExcelForTable() throws IOException, TableException
-    {
+    public void testExcelForTable() throws IOException, TableException {
         Table srcTable = TableDataUtils.getTable();
         TableDataUtils.createTableData(srcTable, TEST_COUNT);
         File file = File.createTempFile("Table", ".xls");

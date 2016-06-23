@@ -13,23 +13,24 @@ import java.io.IOException;
 
 /**
  * 二进制类型属性模板。
+ *
  * @author dangcat
- * 
  */
-public class StringAttributeTemplate extends AttributeTemplate
-{
+public class StringAttributeTemplate extends AttributeTemplate {
     private static final int STRING_MAXLENGTH = 253;
-    /** 属性对象类型。 */
+    /**
+     * 属性对象类型。
+     */
     private String classType;
 
     /**
      * 在本基线模板上建立新的属性对象。
+     *
      * @param value 属性值。
      * @return 属性对象。
      * @throws ProtocolParseException
      */
-    public AttributeData createAttribute(Object value) throws ProtocolParseException
-    {
+    public AttributeData createAttribute(Object value) throws ProtocolParseException {
         AttributeData attributeData = this.createCustom(value);
         if (attributeData != null)
             return attributeData;
@@ -44,22 +45,20 @@ public class StringAttributeTemplate extends AttributeTemplate
         return super.createAttribute(data);
     }
 
-    private AttributeData createCustom(Object value) throws ProtocolParseException
-    {
+    private AttributeData createCustom(Object value) throws ProtocolParseException {
         if (ValueUtils.isEmpty(this.getClassType()))
             return null;
 
         if (value instanceof ValueParser)
             return super.createAttribute(value);
 
-        ValueParser valueParser = (ValueParser) ReflectUtils.newInstance(this.getClassType(), new Class<?>[] { AttributeTemplate.class }, new Object[] { this });
+        ValueParser valueParser = (ValueParser) ReflectUtils.newInstance(this.getClassType(), new Class<?>[]{AttributeTemplate.class}, new Object[]{this});
         if (valueParser == null)
             throw new ProtocolParseException(ProtocolParseException.ATTRIBUTE_INVALID_CLASSTYPE, this.getFullName(), this.getClassType());
 
         if (value instanceof String)
             valueParser.parse((String) value);
-        else if (value instanceof byte[])
-        {
+        else if (value instanceof byte[]) {
             byte[] bytes = (byte[]) value;
             valueParser.parse(bytes, 0, bytes.length);
         }
@@ -68,8 +67,7 @@ public class StringAttributeTemplate extends AttributeTemplate
         return super.createAttribute(valueParser);
     }
 
-    public String getClassType()
-    {
+    public String getClassType() {
         return classType;
     }
 
@@ -81,33 +79,29 @@ public class StringAttributeTemplate extends AttributeTemplate
      * 属性类型。
      */
     @Override
-    public AttributeDataType getDataType()
-    {
+    public AttributeDataType getDataType() {
         return AttributeDataType.string;
     }
 
     @Override
-    public int getMaxLength()
-    {
+    public int getMaxLength() {
         return STRING_MAXLENGTH;
     }
 
     /**
      * 转换成字节数组。
-     * @param outputStream 输出流对象。
+     *
+     * @param outputStream  输出流对象。
      * @param attributeData 属性值。
      * @return 转换后的字节。
      * @throws IOException
      */
-    protected void outputValue(ByteArrayOutputStream outputStream, AttributeData attributeData) throws IOException
-    {
+    protected void outputValue(ByteArrayOutputStream outputStream, AttributeData attributeData) throws IOException {
         byte[] bytes = null;
-        if (attributeData.getValue() instanceof ValueParser)
-        {
+        if (attributeData.getValue() instanceof ValueParser) {
             ValueParser valueParser = attributeData.getValue();
             bytes = valueParser.toBytes();
-        }
-        else if (attributeData.getValue() instanceof byte[])
+        } else if (attributeData.getValue() instanceof byte[])
             bytes = attributeData.getValue();
         if (bytes != null && bytes.length > 0)
             outputStream.write(bytes, 0, bytes.length > STRING_MAXLENGTH ? STRING_MAXLENGTH : bytes.length);
@@ -115,11 +109,11 @@ public class StringAttributeTemplate extends AttributeTemplate
 
     /**
      * 由报文解析属性对象。
+     *
      * @throws ProtocolParseException
      */
     @Override
-    public AttributeData parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException
-    {
+    public AttributeData parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException {
         AttributeData attributeData = this.parseCustom(bytes, beginIndex, length);
         if (attributeData != null)
             return attributeData;
@@ -129,12 +123,11 @@ public class StringAttributeTemplate extends AttributeTemplate
         return this.createAttribute(value);
     }
 
-    private AttributeData parseCustom(byte[] bytes, int beginIndex, int length) throws ProtocolParseException
-    {
+    private AttributeData parseCustom(byte[] bytes, int beginIndex, int length) throws ProtocolParseException {
         if (ValueUtils.isEmpty(this.getClassType()))
             return null;
 
-        ValueParser valueParser = (ValueParser) ReflectUtils.newInstance(this.getClassType(), new Class<?>[] { AttributeTemplate.class }, new Object[] { this });
+        ValueParser valueParser = (ValueParser) ReflectUtils.newInstance(this.getClassType(), new Class<?>[]{AttributeTemplate.class}, new Object[]{this});
         if (valueParser == null)
             throw new ProtocolParseException(ProtocolParseException.ATTRIBUTE_INVALID_CLASSTYPE, this.getFullName(), this.getClassType());
         valueParser.parse(bytes, beginIndex, length);
@@ -142,20 +135,17 @@ public class StringAttributeTemplate extends AttributeTemplate
     }
 
     @Override
-    public String toString(Object value)
-    {
+    public String toString(Object value) {
         if (value instanceof byte[])
             return ParseUtils.toHex((byte[]) value);
         return super.toString(value);
     }
 
     @Override
-    public void validate(Object value) throws ProtocolValidateException
-    {
+    public void validate(Object value) throws ProtocolValidateException {
         super.validate(value);
 
-        if (value instanceof ValueParser)
-        {
+        if (value instanceof ValueParser) {
             ValueParser valueParser = (ValueParser) value;
             valueParser.validate();
             return;

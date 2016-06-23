@@ -8,9 +8,8 @@ import org.dangcat.persistence.annotation.Table;
 import java.util.Date;
 
 @Table
-@Indexes( { @Index("ServerId, DateTime") })
-public class ServerStatusLog extends MonitorData
-{
+@Indexes({@Index("ServerId, DateTime")})
+public class ServerStatusLog extends MonitorData {
     public static final String DateTime = "DateTime";
     public static final String Id = "Id";
     public static final String ServerId = "ServerId";
@@ -24,8 +23,7 @@ public class ServerStatusLog extends MonitorData
     @Column(index = 1, displaySize = 32, isNullable = false)
     private Integer serverId = null;
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -33,8 +31,7 @@ public class ServerStatusLog extends MonitorData
         this.dateTime = dateTime;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
@@ -42,8 +39,7 @@ public class ServerStatusLog extends MonitorData
         this.id = id;
     }
 
-    public Integer getServerId()
-    {
+    public Integer getServerId() {
         return serverId;
     }
 
@@ -52,37 +48,31 @@ public class ServerStatusLog extends MonitorData
     }
 
     @Column(index = 14, logic = "octets", isCalculate = true)
-    public long getTotalDiskSpace()
-    {
+    public long getTotalDiskSpace() {
         return super.getTotalDiskSpace();
     }
 
     @Column(index = 15, logic = "octets", isCalculate = true)
-    public long getTotalPhysicalMemory()
-    {
+    public long getTotalPhysicalMemory() {
         return super.getTotalPhysicalMemory();
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        if (this.getId() != null)
-        {
+        if (this.getId() != null) {
             info.append(Id);
             info.append(" = ");
             info.append(this.getId());
         }
-        if (this.getServerId() != null)
-        {
+        if (this.getServerId() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(ServerId);
             info.append(" = ");
             info.append(this.getServerId());
         }
-        if (this.getDateTime() != null)
-        {
+        if (this.getDateTime() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(DateTime);

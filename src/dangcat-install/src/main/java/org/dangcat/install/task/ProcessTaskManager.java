@@ -4,8 +4,7 @@ import org.apache.log4j.Logger;
 import org.dangcat.commons.log.LogCallback;
 import org.dangcat.install.swing.panel.InstallProgressPanel;
 
-public class ProcessTaskManager extends Thread implements LogCallback
-{
+public class ProcessTaskManager extends Thread implements LogCallback {
     private String appenderName = "InstallCallback";
     private Class<?> classType = null;
     private Exception exception = null;
@@ -14,48 +13,39 @@ public class ProcessTaskManager extends Thread implements LogCallback
     private ProcessTaskCollection processTasks = new ProcessTaskCollection();
     private InstallProgressPanel progressPanel = null;
 
-    public void addTask(ProcessTask processTask)
-    {
+    public void addTask(ProcessTask processTask) {
         this.processTasks.addTask(processTask);
     }
 
-    public void cancel()
-    {
+    public void cancel() {
         this.processTasks.cancel();
     }
 
     @Override
-    public void debug(String message)
-    {
-        if (this.progressPanel != null)
-        {
+    public void debug(String message) {
+        if (this.progressPanel != null) {
             this.progressPanel.debug(message);
             this.showProgress();
         }
     }
 
     @Override
-    public void error(String message)
-    {
-        if (this.progressPanel != null)
-        {
+    public void error(String message) {
+        if (this.progressPanel != null) {
             this.progressPanel.error(message);
             this.showProgress();
         }
     }
 
     @Override
-    public void fatal(String message)
-    {
-        if (this.progressPanel != null)
-        {
+    public void fatal(String message) {
+        if (this.progressPanel != null) {
             this.progressPanel.fatal(message);
             this.showProgress();
         }
     }
 
-    public String getAppenderName()
-    {
+    public String getAppenderName() {
         return this.appenderName;
     }
 
@@ -63,8 +53,7 @@ public class ProcessTaskManager extends Thread implements LogCallback
         this.appenderName = appenderName;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return this.classType;
     }
 
@@ -72,13 +61,11 @@ public class ProcessTaskManager extends Thread implements LogCallback
         this.classType = classType;
     }
 
-    public Exception getException()
-    {
+    public Exception getException() {
         return this.exception;
     }
 
-    public Runnable getExecuteCallback()
-    {
+    public Runnable getExecuteCallback() {
         return this.executeCallback;
     }
 
@@ -86,18 +73,15 @@ public class ProcessTaskManager extends Thread implements LogCallback
         this.executeCallback = executeCallback;
     }
 
-    private Logger getLogger()
-    {
-        if (this.logger == null)
-        {
+    private Logger getLogger() {
+        if (this.logger == null) {
             Logger logger = Logger.getLogger(this.getClassType());
             this.logger = new org.dangcat.commons.log.Logger(logger, this.getAppenderName(), this);
         }
         return this.logger;
     }
 
-    public InstallProgressPanel getProgressPanel()
-    {
+    public InstallProgressPanel getProgressPanel() {
         return this.progressPanel;
     }
 
@@ -106,51 +90,39 @@ public class ProcessTaskManager extends Thread implements LogCallback
     }
 
     @Override
-    public void info(String message)
-    {
-        if (this.progressPanel != null)
-        {
+    public void info(String message) {
+        if (this.progressPanel != null) {
             this.progressPanel.info(message);
             this.showProgress();
         }
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.processTasks.isCancel();
     }
 
-    public void prepare()
-    {
+    public void prepare() {
         this.processTasks.prepare();
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         this.exception = null;
         Logger logger = this.getLogger();
-        try
-        {
+        try {
             this.processTasks.execute(logger);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
             this.exception = e;
-        }
-        finally
-        {
+        } finally {
             this.showProgress();
             if (this.executeCallback != null)
                 this.executeCallback.run();
         }
     }
 
-    public void showProgress()
-    {
-        if (this.progressPanel != null)
-        {
+    public void showProgress() {
+        if (this.progressPanel != null) {
             this.progressPanel.setMin(0);
             this.progressPanel.setValue((int) this.processTasks.getFinishedSize());
             this.progressPanel.setMax((int) this.processTasks.getTaskSize());
@@ -158,10 +130,8 @@ public class ProcessTaskManager extends Thread implements LogCallback
     }
 
     @Override
-    public void warn(String message)
-    {
-        if (this.progressPanel != null)
-        {
+    public void warn(String message) {
+        if (this.progressPanel != null) {
             this.progressPanel.warn(message);
             this.showProgress();
         }

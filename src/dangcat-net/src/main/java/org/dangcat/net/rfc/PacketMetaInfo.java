@@ -9,11 +9,10 @@ import java.util.Map.Entry;
 
 /**
  * 协议包元数据。
+ *
  * @author dangcat
- * 
  */
-public class PacketMetaInfo
-{
+public class PacketMetaInfo {
     private static final String FILENAME_POSTFIX = ".xml";
     private static final String TEXT_VALUE = "value";
     private AttributeTemplateManager attributeTemplateManager = null;
@@ -22,8 +21,7 @@ public class PacketMetaInfo
     private Class<?> packetTypeClass = null;
     private Map<Integer, String> packetTypeMap = null;
 
-    public PacketMetaInfo(Class<?> packetTypeClass, String fileNamePrefix)
-    {
+    public PacketMetaInfo(Class<?> packetTypeClass, String fileNamePrefix) {
         this.packetTypeClass = packetTypeClass;
         this.fileNamePrefix = fileNamePrefix;
     }
@@ -31,14 +29,10 @@ public class PacketMetaInfo
     /**
      * 加载属性模板。
      */
-    public AttributeTemplateManager getAttributeTemplateManager()
-    {
-        if (attributeTemplateManager == null)
-        {
-            synchronized (AttributeTemplateManager.class)
-            {
-                if (attributeTemplateManager == null)
-                {
+    public AttributeTemplateManager getAttributeTemplateManager() {
+        if (attributeTemplateManager == null) {
+            synchronized (AttributeTemplateManager.class) {
+                if (attributeTemplateManager == null) {
                     AttributeTemplateManager attributeTemplateManager = new AttributeTemplateManager(this);
                     attributeTemplateManager.initialize();
                     this.attributeTemplateManager = attributeTemplateManager;
@@ -48,18 +42,15 @@ public class PacketMetaInfo
         return attributeTemplateManager;
     }
 
-    public String getFileNamePostfix()
-    {
+    public String getFileNamePostfix() {
         return FILENAME_POSTFIX;
     }
 
-    public String getFileNamePrefix()
-    {
+    public String getFileNamePrefix() {
         return fileNamePrefix;
     }
 
-    public PacketAttributeManager getPacketAttributeManager()
-    {
+    public PacketAttributeManager getPacketAttributeManager() {
         if (this.packetAttributeManager == null)
             this.packetAttributeManager = new PacketAttributeManager(this);
         return this.packetAttributeManager;
@@ -68,21 +59,17 @@ public class PacketMetaInfo
     /**
      * 根据包的ID读取名字。
      */
-    public String getPacketName(Integer type)
-    {
+    public String getPacketName(Integer type) {
         return this.getPacketTypeMap().get(type);
     }
 
     /**
      * 根据包的名字读取ID。
      */
-    public Integer getPacketType(String name)
-    {
+    public Integer getPacketType(String name) {
         Integer packTypeId = null;
-        for (Entry<Integer, String> entry : this.getPacketTypeMap().entrySet())
-        {
-            if (entry.getValue().equalsIgnoreCase(name))
-            {
+        for (Entry<Integer, String> entry : this.getPacketTypeMap().entrySet()) {
+            if (entry.getValue().equalsIgnoreCase(name)) {
                 packTypeId = entry.getKey();
                 break;
             }
@@ -90,43 +77,30 @@ public class PacketMetaInfo
         return packTypeId;
     }
 
-    public Class<?> getPacketTypeClass()
-    {
+    public Class<?> getPacketTypeClass() {
         return packetTypeClass;
     }
 
-    private Map<Integer, String> getPacketTypeMap()
-    {
-        if (this.packetTypeMap == null)
-        {
+    private Map<Integer, String> getPacketTypeMap() {
+        if (this.packetTypeMap == null) {
             this.packetTypeMap = new HashMap<Integer, String>();
-            if (this.packetTypeClass.isEnum())
-            {
+            if (this.packetTypeClass.isEnum()) {
                 Field field = null;
-                try
-                {
+                try {
                     field = this.packetTypeClass.getDeclaredField(TEXT_VALUE);
                     field.setAccessible(true);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                 }
                 Object[] enumArray = this.packetTypeClass.getEnumConstants();
-                for (Object instance : enumArray)
-                {
+                for (Object instance : enumArray) {
                     Enum<?> enumObject = (Enum<?>) instance;
                     Integer value = null;
-                    if (field != null)
-                    {
-                        try
-                        {
+                    if (field != null) {
+                        try {
                             value = (Integer) field.get(instance);
+                        } catch (Exception e) {
                         }
-                        catch (Exception e)
-                        {
-                        }
-                    }
-                    else
+                    } else
                         value = enumObject.ordinal();
                     if (value != null)
                         this.packetTypeMap.put(value, enumObject.name().replace("_", "-"));

@@ -15,31 +15,28 @@ import org.dangcat.persistence.tablename.TableName;
 
 /**
  * 业务实体基础。
+ *
  * @author dangcat
- * 
  */
-public abstract class EntityBase extends ServiceFeedback implements java.io.Serializable
-{
+public abstract class EntityBase extends ServiceFeedback implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     protected transient Logger logger = Logger.getLogger(this.getClass());
-    /** 实体数据状态。 */
+    /**
+     * 实体数据状态。
+     */
     private DataState dataState = null;
     @Column(index = 0, isCalculate = true, displaySize = 4)
     private transient Integer rowNum = null;
     private transient TableName tableName = null;
 
-    public EntityBase()
-    {
+    public EntityBase() {
         if (this instanceof DataStatus)
             this.dataState = DataState.Insert;
     }
 
-    private boolean containsNull(Object[] values)
-    {
-        if (values != null)
-        {
-            for (Object value : values)
-            {
+    private boolean containsNull(Object[] values) {
+        if (values != null) {
+            for (Object value : values) {
                 if (value == null)
                     return true;
             }
@@ -48,10 +45,8 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj != null)
-        {
+    public boolean equals(Object obj) {
+        if (obj != null) {
             if (obj == this)
                 return true;
 
@@ -62,18 +57,13 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
                 return false;
 
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.getClass());
-            if (entityMetaData != null)
-            {
+            if (entityMetaData != null) {
                 Object[] srcPrimaryValues = entityMetaData.getPrimaryKeyValues(this);
-                if (!this.containsNull(srcPrimaryValues))
-                {
+                if (!this.containsNull(srcPrimaryValues)) {
                     Object[] dstPrimaryValues = entityMetaData.getPrimaryKeyValues(obj);
-                    if (!this.containsNull(dstPrimaryValues))
-                    {
-                        if (srcPrimaryValues != null && dstPrimaryValues != null && dstPrimaryValues.length == srcPrimaryValues.length)
-                        {
-                            for (int i = 0; i < srcPrimaryValues.length; i++)
-                            {
+                    if (!this.containsNull(dstPrimaryValues)) {
+                        if (srcPrimaryValues != null && dstPrimaryValues != null && dstPrimaryValues.length == srcPrimaryValues.length) {
+                            for (int i = 0; i < srcPrimaryValues.length; i++) {
                                 if (ValueUtils.compare(srcPrimaryValues[i], dstPrimaryValues[i]) != 0)
                                     return false;
                             }
@@ -87,20 +77,17 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     }
 
     @Override
-    public ServiceException findServiceException(Integer messageId)
-    {
+    public ServiceException findServiceException(Integer messageId) {
         return EntityFeedback.findServiceException(this, messageId);
     }
 
     @Override
-    public ServiceInformation findServiceInformation(Integer messageId)
-    {
+    public ServiceInformation findServiceInformation(Integer messageId) {
         return EntityFeedback.findServiceInformation(this, messageId);
     }
 
     @Serialize(ignoreValue = "Browse")
-    public DataState getDataState()
-    {
+    public DataState getDataState() {
         if (this.dataState == null && !(this instanceof DataStatus))
             return EntityUtils.checkDataState(this);
         return this.dataState;
@@ -110,8 +97,7 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
         this.dataState = dataState;
     }
 
-    public Integer getRowNum()
-    {
+    public Integer getRowNum() {
         return this.rowNum;
     }
 
@@ -120,8 +106,7 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     }
 
     @Serialize(ignore = true)
-    public String getTableName()
-    {
+    public String getTableName() {
         if (this.tableName == null)
             this.tableName = TableUtils.getTableName(this);
         if (this.tableName instanceof DynamicTable)
@@ -130,20 +115,16 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     }
 
     @Override
-    public boolean hasError()
-    {
+    public boolean hasError() {
         return EntityFeedback.hasError(this);
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.getClass());
-        if (entityMetaData != null)
-        {
+        if (entityMetaData != null) {
             Object[] srcPrimaryValues = entityMetaData.getPrimaryKeyValues(this);
-            if (srcPrimaryValues != null && !this.containsNull(srcPrimaryValues))
-            {
+            if (srcPrimaryValues != null && !this.containsNull(srcPrimaryValues)) {
                 final int prime = 31;
                 int result = this.getClass().hashCode();
                 result = prime * result + (this.getTableName() == null ? 0 : this.getTableName().hashCode());
@@ -156,14 +137,12 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     }
 
     @Override
-    public boolean hasInformation()
-    {
+    public boolean hasInformation() {
         return EntityFeedback.hasInformation(this);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.getClass());
         if (entityMetaData == null)
             return super.toString();
@@ -171,8 +150,7 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
         StringBuilder info = new StringBuilder();
         info.append(this.getClass().getSimpleName() + ": ");
         boolean isFirst = true;
-        for (EntityField entityField : entityMetaData.getEntityFieldCollection())
-        {
+        for (EntityField entityField : entityMetaData.getEntityFieldCollection()) {
             org.dangcat.persistence.model.Column column = entityField.getColumn();
             if (!isFirst)
                 info.append(", ");

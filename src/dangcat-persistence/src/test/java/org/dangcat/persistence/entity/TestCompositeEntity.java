@@ -17,26 +17,22 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestCompositeEntity extends TestDatabase
-{
+public class TestCompositeEntity extends TestDatabase {
     private static final int TEST_COUNT = 100;
     private static TeacherInfoUtils teacherInfoUtils = new TeacherInfoUtils();
 
     @BeforeClass
-    public static void setUpBeforeClass() throws IOException, SessionException
-    {
+    public static void setUpBeforeClass() throws IOException, SessionException {
         SimulateUtils.configure();
         teacherInfoUtils.createSimulator();
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -50,8 +46,7 @@ public class TestCompositeEntity extends TestDatabase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testEntityDelete() throws EntityException
-    {
+    private void testEntityDelete() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         List<TeacherInfo> teacherInfoList = entityManager.load(TeacherInfo.class);
         Assert.assertEquals(TEST_COUNT, teacherInfoList.size());
@@ -61,8 +56,7 @@ public class TestCompositeEntity extends TestDatabase
         Assert.assertNull(entityManager.load(MemberInfo.class));
     }
 
-    private void testEntityInsert() throws EntityException
-    {
+    private void testEntityInsert() throws EntityException {
         List<TeacherInfo> teacherInfoList = new LinkedList<TeacherInfo>();
         teacherInfoUtils.createList(teacherInfoList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, teacherInfoList.size());
@@ -76,8 +70,7 @@ public class TestCompositeEntity extends TestDatabase
         Assert.assertTrue(SimulateUtils.compareDataCollection(teacherInfoList, saveTeacherInfoList));
     }
 
-    private void testEntityModify() throws EntityException
-    {
+    private void testEntityModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         // 检查数据存储正确否
         List<TeacherInfo> teacherInfoList = entityManager.load(TeacherInfo.class);

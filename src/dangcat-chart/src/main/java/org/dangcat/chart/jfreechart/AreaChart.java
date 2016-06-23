@@ -4,25 +4,21 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 
-public class AreaChart extends TimeXYChart
-{
+public class AreaChart extends TimeXYChart {
     @Override
-    protected XYItemRenderer createXYItemRenderer()
-    {
+    protected XYItemRenderer createXYItemRenderer() {
         return new StackedXYAreaRenderer2();
     }
 
     @Override
-    protected void initPlot(Plot plot)
-    {
+    protected void initPlot(Plot plot) {
         super.initPlot(plot);
         // …Ë÷√∞ÎÕ∏√˜
         plot.setForegroundAlpha(0.7f);
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         this.load(true);
     }
 }

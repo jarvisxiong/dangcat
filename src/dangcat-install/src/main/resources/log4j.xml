@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-	<!--
-		=====================================================================
-	-->
-	<!--
-	-->
-	<!--
-		Log4j Configuration
-	-->
-	<!--
-	-->
-	<!--
-		=====================================================================
-	-->
-	<!-- $Id: log4j.xml,v 1.1.1.1 2006/01/06 00:10:18 bill Exp $ -->
-	<!--
-		| For more configuration infromation and examples see the Jakarta
-		Log4j | owebsite: http://jakarta.apache.org/log4j
-	-->
+<!--
+    =====================================================================
+-->
+<!--
+-->
+<!--
+    Log4j Configuration
+-->
+<!--
+-->
+<!--
+    =====================================================================
+-->
+<!-- $Id: log4j.xml,v 1.1.1.1 2006/01/06 00:10:18 bill Exp $ -->
+<!--
+    | For more configuration infromation and examples see the Jakarta
+    Log4j | owebsite: http://jakarta.apache.org/log4j
+-->
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
-	debug="false">
+                     debug="false">
 
-	<appender name="DailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="Threshold" value="INFO" />
-		<param name="ImmediateFlush" value="true" />
-		<param name="File" value="./log/dangcat.install.log" />
-		<param name="Append" value="true" />
-		<param name="DatePattern" value="'.'yyyy-MM-dd" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n" />
-		</layout>
-	</appender>
+    <appender name="DailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="INFO"/>
+        <param name="ImmediateFlush" value="true"/>
+        <param name="File" value="./log/dangcat.install.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n"/>
+        </layout>
+    </appender>
 
-	<!-- ============================== -->
-	<!-- Append messages to the console -->
-	<!-- ============================== -->
-	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-		<param name="Threshold" value="INFO" />
-		<param name="Target" value="System.out" />
+    <!-- ============================== -->
+    <!-- Append messages to the console -->
+    <!-- ============================== -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="INFO"/>
+        <param name="Target" value="System.out"/>
 
-		<layout class="org.apache.log4j.PatternLayout">
-			<!-- The default pattern: Date Priority [Category] Message\n -->
-			<param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n" />
-		</layout>
-	</appender>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n"/>
+        </layout>
+    </appender>
 
-	<appender name="InstallCallback" class="org.dangcat.commons.log.CallbackAppender">
-		<param name="Threshold" value="INFO" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<!-- The default pattern: Date Priority [Category] Message\n -->
-			<param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n" />
-		</layout>
-	</appender>
+    <appender name="InstallCallback" class="org.dangcat.commons.log.CallbackAppender">
+        <param name="Threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param name="ConversionPattern" value="%d{HH:mm:ss}[%-5p]: %m%n"/>
+        </layout>
+    </appender>
 
-	<category name="org.dangcat.install">
-		<priority value="INFO" />
-		<appender-ref ref="InstallCallback" />
-	</category>
+    <category name="org.dangcat.install">
+        <priority value="INFO"/>
+        <appender-ref ref="InstallCallback"/>
+    </category>
 
-	<!-- ======================= -->
-	<!-- Setup the Root category -->
-	<!-- ======================= -->
-	<root>
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="DailyRollingFile" />
-	</root>
+    <!-- ======================= -->
+    <!-- Setup the Root category -->
+    <!-- ======================= -->
+    <root>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DailyRollingFile"/>
+    </root>
 </log4j:configuration>

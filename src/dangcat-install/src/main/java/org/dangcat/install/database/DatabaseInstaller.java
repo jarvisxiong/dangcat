@@ -6,8 +6,7 @@ import org.dangcat.install.Installer;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class DatabaseInstaller extends Installer
-{
+public abstract class DatabaseInstaller extends Installer {
     private static final String CHARACTERSET = "characterSet";
     private static final String DATABASENAME = "databaseName";
     private static final String DEFAULT_DATABASENAME = "default_databasename";
@@ -22,8 +21,7 @@ public abstract class DatabaseInstaller extends Installer
 
     public abstract void createDatabase() throws Exception;
 
-    public String getCharacterSet()
-    {
+    public String getCharacterSet() {
         return (String) this.getParams().get(CHARACTERSET);
     }
 
@@ -31,8 +29,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(CHARACTERSET, characterSet);
     }
 
-    public String getDatabaseName()
-    {
+    public String getDatabaseName() {
         String value = (String) this.getParams().get(DATABASENAME);
         if (ValueUtils.isEmpty(value))
             value = this.getDefaultDatabaseName();
@@ -43,8 +40,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(DATABASENAME, databaseName);
     }
 
-    public String getDefaultDatabaseName()
-    {
+    public String getDefaultDatabaseName() {
         return (String) this.getParams().get(DEFAULT_DATABASENAME);
     }
 
@@ -52,8 +48,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(DEFAULT_DATABASENAME, databaseName);
     }
 
-    public Integer getDefaultPort()
-    {
+    public Integer getDefaultPort() {
         return (Integer) this.getParams().get(DEFAULT_PORT);
     }
 
@@ -61,8 +56,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(DEFAULT_PORT, port);
     }
 
-    public String getDefaultUser()
-    {
+    public String getDefaultUser() {
         return (String) this.getParams().get(DEFAULT_USER);
     }
 
@@ -70,8 +64,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(DEFAULT_USER, user);
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return (String) this.getParams().get(PASSWORD);
     }
 
@@ -79,8 +72,7 @@ public abstract class DatabaseInstaller extends Installer
         this.getParams().put(PASSWORD, password);
     }
 
-    public Integer getPort()
-    {
+    public Integer getPort() {
         Integer value = (Integer) this.getParams().get(PORT);
         if (value == null)
             value = this.getDefaultPort();
@@ -92,32 +84,27 @@ public abstract class DatabaseInstaller extends Installer
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> getScripts()
-    {
+    public List<String> getScripts() {
         List<String> scripts = (List<String>) this.getParams().get(SCRIPTS);
-        if (scripts == null)
-        {
+        if (scripts == null) {
             scripts = new LinkedList<String>();
             this.getParams().put(SCRIPTS, scripts);
         }
         return scripts;
     }
 
-    public String getUser()
-    {
+    public String getUser() {
         String value = (String) this.getParams().get(USER);
         if (ValueUtils.isEmpty(value))
             value = this.getDefaultUser();
         return value;
     }
 
-    public void setUser(String user)
-    {
+    public void setUser(String user) {
         this.getParams().put(USER, user);
     }
 
-    protected void logDatabase(String key, Object... params)
-    {
+    protected void logDatabase(String key, Object... params) {
         this.log(key, this.getDatabaseName(), params);
     }
 }

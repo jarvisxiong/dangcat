@@ -6,16 +6,13 @@ import org.dangcat.persistence.simulate.data.DateSimulator;
 import org.dangcat.persistence.simulate.data.ValueSimulator;
 import org.dangcat.persistence.simulate.table.EntityData;
 
-public class OperateLogSimulator extends EntityData<OperateLog>
-{
-    public OperateLogSimulator()
-    {
+public class OperateLogSimulator extends EntityData<OperateLog> {
+    public OperateLogSimulator() {
         super(OperateLog.class);
     }
 
     @Override
-    public void create()
-    {
+    public void create() {
         ValueSimulator operatorIdSimulator = this.getDataSimulator().findValueSimulator(OperateLog.OperatorId);
         operatorIdSimulator.bind(OperatorInfo.class, OperatorInfo.Id);
 

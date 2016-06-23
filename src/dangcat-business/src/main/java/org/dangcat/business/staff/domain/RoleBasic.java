@@ -5,8 +5,7 @@ import org.dangcat.persistence.annotation.Table;
 import org.dangcat.persistence.entity.EntityBase;
 
 @Table("RoleInfo")
-public class RoleBasic extends EntityBase
-{
+public class RoleBasic extends EntityBase {
     public static final String Description = "Description";
     public static final String Id = "Id";
     public static final String Name = "Name";
@@ -21,37 +20,30 @@ public class RoleBasic extends EntityBase
     @Column(index = 1, displaySize = 20, isNullable = false)
     private String name = null;
 
-    public RoleBasic()
-    {
+    public RoleBasic() {
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -14,11 +14,10 @@ import java.util.Map;
 
 /**
  * 压缩基础类。
+ *
  * @author dangcat
- * 
  */
-public class Compressor
-{
+public class Compressor {
     protected static final String FILE_SEPARATOR = "/";
     private long compressSize = 0;
     private String encoding = null;
@@ -28,34 +27,31 @@ public class Compressor
 
     /**
      * 添加归档文件或目录。
+     *
      * @param file 归档文件。
      */
-    public void addArchiveEntry(File file)
-    {
+    public void addArchiveEntry(File file) {
         this.addArchiveEntry(file, null);
     }
 
     /**
      * 添加归档文件或目录。
+     *
      * @param file 归档文件。
      * @param path 压缩路径。
      */
-    public void addArchiveEntry(File file, String path)
-    {
+    public void addArchiveEntry(File file, String path) {
         if (this.fileNameFilter != null && !this.fileNameFilter.accept(file))
             return;
 
         if (file == null || file.isFile())
             this.addFileArchiveEntry(file, path);
-        else if (file.isDirectory())
-        {
+        else if (file.isDirectory()) {
             File[] files = file.listFiles();
-            if (files != null)
-            {
+            if (files != null) {
                 if (files.length == 0)
                     this.addFileArchiveEntry(file, path);
-                else
-                {
+                else {
                     String pathName = ValueUtils.isEmpty(path) ? file.getName() : path + FILE_SEPARATOR + file.getName();
                     for (File childFile : files)
                         this.addArchiveEntry(childFile, pathName);
@@ -66,17 +62,16 @@ public class Compressor
 
     /**
      * 添加归档文件。
+     *
      * @param file 归档文件。
      * @param path 压缩路径。
      */
-    private void addFileArchiveEntry(File file, String path)
-    {
+    private void addFileArchiveEntry(File file, String path) {
         if (ValueUtils.isEmpty(path))
             path = "";
 
         List<File> fileList = this.entityMap.get(path);
-        if (fileList == null)
-        {
+        if (fileList == null) {
             fileList = new ArrayList<File>();
             this.entityMap.put(path, fileList);
         }
@@ -86,10 +81,10 @@ public class Compressor
 
     /**
      * 压缩文件。
+     *
      * @throws IOException
      */
-    public void compress(File compressFile) throws IOException
-    {
+    public void compress(File compressFile) throws IOException {
         this.totalSize = 0;
         this.compressSize = 0;
 
@@ -99,22 +94,17 @@ public class Compressor
 
         Archiver archiver = archiveInfo.createArchiver();
         // 压缩文档。
-        if (archiveInfo.getCompressType() != null)
-        {
+        if (archiveInfo.getCompressType() != null) {
             File archiveFile = File.createTempFile("TMP", archiveInfo.getArchiverType());
-            try
-            {
+            try {
                 // 产生归档。
                 archiver.pack(this, archiveFile);
                 // 压缩文档。
                 CompressUtils.compress(archiveInfo.getCompressType(), archiveFile, compressFile);
-            }
-            finally
-            {
+            } finally {
                 archiveFile.delete();
             }
-        }
-        else
+        } else
             archiver.pack(this, compressFile);
 
         this.compressSize = compressFile.length();
@@ -122,11 +112,11 @@ public class Compressor
 
     /**
      * 解压缩。
+     *
      * @param destPath 目标路径。
      * @throws IOException
      */
-    public void decompress(File compressFile, File destPath) throws IOException
-    {
+    public void decompress(File compressFile, File destPath) throws IOException {
         this.totalSize = 0;
         if (!compressFile.exists())
             throw new FileNotFoundException(compressFile.getAbsolutePath());
@@ -149,37 +139,29 @@ public class Compressor
             throw new IOException("This archive type is not declare: " + compressFile);
 
         // 压缩文档。
-        if (archiveInfo.getCompressType() != null)
-        {
+        if (archiveInfo.getCompressType() != null) {
             File archiveFile = File.createTempFile("TMP", archiveInfo.getArchiverType());
-            try
-            {
+            try {
                 // 解压缩文档。
                 CompressUtils.decompressFile(archiveInfo.getCompressType(), compressFile, archiveFile);
                 // 产生归档。
                 archiver.unpack(this, archiveFile, destPath);
-            }
-            finally
-            {
+            } finally {
                 archiveFile.delete();
             }
-        }
-        else
+        } else
             archiver.unpack(this, compressFile, destPath);
     }
 
-    public int getCompressRate()
-    {
+    public int getCompressRate() {
         return (int) (this.totalSize == 0 ? 0 : 100 - this.compressSize * 100.0 / this.totalSize);
     }
 
-    public long getCompressSize()
-    {
+    public long getCompressSize() {
         return this.compressSize;
     }
 
-    public String getEncoding()
-    {
+    public String getEncoding() {
         return this.encoding;
     }
 
@@ -187,13 +169,11 @@ public class Compressor
         this.encoding = encoding;
     }
 
-    protected Map<String, List<File>> getEntityMap()
-    {
+    protected Map<String, List<File>> getEntityMap() {
         return this.entityMap;
     }
 
-    public FileNameFilter getFileNameFilter()
-    {
+    public FileNameFilter getFileNameFilter() {
         return this.fileNameFilter;
     }
 
@@ -201,13 +181,11 @@ public class Compressor
         this.fileNameFilter = fileNameFilter;
     }
 
-    public long getTotalSize()
-    {
+    public long getTotalSize() {
         return this.totalSize;
     }
 
-    protected void processFile(File uncompressFile)
-    {
+    protected void processFile(File uncompressFile) {
         this.totalSize += uncompressFile.length();
     }
 }

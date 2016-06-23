@@ -4,10 +4,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class PanelUtils
-{
-    public static void decorateTitleBoder(JPanel panel, JPanel component, String title)
-    {
+public class PanelUtils {
+    public static void decorateTitleBoder(JPanel panel, JPanel component, String title) {
         component.setBorder(new TitledBorder(title == null ? "" : title));
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -21,8 +19,7 @@ public class PanelUtils
         panel.add(component, constraints);
     }
 
-    public static JPanel decorateTitleBoder(JPanel component, String title)
-    {
+    public static JPanel decorateTitleBoder(JPanel component, String title) {
         JPanel panel = new JPanel(new GridBagLayout());
         decorateTitleBoder(panel, component, title);
         return panel;

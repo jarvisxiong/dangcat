@@ -2,8 +2,7 @@ package org.dangcat.install.task;
 
 import java.util.Properties;
 
-public interface ConfigureAccess
-{
+public interface ConfigureAccess {
     boolean isEnabled();
 
     void load(Properties properties);

@@ -8,17 +8,15 @@ import java.util.List;
 
 /**
  * Excel文档操作。
+ *
  * @author dangcat
- * 
  */
-public class ExcelDocumentReader extends ExcelReader
-{
+public class ExcelDocumentReader extends ExcelReader {
     private Columns columns = null;
     private DataWriter dataWriter = null;
     private int rowIndex = 0;
 
-    public DataWriter getDataWriter()
-    {
+    public DataWriter getDataWriter() {
         return this.dataWriter;
     }
 
@@ -29,13 +27,12 @@ public class ExcelDocumentReader extends ExcelReader
 
     /**
      * 读取文档的数据内容。
-     * @param sheet 页面标签。
+     *
+     * @param sheet      页面标签。
      * @param dataWriter 数据接收对象。
      */
-    private void readBody(List<Object> values)
-    {
-        for (int i = 0; i < values.size(); i++)
-        {
+    private void readBody(List<Object> values) {
+        for (int i = 0; i < values.size(); i++) {
             Object value = values.get(i);
             if (value == null)
                 continue;
@@ -54,17 +51,15 @@ public class ExcelDocumentReader extends ExcelReader
 
     /**
      * 读取文档的栏位标题。
-     * @param sheet 页面标签。
+     *
+     * @param sheet      页面标签。
      * @param dataWriter 数据接收对象。
      */
-    private void readHeader(List<Object> values)
-    {
+    private void readHeader(List<Object> values) {
         Columns columns = new Columns();
-        for (Object value : values)
-        {
+        for (Object value : values) {
             Column column = null;
-            if (value != null)
-            {
+            if (value != null) {
                 column = this.dataWriter.getColumns().find(value.toString());
                 if (column != null)
                     this.columns = columns;
@@ -75,8 +70,7 @@ public class ExcelDocumentReader extends ExcelReader
     }
 
     @Override
-    protected void readRowData(int rowIndex, List<Object> values)
-    {
+    protected void readRowData(int rowIndex, List<Object> values) {
         if (this.columns == null)
             this.readHeader(values);
         else

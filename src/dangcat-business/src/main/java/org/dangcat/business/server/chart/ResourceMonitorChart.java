@@ -23,8 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-class ResourceMonitorChart
-{
+class ResourceMonitorChart {
     private static final Logger logger = Logger.getLogger(ResourceMonitorChart.class);
     private String activeArea = null;
     private byte[] chartImg = null;
@@ -36,11 +35,9 @@ class ResourceMonitorChart
     private long totalPhysicalMemory = 0;
     private int width = 600;
 
-    protected static ResourceMonitorChart createInstance(ServerInfoService serverInfoService, Integer id, Integer width, Integer height)
-    {
+    protected static ResourceMonitorChart createInstance(ServerInfoService serverInfoService, Integer id, Integer width, Integer height) {
         ResourceMonitorChart resourceMonitorChart = ServiceContext.getInstance().getSession(ResourceMonitorChart.class);
-        if (resourceMonitorChart == null)
-        {
+        if (resourceMonitorChart == null) {
             resourceMonitorChart = new ResourceMonitorChart();
             ServiceContext.getInstance().addSession(ResourceMonitorChart.class, resourceMonitorChart);
             resourceMonitorChart.setServerInfoService(serverInfoService);
@@ -54,32 +51,25 @@ class ResourceMonitorChart
         return resourceMonitorChart;
     }
 
-    protected void create()
-    {
+    protected void create() {
         ChartBase chartBase = this.createChart();
 
         ByteArrayOutputStream byteArrayOutputStream = null;
-        try
-        {
+        try {
             byteArrayOutputStream = new ByteArrayOutputStream();
             chartBase.render(byteArrayOutputStream);
             this.chartImg = byteArrayOutputStream.toByteArray();
             this.activeArea = chartBase.getImageMap();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             logger.error(this, e);
-        }
-        finally
-        {
+        } finally {
             FileUtils.close(byteArrayOutputStream);
         }
     }
 
-    private TimeChart createBarTimeChart(DataReader dataReader)
-    {
-        DataModule memoryDataModule = new ColumnDataModule(dataReader, new String[] { ServerResourceLog.ProcessUsageMemory, ServerResourceLog.OtherUsageMemory },
-                new String[] { ServerResourceLog.DateTime });
+    private TimeChart createBarTimeChart(DataReader dataReader) {
+        DataModule memoryDataModule = new ColumnDataModule(dataReader, new String[]{ServerResourceLog.ProcessUsageMemory, ServerResourceLog.OtherUsageMemory},
+                new String[]{ServerResourceLog.DateTime});
         memoryDataModule.setMaxValue(this.totalPhysicalMemory);
         BarTimeChart barTimeChart = new BarTimeChart();
         barTimeChart.setRangeTitle(dataReader.getTitle("UsageMemoryRatio"));
@@ -87,8 +77,7 @@ class ResourceMonitorChart
         return barTimeChart;
     }
 
-    private ChartBase createChart()
-    {
+    private ChartBase createChart() {
         TimeRange timeRange = this.getTimeRange();
         timeRange.setBaseTime(DateUtils.now());
         DataReader dataReader = this.loadServerStatusLogs();
@@ -106,9 +95,8 @@ class ResourceMonitorChart
         return combinedChart;
     }
 
-    private TimeChart createDiffLineChart(DataReader dataReader)
-    {
-        DataModule cpuDataModule = new ColumnDataModule(dataReader, new String[] { ServerResourceLog.ProcessCpuRatio, ServerResourceLog.TotalCpuRatio }, new String[] { ServerResourceLog.DateTime });
+    private TimeChart createDiffLineChart(DataReader dataReader) {
+        DataModule cpuDataModule = new ColumnDataModule(dataReader, new String[]{ServerResourceLog.ProcessCpuRatio, ServerResourceLog.TotalCpuRatio}, new String[]{ServerResourceLog.DateTime});
         cpuDataModule.setRowMaxValue(100.0);
         LineChart lineChart = new LineChart();
         lineChart.setRangeTitle(dataReader.getTitle("CpuRatio"));
@@ -116,13 +104,11 @@ class ResourceMonitorChart
         return lineChart;
     }
 
-    protected String getActiveArea()
-    {
+    protected String getActiveArea() {
         return activeArea;
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
@@ -130,8 +116,7 @@ class ResourceMonitorChart
         this.entityManager = entityManager;
     }
 
-    protected int getHeight()
-    {
+    protected int getHeight() {
         return height;
     }
 
@@ -139,8 +124,7 @@ class ResourceMonitorChart
         this.height = height;
     }
 
-    protected Integer getServerId()
-    {
+    protected Integer getServerId() {
         return serverId;
     }
 
@@ -148,8 +132,7 @@ class ResourceMonitorChart
         this.serverId = serverId;
     }
 
-    public ServerInfoService getServerInfoService()
-    {
+    public ServerInfoService getServerInfoService() {
         return serverInfoService;
     }
 
@@ -157,8 +140,7 @@ class ResourceMonitorChart
         this.serverInfoService = serverInfoService;
     }
 
-    public TimeRange getTimeRange()
-    {
+    public TimeRange getTimeRange() {
         return timeRange;
     }
 
@@ -166,8 +148,7 @@ class ResourceMonitorChart
         this.timeRange = timeRange;
     }
 
-    protected int getWidth()
-    {
+    protected int getWidth() {
         return width;
     }
 
@@ -175,35 +156,26 @@ class ResourceMonitorChart
         this.width = width;
     }
 
-    private DataReader loadServerStatusLogs()
-    {
+    private DataReader loadServerStatusLogs() {
         this.totalPhysicalMemory = this.serverInfoService.getTotalPhysicalMemory(this.getServerId());
         TimeData<ServerResourceLog> timeData = this.serverInfoService.loadServerResourceLogs(this.getServerId(), this.getTimeRange(), null);
         return new EntityDataReader<ServerResourceLog>((List<ServerResourceLog>) timeData.getData(), ServerResourceLog.class);
     }
 
-    protected boolean render() throws ServiceException
-    {
+    protected boolean render() throws ServiceException {
         boolean valid = this.chartImg != null && this.chartImg.length > 0;
         OutputStream outputStream = null;
-        try
-        {
-            if (valid)
-            {
+        try {
+            if (valid) {
                 HttpServletResponse httpServletResponse = ServiceContext.getInstance().getParam(HttpServletResponse.class);
-                if (httpServletResponse != null)
-                {
+                if (httpServletResponse != null) {
                     outputStream = httpServletResponse.getOutputStream();
                     outputStream.write(this.chartImg);
                 }
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             logger.error(this, e);
-        }
-        finally
-        {
+        } finally {
             FileUtils.close(outputStream);
             ServiceContext.getInstance().removeSession(ResourceMonitorChart.class);
         }

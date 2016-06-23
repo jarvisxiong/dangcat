@@ -16,8 +16,7 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DatabaseConfigPanel extends ConfigPanel
-{
+public class DatabaseConfigPanel extends ConfigPanel {
     protected static final Logger logger = Logger.getLogger(DatabaseConfigPanel.class);
     private static final String DATABASE_NAME = "DatabaseName";
     private static final String PASSWORD = "Password";
@@ -34,8 +33,7 @@ public class DatabaseConfigPanel extends ConfigPanel
     private JTextField serverTextField = null;
     private JTextField userTextField = null;
 
-    private void addComponents(JPanel panel, int y, JLabel label, Component component)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, Component component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 10);
@@ -53,28 +51,23 @@ public class DatabaseConfigPanel extends ConfigPanel
         panel.add(component, constraints);
     }
 
-    private void checkDatabaseConnection()
-    {
+    private void checkDatabaseConnection() {
         if (!this.validateData())
             return;
 
         Connection connection = null;
-        try
-        {
+        try {
             Class.forName(this.database.getDriver());
             connection = DriverManager.getConnection(this.database.getUrl(), this.database.getUser(), this.database.getPassword());
             connection.getMetaData();
             JOptionPane.showMessageDialog(this, this.getText("ConnectionSuccess"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
             JOptionPane.showMessageDialog(this, this.getText("ConnectionError") + e.getMessage());
         }
     }
 
-    private JPanel createDatabaseConfigPanel()
-    {
+    private JPanel createDatabaseConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 160));
 
@@ -119,8 +112,7 @@ public class DatabaseConfigPanel extends ConfigPanel
         return panel;
     }
 
-    private void createDatabaseTestButton(JPanel panel, int y)
-    {
+    private void createDatabaseTestButton(JPanel panel, int y) {
         ImageIcon testImage = ImageUtils.loadImageIcon(this.getClass(), "test.gif");
         JButton testButton = new JButton(this.getText("TestConnection"), testImage);
         testButton.setMargin(new Insets(0, 20, 0, 20));
@@ -128,11 +120,9 @@ public class DatabaseConfigPanel extends ConfigPanel
         testButton.setAlignmentX(CENTER_ALIGNMENT);
         testButton.setMnemonic(KeyEvent.VK_T);
         testButton.setDisplayedMnemonicIndex(testButton.getText().indexOf("T"));
-        testButton.addActionListener(new ActionListener()
-        {
+        testButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 DatabaseConfigPanel.this.checkDatabaseConnection();
             }
         });
@@ -146,8 +136,7 @@ public class DatabaseConfigPanel extends ConfigPanel
         panel.add(testButton, constraints);
     }
 
-    public Database getDatabase()
-    {
+    public Database getDatabase() {
         return this.database;
     }
 
@@ -156,8 +145,7 @@ public class DatabaseConfigPanel extends ConfigPanel
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.createDatabaseConfigPanel());
         this.update();
@@ -172,8 +160,7 @@ public class DatabaseConfigPanel extends ConfigPanel
         this.databaseConfigListener.initialize();
     }
 
-    public void update()
-    {
+    public void update() {
         if (this.databaseConfigListener != null)
             this.databaseConfigListener.setEnabled(false);
 
@@ -189,8 +176,7 @@ public class DatabaseConfigPanel extends ConfigPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         if (!ValidateUtils.validateServer(this, this.serverTextField, SERVER))
             return false;
         if (!ValidateUtils.validatePort(this, this.portTextField, PORT))

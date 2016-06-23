@@ -2,11 +2,10 @@ package org.dangcat.framework.service;
 
 /**
  * 服务控制。
+ *
  * @author dangcat
- * 
  */
-public interface ServiceControl
-{
+public interface ServiceControl {
     /**
      * 服务名称。
      */
@@ -14,6 +13,7 @@ public interface ServiceControl
 
     /**
      * 服务状态。
+     *
      * @return
      */
     ServiceStatus getServiceStatus();

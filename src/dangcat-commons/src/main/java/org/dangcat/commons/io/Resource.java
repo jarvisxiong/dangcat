@@ -3,57 +3,47 @@ package org.dangcat.commons.io;
 import java.io.File;
 import java.io.InputStream;
 
-public class Resource
-{
+public class Resource {
     private InputStream inputStream;
     private String name;
     private String path;
 
-    public Resource(String path, String name, InputStream inputStream)
-    {
+    public Resource(String path, String name, InputStream inputStream) {
         this.path = path;
         this.name = name;
         this.inputStream = inputStream;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj instanceof Resource)
-        {
+    public boolean equals(Object obj) {
+        if (obj instanceof Resource) {
             Resource resource = (Resource) obj;
             return this.getName().equalsIgnoreCase(resource.getName());
         }
         return super.equals(obj);
     }
 
-    public InputStream getInputStream()
-    {
+    public InputStream getInputStream() {
         return this.inputStream;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public String getPath()
-    {
+    public String getPath() {
         return this.path;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return this.getName().hashCode();
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        if (this.getPath() != null)
-        {
+        if (this.getPath() != null) {
             info.append(this.getPath());
             info.append(File.separator);
         }

@@ -6,23 +6,20 @@ import java.io.IOException;
 
 /**
  * FTPœ¬‘ÿª·ª∞°£
+ *
  * @author dangcat
- * 
  */
-class FTPRenameSession extends FTPSessionExecutor
-{
+class FTPRenameSession extends FTPSessionExecutor {
     boolean success = false;
     private String from;
     private String to;
 
-    FTPRenameSession(FTPContext ftpContext, FTPSession ftpSession)
-    {
+    FTPRenameSession(FTPContext ftpContext, FTPSession ftpSession) {
         super(ftpContext, ftpSession);
         ftpContext.setName(FTPContext.OPT_RENAME);
     }
 
-    protected String getFrom()
-    {
+    protected String getFrom() {
         return this.from;
     }
 
@@ -30,8 +27,7 @@ class FTPRenameSession extends FTPSessionExecutor
         this.from = from;
     }
 
-    protected String getTo()
-    {
+    protected String getTo() {
         return this.to;
     }
 
@@ -40,15 +36,13 @@ class FTPRenameSession extends FTPSessionExecutor
     }
 
     @Override
-    protected void innerExecute() throws FTPSessionException, IOException
-    {
+    protected void innerExecute() throws FTPSessionException, IOException {
         FTPClient ftpClient = this.getFTPClient();
         ftpClient.rename(this.from, this.to);
         this.success = true;
     }
 
-    protected boolean isSuccess()
-    {
+    protected boolean isSuccess() {
         return this.success;
     }
 }

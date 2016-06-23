@@ -6,11 +6,9 @@ import org.junit.Test;
 import java.awt.*;
 import java.util.Locale;
 
-public class TestResource
-{
+public class TestResource {
     @Test
-    public void testResourceBundle()
-    {
+    public void testResourceBundle() {
         ResourceHelper chinaResourceHelper = new ResourceHelper(TestResource.class, Locale.SIMPLIFIED_CHINESE, "MyResource");
         for (int i = 0; i < 5; i++)
             Assert.assertEquals("我的祖国" + i, chinaResourceHelper.getText("dangcat.title" + i));
@@ -31,8 +29,7 @@ public class TestResource
     }
 
     @Test
-    public void testResourceHelper()
-    {
+    public void testResourceHelper() {
         ResourceHelper chinaResourceHelper = new ResourceHelper(TestResource.class, Locale.SIMPLIFIED_CHINESE);
         for (int i = 0; i < 6; i++)
             Assert.assertEquals("我的祖国" + i, chinaResourceHelper.getText("dangcat.title" + i));

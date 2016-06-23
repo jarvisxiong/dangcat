@@ -14,25 +14,21 @@ import org.dangcat.persistence.model.TableDataReader;
 import javax.swing.*;
 import java.util.Date;
 
-public class CombinedChartDemo extends ChartDemoBase
-{
+public class CombinedChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "组合统计图";
     private static Date[] dates = SimulateTimeData.today();
 
-    public CombinedChartDemo()
-    {
+    public CombinedChartDemo() {
         super(CombinedChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new CombinedChartDemo());
     }
 
-    private TimeChart createAreaChart(Table table)
-    {
-        DataModule dataModule = this.createDataModule(table, new String[] { SimulateTimeData.Octets }, SimulateTimeData.Octets);
+    private TimeChart createAreaChart(Table table) {
+        DataModule dataModule = this.createDataModule(table, new String[]{SimulateTimeData.Octets}, SimulateTimeData.Octets);
         FilterExpress filterExpress = this.createFilterExpress(table, SimulateTimeData.Octets);
 
         dataModule.getDataReader().setFilterExpress(filterExpress);
@@ -41,9 +37,8 @@ public class CombinedChartDemo extends ChartDemoBase
         return areaChart;
     }
 
-    private TimeChart createBarTimeChart(Table table)
-    {
-        DataModule dataModule = this.createDataModule(table, new String[] { SimulateTimeData.UpOctets, SimulateTimeData.DownOctets }, SimulateTimeData.Octets);
+    private TimeChart createBarTimeChart(Table table) {
+        DataModule dataModule = this.createDataModule(table, new String[]{SimulateTimeData.UpOctets, SimulateTimeData.DownOctets}, SimulateTimeData.Octets);
         FilterExpress filterExpress = this.createFilterExpress(table, SimulateTimeData.UpOctets, SimulateTimeData.DownOctets);
 
         dataModule.getDataReader().setFilterExpress(filterExpress);
@@ -52,8 +47,7 @@ public class CombinedChartDemo extends ChartDemoBase
         return barTimeChart;
     }
 
-    private void createColumnDataModule(JTabbedPane tabbedPane)
-    {
+    private void createColumnDataModule(JTabbedPane tabbedPane) {
         Table table = SimulateTimeData.createTable(SimulateTimeData.Name, SimulateTimeData.DateTime, SimulateTimeData.Octets, SimulateTimeData.UpOctets, SimulateTimeData.DownOctets,
                 SimulateTimeData.OctetsVelocity, SimulateTimeData.Percent);
         SimulateTimeData.createTableColumnData(table);
@@ -70,19 +64,17 @@ public class CombinedChartDemo extends ChartDemoBase
         this.renderFile(combinedChart, "CombinedChart1");
     }
 
-    private DataModule createDataModule(Table table, String[] rowKeyNames, String valueFieldName)
-    {
+    private DataModule createDataModule(Table table, String[] rowKeyNames, String valueFieldName) {
         DataModule dataModule = null;
         if (table.getColumns().find(SimulateTimeData.FieldName) == null)
-            dataModule = new ColumnDataModule(new TableDataReader(table), rowKeyNames, new String[] { SimulateTimeData.DateTime });
+            dataModule = new ColumnDataModule(new TableDataReader(table), rowKeyNames, new String[]{SimulateTimeData.DateTime});
         else
-            dataModule = new RowDataModule(new TableDataReader(table), new String[] { SimulateTimeData.FieldName }, new String[] { SimulateTimeData.DateTime }, valueFieldName);
+            dataModule = new RowDataModule(new TableDataReader(table), new String[]{SimulateTimeData.FieldName}, new String[]{SimulateTimeData.DateTime}, valueFieldName);
         return dataModule;
     }
 
-    private TimeChart createDiffChart(Table table)
-    {
-        DataModule dataModule = this.createDataModule(table, new String[] { SimulateTimeData.UpOctets, SimulateTimeData.DownOctets }, SimulateTimeData.Octets);
+    private TimeChart createDiffChart(Table table) {
+        DataModule dataModule = this.createDataModule(table, new String[]{SimulateTimeData.UpOctets, SimulateTimeData.DownOctets}, SimulateTimeData.Octets);
         FilterExpress filterExpress = this.createFilterExpress(table, SimulateTimeData.UpOctets, SimulateTimeData.DownOctets);
 
         TransRateMap transRateMap = new TransRateMap();
@@ -96,13 +88,11 @@ public class CombinedChartDemo extends ChartDemoBase
         return diffLineChart;
     }
 
-    private FilterExpress createFilterExpress(Table table, Object... fieldNames)
-    {
+    private FilterExpress createFilterExpress(Table table, Object... fieldNames) {
         FilterExpress filterExpress = null;
         if (table.getColumns().find(SimulateTimeData.FieldName) == null)
             filterExpress = new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2");
-        else
-        {
+        else {
             FilterGroup filterGroup = new FilterGroup();
             filterGroup.add(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));
             filterGroup.add(new FilterUnit(SimulateCategoryData.FieldName, FilterType.eq, fieldNames));
@@ -111,9 +101,8 @@ public class CombinedChartDemo extends ChartDemoBase
         return filterExpress;
     }
 
-    private TimeChart createLineChart(Table table)
-    {
-        DataModule dataModule = this.createDataModule(table, new String[] { SimulateTimeData.Octets }, SimulateTimeData.Octets);
+    private TimeChart createLineChart(Table table) {
+        DataModule dataModule = this.createDataModule(table, new String[]{SimulateTimeData.Octets}, SimulateTimeData.Octets);
         FilterExpress filterExpress = this.createFilterExpress(table, SimulateTimeData.Octets);
 
         dataModule.getDataReader().setFilterExpress(filterExpress);
@@ -122,8 +111,7 @@ public class CombinedChartDemo extends ChartDemoBase
         return lineChart;
     }
 
-    private void createRowDataModule(JTabbedPane tabbedPane)
-    {
+    private void createRowDataModule(JTabbedPane tabbedPane) {
         Table table = SimulateTimeData.createTable(SimulateTimeData.Name, SimulateTimeData.FieldName, SimulateTimeData.DateTime, SimulateTimeData.Octets);
         SimulateTimeData.createTableRowData(table);
 
@@ -140,8 +128,7 @@ public class CombinedChartDemo extends ChartDemoBase
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         this.createColumnDataModule(tabbedPane);
         this.createRowDataModule(tabbedPane);
     }

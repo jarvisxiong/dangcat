@@ -13,14 +13,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ChartExportServlet extends HttpServlet
-{
+public class ChartExportServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private File baseDir = null;
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getParameter("options"));
         String options = request.getParameter("options");
         String data = request.getParameter("data");
@@ -35,19 +33,15 @@ public class ChartExportServlet extends HttpServlet
         chartExporter.setWidth(width);
         chartExporter.setHeight(height);
         chartExporter.export(options, data, output);
-        if (output.exists())
-        {
+        if (output.exists()) {
             OutputStream outputStream = response.getOutputStream();
-            try
-            {
+            try {
                 String fileName = "chart." + type;
                 response.setContentType(ContentType.getType(fileName));
                 response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
                 response.setStatus(HttpServletResponse.SC_OK);
                 FileUtils.copy(output, outputStream);
-            }
-            finally
-            {
+            } finally {
                 outputStream.flush();
                 outputStream.close();
                 output.delete();
@@ -55,11 +49,9 @@ public class ChartExportServlet extends HttpServlet
         }
     }
 
-    private File getBaseDir()
-    {
+    private File getBaseDir() {
         File baseDir = this.baseDir;
-        if (baseDir == null)
-        {
+        if (baseDir == null) {
             if (!ValueUtils.isEmpty(this.getInitParameter("baseDir")))
                 baseDir = new File(this.getInitParameter("baseDir"));
             if (baseDir == null || !baseDir.exists())

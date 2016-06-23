@@ -15,34 +15,28 @@ import java.util.Map;
 
 /**
  * 消息侦发送服务。
+ *
  * @author dangcat
- * 
  */
-public class EventSendServiceImpl extends EventServiceBase implements EventSendService
-{
+public class EventSendServiceImpl extends EventServiceBase implements EventSendService {
     private static final String RESOURCE_NAME = "ResourceName";
     private static final String SERVICE_NAME = "EventSend";
     private Map<String, EventSender> messageSenderMap = new HashMap<String, EventSender>();
 
-    public EventSendServiceImpl(ServiceProvider parent)
-    {
+    public EventSendServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
-    public void addEventSender(EventSender eventSender)
-    {
-        if (eventSender != null)
-        {
-            synchronized (this.messageSenderMap)
-            {
+    public void addEventSender(EventSender eventSender) {
+        if (eventSender != null) {
+            synchronized (this.messageSenderMap) {
                 this.messageSenderMap.put(eventSender.getName(), eventSender);
             }
         }
     }
 
     @Override
-    protected void execute(Event event)
-    {
+    protected void execute(Event event) {
         EventStatistics eventStatistics = this.getEventStatistics();
         long beginTime = DateUtils.currentTimeMillis();
         eventStatistics.increaseHandleCount();
@@ -54,46 +48,37 @@ public class EventSendServiceImpl extends EventServiceBase implements EventSendS
         eventStatistics.increaseHandleTimeCost(beginTime);
     }
 
-    private EventSender getEventSender(Event event)
-    {
+    private EventSender getEventSender(Event event) {
         EventSender eventSender = null;
         if (!Environment.isTestEnabled() && !this.messageSenderMap.isEmpty())
             eventSender = this.messageSenderMap.get(event.getParams().get(RESOURCE_NAME));
         return eventSender;
     }
 
-    public void removeEventSender(EventSender eventListener)
-    {
-        if (eventListener != null)
-        {
-            synchronized (this.messageSenderMap)
-            {
+    public void removeEventSender(EventSender eventListener) {
+        if (eventListener != null) {
+            synchronized (this.messageSenderMap) {
                 this.messageSenderMap.put(eventListener.getName(), eventListener);
             }
         }
     }
 
     @Override
-    public void send(Event event)
-    {
+    public void send(Event event) {
         this.send(ConnectionFactory.DEFAULT, event);
     }
 
     @Override
-    public void send(String name, Event event)
-    {
-        if (event != null)
-        {
+    public void send(String name, Event event) {
+        if (event != null) {
             event.getParams().put(RESOURCE_NAME, name);
             this.addTask(event);
         }
     }
 
     @Override
-    public void start()
-    {
-        synchronized (this.messageSenderMap)
-        {
+    public void start() {
+        synchronized (this.messageSenderMap) {
             for (EventSender eventSender : this.messageSenderMap.values())
                 eventSender.start();
         }
@@ -101,10 +86,8 @@ public class EventSendServiceImpl extends EventServiceBase implements EventSendS
     }
 
     @Override
-    public void stop()
-    {
-        synchronized (this.messageSenderMap)
-        {
+    public void stop() {
+        synchronized (this.messageSenderMap) {
             for (EventSender eventSender : this.messageSenderMap.values())
                 eventSender.stop();
         }

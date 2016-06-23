@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class CommandExecutor
-{
+public class CommandExecutor {
     private static final Logger LOGGER = Logger.getLogger(CommandExecutor.class);
     private File dirFile = null;
     private Map<String, String> envParams = null;
@@ -20,8 +19,7 @@ public class CommandExecutor
     private Logger logger = null;
     private OutputStream outputStream = null;
 
-    public static String execute(String command)
-    {
+    public static String execute(String command) {
         CommandExecutor commandExecutor = new CommandExecutor();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         commandExecutor.setOutputStream(byteArrayOutputStream);
@@ -31,14 +29,13 @@ public class CommandExecutor
 
     /**
      * 执行外部命令。
+     *
      * @param params 命令字串。
      * @return 执行结果。
      */
-    public boolean exec(String... params)
-    {
+    public boolean exec(String... params) {
         boolean result = false;
-        try
-        {
+        try {
             String[] commands = this.getCommands(params);
             String[] envArray = this.getEnvArray();
             File workDirectory = this.getWorkDirectory();
@@ -56,8 +53,7 @@ public class CommandExecutor
             errorConsole.setError(true);
             errorConsole.start();
 
-            if (process.waitFor() == 0)
-            {
+            if (process.waitFor() == 0) {
                 if (standConsole != null)
                     standConsole.join();
                 if (errorConsole != null)
@@ -65,40 +61,31 @@ public class CommandExecutor
                 process.destroy();
             }
             result = true;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.getLogger().error(this, e);
         }
         return result;
     }
 
-    private String[] getCommands(String... params)
-    {
+    private String[] getCommands(String... params) {
         Collection<String> commands = new ArrayList<String>();
         OSType osType = OSType.getOSType();
-        if (OSType.Linux.equals(osType))
-        {
+        if (OSType.Linux.equals(osType)) {
             commands.add("/bin/sh");
             commands.add("-c");
-        }
-        else if (OSType.Windows.equals(osType))
-        {
+        } else if (OSType.Windows.equals(osType)) {
             commands.add("cmd");
             commands.add("/C");
         }
         StringBuilder command = new StringBuilder();
         String execFileCommand = this.getExecFileCommand();
-        if (!ValueUtils.isEmpty(execFileCommand))
-        {
+        if (!ValueUtils.isEmpty(execFileCommand)) {
             command.append(" \"");
             command.append(execFileCommand);
             command.append(" \"");
         }
-        if (params != null)
-        {
-            for (String param : params)
-            {
+        if (params != null) {
+            for (String param : params) {
                 command.append(" ");
                 command.append(param);
             }
@@ -107,8 +94,7 @@ public class CommandExecutor
         return commands.toArray(new String[0]);
     }
 
-    public File getDirFile()
-    {
+    public File getDirFile() {
         return this.dirFile;
     }
 
@@ -116,11 +102,9 @@ public class CommandExecutor
         this.dirFile = dirFile;
     }
 
-    private String[] getEnvArray()
-    {
+    private String[] getEnvArray() {
         Collection<String> paramCollection = null;
-        if (this.envParams != null)
-        {
+        if (this.envParams != null) {
             paramCollection = new ArrayList<String>();
             for (Entry<String, String> entry : this.envParams.entrySet())
                 paramCollection.add(entry.getKey() + "=" + entry.getValue());
@@ -130,11 +114,9 @@ public class CommandExecutor
         return paramCollection.toArray(new String[0]);
     }
 
-    private String getExecFileCommand()
-    {
+    private String getExecFileCommand() {
         String execFileCommand = null;
-        if (this.exeFile != null)
-        {
+        if (this.exeFile != null) {
             if (this.exeFile.exists())
                 execFileCommand = this.exeFile.getAbsolutePath();
             else
@@ -143,8 +125,7 @@ public class CommandExecutor
         return execFileCommand;
     }
 
-    public File getExeFile()
-    {
+    public File getExeFile() {
         return this.exeFile;
     }
 
@@ -152,8 +133,7 @@ public class CommandExecutor
         this.exeFile = exeFile;
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return this.logger == null ? LOGGER : this.logger;
     }
 
@@ -161,8 +141,7 @@ public class CommandExecutor
         this.logger = logger;
     }
 
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         if (this.outputStream == null)
             this.outputStream = new ByteArrayOutputStream();
         return this.outputStream;
@@ -172,17 +151,14 @@ public class CommandExecutor
         this.outputStream = outputStream;
     }
 
-    private File getWorkDirectory()
-    {
+    private File getWorkDirectory() {
         if (this.dirFile == null || !this.dirFile.exists())
             return null;
         return this.dirFile;
     }
 
-    public void putEnv(String name, String value)
-    {
-        if (name != null && value != null)
-        {
+    public void putEnv(String name, String value) {
+        if (name != null && value != null) {
             if (this.envParams == null)
                 this.envParams = new HashMap<String, String>();
             this.envParams.put(name, value);

@@ -10,8 +10,7 @@ import org.dangcat.persistence.validator.annotation.ValueMapValidator;
 import java.util.Date;
 
 @Table("AccountInfo")
-public class AccountBasic extends EntityBase
-{
+public class AccountBasic extends EntityBase {
     public static final String Email = "Email";
     public static final String GroupId = "GroupId";
     public static final String GroupName = "GroupName";
@@ -28,7 +27,7 @@ public class AccountBasic extends EntityBase
     private Integer groupId;
 
     @Column(fieldName = Name, index = 3)
-    @JoinTable(tableName = "GroupInfo", joinColumns = { @JoinColumn(name = Id, joinName = "GroupId") })
+    @JoinTable(tableName = "GroupInfo", joinColumns = {@JoinColumn(name = Id, joinName = "GroupId")})
     private String groupName;
 
     @Column(isPrimaryKey = true, isAutoIncrement = true, index = 0)
@@ -47,83 +46,67 @@ public class AccountBasic extends EntityBase
     @Column(index = 4, displaySize = 40)
     private String tel = null;
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Integer getGroupId()
-    {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId)
-    {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
-    public String getGroupName()
-    {
+    public String getGroupName() {
         return groupName;
     }
 
-    public void setGroupName(String groupName)
-    {
+    public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Date getRegisterTime()
-    {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime)
-    {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
-    public Integer getSex()
-    {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex)
-    {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public String getTel()
-    {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(String tel)
-    {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 }

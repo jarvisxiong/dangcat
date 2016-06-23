@@ -8,49 +8,36 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class UDPListenerTester implements DatagramReceiveListener
-{
+public class UDPListenerTester implements DatagramReceiveListener {
     private static final int PORT = 1541;
     private static File outputFile = new File("E:\\Setup\\database\\Oracle\\Tools\\sqldeveloper-2.1.0.63.73-no-jre2.zip");
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         new UDPListenerTester().run();
     }
 
     @Override
-    public void onReceive(DatagramEvent datagramEvent)
-    {
+    public void onReceive(DatagramEvent datagramEvent) {
         BufferedOutputStream outputStream = null;
-        try
-        {
+        try {
             byte[] data = datagramEvent.getDataBuffer();
-            if (data != null && data.length > 0)
-            {
+            if (data != null && data.length > 0) {
                 outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
                 outputStream.write(data);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 outputStream.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
     }
 
-    private void run()
-    {
+    private void run() {
         UDPListener udpListener = new UDPListener("UDP", PORT, this);
         udpListener.startListener();
     }

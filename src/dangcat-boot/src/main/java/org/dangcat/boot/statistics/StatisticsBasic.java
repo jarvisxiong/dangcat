@@ -4,102 +4,96 @@ import org.dangcat.commons.utils.ValueUtils;
 
 /**
  * 数据处理统计。
+ *
  * @author dangcat
- * 
  */
-public abstract class StatisticsBasic implements StatisticsAble
-{
-    /** 实时数据 */
+public abstract class StatisticsBasic implements StatisticsAble {
+    /**
+     * 实时数据
+     */
     private static final String STATISTICS_REAL = "Real";
-    /** 合计数据 */
+    /**
+     * 合计数据
+     */
     private static final String STATISTICS_TOTAL = "Total";
-    /** 统计名称。 */
+    /**
+     * 统计名称。
+     */
     private String name;
-    /** 实时数据 */
+    /**
+     * 实时数据
+     */
     private StatisticsBase realData = null;
-    /** 总计数据。 */
+    /**
+     * 总计数据。
+     */
     private StatisticsBase totalData = null;
 
-    public StatisticsBasic(String name)
-    {
+    public StatisticsBasic(String name) {
         this.name = name;
     }
 
-    public long begin()
-    {
+    public long begin() {
         return this.begin(StatisticsBase.TimeCost);
     }
 
-    public long begin(String name)
-    {
+    public long begin(String name) {
         return this.getRealData().begin(name);
     }
 
     protected abstract StatisticsBase creatStatisticsData(String name);
 
-    public void end()
-    {
+    public void end() {
         this.getRealData().end(StatisticsBase.TimeCost);
     }
 
-    public void end(long beginTime)
-    {
+    public void end(long beginTime) {
         this.getRealData().end(StatisticsBase.TimeCost, beginTime);
     }
 
-    public void end(String name)
-    {
+    public void end(String name) {
         this.getRealData().end(name);
     }
 
-    public void end(String name, long beginTime)
-    {
+    public void end(String name, long beginTime) {
         this.getRealData().end(name, beginTime);
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    protected StatisticsBase getRealData()
-    {
+    protected StatisticsBase getRealData() {
         if (this.realData == null)
             this.realData = this.creatStatisticsData(STATISTICS_REAL);
         return this.realData;
     }
 
-    protected StatisticsBase getTotalData()
-    {
+    protected StatisticsBase getTotalData() {
         if (this.totalData == null)
             this.totalData = this.creatStatisticsData(STATISTICS_TOTAL);
         return this.totalData;
     }
 
-    public long getValue(String name)
-    {
+    public long getValue(String name) {
         return this.getRealData().getValue(name);
     }
 
-    protected long increase(String name)
-    {
+    protected long increase(String name) {
         return this.getRealData().increase(name);
     }
 
-    protected long increase(String name, long value)
-    {
+    protected long increase(String name, long value) {
         return this.getRealData().increase(name, value);
     }
 
     @Override
-    public boolean isValid()
-    {
+    public boolean isValid() {
         return this.getTotalData().isValid() || this.getRealData().isValid();
     }
 
     @Override
-    public String readRealInfo()
-    {
+    public String readRealInfo() {
         StatisticsBase realData = this.getRealData();
         this.realData = null;
         this.getTotalData().assign(realData);
@@ -107,14 +101,12 @@ public abstract class StatisticsBasic implements StatisticsAble
     }
 
     @Override
-    public void reset()
-    {
+    public void reset() {
         this.realData = null;
         this.totalData = null;
     }
 
-    protected long setValue(String name, long value)
-    {
+    protected long setValue(String name, long value) {
         return this.getRealData().setValue(name, value);
     }
 
@@ -122,20 +114,17 @@ public abstract class StatisticsBasic implements StatisticsAble
      * 显示统计信息。
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.toString(this.getRealData(), this.getTotalData());
     }
 
-    private String toString(StatisticsBase realData, StatisticsBase totalData)
-    {
+    private String toString(StatisticsBase realData, StatisticsBase totalData) {
         StringBuilder info = new StringBuilder();
         // 统计类型名称。
         info.append(this.getName());
         info.append(": ");
         String realDataText = realData.toString();
-        if (!ValueUtils.isEmpty(realDataText))
-        {
+        if (!ValueUtils.isEmpty(realDataText)) {
             info.append(realDataText);
             info.append("\r\n\t");
         }

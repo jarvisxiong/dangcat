@@ -8,14 +8,12 @@ import org.dangcat.commons.utils.ValueUtils;
 import javax.swing.*;
 import java.io.File;
 
-public abstract class CodePanel extends JPanel
-{
+public abstract class CodePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private Logger logger = null;
     private ResourceReader resourceReader = ResourceManager.getInstance().getResourceReader(this.getClass());
 
-    protected void choicePath(JTextField pathTextField)
-    {
+    protected void choicePath(JTextField pathTextField) {
         File currentDirectory = new File(pathTextField.getText());
         if (!currentDirectory.exists())
             currentDirectory = new File(".");
@@ -23,11 +21,9 @@ public abstract class CodePanel extends JPanel
         fileChooser.setDialogTitle(this.getText("PathTitle"));
         fileChooser.setCurrentDirectory(currentDirectory);
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-        {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            if (!file.isDirectory())
-            {
+            if (!file.isDirectory()) {
                 JOptionPane.showMessageDialog(this, this.getText("PathNotExists"));
                 return;
             }
@@ -37,30 +33,25 @@ public abstract class CodePanel extends JPanel
 
     protected abstract Logger createLogger();
 
-    protected Logger getLogger()
-    {
+    protected Logger getLogger() {
         if (this.logger == null)
             this.logger = this.createLogger();
         return this.logger;
     }
 
-    protected String getText(String key)
-    {
+    protected String getText(String key) {
         return this.resourceReader.getText(key);
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return this.resourceReader.getText(this.getClass().getSimpleName());
     }
 
     public abstract void initialize();
 
-    protected boolean validateEmpty(JTextField textField, String name)
-    {
+    protected boolean validateEmpty(JTextField textField, String name) {
         boolean result = true;
-        if (ValueUtils.isEmpty(textField.getText()))
-        {
+        if (ValueUtils.isEmpty(textField.getText())) {
             String message = this.getText(name) + this.getText("CanNotBeEmpty");
             JOptionPane.showMessageDialog(this, message);
             result = false;

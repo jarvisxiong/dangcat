@@ -11,10 +11,8 @@ import org.junit.Assert;
 
 import java.util.List;
 
-public class TestEntityJoin extends TestEntityBase
-{
-    private void checkEntityJoin() throws EntityException
-    {
+public class TestEntityJoin extends TestEntityBase {
+    private void checkEntityJoin() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
 
         List<AccountInfo> entityDataList1 = entityManager.load(AccountInfo.class);
@@ -50,15 +48,13 @@ public class TestEntityJoin extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
 
         List<Table> tableList = EntityJoinUtils.getTable();
-        for (Table table : tableList)
-        {
+        for (Table table : tableList) {
             if (table.exists())
                 table.drop();
             // 产生新的数据表

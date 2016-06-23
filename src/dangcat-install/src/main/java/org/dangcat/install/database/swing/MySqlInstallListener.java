@@ -6,30 +6,25 @@ import org.dangcat.install.swing.ConfigPanel;
 import javax.swing.*;
 
 
-public class MySqlInstallListener extends DatabaseInstallListener
-{
+public class MySqlInstallListener extends DatabaseInstallListener {
     private JTextField baseDirField = null;
     private JTextField dataDirField = null;
 
-    public MySqlInstallListener(ConfigPanel configPanel)
-    {
+    public MySqlInstallListener(ConfigPanel configPanel) {
         super(configPanel);
     }
 
     @Override
-    public void changedValue()
-    {
+    public void changedValue() {
         super.changedValue();
-        if (this.isEnabled())
-        {
+        if (this.isEnabled()) {
             MySqlInstaller mySqlInstaller = (MySqlInstaller) this.getDatabaseInstaller();
             mySqlInstaller.setBaseDir(this.baseDirField.getText());
             mySqlInstaller.setDataDir(this.dataDirField.getText());
         }
     }
 
-    public JTextField getBaseDirField()
-    {
+    public JTextField getBaseDirField() {
         return this.baseDirField;
     }
 
@@ -37,8 +32,7 @@ public class MySqlInstallListener extends DatabaseInstallListener
         this.baseDirField = baseDirField;
     }
 
-    public JTextField getDataDirField()
-    {
+    public JTextField getDataDirField() {
         return this.dataDirField;
     }
 
@@ -47,8 +41,7 @@ public class MySqlInstallListener extends DatabaseInstallListener
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
         this.baseDirField.getDocument().addDocumentListener(this);
         this.dataDirField.getDocument().addDocumentListener(this);

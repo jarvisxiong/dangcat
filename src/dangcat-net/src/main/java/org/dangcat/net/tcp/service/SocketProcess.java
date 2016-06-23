@@ -9,8 +9,7 @@ import org.dangcat.net.event.DatagramReceiveListener;
 import java.io.*;
 import java.net.Socket;
 
-class SocketProcess
-{
+class SocketProcess {
     public static final String SEND = "SEND";
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
     private static final Logger logger = Logger.getLogger(SocketProcess.class);
@@ -21,46 +20,37 @@ class SocketProcess
     private OutputStream outputStream = null;
     private Socket socket = null;
 
-    protected SocketProcess(Socket socket)
-    {
+    protected SocketProcess(Socket socket) {
         this(socket, null);
     }
 
-    protected SocketProcess(Socket socket, DatagramReceiveListener datagramReceiveListener)
-    {
+    protected SocketProcess(Socket socket, DatagramReceiveListener datagramReceiveListener) {
         this.socket = socket;
         this.datagramReceiveListener = datagramReceiveListener;
     }
 
-    protected void close()
-    {
-        try
-        {
+    protected void close() {
+        try {
             if (this.socket != null)
                 this.socket.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
         }
         this.socket = null;
     }
 
-    private InputStream getInputStream() throws IOException
-    {
+    private InputStream getInputStream() throws IOException {
         if (this.inputStream == null)
             this.inputStream = new BufferedInputStream(this.socket.getInputStream());
         return this.inputStream;
     }
 
-    private OutputStream getOutputStream() throws IOException
-    {
+    private OutputStream getOutputStream() throws IOException {
         if (this.outputStream == null)
             this.outputStream = new BufferedOutputStream(this.socket.getOutputStream());
         return this.outputStream;
     }
 
-    protected boolean isClosed()
-    {
+    protected boolean isClosed() {
         return this.closed || this.socket.isClosed();
     }
 
@@ -68,8 +58,7 @@ class SocketProcess
         this.closed = closed;
     }
 
-    protected String readCommand() throws IOException
-    {
+    protected String readCommand() throws IOException {
         InputStream inputStream = this.getInputStream();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int data;
@@ -78,8 +67,7 @@ class SocketProcess
         return new String(outputStream.toByteArray());
     }
 
-    protected void receiveData(String commandLine) throws IOException
-    {
+    protected void receiveData(String commandLine) throws IOException {
         if (this.datagramReceiveListener == null)
             return;
 
@@ -91,37 +79,30 @@ class SocketProcess
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         long count = 0;
         int length = 0;
-        do
-        {
+        do {
             int bufferLength = (int) ((sendLength - count > this.buffer.length) ? this.buffer.length : (sendLength - count));
             length = inputStream.read(this.buffer, 0, bufferLength);
-            if (length > 0)
-            {
+            if (length > 0) {
                 outputStream.write(this.buffer, 0, length);
                 count += length;
             }
         } while (length > 0 && count < sendLength);
 
         byte[] receivedBytes = outputStream.toByteArray();
-        if (receivedBytes != null)
-        {
-            if (receivedBytes.length == sendLength)
-            {
+        if (receivedBytes != null) {
+            if (receivedBytes.length == sendLength) {
                 DatagramEvent datagramEvent = new DatagramEvent(this.socket.getInetAddress(), this.socket.getPort(), receivedBytes);
                 datagramEvent.setLocalAddress(this.socket.getLocalAddress());
                 datagramEvent.setLocalPort(this.socket.getLocalPort());
                 this.datagramReceiveListener.onReceive(datagramEvent);
-            }
-            else
-            {
+            } else {
                 if (logger.isDebugEnabled())
                     logger.error("receive Data length " + receivedBytes.length + ", but expect " + sendLength);
             }
         }
     }
 
-    protected void sendCommand(String command) throws IOException
-    {
+    protected void sendCommand(String command) throws IOException {
         if (logger.isDebugEnabled())
             logger.debug(command);
         OutputStream outputStream = this.getOutputStream();
@@ -130,13 +111,11 @@ class SocketProcess
         outputStream.flush();
     }
 
-    protected void sendData(byte[] data) throws IOException
-    {
+    protected void sendData(byte[] data) throws IOException {
         this.sendData(new ByteArrayInputStream(data));
     }
 
-    protected void sendData(InputStream inputStream) throws IOException
-    {
+    protected void sendData(InputStream inputStream) throws IOException {
         this.sendCommand(SEND + " " + inputStream.available());
 
         OutputStream outputStream = this.socket.getOutputStream();

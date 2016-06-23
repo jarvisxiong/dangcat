@@ -18,32 +18,36 @@ import java.util.concurrent.RejectedExecutionHandler;
 
 /**
  * 线程池服务。
+ *
  * @author dangcat
- * 
  */
-public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolService, RejectedExecutionHandler
-{
+public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolService, RejectedExecutionHandler {
     private static final String SERVICE_NAME = "ThreadPoolWork";
     private static ThreadPoolFactory instance = null;
-    /** 拒绝事件列表。 */
+    /**
+     * 拒绝事件列表。
+     */
     private List<RejectedExecutionHandler> rejectedExecutionHandlerList = new ArrayList<RejectedExecutionHandler>();
-    /** 线程池 */
+    /**
+     * 线程池
+     */
     private ThreadPoolExecutor threadPoolExecutor = null;
-    /** 处于阻塞的任务队列。 */
+    /**
+     * 处于阻塞的任务队列。
+     */
     private BlockingQueue<Runnable> workQueue = null;
+
     /**
      * 构建服务
+     *
      * @param parent 所属父服务。
      */
-    private ThreadPoolFactory(ServiceProvider parent)
-    {
+    private ThreadPoolFactory(ServiceProvider parent) {
         super(parent);
 
-        ThreadPoolConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        ThreadPoolConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 if (ThreadPoolFactory.this.threadPoolExecutor != null)
                     ThreadPoolFactory.this.restart();
             }
@@ -75,10 +79,10 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
 
     /**
      * 添加拒绝处理侦听器。
+     *
      * @param rejectedExecutionHandler 处理器。
      */
-    public void addRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler)
-    {
+    public void addRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
         if (rejectedExecutionHandler != null && !this.rejectedExecutionHandlerList.contains(rejectedExecutionHandler))
             this.rejectedExecutionHandlerList.add(rejectedExecutionHandler);
     }
@@ -87,12 +91,10 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 执行多线程任务。
      */
     @Override
-    public void execute(Runnable runnable)
-    {
+    public void execute(Runnable runnable) {
         if (Environment.isTestEnabled())
             runnable.run();
-        else
-        {
+        else {
             ThreadPoolExecutor threadPoolExecutor = this.threadPoolExecutor;
             if (threadPoolExecutor != null)
                 threadPoolExecutor.execute(runnable);
@@ -103,8 +105,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 当前正在执行的任务数。
      */
     @Override
-    public int getActiveCount()
-    {
+    public int getActiveCount() {
         ThreadPoolExecutor threadPoolExecutor = this.threadPoolExecutor;
         if (threadPoolExecutor != null)
             return threadPoolExecutor.getExecutingCount();
@@ -115,8 +116,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 当前处于阻塞的任务数。
      */
     @Override
-    public int getBlockCount()
-    {
+    public int getBlockCount() {
         BlockingQueue<Runnable> workQueue = this.workQueue;
         if (workQueue != null)
             return this.workQueue.size();
@@ -127,8 +127,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 添加线程执行对象。
      */
     @Override
-    public boolean isShutdown()
-    {
+    public boolean isShutdown() {
         ThreadPoolExecutor threadPoolExecutor = this.threadPoolExecutor;
         if (threadPoolExecutor != null)
             return threadPoolExecutor.isShutdown();
@@ -137,23 +136,23 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
 
     /**
      * 触发拒绝处理侦听器。
+     *
      * @param runnable 处理器。
      * @param executor 线程池对象。
      */
     @Override
-    public void rejectedExecution(Runnable runnable, java.util.concurrent.ThreadPoolExecutor threadPoolExecutor)
-    {
+    public void rejectedExecution(Runnable runnable, java.util.concurrent.ThreadPoolExecutor threadPoolExecutor) {
         for (RejectedExecutionHandler rejectedExecutionHandler : this.rejectedExecutionHandlerList)
             rejectedExecutionHandler.rejectedExecution(runnable, threadPoolExecutor);
     }
 
     /**
      * 删除拒绝处理侦听器。
+     *
      * @param rejectedExecutionHandler 处理器。
      */
     @Override
-    public void removeRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler)
-    {
+    public void removeRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
         if (rejectedExecutionHandler != null && this.rejectedExecutionHandlerList.contains(rejectedExecutionHandler))
             this.rejectedExecutionHandlerList.remove(rejectedExecutionHandler);
     }
@@ -162,10 +161,8 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 启动服务。
      */
     @Override
-    public synchronized void start()
-    {
-        if (this.threadPoolExecutor == null && !Environment.isTestEnabled())
-        {
+    public synchronized void start() {
+        if (this.threadPoolExecutor == null && !Environment.isTestEnabled()) {
             this.setServiceStatus(ServiceStatus.Starting);
             if (this.workQueue == null)
                 this.workQueue = new ArrayBlockingQueue<Runnable>(ThreadPoolConfig.getInstance().getQueueCapacity());
@@ -181,14 +178,11 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
      * 停止服务。
      */
     @Override
-    public void stop()
-    {
+    public void stop() {
         ThreadPoolExecutor threadPoolExecutor = this.threadPoolExecutor;
-        if (threadPoolExecutor != null)
-        {
+        if (threadPoolExecutor != null) {
             this.setServiceStatus(ServiceStatus.Stopping);
-            synchronized (this.threadPoolExecutor)
-            {
+            synchronized (this.threadPoolExecutor) {
                 this.threadPoolExecutor = null;
             }
             threadPoolExecutor.shutdown();
@@ -198,15 +192,13 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
 
     /**
      * 向系统提交全局事件。
+     *
      * @param event 事件对象。
      */
-    public void submitEvent(final Event event)
-    {
-        this.execute(new Runnable()
-        {
+    public void submitEvent(final Event event) {
+        this.execute(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 ApplicationContext.getInstance().handle(event);
             }
         });

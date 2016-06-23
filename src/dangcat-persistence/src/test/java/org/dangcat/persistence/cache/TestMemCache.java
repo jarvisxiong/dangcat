@@ -18,10 +18,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class TestMemCache extends TestCacheBase
-{
-    private void testCacheFilter1(MemCache<EntityData> memCache)
-    {
+public class TestMemCache extends TestCacheBase {
+    private void testCacheFilter1(MemCache<EntityData> memCache) {
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006"));
@@ -92,8 +90,7 @@ public class TestMemCache extends TestCacheBase
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
-    private void testCacheFilter2(MemCache<EntityData> memCache)
-    {
+    private void testCacheFilter2(MemCache<EntityData> memCache) {
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006", null, "A-00000000000000000000000000000000000009"));
@@ -101,8 +98,7 @@ public class TestMemCache extends TestCacheBase
         Collection<EntityData> entityDataList = memCache.find(filterGroup);
         // 判断过滤内容
         Assert.assertEquals(2, entityDataList.size());
-        for (EntityData entityData : entityDataList)
-        {
+        for (EntityData entityData : entityDataList) {
             if (entityData.getFieldB() == 6)
                 Assert.assertEquals("A-00000000000000000000000000000000000006", entityData.getFieldA());
             else if (entityData.getFieldB() == 9)
@@ -187,17 +183,16 @@ public class TestMemCache extends TestCacheBase
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
-    private void testCacheFilter3(MemCache<EntityData> memCache)
-    {
+    private void testCacheFilter3(MemCache<EntityData> memCache) {
         EntityData srcEntityData = EntityDataUtils.createEntityData(6);
         // 测试定位数据。
-        Collection<EntityData> entityDataList = memCache.find(new String[] { EntityData.FieldA }, srcEntityData.getFieldA());
+        Collection<EntityData> entityDataList = memCache.find(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertEquals(1, entityDataList.size());
         Assert.assertTrue(SimulateUtils.compareData(srcEntityData, entityDataList.iterator().next()));
 
         // 测试删除数据。
         memCache.remove(entityDataList.iterator().next());
-        Collection<EntityData> entityDataList2 = memCache.find(new String[] { EntityData.FieldA }, srcEntityData.getFieldA());
+        Collection<EntityData> entityDataList2 = memCache.find(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertNull(entityDataList2);
 
         // 测试清除缓存数据。
@@ -206,13 +201,11 @@ public class TestMemCache extends TestCacheBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
     }
 
     @Test
-    public void testMemCache()
-    {
+    public void testMemCache() {
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
         entityCacheManager.clear(true);
         MemCache<EntityData> memCache = entityCacheManager.getMemCache(EntityData.class);

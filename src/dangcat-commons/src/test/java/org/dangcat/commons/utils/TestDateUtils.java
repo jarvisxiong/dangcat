@@ -6,11 +6,9 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TestDateUtils
-{
+public class TestDateUtils {
     @Test
-    public void testDiff()
-    {
+    public void testDiff() {
         Date beginDate = ValueUtils.parseDate("2012-05-20 20:59:59.999");
         Date endDate = DateUtils.add(DateUtils.DAY, beginDate, 1);
         Assert.assertEquals(0, DateUtils.diff(DateUtils.YEAR, beginDate, endDate));
@@ -36,8 +34,7 @@ public class TestDateUtils
     }
 
     @Test
-    public void testGMTDate()
-    {
+    public void testGMTDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2014);
         calendar.set(Calendar.MONTH, 5 - 1);
@@ -52,8 +49,7 @@ public class TestDateUtils
     }
 
     @Test
-    public void testRange()
-    {
+    public void testRange() {
         Date dateTime = ValueUtils.parseDate("2014-03-28 20:59:59.999");
         Date expected = ValueUtils.parseDate("2014-03-28 00:00:00.000");
         Date actual = DateUtils.getFirstTimeOfDay(dateTime);

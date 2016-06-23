@@ -4,52 +4,58 @@ import org.dangcat.commons.utils.CloneAble;
 
 /**
  * 过滤表达式。
+ *
  * @author dangcat
- * 
  */
-public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterExpress>
-{
+public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterExpress> {
     private static final long serialVersionUID = 1L;
-    /** 字段名。 */
+    /**
+     * 字段名。
+     */
     private String fieldName = null;
-    /** 过滤类型。 */
+    /**
+     * 过滤类型。
+     */
     private FilterType filterType = null;
-    /** 是否是NOT运算。 */
+    /**
+     * 是否是NOT运算。
+     */
     private boolean not = false;
-    /** 过滤值。 */
+    /**
+     * 过滤值。
+     */
     private Object[] params;
-    /** 过滤名称。 */
+    /**
+     * 过滤名称。
+     */
     private Object value;
 
-    public FilterUnit()
-    {
+    public FilterUnit() {
     }
 
     /**
      * 构造过滤表达式。
-     * @param fieldName 字段名。
+     *
+     * @param fieldName  字段名。
      * @param filterType 过滤类型。
-     * @param not 取反过滤。
-     * @param params 过滤参数。
+     * @param not        取反过滤。
+     * @param params     过滤参数。
      */
-    public FilterUnit(String fieldName, FilterType filterType, Object... values)
-    {
+    public FilterUnit(String fieldName, FilterType filterType, Object... values) {
         this.fieldName = fieldName;
         this.filterType = filterType;
         this.params = values;
     }
 
     @Override
-    public FilterExpress clone()
-    {
+    public FilterExpress clone() {
         FilterUnit filterUnit = new FilterUnit(this.getFieldName(), this.getFilterType(), this.getParams());
         filterUnit.setNot(this.isNot());
         filterUnit.setValue(this.getValue());
         return filterUnit;
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return this.fieldName;
     }
 
@@ -57,8 +63,7 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
         this.fieldName = fieldName;
     }
 
-    public FilterType getFilterType()
-    {
+    public FilterType getFilterType() {
         return this.filterType;
     }
 
@@ -66,8 +71,7 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
         this.filterType = filterType;
     }
 
-    public Object[] getParams()
-    {
+    public Object[] getParams() {
         return this.params;
     }
 
@@ -76,8 +80,7 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
     }
 
     @Override
-    public Object getValue()
-    {
+    public Object getValue() {
         return this.value;
     }
 
@@ -85,8 +88,7 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
         this.value = value;
     }
 
-    public boolean isNot()
-    {
+    public boolean isNot() {
         return this.not;
     }
 
@@ -96,11 +98,11 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
 
     /**
      * 判断数据是否满足要求。
+     *
      * @param instance 数据对象。
      * @return 满足则为true，否则为false。
      */
-    public boolean isValid(Object instance)
-    {
+    public boolean isValid(Object instance) {
         Object value = FilterUtils.getValue(instance, this.getFieldName());
         if (value == null)
             value = instance;
@@ -109,11 +111,11 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
 
     /**
      * 判断数据行是否满足要求。
+     *
      * @param field 数据字段。
      * @return 满足则为true，否则为false。
      */
-    private boolean isValidData(Object value)
-    {
+    private boolean isValidData(Object value) {
         Filter filter = FilterFactory.getInstance().getFilter(this);
         if (filter != null)
             return filter.isValid(this.params, value);
@@ -124,10 +126,8 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
      * 转成SQL表达语句。
      */
     @Override
-    public String toString()
-    {
-        if (this.params != null && this.params.length > 0)
-        {
+    public String toString() {
+        if (this.params != null && this.params.length > 0) {
             Filter filter = FilterFactory.getInstance().getFilter(this);
             if (filter != null)
                 return filter.toSql(this.fieldName, this.params);

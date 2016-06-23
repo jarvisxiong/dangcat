@@ -1,7 +1,6 @@
 package org.dangcat.examples.settle;
 
-public interface SettleService2
-{
+public interface SettleService2 {
     SettleService1 getSettleService1();
 
     Integer getValue();

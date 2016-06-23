@@ -7,11 +7,9 @@ import org.dangcat.persistence.model.Table;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestEntityParams
-{
+public class TestEntityParams {
     @Test
-    public void testParams()
-    {
+    public void testParams() {
         Table table = EntityHelper.getEntityMetaData(EntityParams.class).getTable();
         Column idColumn = table.getColumns().find("Id");
         Assert.assertEquals(new Integer(1000), idColumn.getParams().get("idParams1"));

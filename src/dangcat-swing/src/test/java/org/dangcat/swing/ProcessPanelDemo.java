@@ -4,23 +4,19 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
-public class ProcessPanelDemo extends JFrameExt
-{
+public class ProcessPanelDemo extends JFrameExt {
     private static final long serialVersionUID = 1L;
 
-    public ProcessPanelDemo()
-    {
+    public ProcessPanelDemo() {
         super(ProcessPanelDemo.class.getSimpleName());
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         show(new ProcessPanelDemo());
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 

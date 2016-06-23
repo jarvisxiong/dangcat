@@ -11,39 +11,33 @@ import org.dangcat.install.task.ProcessTask;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public abstract class DatabaseInstallModule extends InstallModuleBase
-{
+public abstract class DatabaseInstallModule extends InstallModuleBase {
     private DatabaseInstallPanelAccess databaseAccess = null;
     private String dataDir = "data";
     private FileCopyTask fileCopyTask = new FileCopyTask();
     private String installShellDir = "install";
     private String scriptsDir = "scripts";
 
-    public DatabaseInstallModule(String name, String title)
-    {
+    public DatabaseInstallModule(String name, String title) {
         super(name, title);
     }
 
-    public void addCopyTask(File source, File dest)
-    {
+    public void addCopyTask(File source, File dest) {
         this.fileCopyTask.addTask(source, dest);
     }
 
-    public void clearCopyTasks()
-    {
+    public void clearCopyTasks() {
         this.fileCopyTask.clearTasks();
     }
 
-    public void createDatabaseAccess(String name, String title)
-    {
+    public void createDatabaseAccess(String name, String title) {
         DatabaseInstallPanelAccess databaseInstallPanelAccess = new DatabaseInstallPanelAccess();
         DatabaseInstallPanel databaseInstallPanel = this.createDatabaseInstallPanel(name, title);
         databaseInstallPanelAccess.addDatabaseInstallPanel(name, databaseInstallPanel);
         this.databaseAccess = databaseInstallPanelAccess;
     }
 
-    private DatabaseInstallPanel createDatabaseInstallPanel(String name, String title)
-    {
+    private DatabaseInstallPanel createDatabaseInstallPanel(String name, String title) {
         DatabaseInstallPanel databaseInstallPanel = new DatabaseInstallPanel();
         databaseInstallPanel.setDatabaseInstaller(this.getDatabaseInstaller());
         databaseInstallPanel.setName(name);
@@ -53,15 +47,13 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
         return databaseInstallPanel;
     }
 
-    public DatabaseInstallPanelAccess getDatabaseAccess()
-    {
+    public DatabaseInstallPanelAccess getDatabaseAccess() {
         return this.databaseAccess;
     }
 
     public abstract DatabaseInstaller getDatabaseInstaller();
 
-    public String getDataDir()
-    {
+    public String getDataDir() {
         return this.dataDir;
     }
 
@@ -69,8 +61,7 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
         this.dataDir = dataDir;
     }
 
-    public String getDefaultDatabaseName()
-    {
+    public String getDefaultDatabaseName() {
         return this.getDatabaseInstaller().getDefaultDatabaseName();
     }
 
@@ -78,8 +69,7 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
         this.getDatabaseInstaller().setDefaultDatabaseName(databaseName);
     }
 
-    public Integer getDefaultPort()
-    {
+    public Integer getDefaultPort() {
         return this.getDatabaseInstaller().getDefaultPort();
     }
 
@@ -88,8 +78,7 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
     }
 
     @Override
-    public String getInstallShellDir()
-    {
+    public String getInstallShellDir() {
         return this.installShellDir;
     }
 
@@ -97,8 +86,7 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
         this.installShellDir = installShellDir;
     }
 
-    public String getScriptsDir()
-    {
+    public String getScriptsDir() {
         return this.scriptsDir;
     }
 
@@ -107,8 +95,7 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         DatabaseInstaller databaseInstaller = this.getDatabaseInstaller();
         databaseInstaller.setServiceName(this.getName());
         databaseInstaller.setServiceDisplayName(this.getDisplayName());
@@ -119,22 +106,19 @@ public abstract class DatabaseInstallModule extends InstallModuleBase
             this.addProcessTask((ProcessTask) databaseInstaller);
     }
 
-    private void readScripts(DatabaseInstaller databaseInstaller)
-    {
+    private void readScripts(DatabaseInstaller databaseInstaller) {
         databaseInstaller.getScripts().clear();
         String currentPath = this.getCurrentPath().getAbsolutePath();
         File scriptsDir = new File(currentPath, databaseInstaller.getServiceName() + File.separator + this.getScriptsDir());
         File[] scriptFiles = scriptsDir.listFiles((FilenameFilter) new FileNameFilter(".sql"));
-        if (scriptFiles != null && scriptFiles.length > 0)
-        {
+        if (scriptFiles != null && scriptFiles.length > 0) {
             for (File file : scriptFiles)
                 databaseInstaller.getScripts().add(file.getAbsolutePath().replace("\\", "/"));
         }
     }
 
     @Override
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.databaseAccess.setEnabled(enabled);
         super.setEnabled(enabled);
     }

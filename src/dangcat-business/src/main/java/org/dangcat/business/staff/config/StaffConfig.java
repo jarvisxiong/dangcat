@@ -6,27 +6,23 @@ import org.dangcat.persistence.entity.EntityBase;
 
 /**
  * 操作员参数设置。
+ *
  * @author dangcat
- * 
  */
-public class StaffConfig extends BusinessConfig
-{
+public class StaffConfig extends BusinessConfig {
     private static final String CONFIG_NAME = "OperatorInfo";
     private static StaffConfig instance = new StaffConfig();
 
-    private StaffConfig()
-    {
+    private StaffConfig() {
         super(CONFIG_NAME);
     }
 
-    public static StaffConfig getInstance()
-    {
+    public static StaffConfig getInstance() {
         return instance;
     }
 
     @Override
-    public EntityBase createDefaultEntity()
-    {
+    public EntityBase createDefaultEntity() {
         StaffSetup staffSetup = new StaffSetup();
         staffSetup.setDefaultUseAble(Boolean.FALSE);
         staffSetup.setLogKeepMonth(3);
@@ -34,23 +30,19 @@ public class StaffConfig extends BusinessConfig
         return staffSetup;
     }
 
-    public Boolean getDefaultUseAble()
-    {
+    public Boolean getDefaultUseAble() {
         return this.getBooleanValue(StaffSetup.DefaultUseAble);
     }
 
-    public Integer getLogKeepMonth()
-    {
+    public Integer getLogKeepMonth() {
         return this.getIntValue(StaffSetup.LogKeepMonth);
     }
 
-    public Integer getValidDays()
-    {
+    public Integer getValidDays() {
         return this.getIntValue(StaffSetup.ValidDays);
     }
 
     @Override
-    public void validate(EntityBase entity) throws ServiceException
-    {
+    public void validate(EntityBase entity) throws ServiceException {
     }
 }

@@ -16,26 +16,21 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * ≈‰÷√≤Œ ˝ ‰≥ˆ°£
+ *
  * @author dangcat
- * 
  */
-public class ConfigTag extends SimpleTagSupport
-{
+public class ConfigTag extends SimpleTagSupport {
     protected static final Logger logger = Logger.getLogger(ConfigTag.class);
     private static final String PROPERTY_NAME = "config";
 
     @Override
-    public void doTag() throws JspTagException
-    {
-        try
-        {
+    public void doTag() throws JspTagException {
+        try {
             ServiceContext serviceContext = ServiceContext.getInstance();
-            if (serviceContext != null)
-            {
+            if (serviceContext != null) {
                 ServiceInfo serviceInfo = serviceContext.getServiceInfo();
                 ConfigProvider configProvider = serviceInfo.getConfigProvider();
-                if (configProvider instanceof BusinessConfig && !configProvider.getConfigValueMap().isEmpty())
-                {
+                if (configProvider instanceof BusinessConfig && !configProvider.getConfigValueMap().isEmpty()) {
                     BusinessConfig businessConfig = (BusinessConfig) configProvider;
                     JspWriter jspWriter = this.getJspContext().getOut();
                     jspWriter.write(PROPERTY_NAME);
@@ -46,17 +41,14 @@ public class ConfigTag extends SimpleTagSupport
                     entityJsonSerializer.serialize(jspWriter, configEntity.getClass(), "table");
 
                     String data = JsonSerializer.serialize(configEntity);
-                    if (!ValueUtils.isEmpty(data))
-                    {
+                    if (!ValueUtils.isEmpty(data)) {
                         jspWriter.write(",data:");
                         jspWriter.write(data);
                     }
                     jspWriter.write("},");
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
 
             Throwable rootCause = null;

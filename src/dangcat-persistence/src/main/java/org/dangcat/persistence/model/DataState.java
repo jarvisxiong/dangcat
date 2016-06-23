@@ -2,11 +2,10 @@ package org.dangcat.persistence.model;
 
 /**
  * Êý¾Ý×´Ì¬¡£
+ *
  * @author dangcat
- * 
  */
-public enum DataState
-{
+public enum DataState {
     /**
      * ä¯ÀÀ¡£
      */

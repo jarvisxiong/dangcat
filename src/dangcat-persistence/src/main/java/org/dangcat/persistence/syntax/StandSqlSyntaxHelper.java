@@ -9,11 +9,10 @@ import java.util.Date;
 
 /**
  * 标准表达式构建器。
+ *
  * @author dangcat
- * 
  */
-public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase
-{
+public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase {
     private static final String BIGINT = "BIGINT";
     private static final String BLOB = "BLOB";
     private static final String CLOB = "CLOB";
@@ -26,13 +25,13 @@ public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase
 
     /**
      * 构建表存在表达式。
+     *
      * @param databaseName 数据库名。
-     * @param tableName 表名。
+     * @param tableName    表名。
      * @return 查询语句。
      */
     @Override
-    public String buildExistsStatement(String databaseName, String tableName)
-    {
+    public String buildExistsStatement(String databaseName, String tableName) {
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("SELECT COUNT(*) FROM ");
         sqlBuilder.append(tableName);
@@ -41,20 +40,19 @@ public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase
 
     /**
      * 构建含有范围载入的语句表达式。
-     * @param sql 查询语句。
+     *
+     * @param sql   查询语句。
      * @param range 查询范围。
      * @return 载入的表达语句。
      */
     @Override
-    public String buildRangeLoadStatement(String sql, Range range)
-    {
+    public String buildRangeLoadStatement(String sql, Range range) {
         if (sql.indexOf(Range.TOP_SQLFLAG) > -1)
             return sql.replace(Range.TOP_SQLFLAG, "TOP " + range.getTo());
         String sqlExpress = sql.toLowerCase();
         final String flag = "select ";
         int index = sqlExpress.indexOf(flag);
-        if (index != -1)
-        {
+        if (index != -1) {
             String select = sql.substring(index, index + flag.length());
             return sql.replace(select, select + "TOP " + range.getTo());
         }
@@ -71,12 +69,12 @@ public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase
 
     /**
      * 转换SQL栏位数据类型。
+     *
      * @param column 栏位对象。
      * @return SQL数据类型。
      */
     @Override
-    public String getSqlType(Column column)
-    {
+    public String getSqlType(Column column) {
         String sqlDataType = "";
         int displaySize = column.getDisplaySize();
         if (String.class.equals(column.getFieldClass()))
@@ -93,15 +91,13 @@ public class StandSqlSyntaxHelper extends SqlSyntaxHelperBase
             sqlDataType = BIGINT;
         else if (Date.class.equals(column.getFieldClass()) || Timestamp.class.equals(column.getFieldClass()))
             sqlDataType = DATETIME;
-        else if (Double.class.equals(column.getFieldClass()) || double.class.equals(column.getFieldClass()))
-        {
+        else if (Double.class.equals(column.getFieldClass()) || double.class.equals(column.getFieldClass())) {
             int scale = column.getScale();
             if (scale == 0)
                 sqlDataType = NUMERIC + "(" + (displaySize - 1) + ")";
             else
                 sqlDataType = NUMERIC + "(" + (displaySize - scale) + ", " + scale + ")";
-        }
-        else if (Character[].class.equals(column.getFieldClass()) || char[].class.equals(column.getFieldClass()))
+        } else if (Character[].class.equals(column.getFieldClass()) || char[].class.equals(column.getFieldClass()))
             sqlDataType = CLOB;
         else if (Byte[].class.equals(column.getFieldClass()) || byte[].class.equals(column.getFieldClass()))
             sqlDataType = BLOB;

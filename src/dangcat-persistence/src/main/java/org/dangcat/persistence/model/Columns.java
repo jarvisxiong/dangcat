@@ -9,11 +9,10 @@ import java.util.*;
 
 /**
  * 栏位对象集合。
+ *
  * @author dangcat
- * 
  */
-public class Columns extends ArrayList<Column> implements java.io.Serializable
-{
+public class Columns extends ArrayList<Column> implements java.io.Serializable {
     private static final String ROW_NUM = "RowNum";
     private static final long serialVersionUID = 1L;
     private Collection<DataValidator> dataValidators = null;
@@ -24,32 +23,26 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
     private Column rowNumColumn = null;
     private Map<String, Column> titleMap = null;
 
-    public Columns()
-    {
+    public Columns() {
     }
 
-    public Columns(Table parent)
-    {
+    public Columns(Table parent) {
         this.parent = parent;
     }
 
-    public Column add(int index, String name, Class<?> fieldClass)
-    {
+    public Column add(int index, String name, Class<?> fieldClass) {
         return this.add(index, name, fieldClass, 0, false);
     }
 
-    public Column add(int index, String name, Class<?> fieldClass, boolean isPrimaryKey)
-    {
+    public Column add(int index, String name, Class<?> fieldClass, boolean isPrimaryKey) {
         return this.add(index, name, fieldClass, 0, isPrimaryKey);
     }
 
-    public Column add(int index, String name, Class<?> fieldClass, int displaySize)
-    {
+    public Column add(int index, String name, Class<?> fieldClass, int displaySize) {
         return this.add(index, name, fieldClass, displaySize, false);
     }
 
-    public Column add(int index, String name, Class<?> fieldClass, int displaySize, boolean isPrimaryKey)
-    {
+    public Column add(int index, String name, Class<?> fieldClass, int displaySize, boolean isPrimaryKey) {
         Column column = new Column();
         column.initialize();
         column.setName(name);
@@ -64,35 +57,28 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         return column;
     }
 
-    public Column add(String name, Class<?> fieldClass)
-    {
+    public Column add(String name, Class<?> fieldClass) {
         return this.add(name, fieldClass, 0, false);
     }
 
-    public Column add(String name, Class<?> fieldClass, boolean isPrimaryKey)
-    {
+    public Column add(String name, Class<?> fieldClass, boolean isPrimaryKey) {
         return this.add(name, fieldClass, 0, isPrimaryKey);
     }
 
-    public Column add(String name, Class<?> fieldClass, int displaySize)
-    {
+    public Column add(String name, Class<?> fieldClass, int displaySize) {
         return this.add(name, fieldClass, displaySize, false);
     }
 
-    public Column add(String name, Class<?> fieldClass, int displaySize, boolean isPrimaryKey)
-    {
+    public Column add(String name, Class<?> fieldClass, int displaySize, boolean isPrimaryKey) {
         return this.add(-1, name, fieldClass, displaySize, isPrimaryKey);
     }
 
-    public void addDataValidator(DataValidator dataValidator)
-    {
+    public void addDataValidator(DataValidator dataValidator) {
         if (this.dataValidators == null)
             this.createDataValidators(null);
-        if (dataValidator != null)
-        {
+        if (dataValidator != null) {
             Column findColumn = this.find(dataValidator.getColumn().getName());
-            if (findColumn != null)
-            {
+            if (findColumn != null) {
                 if (!this.dataValidators.contains(dataValidator))
                     this.dataValidators.add(dataValidator);
                 findColumn.addDataValidator(dataValidator);
@@ -100,14 +86,11 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         }
     }
 
-    public void createDataValidators(Class<?> classType)
-    {
+    public void createDataValidators(Class<?> classType) {
         Collection<DataValidator> dataValidators = new LinkedList<DataValidator>();
-        for (Column column : this)
-        {
+        for (Column column : this) {
             // 不可为空校验
-            if (!column.isNullable() && (!column.isAutoIncrement() || !column.getGenerationType().equals(GenerationType.IDENTITY)))
-            {
+            if (!column.isNullable() && (!column.isAutoIncrement() || !column.getGenerationType().equals(GenerationType.IDENTITY))) {
                 NotNullValidator notNullValidator = new NotNullValidator(classType, column);
                 dataValidators.add(notNullValidator);
                 column.addDataValidator(notNullValidator);
@@ -117,8 +100,7 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
                 continue;
 
             // 最大长度校验
-            if (ValueUtils.isText(column.getFieldClass()) && column.getDisplaySize() > 0)
-            {
+            if (ValueUtils.isText(column.getFieldClass()) && column.getDisplaySize() > 0) {
                 MaxLengthValidator maxLengthValidator = new MaxLengthValidator(classType, column);
                 dataValidators.add(maxLengthValidator);
                 column.addDataValidator(maxLengthValidator);
@@ -127,15 +109,12 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         this.dataValidators = dataValidators;
     }
 
-    private void createNameMap()
-    {
-        if (this.nameMap == null || this.nameMap.size() != this.size())
-        {
+    private void createNameMap() {
+        if (this.nameMap == null || this.nameMap.size() != this.size()) {
             Map<String, Column> titleMap = new HashMap<String, Column>();
             Map<String, String> fieldNameMap = new HashMap<String, String>();
             Map<String, Column> nameMap = new HashMap<String, Column>();
-            for (Column column : this)
-            {
+            for (Column column : this) {
                 nameMap.put(column.getName(), column);
                 String fieldName = column.getFieldName();
                 if (column.getTableName() != null)
@@ -150,22 +129,19 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         }
     }
 
-    public void createRowNumColumn()
-    {
+    public void createRowNumColumn() {
         this.rowNumColumn = this.add(0, ROW_NUM, Integer.class, 4, false);
         this.rowNumColumn.setRowNum(true);
     }
 
-    public Column find(String name)
-    {
+    public Column find(String name) {
         Column column = this.getNameMap().get(name);
         if (column == null)
             column = this.getTitleMap().get(name);
         return column;
     }
 
-    public Column findByFieldName(String fieldName)
-    {
+    public Column findByFieldName(String fieldName) {
         fieldName = fieldName.toLowerCase();
         String name = this.getFieldNameMap().get(fieldName);
         if (name != null)
@@ -173,35 +149,28 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         return this.find(fieldName);
     }
 
-    public DataValidator[] getDataValidators()
-    {
+    public DataValidator[] getDataValidators() {
         return this.dataValidators == null ? null : this.dataValidators.toArray(new DataValidator[0]);
     }
 
-    private Map<String, String> getFieldNameMap()
-    {
+    private Map<String, String> getFieldNameMap() {
         this.createNameMap();
         return this.fieldNameMap;
     }
 
-    private Map<String, Column> getNameMap()
-    {
+    private Map<String, Column> getNameMap() {
         this.createNameMap();
         return this.nameMap;
     }
 
-    public Table getParent()
-    {
+    public Table getParent() {
         return this.parent;
     }
 
-    public Column[] getPrimaryKeys()
-    {
-        if (this.primaryKeys == null)
-        {
+    public Column[] getPrimaryKeys() {
+        if (this.primaryKeys == null) {
             List<Column> keyColumns = new ArrayList<Column>();
-            for (Column column : this)
-            {
+            for (Column column : this) {
                 if (column.isPrimaryKey())
                     keyColumns.add(column);
             }
@@ -210,14 +179,10 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         return this.primaryKeys;
     }
 
-    public Column getRowNumColumn()
-    {
-        if (this.rowNumColumn == null)
-        {
-            for (Column column : this)
-            {
-                if (column.isRowNum())
-                {
+    public Column getRowNumColumn() {
+        if (this.rowNumColumn == null) {
+            for (Column column : this) {
+                if (column.isRowNum()) {
                     this.rowNumColumn = column;
                     break;
                 }
@@ -226,26 +191,21 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
         return this.rowNumColumn;
     }
 
-    private Map<String, Column> getTitleMap()
-    {
+    private Map<String, Column> getTitleMap() {
         this.createNameMap();
         return this.titleMap;
     }
 
-    public int indexOf(String fieldName)
-    {
+    public int indexOf(String fieldName) {
         Column column = this.find(fieldName);
         if (column == null)
             return -1;
         return this.indexOf(column);
     }
 
-    public void sort()
-    {
-        Collections.sort(this, new Comparator<Column>()
-        {
-            public int compare(Column srcColumn, Column dstColumn)
-            {
+    public void sort() {
+        Collections.sort(this, new Comparator<Column>() {
+            public int compare(Column srcColumn, Column dstColumn) {
                 if (srcColumn.getIndex() == -1 || dstColumn.getIndex() == -1)
                     return dstColumn.getIndex() - srcColumn.getIndex();
                 return srcColumn.getIndex() - dstColumn.getIndex();
@@ -254,8 +214,7 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer info = new StringBuffer();
         info.append("Columns Size: " + this.size() + "\n");
         for (Column column : this)

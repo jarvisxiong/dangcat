@@ -11,8 +11,7 @@ import org.dangcat.persistence.validator.annotation.LogicValidators;
 import org.dangcat.web.annotation.EditDataStates;
 
 @Table("OperatorInfo")
-public class OperatorInfoBase extends EntityBase
-{
+public class OperatorInfoBase extends EntityBase {
     public static final String Email = "Email";
     public static final String Id = "Id";
     public static final String Name = "Name";
@@ -20,7 +19,7 @@ public class OperatorInfoBase extends EntityBase
     public static final String Tel = "Tel";
     private static final long serialVersionUID = 1L;
     @Column(index = 12, displaySize = 30)
-    @LogicValidators( { EmailValidator.class })
+    @LogicValidators({EmailValidator.class})
     private String email = null;
 
     @Column(index = 0, isPrimaryKey = true, isAutoIncrement = true)
@@ -31,64 +30,53 @@ public class OperatorInfoBase extends EntityBase
 
     @Column(index = 1, displaySize = 20, isNullable = false)
     @EditDataStates(DataState.Insert)
-    @LogicValidators( { NoValidator.class })
+    @LogicValidators({NoValidator.class})
     private String no = null;
 
     @Column(index = 10, displaySize = 20)
-    @LogicValidators( { TelValidator.class })
+    @LogicValidators({TelValidator.class})
     private String tel = null;
 
-    public OperatorInfoBase()
-    {
+    public OperatorInfoBase() {
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getNo()
-    {
+    public String getNo() {
         return this.no;
     }
 
-    public void setNo(String no)
-    {
+    public void setNo(String no) {
         this.no = no;
     }
 
-    public String getTel()
-    {
+    public String getTel() {
         return this.tel;
     }
 
-    public void setTel(String tel)
-    {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 }

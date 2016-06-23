@@ -6,26 +6,22 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * 最大长度校验。
+ *
  * @author dangcat
- * 
  */
-public class MaxLengthValidator extends DataValidator
-{
+public class MaxLengthValidator extends DataValidator {
     private int maxLength = 0;
 
-    public MaxLengthValidator(Class<?> classType, Column column)
-    {
+    public MaxLengthValidator(Class<?> classType, Column column) {
         super(classType, column);
         this.maxLength = column.getDisplaySize();
     }
 
-    public int getMaxLength()
-    {
+    public int getMaxLength() {
         return maxLength;
     }
 
-    private boolean isInvalid(Object value)
-    {
+    private boolean isInvalid(Object value) {
         int length = -1;
         if (value instanceof String)
             length = ((String) value).length();
@@ -40,8 +36,7 @@ public class MaxLengthValidator extends DataValidator
         return length != -1 && length > this.getMaxLength();
     }
 
-    public void validate(Object instance) throws DataValidateException
-    {
+    public void validate(Object instance) throws DataValidateException {
         Object value = this.getValue(instance);
         if (this.isInvalid(value))
             this.throwDataValidateException(DataValidateException.INVALIDATE_MAXLENTH, this.getMaxLength());

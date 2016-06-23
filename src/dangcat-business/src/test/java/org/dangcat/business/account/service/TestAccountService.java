@@ -15,19 +15,17 @@ import org.junit.Test;
 
 /**
  * 账户管理服务测试。
+ *
  * @author dangcat
- * 
  */
-public class TestAccountService extends BusinessServiceTestBase<AccountService, AccountBasic, AccountInfo, AccountFilter>
-{
+public class TestAccountService extends BusinessServiceTestBase<AccountService, AccountBasic, AccountInfo, AccountFilter> {
     private static final int TEST_COUNT = 100;
 
     /**
      * 初始化需要使用的数据库配置。
      */
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new GroupInfoSimulator(), 10);
         databaseSimulator.add(new ServiceInfoSimulator(), 10);
         databaseSimulator.add(new AccountInfoSimulator(), TEST_COUNT);
@@ -37,8 +35,7 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(AccountService.class, AccountServiceImpl.class);
 
@@ -46,8 +43,7 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     }
 
     @Test
-    public void testDefaultNew() throws ServiceException
-    {
+    public void testDefaultNew() throws ServiceException {
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setName("Monkey hou");
         accountInfo.setAddress("中国深圳");
@@ -60,14 +56,12 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     }
 
     @Test
-    public void testDelete() throws ServiceException
-    {
+    public void testDelete() throws ServiceException {
         this.testDelete(AccountInfo.class, TEST_COUNT);
     }
 
     @Test
-    public void testQuery() throws ServiceException
-    {
+    public void testQuery() throws ServiceException {
         TestServiceQuery<AccountBasic, AccountInfo, AccountFilter> testServiceQuery = new TestServiceQuery<AccountBasic, AccountInfo, AccountFilter>(this.getBusinessService());
         QueryAssert<AccountFilter> queryAssert = new QueryAssert<AccountFilter>(AccountBasic.class);
         queryAssert.setDataFilter(new AccountFilter());
@@ -76,14 +70,12 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     }
 
     @Test
-    public void testSave() throws ServiceException
-    {
+    public void testSave() throws ServiceException {
         this.testSave(AccountInfo.class, TEST_COUNT);
     }
 
     @Test
-    public void testView() throws ServiceException
-    {
+    public void testView() throws ServiceException {
         this.testView(AccountInfo.class, TEST_COUNT);
     }
 }

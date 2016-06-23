@@ -1,9 +1,7 @@
 package org.dangcat.install.database.mysql;
 
-public class MySqlInstallerMain
-{
-    public static void main(String[] args) throws Exception
-    {
+public class MySqlInstallerMain {
+    public static void main(String[] args) throws Exception {
         MySqlInstaller mySqlInstaller = new MySqlInstaller();
         mySqlInstaller.setServiceName("MySql-scores");
         mySqlInstaller.setServiceDisplayName("dangcat-scores");

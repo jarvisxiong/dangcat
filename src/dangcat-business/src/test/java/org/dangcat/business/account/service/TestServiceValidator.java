@@ -12,23 +12,20 @@ import org.junit.Test;
 
 /**
  * 账户管理服务测试。
+ *
  * @author dangcat
- * 
  */
-public class TestServiceValidator extends BusinessServiceTestBase<AccountService, AccountBasic, AccountInfo, AccountFilter>
-{
+public class TestServiceValidator extends BusinessServiceTestBase<AccountService, AccountBasic, AccountInfo, AccountFilter> {
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(AccountService.class, AccountServiceImpl.class);
         super.initialize();
     }
 
     @Test
-    public void testMaxLengthValidator() throws ServiceException
-    {
+    public void testMaxLengthValidator() throws ServiceException {
         AccountInfo accountInfo = this.getService().view(null);
         Assert.assertNotNull(accountInfo);
 
@@ -39,8 +36,7 @@ public class TestServiceValidator extends BusinessServiceTestBase<AccountService
     }
 
     @Test
-    public void testNotNullValidator() throws ServiceException
-    {
+    public void testNotNullValidator() throws ServiceException {
         AccountInfo accountInfo = this.getService().view(null);
         Assert.assertNotNull(accountInfo);
 
@@ -51,8 +47,7 @@ public class TestServiceValidator extends BusinessServiceTestBase<AccountService
     }
 
     @Test
-    public void testRangeValidator() throws ServiceException
-    {
+    public void testRangeValidator() throws ServiceException {
         AccountInfo accountInfo = this.getService().view(null);
         Assert.assertNotNull(accountInfo);
 
@@ -87,8 +82,7 @@ public class TestServiceValidator extends BusinessServiceTestBase<AccountService
     }
 
     @Test
-    public void testValueMapValidator() throws ServiceException
-    {
+    public void testValueMapValidator() throws ServiceException {
         AccountInfo accountInfo = this.getService().view(null);
         Assert.assertNotNull(accountInfo);
 

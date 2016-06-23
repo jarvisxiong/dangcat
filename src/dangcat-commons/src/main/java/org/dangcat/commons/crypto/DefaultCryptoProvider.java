@@ -3,19 +3,16 @@ package org.dangcat.commons.crypto;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class DefaultCryptoProvider implements CryptoProvider
-{
+public class DefaultCryptoProvider implements CryptoProvider {
     @Override
-    public String decrypt(String sourceText, String charsetName)
-    {
+    public String decrypt(String sourceText, String charsetName) {
         if (sourceText == null)
             return null;
 
         if (sourceText.length() == 0)
             return "";
 
-        try
-        {
+        try {
             // Base64解密
             byte[] decodeBytes = BASE64Coder.decode(sourceText);
 
@@ -27,25 +24,21 @@ public class DefaultCryptoProvider implements CryptoProvider
                 return null;
 
             return new String(decryptBytes, charsetName);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
     @Override
-    public String encrypt(String sourceText, String charsetName)
-    {
+    public String encrypt(String sourceText, String charsetName) {
         if (sourceText == null)
             return null;
 
         if (sourceText.length() == 0)
             return "";
 
-        try
-        {
+        try {
             // TripleDES加密
             byte[] encryptBytes = TripleDes.encrypt(sourceText.getBytes(charsetName));
             // 加密错误
@@ -53,9 +46,7 @@ public class DefaultCryptoProvider implements CryptoProvider
                 return null;
             // Base64加密
             return new String(BASE64Coder.encode(encryptBytes));
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

@@ -1,5 +1,4 @@
 package org.dangcat.examples.stock;
 
-public interface UserInfoService
-{
+public interface UserInfoService {
 }

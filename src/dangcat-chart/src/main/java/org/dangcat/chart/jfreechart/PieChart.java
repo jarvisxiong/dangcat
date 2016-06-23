@@ -14,14 +14,12 @@ import java.awt.*;
 
 /**
  * 饼状统计图。
+ *
  * @author dangcat
- * 
  */
-public class PieChart extends ChartBase
-{
+public class PieChart extends ChartBase {
     @Override
-    protected JFreeChart createChart()
-    {
+    protected JFreeChart createChart() {
         // 建立统计对象。
         JFreeChart chart = ChartFactory.createPieChart(this.getTitle(), // 标题
                 new DefaultPieDataset(), // 数据来源。
@@ -36,8 +34,7 @@ public class PieChart extends ChartBase
     }
 
     @Override
-    protected void initPlot(Plot plot)
-    {
+    protected void initPlot(Plot plot) {
         super.initPlot(plot);
         // 获得3D的水晶饼图对象
         PiePlot piePlot = (PiePlot) plot;
@@ -78,14 +75,12 @@ public class PieChart extends ChartBase
         piePlot.setLegendItemShape(new Rectangle(10, 10));
     }
 
-    private void initSectionPaint()
-    {
+    private void initSectionPaint() {
         // 设置固定颜色范围。
         PiePlot piePlot = (PiePlot) this.getChart().getPlot();
         DataModule dataModule = this.getDataModule();
         String[] labels = dataModule.getRowKeys().toArray(new String[0]);
-        for (int i = 0; i < labels.length; i++)
-        {
+        for (int i = 0; i < labels.length; i++) {
             Color color = ColorFactory.sequence(i);
             if (color != null)
                 piePlot.setSectionPaint(labels[i], color);
@@ -93,16 +88,13 @@ public class PieChart extends ChartBase
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         DataModule dataModule = this.getDataModule();
 
         DataConverter dataConverter = this.createDataConverter(false);
         DefaultPieDataset pieDataset = new DefaultPieDataset();
-        for (Comparable<?> rowKey : dataModule.getRowKeys())
-        {
-            for (Comparable<?> columnKey : dataModule.getColumnKeys(rowKey))
-            {
+        for (Comparable<?> rowKey : dataModule.getRowKeys()) {
+            for (Comparable<?> columnKey : dataModule.getColumnKeys(rowKey)) {
                 Double value = dataConverter.getValue(rowKey, columnKey);
                 Comparable<?> key = null;
                 if (!ChartUtils.isNull(rowKey) && !ChartUtils.isNull(columnKey))

@@ -10,15 +10,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-public abstract class TimeSeriesChart extends TimeChart
-{
+public abstract class TimeSeriesChart extends TimeChart {
     @Override
-    protected XYDataset createXYDataset(Collection<Comparable<?>> rowKeys)
-    {
+    protected XYDataset createXYDataset(Collection<Comparable<?>> rowKeys) {
         DataModule dataModule = this.getDataModule();
         TimeSeriesCollection timeSeriesCollection = new TimeSeriesCollection();
-        for (Comparable<?> rowKey : dataModule.getRowKeys())
-        {
+        for (Comparable<?> rowKey : dataModule.getRowKeys()) {
             if (rowKeys != null && !rowKeys.contains(rowKey))
                 continue;
 
@@ -33,8 +30,7 @@ public abstract class TimeSeriesChart extends TimeChart
         return timeSeriesCollection;
     }
 
-    protected void load(boolean isStacked)
-    {
+    protected void load(boolean isStacked) {
         this.createDataConverter(isStacked);
 
         this.setXYDataset(this.createXYDataset());

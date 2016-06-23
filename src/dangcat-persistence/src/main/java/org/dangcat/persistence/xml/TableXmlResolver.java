@@ -6,19 +6,19 @@ import org.dangcat.persistence.model.Table;
 
 /**
  * 栏位对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class TableXmlResolver extends XmlResolver
-{
-    /** 栏位对象。 */
+public class TableXmlResolver extends XmlResolver {
+    /**
+     * 栏位对象。
+     */
     private Table table = null;
 
     /**
      * 构建解析器。
      */
-    public TableXmlResolver()
-    {
+    public TableXmlResolver() {
         super(Table.class.getSimpleName());
         this.addChildXmlResolver(new ColumnsXmlResolver());
         this.addChildXmlResolver(new SqlBuilderXmlResolver());
@@ -30,8 +30,7 @@ public class TableXmlResolver extends XmlResolver
         this.addChildXmlResolver(new CalculatorsXmlResolver());
     }
 
-    public Table getTable()
-    {
+    public Table getTable() {
         return table;
     }
 
@@ -39,8 +38,7 @@ public class TableXmlResolver extends XmlResolver
      * 开始解析元素标签。
      */
     @Override
-    protected void startElement()
-    {
+    protected void startElement() {
         this.table = new Table();
         this.setResolveObject(table);
     }

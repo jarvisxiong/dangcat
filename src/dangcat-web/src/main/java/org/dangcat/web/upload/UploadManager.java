@@ -19,11 +19,10 @@ import java.util.List;
 
 /**
  * 上传管理。
+ *
  * @author dangcat
- * 
  */
-public class UploadManager
-{
+public class UploadManager {
     private static final String FILE_PREFIX = "UPLOAD";
     private static final String FILE_SUFFIX = ".tmp";
     protected static Logger logger = Logger.getLogger(UploadManager.class);
@@ -33,23 +32,21 @@ public class UploadManager
     private UploadManager() {
     }
 
-    public static UploadManager getInstance()
-    {
+    public static UploadManager getInstance() {
         return instance;
     }
 
     /**
      * 判断是否是上传文件请求。
+     *
      * @param request 上传请求。
      * @return 结果。
      */
-    public static boolean isMultipart(HttpServletRequest request)
-    {
+    public static boolean isMultipart(HttpServletRequest request) {
         return ServletFileUpload.isMultipartContent(request);
     }
 
-    private ServletFileUpload createServletFileUpload(HttpServletRequest request)
-    {
+    private ServletFileUpload createServletFileUpload(HttpServletRequest request) {
         ServletFileUpload servletFileUpload = new ServletFileUpload(this.getDiskFileItemFactory(request));
         if (UploadConfig.getInstance().getMaxRequestSize() != null)
             servletFileUpload.setFileSizeMax(UploadConfig.getInstance().getMaxRequestSize());
@@ -58,40 +55,33 @@ public class UploadManager
 
     /**
      * 产生上传的临时文件。
+     *
      * @return 临时文件对象。
      * @throws IOException
      */
-    public File createTmpFile()
-    {
+    public File createTmpFile() {
         File tmpFile = null;
-        try
-        {
+        try {
             if (this.diskFileItemFactory != null)
                 tmpFile = File.createTempFile(FILE_PREFIX, FILE_SUFFIX, this.getRepository());
             else
                 tmpFile = File.createTempFile(FILE_PREFIX, FILE_SUFFIX);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("create temp file error", e);
         }
         return tmpFile;
     }
 
-    private DiskFileItemFactory getDiskFileItemFactory(HttpServletRequest request)
-    {
-        if (this.diskFileItemFactory == null)
-        {
+    private DiskFileItemFactory getDiskFileItemFactory(HttpServletRequest request) {
+        if (this.diskFileItemFactory == null) {
             DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
             FileCleaningTracker fileCleaningTracker = FileCleanerCleanup.getFileCleaningTracker(request.getServletContext());
             diskFileItemFactory.setFileCleaningTracker(fileCleaningTracker);
             this.diskFileItemFactory = diskFileItemFactory;
             this.loadConfig();
-            UploadConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor()
-            {
+            UploadConfig.getInstance().addChangeEventAdaptor(new ChangeEventAdaptor() {
                 @Override
-                public void afterChanged(Object sender, Event event)
-                {
+                public void afterChanged(Object sender, Event event) {
                     loadConfig();
                 }
             });
@@ -101,17 +91,16 @@ public class UploadManager
 
     /**
      * 上传目录。
+     *
      * @return
      */
-    public File getRepository()
-    {
+    public File getRepository() {
         if (this.diskFileItemFactory != null)
             return this.diskFileItemFactory.getRepository();
         return new File(UploadConfig.getInstance().getRepository());
     }
 
-    private void loadConfig()
-    {
+    private void loadConfig() {
         UploadConfig uploadConfig = UploadConfig.getInstance();
         this.diskFileItemFactory.setSizeThreshold(uploadConfig.getMaxMemorySize());
 
@@ -121,12 +110,12 @@ public class UploadManager
 
     /**
      * 处理上传请求，得到上传内容。
+     *
      * @param request 请求对象。
      * @return 上传内容。
      * @throws Exception 上传异常。
      */
-    public UploadContent upload(HttpServletRequest request) throws Exception
-    {
+    public UploadContent upload(HttpServletRequest request) throws Exception {
         ServletFileUpload servletFileUpload = this.createServletFileUpload(request);
 
         UploadContent uploadContent = new UploadContent();
@@ -137,18 +126,14 @@ public class UploadManager
             uploadContent.setInvokeStep(invokeProcess.getInvokeStep(InvokeProcess.UPLOAD));
 
         List<FileItem> fileItems = servletFileUpload.parseRequest(request);
-        if (fileItems != null)
-        {
-            for (FileItem fileItem : fileItems)
-            {
-                if (fileItem.isFormField())
-                {
+        if (fileItems != null) {
+            for (FileItem fileItem : fileItems) {
+                if (fileItem.isFormField()) {
                     String name = fileItem.getFieldName();
                     String value = fileItem.getString();
                     if (!ValueUtils.isEmpty(name))
                         uploadContent.getParams().put(name, value);
-                }
-                else
+                } else
                     uploadContent.setFileItem(fileItem);
             }
         }

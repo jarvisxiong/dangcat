@@ -7,8 +7,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import java.util.Date;
 
 @Table
-public class MemberInfo extends EntityBase
-{
+public class MemberInfo extends EntityBase {
     private static final long serialVersionUID = 1L;
 
     @Column
@@ -26,57 +25,46 @@ public class MemberInfo extends EntityBase
     @Column(index = 13, isNullable = false)
     private Boolean useAble = null;
 
-    public MemberInfo()
-    {
+    public MemberInfo() {
     }
 
-    public Date getExpireTime()
-    {
+    public Date getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(Date expireTime)
-    {
+    public void setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getNo()
-    {
+    public String getNo() {
         return this.no;
     }
 
-    public void setNo(String no)
-    {
+    public void setNo(String no) {
         this.no = no;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Boolean getUseAble()
-    {
+    public Boolean getUseAble() {
         return useAble;
     }
 
-    public void setUseAble(Boolean useAble)
-    {
+    public void setUseAble(Boolean useAble) {
         this.useAble = useAble;
     }
 }

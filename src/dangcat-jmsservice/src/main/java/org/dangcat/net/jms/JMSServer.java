@@ -13,19 +13,17 @@ import java.net.URI;
 
 /**
  * DangCat Message Service。
- * 
  */
-public class JMSServer extends ServiceControlBase
-{
+public class JMSServer extends ServiceControlBase {
     public static final String SERVICE_NAME = "jmsservice";
     private BrokerService brokerService = null;
 
     /**
      * 构建服务。
+     *
      * @param parent 所属父服务。
      */
-    public JMSServer(ServiceProvider parent)
-    {
+    public JMSServer(ServiceProvider parent) {
         super(parent);
     }
 
@@ -34,8 +32,7 @@ public class JMSServer extends ServiceControlBase
     }
 
     @Override
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return this.brokerService != null;
     }
 
@@ -43,12 +40,9 @@ public class JMSServer extends ServiceControlBase
      * 启动嵌入式JMS服务。
      */
     @Override
-    public void start()
-    {
-        if (!this.isRunning())
-        {
-            try
-            {
+    public void start() {
+        if (!this.isRunning()) {
+            try {
                 System.setProperty("activemq.home", ApplicationContext.getInstance().getContextPath().getBaseDir());
                 System.setProperty("activemq.conf", ApplicationContext.getInstance().getContextPath().getConf());
 
@@ -56,9 +50,7 @@ public class JMSServer extends ServiceControlBase
                 // 启动嵌入服务。
                 this.brokerService = BrokerFactory.createBroker(new URI(brokerURI));
                 this.brokerService.start();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 this.logger.error(ExtensionClassLoader.getInstance(), e);
             }
         }
@@ -69,19 +61,14 @@ public class JMSServer extends ServiceControlBase
      * 停止服务。
      */
     @Override
-    public void stop()
-    {
+    public void stop() {
         super.stop();
 
-        if (this.isRunning())
-        {
-            try
-            {
+        if (this.isRunning()) {
+            try {
                 this.brokerService.stop();
                 this.brokerService = null;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 this.logger.error(this, e);
             }
         }

@@ -26,11 +26,10 @@ import java.util.HashSet;
 
 /**
  * 业务操作日志。
+ *
  * @author fanst174766
- * 
  */
-public class BusinessOperateLogInterceptor implements AfterInterceptor
-{
+public class BusinessOperateLogInterceptor implements AfterInterceptor {
     protected static final Logger logger = Logger.getLogger(BusinessOperateLogInterceptor.class);
     private static final String COLON = ": ";
     private static final String EQUALS = "=";
@@ -49,15 +48,13 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
     private static final String TIME_COST = "TimeCost";
     private static final String USER = "User ";
 
-    static
-    {
+    static {
         ignoreMethodNames.add("query");
         ignoreMethodNames.add("load");
     }
 
     @Override
-    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result)
-    {
+    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result) {
         this.log(service, serviceContext, methodInfo, args, result);
 
         if (methodInfo.getValue() == null)
@@ -71,8 +68,7 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         if (loginUser == null || loginUser.getId() == null)
             return;
 
-        if (result instanceof EntityBase)
-        {
+        if (result instanceof EntityBase) {
             EntityBase entityBase = (EntityBase) result;
             if (entityBase.hasError())
                 return;
@@ -84,18 +80,15 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         this.createOperateLog(loginUser, servicePrincipal, methodInfo, args, result);
     }
 
-    private void createOperateLog(LoginUser loginUser, ServicePrincipal servicePrincipal, MethodInfo methodInfo, Object[] args, Object result)
-    {
+    private void createOperateLog(LoginUser loginUser, ServicePrincipal servicePrincipal, MethodInfo methodInfo, Object[] args, Object result) {
         OperateLog operateLog = new OperateLog();
         operateLog.setOperatorId(loginUser.getId());
         operateLog.setMethodId(methodInfo.getValue());
         operateLog.setIpAddress(servicePrincipal.getClientIp());
-        if (result instanceof ServiceException)
-        {
+        if (result instanceof ServiceException) {
             ServiceException serviceException = (ServiceException) result;
             operateLog.setErrorCode(serviceException.getMessageId());
-        }
-        else if (result instanceof Exception)
+        } else if (result instanceof Exception)
             operateLog.setErrorCode(BusinessException.INVOKE_ERROR);
         else
             operateLog.setErrorCode(OperateLog.SUCCESS);
@@ -105,15 +98,12 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         entityBatchStorer.save(operateLog);
     }
 
-    private void log(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result)
-    {
+    private void log(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result) {
         StringBuilder info = new StringBuilder();
         ServicePrincipal servicePrincipal = serviceContext.getServicePrincipal();
-        if (servicePrincipal != null)
-        {
+        if (servicePrincipal != null) {
             LoginUser loginUser = servicePrincipal.getParam(LoginUser.class);
-            if (loginUser != null)
-            {
+            if (loginUser != null) {
                 info.append(USER);
                 info.append(loginUser.getNo());
                 info.append(SPACE);
@@ -128,22 +118,18 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         info.append(COLON);
 
         String params = this.readRemark(methodInfo, args);
-        if (!ValueUtils.isEmpty(params))
-        {
+        if (!ValueUtils.isEmpty(params)) {
             info.append(PARAMS);
             info.append(params);
         }
 
         String returnText = null;
-        if (result instanceof Exception)
-        {
+        if (result instanceof Exception) {
             Exception exception = (Exception) result;
             returnText = exception.getMessage();
-        }
-        else if (result != null)
+        } else if (result != null)
             returnText = this.readRemark(result);
-        if (!ValueUtils.isEmpty(returnText))
-        {
+        if (!ValueUtils.isEmpty(returnText)) {
             if (!ValueUtils.isEmpty(params))
                 info.append(SEPARATOR);
             info.append(RETURN);
@@ -152,20 +138,17 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         }
 
         info.append(RESULT);
-        if (result instanceof EntityBase)
-        {
+        if (result instanceof EntityBase) {
             EntityBase entityBase = (EntityBase) result;
             if (entityBase.hasError())
                 info.append(ERROR);
             else
                 info.append(SUCCESS);
-        }
-        else
+        } else
             info.append(SUCCESS);
 
         long timeCost = DateUtils.currentTimeMillis() - serviceContext.getBeginTime().getTime();
-        if (timeCost > 0)
-        {
+        if (timeCost > 0) {
             info.append(SPACE);
             info.append(TIME_COST);
             info.append(COLON);
@@ -174,29 +157,23 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         logger.info(info);
     }
 
-    private String readRemark(MethodInfo methodInfo, Object[] args)
-    {
+    private String readRemark(MethodInfo methodInfo, Object[] args) {
         StringBuilder remark = null;
-        if (args != null && args.length == 1 && args[0] != null)
-        {
-            if (args[0] instanceof Integer)
-            {
+        if (args != null && args.length == 1 && args[0] != null) {
+            if (args[0] instanceof Integer) {
                 ParamInfo paramInfo = methodInfo.getParamInfoList().get(0);
                 remark = new StringBuilder();
                 remark.append(paramInfo.getName());
                 remark.append(EQUALS);
                 remark.append(args[0].toString());
-            }
-            else
+            } else
                 return this.readRemark(args[0]);
         }
         return remark == null ? null : remark.toString();
     }
 
-    private String readRemark(Object entity)
-    {
-        if (ReflectUtils.isConstClassType(entity.getClass()))
-        {
+    private String readRemark(Object entity) {
+        if (ReflectUtils.isConstClassType(entity.getClass())) {
             String result = ValueUtils.toString(entity);
             if (result != null && result.length() > 100 && !logger.isDebugEnabled())
                 result = result.substring(0, 100);
@@ -205,32 +182,27 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
 
         StringBuilder remark = null;
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity);
-        if (entityMetaData != null)
-        {
+        if (entityMetaData != null) {
             remark = new StringBuilder();
             String[] primaryKeyNames = null;
             EntityField noField = entityMetaData.getEntityField(FIELDNAME_NO);
             EntityField nameField = entityMetaData.getEntityField(FIELDNAME_NAME);
             if (noField != null && nameField != null)
-                primaryKeyNames = new String[] { FIELDNAME_NO, FIELDNAME_NAME };
+                primaryKeyNames = new String[]{FIELDNAME_NO, FIELDNAME_NAME};
             else if (noField != null)
-                primaryKeyNames = new String[] { FIELDNAME_NO };
+                primaryKeyNames = new String[]{FIELDNAME_NO};
             else if (nameField != null)
-                primaryKeyNames = new String[] { FIELDNAME_NAME };
+                primaryKeyNames = new String[]{FIELDNAME_NAME};
 
             if (primaryKeyNames == null || primaryKeyNames.length == 0)
                 primaryKeyNames = entityMetaData.getPrimaryKeyNames();
 
-            if (primaryKeyNames != null && primaryKeyNames.length > 0)
-            {
-                for (String primaryKeyName : primaryKeyNames)
-                {
+            if (primaryKeyNames != null && primaryKeyNames.length > 0) {
+                for (String primaryKeyName : primaryKeyNames) {
                     EntityField entityField = entityMetaData.getEntityField(primaryKeyName);
-                    if (entityField != null)
-                    {
+                    if (entityField != null) {
                         Object value = entityField.getValue(entity);
-                        if (value != null)
-                        {
+                        if (value != null) {
                             if (remark.length() > 0)
                                 remark.append(SEPARATOR);
                             remark.append(primaryKeyName);
@@ -244,8 +216,7 @@ public class BusinessOperateLogInterceptor implements AfterInterceptor
         return remark == null ? null : remark.toString();
     }
 
-    private void readRemark(OperateLog operateLog, MethodInfo methodInfo, Object[] args, Object result)
-    {
+    private void readRemark(OperateLog operateLog, MethodInfo methodInfo, Object[] args, Object result) {
         String remark = this.readRemark(methodInfo, args);
         if (result instanceof Boolean && Boolean.FALSE.equals(result))
             operateLog.setErrorCode(BusinessException.DELETE_ERROR);

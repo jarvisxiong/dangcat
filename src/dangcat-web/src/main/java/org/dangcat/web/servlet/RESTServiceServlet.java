@@ -18,23 +18,19 @@ import java.util.Collection;
 
 /**
  * RESTFull Web Service 执行入口。
+ *
  * @author dangcat
- * 
  */
-public class RESTServiceServlet extends ServiceServletBase
-{
+public class RESTServiceServlet extends ServiceServletBase {
     private static final long serialVersionUID = 1L;
 
-    private void createInvokeProcess(MethodInfo methodInfo)
-    {
+    private void createInvokeProcess(MethodInfo methodInfo) {
         ServiceContext serviceContext = ServiceContext.getInstance();
         serviceContext.addParam(MethodInfo.class, methodInfo);
         org.dangcat.web.annotation.InvokeProcess invokeProcessAnnotation = methodInfo.getMethod().getAnnotation(org.dangcat.web.annotation.InvokeProcess.class);
-        if (invokeProcessAnnotation != null)
-        {
+        if (invokeProcessAnnotation != null) {
             InvokeProcess invokeProcess = (InvokeProcess) ReflectUtils.newInstance(invokeProcessAnnotation.value());
-            if (invokeProcess != null)
-            {
+            if (invokeProcess != null) {
                 ServiceInfo serviceInfo = serviceContext.getServiceInfo();
                 invokeProcess.setServiceInfo(serviceInfo);
                 serviceContext.addParam(InvokeProcess.class, invokeProcess);
@@ -44,8 +40,7 @@ public class RESTServiceServlet extends ServiceServletBase
         }
     }
 
-    private void executeForm(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception
-    {
+    private void executeForm(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception {
         Menus menus = MenusManager.getInstance().getMenus();
         StringBuilder path = new StringBuilder();
         path.append("/");
@@ -57,8 +52,7 @@ public class RESTServiceServlet extends ServiceServletBase
         request.getRequestDispatcher(path.toString()).forward(request, response);
     }
 
-    private void executeMethod(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception
-    {
+    private void executeMethod(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception {
         // 找到执行的方法。
         MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(serviceCaller.getMethod());
         if (methodInfo == null)
@@ -74,13 +68,13 @@ public class RESTServiceServlet extends ServiceServletBase
 
     /**
      * 查询服务接口。
-     * @param request 请求对象。
-     * @param response 响应对象。
+     *
+     * @param request       请求对象。
+     * @param response      响应对象。
      * @param serviceCaller 服务调用对象。
      * @throws Exception 执行异常。
      */
-    private void executeQuery(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception
-    {
+    private void executeQuery(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception {
         Collection<MethodInfo> methodInfoCollection = serviceInfo.getServiceMethodInfo().getMethodInfos();
 
         if (methodInfoCollection == null)
@@ -94,11 +88,9 @@ public class RESTServiceServlet extends ServiceServletBase
         MethodInfoSerializer.serialize(methodInfoCollection, response.getWriter());
     }
 
-    private boolean executeQueryJndiNames(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller) throws Exception
-    {
+    private boolean executeQueryJndiNames(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller) throws Exception {
         boolean result = false;
-        if (ValueUtils.isEmpty(serviceCaller.getJndiName()) && RequestParser.isQueryRequest(request))
-        {
+        if (ValueUtils.isEmpty(serviceCaller.getJndiName()) && RequestParser.isQueryRequest(request)) {
             Collection<String> jndiNames = ServiceFactory.getInstance().getJndiNames(false);
             ResponseUtils.responseResult(response, jndiNames);
             result = true;
@@ -107,8 +99,7 @@ public class RESTServiceServlet extends ServiceServletBase
     }
 
     @Override
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ServiceCaller serviceCaller = RequestParser.createServiceCaller(request);
         if (this.logger.isDebugEnabled())
             this.logger.debug(serviceCaller);
@@ -129,13 +120,11 @@ public class RESTServiceServlet extends ServiceServletBase
             this.executeMethod(request, response, serviceCaller, serviceInfo); // 调用服务方法。
     }
 
-    protected Object invoke(ServiceCaller serviceCaller, ServiceInfo serviceInfo, MethodInfo methodInfo) throws Exception
-    {
+    protected Object invoke(ServiceCaller serviceCaller, ServiceInfo serviceInfo, MethodInfo methodInfo) throws Exception {
         return serviceCaller.invoke(serviceInfo.getInstance(), methodInfo);
     }
 
-    private ServiceInfo locateServiceInfo(HttpServletRequest request, ServiceCaller serviceCaller) throws Exception
-    {
+    private ServiceInfo locateServiceInfo(HttpServletRequest request, ServiceCaller serviceCaller) throws Exception {
         // 定位目标服务。
         ServiceInfo serviceInfo = this.locateServiceInfo(serviceCaller);
         if (serviceInfo == null || serviceInfo.getInstance() == null)
@@ -144,8 +133,7 @@ public class RESTServiceServlet extends ServiceServletBase
         return serviceInfo;
     }
 
-    protected ServiceInfo locateServiceInfo(ServiceCaller serviceCaller)
-    {
+    protected ServiceInfo locateServiceInfo(ServiceCaller serviceCaller) {
         return ServiceFactory.getServiceLocator().getServiceInfo(serviceCaller.getJndiName());
     }
 }

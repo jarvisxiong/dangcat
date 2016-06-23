@@ -10,13 +10,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public abstract class JFrameExt extends JFrame
-{
+public abstract class JFrameExt extends JFrame {
     private static final long serialVersionUID = 1L;
     protected final Logger logger = Logger.getLogger(this.getClass());
 
-    public JFrameExt()
-    {
+    public JFrameExt() {
         super();
         String title = this.getText(this.getClass().getSimpleName());
         if (!ValueUtils.isEmpty(title))
@@ -26,8 +24,7 @@ public abstract class JFrameExt extends JFrame
             this.setIconImage(image);
     }
 
-    public JFrameExt(String title)
-    {
+    public JFrameExt(String title) {
         super(title);
     }
 
@@ -41,8 +38,7 @@ public abstract class JFrameExt extends JFrame
         });
     }
 
-    private void centerFrameOnScreen()
-    {
+    private void centerFrameOnScreen() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int x = (screenSize.width - this.getWidth()) / 2;
@@ -52,29 +48,23 @@ public abstract class JFrameExt extends JFrame
 
     protected abstract Container createContentPane();
 
-    protected String getText(Class<?> classType, String key, Object... params)
-    {
+    protected String getText(Class<?> classType, String key, Object... params) {
         return ResourceUtils.getText(classType, key, params);
     }
 
-    protected String getText(String key, Object... params)
-    {
+    protected String getText(String key, Object... params) {
         return this.getText(this.getClass(), key, params);
     }
 
-    protected Image loadFrameIcon()
-    {
+    protected Image loadFrameIcon() {
         return ImageUtils.loadImage(this.getClass(), this.getClass().getSimpleName() + ".png");
     }
 
     @Override
-    public void pack()
-    {
-        this.addWindowListener(new WindowAdapter()
-        {
+    public void pack() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(final WindowEvent e)
-            {
+            public void windowClosing(final WindowEvent e) {
                 JFrameExt.this.dispose();
                 System.exit(0);
             }
@@ -85,8 +75,7 @@ public abstract class JFrameExt extends JFrame
     }
 
     @Override
-    public void setVisible(boolean visible)
-    {
+    public void setVisible(boolean visible) {
         this.centerFrameOnScreen();
         super.setVisible(visible);
     }

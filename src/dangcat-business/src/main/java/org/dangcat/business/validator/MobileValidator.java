@@ -8,32 +8,26 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * ÓÊ¼þÐ£ÑéÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class MobileValidator extends LogicValidator
-{
+public class MobileValidator extends LogicValidator {
     private static final String VALIDATOR_NAME = "Mobile";
 
-    public MobileValidator(Class<?> classType, Column column)
-    {
+    public MobileValidator(Class<?> classType, Column column) {
         super(classType, column);
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return VALIDATOR_NAME;
     }
 
     @Override
-    public void validateValue(Object value) throws DataValidateException
-    {
+    public void validateValue(Object value) throws DataValidateException {
         String mobile = (String) value;
-        if (!ValueUtils.isEmpty(mobile))
-        {
-            for (int index = 0; index < mobile.length(); index++)
-            {
+        if (!ValueUtils.isEmpty(mobile)) {
+            for (int index = 0; index < mobile.length(); index++) {
                 char charValue = mobile.charAt(index);
                 if (Character.isDigit(charValue) || charValue == '-')
                     continue;

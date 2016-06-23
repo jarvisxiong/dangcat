@@ -2,11 +2,10 @@ package org.dangcat.persistence.orderby;
 
 /**
  * ÅÅÐò·½Ê½¡£
+ *
  * @author dangcat
- * 
  */
-public enum OrderByType
-{
+public enum OrderByType {
     /**
      * ÕýÐò¡£
      */

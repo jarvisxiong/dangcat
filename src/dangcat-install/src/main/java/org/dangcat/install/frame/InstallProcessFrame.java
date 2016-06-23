@@ -10,8 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public abstract class InstallProcessFrame extends FrameBase
-{
+public abstract class InstallProcessFrame extends FrameBase {
     private static final long serialVersionUID = 1L;
     private boolean bodyContentChanged = false;
     private boolean cancel = false;
@@ -20,8 +19,7 @@ public abstract class InstallProcessFrame extends FrameBase
     private InstallSelectPanel installSelectPanel = null;
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
+    public void actionPerformed(ActionEvent actionEvent) {
         if (this.bodyContentChanged)
             this.updateBodyContent();
 
@@ -29,15 +27,13 @@ public abstract class InstallProcessFrame extends FrameBase
     }
 
     @Override
-    protected void cancel()
-    {
+    protected void cancel() {
         this.cancel = true;
         super.cancel();
     }
 
     @Override
-    protected void createBodyContent(InstallBodyPanel bodyContainer)
-    {
+    protected void createBodyContent(InstallBodyPanel bodyContainer) {
         bodyContainer.setContainsProcessPanel(true);
         this.installSelectPanel = this.createInstallSelectPanel();
         bodyContainer.addContainer(InstallSelectPanel.class.getSimpleName(), this.installSelectPanel);
@@ -49,15 +45,13 @@ public abstract class InstallProcessFrame extends FrameBase
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         Container container = super.createContentPane();
         this.onComponentsSelecedChanged();
         return container;
     }
 
-    private InstallProgressPanel createInstallProgressPanel()
-    {
+    private InstallProgressPanel createInstallProgressPanel() {
         InstallProgressPanel installProgressPanel = new InstallProgressPanel();
         installProgressPanel.initialize();
         installProgressPanel.setMin(0);
@@ -66,36 +60,30 @@ public abstract class InstallProcessFrame extends FrameBase
         return installProgressPanel;
     }
 
-    protected InstallSelectPanel createInstallSelectPanel()
-    {
+    protected InstallSelectPanel createInstallSelectPanel() {
         InstallSelectPanel installSelectPanel = this.createInstallSelectPanelInstancel();
         installSelectPanel.initialize();
-        installSelectPanel.getComponentList().addActionListener(new ActionListener()
-        {
+        installSelectPanel.getComponentList().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent)
-            {
+            public void actionPerformed(ActionEvent actionEvent) {
                 InstallProcessFrame.this.onComponentsSelecedChanged();
             }
         });
         return installSelectPanel;
     }
 
-    protected InstallSelectPanel createInstallSelectPanelInstancel()
-    {
+    protected InstallSelectPanel createInstallSelectPanelInstancel() {
         return new InstallSelectPanel();
     }
 
     @Override
-    protected void executeProcess()
-    {
+    protected void executeProcess() {
         this.cancel = false;
         this.installProgressPanel.reset();
         super.executeProcess();
     }
 
-    public File getCurrentPath()
-    {
+    public File getCurrentPath() {
         return this.currentPath;
     }
 
@@ -103,36 +91,30 @@ public abstract class InstallProcessFrame extends FrameBase
         this.currentPath = currenPath;
     }
 
-    public InstallProgressPanel getInstallProgressPanel()
-    {
+    public InstallProgressPanel getInstallProgressPanel() {
         return this.installProgressPanel;
     }
 
-    public InstallSelectPanel getInstallSelectPanel()
-    {
+    public InstallSelectPanel getInstallSelectPanel() {
         return this.installSelectPanel;
     }
 
     @Override
-    protected ProcessTaskManager getProcessTaskManager()
-    {
+    protected ProcessTaskManager getProcessTaskManager() {
         ProcessTaskManager processTaskManager = super.getProcessTaskManager();
         processTaskManager.setProgressPanel(this.installProgressPanel);
         return processTaskManager;
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.cancel;
     }
 
-    protected void onComponentsSelecedChanged()
-    {
+    protected void onComponentsSelecedChanged() {
         this.bodyContentChanged = true;
     }
 
-    protected void updateBodyContent()
-    {
+    protected void updateBodyContent() {
         this.getBodyContainer().updateContent(this.installSelectPanel);
         this.bodyContentChanged = false;
     }

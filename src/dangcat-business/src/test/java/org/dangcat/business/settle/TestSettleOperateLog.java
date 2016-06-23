@@ -17,15 +17,13 @@ import org.junit.Test;
 import java.util.*;
 import java.util.Map.Entry;
 
-public class TestSettleOperateLog extends TestWebServerBase
-{
+public class TestSettleOperateLog extends TestWebServerBase {
     private static final int TEST_COUNT = 100;
     private Date[] dateTimes = null;
     @Service
     private SettleService settleService = null;
 
-    private void assetResult(Collection<OperateStat> operateStatCollection)
-    {
+    private void assetResult(Collection<OperateStat> operateStatCollection) {
         Collection<OperateStat> saveOperateStatCollection = this.getEntityManager().load(OperateStat.class);
         Assert.assertNotNull(saveOperateStatCollection);
         Assert.assertEquals(operateStatCollection.size(), saveOperateStatCollection.size());
@@ -33,16 +31,14 @@ public class TestSettleOperateLog extends TestWebServerBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(operateStatCollection, saveOperateStatCollection));
     }
 
-    private void createDateTimes()
-    {
+    private void createDateTimes() {
         Date now = DateUtils.now();
         Date priorMonth = DateUtils.add(DateUtils.MONTH, now, -1);
         Date nextMonth = DateUtils.add(DateUtils.MONTH, now, 1);
-        this.dateTimes = new Date[] { priorMonth, now, nextMonth };
+        this.dateTimes = new Date[]{priorMonth, now, nextMonth};
     }
 
-    private Collection<OperateStat> createOperateStats(Collection<OperateLog> operateLogCollection, int count)
-    {
+    private Collection<OperateStat> createOperateStats(Collection<OperateLog> operateLogCollection, int count) {
         OperatorGroup operatorGroup = new OperatorGroup();
         operatorGroup.setName("Name");
         operatorGroup.setDescription("Description");
@@ -57,8 +53,7 @@ public class TestSettleOperateLog extends TestWebServerBase
         this.getEntityManager().save(operatorInfo);
 
         Map<Integer, OperateStat> operateStatMap = new HashMap<Integer, OperateStat>();
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             OperateLog operateLog = new OperateLog();
             operateLog.setErrorCode(i % 5);
             operateLog.setIpAddress("127.0.0.1");
@@ -68,8 +63,7 @@ public class TestSettleOperateLog extends TestWebServerBase
             operateLogCollection.add(operateLog);
 
             OperateStat operateStat = operateStatMap.get(operateLog.getOperatorId());
-            if (operateStat == null)
-            {
+            if (operateStat == null) {
                 operateStat = new OperateStat();
                 operateStat.setOperatorId(operateLog.getOperatorId());
                 operateStatMap.put(operateLog.getOperatorId(), operateStat);
@@ -85,14 +79,11 @@ public class TestSettleOperateLog extends TestWebServerBase
 
     @After
     @Before
-    public void dropTables() throws Exception
-    {
+    public void dropTables() throws Exception {
         this.initEntityTable(OperatorInfo.class, OperatorGroup.class);
         this.dropEntityTable(OperateLog.class, OperateStat.class, SettleRecord.class);
-        if (this.dateTimes != null)
-        {
-            for (Date date : this.dateTimes)
-            {
+        if (this.dateTimes != null) {
+            for (Date date : this.dateTimes) {
                 DateUtils.setCurrentDate(date);
                 this.dropEntityTable(OperateLog.class, OperateStat.class, SettleRecord.class);
             }
@@ -101,8 +92,7 @@ public class TestSettleOperateLog extends TestWebServerBase
     }
 
     @After
-    public void restart() throws Exception
-    {
+    public void restart() throws Exception {
         ((ServiceControlBase) this.settleService).restart();
     }
 
@@ -110,8 +100,7 @@ public class TestSettleOperateLog extends TestWebServerBase
      * 测试当日结算的基本功能。
      */
     @Test
-    public void testSettleCurrent()
-    {
+    public void testSettleCurrent() {
         Collection<OperateLog> operateLogCollection = new ArrayList<OperateLog>();
         Collection<OperateStat> operateStatCollection = this.createOperateStats(operateLogCollection, TEST_COUNT);
         this.getEntityManager().save(operateLogCollection.toArray());
@@ -123,14 +112,12 @@ public class TestSettleOperateLog extends TestWebServerBase
      * 测试跨月结算的功能。
      */
     @Test
-    public void testSettleDiffMonth()
-    {
+    public void testSettleDiffMonth() {
         this.createDateTimes();
 
         Map<Date, Collection<OperateStat>> operateStatCollectionMap = new HashMap<Date, Collection<OperateStat>>();
         Object[] entities = null;
-        for (Date date : this.dateTimes)
-        {
+        for (Date date : this.dateTimes) {
             DateUtils.setCurrentDate(date);
 
             if (entities != null)
@@ -145,13 +132,11 @@ public class TestSettleOperateLog extends TestWebServerBase
 
             operateStatCollectionMap.put(date, operateStatCollection);
         }
-        if (entities != null)
-        {
+        if (entities != null) {
             this.getEntityManager().save(entities);
             this.settleService.execute();
         }
-        for (Entry<Date, Collection<OperateStat>> entry : operateStatCollectionMap.entrySet())
-        {
+        for (Entry<Date, Collection<OperateStat>> entry : operateStatCollectionMap.entrySet()) {
             DateUtils.setCurrentDate(entry.getKey());
             this.assetResult(entry.getValue());
         }

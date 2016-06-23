@@ -14,31 +14,27 @@ import org.junit.Test;
 
 /**
  * The service test for ServerInfo
+ *
  * @author
- * 
  */
-public class TestServerInfoService extends BusinessServiceTestBase<ServerInfoService, ServerInfoQuery, ServerInfoQuery, ServerInfoFilter>
-{
+public class TestServerInfoService extends BusinessServiceTestBase<ServerInfoService, ServerInfoQuery, ServerInfoQuery, ServerInfoFilter> {
     private static final int TEST_COUNT = 100;
 
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new ServerInfoSimulator(), TEST_COUNT);
     }
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(ServerInfoService.class, ServerInfoServiceImpl.class);
         super.initialize();
     }
 
     @Test
-    public void testFilter() throws ServiceException
-    {
+    public void testFilter() throws ServiceException {
         TestServiceQuery<ServerInfoQuery, ServerInfoQuery, ServerInfoFilter> testServiceQuery = new TestServiceQuery<ServerInfoQuery, ServerInfoQuery, ServerInfoFilter>(this.getBusinessService());
         QueryAssert<ServerInfoFilter> queryAssert = new QueryAssert<ServerInfoFilter>(ServerInfoQuery.class);
         ServerInfoFilter serverInfoFilter = new ServerInfoFilter();
@@ -48,10 +44,8 @@ public class TestServerInfoService extends BusinessServiceTestBase<ServerInfoSer
     }
 
     private void testFilter_Ip(TestServiceQuery<ServerInfoQuery, ServerInfoQuery, ServerInfoFilter> testServiceQuery, QueryAssert<ServerInfoFilter> queryAssert, ServerInfoFilter serverInfoFilter)
-            throws ServiceException
-    {
-        for (Object entity : this.loadSamples(ServerInfo.class))
-        {
+            throws ServiceException {
+        for (Object entity : this.loadSamples(ServerInfo.class)) {
             ServerInfo serverInfo = (ServerInfo) entity;
             serverInfoFilter.setIp(serverInfo.getIp());
             FilterGroup filterGroup = new FilterGroup();

@@ -16,8 +16,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class InstallPathPanel extends ConfigPanel
-{
+public class InstallPathPanel extends ConfigPanel {
     protected static final Logger logger = Logger.getLogger(InstallPathPanel.class);
     private static final String INSTALL_PATH = "InstallPath";
     private static final long serialVersionUID = 1L;
@@ -29,8 +28,7 @@ public class InstallPathPanel extends ConfigPanel
     private long minNeedSpace = 0l;
     private JLabel needSpaceValueLabel = null;
 
-    private void addComponents(int y, JLabel label, Component component, JButton button)
-    {
+    private void addComponents(int y, JLabel label, Component component, JButton button) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -47,8 +45,7 @@ public class InstallPathPanel extends ConfigPanel
         constraints.gridy = y;
         this.add(component, constraints);
 
-        if (button != null)
-        {
+        if (button != null) {
             constraints.insets = new Insets(2, 2, 2, 40);
             constraints.weightx = 0.1;
             constraints.gridwidth = 1;
@@ -61,8 +58,7 @@ public class InstallPathPanel extends ConfigPanel
         }
     }
 
-    private void addComponents(int y, JLabel needSpaceTitleLabel, JLabel freeSpaceTitleLabel)
-    {
+    private void addComponents(int y, JLabel needSpaceTitleLabel, JLabel freeSpaceTitleLabel) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -88,37 +84,31 @@ public class InstallPathPanel extends ConfigPanel
     }
 
     @Override
-    protected void choicePath(JTextField pathTextField)
-    {
+    protected void choicePath(JTextField pathTextField) {
         super.choicePath(pathTextField);
         this.installPathChanged();
     }
 
-    private void createInstallPathPanel()
-    {
+    private void createInstallPathPanel() {
         int y = 0;
 
         JLabel installPathLabel = new JLabel(this.getText(INSTALL_PATH), JLabel.RIGHT);
         installPathLabel.setLabelFor(this.installPathTextField);
         this.installPathTextField = new JTextField();
         this.installPathTextField.setColumns(Short.MAX_VALUE);
-        this.installPathTextField.getDocument().addDocumentListener(new DocumentListener()
-        {
+        this.installPathTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void changedUpdate(DocumentEvent e)
-            {
+            public void changedUpdate(DocumentEvent e) {
                 InstallPathPanel.this.installPathChanged();
             }
 
             @Override
-            public void insertUpdate(DocumentEvent e)
-            {
+            public void insertUpdate(DocumentEvent e) {
                 InstallPathPanel.this.installPathChanged();
             }
 
             @Override
-            public void removeUpdate(DocumentEvent e)
-            {
+            public void removeUpdate(DocumentEvent e) {
                 InstallPathPanel.this.installPathChanged();
             }
         });
@@ -127,11 +117,9 @@ public class InstallPathPanel extends ConfigPanel
         installPathButton.setAlignmentX(CENTER_ALIGNMENT);
         installPathButton.setMnemonic(KeyEvent.VK_B);
         installPathButton.setDisplayedMnemonicIndex(installPathButton.getText().indexOf("B"));
-        installPathButton.addActionListener(new ActionListener()
-        {
+        installPathButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 InstallPathPanel.this.choicePath(InstallPathPanel.this.installPathTextField);
             }
         });
@@ -145,8 +133,7 @@ public class InstallPathPanel extends ConfigPanel
         this.addGridBagSpace(this, y);
     }
 
-    public long getFreeSpace()
-    {
+    public long getFreeSpace() {
         return this.freeSpace;
     }
 
@@ -155,13 +142,11 @@ public class InstallPathPanel extends ConfigPanel
         this.freeSpaceValueLabel.setText(this.getFreeSpaceText());
     }
 
-    private String getFreeSpaceText()
-    {
+    private String getFreeSpaceText() {
         return this.formator.format(this.freeSpace);
     }
 
-    public String getInstallPath()
-    {
+    public String getInstallPath() {
         return this.installPathTextField.getText();
     }
 
@@ -169,8 +154,7 @@ public class InstallPathPanel extends ConfigPanel
         this.installPathTextField.setText(value);
     }
 
-    public long getMinNeedSpace()
-    {
+    public long getMinNeedSpace() {
         return this.minNeedSpace;
     }
 
@@ -179,20 +163,17 @@ public class InstallPathPanel extends ConfigPanel
         this.needSpaceValueLabel.setText(this.getNeedSpaceText());
     }
 
-    private String getNeedSpaceText()
-    {
+    private String getNeedSpaceText() {
         return this.formator.format(this.minNeedSpace);
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new GridBagLayout());
         this.createInstallPathPanel();
     }
 
-    private void installPathChanged()
-    {
+    private void installPathChanged() {
         File file = new File(this.installPathTextField.getText());
         while (!file.exists() && file.getParentFile() != null)
             file = file.getParentFile();
@@ -203,15 +184,12 @@ public class InstallPathPanel extends ConfigPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         return ValidateUtils.validateEmpty(this, this.installPathTextField, INSTALL_PATH);
     }
 
-    public boolean validateData(Map<String, String> selectedMap)
-    {
-        for (Entry<String, String> selectedService : selectedMap.entrySet())
-        {
+    public boolean validateData(Map<String, String> selectedMap) {
+        for (Entry<String, String> selectedService : selectedMap.entrySet()) {
             String value = this.installPathTextField.getText() + File.separator + selectedService.getKey();
             if (!ValidateUtils.validateInstallPath(this, this.installPathTextField, value, selectedService.getValue()))
                 return false;

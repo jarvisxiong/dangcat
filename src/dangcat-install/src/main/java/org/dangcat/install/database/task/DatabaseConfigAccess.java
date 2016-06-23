@@ -10,17 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class DatabaseConfigAccess extends DatabaseAccess implements ConfigureAccess
-{
+public class DatabaseConfigAccess extends DatabaseAccess implements ConfigureAccess {
     private Map<String, DatabaseConfigPanel> databaseConfigPanels = new LinkedHashMap<String, DatabaseConfigPanel>();
 
-    public void addDatabaseConfigPanel(String name, DatabaseConfigPanel databaseConfigPanel)
-    {
+    public void addDatabaseConfigPanel(String name, DatabaseConfigPanel databaseConfigPanel) {
         this.databaseConfigPanels.put(name, databaseConfigPanel);
     }
 
-    private void load(DatabaseConfigPanel databaseConfigPanel, Properties properties)
-    {
+    private void load(DatabaseConfigPanel databaseConfigPanel, Properties properties) {
         Database database = databaseConfigPanel.getDatabase();
         String name = database.getName();
         String server = properties.getProperty(this.getServerKey(name));
@@ -38,14 +35,12 @@ public class DatabaseConfigAccess extends DatabaseAccess implements ConfigureAcc
     }
 
     @Override
-    public void load(Properties properties)
-    {
+    public void load(Properties properties) {
         for (DatabaseConfigPanel databaseConfigPanel : this.databaseConfigPanels.values())
             this.load(databaseConfigPanel, properties);
     }
 
-    private void save(DatabaseConfigPanel databaseConfigPanel, Properties properties)
-    {
+    private void save(DatabaseConfigPanel databaseConfigPanel, Properties properties) {
         Database database = databaseConfigPanel.getDatabase();
         String name = database.getName();
         String server = database.getServer() == null ? database.getDefaultServer() : database.getServer();
@@ -62,8 +57,7 @@ public class DatabaseConfigAccess extends DatabaseAccess implements ConfigureAcc
     }
 
     @Override
-    public void save(Properties properties)
-    {
+    public void save(Properties properties) {
         for (DatabaseConfigPanel databaseConfigPanel : this.databaseConfigPanels.values())
             this.save(databaseConfigPanel, properties);
     }

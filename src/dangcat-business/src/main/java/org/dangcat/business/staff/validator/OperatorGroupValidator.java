@@ -12,11 +12,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 
-public class OperatorGroupValidator extends BusinessValidator<OperatorGroup>
-{
+public class OperatorGroupValidator extends BusinessValidator<OperatorGroup> {
     @Override
-    public void beforeDelete(OperatorGroup operatorGroup) throws ServiceException
-    {
+    public void beforeDelete(OperatorGroup operatorGroup) throws ServiceException {
         // 已经绑定操作员的组不能删除。
         if (this.exists(OperatorInfo.class, OperatorInfo.GroupId, operatorGroup.getId()))
             throw new OperatorGroupException(OperatorGroupException.CHILE_OPERATOR_EXISTS);
@@ -29,8 +27,7 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup>
     }
 
     @Override
-    public void beforeSave(OperatorGroup operatorGroup) throws ServiceException
-    {
+    public void beforeSave(OperatorGroup operatorGroup) throws ServiceException {
         this.validateExists(operatorGroup);
         if (operatorGroup.hasError())
             return;
@@ -43,8 +40,7 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup>
         this.validateParent(operatorGroup);
     }
 
-    private boolean isMembers(Integer groupId)
-    {
+    private boolean isMembers(Integer groupId) {
         OperatorGroupLoader operatorGroupLoader = new OperatorGroupLoader(this.getEntityManager());
         Map<Integer, String> operatorGroupMap = operatorGroupLoader.loadMembers(null);
         if (operatorGroupMap != null)
@@ -52,8 +48,7 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup>
         return true;
     }
 
-    private boolean isParent(Integer groupId)
-    {
+    private boolean isParent(Integer groupId) {
         OperatorGroupLoader operatorGroupLoader = new OperatorGroupLoader(this.getEntityManager());
         Map<Integer, String> operatorGroupMap = operatorGroupLoader.loadMembers(groupId);
         if (operatorGroupMap != null)
@@ -61,54 +56,43 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup>
         return false;
     }
 
-    private void validateExists(OperatorGroup operatorGroup)
-    {
-        if (operatorGroup.getId() != null)
-        {
+    private void validateExists(OperatorGroup operatorGroup) {
+        if (operatorGroup.getId() != null) {
             // 操作员组不存在。
             if (!this.exists(OperatorGroup.class, OperatorGroup.Id, operatorGroup.getId()))
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.Name, OperatorGroupException.DATA_NOTEXISTS));
         }
     }
 
-    private void validateMember(OperatorGroup operatorGroup) throws OperatorGroupException
-    {
-        if (operatorGroup.getId() != null)
-        {
+    private void validateMember(OperatorGroup operatorGroup) throws OperatorGroupException {
+        if (operatorGroup.getId() != null) {
             if (!this.isMembers(operatorGroup.getId()))
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroupException.MODIFY_DENY_FOR_NOTMEMBER));
         }
     }
 
-    private void validateName(OperatorGroup operatorGroup)
-    {
-        if (!ValueUtils.isEmpty(operatorGroup.getName()))
-        {
+    private void validateName(OperatorGroup operatorGroup) {
+        if (!ValueUtils.isEmpty(operatorGroup.getName())) {
             // 操作员组的名称不能重复。
             if (this.checkRepeat(OperatorGroup.class, operatorGroup, OperatorGroup.Name, operatorGroup.getName()))
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.Name, OperatorGroupException.DATA_REPEAT));
         }
     }
 
-    private void validateParent(OperatorGroup operatorGroup)
-    {
-        if (operatorGroup.getParentId() != null)
-        {
+    private void validateParent(OperatorGroup operatorGroup) {
+        if (operatorGroup.getParentId() != null) {
             // 所属操作员组不存在。
             OperatorGroup parentGroup = this.getEntityManager().load(OperatorGroup.class, operatorGroup.getParentId());
             if (parentGroup == null)
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.ParentId, OperatorGroupException.DATA_NOTEXISTS));
-            else if (operatorGroup.getId() != null)
-            {
+            else if (operatorGroup.getId() != null) {
                 // 所属操作员组不能循环绑定。
                 Collection<OperatorGroup> operatorGroupCollection = new HashSet<OperatorGroup>();
-                while (parentGroup != null)
-                {
+                while (parentGroup != null) {
                     if (operatorGroupCollection.contains(parentGroup))
                         break;
 
-                    if (operatorGroup.getId().equals(parentGroup.getId()))
-                    {
+                    if (operatorGroup.getId().equals(parentGroup.getId())) {
                         operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.ParentId, OperatorGroupException.BIND_CYCLING));
                         break;
                     }

@@ -8,16 +8,14 @@ import org.dangcat.persistence.entity.EntityManager;
 
 import java.util.List;
 
-public class EntityDataLoader implements EntityLoader<EntityData>
-{
+public class EntityDataLoader implements EntityLoader<EntityData> {
     @Cache(AccountInfo.class)
     private EntityCache<AccountInfo> accountInfoCache = null;
     @Database
     private EntityManager defaultEntityManager = null;
 
     @Override
-    public List<EntityData> load(EntityManager entityManager)
-    {
+    public List<EntityData> load(EntityManager entityManager) {
         if (this.defaultEntityManager == null)
             throw new RuntimeException("The inject entityManager is null.");
         if (this.accountInfoCache == null)

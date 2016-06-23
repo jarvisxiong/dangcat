@@ -14,37 +14,27 @@ import java.io.InputStream;
 
 /**
  * 文件上传。
+ *
  * @author Administrator
- * 
  */
-public class UploadDemoServiceImpl implements UploadDemoService
-{
+public class UploadDemoServiceImpl implements UploadDemoService {
     protected static final Logger logger = Logger.getLogger(UploadDemoService.class);
 
-    private void executeProcess()
-    {
+    private void executeProcess() {
         InvokeProcess invokeProcess = ServiceContext.getInstance().getParam(InvokeProcess.class);
-        if (invokeProcess != null)
-        {
-            for (InvokeStep invokeStep : invokeProcess.getInvokeSteps())
-            {
+        if (invokeProcess != null) {
+            for (InvokeStep invokeStep : invokeProcess.getInvokeSteps()) {
                 if (invokeStep.getStatus() != InvokeStep.FINISHED)
                     invokeStep.setTotal(100);
             }
 
-            for (InvokeStep invokeStep : invokeProcess.getInvokeSteps())
-            {
-                if (invokeStep.getStatus() != InvokeStep.FINISHED)
-                {
-                    for (int i = 0; i < invokeStep.getTotal() && !invokeStep.isCancel(); i++)
-                    {
+            for (InvokeStep invokeStep : invokeProcess.getInvokeSteps()) {
+                if (invokeStep.getStatus() != InvokeStep.FINISHED) {
+                    for (int i = 0; i < invokeStep.getTotal() && !invokeStep.isCancel(); i++) {
                         invokeStep.setCurrent(i + 1);
-                        try
-                        {
+                        try {
                             Thread.sleep(100);
-                        }
-                        catch (InterruptedException e)
-                        {
+                        } catch (InterruptedException e) {
                         }
                     }
                 }
@@ -55,8 +45,7 @@ public class UploadDemoServiceImpl implements UploadDemoService
     /**
      * 上传字节数组。
      */
-    public ServiceInformation uploadBytes(byte[] bytes)
-    {
+    public ServiceInformation uploadBytes(byte[] bytes) {
         this.executeProcess();
         String result = "uploadBytes receive bytes " + bytes.length;
         logger.info(result);
@@ -66,8 +55,7 @@ public class UploadDemoServiceImpl implements UploadDemoService
     /**
      * 上传文件。
      */
-    public ServiceInformation uploadFile(File file)
-    {
+    public ServiceInformation uploadFile(File file) {
         this.executeProcess();
         String result = "uploadFile receive file " + file.getAbsolutePath();
         logger.info(result);
@@ -77,22 +65,18 @@ public class UploadDemoServiceImpl implements UploadDemoService
     /**
      * 上传数据流。
      */
-    public ServiceInformation uploadInputStream(InputStream inputStream)
-    {
+    public ServiceInformation uploadInputStream(InputStream inputStream) {
         this.executeProcess();
         String result = null;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int length = 0;
         byte[] buffer = new byte[1024];
-        try
-        {
+        try {
             while ((length = inputStream.read(buffer)) > 0)
                 outputStream.write(buffer, 0, length);
             result = "uploadInputStream receive " + outputStream.size();
             logger.info(result);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             logger.error(this, e);
         }
         return new ServiceInformation(result);

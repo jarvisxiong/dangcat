@@ -4,8 +4,7 @@ import org.dangcat.persistence.model.Table;
 import org.dangcat.persistence.simulate.DataSimulator;
 import org.dangcat.persistence.simulate.DatabaseSimulator;
 
-public abstract class SimulateData
-{
+public abstract class SimulateData {
     protected DataSimulator dataSimulator = null;
     private int size;
 
@@ -15,13 +14,11 @@ public abstract class SimulateData
 
     public abstract void createDataSimulator(DatabaseSimulator databaseSimulator);
 
-    public DataSimulator getDataSimulator()
-    {
+    public DataSimulator getDataSimulator() {
         return dataSimulator;
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return size;
     }
 
@@ -29,13 +26,11 @@ public abstract class SimulateData
         this.size = size;
     }
 
-    public Table getTable()
-    {
+    public Table getTable() {
         return this.getDataSimulator().getTable();
     }
 
-    public void initTable()
-    {
+    public void initTable() {
         Table table = this.getTable();
         if (table.exists())
             table.drop();

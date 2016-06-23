@@ -17,8 +17,7 @@ import java.util.Date;
 
 @Table
 @Calculator(OperatorInfoCalculator.class)
-public class OperatorInfo extends OperatorInfoBase
-{
+public class OperatorInfo extends OperatorInfoBase {
     public static final String Description = "Description";
     public static final String ExpiryTime = "ExpiryTime";
     public static final String GroupId = "GroupId";
@@ -46,7 +45,7 @@ public class OperatorInfo extends OperatorInfoBase
     private String groupName = null;
 
     @Column(index = 11, displaySize = 20)
-    @LogicValidators( { MobileValidator.class })
+    @LogicValidators({MobileValidator.class})
     private String mobile = null;
 
     @Column(index = 15, isReadonly = true)
@@ -65,97 +64,78 @@ public class OperatorInfo extends OperatorInfoBase
     @Permission(value = "advencedModify", visible = true)
     private Boolean useAble = null;
 
-    public OperatorInfo()
-    {
+    public OperatorInfo() {
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Date getExpiryTime()
-    {
+    public Date getExpiryTime() {
         return this.expiryTime;
     }
 
-    public void setExpiryTime(Date expiryTime)
-    {
+    public void setExpiryTime(Date expiryTime) {
         this.expiryTime = expiryTime;
     }
 
-    public Integer getGroupId()
-    {
+    public Integer getGroupId() {
         return this.groupId;
     }
 
-    public void setGroupId(Integer groupId)
-    {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
-    public String getGroupName()
-    {
+    public String getGroupName() {
         return groupName;
     }
 
-    public void setGroupName(String groupName)
-    {
+    public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    public String getMobile()
-    {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile)
-    {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public Date getRegisterTime()
-    {
+    public Date getRegisterTime() {
         return this.registerTime;
     }
 
-    public void setRegisterTime(Date registerTime)
-    {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
-    public Integer getRoleId()
-    {
+    public Integer getRoleId() {
         return this.roleId;
     }
 
-    public void setRoleId(Integer roleId)
-    {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public String getRoleName()
-    {
+    public String getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName)
-    {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public Boolean getUseAble()
-    {
+    public Boolean getUseAble() {
         return this.useAble == null ? Boolean.FALSE : this.useAble;
     }
 
-    public void setUseAble(Boolean useAble)
-    {
+    public void setUseAble(Boolean useAble) {
         this.useAble = useAble;
     }
 }

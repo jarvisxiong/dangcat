@@ -16,18 +16,15 @@ import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
-public abstract class TestFTPSession
-{
+public abstract class TestFTPSession {
     protected static final Logger logger = Logger.getLogger(FTPSession.class);
 
     @BeforeClass
-    public static void initialize() throws IOException, SessionException
-    {
+    public static void initialize() throws IOException, SessionException {
         SimulateUtils.configure();
     }
 
-    private void deleteRemotePath(String remotePath) throws FTPSessionException
-    {
+    private void deleteRemotePath(String remotePath) throws FTPSessionException {
         FTPSession ftpSession = this.getFTPSession();
         ftpSession.delete(remotePath);
         this.release();
@@ -35,8 +32,7 @@ public abstract class TestFTPSession
 
     protected abstract FTPSession getFTPSession();
 
-    private File getLocalDirectory()
-    {
+    private File getLocalDirectory() {
         String pathName = TestFTPSession.class.getPackage().getName().replace(".", "/");
         return new File(FileUtils.getResourcePath(TestFTPSession.class, pathName));
     }
@@ -45,11 +41,11 @@ public abstract class TestFTPSession
 
     /**
      * 测试FTP目录功能。
+     *
      * @throws FTPSessionException
      */
     @Test
-    public void testFTPDirectory() throws FTPSessionException
-    {
+    public void testFTPDirectory() throws FTPSessionException {
         final String remotePath = "data/Data/dir1";
         this.deleteRemotePath(remotePath);
         FTPSession ftpSession = this.getFTPSession();
@@ -67,19 +63,17 @@ public abstract class TestFTPSession
 
     /**
      * 测试指定FTP文件功能。
+     *
      * @throws FTPSessionException
      */
     @Test
-    public void testFTPFile() throws FTPSessionException
-    {
+    public void testFTPFile() throws FTPSessionException {
         final String remotePath = "data\\dir2";
         this.deleteRemotePath(remotePath);
         FTPSession ftpSession = this.getFTPSession();
-        File[] localFiles = this.getLocalDirectory().listFiles(new FileFilter()
-        {
+        File[] localFiles = this.getLocalDirectory().listFiles(new FileFilter() {
             @Override
-            public boolean accept(File pathname)
-            {
+            public boolean accept(File pathname) {
                 return pathname.isFile();
             }
         });
@@ -99,11 +93,11 @@ public abstract class TestFTPSession
 
     /**
      * 测试FTP过滤功能。
+     *
      * @throws FTPSessionException
      */
     @Test
-    public void testFTPFilter() throws FTPSessionException
-    {
+    public void testFTPFilter() throws FTPSessionException {
         // 测试过滤上传
         final String remotePath = "data/dir3";
         final String directoryName = "filter";
@@ -114,11 +108,9 @@ public abstract class TestFTPSession
         String path = localDirectory.getAbsolutePath() + File.separator + directoryName;
         FileUtils.mkdir(path);
         FileUtils.copy(new File(localDirectory.getAbsolutePath() + File.separator + fileName), new File(path));
-        FileFilter localFileFilter = new FileFilter()
-        {
+        FileFilter localFileFilter = new FileFilter() {
             @Override
-            public boolean accept(File file)
-            {
+            public boolean accept(File file) {
                 if (file.isDirectory())
                     return file.getName().equalsIgnoreCase("filter");
                 return file.getName().startsWith("Test");
@@ -143,11 +135,11 @@ public abstract class TestFTPSession
 
     /**
      * 测试FTP重命名功能。
+     *
      * @throws FTPSessionException
      */
     @Test
-    public void testFTPRename() throws FTPSessionException
-    {
+    public void testFTPRename() throws FTPSessionException {
         final String remotePath = "data/dir5";
         final String oldFileName = TestFTPPoolSession.class.getSimpleName() + ".class";
         final String newFileName = TestFTPPoolSession.class.getSimpleName() + ".classftp";
@@ -157,11 +149,9 @@ public abstract class TestFTPSession
         FTPSession ftpSession = this.getFTPSession();
         File localDirectory = this.getLocalDirectory();
         FileUtils.mkdir(localDirectory.getAbsolutePath() + File.separator + oldDirectoryName);
-        FileFilter localFileFilter = new FileFilter()
-        {
+        FileFilter localFileFilter = new FileFilter() {
             @Override
-            public boolean accept(File file)
-            {
+            public boolean accept(File file) {
                 if (file.isDirectory())
                     return file.getName().equalsIgnoreCase(oldDirectoryName);
                 return file.getName().equals(oldFileName);
@@ -173,11 +163,9 @@ public abstract class TestFTPSession
         File downlodPath = SimulateUtils.createTmpDirectory(remotePath);
         ftpSession.download(downlodPath, remotePath, null);
 
-        File[] findFiles = downlodPath.listFiles(new FileFilter()
-        {
+        File[] findFiles = downlodPath.listFiles(new FileFilter() {
             @Override
-            public boolean accept(File file)
-            {
+            public boolean accept(File file) {
                 if (file.isDirectory())
                     return file.getName().equalsIgnoreCase(newDirectoryName);
                 return file.getName().equals(newFileName);

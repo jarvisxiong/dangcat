@@ -20,11 +20,10 @@ import java.util.Map.Entry;
 
 /**
  * 权限管理。
+ *
  * @author dangcat
- * 
  */
-public class PermissionManager
-{
+public class PermissionManager {
     protected static Logger logger = Logger.getLogger(PermissionManager.class);
     private static PermissionManager instance = new PermissionManager();
     private Map<Integer, Permission> methodPermissionMap = new HashMap<Integer, Permission>();
@@ -36,28 +35,23 @@ public class PermissionManager
     private PermissionManager() {
     }
 
-    public static PermissionManager getInstance()
-    {
+    public static PermissionManager getInstance() {
         return instance;
     }
 
-    public static void stop()
-    {
+    public static void stop() {
         instance = new PermissionManager();
     }
 
-    public void addModule(Module module)
-    {
+    public void addModule(Module module) {
         if (this.moduleMap.containsKey(module.getName()))
             logger.error("The permission congfig is error: " + module);
         else
             this.moduleMap.put(module.getName(), module);
     }
 
-    public void addPermissions(String roleName, Collection<Integer> permissions)
-    {
-        if (!ValueUtils.isEmpty(roleName))
-        {
+    public void addPermissions(String roleName, Collection<Integer> permissions) {
+        if (!ValueUtils.isEmpty(roleName)) {
             if (this.rolePermissionMap.containsKey(roleName))
                 logger.info("Change role " + roleName + " permissions.");
             if (permissions == null || permissions.size() == 0)
@@ -67,34 +61,26 @@ public class PermissionManager
         }
     }
 
-    private void configure(File configFile)
-    {
-        if (configFile == null || !configFile.exists())
-        {
+    private void configure(File configFile) {
+        if (configFile == null || !configFile.exists()) {
             logger.warn("The permission file is not exists : " + configFile.getAbsolutePath());
             return;
         }
 
         InputStream inputStream = null;
-        try
-        {
+        try {
             inputStream = new FileInputStream(configFile);
             PermissionManagerXmlResolver permissionManagerXmlResolver = new PermissionManagerXmlResolver(this);
             permissionManagerXmlResolver.open(inputStream);
             permissionManagerXmlResolver.resolve();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
-        }
-        finally
-        {
+        } finally {
             inputStream = FileUtils.close(inputStream);
         }
     }
 
-    public Module findModule(String jndiName)
-    {
+    public Module findModule(String jndiName) {
         String moduleName = null;
         int index = jndiName.indexOf("/");
         if (index == -1)
@@ -103,51 +89,40 @@ public class PermissionManager
         return this.moduleMap.get(moduleName);
     }
 
-    public Permission getMethodPermission(Integer permissionValue)
-    {
+    public Permission getMethodPermission(Integer permissionValue) {
         return this.methodPermissionMap.get(permissionValue);
     }
 
-    public Collection<Integer> getMethodPermissions()
-    {
+    public Collection<Integer> getMethodPermissions() {
         return this.methodPermissionMap.keySet();
     }
 
-    public Collection<Module> getModules()
-    {
+    public Collection<Module> getModules() {
         return this.moduleMap.values();
     }
 
-    public Collection<Integer> getPermissions(String roleName)
-    {
+    public Collection<Integer> getPermissions(String roleName) {
         return this.rolePermissionMap.get(roleName);
     }
 
-    public Collection<String> getRoles()
-    {
+    public Collection<String> getRoles() {
         return this.rolePermissionMap.keySet();
     }
 
-    public ServiceInfo getServiceInfo(Integer id)
-    {
+    public ServiceInfo getServiceInfo(Integer id) {
         return this.serviceInfoMap.get(id);
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         Collection<String> jndiNameCollection = serviceFactory.getJndiNames(false);
-        if (jndiNameCollection != null)
-        {
-            for (String jndiName : jndiNameCollection)
-            {
+        if (jndiNameCollection != null) {
+            for (String jndiName : jndiNameCollection) {
                 ServiceInfo serviceInfo = serviceFactory.getServiceInfo(jndiName);
                 Module module = this.findModule(jndiName);
-                if (module != null)
-                {
+                if (module != null) {
                     JndiName serviceName = module.findJndiName(jndiName);
-                    if (serviceName != null)
-                    {
+                    if (serviceName != null) {
                         Map<Integer, Permission> methodPermissionMap = ServiceCalculator.createPermissionValues(serviceInfo, module.getId(), serviceName.getId());
                         if (methodPermissionMap != null && !methodPermissionMap.isEmpty())
                             this.methodPermissionMap.putAll(methodPermissionMap);
@@ -159,37 +134,30 @@ public class PermissionManager
             }
         }
 
-        if (this.rolePermissions != null)
-        {
+        if (this.rolePermissions != null) {
             for (RolePermission rolePermission : this.rolePermissions)
                 rolePermission.createPermissions(this);
         }
         this.log();
     }
 
-    public void load()
-    {
+    public void load() {
         ConfigureReader configureReader = ApplicationContext.getInstance().getConfigureReader();
         String permissionConfigFileName = configureReader.getPermissionConfigFileName();
-        if (!ValueUtils.isEmpty(permissionConfigFileName))
-        {
+        if (!ValueUtils.isEmpty(permissionConfigFileName)) {
             this.configure(new File(ApplicationContext.getInstance().getContextPath().getConf() + File.separator + permissionConfigFileName));
             this.initialize();
         }
     }
 
-    private void log()
-    {
-        if (logger.isDebugEnabled())
-        {
-            for (Entry<String, Collection<Integer>> entry : this.rolePermissionMap.entrySet())
-            {
+    private void log() {
+        if (logger.isDebugEnabled()) {
+            for (Entry<String, Collection<Integer>> entry : this.rolePermissionMap.entrySet()) {
                 StringBuilder info = new StringBuilder();
                 List<Integer> permissionList = new ArrayList<Integer>();
                 permissionList.addAll(entry.getValue());
                 Collections.sort(permissionList);
-                for (Integer permission : permissionList)
-                {
+                for (Integer permission : permissionList) {
                     if (info.length() == 0)
                         info.append(entry.getKey() + ": ");
                     else
@@ -201,8 +169,7 @@ public class PermissionManager
         }
     }
 
-    public void setRolePermissions(Collection<RolePermission> rolePermissions)
-    {
+    public void setRolePermissions(Collection<RolePermission> rolePermissions) {
         this.rolePermissions = rolePermissions;
     }
 }

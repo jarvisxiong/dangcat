@@ -19,8 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public abstract class FrameBase extends JFrameExt implements ActionListener
-{
+public abstract class FrameBase extends JFrameExt implements ActionListener {
     private static final String BOF = "Bof";
     private static final String EOF = "Eof";
     private static final String NEXT = "next";
@@ -34,8 +33,7 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
     private ToolBarPanel toolBarContainer = null;
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
+    public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getActionCommand().equals(ToolBarPanel.CANCEL))
             this.cancel();
 
@@ -50,47 +48,37 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
         toolBarContainer.addState(BOF, bodyContainer.isBof());
     }
 
-    protected void addProcessModule(ProcessModule processModule)
-    {
+    protected void addProcessModule(ProcessModule processModule) {
         if (processModule != null)
             this.processModules.add(processModule);
     }
 
-    protected void cancel()
-    {
+    protected void cancel() {
         this.getProcessTaskManager().cancel();
         this.getToolBarContainer().removeState(ToolBarPanel.PROCESS);
         this.getBodyContainer().prior();
     }
 
-    private InstallBodyPanel createBodyContainer()
-    {
+    private InstallBodyPanel createBodyContainer() {
         InstallBodyPanel bodyContainer = new InstallBodyPanel();
         this.createBodyContent(bodyContainer);
         bodyContainer.initialize();
         return bodyContainer;
     }
 
-    protected void createBodyContent(InstallBodyPanel bodyContainer)
-    {
+    protected void createBodyContent(InstallBodyPanel bodyContainer) {
         Collection<ProcessModule> processModules = this.getProcessModules();
-        if (processModules != null && !processModules.isEmpty())
-        {
-            for (ProcessModule processModule : processModules)
-            {
+        if (processModules != null && !processModules.isEmpty()) {
+            for (ProcessModule processModule : processModules) {
                 Collection<ConfigPanel> configPanels = processModule.getConfigPanels();
-                if (configPanels != null)
-                {
+                if (configPanels != null) {
                     ConfigPanel configPanel = null;
-                    if (configPanels.size() == 1)
-                    {
+                    if (configPanels.size() == 1) {
                         configPanel = configPanels.iterator().next();
                         configPanel.setBorder(new TitledBorder(configPanel.getTitle()));
-                    }
-                    else if (configPanels.size() > 1)
+                    } else if (configPanels.size() > 1)
                         configPanel = this.createConfigTabPanel(configPanels);
-                    if (configPanel != null)
-                    {
+                    if (configPanel != null) {
                         bodyContainer.addContainer(processModule.getName(), configPanel);
                         processModule.setContainer(configPanel);
                         configPanel.setVisible(false);
@@ -100,8 +88,7 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
         }
     }
 
-    private ConfigTabPanel createConfigTabPanel(Collection<ConfigPanel> configPanels)
-    {
+    private ConfigTabPanel createConfigTabPanel(Collection<ConfigPanel> configPanels) {
         ConfigTabPanel configTabPanel = new ConfigTabPanel();
         configTabPanel.setConfigPanels(configPanels);
         configTabPanel.initialize();
@@ -109,8 +96,7 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel content = new JPanel(new BorderLayout());
         content.setPreferredSize(PERFECT_SIZE);
 
@@ -129,8 +115,7 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
         return content;
     }
 
-    private InstallHeaderPanel createHeaderContainer()
-    {
+    private InstallHeaderPanel createHeaderContainer() {
         InstallHeaderPanel headerContainer = new InstallHeaderPanel();
         headerContainer.setTitle(this.getTitle());
         if (!ValueUtils.isEmpty(this.getBackgroundName()))
@@ -141,30 +126,24 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
 
     protected abstract ToolBarPanel createToolBarContainer();
 
-    protected void executeFinished()
-    {
+    protected void executeFinished() {
         this.getToolBarContainer().removeState(ToolBarPanel.PROCESS);
         this.processTaskManager = null;
     }
 
-    protected void executeProcess()
-    {
+    protected void executeProcess() {
         Collection<ProcessModule> processModules = this.getProcessModules();
-        if (processModules != null && !processModules.isEmpty())
-        {
-            for (ProcessModule processModule : processModules)
-            {
+        if (processModules != null && !processModules.isEmpty()) {
+            for (ProcessModule processModule : processModules) {
                 if (processModule.isEnabled())
                     processModule.prepare();
             }
         }
 
         ProcessTaskManager processTaskManager = this.getProcessTaskManager();
-        processTaskManager.setExecuteCallback(new Runnable()
-        {
+        processTaskManager.setExecuteCallback(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 FrameBase.this.executeFinished();
             }
         });
@@ -173,40 +152,31 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
         this.getToolBarContainer().addState(ToolBarPanel.PROCESS, true);
     }
 
-    protected String getBackgroundName()
-    {
+    protected String getBackgroundName() {
         return null;
     }
 
-    protected InstallBodyPanel getBodyContainer()
-    {
+    protected InstallBodyPanel getBodyContainer() {
         return this.bodyContainer;
     }
 
-    protected InstallHeaderPanel getHeaderContainer()
-    {
+    protected InstallHeaderPanel getHeaderContainer() {
         return this.headerContainer;
     }
 
-    protected Collection<ProcessModule> getProcessModules()
-    {
+    protected Collection<ProcessModule> getProcessModules() {
         return this.processModules;
     }
 
-    protected ProcessTaskManager getProcessTaskManager()
-    {
-        if (this.processTaskManager == null)
-        {
+    protected ProcessTaskManager getProcessTaskManager() {
+        if (this.processTaskManager == null) {
             ProcessTaskManager processTaskManager = new ProcessTaskManager();
             processTaskManager.setClassType(this.getClass());
             Collection<ProcessModule> processModules = this.getProcessModules();
-            if (processModules != null && !processModules.isEmpty())
-            {
-                for (ProcessModule processModule : processModules)
-                {
+            if (processModules != null && !processModules.isEmpty()) {
+                for (ProcessModule processModule : processModules) {
                     Collection<ProcessTask> processTasks = processModule.getProcessTasks();
-                    if (processTasks != null)
-                    {
+                    if (processTasks != null) {
                         for (ProcessTask processTask : processTasks)
                             processTaskManager.addTask(processTask);
                     }
@@ -217,46 +187,36 @@ public abstract class FrameBase extends JFrameExt implements ActionListener
         return this.processTaskManager;
     }
 
-    protected ToolBarPanel getToolBarContainer()
-    {
+    protected ToolBarPanel getToolBarContainer() {
         return this.toolBarContainer;
     }
 
     public abstract void initialize();
 
-    protected boolean isSuccessFull()
-    {
+    protected boolean isSuccessFull() {
         ProcessTaskManager processTaskManager = this.getProcessTaskManager();
         return !processTaskManager.isCancel() && processTaskManager.getException() == null;
     }
 
     @Override
-    public void pack()
-    {
+    public void pack() {
         this.initialize();
         super.pack();
     }
 
-    protected void prepare()
-    {
+    protected void prepare() {
         this.getProcessTaskManager().prepare();
         this.getToolBarContainer().removeState(ToolBarPanel.PROCESS);
     }
 
-    protected boolean validateData()
-    {
+    protected boolean validateData() {
         Collection<ProcessModule> processModules = this.getProcessModules();
-        if (processModules != null && !processModules.isEmpty())
-        {
-            for (ProcessModule processModule : processModules)
-            {
-                if (processModule.isEnabled())
-                {
+        if (processModules != null && !processModules.isEmpty()) {
+            for (ProcessModule processModule : processModules) {
+                if (processModule.isEnabled()) {
                     Collection<ConfigPanel> configPanels = processModule.getConfigPanels();
-                    if (configPanels != null)
-                    {
-                        for (ConfigPanel configPanel : configPanels)
-                        {
+                    if (configPanels != null) {
+                        for (ConfigPanel configPanel : configPanels) {
                             if (!configPanel.validateData())
                                 return false;
                         }

@@ -7,12 +7,11 @@ import java.util.Map;
 
 /**
  * 业务服务接口。
- * @author dangcat
- * 
+ *
  * @param <V>
+ * @author dangcat
  */
-public interface BusinessService<Q extends EntityBase, V extends EntityBase, F extends DataFilter>
-{
+public interface BusinessService<Q extends EntityBase, V extends EntityBase, F extends DataFilter> {
     String QUERY_TABLENAME = "Q";
     String VIEW_TABLENAME = "V";
 
@@ -23,6 +22,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 新增实体数据。
+     *
      * @param entity 实体对象。
      * @return 运行结果。
      */
@@ -30,6 +30,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 删除指定条件的数据。
+     *
      * @param id 主键。
      * @return 执行结果。
      */
@@ -37,6 +38,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 判断是否有权限。
+     *
      * @param permissionId 权限码。
      * @return 是否有指定权限。
      */
@@ -44,6 +46,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 查询指定条件的数据。
+     *
      * @param dataFilter 查询范围。
      * @return 查询结果。
      */
@@ -51,6 +54,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 保存实体数据。
+     *
      * @param entity 实体对象。
      * @return 运行结果。
      */
@@ -58,6 +62,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 查询指定条件的列表。
+     *
      * @param dataFilter 查询范围。
      * @return 查询结果。
      */
@@ -65,6 +70,7 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
 
     /**
      * 查询指定主键的数据。
+     *
      * @param id 主键值。
      * @return 查询结果。
      */

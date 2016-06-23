@@ -8,6 +8,7 @@
     <script>
         var isomorphicDir = "../../../../main/webapp/isomorphic/";
         var isc_maxCSSLoaders = 200;
+
     </script>
     <script src="../../../../main/webapp/isomorphic/system/modules-debug/ISC_History.js?isc_version=v9.1p_2014-03-25.js"></script>
     <script src="../../../../main/webapp/isomorphic/system/development/ISC_FileLoader.js?isc_version=v9.1p_2014-03-25.js"></script>
@@ -21,10 +22,10 @@
 </HEAD>
 <BODY>
 <select onchange="tileGrid1.setColumnSize(this.value)">
-  <option value ="2">2</option>
-  <option value ="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
 </select>
 <SCRIPT>
 
@@ -93,6 +94,7 @@ var tileGrid1 = isc.TileGrid.create({
         return this.Super("resized", arguments);
     }
 });
+
 
 </SCRIPT>
 </BODY>

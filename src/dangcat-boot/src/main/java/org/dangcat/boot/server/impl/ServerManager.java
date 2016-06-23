@@ -20,11 +20,10 @@ import java.util.Map;
 
 /**
  * 主机信息。
+ *
  * @author dangcat
- * 
  */
-public class ServerManager extends ServiceBase
-{
+public class ServerManager extends ServiceBase {
     public static final String BIND_SERVER_ADDRESS = "dangcat.bind.serverip";
     public static final String BIND_SERVER_ID = "dangcat.bind.serverid";
     public static final String BIND_SERVER_NAME = "dangcat.bind.servername";
@@ -42,46 +41,34 @@ public class ServerManager extends ServiceBase
         super(parent);
     }
 
-    public static ServerManager createInstance(ServiceProvider parent)
-    {
+    public static ServerManager createInstance(ServiceProvider parent) {
         instance = new ServerManager(parent);
         return instance;
     }
 
-    public static ServerManager getInstance()
-    {
+    public static ServerManager getInstance() {
         return instance;
     }
 
-    private InetAddress getLocalHost()
-    {
-        if (this.localhost == null)
-        {
-            try
-            {
+    private InetAddress getLocalHost() {
+        if (this.localhost == null) {
+            try {
                 this.localhost = NetUtils.toInetAddress(DEFAULT_SERVER_ADDRESS);
-            }
-            catch (UnknownHostException e)
-            {
+            } catch (UnknownHostException e) {
             }
         }
         return this.localhost;
     }
 
-    public InetAddress getServerAddress()
-    {
+    public InetAddress getServerAddress() {
         if (ValueUtils.isEmpty(System.getProperty(BIND_SERVER_ADDRESS)))
             return this.getLocalHost();
 
-        if (this.serverAddress == null)
-        {
+        if (this.serverAddress == null) {
             InetAddress serverAddress = null;
-            try
-            {
+            try {
                 serverAddress = NetUtils.toInetAddress(System.getProperty(BIND_SERVER_ADDRESS));
-            }
-            catch (UnknownHostException e)
-            {
+            } catch (UnknownHostException e) {
             }
             if (serverAddress == null)
                 serverAddress = this.getLocalHost();
@@ -90,8 +77,7 @@ public class ServerManager extends ServiceBase
         return this.serverAddress;
     }
 
-    public Integer getServerId()
-    {
+    public Integer getServerId() {
         if (this.serverId == null)
             this.serverId = ValueUtils.parseInt(System.getProperty(BIND_SERVER_ID));
         return this.serverId;
@@ -105,8 +91,7 @@ public class ServerManager extends ServiceBase
             System.setProperty(BIND_SERVER_ID, null);
     }
 
-    public ServerInfo getServerInfo()
-    {
+    public ServerInfo getServerInfo() {
         this.serverInfo.setId(this.getServerId());
         this.serverInfo.setName(this.getServerName());
         this.serverInfo.setType(ServerConfig.getInstance().getType());
@@ -115,13 +100,11 @@ public class ServerManager extends ServiceBase
         return this.serverInfo;
     }
 
-    public ServerInfo getServerInfo(String ip)
-    {
+    public ServerInfo getServerInfo(String ip) {
         return this.serverInfoMap.get(ip);
     }
 
-    public String getServerName()
-    {
+    public String getServerName() {
         String serverName = System.getProperty(BIND_SERVER_NAME);
         if (ValueUtils.isEmpty(serverName))
             return DEFAULT_SERVER_NAME;
@@ -129,11 +112,9 @@ public class ServerManager extends ServiceBase
     }
 
     @Override
-    public Object handle(Event event)
-    {
+    public Object handle(Event event) {
         // 在管理中心注册成功。
-        if (event instanceof ServerEvent && ServerEvent.Register.equalsIgnoreCase(event.getId()))
-        {
+        if (event instanceof ServerEvent && ServerEvent.Register.equalsIgnoreCase(event.getId())) {
             ServerEvent serverEvent = (ServerEvent) event;
             ServerInfo serverInfo = serverEvent.getServerInfo();
             if (serverInfo != null)
@@ -143,11 +124,9 @@ public class ServerManager extends ServiceBase
         return super.handle(event);
     }
 
-    public void load()
-    {
+    public void load() {
         List<ServerInfo> serverInfos = EntityManagerFactory.getInstance().open().load(ServerInfo.class);
-        if (serverInfos != null && !serverInfos.isEmpty())
-        {
+        if (serverInfos != null && !serverInfos.isEmpty()) {
             Map<String, ServerInfo> serverInfoMap = new HashMap<String, ServerInfo>();
             for (ServerInfo serverInfo : serverInfos)
                 serverInfoMap.put(serverInfo.getIp(), serverInfo);
@@ -155,14 +134,12 @@ public class ServerManager extends ServiceBase
         }
     }
 
-    public void remove(ServerInfo serverInfo)
-    {
+    public void remove(ServerInfo serverInfo) {
         this.serverInfoMap.remove(serverInfo.getIp());
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("LocalHost Info :");
         info.append(Environment.LINETAB_SEPARATOR);

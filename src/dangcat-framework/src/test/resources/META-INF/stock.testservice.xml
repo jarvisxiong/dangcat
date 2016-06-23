@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Services>
-	<Service JndiName="SettleService1" AccessType="org.dangcat.examples.settle.SettleService1" ServiceType="org.dangcat.examples.settle.SettleServiceImpl1">
-		<Interceptors>
-			<Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
-		</Interceptors>
-	</Service>
+    <Service JndiName="SettleService1" AccessType="org.dangcat.examples.settle.SettleService1"
+             ServiceType="org.dangcat.examples.settle.SettleServiceImpl1">
+        <Interceptors>
+            <Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
+        </Interceptors>
+    </Service>
 
-	<Service JndiName="SettleService2" Proxy="true" Pool="true" AccessType="org.dangcat.examples.settle.SettleService2" ServiceType="org.dangcat.examples.settle.SettleServiceImpl2">
-		<Interceptors>
-			<Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
-		</Interceptors>
-	</Service>
+    <Service JndiName="SettleService2" Proxy="true" Pool="true" AccessType="org.dangcat.examples.settle.SettleService2"
+             ServiceType="org.dangcat.examples.settle.SettleServiceImpl2">
+        <Interceptors>
+            <Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
+        </Interceptors>
+    </Service>
 
-	<Interceptors>
-		<Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
-	</Interceptors>
+    <Interceptors>
+        <Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
+    </Interceptors>
 </Services>

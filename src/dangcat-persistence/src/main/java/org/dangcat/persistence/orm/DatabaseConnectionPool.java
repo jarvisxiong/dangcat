@@ -16,37 +16,43 @@ import java.util.Map;
 
 /**
  * 连接池。
+ *
  * @author dangcat
- * 
  */
-public class DatabaseConnectionPool extends ConnectionPool<Connection>
-{
-    /** 自增字段管理。 */
+public class DatabaseConnectionPool extends ConnectionPool<Connection> {
+    /**
+     * 自增字段管理。
+     */
     private AutoIncrementManager autoIncrementManager = null;
-    /** 批处理的大小。 */
+    /**
+     * 批处理的大小。
+     */
     private int batchSize = 0;
-    /** 数据库类型。 */
+    /**
+     * 数据库类型。
+     */
     private DatabaseType databaseType = null;
-    /** 数据源。 */
+    /**
+     * 数据源。
+     */
     private DataSource dataSource;
-    /** 语法解释器。 */
+    /**
+     * 语法解释器。
+     */
     private SqlSyntaxHelper sqlSyntaxHelper = null;
 
-    public DatabaseConnectionPool(String name, DataSource dataSource, Map<String, String> params)
-    {
+    public DatabaseConnectionPool(String name, DataSource dataSource, Map<String, String> params) {
         this(name, params);
         this.dataSource = dataSource;
     }
 
-    public DatabaseConnectionPool(String name, Map<String, String> params)
-    {
+    public DatabaseConnectionPool(String name, Map<String, String> params) {
         super(name, params);
         this.autoIncrementManager = new AutoIncrementManager(name);
     }
 
     @Override
-    public void close()
-    {
+    public void close() {
         super.close();
         AutoIncrementManager.reset(this.getName(), null);
     }
@@ -55,29 +61,22 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
      * 关闭连接
      */
     @Override
-    protected void close(Connection connection)
-    {
-        try
-        {
+    protected void close(Connection connection) {
+        try {
             if (connection != null)
                 connection.close();
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             this.logger.error(this, e);
         }
     }
 
     @Override
-    protected Connection create()
-    {
+    protected Connection create() {
         Connection connection = null;
-        try
-        {
+        try {
             if (this.dataSource != null)
                 connection = this.dataSource.getConnection();
-            if (connection == null)
-            {
+            if (connection == null) {
                 String url = this.getProperty(DatabaseParams.Url);
                 String user = this.getProperty(DatabaseParams.User);
                 String password = this.getProperty(DatabaseParams.Password);
@@ -86,26 +85,19 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
                 this.initialize(connection);
             }
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             this.logger.error(this, e);
-        }
-        catch (SessionException e)
-        {
+        } catch (SessionException e) {
             this.logger.error(this, e);
         }
         return connection;
     }
 
-    private void createDatabaseType()
-    {
+    private void createDatabaseType() {
         Connection connection = this.create();
-        if (connection != null)
-        {
+        if (connection != null) {
             DatabaseType databaseType = DatabaseType.Default;
-            try
-            {
+            try {
                 DatabaseMetaData databaseMetaData = connection.getMetaData();
                 String databaseProductName = databaseMetaData.getDatabaseProductName();
                 String driverName = databaseMetaData.getDriverName();
@@ -115,29 +107,23 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
                     this.logger.error(value + " is not surpport.");
                 else
                     databaseType = dbType;
-            }
-            catch (SQLException e)
-            {
+            } catch (SQLException e) {
                 this.logger.error(this, e);
-            }
-            finally
-            {
+            } finally {
                 this.release(connection);
             }
             this.databaseType = databaseType;
         }
     }
 
-    public AutoIncrementManager getAutoIncrementManager()
-    {
+    public AutoIncrementManager getAutoIncrementManager() {
         return this.autoIncrementManager;
     }
 
     /**
      * 批处理的大小。
      */
-    public int getBatchSize()
-    {
+    public int getBatchSize() {
         if (this.batchSize == 0)
             this.batchSize = this.getParamAsInt(DatabaseParams.BatchSize, 1000);
         return this.batchSize;
@@ -146,21 +132,18 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
     /**
      * 数据库类型。
      */
-    public DatabaseType getDatabaseType()
-    {
+    public DatabaseType getDatabaseType() {
         return this.databaseType;
     }
 
-    private String getProperty(String name)
-    {
+    private String getProperty(String name) {
         String value = this.getParams().get(name);
         if (!ValueUtils.isEmpty(value))
             value = PropertiesManager.getInstance().getValue(value);
         return value;
     }
 
-    public SqlSyntaxHelper getSqlSyntaxHelper()
-    {
+    public SqlSyntaxHelper getSqlSyntaxHelper() {
         if (this.sqlSyntaxHelper == null)
             this.sqlSyntaxHelper = SqlSyntaxHelperFactory.getInstance().getSqlSyntaxHelper(this.getDatabaseType());
         return this.sqlSyntaxHelper;
@@ -168,15 +151,13 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
 
     /**
      * 初始化连接池。
+     *
      * @throws SessionException
      */
     @Override
-    public void initialize() throws SessionException
-    {
-        try
-        {
-            if (this.dataSource == null)
-            {
+    public void initialize() throws SessionException {
+        try {
+            if (this.dataSource == null) {
                 Object instance = this.loadDriverInstance();
                 if (this.getDatabaseType() == null)
                     this.createDatabaseType();
@@ -184,52 +165,39 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
                 this.initialize(instance);
                 if (instance instanceof DataSource)
                     this.dataSource = (DataSource) instance;
-            }
-            else if (this.getDatabaseType() == null)
+            } else if (this.getDatabaseType() == null)
                 this.createDatabaseType();
-        }
-        catch (SessionException e)
-        {
+        } catch (SessionException e) {
             throw e;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new SessionException(e);
         }
     }
 
     @Override
-    public boolean isPoolEnabled()
-    {
+    public boolean isPoolEnabled() {
         return this.getParamAsBoolean(DatabaseParams.UseConnectionPool, true);
     }
 
     /**
      * 使用外部事物。
      */
-    public boolean isUseExtendTransaction()
-    {
+    public boolean isUseExtendTransaction() {
         return this.getParamAsBoolean(DatabaseParams.UseExtendTransaction, false);
     }
 
-    private Object loadDriverInstance() throws Exception
-    {
+    private Object loadDriverInstance() throws Exception {
         Object instance = null;
-        for (String propertyKey : this.getParams().keySet())
-        {
-            if (propertyKey.equalsIgnoreCase(DatabaseParams.Driver))
-            {
+        for (String propertyKey : this.getParams().keySet()) {
+            if (propertyKey.equalsIgnoreCase(DatabaseParams.Driver)) {
                 String propertyValue = this.getProperty(propertyKey);
-                if (!ValueUtils.isEmpty(propertyValue))
-                {
+                if (!ValueUtils.isEmpty(propertyValue)) {
                     Class<?> driverClass = Class.forName(propertyValue);
-                    if (driverClass != null)
-                    {
+                    if (driverClass != null) {
                         instance = driverClass.newInstance();
                         if (this.databaseType == null)
                             this.databaseType = DatabaseType.parse(propertyValue);
-                    }
-                    else
+                    } else
                         this.logger.error("The database driver " + propertyValue + "is not found.");
                 }
                 break;
@@ -242,31 +210,22 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection>
      * 返回连接池中的一个数据库连接。
      */
     @Override
-    public Connection poll()
-    {
+    public Connection poll() {
         Connection connection = super.poll();
-        if (connection != null)
-        {
-            if (!this.isUseExtendTransaction())
-            {
+        if (connection != null) {
+            if (!this.isUseExtendTransaction()) {
                 int status = 0;
-                while (status != 1)
-                {
-                    try
-                    {
+                while (status != 1) {
+                    try {
                         connection.setAutoCommit(this.getParamAsBoolean(DatabaseParams.AutoCommit, true));
                         status = 1;
-                    }
-                    catch (SQLException e)
-                    {
-                        if (status == 0 && this.isCommunicationsException(e))
-                        {
+                    } catch (SQLException e) {
+                        if (status == 0 && this.isCommunicationsException(e)) {
                             this.destroy(connection);
                             this.closePooled();
                             connection = super.poll();
                             status = -1;
-                        }
-                        else
+                        } else
                             status = 1;
 
                         if (this.logger.isDebugEnabled())

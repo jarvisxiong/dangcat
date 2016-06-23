@@ -14,18 +14,16 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  * 输出实体定义结构。
+ *
  * @author dangcat
- * 
  */
-public class EntityTag extends SimpleTagSupport
-{
+public class EntityTag extends SimpleTagSupport {
     protected static final Logger logger = Logger.getLogger(EntityTag.class);
     private String classType = null;
     private String name = null;
 
     @Override
-    public void doTag() throws JspTagException
-    {
+    public void doTag() throws JspTagException {
         if (ValueUtils.isEmpty(this.getClassType()))
             throw new JspTagException("The entity tag class type can't be empty.");
 
@@ -37,14 +35,11 @@ public class EntityTag extends SimpleTagSupport
         if (entityMetaData == null)
             throw new JspTagException("The class type " + this.getClassType() + " is not entity type.");
 
-        try
-        {
+        try {
             PageContext pageContext = (PageContext) this.getJspContext();
             EntityJsonSerializer entityJsonSerializer = new EntityJsonSerializer();
             entityJsonSerializer.serialize(pageContext.getOut(), classType, this.getName());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
 
             Throwable rootCause = null;
@@ -54,23 +49,19 @@ public class EntityTag extends SimpleTagSupport
         }
     }
 
-    public String getClassType()
-    {
+    public String getClassType() {
         return classType;
     }
 
-    public void setClassType(String classType)
-    {
+    public void setClassType(String classType) {
         this.classType = classType;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -1,7 +1,6 @@
 package org.dangcat.commons.log;
 
-public interface LogCallback
-{
+public interface LogCallback {
     void debug(String message);
 
     void error(String message);

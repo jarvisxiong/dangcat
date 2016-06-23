@@ -12,30 +12,31 @@ import java.util.Map;
 
 /**
  * 结算服务。
+ *
  * @author dangcat
- * 
  */
-public class SettleServiceImpl extends ThreadService implements SettleService
-{
+public class SettleServiceImpl extends ThreadService implements SettleService {
     private static final String SERVICE_NAME = "SETTLE";
-    /** 结算对象列表。 */
+    /**
+     * 结算对象列表。
+     */
     private Map<SettleUnit, SettleExecutor> settleUnitMap = new LinkedHashMap<SettleUnit, SettleExecutor>();
 
     /**
      * 构造服务。
+     *
      * @param parent 所属服务。
      */
-    public SettleServiceImpl(ServiceProvider parent)
-    {
+    public SettleServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
     /**
      * 添加结算对象。
+     *
      * @param SettleUnit 结算对象。
      */
-    public void addSettleUnit(SettleUnit settleUnit)
-    {
+    public void addSettleUnit(SettleUnit settleUnit) {
         if (settleUnit != null && !this.settleUnitMap.containsKey(settleUnit))
             this.settleUnitMap.put(settleUnit, new SettleExecutor(settleUnit));
     }
@@ -44,27 +45,22 @@ public class SettleServiceImpl extends ThreadService implements SettleService
      * 执行结算。
      */
     @Override
-    public void execute()
-    {
+    public void execute() {
         this.innerExecute();
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
-        CronAlarmClock cronAlarmClock = new CronAlarmClock(this)
-        {
+        CronAlarmClock cronAlarmClock = new CronAlarmClock(this) {
             @Override
-            public String getCronExpression()
-            {
+            public String getCronExpression() {
                 return SettleConfig.getInstance().getCronExpression();
             }
 
             @Override
-            public boolean isEnabled()
-            {
+            public boolean isEnabled() {
                 return SettleConfig.getInstance().isEnabled() && SettleServiceImpl.this.settleUnitMap.size() > 0;
             }
         };
@@ -76,10 +72,8 @@ public class SettleServiceImpl extends ThreadService implements SettleService
      * 定时执行结算。
      */
     @Override
-    protected void innerExecute()
-    {
-        if (this.settleUnitMap.size() > 0)
-        {
+    protected void innerExecute() {
+        if (this.settleUnitMap.size() > 0) {
             for (SettleExecutor settleExecutor : this.settleUnitMap.values())
                 settleExecutor.execute();
         }
@@ -87,19 +81,17 @@ public class SettleServiceImpl extends ThreadService implements SettleService
 
     /**
      * 删除结算对象。
+     *
      * @param settleUnit 结算对象。
      */
-    public void removeSettleUnit(SettleUnit settleUnit)
-    {
+    public void removeSettleUnit(SettleUnit settleUnit) {
         if (settleUnit != null && this.settleUnitMap.containsKey(settleUnit))
             this.settleUnitMap.remove(settleUnit);
     }
 
     @Override
-    public void stop()
-    {
-        if (this.settleUnitMap.size() > 0)
-        {
+    public void stop() {
+        if (this.settleUnitMap.size() > 0) {
             for (SettleExecutor settleExecutor : this.settleUnitMap.values())
                 settleExecutor.reset();
         }

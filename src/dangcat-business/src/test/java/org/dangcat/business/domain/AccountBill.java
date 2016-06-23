@@ -7,8 +7,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import java.util.Date;
 
 @Table
-public class AccountBill extends EntityBase
-{
+public class AccountBill extends EntityBase {
     public static final String AccountId = "AccountId";
     public static final String Amount = "Amount";
     public static final String DateTime = "DateTime";
@@ -30,53 +29,43 @@ public class AccountBill extends EntityBase
     @Column(isPrimaryKey = true, isAutoIncrement = true)
     private Integer id;
 
-    public Integer getAccountId()
-    {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountId)
-    {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
-    public Double getAmount()
-    {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount)
-    {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime)
-    {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

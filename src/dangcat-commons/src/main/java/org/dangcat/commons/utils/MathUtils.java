@@ -2,8 +2,7 @@ package org.dangcat.commons.utils;
 
 import java.math.BigDecimal;
 
-public class MathUtils
-{
+public class MathUtils {
     public static final BigDecimal BIGDECIMAL_ONE = new BigDecimal(1);
     public static final Double DOUBLE_ZERO = new Double(0);
     public static final Integer INTEGER_ZERO = new Integer(0);
@@ -12,16 +11,13 @@ public class MathUtils
     private static final int MAX_DOUBLE_DIGIT = 5;
     private static final double MIN_DOUBLE_VALUE = 0.00001;
 
-    public static Number divide(Number value1, Number value2)
-    {
+    public static Number divide(Number value1, Number value2) {
         return divide(value1, value2, MAX_DOUBLE_DIGIT);
     }
 
-    public static Number divide(Number value1, Number value2, int scale)
-    {
+    public static Number divide(Number value1, Number value2, int scale) {
         Number result = null;
-        if (value1 != null && value2 != null)
-        {
+        if (value1 != null && value2 != null) {
             if (Math.abs(value2.doubleValue()) > MIN_DOUBLE_VALUE)
                 result = round(value1.doubleValue() / value2.doubleValue(), scale);
             else
@@ -30,11 +26,9 @@ public class MathUtils
         return result;
     }
 
-    public static Number multi(Number value1, Number value2)
-    {
+    public static Number multi(Number value1, Number value2) {
         Number result = null;
-        if (value1 != null && value2 != null)
-        {
+        if (value1 != null && value2 != null) {
             if (value1 instanceof Double || value2 instanceof Double)
                 result = value1.doubleValue() * value2.doubleValue();
             else if (value1 instanceof Long || value2 instanceof Long)
@@ -47,11 +41,9 @@ public class MathUtils
         return result;
     }
 
-    public static Number plus(Number value1, Number value2)
-    {
+    public static Number plus(Number value1, Number value2) {
         Number result = null;
-        if (value1 != null && value2 != null)
-        {
+        if (value1 != null && value2 != null) {
             if (value1 instanceof Double || value2 instanceof Double)
                 result = value1.doubleValue() + value2.doubleValue();
             else if (value1 instanceof Long || value2 instanceof Long)
@@ -60,16 +52,14 @@ public class MathUtils
                 result = value1.intValue() + value2.intValue();
             else if (value1 instanceof Short || value2 instanceof Short)
                 result = value1.shortValue() + value2.shortValue();
-        }
-        else if (value1 != null)
+        } else if (value1 != null)
             result = value1;
         else if (value2 != null)
             result = value2;
         return result;
     }
 
-    public static double round(double value, int scale)
-    {
+    public static double round(double value, int scale) {
         if (scale < 0)
             throw new IllegalArgumentException("The scale must be a positive integer or zero.");
 
@@ -77,11 +67,9 @@ public class MathUtils
         return bigDecimal.divide(BIGDECIMAL_ONE, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    public static Number subtract(Number value1, Number value2)
-    {
+    public static Number subtract(Number value1, Number value2) {
         Number result = null;
-        if (value1 != null && value2 != null)
-        {
+        if (value1 != null && value2 != null) {
             if (value1 instanceof Double || value2 instanceof Double)
                 result = value1.doubleValue() - value2.doubleValue();
             else if (value1 instanceof Long || value2 instanceof Long)
@@ -90,8 +78,7 @@ public class MathUtils
                 result = value1.intValue() - value2.intValue();
             else if (value1 instanceof Short || value2 instanceof Short)
                 result = value1.shortValue() - value2.shortValue();
-        }
-        else if (value1 != null)
+        } else if (value1 != null)
             result = value1;
         else if (value2 != null)
             result = multi(new Short((short) -1), value2);

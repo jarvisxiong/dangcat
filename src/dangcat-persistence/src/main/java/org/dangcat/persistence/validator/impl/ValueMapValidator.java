@@ -9,30 +9,24 @@ import java.util.Map;
 
 /**
  * 数值范围校验。
+ *
  * @author dangcat
- * 
  */
-public class ValueMapValidator extends DataValidator
-{
+public class ValueMapValidator extends DataValidator {
     private Map<Integer, String> valueMap = null;
 
-    public ValueMapValidator(Class<?> classType, Column column, Map<Integer, String> valueMap)
-    {
+    public ValueMapValidator(Class<?> classType, Column column, Map<Integer, String> valueMap) {
         super(classType, column);
         this.valueMap = valueMap;
     }
 
-    public Map<Integer, String> getValueMap()
-    {
+    public Map<Integer, String> getValueMap() {
         return valueMap;
     }
 
-    private boolean isInvalid(Object value)
-    {
-        if (this.valueMap != null && this.valueMap.size() > 0)
-        {
-            for (Object key : this.valueMap.keySet())
-            {
+    private boolean isInvalid(Object value) {
+        if (this.valueMap != null && this.valueMap.size() > 0) {
+            for (Object key : this.valueMap.keySet()) {
                 if (ValueUtils.compare(value, key) == 0)
                     return false;
             }
@@ -41,8 +35,7 @@ public class ValueMapValidator extends DataValidator
         return false;
     }
 
-    public void validate(Object instance) throws DataValidateException
-    {
+    public void validate(Object instance) throws DataValidateException {
         Object value = this.getValue(instance);
         if (this.isInvalid(value))
             this.throwDataValidateException(DataValidateException.INVALIDATE_OPTIONS);

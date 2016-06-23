@@ -4,24 +4,29 @@ import org.dangcat.commons.utils.Environment;
 
 /**
  * 实体批量操作配置。
+ *
  * @author dangcat
- * 
  */
-public class EntityBatchConfig extends ServiceConfig
-{
+public class EntityBatchConfig extends ServiceConfig {
     public static final String BatchSize = "BatchSize";
     public static final String CronExpression = "CronExpression";
     private static final String CONFIG_NAME = "EntityBatch";
     private static final String MaxInterval = "MaxInterval";
     private static EntityBatchConfig instance = new EntityBatchConfig();
-    /** 批量操作的大小。 */
+    /**
+     * 批量操作的大小。
+     */
     private int batchSize = 5000;
-    /** 监控周期。 */
+    /**
+     * 监控周期。
+     */
     private String cronExpression = "0/10 * * * * ?";
-    /** 最大执行周期。 */
+    /**
+     * 最大执行周期。
+     */
     private int maxInterval = 30;
-    private EntityBatchConfig()
-    {
+
+    private EntityBatchConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(BatchSize, int.class, this.batchSize);
@@ -38,18 +43,15 @@ public class EntityBatchConfig extends ServiceConfig
         return instance;
     }
 
-    public int getBatchSize()
-    {
+    public int getBatchSize() {
         return Environment.isTestEnabled() ? 0 : this.getIntValue(BatchSize);
     }
 
-    public String getCronExpression()
-    {
+    public String getCronExpression() {
         return this.getStringValue(CronExpression);
     }
 
-    public int getMaxInterval()
-    {
+    public int getMaxInterval() {
         return Environment.isTestEnabled() ? 0 : this.getIntValue(MaxInterval);
     }
 }

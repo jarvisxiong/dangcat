@@ -6,27 +6,23 @@ import org.dangcat.install.database.swing.DatabaseConfigPanel;
 import org.dangcat.install.database.task.DatabaseConfigAccess;
 import org.dangcat.install.module.ProcessModuleBase;
 
-public class DatabaseConfigModule extends ProcessModuleBase
-{
+public class DatabaseConfigModule extends ProcessModuleBase {
     private Database database = new MySqlDatabase();
     private DatabaseConfigAccess databaseConfigAccess = null;
     private DatabaseConfigPanel databaseConfigPanel = null;
 
-    public DatabaseConfigModule(String name, String title)
-    {
+    public DatabaseConfigModule(String name, String title) {
         super(name, title);
     }
 
-    public void createDatabaseConfigAccess(String name, String title)
-    {
+    public void createDatabaseConfigAccess(String name, String title) {
         DatabaseConfigPanel databaseConfigPanel = this.createDatabaseConfigPanel(name, title);
         DatabaseConfigAccess databaseConfigAccess = new DatabaseConfigAccess();
         databaseConfigAccess.addDatabaseConfigPanel(name, databaseConfigPanel);
         this.databaseConfigAccess = databaseConfigAccess;
     }
 
-    private DatabaseConfigPanel createDatabaseConfigPanel(String name, String title)
-    {
+    private DatabaseConfigPanel createDatabaseConfigPanel(String name, String title) {
         DatabaseConfigPanel databaseConfigPanel = new DatabaseConfigPanel();
         databaseConfigPanel.setDatabase(this.getDatabase());
         databaseConfigPanel.setName(name);
@@ -37,28 +33,23 @@ public class DatabaseConfigModule extends ProcessModuleBase
         return databaseConfigPanel;
     }
 
-    public Database getDatabase()
-    {
+    public Database getDatabase() {
         return this.database;
     }
 
-    public DatabaseConfigAccess getDatabaseConfigAccess()
-    {
+    public DatabaseConfigAccess getDatabaseConfigAccess() {
         return this.databaseConfigAccess;
     }
 
-    public DatabaseConfigPanel getDatabaseConfigPanel()
-    {
+    public DatabaseConfigPanel getDatabaseConfigPanel() {
         return this.databaseConfigPanel;
     }
 
-    public String getDefaultName()
-    {
+    public String getDefaultName() {
         return this.getDatabase().getDefaultName();
     }
 
-    public Integer getDefaultPort()
-    {
+    public Integer getDefaultPort() {
         return this.getDatabase().getDefaultPort();
     }
 
@@ -67,18 +58,15 @@ public class DatabaseConfigModule extends ProcessModuleBase
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
     }
 
-    public void setDefaultDatabaseName(String databaseName)
-    {
+    public void setDefaultDatabaseName(String databaseName) {
         this.getDatabase().setDefaultName(databaseName);
     }
 
     @Override
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.databaseConfigAccess.setEnabled(enabled);
         super.setEnabled(enabled);
     }

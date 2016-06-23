@@ -5,16 +5,18 @@ import org.dangcat.commons.utils.ValueUtils;
 
 import java.text.MessageFormat;
 
-class WindowsSystemService extends SystemService
-{
-    /** 删除服务。 */
+class WindowsSystemService extends SystemService {
+    /**
+     * 删除服务。
+     */
     private static final String CMD_DELETE_CMD = "sc delete {0}";
-    /** 判断服务是否存在。 */
+    /**
+     * 判断服务是否存在。
+     */
     private static final String CMD_EXISTS_CMD = "sc query {0} | find \"STATE\"";
 
     @Override
-    protected boolean exists(String name)
-    {
+    protected boolean exists(String name) {
         if (ValueUtils.isEmpty(name))
             return false;
 
@@ -24,14 +26,12 @@ class WindowsSystemService extends SystemService
     }
 
     @Override
-    protected String getRemoveCMD()
-    {
+    protected String getRemoveCMD() {
         return CMD_DELETE_CMD;
     }
 
     @Override
-    protected boolean isRunning(String name)
-    {
+    protected boolean isRunning(String name) {
         if (ValueUtils.isEmpty(name))
             return false;
 

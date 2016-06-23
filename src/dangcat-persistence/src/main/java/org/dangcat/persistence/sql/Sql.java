@@ -5,11 +5,10 @@ import org.dangcat.commons.utils.ValueUtils;
 
 /**
  * SQLµ¥Ôª¡£
+ *
  * @author dangcat
- * 
  */
-public class Sql
-{
+public class Sql {
     public static final String CREATE = "CREATE";
     public static final String DELETE = "DELETE";
     public static final String DROP = "DROP";
@@ -23,20 +22,17 @@ public class Sql
     private String name = QUERY;
     private String sql = null;
 
-    public Sql()
-    {
+    public Sql() {
     }
 
-    public Sql(org.dangcat.persistence.annotation.Sql sqlAnnotation)
-    {
+    public Sql(org.dangcat.persistence.annotation.Sql sqlAnnotation) {
         this.databaseType = sqlAnnotation.databaseType();
         this.name = sqlAnnotation.name();
         this.sql = sqlAnnotation.value();
         this.delimiter = sqlAnnotation.delimiter();
     }
 
-    public DatabaseType getDatabaseType()
-    {
+    public DatabaseType getDatabaseType() {
         return databaseType;
     }
 
@@ -44,46 +40,38 @@ public class Sql
         this.databaseType = databaseType;
     }
 
-    public String getDelimiter()
-    {
+    public String getDelimiter() {
         return delimiter;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getSql()
-    {
+    public String getSql() {
         return sql;
     }
 
-    public void setSql(String sql)
-    {
+    public void setSql(String sql) {
         this.sql = sql;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(Sql.class.getSimpleName());
         info.append(" : ");
         info.append("DatabaseType = ");
         info.append(this.getDatabaseType());
-        if (!ValueUtils.isEmpty(this.getName()))
-        {
+        if (!ValueUtils.isEmpty(this.getName())) {
             info.append(", Name = ");
             info.append(this.getName());
         }
-        if (!ValueUtils.isEmpty(this.getDelimiter()))
-        {
+        if (!ValueUtils.isEmpty(this.getDelimiter())) {
             info.append(", Delimiter = ");
             info.append(this.getDelimiter());
         }

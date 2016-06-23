@@ -5,11 +5,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class TestTextMarker
-{
+public class TestTextMarker {
     @Test
-    public void testProcess() throws IOException
-    {
+    public void testProcess() throws IOException {
         String expected = "select a, b from testTable where c=12";
         TextMarker textMarker = new TextMarker();
         textMarker.setTemplate("select a, b from ${tableName} where c=${c}");

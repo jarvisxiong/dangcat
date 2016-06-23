@@ -15,8 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class FtpConfigPanel extends ConfigPanel
-{
+public class FtpConfigPanel extends ConfigPanel {
     protected static final Logger logger = Logger.getLogger(FtpConfigPanel.class);
     private static final String INITPATH = "InitPath";
     private static final String PASSWORD = "Password";
@@ -33,8 +32,7 @@ public class FtpConfigPanel extends ConfigPanel
     private JTextField serverTextField = null;
     private JTextField usernameTextField = null;
 
-    private void addComponents(JPanel panel, int y, JLabel label, Component component)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, Component component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 10);
@@ -52,14 +50,12 @@ public class FtpConfigPanel extends ConfigPanel
         panel.add(component, constraints);
     }
 
-    private void checkDatabaseConnection()
-    {
+    private void checkDatabaseConnection() {
         if (!this.validateData())
             return;
 
         FTPClientSession ftpClientSession = new FTPClientSession();
-        try
-        {
+        try {
             FtpParameter ftpParameter = this.getFtpParameter();
             ftpClientSession.setServer(ftpParameter.getServer());
             ftpClientSession.setUserName(ftpParameter.getUser());
@@ -71,20 +67,15 @@ public class FtpConfigPanel extends ConfigPanel
             if (ftpClientSession.testConnect() != null)
                 throw ftpClientSession.testConnect();
             JOptionPane.showMessageDialog(this, this.getText("ConnectionSuccess"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
             JOptionPane.showMessageDialog(this, this.getText("ConnectionError") + e.getMessage());
-        }
-        finally
-        {
+        } finally {
             ftpClientSession.close();
         }
     }
 
-    private JPanel createFtpConfigPanel()
-    {
+    private JPanel createFtpConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 160));
 
@@ -128,8 +119,7 @@ public class FtpConfigPanel extends ConfigPanel
         return panel;
     }
 
-    private void createFtpTestButton(JPanel panel, int y)
-    {
+    private void createFtpTestButton(JPanel panel, int y) {
         ImageIcon testImage = ImageUtils.loadImageIcon(this.getClass(), "test.gif");
         JButton testButton = new JButton(this.getText("TestConnection"), testImage);
         testButton.setMargin(new Insets(0, 20, 0, 20));
@@ -137,11 +127,9 @@ public class FtpConfigPanel extends ConfigPanel
         testButton.setAlignmentX(CENTER_ALIGNMENT);
         testButton.setMnemonic(KeyEvent.VK_T);
         testButton.setDisplayedMnemonicIndex(testButton.getText().indexOf("T"));
-        testButton.addActionListener(new ActionListener()
-        {
+        testButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 FtpConfigPanel.this.checkDatabaseConnection();
             }
         });
@@ -155,8 +143,7 @@ public class FtpConfigPanel extends ConfigPanel
         panel.add(testButton, constraints);
     }
 
-    public FtpParameter getFtpParameter()
-    {
+    public FtpParameter getFtpParameter() {
         return this.ftpParameter;
     }
 
@@ -165,8 +152,7 @@ public class FtpConfigPanel extends ConfigPanel
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.createFtpConfigPanel());
         this.update();
@@ -181,8 +167,7 @@ public class FtpConfigPanel extends ConfigPanel
         this.ftpConfigListener.initialize();
     }
 
-    public void update()
-    {
+    public void update() {
         if (this.ftpConfigListener != null)
             this.ftpConfigListener.setEnabled(false);
 
@@ -198,8 +183,7 @@ public class FtpConfigPanel extends ConfigPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         if (!ValidateUtils.validateServer(this, this.serverTextField, SERVER))
             return false;
         if (!ValidateUtils.validatePort(this, this.portTextField, PORT))

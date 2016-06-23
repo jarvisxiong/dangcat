@@ -12,14 +12,12 @@ import org.dangcat.persistence.simulate.SimulateUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestEntityPerformance extends TestEntityBase
-{
+public class TestEntityPerformance extends TestEntityBase {
     private static final int TEST_COUNT = 10000;
     private List<EntityData> entityList = new ArrayList<EntityData>();
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         if (this.entityList.isEmpty())
             EntityDataUtils.createEntityDataList(this.entityList, TEST_COUNT);
         SessionFactory.getInstance().setDefaultName(databaseName);

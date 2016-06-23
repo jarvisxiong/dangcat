@@ -13,14 +13,14 @@ import java.util.Map;
 
 /**
  * The service interface for OperatorGroup.
+ *
  * @author dangcat
- * 
  */
 @JndiName(module = "Staff", name = "OperatorGroup")
-public interface OperatorGroupService
-{
+public interface OperatorGroupService {
     /**
      * 新增实体数据。
+     *
      * @param operatorGroup 实体对象。
      * @return 运行结果。
      */
@@ -28,6 +28,7 @@ public interface OperatorGroupService
 
     /**
      * 删除指定条件的数据。
+     *
      * @param id 主键。
      * @return 执行结果。
      */
@@ -35,12 +36,14 @@ public interface OperatorGroupService
 
     /**
      * 查看当前用户所属的操作员组的子组列表。
+     *
      * @return 操作员组映射表。
      */
     Map<Integer, String> loadMembers() throws ServiceException;
 
     /**
      * 查询指定条件的列表。
+     *
      * @param operatorGroupFilter 查询条件。
      * @return 查询结果。
      */
@@ -48,6 +51,7 @@ public interface OperatorGroupService
 
     /**
      * 查询指定条件的数据。
+     *
      * @param operatorGroupFilter 查询条件。
      * @return 查询结果。
      */
@@ -55,6 +59,7 @@ public interface OperatorGroupService
 
     /**
      * 保存实体数据。
+     *
      * @param operatorGroup 实体对象。
      * @return 运行结果。
      */
@@ -62,6 +67,7 @@ public interface OperatorGroupService
 
     /**
      * 查询指定条件的列表。
+     *
      * @param operatorGroupFilter 查询条件。
      * @return 查询结果。
      */
@@ -69,6 +75,7 @@ public interface OperatorGroupService
 
     /**
      * 查看指定主键的数据。
+     *
      * @param id 主键值。
      * @return 查看结果。
      */

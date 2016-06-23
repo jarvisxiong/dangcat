@@ -7,11 +7,10 @@ import java.util.Date;
 
 /**
  * 服务委托信息。
+ *
  * @author Administrator
- * 
  */
-public class ServicePrincipal extends ServiceParams
-{
+public class ServicePrincipal extends ServiceParams {
     private static final long serialVersionUID = 1L;
     private String clientIp = null;
     private boolean isValid = true;
@@ -22,13 +21,11 @@ public class ServicePrincipal extends ServiceParams
     private String roleName = null;
     private String type;
 
-    public ServicePrincipal(String no, String roleName, String type)
-    {
+    public ServicePrincipal(String no, String roleName, String type) {
         this(no, no, roleName, null, type, null);
     }
 
-    public ServicePrincipal(String no, String name, String roleName, String clientIp, String type, Collection<Integer> permissions)
-    {
+    public ServicePrincipal(String no, String name, String roleName, String clientIp, String type, Collection<Integer> permissions) {
         this.no = no;
         this.name = name;
         this.roleName = roleName;
@@ -37,56 +34,46 @@ public class ServicePrincipal extends ServiceParams
         this.permissions = permissions;
     }
 
-    public String getClientIp()
-    {
+    public String getClientIp() {
         return this.clientIp;
     }
 
-    public Date getLoginTime()
-    {
+    public Date getLoginTime() {
         return this.loginTime;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public String getNo()
-    {
+    public String getNo() {
         return this.no;
     }
 
-    public String getRoleName()
-    {
+    public String getRoleName() {
         return this.roleName;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return this.type;
     }
 
-    public boolean hasPermission(Integer permission)
-    {
+    public boolean hasPermission(Integer permission) {
         if (this.permissions == null)
             return true;
         return this.permissions.contains(permission);
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         return this.isValid;
     }
 
-    public void setValid(boolean isValid)
-    {
+    public void setValid(boolean isValid) {
         this.isValid = isValid;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("No: ");
         info.append(this.getNo());

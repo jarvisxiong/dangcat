@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Sqls>
-	<Sql><![CDATA[SELECT A.Id, A.Name, A.GroupId, G.Name GroupName, G.Description GroupDescription, A.ServiceId, S.Name ServiceName, S.Description ServiceDescription
+    <Sql><![CDATA[SELECT A.Id, A.Name, A.GroupId, G.Name GroupName, G.Description GroupDescription, A.ServiceId, S.Name ServiceName, S.Description ServiceDescription
 FROM AccountInfo A
 	LEFT OUTER JOIN ServiceInfo S ON S.Id = A.ServiceId
 	LEFT OUTER JOIN GroupInfo G ON G.Id = A.GroupId

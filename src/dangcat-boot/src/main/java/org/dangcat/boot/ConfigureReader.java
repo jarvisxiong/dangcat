@@ -11,8 +11,7 @@ import org.dom4j.io.SAXReader;
 
 import java.io.File;
 
-public class ConfigureReader
-{
+public class ConfigureReader {
     public static final String KEY_SYSTEM_ID = "system.id";
     private Document document = null;
     private Integer id = null;
@@ -22,12 +21,10 @@ public class ConfigureReader
     private String resourceConfigFileName = null;
     private String version = null;
 
-    public String getAttributValue(String nodePath, String name)
-    {
+    public String getAttributValue(String nodePath, String name) {
         String value = null;
         Node node = this.getXmlNode(nodePath);
-        if (node != null)
-        {
+        if (node != null) {
             Element element = (Element) node;
             value = element.attributeValue(name);
         }
@@ -37,49 +34,40 @@ public class ConfigureReader
     /**
      * ≈‰÷√Œƒº˛°£
      */
-    protected File getConfigFile()
-    {
+    protected File getConfigFile() {
         String configFileName = ApplicationContext.getInstance().getName() + ".server.xml";
         return new File(ApplicationContext.getInstance().getContextPath().getConf() + File.separator + configFileName);
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         if (this.id == null)
             return ValueUtils.parseInt(System.getProperty(KEY_SYSTEM_ID));
         return this.id;
     }
 
-    protected String getLogConfigFileName()
-    {
+    protected String getLogConfigFileName() {
         return this.logConfigFileName;
     }
 
-    protected String getModuleMenus()
-    {
+    protected String getModuleMenus() {
         return this.moduleMenus;
     }
 
-    public String getPermissionConfigFileName()
-    {
+    public String getPermissionConfigFileName() {
         return this.permissionConfigFileName;
     }
 
-    protected String getResourceConfigFileName()
-    {
+    protected String getResourceConfigFileName() {
         return this.resourceConfigFileName;
     }
 
-    public String getVersion()
-    {
+    public String getVersion() {
         return this.version;
     }
 
-    private Node getXmlNode(String nodePath)
-    {
+    private Node getXmlNode(String nodePath) {
         Node node = null;
-        if (this.document != null)
-        {
+        if (this.document != null) {
             String xpath = "//Configuration/";
             if (!ValueUtils.isEmpty(nodePath))
                 xpath += nodePath;
@@ -92,11 +80,11 @@ public class ConfigureReader
 
     /**
      * ∂¡»°≈‰÷√ƒ⁄»›°£
+     *
      * @param nodePath ≈‰÷√¬∑æ∂°£
      * @return ≈‰÷√µƒ÷µ°£
      */
-    public String getXmlValue(String nodePath)
-    {
+    public String getXmlValue(String nodePath) {
         String value = null;
         Node node = this.getXmlNode(nodePath);
         if (node != null)
@@ -104,21 +92,19 @@ public class ConfigureReader
         return PropertiesManager.getInstance().getValue(value);
     }
 
-    protected boolean isValid()
-    {
+    protected boolean isValid() {
         File configFile = this.getConfigFile();
         return configFile != null && configFile.exists();
     }
 
     /**
      * ‘ÿ»Î≈‰÷√ƒ⁄»›°£
+     *
      * @throws DocumentException
      */
-    protected void load() throws DocumentException
-    {
+    protected void load() throws DocumentException {
         File configFile = this.getConfigFile();
-        if (!this.isValid())
-        {
+        if (!this.isValid()) {
             System.err.println("The server config file is not exists: " + configFile.getAbsolutePath());
             System.exit(0);
             return;
@@ -144,8 +130,7 @@ public class ConfigureReader
             this.moduleMenus = name + ".menus.xml";
     }
 
-    protected void log()
-    {
+    protected void log() {
         String name = ApplicationContext.getInstance().getName();
         Logger logger = ApplicationContext.getInstance().logger;
         logger.info("The " + name + " (Id: " + this.getId() + " Version: " + this.getVersion() + ") is started.");

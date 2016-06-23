@@ -6,28 +6,24 @@ import java.util.Collection;
 
 /**
  * 载入上下文。
- * @author dangcat
- * 
+ *
  * @param <T>
+ * @author dangcat
  */
-public class QueryContext<T> extends OperateContext
-{
+public class QueryContext<T> extends OperateContext {
     private Collection<T> data = null;
     private DataFilter dataFilter = null;
 
-    public QueryContext(DataFilter dataFilter, Collection<T> data)
-    {
+    public QueryContext(DataFilter dataFilter, Collection<T> data) {
         this.dataFilter = dataFilter;
         this.data = data;
     }
 
-    public Collection<T> getData()
-    {
+    public Collection<T> getData() {
         return this.data;
     }
 
-    public DataFilter getDataFilter()
-    {
+    public DataFilter getDataFilter() {
         return dataFilter;
     }
 }

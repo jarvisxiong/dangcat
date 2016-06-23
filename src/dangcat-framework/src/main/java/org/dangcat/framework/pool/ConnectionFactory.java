@@ -11,23 +11,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ConnectionFactory<T extends ConnectionPool<?>, K>
-{
+public abstract class ConnectionFactory<T extends ConnectionPool<?>, K> {
     public static final String DEFAULT = "default";
     protected static final Logger logger = Logger.getLogger(ConnectionFactory.class);
     private Map<String, T> connectionPools = new HashMap<String, T>();
     private String defaultName = null;
 
-    public void close()
-    {
+    public void close() {
         for (T connectionPool : this.connectionPools.values())
             this.close(connectionPool);
     }
 
     protected abstract void close(T connectionPool);
 
-    public boolean containsKey(String key)
-    {
+    public boolean containsKey(String key) {
         return this.connectionPools.containsKey(key);
     }
 
@@ -35,22 +32,19 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K>
 
     protected abstract K createSession(T connectionPool);
 
-    public synchronized T get(String name)
-    {
+    public synchronized T get(String name) {
         if (name != null)
             name = name.toLowerCase();
         if (name == null || !this.containsKey(name))
             name = DEFAULT;
-        if (DEFAULT.equalsIgnoreCase(name))
-        {
+        if (DEFAULT.equalsIgnoreCase(name)) {
             if (!this.connectionPools.containsKey(DEFAULT) && this.connectionPools.size() > 0)
                 this.connectionPools.put(DEFAULT, this.connectionPools.values().iterator().next());
         }
         return this.connectionPools.get(name);
     }
 
-    public String getDefaultName()
-    {
+    public String getDefaultName() {
         return this.defaultName;
     }
 
@@ -61,11 +55,9 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K>
         }
     }
 
-    public String[] getResourceNames()
-    {
+    public String[] getResourceNames() {
         List<String> resourceNameList = new ArrayList<String>();
-        for (String resourceName : this.connectionPools.keySet())
-        {
+        for (String resourceName : this.connectionPools.keySet()) {
             if (DEFAULT.equalsIgnoreCase(resourceName))
                 continue;
             resourceNameList.add(resourceName);
@@ -77,18 +69,15 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K>
 
     /**
      * 初始化服务。
+     *
      * @throws SessionException
      */
-    public void initialize() throws SessionException
-    {
+    public void initialize() throws SessionException {
         ConfigureCollection configureCollection = ConfigureManager.getInstance().getConfigureCollection(this.getResourceType());
-        if (configureCollection != null)
-        {
+        if (configureCollection != null) {
             Map<String, Configure> configureMap = configureCollection.getConfigureMap();
-            for (String key : configureMap.keySet())
-            {
-                if (this.connectionPools.containsKey(key))
-                {
+            for (String key : configureMap.keySet()) {
+                if (this.connectionPools.containsKey(key)) {
                     this.close(this.connectionPools.get(key));
                     this.connectionPools.remove(key);
                 }
@@ -101,24 +90,23 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K>
 
     /**
      * 开启一个会话对象。
+     *
      * @throws SessionException 会话异常。
      */
-    public K openSession()
-    {
+    public K openSession() {
         return this.openSession(DEFAULT);
     }
 
     /**
      * 开启一个会话对象。
+     *
      * @throws SessionException 会话异常。
      */
-    public K openSession(String name)
-    {
+    public K openSession(String name) {
         return this.createSession(this.get(name));
     }
 
-    protected synchronized void put(String name, T connectionPool)
-    {
+    protected synchronized void put(String name, T connectionPool) {
         this.connectionPools.put(name, connectionPool);
         if (ValueUtils.isEmpty(this.defaultName))
             this.setDefaultName(name);

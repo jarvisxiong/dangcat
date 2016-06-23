@@ -20,10 +20,8 @@ import org.dangcat.framework.service.ServiceLocator;
 import org.dangcat.framework.service.impl.ServiceFactory;
 import org.dangcat.persistence.entity.EntityManagerFactory;
 
-class CoreServiceLoader
-{
-    protected static void load(ServiceBase serviceBase)
-    {
+class CoreServiceLoader {
+    protected static void load(ServiceBase serviceBase) {
         // 服务工厂
         ServiceFactory serviceFactory = ServiceFactory.createInstance(serviceBase);
         serviceBase.addService(ServiceLocator.class, serviceFactory);
@@ -63,8 +61,7 @@ class CoreServiceLoader
         serviceBase.addService(EntityBatchService.class, entityBatchService);
 
         // Web服务
-        if (WebServiceConfig.getInstance().isEnabled())
-        {
+        if (WebServiceConfig.getInstance().isEnabled()) {
             WebService webService = new WebService(serviceBase);
             serviceBase.addService(WebService.class, webService);
             webService.initialize();

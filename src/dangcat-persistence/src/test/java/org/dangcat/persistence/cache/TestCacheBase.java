@@ -15,14 +15,12 @@ import org.junit.BeforeClass;
 
 import java.io.IOException;
 
-public abstract class TestCacheBase extends TestDatabase
-{
+public abstract class TestCacheBase extends TestDatabase {
     protected static final int TEST_COUNT = 10;
     private static final String RESOURCE_NAME = "entity.cache.xml";
 
     @BeforeClass
-    public static void setUpBeforeClass() throws IOException, SessionException
-    {
+    public static void setUpBeforeClass() throws IOException, SessionException {
         SimulateUtils.configure();
         EntityCacheManager.getInstance();
         EntityDataUtils.createEntitySimulator();
@@ -30,20 +28,17 @@ public abstract class TestCacheBase extends TestDatabase
     }
 
     @Before
-    public void beforeTest() throws TableException
-    {
+    public void beforeTest() throws TableException {
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
         entityCacheManager.clear(true);
         entityCacheManager.load(TestCacheBase.class, RESOURCE_NAME);
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 
-    protected void testTableCreate() throws TableException
-    {
+    protected void testTableCreate() throws TableException {
         Table table = TableDataUtils.getTable();
 
         if (table.exists())
@@ -53,8 +48,7 @@ public abstract class TestCacheBase extends TestDatabase
         table.create();
     }
 
-    protected void testTableDrop() throws TableException
-    {
+    protected void testTableDrop() throws TableException {
         Table table = TableDataUtils.getTable();
         table.drop();
         Assert.assertFalse(table.exists());

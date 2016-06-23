@@ -5,25 +5,21 @@ import org.dangcat.framework.pool.SessionException;
 
 /**
  * FTPœ¬‘ÿª·ª∞°£
+ *
  * @author dangcat
- * 
  */
-public class FTPClientSession extends FTPSession
-{
+public class FTPClientSession extends FTPSession {
     private static final Logger logger = Logger.getLogger(FTPClientSession.class);
 
-    public FTPClientSession()
-    {
+    public FTPClientSession() {
         super(new FTPClientPool());
     }
 
-    public void close()
-    {
+    public void close() {
         this.getFtpClientPool().close();
     }
 
-    public int getConnectMode()
-    {
+    public int getConnectMode() {
         return this.getFtpClientPool().getConnectMode();
     }
 
@@ -31,8 +27,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setConnectMode(connectMode);
     }
 
-    public int getConnectTimeout()
-    {
+    public int getConnectTimeout() {
         return this.getFtpClientPool().getConnectTimeout();
     }
 
@@ -41,8 +36,7 @@ public class FTPClientSession extends FTPSession
     }
 
     @Override
-    public String getControlEncoding()
-    {
+    public String getControlEncoding() {
         return this.getFtpClientPool().getControlEncoding();
     }
 
@@ -51,8 +45,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setControlEncoding(controlEncoding);
     }
 
-    public int getDataTimeout()
-    {
+    public int getDataTimeout() {
         return this.getFtpClientPool().getDataTimeout();
     }
 
@@ -60,8 +53,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setDataTimeout(dataTimeout);
     }
 
-    public int getDefaultTimeout()
-    {
+    public int getDefaultTimeout() {
         return this.getFtpClientPool().getDefaultTimeout();
     }
 
@@ -76,8 +68,7 @@ public class FTPClientSession extends FTPSession
      * 8; PAGE_STRUCTURE = 9; STREAM_TRANSFER_MODE = 10; BLOCK_TRANSFER_MODE =
      * 11; COMPRESSED_TRANSFER_MODE = 12;
      */
-    public int getFileType()
-    {
+    public int getFileType() {
         return this.getFtpClientPool().getFileType();
     }
 
@@ -85,8 +76,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setFileType(fileType);
     }
 
-    public String getInitPath()
-    {
+    public String getInitPath() {
         return this.getFtpClientPool().getInitPath();
     }
 
@@ -94,8 +84,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setInitPath(initPath);
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.getFtpClientPool().getPassword();
     }
 
@@ -103,8 +92,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setPassword(password);
     }
 
-    public Integer getPort()
-    {
+    public Integer getPort() {
         return this.getFtpClientPool().getPort();
     }
 
@@ -112,8 +100,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setPort(port);
     }
 
-    public String getServer()
-    {
+    public String getServer() {
         return this.getFtpClientPool().getServer();
     }
 
@@ -121,8 +108,7 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setServer(server);
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         return this.getFtpClientPool().getUserName();
     }
 
@@ -130,25 +116,19 @@ public class FTPClientSession extends FTPSession
         this.getFtpClientPool().setUserName(userName);
     }
 
-    public void initialize()
-    {
-        try
-        {
+    public void initialize() {
+        try {
             this.getFtpClientPool().initialize();
-        }
-        catch (SessionException e)
-        {
+        } catch (SessionException e) {
             logger.error(this, e);
         }
     }
 
-    public boolean isPoolEnabled()
-    {
+    public boolean isPoolEnabled() {
         return this.getFtpClientPool().isPoolEnabled();
     }
 
-    public void setPoolEnabled(boolean poolEnabled)
-    {
+    public void setPoolEnabled(boolean poolEnabled) {
         this.getFtpClientPool().setPoolEnabled(poolEnabled);
     }
 }

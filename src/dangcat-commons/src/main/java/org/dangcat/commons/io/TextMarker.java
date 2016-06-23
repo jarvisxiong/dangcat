@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class TextMarker
-{
+public class TextMarker {
     protected static final Logger logger = Logger.getLogger(TextMarker.class);
     private Configuration configuration = null;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -21,10 +20,8 @@ public class TextMarker
     private Locale locale = Environment.getCurrentLocale();
     private String template = null;
 
-    public Configuration getConfiguration()
-    {
-        if (this.configuration == null)
-        {
+    public Configuration getConfiguration() {
+        if (this.configuration == null) {
             Configuration configuration = new Configuration();
             configuration.setObjectWrapper(new DefaultObjectWrapper());
             configuration.setEncoding(this.getLocale(), this.getEncoding());
@@ -33,13 +30,11 @@ public class TextMarker
         return this.configuration;
     }
 
-    public Map<String, Object> getDataMap()
-    {
+    public Map<String, Object> getDataMap() {
         return this.dataMap;
     }
 
-    public String getEncoding()
-    {
+    public String getEncoding() {
         return this.encoding;
     }
 
@@ -47,8 +42,7 @@ public class TextMarker
         this.encoding = encoding;
     }
 
-    public Locale getLocale()
-    {
+    public Locale getLocale() {
         return this.locale;
     }
 
@@ -56,8 +50,7 @@ public class TextMarker
         this.locale = locale;
     }
 
-    public String getTemplate()
-    {
+    public String getTemplate() {
         return this.template;
     }
 
@@ -65,47 +58,37 @@ public class TextMarker
         this.template = template;
     }
 
-    public String process() throws IOException
-    {
+    public String process() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         this.process(outputStream);
         return new String(outputStream.toByteArray());
     }
 
-    public void process(File outputFile) throws IOException
-    {
+    public void process(File outputFile) throws IOException {
         OutputStream outputStream = null;
-        try
-        {
+        try {
             outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
             this.process(outputStream);
-        }
-        finally
-        {
+        } finally {
             if (outputStream != null)
                 outputStream.close();
         }
     }
 
-    public void process(OutputStream outputStream) throws IOException
-    {
-        try
-        {
+    public void process(OutputStream outputStream) throws IOException {
+        try {
             Template template = new Template(null, new StringReader(this.template), this.getConfiguration());
             template.setEncoding(this.getEncoding());
             Writer writer = new OutputStreamWriter(outputStream, this.getEncoding());
             template.process(this.dataMap, writer);
             writer.flush();
-        }
-        catch (TemplateException e)
-        {
+        } catch (TemplateException e) {
             logger.error(this.template, e);
             throw new IOException(e.getMessage());
         }
     }
 
-    public void putData(String name, Object value)
-    {
+    public void putData(String name, Object value) {
         this.dataMap.put(name, value);
     }
 }

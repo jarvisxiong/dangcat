@@ -7,8 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class TextDocumentListener implements DocumentListener
-{
+public class TextDocumentListener implements DocumentListener {
     @SuppressWarnings("unchecked")
     private JComboBox databaseComboBox = null;
     private JTextField databaseTextField = null;
@@ -19,15 +18,12 @@ public class TextDocumentListener implements DocumentListener
     private JTextField userTextField = null;
 
     @Override
-    public void changedUpdate(DocumentEvent e)
-    {
+    public void changedUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public void changedValue()
-    {
-        if (this.isEnabled())
-        {
+    public void changedValue() {
+        if (this.isEnabled()) {
             Database database = (Database) this.databaseComboBox.getSelectedItem();
             database.setName(this.databaseTextField.getText());
             database.setPassword(new String(this.passwordTextField.getPassword()));
@@ -38,8 +34,7 @@ public class TextDocumentListener implements DocumentListener
     }
 
     @SuppressWarnings("unchecked")
-    public JComboBox getDatabaseComboBox()
-    {
+    public JComboBox getDatabaseComboBox() {
         return databaseComboBox;
     }
 
@@ -48,8 +43,7 @@ public class TextDocumentListener implements DocumentListener
         this.databaseComboBox = databaseComboBox;
     }
 
-    public JTextField getDatabaseTextField()
-    {
+    public JTextField getDatabaseTextField() {
         return databaseTextField;
     }
 
@@ -57,8 +51,7 @@ public class TextDocumentListener implements DocumentListener
         this.databaseTextField = databaseTextField;
     }
 
-    public JPasswordField getPasswordTextField()
-    {
+    public JPasswordField getPasswordTextField() {
         return passwordTextField;
     }
 
@@ -66,8 +59,7 @@ public class TextDocumentListener implements DocumentListener
         this.passwordTextField = passwordTextField;
     }
 
-    public JTextField getPortTextField()
-    {
+    public JTextField getPortTextField() {
         return portTextField;
     }
 
@@ -75,8 +67,7 @@ public class TextDocumentListener implements DocumentListener
         this.portTextField = portTextField;
     }
 
-    public JTextField getServerTextField()
-    {
+    public JTextField getServerTextField() {
         return serverTextField;
     }
 
@@ -84,8 +75,7 @@ public class TextDocumentListener implements DocumentListener
         this.serverTextField = serverTextField;
     }
 
-    public JTextField getUserTextField()
-    {
+    public JTextField getUserTextField() {
         return userTextField;
     }
 
@@ -93,8 +83,7 @@ public class TextDocumentListener implements DocumentListener
         this.userTextField = userTextField;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         this.databaseTextField.getDocument().addDocumentListener(this);
         this.passwordTextField.getDocument().addDocumentListener(this);
         this.portTextField.getDocument().addDocumentListener(this);
@@ -103,24 +92,20 @@ public class TextDocumentListener implements DocumentListener
     }
 
     @Override
-    public void insertUpdate(DocumentEvent e)
-    {
+    public void insertUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
     @Override
-    public void removeUpdate(DocumentEvent e)
-    {
+    public void removeUpdate(DocumentEvent e) {
         this.changedValue();
     }
 }

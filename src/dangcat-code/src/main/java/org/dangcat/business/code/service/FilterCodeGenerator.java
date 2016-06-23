@@ -4,13 +4,11 @@ import org.dangcat.business.code.CodeGenerator;
 
 import java.io.File;
 
-public class FilterCodeGenerator extends CodeGenerator
-{
+public class FilterCodeGenerator extends CodeGenerator {
     private static final String TEMPLATE = "Filter.java.template";
 
     @Override
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         String outputFile = "main" + File.separator + "java";
         outputFile += File.separator + this.getPackageName().replace(".", File.separator);
         outputFile += File.separator + "filter";
@@ -19,8 +17,7 @@ public class FilterCodeGenerator extends CodeGenerator
     }
 
     @Override
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return TEMPLATE;
     }
 }

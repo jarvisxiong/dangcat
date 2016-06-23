@@ -15,13 +15,11 @@ import org.junit.Assert;
 
 import java.util.Date;
 
-public class TestModelFilter extends TestEntityBase
-{
+public class TestModelFilter extends TestEntityBase {
     private static final int TEST_COUNT = 10;
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -44,8 +42,7 @@ public class TestModelFilter extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testTableFilter1() throws TableException
-    {
+    private void testTableFilter1() throws TableException {
         Table table = TableDataUtils.getTable();
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
@@ -124,8 +121,7 @@ public class TestModelFilter extends TestEntityBase
             Assert.assertTrue(filterGroup.isValid(row));
     }
 
-    private void testTableFilter2() throws TableException
-    {
+    private void testTableFilter2() throws TableException {
         Table table = TableDataUtils.getTable();
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
@@ -224,8 +220,7 @@ public class TestModelFilter extends TestEntityBase
             Assert.assertTrue(filterGroup.isValid(row));
     }
 
-    private void testTableFilter3() throws TableException
-    {
+    private void testTableFilter3() throws TableException {
         FilterGroup objectGroup = new FilterGroup();
         objectGroup.setGroupType(FilterGroupType.or);
 

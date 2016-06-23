@@ -9,16 +9,14 @@ import org.dangcat.net.jms.activemq.JMSConnectionFactory;
 
 /**
  * 消息服务。
- * 
  */
-public class JMSServiceImpl extends ServiceBase
-{
+public class JMSServiceImpl extends ServiceBase {
     /**
      * 构建服务对象。
+     *
      * @param parent 所属服务。
      */
-    public JMSServiceImpl(ServiceProvider parent)
-    {
+    public JMSServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
@@ -26,16 +24,14 @@ public class JMSServiceImpl extends ServiceBase
      * 初始化服务。
      */
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         EventListenService eventListenService = this.getService(EventListenService.class);
         EventSendServiceImpl eventSendService = (EventSendServiceImpl) this.getService(EventSendService.class);
 
         // 根据资源配置初始化消息组件。
-        for (String name : JMSConnectionFactory.getInstance().getResourceNames())
-        {
+        for (String name : JMSConnectionFactory.getInstance().getResourceNames()) {
             // 消息发送服务。
             JMSSender jmsSender = new JMSSender(name);
             jmsSender.initialize();

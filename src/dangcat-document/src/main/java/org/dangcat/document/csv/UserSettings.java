@@ -1,7 +1,6 @@
 package org.dangcat.document.csv;
 
-public class UserSettings
-{
+public class UserSettings {
     /**
      * Use a backslash character before the text qualifier to represent an
      * occurance of the text qualifier.

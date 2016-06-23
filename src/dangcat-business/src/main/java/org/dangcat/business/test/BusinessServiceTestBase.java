@@ -28,8 +28,7 @@ import org.junit.Before;
 
 import java.util.*;
 
-public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends EntityBase, K extends DataFilter> extends MainServiceBase
-{
+public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends EntityBase, K extends DataFilter> extends MainServiceBase {
     private static final int MODULE_ID = 1;
     private static final int SERVICE_ID = 1;
     private static final String SESSIONID = "SESSIONID";
@@ -41,22 +40,17 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
     private ServiceInfo serviceInfo = null;
     private ServicePrincipal servicePrincipal = null;
 
-    public BusinessServiceTestBase()
-    {
+    public BusinessServiceTestBase() {
         super(ServiceFactory.createInstance(null));
     }
 
-    protected void addService(Class<?> accessClassType, Class<?> serviceClassType)
-    {
-        if (this.getService(accessClassType) == null)
-        {
-            Object service = ReflectUtils.newInstance(serviceClassType, new Class<?>[] { ServiceProvider.class }, new Object[] { this });
-            if (service != null)
-            {
+    protected void addService(Class<?> accessClassType, Class<?> serviceClassType) {
+        if (this.getService(accessClassType) == null) {
+            Object service = ReflectUtils.newInstance(serviceClassType, new Class<?>[]{ServiceProvider.class}, new Object[]{this});
+            if (service != null) {
                 // 服务工厂
                 ServiceLocator serviceLocator = this.getService(ServiceLocator.class);
-                if (serviceLocator == null)
-                {
+                if (serviceLocator == null) {
                     ServiceFactory serviceFactory = ServiceFactory.getInstance();
                     this.addService(ServiceLocator.class, serviceFactory);
                     this.addService(ServiceFactory.class, serviceFactory);
@@ -70,22 +64,17 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
     }
 
     @SuppressWarnings("unchecked")
-    protected void assertDelete(Integer id, Integer exceptionId) throws ServiceException
-    {
-        try
-        {
+    protected void assertDelete(Integer id, Integer exceptionId) throws ServiceException {
+        try {
             BusinessServiceBase<Q, T, K> businessServiceBase = (BusinessServiceBase<Q, T, K>) this.getService();
             businessServiceBase.delete(id);
             if (exceptionId != null)
                 throw new ServiceException("delete entity error.");
-            else
-            {
+            else {
                 T entity = businessServiceBase.view(id);
                 Assert.assertNull(entity);
             }
-        }
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             if (exceptionId != null && !exceptionId.equals(e.getMessageId()))
                 this.logger.error(exceptionId, e);
             Assert.assertEquals(exceptionId, e.getMessageId());
@@ -93,56 +82,44 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
     }
 
     @SuppressWarnings("unchecked")
-    protected void assertSave(T entity, Integer exceptionId) throws ServiceException
-    {
-        try
-        {
+    protected void assertSave(T entity, Integer exceptionId) throws ServiceException {
+        try {
             BusinessServiceBase<Q, T, K> businessServiceBase = (BusinessServiceBase<Q, T, K>) this.getService();
             businessServiceBase.save(entity);
-            if (exceptionId != null)
-            {
+            if (exceptionId != null) {
                 if (entity.findServiceException(exceptionId) == null)
                     throw new ServiceException("save entity error.");
-            }
-            else
+            } else
                 Assert.assertFalse(entity.hasError());
-        }
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             if (exceptionId != null && !exceptionId.equals(e.getMessageId()))
                 this.logger.error(exceptionId, e);
             Assert.assertEquals(exceptionId, e.getMessageId());
         }
     }
 
-    protected void disableExtendEvent()
-    {
+    protected void disableExtendEvent() {
         System.setProperty("business.extendevent.enabled", "false");
     }
 
-    protected void enabledExtendEvent()
-    {
+    protected void enabledExtendEvent() {
         System.setProperty("business.extendevent.enabled", "");
     }
 
     @SuppressWarnings("unchecked")
-    protected BusinessService<Q, T, K> getBusinessService()
-    {
+    protected BusinessService<Q, T, K> getBusinessService() {
         return (BusinessService<Q, T, K>) this.service;
     }
 
-    public DatabaseSimulator getDatabaseSimulator()
-    {
+    public DatabaseSimulator getDatabaseSimulator() {
         return this.databaseSimulator;
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 
-    protected EntitySimulator getEntitySimulator(Class<?> classType)
-    {
+    protected EntitySimulator getEntitySimulator(Class<?> classType) {
         String tableName = null;
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
         if (entityMetaData != null)
@@ -150,13 +127,11 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         return (EntitySimulator) this.databaseSimulator.getSimulateData(tableName).getDataSimulator();
     }
 
-    protected int getIndexOffSet()
-    {
+    protected int getIndexOffSet() {
         return 0;
     }
 
-    protected Locale getLocale()
-    {
+    protected Locale getLocale() {
         return this.locale;
     }
 
@@ -164,22 +139,18 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         this.locale = locale;
     }
 
-    protected S getService()
-    {
+    protected S getService() {
         return this.service;
     }
 
-    protected ServiceContext getServiceContext()
-    {
+    protected ServiceContext getServiceContext() {
         if (this.serviceContext == null)
             this.serviceContext = new ServiceContext(SESSIONID, this.getServicePrincipal(), this.getLocale());
         return this.serviceContext;
     }
 
-    protected ServiceInfo getServiceInfo()
-    {
-        if (this.serviceInfo == null)
-        {
+    protected ServiceInfo getServiceInfo() {
+        if (this.serviceInfo == null) {
             Map<String, Class<?>> genericClassMap = GenericUtils.getClassGenericInfo(this.getClass());
             this.serviceInfo = ServiceFactory.getInstance().getServiceInfo(genericClassMap.get("S"));
             ServiceCalculator.createPermissionValues(this.serviceInfo, MODULE_ID, SERVICE_ID);
@@ -187,17 +158,14 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         return this.serviceInfo;
     }
 
-    protected ServicePrincipal getServicePrincipal()
-    {
+    protected ServicePrincipal getServicePrincipal() {
         if (this.servicePrincipal == null)
             this.servicePrincipal = new ServicePrincipal("admin", "学习邓稼先", "SBEH", "127.0.0.1", null, null);
         return this.servicePrincipal;
     }
 
-    private void initDatabase()
-    {
-        if (this.databaseSimulator == null)
-        {
+    private void initDatabase() {
+        if (this.databaseSimulator == null) {
             Environment.setHomePath(this.getClass());
             SimulateUtils.configure();
 
@@ -210,13 +178,11 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         this.databaseSimulator.initDatabase();
     }
 
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         LogicValidatorUtils.disable();
         System.setProperty(ConfigureReader.KEY_SYSTEM_ID, "1");
         this.initDatabase();
@@ -224,24 +190,20 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         ServiceHelper.inject(this, this);
     }
 
-    protected Object[] loadSamples(Class<?> classType)
-    {
+    protected Object[] loadSamples(Class<?> classType) {
         List<?> entityList = this.getEntityManager().load(classType);
         Assert.assertNotNull(entityList);
-        return new Object[] { entityList.get(0), entityList.get(entityList.size() / 2), entityList.get(entityList.size() - 1) };
+        return new Object[]{entityList.get(0), entityList.get(entityList.size() / 2), entityList.get(entityList.size() - 1)};
     }
 
     @Before
-    public void login()
-    {
+    public void login() {
         ServiceContext.set(this.getServiceContext());
     }
 
-    protected void login(String no, Integer... permissionIds)
-    {
+    protected void login(String no, Integer... permissionIds) {
         Collection<Integer> permissions = null;
-        if (permissionIds != null && permissionIds.length > 0)
-        {
+        if (permissionIds != null && permissionIds.length > 0) {
             permissions = new HashSet<Integer>();
             for (Integer permissionId : permissionIds)
                 permissions.add(ServiceCalculator.create(MODULE_ID, SERVICE_ID, permissionId));
@@ -255,53 +217,44 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
     }
 
     @After
-    public void logout()
-    {
+    public void logout() {
         ServiceContext.remove();
         this.servicePrincipal = null;
         this.serviceContext = null;
     }
 
-    protected void testDefaultNew(Class<?> classType, Object expectEntity) throws ServiceException
-    {
+    protected void testDefaultNew(Class<?> classType, Object expectEntity) throws ServiceException {
         EntityBase entity = this.getBusinessService().view(null);
         Assert.assertNotNull(entity);
         Assert.assertTrue(SimulateUtils.compareData(expectEntity, entity));
     }
 
-    protected void testDelete(Class<?> classType, int size) throws ServiceException
-    {
+    protected void testDelete(Class<?> classType, int size) throws ServiceException {
         int indexOffSet = this.getIndexOffSet();
         this.disableExtendEvent();
-        Integer[] ids = new Integer[] { indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet };
-        for (Integer id : ids)
-        {
+        Integer[] ids = new Integer[]{indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet};
+        for (Integer id : ids) {
             Assert.assertTrue(this.getBusinessService().delete(id));
             Object entity = this.getEntityManager().load(classType, id);
             Assert.assertNull(entity);
         }
 
-        try
-        {
+        try {
             this.getBusinessService().delete(size);
-        }
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             Assert.assertEquals(BusinessException.DATA_NOTFOUND, e.getMessageId());
         }
         this.enabledExtendEvent();
     }
 
-    protected void testFilter(TestServiceQuery<Q, T, K> testServiceQuery, QueryAssert<K> queryAssert) throws ServiceException
-    {
+    protected void testFilter(TestServiceQuery<Q, T, K> testServiceQuery, QueryAssert<K> queryAssert) throws ServiceException {
         this.disableExtendEvent();
         testServiceQuery.query(queryAssert.getDataFilter());
         testServiceQuery.assertFilterResult(queryAssert);
         this.enabledExtendEvent();
     }
 
-    private void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, Integer startRow, Integer pageSize, QueryAssert<K> queryAssert) throws ServiceException
-    {
+    private void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, Integer startRow, Integer pageSize, QueryAssert<K> queryAssert) throws ServiceException {
         this.disableExtendEvent();
         queryAssert.getDataFilter().setStartRow(startRow);
         queryAssert.getDataFilter().setPageSize(pageSize);
@@ -310,13 +263,11 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         this.enabledExtendEvent();
     }
 
-    protected void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, QueryAssert<K> queryAssert) throws ServiceException
-    {
+    protected void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, QueryAssert<K> queryAssert) throws ServiceException {
         this.testQuery(testServiceQuery, "Id", queryAssert);
     }
 
-    protected void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, String idFieldName, QueryAssert<K> queryAssert) throws ServiceException
-    {
+    protected void testQuery(TestServiceQuery<Q, T, K> testServiceQuery, String idFieldName, QueryAssert<K> queryAssert) throws ServiceException {
         int indexOffSet = this.getIndexOffSet();
         int pageSize = 10;
         queryAssert.setExpectPageSize(pageSize);
@@ -351,14 +302,12 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         this.testQuery(testServiceQuery, startRow, pageSize, queryAssert);
     }
 
-    protected void testSave(Class<T> classType, int size) throws ServiceException
-    {
+    protected void testSave(Class<T> classType, int size) throws ServiceException {
         int indexOffSet = this.getIndexOffSet();
         this.disableExtendEvent();
         EntitySimulator entitySimulator = this.getEntitySimulator(classType);
-        Integer[] ids = new Integer[] { indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet };
-        for (Integer id : ids)
-        {
+        Integer[] ids = new Integer[]{indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet};
+        for (Integer id : ids) {
             T expectEntity = this.getEntityManager().load(classType, id);
             entitySimulator.modify(expectEntity, size - id - 1);
             this.getBusinessService().save(expectEntity);
@@ -371,12 +320,10 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         this.enabledExtendEvent();
     }
 
-    protected void testView(Class<?> classType, int size) throws ServiceException
-    {
+    protected void testView(Class<?> classType, int size) throws ServiceException {
         int indexOffSet = this.getIndexOffSet();
-        Integer[] ids = new Integer[] { indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet };
-        for (Integer id : ids)
-        {
+        Integer[] ids = new Integer[]{indexOffSet, size / 2 + indexOffSet, size - 1 + indexOffSet};
+        for (Integer id : ids) {
             Object expectEntity = this.getEntityManager().load(classType, id);
             EntityCalculator.calculate(expectEntity);
             EntityBase actualEntity = this.getBusinessService().view(id);
@@ -384,22 +331,16 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
             Assert.assertTrue(SimulateUtils.compareData(expectEntity, actualEntity));
         }
 
-        try
-        {
+        try {
             this.getBusinessService().view(size);
-        }
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             Assert.assertEquals(BusinessException.DATA_NOTFOUND, e.getMessageId());
         }
     }
 
-    protected void truncate(Class<?>... classTypes)
-    {
-        if (classTypes != null && classTypes.length > 0)
-        {
-            for (Class<?> classType : classTypes)
-            {
+    protected void truncate(Class<?>... classTypes) {
+        if (classTypes != null && classTypes.length > 0) {
+            for (Class<?> classType : classTypes) {
                 EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
                 Table table = entityMetaData.getTable();
                 if (table.exists())

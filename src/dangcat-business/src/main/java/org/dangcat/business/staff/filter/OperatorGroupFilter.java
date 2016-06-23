@@ -15,12 +15,11 @@ import org.dangcat.web.annotation.Picker;
 
 /**
  * The service filter for OperatorGroup.
+ *
  * @author dangcat
- * 
  */
 @Table("OperatorGroup")
-public class OperatorGroupFilter extends DataFilter
-{
+public class OperatorGroupFilter extends DataFilter {
     private Integer[] children = null;
     @Column(index = 0, displaySize = 20)
     @Picker(value = OperatorGroupPicker.class, valueField = "name")
@@ -30,8 +29,7 @@ public class OperatorGroupFilter extends DataFilter
     private Integer parentId = null;
 
     @Serialize(ignore = true)
-    public Integer[] getChildren()
-    {
+    public Integer[] getChildren() {
         return children;
     }
 
@@ -41,8 +39,7 @@ public class OperatorGroupFilter extends DataFilter
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         if (!ValueUtils.isEmpty(this.getName()))
             filterGroup.add(new FilterUnit(OperatorGroup.Name, FilterType.like, this.getName()));
@@ -53,23 +50,19 @@ public class OperatorGroupFilter extends DataFilter
         return this.getFilterExpress(filterGroup);
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getParentId()
-    {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId)
-    {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 }

@@ -15,21 +15,18 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 系统登出入口。
+ *
  * @author dangcat
- * 
  */
-public class LogoutServlet extends ServiceServletBase
-{
+public class LogoutServlet extends ServiceServletBase {
     private static final String METHOD_NAME = "logout";
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession httpSession = request.getSession();
         ServicePrincipal servicePrincipal = (ServicePrincipal) httpSession.getAttribute(ServicePrincipal.class.getSimpleName());
-        if (servicePrincipal != null && servicePrincipal.isValid())
-        {
+        if (servicePrincipal != null && servicePrincipal.isValid()) {
             ResponseUtils.createServiceContext(request, response, null);
             ServiceInfo serviceInfo = ServiceFactory.getInstance().getServiceInfo(SecurityLoginService.class);
             MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(METHOD_NAME);

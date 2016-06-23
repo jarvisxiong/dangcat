@@ -12,33 +12,29 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 /**
  * The service filter for ServerInfo.
+ *
  * @author ${authorName}
- * 
  */
 @Table("ServerInfo")
-@Resources( { ServerInfoQuery.class })
-public class ServerInfoFilter extends DataFilter
-{
+@Resources({ServerInfoQuery.class})
+public class ServerInfoFilter extends DataFilter {
     @Column(index = 1, displaySize = 32)
     private String ip;
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         if (this.getIp() != null)
             filterGroup.add(new FilterUnit(ServerInfoQuery.Ip, FilterType.like, this.getIp()));
         return this.getFilterExpress(filterGroup);
     }
 
-    public String getIp()
-    {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(String ip)
-    {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 }

@@ -20,101 +20,131 @@ import java.util.*;
 
 /**
  * 实体元数据。
+ *
  * @author dangcat
- * 
  */
-public class EntityMetaData
-{
-    /** 提交后事件方法。 */
+public class EntityMetaData {
+    /**
+     * 提交后事件方法。
+     */
     private Collection<Method> afterCommitCollection = new HashSet<Method>();
-    /** 删除后事件方法。 */
+    /**
+     * 删除后事件方法。
+     */
     private Collection<Method> afterDeleteCollection = new HashSet<Method>();
-    /** 新增后事件方法。 */
+    /**
+     * 新增后事件方法。
+     */
     private Collection<Method> afterInsertCollection = new HashSet<Method>();
-    /** 载入事件配置。 */
+    /**
+     * 载入事件配置。
+     */
     private Collection<Method> afterLoadCollection = new HashSet<Method>();
-    /** 保存后事件方法。 */
+    /**
+     * 保存后事件方法。
+     */
     private Collection<Method> afterSaveCollection = new HashSet<Method>();
-    /** 自增主键字段。 */
+    /**
+     * 自增主键字段。
+     */
     private EntityField autoIncrement = null;
-    /** 删除前事件方法。 */
+    /**
+     * 删除前事件方法。
+     */
     private Collection<Method> beforeDeleteCollection = new HashSet<Method>();
-    /** 保存前前事件方法。 */
+    /**
+     * 保存前前事件方法。
+     */
     private Collection<Method> beforeInsertCollection = new HashSet<Method>();
-    /** 保存前事件方法。 */
+    /**
+     * 保存前事件方法。
+     */
     private Collection<Method> beforeSaveCollection = new HashSet<Method>();
-    /** 实体类。 */
+    /**
+     * 实体类。
+     */
     private Class<?> entityClass = null;
-    /** 属性名映射表。 */
+    /**
+     * 属性名映射表。
+     */
     private Map<String, EntityField> entityFieldMap = new HashMap<String, EntityField>();
-    /** 数据库相关的表达语句。 */
+    /**
+     * 数据库相关的表达语句。
+     */
     private Map<String, EntityStatement> entityStatementMap = new HashMap<String, EntityStatement>();
-    /** 连接表配置。 */
+    /**
+     * 连接表配置。
+     */
     private Collection<JoinTable> joinTableCollection = new HashSet<JoinTable>();
-    /** 主键字段。 */
+    /**
+     * 主键字段。
+     */
     private Collection<EntityField> primaryKeyFieldCollection = null;
-    /** 主键字段名。 */
+    /**
+     * 主键字段名。
+     */
     private Collection<String> primaryKeyNameCollection = null;
-    /** 关联表配置。 */
+    /**
+     * 关联表配置。
+     */
     private Collection<Relation> relations = new HashSet<Relation>();
-    /** 资源读取器 */
+    /**
+     * 资源读取器
+     */
     private ResourceReader resourceReader = null;
-    /** 表对象。 */
+    /**
+     * 表对象。
+     */
     private Table table = new Table();
 
-    public EntityMetaData(Class<?> entityClass)
-    {
+    public EntityMetaData(Class<?> entityClass) {
         this.entityClass = entityClass;
         EntityHelper.createEntityMetaData(this);
     }
 
-    public void addEntityField(EntityField entityField)
-    {
+    public void addEntityField(EntityField entityField) {
         this.getEntityFieldMap().put(entityField.getName(), entityField);
     }
 
-    public void addRelation(Relation relation)
-    {
+    public void addRelation(Relation relation) {
         this.relations.add(relation);
     }
 
     /**
      * 比较两个实体大小。
+     *
      * @param srcEntity 来源实体对象。
      * @param dstEntity 目标实体对象。
      * @return
      */
-    public int compare(Object srcEntity, Object dstEntity)
-    {
+    public int compare(Object srcEntity, Object dstEntity) {
         return EntityMetaUtils.compare(this, srcEntity, dstEntity);
     }
 
     /**
      * 比较两个实体大小。
+     *
      * @param srcEntity 来源实体对象。
      * @param dstEntity 目标实体对象。
      * @return
      */
-    public int compareByPrimaryKey(Object srcEntity, Object dstEntity)
-    {
+    public int compareByPrimaryKey(Object srcEntity, Object dstEntity) {
         return EntityMetaUtils.compareByPrimaryKey(this, srcEntity, dstEntity);
     }
 
     /**
      * 通过属性内容产生过滤条件。
+     *
      * @param entityMetaData 实体元数据。
-     * @param fieldNames 字段名。
-     * @param values 数值。
+     * @param fieldNames     字段名。
+     * @param values         数值。
      * @return 过滤条件。
      */
-    public FilterExpress createFilterExpress(String[] fieldNames, Object[] values)
-    {
+    public FilterExpress createFilterExpress(String[] fieldNames, Object[] values) {
         FilterExpress filterExpress = null;
-        if (fieldNames != null && values != null && fieldNames.length == values.length)
-        {
+        if (fieldNames != null && values != null && fieldNames.length == values.length) {
             FilterGroup filterGroup = new FilterGroup();
-            for (int i = 0; i < fieldNames.length; i++)
-            {
+            for (int i = 0; i < fieldNames.length; i++) {
                 EntityField entityField = this.getEntityField(fieldNames[i]);
                 if (entityField == null)
                     throw new EntityException("The field name " + fieldNames[i] + " is not found.");
@@ -128,38 +158,31 @@ public class EntityMetaData
         return filterExpress;
     }
 
-    public Table createTable()
-    {
+    public Table createTable() {
         return (Table) this.getTable().clone();
     }
 
-    public Collection<Method> getAfterCommitCollection()
-    {
+    public Collection<Method> getAfterCommitCollection() {
         return this.afterCommitCollection;
     }
 
-    public Collection<Method> getAfterDeleteCollection()
-    {
+    public Collection<Method> getAfterDeleteCollection() {
         return this.afterDeleteCollection;
     }
 
-    public Collection<Method> getAfterInsertCollection()
-    {
+    public Collection<Method> getAfterInsertCollection() {
         return this.afterInsertCollection;
     }
 
-    public Collection<Method> getAfterLoadCollection()
-    {
+    public Collection<Method> getAfterLoadCollection() {
         return this.afterLoadCollection;
     }
 
-    public Collection<Method> getAfterSaveCollection()
-    {
+    public Collection<Method> getAfterSaveCollection() {
         return this.afterSaveCollection;
     }
 
-    public EntityField getAutoIncrement()
-    {
+    public EntityField getAutoIncrement() {
         return this.autoIncrement;
     }
 
@@ -167,64 +190,54 @@ public class EntityMetaData
         this.autoIncrement = autoIncrement;
     }
 
-    public Collection<Method> getBeforeDeleteCollection()
-    {
+    public Collection<Method> getBeforeDeleteCollection() {
         return this.beforeDeleteCollection;
     }
 
-    public Collection<Method> getBeforeInsertCollection()
-    {
+    public Collection<Method> getBeforeInsertCollection() {
         return this.beforeInsertCollection;
     }
 
-    public Collection<Method> getBeforeSaveCollection()
-    {
+    public Collection<Method> getBeforeSaveCollection() {
         return this.beforeSaveCollection;
     }
 
-    public Class<?> getEntityClass()
-    {
+    public Class<?> getEntityClass() {
         return this.entityClass;
     }
 
-    public EntityField getEntityField(String name)
-    {
+    public EntityField getEntityField(String name) {
         return this.getEntityFieldMap().get(ReflectUtils.toFieldName(name));
     }
 
-    public EntityField getEntityFieldByFieldName(String fieldName)
-    {
+    public EntityField getEntityFieldByFieldName(String fieldName) {
         Column column = this.table.getColumns().findByFieldName(fieldName);
         if (column != null)
             return this.getEntityField(column.getName());
         return this.getEntityField(fieldName);
     }
 
-    public Collection<EntityField> getEntityFieldCollection()
-    {
+    public Collection<EntityField> getEntityFieldCollection() {
         return this.getEntityFieldMap().values();
     }
 
-    private Map<String, EntityField> getEntityFieldMap()
-    {
+    private Map<String, EntityField> getEntityFieldMap() {
         return this.entityFieldMap;
     }
 
     /**
      * 读取指定数据库的表达式。
+     *
      * @param databaseName
      * @return
      */
-    public EntityStatement getEntityStatement(String databaseName)
-    {
+    public EntityStatement getEntityStatement(String databaseName) {
         if (ValueUtils.isEmpty(databaseName))
             databaseName = SessionFactory.getInstance().getDefaultDatabase();
 
         EntityStatement entityStatement = this.entityStatementMap.get(databaseName);
-        if (entityStatement == null)
-        {
-            synchronized (this.entityStatementMap)
-            {
+        if (entityStatement == null) {
+            synchronized (this.entityStatementMap) {
                 entityStatement = new EntityStatement(this, databaseName);
                 entityStatement.initialize();
                 this.entityStatementMap.put(databaseName, entityStatement);
@@ -233,20 +246,16 @@ public class EntityMetaData
         return entityStatement;
     }
 
-    protected Map<String, EntityStatement> getEntityStatementMap()
-    {
+    protected Map<String, EntityStatement> getEntityStatementMap() {
         return this.entityStatementMap;
     }
 
-    public Collection<JoinTable> getJoinTableCollection()
-    {
+    public Collection<JoinTable> getJoinTableCollection() {
         return this.joinTableCollection;
     }
 
-    public Collection<EntityField> getPrimaryKeyFieldCollection()
-    {
-        if (this.primaryKeyFieldCollection == null)
-        {
+    public Collection<EntityField> getPrimaryKeyFieldCollection() {
+        if (this.primaryKeyFieldCollection == null) {
             Collection<EntityField> primaryKeyFieldCollection = new LinkedHashSet<EntityField>();
             for (Column column : this.table.getColumns().getPrimaryKeys())
                 primaryKeyFieldCollection.add(this.getEntityField(column.getName()));
@@ -255,10 +264,8 @@ public class EntityMetaData
         return this.primaryKeyFieldCollection;
     }
 
-    public String[] getPrimaryKeyNames()
-    {
-        if (this.primaryKeyNameCollection == null)
-        {
+    public String[] getPrimaryKeyNames() {
+        if (this.primaryKeyNameCollection == null) {
             Collection<String> primaryKeyNameCollection = new LinkedHashSet<String>();
             for (EntityField primaryKeyEntityField : this.getPrimaryKeyFieldCollection())
                 primaryKeyNameCollection.add(primaryKeyEntityField.getName());
@@ -267,33 +274,28 @@ public class EntityMetaData
         return this.primaryKeyNameCollection.toArray(new String[0]);
     }
 
-    public Object[] getPrimaryKeyValues(Object entity)
-    {
+    public Object[] getPrimaryKeyValues(Object entity) {
         Collection<Object> primaryKeyNameCollection = new LinkedList<Object>();
         for (EntityField primaryKeyEntityField : this.getPrimaryKeyFieldCollection())
             primaryKeyNameCollection.add(primaryKeyEntityField.getValue(entity));
         return primaryKeyNameCollection.toArray();
     }
 
-    public Collection<Relation> getRelations()
-    {
+    public Collection<Relation> getRelations() {
         return this.relations;
     }
 
-    public ResourceReader getResourceReader()
-    {
+    public ResourceReader getResourceReader() {
         if (this.resourceReader == null)
             this.resourceReader = EntityResourceManager.getInstance().getResourceReader(this);
         return this.resourceReader;
     }
 
-    public Table getTable()
-    {
+    public Table getTable() {
         return this.table;
     }
 
-    public TableName getTableName()
-    {
+    public TableName getTableName() {
         return this.getTable().getTableName();
     }
 
@@ -301,16 +303,14 @@ public class EntityMetaData
         this.getTable().setTableName(tableName);
     }
 
-    public Object getValue(String fieldName, Object instance)
-    {
+    public Object getValue(String fieldName, Object instance) {
         EntityField entityField = this.getEntityField(fieldName);
         if (entityField != null)
             return entityField.getValue(instance);
         return null;
     }
 
-    protected void initialize()
-    {
+    protected void initialize() {
         // 产生校验器
         new EntityDataValidatorCreater(this).create();
         // 事件。
@@ -319,16 +319,15 @@ public class EntityMetaData
 
     /**
      * 主键值是否有效。
+     *
      * @param primaryKeyValues 主键值。
      * @return
      */
-    public boolean isPrimaryKeyValueValid(Object[] primaryKeyValues)
-    {
+    public boolean isPrimaryKeyValueValid(Object[] primaryKeyValues) {
         return EntityMetaUtils.isPrimaryKeyValueValid(primaryKeyValues);
     }
 
-    public void setValue(String fieldName, Object instance, Object value)
-    {
+    public void setValue(String fieldName, Object instance, Object value) {
         EntityField entityField = this.getEntityField(fieldName);
         if (entityField != null)
             entityField.setValue(instance, value);
@@ -337,14 +336,12 @@ public class EntityMetaData
     /**
      * 排序栏位顺序。
      */
-    public void sort()
-    {
+    public void sort() {
         this.entityFieldMap = EntityMetaUtils.sort(this);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return EntityMetaUtils.toString(this);
     }
 }

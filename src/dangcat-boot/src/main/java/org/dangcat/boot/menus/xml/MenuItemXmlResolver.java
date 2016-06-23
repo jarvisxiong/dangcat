@@ -8,31 +8,31 @@ import java.util.Map;
 
 /**
  * 模块对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class MenuItemXmlResolver extends XmlResolver
-{
-    /** 模块。 */
+public class MenuItemXmlResolver extends XmlResolver {
+    /**
+     * 模块。
+     */
     private MenuItem menuItem = null;
 
     /**
      * 构建解析器。
      */
-    public MenuItemXmlResolver()
-    {
+    public MenuItemXmlResolver() {
         super(MenuItem.class.getSimpleName());
         this.addChildXmlResolver(new ParamsXmlResolver());
     }
 
     /**
      * 产生子元素对象。
+     *
      * @param elementName 子元素名称。
-     * @param child 子元素对象。
+     * @param child       子元素对象。
      */
     @SuppressWarnings("unchecked")
-    protected void afterChildCreate(String elementName, Object child)
-    {
+    protected void afterChildCreate(String elementName, Object child) {
         if (child instanceof Map)
             this.menuItem.setParams((Map<String, Object>) child);
     }
@@ -41,8 +41,7 @@ public class MenuItemXmlResolver extends XmlResolver
      * 开始解析元素标签。
      */
     @Override
-    protected void startElement()
-    {
+    protected void startElement() {
         this.menuItem = new MenuItem();
         this.setResolveObject(this.menuItem);
     }

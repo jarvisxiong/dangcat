@@ -15,11 +15,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class MultiLineChart extends TimeSeriesChart
-{
+public class MultiLineChart extends TimeSeriesChart {
     @Override
-    protected JFreeChart createChart()
-    {
+    protected JFreeChart createChart() {
         this.initDataConverters();
 
         // 区域图的表现模块。
@@ -27,8 +25,7 @@ public class MultiLineChart extends TimeSeriesChart
         // 横坐标标题。
         xyPlot.setDomainAxis(new DateAxis(this.getDomainTitle()));
 
-        for (int i = 0; i < this.getDataConverters().size(); i++)
-        {
+        for (int i = 0; i < this.getDataConverters().size(); i++) {
             CategoryTableXYDataset categoryTableXYDataset = new CategoryTableXYDataset();
             xyPlot.setDataset(i, categoryTableXYDataset);
             // 初始化纵坐标。
@@ -42,14 +39,12 @@ public class MultiLineChart extends TimeSeriesChart
     }
 
     @Override
-    protected XYItemRenderer createXYItemRenderer()
-    {
+    protected XYItemRenderer createXYItemRenderer() {
         return new XYLineAndShapeRenderer(true, true);
     }
 
     @Override
-    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i)
-    {
+    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i) {
         super.iniItemRenderer(xyItemRenderer, i);
 
         XYLineAndShapeRenderer xyLineAndShapeRenderer = (XYLineAndShapeRenderer) xyItemRenderer;
@@ -58,13 +53,11 @@ public class MultiLineChart extends TimeSeriesChart
         xyLineAndShapeRenderer.setDrawSeriesLineAsPath(true);
     }
 
-    private void initDataConverters()
-    {
+    private void initDataConverters() {
         DataModule dataModule = this.getDataModule();
 
         List<DataConverter> dataConverters = this.getDataConverters();
-        if (dataConverters.size() == 0)
-        {
+        if (dataConverters.size() == 0) {
             for (Comparable<?> rowKey : dataModule.getRowKeys())
                 dataConverters.add(new DataConverter((String) rowKey));
         }
@@ -73,14 +66,12 @@ public class MultiLineChart extends TimeSeriesChart
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         DataModule dataModule = this.getDataModule();
 
         List<DataConverter> dataConverters = this.getDataConverters();
         XYPlot xyPlot = (XYPlot) this.getChart().getPlot();
-        for (int i = 0; i < dataConverters.size(); i++)
-        {
+        for (int i = 0; i < dataConverters.size(); i++) {
             DataConverter dataConverter = dataConverters.get(i);
             dataConverter.setDataModule(dataModule);
             dataConverter.calculate(false);

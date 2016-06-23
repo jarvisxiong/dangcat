@@ -9,36 +9,32 @@ import java.util.Collection;
 
 /**
  * 拦截器对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class InterceptorsXmlResolver extends XmlResolver
-{
+public class InterceptorsXmlResolver extends XmlResolver {
     protected static final String RESOLVER_NAME = "Interceptors";
     private static final String CHILDELEMENT_NAME = "Interceptor";
 
     /**
      * 构建解析器。
      */
-    public InterceptorsXmlResolver()
-    {
+    public InterceptorsXmlResolver() {
         super(RESOLVER_NAME);
     }
 
     @SuppressWarnings("unchecked")
-    public Collection<Class<?>> getInterceptors()
-    {
+    public Collection<Class<?>> getInterceptors() {
         return (Collection<Class<?>>) this.getResolveObject();
     }
 
     /**
      * 开始解析子元素标签。
+     *
      * @param element 子元素名称。
      */
-    protected void resolveChildElement(Element element)
-    {
-        if (CHILDELEMENT_NAME.equalsIgnoreCase(element.getName()) && !ValueUtils.isEmpty(element.getText()))
-        {
+    protected void resolveChildElement(Element element) {
+        if (CHILDELEMENT_NAME.equalsIgnoreCase(element.getName()) && !ValueUtils.isEmpty(element.getText())) {
             Class<?> interceptorClass = ReflectUtils.loadClass(element.getTextTrim());
             if (interceptorClass == null)
                 logger.error("The interceptor class " + element.getTextTrim() + " is not found.");

@@ -4,8 +4,7 @@ import org.dangcat.framework.EntityResourceManager;
 import org.dangcat.framework.service.annotation.JndiName;
 
 @JndiName
-public interface SettleService
-{
+public interface SettleService {
     EntityResourceManager getEntityManager();
 
     EntityResourceManager getHsqldbEntityManager();

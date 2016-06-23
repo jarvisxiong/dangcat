@@ -4,8 +4,7 @@ import org.dangcat.persistence.annotation.Column;
 import org.dangcat.persistence.annotation.Table;
 
 @Table
-public class BillDetail
-{
+public class BillDetail {
     public static final String Amount = "Amount";
     public static final String BillId = "BillId";
     public static final String Id = "Id";
@@ -23,43 +22,35 @@ public class BillDetail
     @Column
     private String name;
 
-    public double getAmount()
-    {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount)
-    {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Integer getBillId()
-    {
+    public Integer getBillId() {
         return billId;
     }
 
-    public void setBillId(Integer billId)
-    {
+    public void setBillId(Integer billId) {
         this.billId = billId;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

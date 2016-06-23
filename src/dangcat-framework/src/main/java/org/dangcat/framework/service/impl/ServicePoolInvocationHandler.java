@@ -9,25 +9,21 @@ import java.lang.reflect.Method;
 
 /**
  * 服务对象池代理。
+ *
  * @author dangcat
- * 
  */
-public class ServicePoolInvocationHandler implements InvocationHandler
-{
+public class ServicePoolInvocationHandler implements InvocationHandler {
     private ServicePool servicePool = null;
 
-    public ServicePoolInvocationHandler(ServicePool servicePool)
-    {
+    public ServicePoolInvocationHandler(ServicePool servicePool) {
         this.servicePool = servicePool;
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
-    {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object result = null;
         ServiceLiver serviceLiver = this.servicePool.poll();
-        if (serviceLiver != null)
-        {
+        if (serviceLiver != null) {
             Object instance = serviceLiver.getService();
             ServiceContext serviceContext = ServiceContext.getInstance();
             ServiceInfo preServiceInfo = null;
@@ -35,33 +31,23 @@ public class ServicePoolInvocationHandler implements InvocationHandler
             MethodInfo methodInfo = null;
 
             Throwable throwable = null;
-            try
-            {
-                if (serviceContext != null)
-                {
+            try {
+                if (serviceContext != null) {
                     preServiceInfo = serviceContext.getServiceInfo();
                     serviceInfo = this.servicePool.getServiceInfo();
                     methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(method.getName());
                 }
-                if (methodInfo != null)
-                {
+                if (methodInfo != null) {
                     ServiceUtils.injectContext(instance, serviceContext);
                     serviceInfo.beforeInvoke(instance, serviceContext, methodInfo, args);
                 }
                 result = method.invoke(instance, args);
-            }
-            catch (InvocationTargetException e)
-            {
+            } catch (InvocationTargetException e) {
                 throwable = e.getTargetException();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 throwable = e;
-            }
-            finally
-            {
-                if (methodInfo != null)
-                {
+            } finally {
+                if (methodInfo != null) {
                     serviceInfo.afterInvoke(instance, serviceContext, methodInfo, args, throwable != null ? throwable : result);
                     ServiceUtils.injectContext(instance, null);
                 }
@@ -75,18 +61,13 @@ public class ServicePoolInvocationHandler implements InvocationHandler
         return result;
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         boolean result = false;
         ServiceLiver serviceLiver = this.servicePool.poll();
-        if (serviceLiver != null)
-        {
-            try
-            {
+        if (serviceLiver != null) {
+            try {
                 result = serviceLiver.getService() != null;
-            }
-            finally
-            {
+            } finally {
                 this.servicePool.release(serviceLiver);
             }
         }

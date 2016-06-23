@@ -4,24 +4,20 @@ import org.dangcat.framework.service.annotation.Service;
 
 import java.lang.annotation.Annotation;
 
-public class ServiceInjectProvider extends InjectProvider
-{
+public class ServiceInjectProvider extends InjectProvider {
     @Override
-    public Class<? extends Annotation> getAnnotation()
-    {
+    public Class<? extends Annotation> getAnnotation() {
         return Service.class;
     }
 
     @Override
-    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation)
-    {
+    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation) {
         Service serviceAnnotation = (Service) annotation;
         Object injectService = null;
         if (!Object.class.equals(serviceAnnotation.value()))
             accessClassType = serviceAnnotation.value();
         injectService = serviceProvider.getService(accessClassType);
-        if (injectService == null)
-        {
+        if (injectService == null) {
             StringBuilder info = new StringBuilder();
             info.append("serviceProvider: " + serviceProvider.getClass().getName());
             info.append(", ");

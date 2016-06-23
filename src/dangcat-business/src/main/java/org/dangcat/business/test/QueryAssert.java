@@ -2,8 +2,7 @@ package org.dangcat.business.test;
 
 import org.dangcat.persistence.filter.FilterExpress;
 
-public class QueryAssert<T>
-{
+public class QueryAssert<T> {
     private Class<?> classType = null;
     private T dataFilter = null;
     private FilterExpress exceptFilterExpress = null;
@@ -11,13 +10,11 @@ public class QueryAssert<T>
     private Integer expectStartRow = null;
     private Integer expectTotaleSize = null;
 
-    public QueryAssert(Class<?> classType)
-    {
+    public QueryAssert(Class<?> classType) {
         this.classType = classType;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return classType;
     }
 
@@ -25,8 +22,7 @@ public class QueryAssert<T>
         this.classType = classType;
     }
 
-    public T getDataFilter()
-    {
+    public T getDataFilter() {
         return dataFilter;
     }
 
@@ -34,13 +30,11 @@ public class QueryAssert<T>
         this.dataFilter = dataFilter;
     }
 
-    public FilterExpress getExceptFilterExpress()
-    {
+    public FilterExpress getExceptFilterExpress() {
         return exceptFilterExpress;
     }
 
-    public Integer getExpectPageSize()
-    {
+    public Integer getExpectPageSize() {
         return expectPageSize;
     }
 
@@ -48,28 +42,23 @@ public class QueryAssert<T>
         this.expectPageSize = expectPageSize;
     }
 
-    public Integer getExpectStartRow()
-    {
+    public Integer getExpectStartRow() {
         return expectStartRow;
     }
 
-    public void setExpectStartRow(Integer expectStartRow)
-    {
+    public void setExpectStartRow(Integer expectStartRow) {
         this.expectStartRow = expectStartRow;
     }
 
-    public Integer getExpectTotaleSize()
-    {
+    public Integer getExpectTotaleSize() {
         return expectTotaleSize;
     }
 
-    public void setExpectTotaleSize(Integer expectTotaleSize)
-    {
+    public void setExpectTotaleSize(Integer expectTotaleSize) {
         this.expectTotaleSize = expectTotaleSize;
     }
 
-    public void setExpectFilterExpress(FilterExpress exceptFilterExpress)
-    {
+    public void setExpectFilterExpress(FilterExpress exceptFilterExpress) {
         this.exceptFilterExpress = exceptFilterExpress;
     }
 }

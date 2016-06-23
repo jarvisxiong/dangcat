@@ -8,8 +8,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class FtpConfigListener implements DocumentListener
-{
+public class FtpConfigListener implements DocumentListener {
     private ConfigPanel configPanel = null;
     private boolean enabled = true;
     private FtpParameter ftpParameter = null;
@@ -19,21 +18,17 @@ public class FtpConfigListener implements DocumentListener
     private JTextField serverTextField = null;
     private JTextField usernameTextField = null;
 
-    public FtpConfigListener(ConfigPanel configPanel)
-    {
+    public FtpConfigListener(ConfigPanel configPanel) {
         this.configPanel = configPanel;
     }
 
     @Override
-    public void changedUpdate(DocumentEvent e)
-    {
+    public void changedUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public void changedValue()
-    {
-        if (this.isEnabled())
-        {
+    public void changedValue() {
+        if (this.isEnabled()) {
             FtpParameter ftpParameter = this.getFtpParamer();
             ftpParameter.setInitPath(this.initpathTextField.getText());
             ftpParameter.setPassword(new String(this.passwordTextField.getPassword()));
@@ -44,18 +39,15 @@ public class FtpConfigListener implements DocumentListener
         }
     }
 
-    public JTextField getDatabaseTextField()
-    {
+    public JTextField getDatabaseTextField() {
         return this.initpathTextField;
     }
 
-    public FtpParameter getFtpParamer()
-    {
+    public FtpParameter getFtpParamer() {
         return this.ftpParameter;
     }
 
-    public JPasswordField getPasswordTextField()
-    {
+    public JPasswordField getPasswordTextField() {
         return this.passwordTextField;
     }
 
@@ -63,8 +55,7 @@ public class FtpConfigListener implements DocumentListener
         this.passwordTextField = passwordTextField;
     }
 
-    public JTextField getPortTextField()
-    {
+    public JTextField getPortTextField() {
         return this.portTextField;
     }
 
@@ -72,8 +63,7 @@ public class FtpConfigListener implements DocumentListener
         this.portTextField = portTextField;
     }
 
-    public JTextField getServerTextField()
-    {
+    public JTextField getServerTextField() {
         return this.serverTextField;
     }
 
@@ -81,8 +71,7 @@ public class FtpConfigListener implements DocumentListener
         this.serverTextField = serverTextField;
     }
 
-    public JTextField getUserTextField()
-    {
+    public JTextField getUserTextField() {
         return this.usernameTextField;
     }
 
@@ -90,8 +79,7 @@ public class FtpConfigListener implements DocumentListener
         this.usernameTextField = userTextField;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         this.initpathTextField.getDocument().addDocumentListener(this);
         this.passwordTextField.getDocument().addDocumentListener(this);
         this.portTextField.getDocument().addDocumentListener(this);
@@ -100,13 +88,11 @@ public class FtpConfigListener implements DocumentListener
     }
 
     @Override
-    public void insertUpdate(DocumentEvent e)
-    {
+    public void insertUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
@@ -115,18 +101,15 @@ public class FtpConfigListener implements DocumentListener
     }
 
     @Override
-    public void removeUpdate(DocumentEvent e)
-    {
+    public void removeUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public void setFtpParameter(FtpParameter ftpParameter)
-    {
+    public void setFtpParameter(FtpParameter ftpParameter) {
         this.ftpParameter = ftpParameter;
     }
 
-    public void setInitPathTextField(JTextField databaseTextField)
-    {
+    public void setInitPathTextField(JTextField databaseTextField) {
         this.initpathTextField = databaseTextField;
     }
 }

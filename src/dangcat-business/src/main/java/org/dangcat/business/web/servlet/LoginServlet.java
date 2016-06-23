@@ -20,18 +20,16 @@ import java.util.Locale;
 
 /**
  * 系统登陆入口。
+ *
  * @author dangcat
- * 
  */
-public class LoginServlet extends ServiceServletBase
-{
+public class LoginServlet extends ServiceServletBase {
     private static final String METHOD_LOGIN = "login";
     private static final String METHOD_SIGNIN = "signin";
     private static final long serialVersionUID = 1L;
     private static final String SIGNID = "SIGNID";
 
-    private ServicePrincipal createServicePrincipal(String methodName, Object... params) throws Exception
-    {
+    private ServicePrincipal createServicePrincipal(String methodName, Object... params) throws Exception {
         ServiceInfo serviceInfo = ServiceFactory.getInstance().getServiceInfo(SecurityLoginService.class);
         MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(methodName);
         ServiceContext.getInstance().addParam(MethodInfo.class, methodInfo);
@@ -39,15 +37,13 @@ public class LoginServlet extends ServiceServletBase
     }
 
     @Override
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ResponseUtils.createServiceContext(request, response, null);
         String signId = request.getParameter(SIGNID);
         ServicePrincipal servicePrincipal = null;
         if (!ValueUtils.isEmpty(signId))
             servicePrincipal = this.createServicePrincipal(METHOD_SIGNIN, signId);
-        else
-        {
+        else {
             String no = request.getParameter(SecurityLoginException.FIELDNAME_NO);
             if (!ValueUtils.isEmpty(no))
                 no = SecurityUtils.decryptContent(no);

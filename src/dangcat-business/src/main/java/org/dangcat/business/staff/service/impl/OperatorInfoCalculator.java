@@ -7,17 +7,14 @@ import org.dangcat.persistence.calculate.Calculator;
 import java.util.Collection;
 import java.util.Map;
 
-public class OperatorInfoCalculator implements Calculator
-{
+public class OperatorInfoCalculator implements Calculator {
     public static final Logger logger = Logger.getLogger(OperatorInfoCalculator.class);
 
     @Override
-    public void calculate(Collection<?> entityCollection)
-    {
+    public void calculate(Collection<?> entityCollection) {
         Map<Integer, String> operatorGroupMap = OperatorGroupCalculator.getOperatorGroupMap();
         Map<Integer, String> roleInfoMap = RoleInfoCalculator.getRoleInfoMap();
-        for (Object entity : entityCollection)
-        {
+        for (Object entity : entityCollection) {
             OperatorInfo operatorInfo = (OperatorInfo) entity;
             if (operatorGroupMap != null)
                 operatorInfo.setGroupName(operatorGroupMap.get(operatorInfo.getGroupId()));
@@ -27,8 +24,7 @@ public class OperatorInfoCalculator implements Calculator
     }
 
     @Override
-    public void calculate(Object entity)
-    {
+    public void calculate(Object entity) {
         OperatorInfo operatorInfo = (OperatorInfo) entity;
 
         Map<Integer, String> operatorGroupMap = OperatorGroupCalculator.getOperatorGroupMap();

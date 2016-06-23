@@ -4,19 +4,19 @@ import org.dangcat.boot.config.ServiceConfig;
 
 /**
  * 统计配置。
+ *
  * @author dangcat
- * 
  */
-public class SettleConfig extends ServiceConfig
-{
+public class SettleConfig extends ServiceConfig {
     public static final String CronExpression = "CronExpression";
     private static final String CONFIG_NAME = "Settle";
     private static SettleConfig instance = new SettleConfig();
-    /** 监控周期（秒）。 */
+    /**
+     * 监控周期（秒）。
+     */
     private String cronExpression = "0 * * * * ?";
 
-    public SettleConfig()
-    {
+    public SettleConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(CronExpression, String.class, this.cronExpression);
@@ -31,8 +31,7 @@ public class SettleConfig extends ServiceConfig
         return instance;
     }
 
-    public String getCronExpression()
-    {
+    public String getCronExpression() {
         return super.getStringValue(CronExpression);
     }
 }

@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExtendSecurities
-{
+public @interface ExtendSecurities {
     Class<? extends LoginServiceBase>[] value();
 }

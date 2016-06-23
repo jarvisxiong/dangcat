@@ -7,25 +7,22 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
-public class JCheckBoxList extends JPanel
-{
+public class JCheckBoxList extends JPanel {
     private static final long serialVersionUID = 1L;
     private Map<JCheckBox, CheckBoxEntry> checkBoxEntryMap = new HashMap<JCheckBox, CheckBoxEntry>();
     private JPanel content = null;
     private int flow = BoxLayout.Y_AXIS;
-    private FocusListener listFocusListener = new FocusAdapter()
-    {
+    private FocusListener listFocusListener = new FocusAdapter() {
         @Override
-        public void focusGained(FocusEvent focusEvent)
-        {
+        public void focusGained(FocusEvent focusEvent) {
             JComponent component = (JComponent) focusEvent.getComponent();
             component.scrollRectToVisible(new Rectangle(0, 0, component.getWidth(), component.getHeight()));
         }
     };
     private JScrollPane scrollPane = null;
     private Action updateListAction = null;
-    public JCheckBoxList()
-    {
+
+    public JCheckBoxList() {
         super();
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -36,23 +33,19 @@ public class JCheckBoxList extends JPanel
         this.add(this.scrollPane);
     }
 
-    public void addActionListener(ActionListener actionListener)
-    {
+    public void addActionListener(ActionListener actionListener) {
         this.listenerList.add(ActionListener.class, actionListener);
     }
 
-    public void addItem(Object value)
-    {
+    public void addItem(Object value) {
         this.addItem(value, value.toString());
     }
 
-    public void addItem(Object value, String title)
-    {
+    public void addItem(Object value, String title) {
         this.addItem(value, title, false);
     }
 
-    public void addItem(Object value, String title, boolean selected)
-    {
+    public void addItem(Object value, String title, boolean selected) {
         CheckBoxEntry checkBoxEntry = new CheckBoxEntry();
         checkBoxEntry.value = value;
         checkBoxEntry.selected = selected;
@@ -67,24 +60,20 @@ public class JCheckBoxList extends JPanel
         this.content.updateUI();
     }
 
-    public void clear()
-    {
+    public void clear() {
         this.checkBoxEntryMap.clear();
         this.content.removeAll();
     }
 
-    protected void fireActionPerformed(ActionEvent event)
-    {
+    protected void fireActionPerformed(ActionEvent event) {
         Object[] listeners = this.listenerList.getListenerList();
-        for (int i = listeners.length - 2; i >= 0; i -= 2)
-        {
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
             if (listeners[i] == ActionListener.class)
                 ((ActionListener) listeners[i + 1]).actionPerformed(event);
         }
     }
 
-    public int getFlow()
-    {
+    public int getFlow() {
         return this.flow;
     }
 
@@ -94,11 +83,9 @@ public class JCheckBoxList extends JPanel
     }
 
     @SuppressWarnings("unchecked")
-    public <T> Map<T, String> getSelectedMap()
-    {
+    public <T> Map<T, String> getSelectedMap() {
         Map<T, String> selectedMap = new LinkedHashMap<T, String>();
-        for (CheckBoxEntry checkBoxEntry : this.checkBoxEntryMap.values())
-        {
+        for (CheckBoxEntry checkBoxEntry : this.checkBoxEntryMap.values()) {
             if (checkBoxEntry.selected)
                 selectedMap.put((T) checkBoxEntry.value, checkBoxEntry.title);
         }
@@ -106,11 +93,9 @@ public class JCheckBoxList extends JPanel
     }
 
     @SuppressWarnings("unchecked")
-    public <T> Collection<T> getSelectedValues()
-    {
+    public <T> Collection<T> getSelectedValues() {
         List<T> selectedValues = new LinkedList<T>();
-        for (CheckBoxEntry checkBoxEntry : this.checkBoxEntryMap.values())
-        {
+        for (CheckBoxEntry checkBoxEntry : this.checkBoxEntryMap.values()) {
             if (checkBoxEntry.selected)
                 selectedValues.add((T) checkBoxEntry.value);
         }
@@ -123,37 +108,32 @@ public class JCheckBoxList extends JPanel
     }
 
     @SuppressWarnings("unchecked")
-    public <T> Collection<T> getValues()
-    {
+    public <T> Collection<T> getValues() {
         List<T> values = new LinkedList<T>();
         for (CheckBoxEntry checkBoxEntry : this.checkBoxEntryMap.values())
             values.add((T) checkBoxEntry.value);
         return values;
     }
 
-    public void removeActionListener(ActionListener actionListener)
-    {
+    public void removeActionListener(ActionListener actionListener) {
         this.listenerList.remove(ActionListener.class, actionListener);
     }
 
     @Override
-    public void setBorder(Border border)
-    {
+    public void setBorder(Border border) {
         if (border != null)
             this.scrollPane.setBorder(null);
 
         super.setBorder(border);
     }
 
-    class CheckBoxEntry
-    {
+    class CheckBoxEntry {
         protected boolean selected = false;
         protected String title = null;
         protected Object value = null;
     }
 
-    class UpdateListAction extends AbstractAction
-    {
+    class UpdateListAction extends AbstractAction {
         private static final long serialVersionUID = 1L;
         private JCheckBoxList checkBoxList = null;
 

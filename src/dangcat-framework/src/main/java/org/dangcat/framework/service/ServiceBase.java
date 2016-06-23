@@ -8,13 +8,11 @@ import java.util.*;
 
 /**
  * 服务基类
+ *
  * @author dangcat
- * 
  */
-public abstract class ServiceBase implements ServiceProvider, EventHandler
-{
-    static
-    {
+public abstract class ServiceBase implements ServiceProvider, EventHandler {
+    static {
         ServiceHelper.addInjectProvider(new ServiceInjectProvider());
     }
 
@@ -26,20 +24,18 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
 
     /**
      * 构造服务对象。
+     *
      * @param parent 所属服务。
      */
-    public ServiceBase(ServiceProvider parent)
-    {
+    public ServiceBase(ServiceProvider parent) {
         this.parent = parent;
     }
 
     /**
      * 添加服务。
      */
-    public void addService(Class<?> classType, Object service)
-    {
-        if (service != this)
-        {
+    public void addService(Class<?> classType, Object service) {
+        if (service != this) {
             this.serviceContainer.put(classType, service);
             if (!this.childrenList.contains(service))
                 this.childrenList.add(service);
@@ -48,24 +44,23 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
 
     /**
      * 读取子服务列表。
+     *
      * @return 子服务集合。
      */
-    public Collection<Object> getChildren()
-    {
+    public Collection<Object> getChildren() {
         return this.childrenList;
     }
 
-    protected Logger getLogger()
-    {
+    protected Logger getLogger() {
         return this.logger;
     }
 
     /**
      * 访问父服务。
+     *
      * @return
      */
-    public ServiceProvider getParent()
-    {
+    public ServiceProvider getParent() {
         return this.parent;
     }
 
@@ -73,8 +68,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
      * 获取指定类型的服务。
      */
     @SuppressWarnings("unchecked")
-    public <T> T getService(Class<T> classType)
-    {
+    public <T> T getService(Class<T> classType) {
         if (this.serviceContainer.containsKey(classType))
             return (T) this.serviceContainer.get(classType);
         if (this.parent != null)
@@ -85,18 +79,14 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
     /**
      * 处理事件。
      */
-    public Object handle(Event event)
-    {
+    public Object handle(Event event) {
         Object result = null;
-        if (this.isEnabled())
-        {
-            for (Object serviceObject : this.childrenList)
-            {
+        if (this.isEnabled()) {
+            for (Object serviceObject : this.childrenList) {
                 if (event.isCancel() || event.isHandled())
                     break;
 
-                if (serviceObject instanceof EventHandler)
-                {
+                if (serviceObject instanceof EventHandler) {
                     EventHandler eventHandler = (EventHandler) serviceObject;
                     result = eventHandler.handle(event);
                 }
@@ -108,27 +98,22 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
     /**
      * 初始化服务。
      */
-    public void initialize()
-    {
+    public void initialize() {
         // 由配置文件载入子服务。
         ServiceHelper.loadFromServiceXml(this);
         // 注入服务。
         this.inject();
     }
 
-    protected void inject()
-    {
+    protected void inject() {
         // 注入服务。
         ServiceHelper.inject(this, this);
         // 注入子服务中的
-        for (Object childService : this.getChildren())
-        {
-            if (childService instanceof ServiceBase)
-            {
+        for (Object childService : this.getChildren()) {
+            if (childService instanceof ServiceBase) {
                 ServiceBase serviceBase = (ServiceBase) childService;
                 serviceBase.inject();
-            }
-            else
+            } else
                 ServiceHelper.inject(this, childService);
         }
     }
@@ -136,8 +121,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
     /**
      * 服务是否启动。
      */
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.isEnabled;
     }
 
@@ -148,13 +132,10 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler
     /**
      * 删除服务。
      */
-    public void removeService(Object service)
-    {
+    public void removeService(Object service) {
         Class<?> classType = null;
-        for (Class<?> key : this.serviceContainer.keySet())
-        {
-            if (this.serviceContainer.get(key) == service)
-            {
+        for (Class<?> key : this.serviceContainer.keySet()) {
+            if (this.serviceContainer.get(key) == service) {
                 classType = key;
                 break;
             }

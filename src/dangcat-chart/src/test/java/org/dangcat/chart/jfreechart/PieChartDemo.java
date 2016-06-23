@@ -6,23 +6,19 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 import javax.swing.*;
 
-public class PieChartDemo extends ChartDemoBase
-{
+public class PieChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
 
-    public PieChartDemo()
-    {
+    public PieChartDemo() {
         super(PieChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new PieChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         DataModule columnDataModule = SimulateCategoryData.createPieColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 1"));
         PieChart pieChart1 = new PieChart();

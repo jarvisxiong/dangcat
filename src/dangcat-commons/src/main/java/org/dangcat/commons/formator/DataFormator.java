@@ -1,6 +1,5 @@
 package org.dangcat.commons.formator;
 
-public interface DataFormator
-{
+public interface DataFormator {
     String format(Object data);
 }

@@ -5,17 +5,21 @@ import org.jfree.chart.axis.Axis;
 
 import java.awt.*;
 
-abstract class AxisChart extends ChartBase
-{
-    /** 横坐标标签个数。 */
+abstract class AxisChart extends ChartBase {
+    /**
+     * 横坐标标签个数。
+     */
     private int domainAxiaCount = 12;
-    /** 横坐标标题。 */
+    /**
+     * 横坐标标题。
+     */
     private String domainTitle;
-    /** 纵坐标标题。 */
+    /**
+     * 纵坐标标题。
+     */
     private String rangeTitle;
 
-    public int getDomainAxiaCount()
-    {
+    public int getDomainAxiaCount() {
         return this.domainAxiaCount;
     }
 
@@ -23,8 +27,7 @@ abstract class AxisChart extends ChartBase
         this.domainAxiaCount = domainAxiaCount;
     }
 
-    public String getDomainTitle()
-    {
+    public String getDomainTitle() {
         return this.domainTitle;
     }
 
@@ -32,18 +35,15 @@ abstract class AxisChart extends ChartBase
         this.domainTitle = domainTitle;
     }
 
-    public String getDomainTitle(int i)
-    {
+    public String getDomainTitle(int i) {
         return null;
     }
 
-    protected double getMaxValue()
-    {
+    protected double getMaxValue() {
         return this.getMaxValue(0);
     }
 
-    protected double getMaxValue(int i)
-    {
+    protected double getMaxValue(int i) {
         double maxValue = 0.0;
         DataConverter dataConverter = this.getDataConverter(i);
         if (dataConverter != null)
@@ -51,13 +51,11 @@ abstract class AxisChart extends ChartBase
         return ChartUtils.getMaxValue(maxValue);
     }
 
-    protected double getMinValue()
-    {
+    protected double getMinValue() {
         return this.getMinValue(0);
     }
 
-    protected double getMinValue(int i)
-    {
+    protected double getMinValue(int i) {
         double minValue = 0.0;
         DataConverter dataConverter = this.getDataConverter(i);
         if (dataConverter != null)
@@ -65,8 +63,7 @@ abstract class AxisChart extends ChartBase
         return ChartUtils.getMaxValue(minValue);
     }
 
-    public String getRangeTitle()
-    {
+    public String getRangeTitle() {
         return this.getRangeTitle(0);
     }
 
@@ -74,19 +71,16 @@ abstract class AxisChart extends ChartBase
         this.rangeTitle = rangeTitle;
     }
 
-    protected String getRangeTitle(int i)
-    {
+    protected String getRangeTitle(int i) {
         DataConverter dataConverter = this.getDataConverter(i);
         if (dataConverter != null)
             return dataConverter.getRangeTitle(this.rangeTitle);
         return this.rangeTitle;
     }
 
-    protected void initAxis(Axis axis)
-    {
+    protected void initAxis(Axis axis) {
         Font chartFont = this.getChartFont();
-        if (chartFont != null)
-        {
+        if (chartFont != null) {
             // 设置Y轴坐标上的文字
             axis.setTickLabelFont(chartFont);
             // 设置Y轴的标题文字

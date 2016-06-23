@@ -6,24 +6,20 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 import javax.swing.*;
 
-public class BarChartDemo extends ChartDemoBase
-{
+public class BarChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "Öù×´Í³¼ÆÍ¼";
 
-    public BarChartDemo()
-    {
+    public BarChartDemo() {
         super(BarChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new BarChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         DataModule dataModule1 = SimulateCategoryData.createPieColumnDataModule();
         dataModule1.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 1"));
         BarChart barChart1 = new BarChart();

@@ -9,32 +9,41 @@ import org.dangcat.net.rfc.template.ValueParser;
 
 /**
  * 属性定义接口。
+ *
  * @author dangcat
- * 
  */
-public class AttributeData implements Comparable<AttributeData>
-{
+public class AttributeData implements Comparable<AttributeData> {
     protected static final Logger logger = Logger.getLogger(AttributeData.class);
-    /** 属性模板。 */
+    /**
+     * 属性模板。
+     */
     private AttributeTemplate attributeTemplate = null;
-    /** 解析后的字节数组。 */
+    /**
+     * 解析后的字节数组。
+     */
     private byte[] bytes = null;
-    /** 属性长度。 */
+    /**
+     * 属性长度。
+     */
     private int length = 0;
-    /** 所属属性集合。 */
+    /**
+     * 所属属性集合。
+     */
     private AttributeCollection parent = null;
-    /** 属性值。 */
+    /**
+     * 属性值。
+     */
     private Integer type = null;
-    /** 属性值。 */
+    /**
+     * 属性值。
+     */
     private Object value = null;
 
-    public AttributeData(AttributeTemplate attributeTemplate)
-    {
+    public AttributeData(AttributeTemplate attributeTemplate) {
         this.attributeTemplate = attributeTemplate;
     }
 
-    public AttributeData(AttributeTemplate attributeTemplate, Object value)
-    {
+    public AttributeData(AttributeTemplate attributeTemplate, Object value) {
         this.attributeTemplate = attributeTemplate;
         this.value = value;
     }
@@ -43,8 +52,7 @@ public class AttributeData implements Comparable<AttributeData>
      * 比较两个属性内容。
      */
     @Override
-    public int compareTo(AttributeData attributeData)
-    {
+    public int compareTo(AttributeData attributeData) {
         if (attributeData == null)
             return 1;
 
@@ -54,8 +62,7 @@ public class AttributeData implements Comparable<AttributeData>
 
         Object srcValue = this.getValue();
         Object dstValue = attributeData.getValue();
-        if (srcValue instanceof ValueParser && dstValue instanceof ValueParser)
-        {
+        if (srcValue instanceof ValueParser && dstValue instanceof ValueParser) {
             ValueParser valueParser = (ValueParser) srcValue;
             return valueParser.compareTo(dstValue);
         }
@@ -63,16 +70,14 @@ public class AttributeData implements Comparable<AttributeData>
         return ValueUtils.compare(srcValue, dstValue);
     }
 
-    public int compareValue(Object value) throws ProtocolParseException
-    {
+    public int compareValue(Object value) throws ProtocolParseException {
         return this.compareTo(this.getAttributeTemplate().createAttribute(value));
     }
 
     /**
      * 属性模板。
      */
-    public AttributeTemplate getAttributeTemplate()
-    {
+    public AttributeTemplate getAttributeTemplate() {
         return this.attributeTemplate;
     }
 
@@ -80,8 +85,7 @@ public class AttributeData implements Comparable<AttributeData>
         this.attributeTemplate = attributeTemplate;
     }
 
-    public int getLength()
-    {
+    public int getLength() {
         if (this.length == 0)
             this.length = this.toBytes().length;
         return this.length;
@@ -91,8 +95,7 @@ public class AttributeData implements Comparable<AttributeData>
         this.length = length;
     }
 
-    protected AttributeCollection getParent()
-    {
+    protected AttributeCollection getParent() {
         return parent;
     }
 
@@ -100,8 +103,7 @@ public class AttributeData implements Comparable<AttributeData>
         this.parent = parent;
     }
 
-    public Integer getType()
-    {
+    public Integer getType() {
         if (this.type == null)
             this.type = this.getAttributeTemplate().getType();
         return this.type;
@@ -111,8 +113,7 @@ public class AttributeData implements Comparable<AttributeData>
      * 读取属性值。
      */
     @SuppressWarnings("unchecked")
-    public <T> T getValue()
-    {
+    public <T> T getValue() {
         return (T) this.value;
     }
 
@@ -126,23 +127,19 @@ public class AttributeData implements Comparable<AttributeData>
         this.notifyChanged();
     }
 
-    public String getValueText()
-    {
+    public String getValueText() {
         return this.attributeTemplate.toString(this.getValue());
     }
 
-    public Integer getVendorId()
-    {
+    public Integer getVendorId() {
         return this.getAttributeTemplate().getVendorAttributeTemplateManager().getVendorId();
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return ValueUtils.isEmpty(this.value);
     }
 
-    public void notifyChanged()
-    {
+    public void notifyChanged() {
         if (this.getParent() != null)
             this.getParent().onAttributeChanged(this);
     }
@@ -150,10 +147,8 @@ public class AttributeData implements Comparable<AttributeData>
     /**
      * 属性值。
      */
-    public byte[] toBytes()
-    {
-        if (this.bytes == null)
-        {
+    public byte[] toBytes() {
+        if (this.bytes == null) {
             this.bytes = this.attributeTemplate.toBytes(this);
             this.length = bytes.length;
         }
@@ -161,8 +156,7 @@ public class AttributeData implements Comparable<AttributeData>
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         String lengthText = "   " + this.getLength();
         info.append(lengthText.substring(lengthText.length() - 3));
@@ -176,14 +170,10 @@ public class AttributeData implements Comparable<AttributeData>
     /**
      * 属性是否有效。
      */
-    public void validate() throws ProtocolValidateException
-    {
-        try
-        {
+    public void validate() throws ProtocolValidateException {
+        try {
             this.attributeTemplate.validate(this.getValue());
-        }
-        catch (ProtocolValidateException e)
-        {
+        } catch (ProtocolValidateException e) {
             e.setAttributeData(this);
             throw e;
         }

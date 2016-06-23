@@ -7,23 +7,19 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * 不可为空校验。
+ *
  * @author dangcat
- * 
  */
-public class NotNullValidator extends DataValidator
-{
-    public NotNullValidator(Class<?> classType, Column column)
-    {
+public class NotNullValidator extends DataValidator {
+    public NotNullValidator(Class<?> classType, Column column) {
         super(classType, column);
     }
 
-    public NotNullValidator(Column column)
-    {
+    public NotNullValidator(Column column) {
         super(null, column);
     }
 
-    private boolean isInvalid(Object value)
-    {
+    private boolean isInvalid(Object value) {
         if (value == null)
             return true;
 
@@ -41,8 +37,7 @@ public class NotNullValidator extends DataValidator
         return false;
     }
 
-    public void validate(Object instance) throws DataValidateException
-    {
+    public void validate(Object instance) throws DataValidateException {
         Object value = this.getValue(instance);
         if (this.isInvalid(value))
             this.throwDataValidateException(DataValidateException.INVALIDATE_NOTNULL);

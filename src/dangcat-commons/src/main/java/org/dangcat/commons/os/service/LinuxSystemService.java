@@ -6,19 +6,23 @@ import org.dangcat.commons.utils.ValueUtils;
 
 import java.text.MessageFormat;
 
-class LinuxSystemService extends SystemService
-{
-    /** 删除服务。 */
+class LinuxSystemService extends SystemService {
+    /**
+     * 删除服务。
+     */
     private static final String CMD_DELETE_CMD = "chkconfig --del {0}";
-    /** 判断服务是否存在。 */
+    /**
+     * 判断服务是否存在。
+     */
     private static final String CMD_EXISTS_CMD = "chkconfig --list {0}";
-    /** 判断服务是否在运行。 */
+    /**
+     * 判断服务是否在运行。
+     */
     private static final String CMD_RUNNING = "service {0} status";
     private static final Logger logger = Logger.getLogger(LinuxSystemService.class);
 
     @Override
-    protected boolean exists(String name)
-    {
+    protected boolean exists(String name) {
         if (ValueUtils.isEmpty(name))
             return false;
 
@@ -30,14 +34,12 @@ class LinuxSystemService extends SystemService
     }
 
     @Override
-    protected String getRemoveCMD()
-    {
+    protected String getRemoveCMD() {
         return CMD_DELETE_CMD;
     }
 
     @Override
-    protected boolean isRunning(String name)
-    {
+    protected boolean isRunning(String name) {
         if (ValueUtils.isEmpty(name))
             return false;
 

@@ -3,8 +3,7 @@ package org.dangcat.web.invoke;
 import org.dangcat.commons.utils.DateUtils;
 import org.dangcat.commons.utils.ValueUtils;
 
-public class InvokeStep
-{
+public class InvokeStep {
     public static final int CANCEL = 4;
     public static final int FINISHED = 3;
     public static final int PROCESSING = 2;
@@ -17,19 +16,16 @@ public class InvokeStep
     private long timeCost = 0;
     private long total = 0;
 
-    public InvokeStep(String name)
-    {
+    public InvokeStep(String name) {
         this.name = name;
     }
 
-    public void cancel()
-    {
+    public void cancel() {
         if (this.getStatus() != FINISHED)
             this.cancel = true;
     }
 
-    public long getCurrent()
-    {
+    public long getCurrent() {
         return current;
     }
 
@@ -38,18 +34,15 @@ public class InvokeStep
         this.current = current;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public double getPercent()
-    {
+    public double getPercent() {
         return ValueUtils.isZero(this.total) ? 0 : this.current * 100.0 / this.total;
     }
 
-    public int getStatus()
-    {
+    public int getStatus() {
         if (this.isCancel())
             return CANCEL;
 
@@ -61,13 +54,11 @@ public class InvokeStep
         return PROCESSING;
     }
 
-    public long getTimeCost()
-    {
+    public long getTimeCost() {
         return timeCost;
     }
 
-    public long getTotal()
-    {
+    public long getTotal() {
         return total;
     }
 
@@ -75,23 +66,19 @@ public class InvokeStep
         this.total = total;
     }
 
-    public void increase()
-    {
+    public void increase() {
         this.onChanged(this.current, ++this.current);
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.cancel;
     }
 
-    public boolean isFinished()
-    {
+    public boolean isFinished() {
         return this.getStatus() == FINISHED || this.getStatus() == CANCEL;
     }
 
-    private void onChanged(long oldValue, long newValue)
-    {
+    private void onChanged(long oldValue, long newValue) {
         if (oldValue == 0)
             this.beginTime = DateUtils.currentTimeMillis();
         else

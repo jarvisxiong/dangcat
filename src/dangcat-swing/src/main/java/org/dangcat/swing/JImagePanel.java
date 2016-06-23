@@ -9,8 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class JImagePanel extends JPanel
-{
+public class JImagePanel extends JPanel {
     protected static final Logger logger = Logger.getLogger(JImagePanel.class);
     private static final long serialVersionUID = 1L;
     private Image image;
@@ -19,23 +18,17 @@ public class JImagePanel extends JPanel
     private Insets imageInsets = null;
     private boolean imageStretch = true;
 
-    private void createImage()
-    {
-        if (this.image == null && this.getImageInputStream() != null)
-        {
-            try
-            {
+    private void createImage() {
+        if (this.image == null && this.getImageInputStream() != null) {
+            try {
                 this.image = ImageIO.read(this.getImageInputStream());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.error("The image read error.", e);
             }
         }
     }
 
-    public Image getImage()
-    {
+    public Image getImage() {
         this.createImage();
         return this.image;
     }
@@ -44,8 +37,7 @@ public class JImagePanel extends JPanel
         this.image = image;
     }
 
-    public File getImageFile()
-    {
+    public File getImageFile() {
         return this.imageFile;
     }
 
@@ -53,16 +45,11 @@ public class JImagePanel extends JPanel
         this.imageFile = imageFile;
     }
 
-    public InputStream getImageInputStream()
-    {
-        if (this.imageInputStream == null && this.getImageFile() != null)
-        {
-            try
-            {
+    public InputStream getImageInputStream() {
+        if (this.imageInputStream == null && this.getImageFile() != null) {
+            try {
                 this.imageInputStream = new FileInputStream(this.getImageFile());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.error("The image file " + this.getImageFile().getAbsolutePath() + " read error.", e);
             }
         }
@@ -73,8 +60,7 @@ public class JImagePanel extends JPanel
         this.imageInputStream = imageInputStream;
     }
 
-    public Insets getImageInsets()
-    {
+    public Insets getImageInsets() {
         return this.imageInsets;
     }
 
@@ -82,8 +68,7 @@ public class JImagePanel extends JPanel
         this.imageInsets = imageInsets;
     }
 
-    public boolean isImageStretch()
-    {
+    public boolean isImageStretch() {
         return this.imageStretch;
     }
 
@@ -92,27 +77,23 @@ public class JImagePanel extends JPanel
     }
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Image image = this.getImage();
-        if (image != null)
-        {
+        if (image != null) {
             int x = 0;
             int y = 0;
             int width = this.getWidth();
             int height = this.getHeight();
             Insets insets = this.getImageInsets();
-            if (insets != null)
-            {
+            if (insets != null) {
                 x = insets.left;
                 y = insets.top;
                 width = this.getWidth() - insets.left - insets.right;
                 height = this.getHeight() - insets.top - insets.bottom;
             }
-            if (!this.isImageStretch())
-            {
+            if (!this.isImageStretch()) {
                 width = image.getWidth(this);
                 height = image.getHeight(this);
             }

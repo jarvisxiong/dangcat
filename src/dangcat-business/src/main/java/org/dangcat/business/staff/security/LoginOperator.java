@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 
 @Table("OperatorInfo")
-public class LoginOperator
-{
+public class LoginOperator {
     public static final String ExpiryTime = "ExpiryTime";
     public static final String Id = "Id";
     public static final String Name = "Name";
@@ -32,103 +31,85 @@ public class LoginOperator
     @Column
     private Integer roleId = null;
     @Column(fieldName = Name)
-    @JoinTable(tableName = "RoleInfo", joinColumns = { @JoinColumn(name = Id, joinName = RoleId) })
+    @JoinTable(tableName = "RoleInfo", joinColumns = {@JoinColumn(name = Id, joinName = RoleId)})
     private String roleName = null;
-    @Relation(parentFieldNames = { RoleId }, childFieldNames = { RolePermission.RoleId })
+    @Relation(parentFieldNames = {RoleId}, childFieldNames = {RolePermission.RoleId})
     private Collection<RolePermission> rolePermissions = new LinkedHashSet<RolePermission>();
     @Column
     private Boolean useAble = null;
 
-    public LoginOperator()
-    {
+    public LoginOperator() {
     }
 
     public static String getRoleid() {
         return RoleId;
     }
 
-    public Date getExpiryTime()
-    {
+    public Date getExpiryTime() {
         return expiryTime;
     }
 
-    public void setExpiryTime(Date expiryTime)
-    {
+    public void setExpiryTime(Date expiryTime) {
         this.expiryTime = expiryTime;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getNo()
-    {
+    public String getNo() {
         return no;
     }
 
-    public void setNo(String no)
-    {
+    public void setNo(String no) {
         this.no = no;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Integer getRoleId()
-    {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId)
-    {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public String getRoleName()
-    {
+    public String getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName)
-    {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public Collection<RolePermission> getRolePermissions()
-    {
+    public Collection<RolePermission> getRolePermissions() {
         return rolePermissions;
     }
 
-    public Boolean getUseAble()
-    {
+    public Boolean getUseAble() {
         return useAble;
     }
 
-    public void setUseAble(Boolean useAble)
-    {
+    public void setUseAble(Boolean useAble) {
         this.useAble = useAble;
     }
 }

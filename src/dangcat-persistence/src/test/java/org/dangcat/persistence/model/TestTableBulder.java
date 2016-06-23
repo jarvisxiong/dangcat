@@ -16,18 +16,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestTableBulder
-{
+public class TestTableBulder {
     @BeforeClass
-    public static void setUpBeforeClass() throws IOException, SessionException
-    {
+    public static void setUpBeforeClass() throws IOException, SessionException {
         SimulateUtils.configure();
         EntityDataUtils.createEntitySimulator();
         TableDataUtils.createTableSimulator();
     }
 
-    private FilterExpress getFilterExpress()
-    {
+    private FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         FilterGroup childFilterGroup = new FilterGroup(FilterGroupType.or);
         childFilterGroup.add(EntityData.FieldB, FilterType.between, 0, 100);
@@ -38,8 +35,7 @@ public class TestTableBulder
         return filterGroup;
     }
 
-    private Map<String, Object> getParams()
-    {
+    private Map<String, Object> getParams() {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("ParamA", "AAA");
         params.put("ParamB", 222222);
@@ -49,8 +45,7 @@ public class TestTableBulder
         return params;
     }
 
-    private Table getTable()
-    {
+    private Table getTable() {
         Table table = TableDataUtils.getTable();
 
         table.getSql().clear();
@@ -63,16 +58,14 @@ public class TestTableBulder
     }
 
     @Test
-    public void testTableBulder() throws TableException, EntityException
-    {
+    public void testTableBulder() throws TableException, EntityException {
         Table dstTable = TableUtils.build(this.getClass(), "table.modeldata.xml");
         Assert.assertNotNull(dstTable);
 
         Table srcTable = this.getTable();
         Assert.assertEquals(srcTable.getColumns().size(), dstTable.getColumns().size());
 
-        for (Column srcColumn : srcTable.getColumns())
-        {
+        for (Column srcColumn : srcTable.getColumns()) {
             Column dstColumn = dstTable.getColumns().find(srcColumn.getName());
             Assert.assertNotNull(dstColumn);
             Assert.assertEquals(srcColumn.getName(), dstColumn.getName());

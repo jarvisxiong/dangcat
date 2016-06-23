@@ -8,15 +8,15 @@ import java.util.*;
 
 /**
  * 排序对象。
+ *
  * @author dangcat
- * 
  */
-public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializable
-{
+public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 通过排序单元构造排序内容。
+     *
      * @param orderByUnits 排序单元数组。
      */
     public OrderBy(OrderByUnit... orderByUnits) {
@@ -27,11 +27,9 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     /**
      * 转换字串到排序对象。
      */
-    public static OrderBy parse(String orderByText)
-    {
+    public static OrderBy parse(String orderByText) {
         OrderBy orderBy = null;
-        if (!ValueUtils.isEmpty(orderByText))
-        {
+        if (!ValueUtils.isEmpty(orderByText)) {
             orderByText = orderByText.trim();
             if (orderByText.toLowerCase().startsWith("order by"))
                 orderByText = orderByText.substring(8);
@@ -41,20 +39,15 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
                 subOrderByArray = orderByText.split(";");
             else
                 subOrderByArray = orderByText.split(",");
-            if (subOrderByArray != null && subOrderByArray.length > 0)
-            {
-                for (String subOrderBy : subOrderByArray)
-                {
+            if (subOrderByArray != null && subOrderByArray.length > 0) {
+                for (String subOrderBy : subOrderByArray) {
                     subOrderBy = subOrderBy.trim();
                     OrderByType orderByType = null;
                     String fieldName = subOrderBy;
-                    if (subOrderBy.toLowerCase().endsWith(" desc"))
-                    {
+                    if (subOrderBy.toLowerCase().endsWith(" desc")) {
                         fieldName = subOrderBy.substring(0, subOrderBy.length() - 5);
                         orderByType = OrderByType.Desc;
-                    }
-                    else if (subOrderBy.toLowerCase().endsWith(" asc"))
-                    {
+                    } else if (subOrderBy.toLowerCase().endsWith(" asc")) {
                         fieldName = subOrderBy.substring(0, subOrderBy.length() - 4);
                         orderByType = OrderByType.Asc;
                     }
@@ -73,11 +66,9 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     /**
      * 转换字串到排序对象。
      */
-    public static OrderBy parse(String fieldName, String orderByText)
-    {
+    public static OrderBy parse(String fieldName, String orderByText) {
         OrderBy orderBy = null;
-        if (!ValueUtils.isEmpty(orderByText))
-        {
+        if (!ValueUtils.isEmpty(orderByText)) {
             orderByText = orderByText.trim();
             if (orderByText.toLowerCase().startsWith("order by"))
                 orderByText = orderByText.substring(8);
@@ -87,17 +78,14 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
                 subOrderByArray = orderByText.split(";");
             else
                 subOrderByArray = orderByText.split(",");
-            if (subOrderByArray != null && subOrderByArray.length > 0)
-            {
-                for (String subOrderBy : subOrderByArray)
-                {
+            if (subOrderByArray != null && subOrderByArray.length > 0) {
+                for (String subOrderBy : subOrderByArray) {
                     subOrderBy = subOrderBy.trim();
                     OrderByType orderByType = OrderByType.Desc;
                     String formula = subOrderBy;
                     if (subOrderBy.toLowerCase().endsWith(" desc"))
                         formula = subOrderBy.substring(0, subOrderBy.length() - 5);
-                    else if (subOrderBy.toLowerCase().endsWith(" asc"))
-                    {
+                    else if (subOrderBy.toLowerCase().endsWith(" asc")) {
                         formula = subOrderBy.substring(0, subOrderBy.length() - 4);
                         orderByType = OrderByType.Asc;
                     }
@@ -111,8 +99,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     @Override
-    public boolean add(OrderByUnit orderByUnit)
-    {
+    public boolean add(OrderByUnit orderByUnit) {
         boolean result = super.add(orderByUnit);
         if (orderByUnit.getIndex() == 0)
             orderByUnit.setIndex(this.size());
@@ -121,10 +108,8 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj != null)
-        {
+    public boolean equals(Object obj) {
+        if (obj != null) {
             if (obj == this)
                 return true;
 
@@ -137,8 +122,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         String index = this.toIndex();
         if (index != null)
             return index.hashCode();
@@ -148,8 +132,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     /**
      * 根据当前排序对象进行排序数据行集合。
      */
-    public void sort(Collection<Object> collection)
-    {
+    public void sort(Collection<Object> collection) {
         if (collection == null || collection.size() == 0)
             return;
 
@@ -157,13 +140,10 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
 
         List<Object> dataList = new ArrayList<Object>();
         dataList.addAll(collection);
-        Collections.sort(dataList, new Comparator<Object>()
-        {
-            public int compare(Object srcData, Object dstData)
-            {
+        Collections.sort(dataList, new Comparator<Object>() {
+            public int compare(Object srcData, Object dstData) {
                 int result = 0;
-                for (OrderByUnit orderByUnit : orderByUnits)
-                {
+                for (OrderByUnit orderByUnit : orderByUnits) {
                     Object srcValue = FilterUtils.getValue(srcData, orderByUnit.getFieldName());
                     Object dstValue = FilterUtils.getValue(srcData, orderByUnit.getFieldName());
                     result = ValueUtils.compare(srcValue, dstValue);
@@ -181,11 +161,9 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
         collection.addAll(dataList);
     }
 
-    public String toIndex()
-    {
+    public String toIndex() {
         StringBuilder index = new StringBuilder();
-        for (OrderByUnit orderByUnit : this)
-        {
+        for (OrderByUnit orderByUnit : this) {
             if (index.length() > 0)
                 index.append(", ");
             index.append(orderByUnit);
@@ -198,8 +176,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     /**
      * 转换排序语句。
      */
-    public String toString()
-    {
+    public String toString() {
         String index = this.toIndex();
         return index == null ? null : "ORDER BY " + index;
     }

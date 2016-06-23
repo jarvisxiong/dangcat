@@ -1,16 +1,13 @@
 package org.dangcat.commons.reflect.examples;
 
-public class OperatorInfo
-{
+public class OperatorInfo {
     private String name;
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

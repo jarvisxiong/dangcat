@@ -13,26 +13,22 @@ import org.junit.Assert;
 
 import java.util.List;
 
-public class TestEntityTransaction extends TestEntityBase
-{
+public class TestEntityTransaction extends TestEntityBase {
     @Override
-    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue)
-    {
+    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue) {
         if (DatabaseType.Hsqldb.equals(databaseType))
             return false;
         return super.couldTestDatabase(databaseType, defaultValue);
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         this.logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
 
         List<Table> tableList = EntityRelationUtils.getTable();
-        for (Table table : tableList)
-        {
+        for (Table table : tableList) {
             if (table.exists())
                 table.drop();
             // 产生新的数据表
@@ -51,8 +47,7 @@ public class TestEntityTransaction extends TestEntityBase
         this.logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testDelete() throws EntityException
-    {
+    private void testDelete() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         BillInfo billInfo = entityManager.load(BillInfo.class, 0);
         BillDetail[] billDetailArray = billInfo.getBillDetails().toArray(new BillDetail[0]);
@@ -75,8 +70,7 @@ public class TestEntityTransaction extends TestEntityBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(billInfo.getBillDetails(), saveBillInfo2.getBillDetails()));
     }
 
-    private void testInsert() throws EntityException
-    {
+    private void testInsert() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         entityManager.beginTransaction();
 
@@ -125,8 +119,7 @@ public class TestEntityTransaction extends TestEntityBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(saveBillInfo1.getBillDetails(), saveBillInfo3.getBillDetails()));
     }
 
-    private void testModify() throws EntityException
-    {
+    private void testModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         entityManager.beginTransaction();
 

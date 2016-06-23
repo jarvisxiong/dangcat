@@ -8,28 +8,24 @@ import org.dangcat.framework.service.ServiceProvider;
 
 /**
  * ÏûÏ¢ÕìÌýÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public abstract class EventServiceBase extends QueueThreadService<Event>
-{
+public abstract class EventServiceBase extends QueueThreadService<Event> {
     private EventStatistics eventStatistics = null;
 
-    public EventServiceBase(ServiceProvider parent, String name)
-    {
+    public EventServiceBase(ServiceProvider parent, String name) {
         super(parent, name);
     }
 
-    protected EventStatistics getEventStatistics()
-    {
+    protected EventStatistics getEventStatistics() {
         if (this.eventStatistics == null)
             this.eventStatistics = new EventStatistics(this.getServiceName());
         return this.eventStatistics;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         StatisticsService statisticsService = this.getService(StatisticsService.class);

@@ -3,8 +3,7 @@ package org.dangcat.persistence.cache.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cache
-{
+public class Cache {
     private String classType = null;
     private String databaseName = null;
     private List<String> indexList = new ArrayList<String>();
@@ -13,8 +12,7 @@ public class Cache
     private String loaderClass = null;
     private boolean notify = false;
 
-    public String getClassType()
-    {
+    public String getClassType() {
         return this.classType;
     }
 
@@ -22,8 +20,7 @@ public class Cache
         this.classType = classType;
     }
 
-    public String getDatabaseName()
-    {
+    public String getDatabaseName() {
         return this.databaseName;
     }
 
@@ -31,48 +28,39 @@ public class Cache
         this.databaseName = databaseName;
     }
 
-    public List<String> getIndexList()
-    {
+    public List<String> getIndexList() {
         return this.indexList;
     }
 
-    public Integer getInterval()
-    {
+    public Integer getInterval() {
         return this.interval;
     }
 
-    public void setInterval(Integer interval)
-    {
+    public void setInterval(Integer interval) {
         this.interval = interval;
     }
 
-    public String getLoaderClass()
-    {
+    public String getLoaderClass() {
         return this.loaderClass;
     }
 
-    public void setLoaderClass(String loaderClass)
-    {
+    public void setLoaderClass(String loaderClass) {
         this.loaderClass = loaderClass;
     }
 
-    public boolean isNotify()
-    {
+    public boolean isNotify() {
         return this.notify;
     }
 
-    public void setNotify(boolean notify)
-    {
+    public void setNotify(boolean notify) {
         this.notify = notify;
     }
 
-    public boolean isPreload()
-    {
+    public boolean isPreload() {
         return this.isPreload;
     }
 
-    public void setPreload(boolean isPreload)
-    {
+    public void setPreload(boolean isPreload) {
         this.isPreload = isPreload;
     }
 }

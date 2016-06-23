@@ -12,11 +12,10 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 /**
  * 账户查询条件。
+ *
  * @author dangcat
- * 
  */
-public class AccountFilter extends DataFilter
-{
+public class AccountFilter extends DataFilter {
     @Column(index = 2, isNullable = false)
     private Integer groupId;
 
@@ -25,8 +24,7 @@ public class AccountFilter extends DataFilter
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         if (this.getGroupId() != null)
             filterGroup.add(new FilterUnit(AccountInfo.GroupId, FilterType.eq, this.getGroupId()));
@@ -35,23 +33,19 @@ public class AccountFilter extends DataFilter
         return this.getFilterExpress(filterGroup);
     }
 
-    public Integer getGroupId()
-    {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId)
-    {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

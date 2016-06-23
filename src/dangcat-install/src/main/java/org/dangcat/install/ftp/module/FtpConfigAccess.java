@@ -10,17 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class FtpConfigAccess extends FtpAccess implements ConfigureAccess
-{
+public class FtpConfigAccess extends FtpAccess implements ConfigureAccess {
     private Map<String, FtpConfigPanel> ftpConfigPanels = new LinkedHashMap<String, FtpConfigPanel>();
 
-    public void addConfigPanel(String name, FtpConfigPanel ftpConfigPanel)
-    {
+    public void addConfigPanel(String name, FtpConfigPanel ftpConfigPanel) {
         this.ftpConfigPanels.put(name, ftpConfigPanel);
     }
 
-    private void load(FtpConfigPanel configPanel, Properties properties)
-    {
+    private void load(FtpConfigPanel configPanel, Properties properties) {
         FtpParameter ftpParameter = configPanel.getFtpParameter();
         String name = ftpParameter.getName();
         String server = properties.getProperty(this.getServerKey(name));
@@ -39,14 +36,12 @@ public class FtpConfigAccess extends FtpAccess implements ConfigureAccess
     }
 
     @Override
-    public void load(Properties properties)
-    {
+    public void load(Properties properties) {
         for (FtpConfigPanel ftpConfigPanel : this.ftpConfigPanels.values())
             this.load(ftpConfigPanel, properties);
     }
 
-    private void save(FtpConfigPanel configPanel, Properties properties)
-    {
+    private void save(FtpConfigPanel configPanel, Properties properties) {
         FtpParameter ftpParameter = configPanel.getFtpParameter();
         String name = ftpParameter.getName();
         String server = ftpParameter.getServer() == null ? ftpParameter.getDefaultServer() : ftpParameter.getServer();
@@ -63,8 +58,7 @@ public class FtpConfigAccess extends FtpAccess implements ConfigureAccess
     }
 
     @Override
-    public void save(Properties properties)
-    {
+    public void save(Properties properties) {
         for (FtpConfigPanel ftpConfigPanel : this.ftpConfigPanels.values())
             this.save(ftpConfigPanel, properties);
     }

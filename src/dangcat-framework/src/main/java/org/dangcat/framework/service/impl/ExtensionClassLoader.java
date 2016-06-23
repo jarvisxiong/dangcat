@@ -14,17 +14,16 @@ import java.util.*;
 
 /**
  * 扩展目录载入包。
+ *
  * @author dangcat
- * 
  */
-public class ExtensionClassLoader
-{
+public class ExtensionClassLoader {
     private static final Logger logger = Logger.getLogger(ExtensionClassLoader.class);
     private static ExtensionClassLoader instance = new ExtensionClassLoader();
     private ClassLoader classLoader = null;
     private List<File> classPathList = new ArrayList<File>();
-    private ExtensionClassLoader()
-    {
+
+    private ExtensionClassLoader() {
 
     }
 
@@ -35,8 +34,7 @@ public class ExtensionClassLoader
     /**
      * 添加路径目录。
      */
-    public void addClassPath(File file)
-    {
+    public void addClassPath(File file) {
         if (file != null && file.exists() && !this.classPathList.contains(file))
             this.classPathList.add(file);
     }
@@ -44,47 +42,37 @@ public class ExtensionClassLoader
     /**
      * 添加路径。
      */
-    public void addClassPath(String classPath)
-    {
-        if (classPath != null && classPath.length() > 0)
-        {
+    public void addClassPath(String classPath) {
+        if (classPath != null && classPath.length() > 0) {
             StringTokenizer tokenizer = new StringTokenizer(classPath, ";");
             while (tokenizer.hasMoreTokens())
                 addClassPath(new File(tokenizer.nextToken()));
         }
     }
 
-    public ClassLoader getClassLoader()
-    {
+    public ClassLoader getClassLoader() {
         return classLoader;
     }
 
     /**
      * 载入扩展包。
+     *
      * @param parent 所属父加载器。
      * @return 类加载器。
      */
-    public ClassLoader load(ClassLoader parent)
-    {
-        if (this.classLoader == null)
-        {
+    public ClassLoader load(ClassLoader parent) {
+        if (this.classLoader == null) {
             ClassLoader classLoader = parent;
-            if (!this.classPathList.isEmpty())
-            {
+            if (!this.classPathList.isEmpty()) {
                 FileNameFilter fileNameFilter = new FileNameFilter(".jar");
                 fileNameFilter.addSuffixFilter(".zip");
                 List<URL> urlList = new ArrayList<URL>();
-                for (File file : this.classPathList)
-                {
-                    if (file.isDirectory())
-                    {
+                for (File file : this.classPathList) {
+                    if (file.isDirectory()) {
                         File[] files = file.listFiles((FilenameFilter) fileNameFilter);
-                        if (files != null)
-                        {
-                            Arrays.sort(files, new Comparator<File>()
-                            {
-                                public int compare(File srcFile, File dstFile)
-                                {
+                        if (files != null) {
+                            Arrays.sort(files, new Comparator<File>() {
+                                public int compare(File srcFile, File dstFile) {
                                     return srcFile.getName().compareTo(dstFile.getName());
                                 }
                             });
@@ -92,8 +80,7 @@ public class ExtensionClassLoader
                             for (File childFile : files)
                                 this.load(urlList, childFile);
                         }
-                    }
-                    else
+                    } else
                         this.load(urlList, file);
                 }
                 if (urlList.size() > 0)
@@ -109,30 +96,23 @@ public class ExtensionClassLoader
         return this.classLoader;
     }
 
-    private void load(List<URL> urlList, File file)
-    {
-        if (file != null)
-        {
-            try
-            {
+    private void load(List<URL> urlList, File file) {
+        if (file != null) {
+            try {
                 if (!file.exists())
                     logger.error("The file " + file.getAbsolutePath() + " in classpath is not exists!");
-                else
-                {
+                else {
                     URL url = file.toURI().toURL();
                     if (!urlList.contains(url))
                         urlList.add(url);
                 }
-            }
-            catch (MalformedURLException e)
-            {
+            } catch (MalformedURLException e) {
                 logger.error("The file load error " + file.getAbsolutePath(), e);
             }
         }
     }
 
-    private int printTree(StringBuilder info, ClassLoader classLoader)
-    {
+    private int printTree(StringBuilder info, ClassLoader classLoader) {
         int depth = 0;
         if (classLoader.getParent() != null)
             depth = printTree(info, classLoader.getParent()) + 1;
@@ -141,15 +121,13 @@ public class ExtensionClassLoader
         for (int i = 0; i < depth; i++)
             indent.append("  ");
 
-        if (classLoader instanceof URLClassLoader)
-        {
+        if (classLoader instanceof URLClassLoader) {
             URLClassLoader urlClassLoader = (URLClassLoader) classLoader;
             info.append(indent);
             info.append(classLoader.getClass().getName());
             info.append(" {");
             info.append(Environment.LINE_SEPARATOR);
-            for (URL url : urlClassLoader.getURLs())
-            {
+            for (URL url : urlClassLoader.getURLs()) {
                 info.append(indent);
                 info.append("  ");
                 info.append(url);
@@ -158,9 +136,7 @@ public class ExtensionClassLoader
             info.append(indent);
             info.append("}");
             info.append(Environment.LINE_SEPARATOR);
-        }
-        else
-        {
+        } else {
             info.append(indent);
             info.append(classLoader.getClass().getName());
         }
@@ -171,8 +147,7 @@ public class ExtensionClassLoader
      * 打印加载结构。
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         if (this.classLoader != null)
             printTree(info, this.classLoader);

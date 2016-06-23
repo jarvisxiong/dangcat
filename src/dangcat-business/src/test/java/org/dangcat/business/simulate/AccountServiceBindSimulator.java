@@ -7,16 +7,13 @@ import org.dangcat.business.domain.ServiceInfo;
 import org.dangcat.persistence.simulate.data.ValueSimulator;
 import org.dangcat.persistence.simulate.table.EntityData;
 
-public class AccountServiceBindSimulator extends EntityData<AccountServiceBind>
-{
-    public AccountServiceBindSimulator()
-    {
+public class AccountServiceBindSimulator extends EntityData<AccountServiceBind> {
+    public AccountServiceBindSimulator() {
         super(AccountServiceBind.class);
     }
 
     @Override
-    public void create()
-    {
+    public void create() {
         ValueSimulator accountIdSimulator = this.getDataSimulator().findValueSimulator(AccountBill.AccountId);
         accountIdSimulator.bind(AccountInfo.class, AccountInfo.Id);
 

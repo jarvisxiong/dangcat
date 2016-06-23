@@ -12,12 +12,11 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 /**
  * The service filter for Operator.
+ *
  * @author dangcat
- * 
  */
 @Table("OperatorInfo")
-public class OperatorOptLogFilter extends DataFilter
-{
+public class OperatorOptLogFilter extends DataFilter {
     @Column
     private Integer month = null;
     @Column
@@ -25,30 +24,25 @@ public class OperatorOptLogFilter extends DataFilter
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(OperateLog.OperatorId, FilterType.eq, this.getOperatorId()));
         return this.getFilterExpress(filterGroup);
     }
 
-    public Integer getMonth()
-    {
+    public Integer getMonth() {
         return month;
     }
 
-    public void setMonth(Integer month)
-    {
+    public void setMonth(Integer month) {
         this.month = month;
     }
 
-    public Integer getOperatorId()
-    {
+    public Integer getOperatorId() {
         return operatorId;
     }
 
-    public void setOperatorId(Integer operatorId)
-    {
+    public void setOperatorId(Integer operatorId) {
         this.operatorId = operatorId;
     }
 }

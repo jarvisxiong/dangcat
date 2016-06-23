@@ -8,8 +8,7 @@ import org.dangcat.framework.service.annotation.Service;
 
 import java.util.Date;
 
-public class SettleServiceImpl extends ServiceBase implements SettleService
-{
+public class SettleServiceImpl extends ServiceBase implements SettleService {
     private Integer count = null;
     private Date dateTime = null;
     @EntityResource
@@ -32,13 +31,11 @@ public class SettleServiceImpl extends ServiceBase implements SettleService
     @Service
     private UserInfoService userInfoService;
 
-    public SettleServiceImpl(ServiceProvider parent)
-    {
+    public SettleServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
-    public Integer getCount()
-    {
+    public Integer getCount() {
         return count;
     }
 
@@ -46,8 +43,7 @@ public class SettleServiceImpl extends ServiceBase implements SettleService
         this.count = count;
     }
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -55,23 +51,19 @@ public class SettleServiceImpl extends ServiceBase implements SettleService
         this.dateTime = dateTime;
     }
 
-    public EntityResourceManager getEntityManager()
-    {
+    public EntityResourceManager getEntityManager() {
         return entityManager;
     }
 
-    public EntityResourceManager getHsqldbEntityManager()
-    {
+    public EntityResourceManager getHsqldbEntityManager() {
         return hsqldbEntityManager;
     }
 
-    public EntityResourceManager getMySqlEntityManager()
-    {
+    public EntityResourceManager getMySqlEntityManager() {
         return mySqlEntityManager;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -79,18 +71,15 @@ public class SettleServiceImpl extends ServiceBase implements SettleService
         this.name = name;
     }
 
-    public EntityResourceManager getOracleEntityManager()
-    {
+    public EntityResourceManager getOracleEntityManager() {
         return oracleEntityManager;
     }
 
-    public EntityResourceManager getSqlServerEntityManager()
-    {
+    public EntityResourceManager getSqlServerEntityManager() {
         return sqlServerEntityManager;
     }
 
-    public Double getTotal()
-    {
+    public Double getTotal() {
         return total;
     }
 
@@ -98,18 +87,15 @@ public class SettleServiceImpl extends ServiceBase implements SettleService
         this.total = total;
     }
 
-    public UserInfoService getUserInfoService()
-    {
+    public UserInfoService getUserInfoService() {
         return userInfoService;
     }
 
-    public boolean isResult()
-    {
+    public boolean isResult() {
         return result;
     }
 
-    public void setResult(boolean result)
-    {
+    public void setResult(boolean result) {
         this.result = result;
     }
 }

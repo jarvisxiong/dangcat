@@ -9,21 +9,18 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.Map.Entry;
 
-public class ConfigFileAccess
-{
+public class ConfigFileAccess {
     protected final Logger logger = Logger.getLogger(this.getClass());
     private File configFile = null;
     private Collection<ConfigureAccess> configureAccesses = new LinkedList<ConfigureAccess>();
     private boolean enabled = true;
 
-    public void addConfigureAccess(ConfigureAccess configureAccess)
-    {
+    public void addConfigureAccess(ConfigureAccess configureAccess) {
         if (configureAccess != null)
             this.configureAccesses.add(configureAccess);
     }
 
-    public File getConfigFile()
-    {
+    public File getConfigFile() {
         return this.configFile;
     }
 
@@ -31,8 +28,7 @@ public class ConfigFileAccess
         this.configFile = configFile;
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
@@ -40,48 +36,37 @@ public class ConfigFileAccess
         this.enabled = enabled;
     }
 
-    public void load()
-    {
+    public void load() {
         File configFile = this.getConfigFile();
-        if (configFile == null || !configFile.exists())
-        {
+        if (configFile == null || !configFile.exists()) {
             if (configFile != null)
                 System.err.println("The config file " + configFile.getAbsolutePath() + " is not exists!");
             return;
         }
 
         FileInputStream inputStream = null;
-        try
-        {
+        try {
             Properties properties = new Properties();
             inputStream = new FileInputStream(configFile);
             properties.load(inputStream);
-            for (ConfigureAccess configureAccess : this.configureAccesses)
-            {
+            for (ConfigureAccess configureAccess : this.configureAccesses) {
                 if (configureAccess.isEnabled())
                     configureAccess.load(properties);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logger.error("Load the resource file error : " + configFile.getAbsolutePath(), e);
-        }
-        finally
-        {
+        } finally {
             FileUtils.close(inputStream);
         }
     }
 
-    public void save()
-    {
+    public void save() {
         File configFile = this.getConfigFile();
         this.logger.info("Save config data: " + configFile.getAbsolutePath());
         PrintWriter writer = null;
-        try
-        {
+        try {
             Properties properties = new Properties();
-            for (ConfigureAccess configureAccess : this.configureAccesses)
-            {
+            for (ConfigureAccess configureAccess : this.configureAccesses) {
                 if (configureAccess.isEnabled())
                     configureAccess.save(properties);
             }
@@ -89,20 +74,15 @@ public class ConfigFileAccess
             for (Object key : properties.keySet())
                 propertyMap.put((String) key, properties.getProperty((String) key));
             writer = new PrintWriter(this.getConfigFile());
-            for (Entry<String, String> entry : propertyMap.entrySet())
-            {
+            for (Entry<String, String> entry : propertyMap.entrySet()) {
                 writer.print(entry.getKey());
                 writer.print("=");
                 writer.println(entry.getValue());
             }
             this.load();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logger.error("Save the resource file error : " + configFile.getAbsolutePath(), e);
-        }
-        finally
-        {
+        } finally {
             FileUtils.close(writer);
         }
     }

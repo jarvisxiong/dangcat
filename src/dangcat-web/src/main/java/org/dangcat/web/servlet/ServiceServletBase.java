@@ -12,45 +12,34 @@ import java.io.IOException;
 
 /**
  * Service Servlet¡£
+ *
  * @author dangcat
- * 
  */
-public class ServiceServletBase extends HttpServlet
-{
+public class ServiceServletBase extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected final Logger logger = Logger.getLogger(this.getClass());
 
-    protected void clear()
-    {
+    protected void clear() {
         ServiceContext.remove();
     }
 
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.service(request, response);
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        try
-        {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
             this.executeService(request, response);
-        }
-        catch (ServiceException e)
-        {
+        } catch (ServiceException e) {
             ResponseUtils.responseException(response, e);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             ResponseUtils.responseException(response, e);
             if (logger.isDebugEnabled())
                 logger.error(this, e);
             else
                 logger.error(e);
-        }
-        finally
-        {
+        } finally {
             this.clear();
         }
     }

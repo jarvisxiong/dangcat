@@ -8,35 +8,29 @@ import org.dangcat.install.task.ServiceInstallTask;
 
 import java.io.File;
 
-public class ServiceInstallModule extends InstallModuleBase
-{
+public class ServiceInstallModule extends InstallModuleBase {
     private ConfigAccessTask configAccessTask = new ConfigAccessTask();
     private FileCopyTask fileCopyTask = new FileCopyTask();
     private long minNeedSpace = 1024l * 1024l * 1024l * 2l;
     private ServiceInstallTask serviceInstaller = new ServiceInstallTask(this.getName());
 
-    public ServiceInstallModule(String name, String title)
-    {
+    public ServiceInstallModule(String name, String title) {
         super(name, title);
     }
 
-    public void addConfigFileAccess(ConfigFileAccess configFileAccess)
-    {
+    public void addConfigFileAccess(ConfigFileAccess configFileAccess) {
         this.configAccessTask.addConfigFileAccess(configFileAccess);
     }
 
-    public void addCopyTask(File source, File dest)
-    {
+    public void addCopyTask(File source, File dest) {
         this.fileCopyTask.addTask(source, dest);
     }
 
-    public void clearCopyTasks()
-    {
+    public void clearCopyTasks() {
         this.fileCopyTask.clearTasks();
     }
 
-    public long getMinNeedSpace()
-    {
+    public long getMinNeedSpace() {
         return this.minNeedSpace;
     }
 
@@ -44,14 +38,12 @@ public class ServiceInstallModule extends InstallModuleBase
         this.minNeedSpace = minNeedSpace;
     }
 
-    public ServiceInstaller getServiceInstaller()
-    {
+    public ServiceInstaller getServiceInstaller() {
         return this.serviceInstaller;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.getServiceInstaller().setServiceName(this.getName());
         this.getServiceInstaller().setServiceDisplayName(this.getDisplayName());
 
@@ -63,8 +55,7 @@ public class ServiceInstallModule extends InstallModuleBase
     }
 
     @Override
-    public void prepare()
-    {
+    public void prepare() {
         this.clearCopyTasks();
         this.serviceInstaller.setHome(this.getInstallShellDir());
         File sourceDir = new File(this.getCurrentPath().getAbsolutePath(), this.getName());

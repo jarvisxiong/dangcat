@@ -12,8 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class BusinessCodePanel extends CodePanel
-{
+public class BusinessCodePanel extends CodePanel {
     private static final String JNDI_NAME = "JndiName";
     private static final String MODULE_NAME = "ModuleName";
     private static final String PACKAGE = "Package";
@@ -26,8 +25,7 @@ public class BusinessCodePanel extends CodePanel
     private JTextField packageTextField = null;
     private JTextField pathTextField = null;
 
-    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -53,8 +51,7 @@ public class BusinessCodePanel extends CodePanel
         panel.add(button, constraints);
     }
 
-    private JPanel createConfigPanel()
-    {
+    private JPanel createConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 0));
         panel.setBorder(new TitledBorder(this.getText("Config")));
@@ -96,11 +93,9 @@ public class BusinessCodePanel extends CodePanel
         browseButton.setAlignmentX(CENTER_ALIGNMENT);
         browseButton.setMnemonic(KeyEvent.VK_B);
         browseButton.setDisplayedMnemonicIndex(browseButton.getText().indexOf("B"));
-        browseButton.addActionListener(new ActionListener()
-        {
+        browseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 BusinessCodePanel.this.choicePath(BusinessCodePanel.this.pathTextField);
             }
         });
@@ -114,11 +109,9 @@ public class BusinessCodePanel extends CodePanel
         generateButton.setAlignmentX(CENTER_ALIGNMENT);
         generateButton.setMnemonic(KeyEvent.VK_G);
         generateButton.setDisplayedMnemonicIndex(generateButton.getText().indexOf("G"));
-        generateButton.addActionListener(new ActionListener()
-        {
+        generateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 BusinessCodePanel.this.generate();
             }
         });
@@ -128,13 +121,11 @@ public class BusinessCodePanel extends CodePanel
     }
 
     @Override
-    protected Logger createLogger()
-    {
+    protected Logger createLogger() {
         return new org.dangcat.commons.log.Logger(Logger.getLogger(BusinessCodeGenerator.class), "BusinessCallback", this.logPane);
     }
 
-    private JPanel createLogPanel()
-    {
+    private JPanel createLogPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -150,8 +141,7 @@ public class BusinessCodePanel extends CodePanel
         return panel;
     }
 
-    private void generate()
-    {
+    private void generate() {
         if (!this.validateEmpty(this.moduleNameTextField, MODULE_NAME))
             return;
         if (!this.validateEmpty(this.jndiNameTextField, JNDI_NAME))
@@ -161,8 +151,7 @@ public class BusinessCodePanel extends CodePanel
         if (!this.validateEmpty(this.packageTextField, PACKAGE))
             return;
 
-        try
-        {
+        try {
             this.getLogger().info(this.getText("BeginGenerate") + ": " + this.pathTextField.getText());
             BusinessCodeGenerator businessCodeGenerator = new BusinessCodeGenerator(this.moduleNameTextField.getText(), this.jndiNameTextField.getText());
             businessCodeGenerator.setParentComponent(this);
@@ -171,17 +160,14 @@ public class BusinessCodePanel extends CodePanel
             businessCodeGenerator.setOutputDir(this.pathTextField.getText());
             businessCodeGenerator.generate();
             this.getLogger().info(this.getText("EndGenerate"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.getLogger().error(this, e);
             JOptionPane.showMessageDialog(this, this.getText("GenerateError"));
         }
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.createConfigPanel());
         this.add(this.createLogPanel());

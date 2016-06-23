@@ -3,11 +3,9 @@ package org.dangcat.commons.validate;
 import junit.framework.Assert;
 import org.junit.Test;
 
-public class TestRegexValidator
-{
+public class TestRegexValidator {
     @Test
-    public void testEmail()
-    {
+    public void testEmail() {
         EmailValidator validator = new EmailValidator();
         Assert.assertTrue(validator.isValid("a@sian.com"));
         Assert.assertTrue(validator.isValid("a@b.c"));
@@ -20,8 +18,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testGBK()
-    {
+    public void testGBK() {
         GBKValidator validator = new GBKValidator();
         Assert.assertTrue(validator.isValid("≤‚"));
         Assert.assertTrue(validator.isValid("≤‚ ‘"));
@@ -32,8 +29,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testIdentity()
-    {
+    public void testIdentity() {
         IdentityValidator validator = new IdentityValidator();
         Assert.assertTrue(validator.isValid("320807140525461"));
         Assert.assertTrue(validator.isValid("320807201405254619"));
@@ -53,8 +49,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testMobile()
-    {
+    public void testMobile() {
         MobileValidator validator = new MobileValidator();
         Assert.assertTrue(validator.isValid("13952006520"));
         Assert.assertTrue(validator.isValid("14952006520"));
@@ -70,8 +65,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testName()
-    {
+    public void testName() {
         NameValidator validator = new NameValidator();
         Assert.assertTrue(validator.isValid("a"));
         Assert.assertTrue(validator.isValid("a_"));
@@ -87,8 +81,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testNo()
-    {
+    public void testNo() {
         NoValidator validator = new NoValidator(5, 10);
         Assert.assertTrue(validator.isValid("a12bc"));
         Assert.assertTrue(validator.isValid("abcda"));
@@ -107,8 +100,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testPort()
-    {
+    public void testPort() {
         PortValidator validator = new PortValidator();
         Assert.assertTrue(validator.isValid("1"));
         Assert.assertTrue(validator.isValid("65535"));
@@ -120,8 +112,7 @@ public class TestRegexValidator
     }
 
     @Test
-    public void testTel()
-    {
+    public void testTel() {
         TelValidator validator = new TelValidator();
         Assert.assertTrue(validator.isValid("12345678"));
         Assert.assertTrue(validator.isValid("0511-12345678"));

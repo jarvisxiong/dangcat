@@ -9,8 +9,7 @@ import org.dangcat.web.upload.UploadContent;
 import java.io.*;
 import java.util.Map;
 
-public class ServiceCaller
-{
+public class ServiceCaller {
     private static final String ID = "id";
     private String contentData = null;
     private String jndiName = null;
@@ -22,12 +21,10 @@ public class ServiceCaller
     private Integer resourceId = null;
     private UploadContent uploadContent = null;
 
-    public ServiceCaller()
-    {
+    public ServiceCaller() {
     }
 
-    public String getContentData()
-    {
+    public String getContentData() {
         return contentData;
     }
 
@@ -35,8 +32,7 @@ public class ServiceCaller
         this.contentData = contentData;
     }
 
-    public String getJndiName()
-    {
+    public String getJndiName() {
         return jndiName;
     }
 
@@ -44,8 +40,7 @@ public class ServiceCaller
         this.jndiName = jndiName;
     }
 
-    public String getMethod()
-    {
+    public String getMethod() {
         return method;
     }
 
@@ -53,8 +48,7 @@ public class ServiceCaller
         this.method = method;
     }
 
-    public String getParamsData()
-    {
+    public String getParamsData() {
         return paramsData;
     }
 
@@ -62,8 +56,7 @@ public class ServiceCaller
         this.paramsData = paramsData;
     }
 
-    public String getQueryString()
-    {
+    public String getQueryString() {
         return queryString;
     }
 
@@ -71,8 +64,7 @@ public class ServiceCaller
         this.queryString = queryString;
     }
 
-    private Reader getReader() throws IOException
-    {
+    private Reader getReader() throws IOException {
         if (this.getParamsData() != null)
             return new StringReader(this.getParamsData());
         if (this.getContentData() != null)
@@ -80,8 +72,7 @@ public class ServiceCaller
         return null;
     }
 
-    public String getRequestMethod()
-    {
+    public String getRequestMethod() {
         return requestMethod;
     }
 
@@ -89,8 +80,7 @@ public class ServiceCaller
         this.requestMethod = requestMethod;
     }
 
-    public String getRequestURI()
-    {
+    public String getRequestURI() {
         return requestURI;
     }
 
@@ -98,8 +88,7 @@ public class ServiceCaller
         this.requestURI = requestURI;
     }
 
-    public Integer getResourceId()
-    {
+    public Integer getResourceId() {
         return resourceId;
     }
 
@@ -107,8 +96,7 @@ public class ServiceCaller
         this.resourceId = resourceId;
     }
 
-    public UploadContent getUploadContent()
-    {
+    public UploadContent getUploadContent() {
         return uploadContent;
     }
 
@@ -116,14 +104,12 @@ public class ServiceCaller
         this.uploadContent = uploadContent;
     }
 
-    public Object invoke(Object instance, MethodInfo methodInfo) throws Exception
-    {
+    public Object invoke(Object instance, MethodInfo methodInfo) throws Exception {
         Object[] paramValues = this.parseParamValues(methodInfo);
         return methodInfo.invoke(instance, paramValues);
     }
 
-    private Object parseParamValue(ParamInfo paramInfo) throws IOException
-    {
+    private Object parseParamValue(ParamInfo paramInfo) throws IOException {
         Class<?> classType = paramInfo.getClassType();
         Object value = this.parseUploadContentValue(classType);
 
@@ -132,8 +118,7 @@ public class ServiceCaller
             value = this.getResourceId();
 
         // 使用查询字串映射简单对象参数。
-        if (value == null && !ReflectUtils.isConstClassType(classType))
-        {
+        if (value == null && !ReflectUtils.isConstClassType(classType)) {
             Object instance = ReflectUtils.newInstance(classType);
             Reader reader = this.getReader();
             Class<?>[] classTypes = paramInfo.getClassTypes();
@@ -143,17 +128,15 @@ public class ServiceCaller
         return value;
     }
 
-    private Object[] parseParamValues(MethodInfo methodInfo) throws IOException
-    {
+    private Object[] parseParamValues(MethodInfo methodInfo) throws IOException {
         ParamInfo[] paramInfos = methodInfo.getParamInfos();
         if (paramInfos == null || paramInfos.length == 0)
             return null;
 
-        if (paramInfos.length == 1)
-        {
+        if (paramInfos.length == 1) {
             Object value = this.parseParamValue(paramInfos[0]);
             if (value != null)
-                return new Object[] { value };
+                return new Object[]{value};
         }
 
         // 参数映射表产生参数实例。
@@ -163,27 +146,22 @@ public class ServiceCaller
             paramValuesMap.put(ID, this.resourceId);
         Object[] paramValues = new Object[paramClassTypeMap.size()];
         int index = 0;
-        for (String paramName : paramClassTypeMap.keySet())
-        {
+        for (String paramName : paramClassTypeMap.keySet()) {
             Object value = null;
-            if (this.uploadContent != null && paramName.equalsIgnoreCase(this.uploadContent.getFieldName()))
-            {
+            if (this.uploadContent != null && paramName.equalsIgnoreCase(this.uploadContent.getFieldName())) {
                 Class<?>[] classTypes = paramClassTypeMap.get(paramName);
                 if (classTypes != null && classTypes.length == 1)
                     value = this.parseUploadContentValue(classTypes[0]);
-            }
-            else
+            } else
                 value = paramValuesMap.get(paramName);
             paramValues[index++] = value;
         }
         return paramValues;
     }
 
-    private Object parseUploadContentValue(Class<?> classType) throws IOException
-    {
+    private Object parseUploadContentValue(Class<?> classType) throws IOException {
         Object value = null;
-        if (this.uploadContent != null)
-        {
+        if (this.uploadContent != null) {
             if (classType.equals(File.class))
                 value = this.uploadContent.getFile();
             else if (InputStream.class.isAssignableFrom(classType))
@@ -195,8 +173,7 @@ public class ServiceCaller
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("RequestURI = " + this.getRequestURI());
         if (this.getQueryString() != null)
@@ -206,13 +183,11 @@ public class ServiceCaller
         info.append(", JndiName = " + this.getJndiName());
         if (this.getResourceId() != null)
             info.append(", ResourceId = " + this.getResourceId());
-        if (this.getParamsData() != null)
-        {
+        if (this.getParamsData() != null) {
             info.append("\r\nParams:\r\n");
             info.append(this.getParamsData());
         }
-        if (this.getContentData() != null)
-        {
+        if (this.getContentData() != null) {
             info.append("\r\nContentData:\r\n");
             info.append(this.getContentData());
         }

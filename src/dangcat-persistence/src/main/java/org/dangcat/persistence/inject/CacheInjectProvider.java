@@ -9,21 +9,17 @@ import org.dangcat.persistence.cache.MemCache;
 
 import java.lang.annotation.Annotation;
 
-public class CacheInjectProvider extends InjectProvider
-{
+public class CacheInjectProvider extends InjectProvider {
     @Override
-    public Class<? extends Annotation> getAnnotation()
-    {
+    public Class<? extends Annotation> getAnnotation() {
         return Cache.class;
     }
 
     @Override
-    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation)
-    {
+    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation) {
         Object injectObject = null;
         Class<?> entityClassType = ((Cache) annotation).value();
-        if (entityClassType != null)
-        {
+        if (entityClassType != null) {
             if (accessClassType.equals(EntityCache.class))
                 injectObject = EntityCacheManager.getInstance().getEntityCache(entityClassType);
             else if (accessClassType.equals(MemCache.class))

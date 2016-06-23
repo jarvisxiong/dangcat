@@ -16,14 +16,12 @@ import org.jfree.ui.StandardGradientPaintTransformer;
 
 /**
  * 柱状统计图。
+ *
  * @author dangcat
- * 
  */
-public class BarChart extends CategoryChart
-{
+public class BarChart extends CategoryChart {
     @Override
-    protected JFreeChart createChart()
-    {
+    protected JFreeChart createChart() {
         // 建立统计对象。
         JFreeChart chart = ChartFactory.createBarChart(this.getTitle(), // 标题
                 this.getDomainTitle(), // 横坐标标题。
@@ -45,8 +43,7 @@ public class BarChart extends CategoryChart
     }
 
     @Override
-    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i)
-    {
+    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i) {
         super.iniItemRenderer(categoryItemRenderer, i);
 
         BarRenderer barRenderer = (BarRenderer) categoryItemRenderer;
@@ -61,8 +58,7 @@ public class BarChart extends CategoryChart
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         DataConverter dataConverter = this.createDataConverter(false);
 
         CategoryDataset categoryDataset = this.createCategoryDataset(dataConverter);

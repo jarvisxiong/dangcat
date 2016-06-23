@@ -11,29 +11,27 @@ import org.dangcat.persistence.tablename.TableName;
 
 import java.util.List;
 
-class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends DataFilter> extends BusinessServiceInvoker<Q, V, F>
-{
-    BusinessServiceView(BusinessServiceBase<Q, V, F> businessServiceBase)
-    {
+class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends DataFilter> extends BusinessServiceInvoker<Q, V, F> {
+    BusinessServiceView(BusinessServiceBase<Q, V, F> businessServiceBase) {
         super(businessServiceBase);
     }
 
     /**
      * 触发加载数据后事件。
+     *
      * @param loadContext 操作上下文。
      */
-    private void afterLoad(LoadContext<V> loadContext)
-    {
+    private void afterLoad(LoadContext<V> loadContext) {
         if (this.isExtendEventEnabled())
             this.businessServiceBase.afterLoad(loadContext);
     }
 
     /**
      * 触发加载数据前事件。
+     *
      * @param loadContext 操作上下文。
      */
-    private void beforeLoad(LoadContext<V> loadContext) throws ServiceException
-    {
+    private void beforeLoad(LoadContext<V> loadContext) throws ServiceException {
         if (this.isExtendEventEnabled())
             this.businessServiceBase.beforeLoad(loadContext);
     }
@@ -42,8 +40,7 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
      * 新建数据。
      */
     @SuppressWarnings("unchecked")
-    private V createNew() throws ServiceException
-    {
+    private V createNew() throws ServiceException {
         Class<V> classType = this.getViewEntityClass();
 
         long beginTime = DateUtils.currentTimeMillis();
@@ -51,34 +48,27 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
             this.logger.debug("Begin create the entity: " + classType);
 
         V entity = null;
-        try
-        {
+        try {
             entity = (V) ReflectUtils.newInstance(classType);
             if (entity == null)
                 throw new BusinessException(BusinessException.CREATE_ERROR);
 
             this.businessServiceBase.onCreate(entity);
-        }
-        catch (EntityException e)
-        {
+        } catch (EntityException e) {
             this.logger.error(this, e);
             throw new BusinessException(BusinessException.CREATE_ERROR);
-        }
-        finally
-        {
+        } finally {
             if (this.logger.isDebugEnabled())
                 this.logger.debug("End create entity, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
         }
         return entity;
     }
 
-    protected V execute(Object id) throws ServiceException
-    {
+    protected V execute(Object id) throws ServiceException {
         return this.execute(null, null, id);
     }
 
-    protected V execute(TableName tableName, String sqlName, Object... primaryKeyValues) throws ServiceException
-    {
+    protected V execute(TableName tableName, String sqlName, Object... primaryKeyValues) throws ServiceException {
         if (!this.isValid(primaryKeyValues))
             return this.createNew();
 
@@ -92,8 +82,7 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
 
         V entity = null;
         long beginTime = DateUtils.currentTimeMillis();
-        try
-        {
+        try {
             EntityManager entityManager = this.getEntityManager();
             loadContext.setEntityManager(entityManager);
 
@@ -112,26 +101,20 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
             EntityUtils.resetDataState(entity);
             EntityUtils.sortRelation(entity);
             this.afterLoad(loadContext);
-        }
-        catch (EntityException e)
-        {
+        } catch (EntityException e) {
             this.logger.error(this, e);
             throw new BusinessException(BusinessException.LOAD_ERROR, classType);
-        }
-        finally
-        {
+        } finally {
             if (this.logger.isDebugEnabled())
                 this.logger.debug("End load entity, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
         }
         return entity;
     }
 
-    private boolean isValid(Object[] primaryKeyValues)
-    {
+    private boolean isValid(Object[] primaryKeyValues) {
         if (primaryKeyValues == null)
             return false;
-        for (Object value : primaryKeyValues)
-        {
+        for (Object value : primaryKeyValues) {
             if (value == null)
                 return false;
         }

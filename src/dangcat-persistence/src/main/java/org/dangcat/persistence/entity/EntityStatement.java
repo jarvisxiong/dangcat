@@ -5,8 +5,7 @@ import org.dangcat.persistence.model.Column;
 import java.util.LinkedList;
 import java.util.List;
 
-public class EntityStatement
-{
+public class EntityStatement {
     private String databaseName;
     private String deleteSql = null;
     private EntityMetaData entityMetaData;
@@ -17,62 +16,51 @@ public class EntityStatement
     private String modifiedSql = null;
     private List<String> primaryKeyList = new LinkedList<String>();
 
-    public EntityStatement(EntityMetaData entityMetaData, String databaseName)
-    {
+    public EntityStatement(EntityMetaData entityMetaData, String databaseName) {
         this.entityMetaData = entityMetaData;
         this.databaseName = databaseName;
     }
 
-    public String getDeleteSql()
-    {
+    public String getDeleteSql() {
         return deleteSql.toString();
     }
 
-    public List<String> getGeneratedKeyList()
-    {
+    public List<String> getGeneratedKeyList() {
         return generatedKeyList;
     }
 
-    public List<String> getInsertFieldNameList()
-    {
+    public List<String> getInsertFieldNameList() {
         return insertFieldNameList;
     }
 
-    public String getInsertSql()
-    {
+    public String getInsertSql() {
         return insertSql.toString();
     }
 
-    public List<String> getModifiedFieldNameList()
-    {
+    public List<String> getModifiedFieldNameList() {
         return modifiedFieldNameList;
     }
 
-    public String getModifiedSql()
-    {
+    public String getModifiedSql() {
         return modifiedSql.toString();
     }
 
-    public List<String> getPrimaryKeyList()
-    {
+    public List<String> getPrimaryKeyList() {
         return primaryKeyList;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         this.initialize(null);
     }
 
-    public void initialize(SaveEntityContext saveEntityContext)
-    {
+    public void initialize(SaveEntityContext saveEntityContext) {
         EntitySqlBuilder entitySqlBuilder = new EntitySqlBuilder(this.entityMetaData, this.databaseName, saveEntityContext);
         // 构建查询语句
         this.insertSql = entitySqlBuilder.buildInsertStatement(this.insertFieldNameList);
         this.deleteSql = entitySqlBuilder.buildDeleteStatement(this.primaryKeyList);
         // 自增主键列表。
         Column[] primaryKeys = this.entityMetaData.getTable().getColumns().getPrimaryKeys();
-        for (Column column : primaryKeys)
-        {
+        for (Column column : primaryKeys) {
             if (column.isIndentityGeneration())
                 this.generatedKeyList.add(column.getFieldName());
         }
@@ -80,15 +68,13 @@ public class EntityStatement
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("DatabaseName = ");
         info.append(this.databaseName);
         info.append(" GeneratedKeyList = {");
         boolean isFirst = true;
-        for (String fieldName : this.getGeneratedKeyList())
-        {
+        for (String fieldName : this.getGeneratedKeyList()) {
             if (!isFirst)
                 info.append(", ");
             info.append(fieldName);

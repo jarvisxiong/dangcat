@@ -2,10 +2,9 @@ package org.dangcat.persistence.filter;
 
 /**
  * ÷µ∂‘œÛ°£
+ *
  * @author dangcat
- * 
  */
-public interface ValueObject
-{
+public interface ValueObject {
     Object getValue();
 }

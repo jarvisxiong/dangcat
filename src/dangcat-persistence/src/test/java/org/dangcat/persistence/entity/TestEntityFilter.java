@@ -16,12 +16,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestEntityFilter extends TestEntityBase
-{
+public class TestEntityFilter extends TestEntityBase {
     private static final int TEST_COUNT = 10;
 
-    private void createEntityData() throws EntityException
-    {
+    private void createEntityData() throws EntityException {
         List<EntityData> entityDataList = new LinkedList<EntityData>();
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
@@ -31,8 +29,7 @@ public class TestEntityFilter extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -53,8 +50,7 @@ public class TestEntityFilter extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testEntityFilter1() throws EntityException
-    {
+    private void testEntityFilter1() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();
@@ -126,8 +122,7 @@ public class TestEntityFilter extends TestEntityBase
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
-    private void testEntityFilter2() throws EntityException
-    {
+    private void testEntityFilter2() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         // 构建最简单的过滤条件
         FilterGroup filterGroup = new FilterGroup();

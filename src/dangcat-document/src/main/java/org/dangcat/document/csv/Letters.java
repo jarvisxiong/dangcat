@@ -1,7 +1,6 @@
 package org.dangcat.document.csv;
 
-public class Letters
-{
+public class Letters {
     public static final char ALERT = '\u0007';
     public static final char BACKSLASH = '\\';
     public static final char BACKSPACE = '\b';

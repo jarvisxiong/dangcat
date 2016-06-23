@@ -7,8 +7,7 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Locale;
 
-public class Environment
-{
+public class Environment {
     public static final String DANGCAT_HOME = "DANGCAT_HOME";
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String LINETAB_SEPARATOR = LINE_SEPARATOR + "\t";
@@ -19,14 +18,12 @@ public class Environment
     private static ThreadLocal<Locale> localeThreadLocal = new ThreadLocal<Locale>();
     private static String SystemDangCatHome = null;
 
-    public static void clearHomePath()
-    {
+    public static void clearHomePath() {
         homePath = null;
         System.setProperty(DANGCAT_HOME, "");
     }
 
-    public static Locale getCurrentLocale()
-    {
+    public static Locale getCurrentLocale() {
         Locale locale = localeThreadLocal.get();
         return locale == null ? getDefaultLocale() : locale;
     }
@@ -34,8 +31,7 @@ public class Environment
     /**
      * 读取当前的进程ID。
      */
-    public static Integer getCurrentPID()
-    {
+    public static Integer getCurrentPID() {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         return ValueUtils.parseInt(name.substring(0, name.indexOf('@')));
     }
@@ -43,8 +39,7 @@ public class Environment
     /**
      * 获取本地设定。
      */
-    public static Locale getDefaultLocale()
-    {
+    public static Locale getDefaultLocale() {
         if (currentLocale == null)
             currentLocale = LocaleUtils.parse(System.getProperty(LOCALE_KEY));
         return currentLocale;
@@ -58,8 +53,7 @@ public class Environment
     /**
      * 获取本地设定。
      */
-    public static String getHomePath()
-    {
+    public static String getHomePath() {
         if (homePath == null)
             setHomePath(null);
         return homePath;
@@ -68,29 +62,23 @@ public class Environment
     /**
      * 设置本地设定。
      */
-    public static void setHomePath(Class<?> classType)
-    {
-        try
-        {
-            if (SystemDangCatHome == null)
-            {
+    public static void setHomePath(Class<?> classType) {
+        try {
+            if (SystemDangCatHome == null) {
                 SystemDangCatHome = System.getProperty(DANGCAT_HOME);
                 if (ValueUtils.isEmpty(SystemDangCatHome))
                     SystemDangCatHome = "";
             }
             File currentDirectory = null;
-            if (!ValueUtils.isEmpty(SystemDangCatHome))
-            {
+            if (!ValueUtils.isEmpty(SystemDangCatHome)) {
                 File directory = new File(SystemDangCatHome);
                 if (directory.exists() && directory.isDirectory())
                     currentDirectory = directory;
             }
-            if (currentDirectory == null)
-            {
+            if (currentDirectory == null) {
                 if (classType != null)
                     currentDirectory = new File(FileUtils.getResourcePath(classType, null));
-                else
-                {
+                else {
                     currentDirectory = new File("./target");
                     if (!currentDirectory.exists())
                         currentDirectory = new File(".");
@@ -102,15 +90,12 @@ public class Environment
             // 运行环境可能是在lib下。
             if (currentDirectory.getName().endsWith("lib"))
                 currentDirectory = currentDirectory.getParentFile();
-            if (currentDirectory.exists())
-            {
+            if (currentDirectory.exists()) {
                 homePath = currentDirectory.getCanonicalPath();
                 System.setProperty(DANGCAT_HOME, homePath);
                 System.out.println(DANGCAT_HOME + ": " + homePath);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
     }
@@ -145,16 +130,14 @@ public class Environment
         localeThreadLocal.remove();
     }
 
-    public static void setLocale(Locale locale)
-    {
+    public static void setLocale(Locale locale) {
         localeThreadLocal.set(locale);
     }
 
     /**
      * 设置模块参数。
      */
-    public static void setModuleEnabled(String module, boolean enabled)
-    {
+    public static void setModuleEnabled(String module, boolean enabled) {
         System.setProperty("dangcat." + module + ".enabled", enabled ? "true" : "false");
     }
 }

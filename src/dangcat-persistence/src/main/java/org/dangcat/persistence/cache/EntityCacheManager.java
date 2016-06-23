@@ -22,59 +22,52 @@ import java.util.*;
 
 /**
  * 内存数据缓存管理。
+ *
  * @author dangcat
- * 
  */
-public class EntityCacheManager
-{
+public class EntityCacheManager {
     protected static final Logger logger = Logger.getLogger(EntityCacheManager.class);
     private static EntityCacheManager instance = new EntityCacheManager();
 
-    static
-    {
+    static {
         ServiceHelper.addInjectProvider(new CacheInjectProvider());
     }
 
     private Map<Class<?>, EntityCacheImpl<?>> entityCacheMap = Collections.synchronizedMap(new LinkedHashMap<Class<?>, EntityCacheImpl<?>>());
     private EntityCacheNotifier entityCacheNotifier = new EntityCacheNotifier();
-    private EntityCacheManager()
-    {
+
+    private EntityCacheManager() {
     }
 
     public static EntityCacheManager getInstance() {
         return instance;
     }
 
-    public <T> EntityCacheImpl<T> addCache(Class<T> classType)
-    {
+    public <T> EntityCacheImpl<T> addCache(Class<T> classType) {
         Cache cache = new Cache();
         cache.setClassType(classType.getName());
         return this.addCache(classType, cache);
     }
 
-    public <T> EntityCacheImpl<T> addCache(Class<T> classType, Cache cache)
-    {
+    public <T> EntityCacheImpl<T> addCache(Class<T> classType, Cache cache) {
         EntityCacheImpl<T> entityCache = this.createEntityCache(classType, cache);
         if (entityCache != null)
             this.entityCacheMap.put(classType, entityCache);
         return entityCache;
     }
 
-    public void addEntityUpdateNotifier(EntityUpdateNotifier entityUpdateNotifier)
-    {
+    public void addEntityUpdateNotifier(EntityUpdateNotifier entityUpdateNotifier) {
         if (entityUpdateNotifier != null)
             this.entityCacheNotifier.addNotifier(entityUpdateNotifier);
     }
 
-    public void clear(boolean force)
-    {
+    public void clear(boolean force) {
         for (EntityCacheImpl<?> entityCache : this.entityCacheMap.values())
             entityCache.clear(force);
     }
 
     @SuppressWarnings("unchecked")
-    private <T> EntityCacheImpl<T> createEntityCache(Class<T> classType, Cache cache)
-    {
+    private <T> EntityCacheImpl<T> createEntityCache(Class<T> classType, Cache cache) {
         // 产生主键索引。
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
         if (entityMetaData == null)
@@ -95,27 +88,22 @@ public class EntityCacheManager
         return entityCacheImpl;
     }
 
-    public void delete(Class<?> entityClass, FilterExpress filterExpress)
-    {
+    public void delete(Class<?> entityClass, FilterExpress filterExpress) {
         MemCache<?> memCache = this.getMemCache(entityClass);
         if (memCache != null)
             memCache.remove(filterExpress);
     }
 
     @SuppressWarnings("unchecked")
-    public <T> EntityCache<T> getEntityCache(Class<T> entityClassType)
-    {
+    public <T> EntityCache<T> getEntityCache(Class<T> entityClassType) {
         return (EntityCache<T>) this.entityCacheMap.get(entityClassType);
     }
 
-    private Collection<EntityCacheImpl<?>> getEntityCaches(String tableName)
-    {
+    private Collection<EntityCacheImpl<?>> getEntityCaches(String tableName) {
         Collection<EntityCacheImpl<?>> entityCaches = null;
-        for (EntityCache<?> entityCache : this.entityCacheMap.values())
-        {
+        for (EntityCache<?> entityCache : this.entityCacheMap.values()) {
             EntityCacheImpl<?> entityCacheImpl = (EntityCacheImpl<?>) entityCache;
-            if (entityCacheImpl.getTableName().equalsIgnoreCase(tableName))
-            {
+            if (entityCacheImpl.getTableName().equalsIgnoreCase(tableName)) {
                 if (entityCaches == null)
                     entityCaches = new ArrayList<EntityCacheImpl<?>>();
                 entityCaches.add(entityCacheImpl);
@@ -124,34 +112,25 @@ public class EntityCacheManager
         return entityCaches;
     }
 
-    public <T> MemCache<T> getMemCache(Class<T> classType)
-    {
+    public <T> MemCache<T> getMemCache(Class<T> classType) {
         return this.getEntityCache(classType);
     }
 
     /**
      * 由资源文件载入缓存配置。
      */
-    public void load(Class<?> classType, String cacheFile)
-    {
-        if (classType == null || ValueUtils.isEmpty(cacheFile))
-        {
+    public void load(Class<?> classType, String cacheFile) {
+        if (classType == null || ValueUtils.isEmpty(cacheFile)) {
             logger.warn("Load config is empty by " + classType);
             return;
         }
 
         InputStream inputStream = ResourceLoader.load(classType, cacheFile);
-        if (inputStream != null)
-        {
-            try
-            {
+        if (inputStream != null) {
+            try {
                 this.load(inputStream);
-            }
-            catch (DocumentException e)
-            {
-            }
-            finally
-            {
+            } catch (DocumentException e) {
+            } finally {
                 FileUtils.close(inputStream);
             }
         }
@@ -159,48 +138,40 @@ public class EntityCacheManager
 
     /**
      * 由配置文件载入缓存配置。
+     *
      * @param cacheFile 配置文件。
      */
-    public void load(File cacheFile)
-    {
-        if (cacheFile == null || !cacheFile.exists() || !cacheFile.isFile())
-        {
+    public void load(File cacheFile) {
+        if (cacheFile == null || !cacheFile.exists() || !cacheFile.isFile()) {
             logger.error("Load cache file is not valid : " + cacheFile);
             return;
         }
 
         InputStream inputStream = null;
-        try
-        {
+        try {
             inputStream = new FileInputStream(cacheFile);
             this.load(inputStream);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("Load cache file error : " + cacheFile, e);
-        }
-        finally
-        {
+        } finally {
             inputStream = FileUtils.close(inputStream);
         }
     }
 
     /**
      * 由配置文件载入缓存配置。
+     *
      * @param cacheFile 配置文件。
      * @throws DocumentException
      */
-    private void load(InputStream inputStream) throws DocumentException
-    {
+    private void load(InputStream inputStream) throws DocumentException {
         CachesXmlResolver cachesXmlResolver = new CachesXmlResolver();
         cachesXmlResolver.setResolveObject(new ArrayList<Cache>());
         cachesXmlResolver.open(inputStream);
         cachesXmlResolver.resolve();
-        for (Cache cache : cachesXmlResolver.getCacheList())
-        {
+        for (Cache cache : cachesXmlResolver.getCacheList()) {
             Class<?> classType = ReflectUtils.loadClass(cache.getClassType());
-            if (classType == null)
-            {
+            if (classType == null) {
                 logger.error("The cache define " + cache.getClassType() + " is not found.");
                 continue;
             }
@@ -209,23 +180,18 @@ public class EntityCacheManager
         this.loadData();
     }
 
-    public void loadData()
-    {
-        for (EntityCache<?> entityCache : this.entityCacheMap.values())
-        {
+    public void loadData() {
+        for (EntityCache<?> entityCache : this.entityCacheMap.values()) {
             EntityCacheImpl<?> entityCacheImpl = (EntityCacheImpl<?>) entityCache;
             if (entityCacheImpl.isPreload())
                 entityCacheImpl.loadData();
         }
     }
 
-    public void modifyEntities(String tableName, Object... entities)
-    {
-        if (entities != null && entities.length > 0)
-        {
+    public void modifyEntities(String tableName, Object... entities) {
+        if (entities != null && entities.length > 0) {
             Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-            if (entityCaches != null)
-            {
+            if (entityCaches != null) {
                 for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
                     entityCacheImpl.modifyEntities(entities);
             }
@@ -234,14 +200,13 @@ public class EntityCacheManager
 
     /**
      * 当表发生变化时，刷新内存中的数据。
-     * @param tableName 表名。
+     *
+     * @param tableName     表名。
      * @param filterExpress 过滤条件。
      */
-    public void remove(String tableName, FilterExpress filterExpress)
-    {
+    public void remove(String tableName, FilterExpress filterExpress) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-        if (entityCaches != null)
-        {
+        if (entityCaches != null) {
             for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
                 entityCacheImpl.remove(filterExpress);
         }
@@ -249,16 +214,14 @@ public class EntityCacheManager
 
     /**
      * 当表发生变化时，刷新内存中的数据。
-     * @param tableName 表名。
+     *
+     * @param tableName   表名。
      * @param primaryKeys 记录索引。
      */
-    public void remove(String tableName, Object... primaryKeys)
-    {
+    public void remove(String tableName, Object... primaryKeys) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-        if (entityCaches != null)
-        {
-            for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
-            {
+        if (entityCaches != null) {
+            for (EntityCacheImpl<?> entityCacheImpl : entityCaches) {
                 if (primaryKeys != null && primaryKeys.length > 0)
                     entityCacheImpl.removeEntity(primaryKeys);
                 else
@@ -267,19 +230,15 @@ public class EntityCacheManager
         }
     }
 
-    public void removeCache(Class<?> classType)
-    {
+    public void removeCache(Class<?> classType) {
         this.entityCacheMap.remove(classType);
     }
 
-    public int removeEntities(String tableName, Object... entities)
-    {
+    public int removeEntities(String tableName, Object... entities) {
         int count = 0;
-        if (entities != null && entities.length > 0)
-        {
+        if (entities != null && entities.length > 0) {
             Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-            if (entityCaches != null)
-            {
+            if (entityCaches != null) {
                 for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
                     count += entityCacheImpl.removeEntities(entities);
             }
@@ -287,34 +246,28 @@ public class EntityCacheManager
         return count;
     }
 
-    public void removeEntityUpdateNotifier(EntityUpdateNotifier entityUpdateNotifier)
-    {
+    public void removeEntityUpdateNotifier(EntityUpdateNotifier entityUpdateNotifier) {
         if (entityUpdateNotifier != null)
             this.entityCacheNotifier.removeNotifier(entityUpdateNotifier);
     }
 
-    public int size()
-    {
+    public int size() {
         return this.entityCacheMap.size();
     }
 
-    public void truncate()
-    {
+    public void truncate() {
         this.clear(true);
         Class<?>[] classTypes = this.entityCacheMap.keySet().toArray(new Class<?>[0]);
-        for (int i = classTypes.length - 1; i >= 0; i--)
-        {
+        for (int i = classTypes.length - 1; i >= 0; i--) {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classTypes[i]);
-            if (entityMetaData != null)
-            {
+            if (entityMetaData != null) {
                 if (entityMetaData.getTable().exists())
                     entityMetaData.getTable().truncate();
             }
         }
     }
 
-    public void update(EntityPending entityPending)
-    {
+    public void update(EntityPending entityPending) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(entityPending.getTableName());
         if (entityCaches != null)
             this.entityCacheNotifier.update(entityPending, entityCaches);
@@ -322,16 +275,14 @@ public class EntityCacheManager
 
     /**
      * 当表发生变化时，刷新内存中的数据。
-     * @param tableName 表名。
+     *
+     * @param tableName     表名。
      * @param filterExpress 过滤条件。
      */
-    public void update(String tableName, FilterExpress filterExpress)
-    {
+    public void update(String tableName, FilterExpress filterExpress) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-        if (entityCaches != null)
-        {
-            for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
-            {
+        if (entityCaches != null) {
+            for (EntityCacheImpl<?> entityCacheImpl : entityCaches) {
                 entityCacheImpl.remove(filterExpress);
                 entityCacheImpl.load(filterExpress);
             }
@@ -340,18 +291,15 @@ public class EntityCacheManager
 
     /**
      * 当表发生变化时，刷新内存中的数据。
-     * @param tableName 表名。
+     *
+     * @param tableName   表名。
      * @param primaryKeys 记录索引。
      */
-    public void update(String tableName, Object... primaryKeys)
-    {
+    public void update(String tableName, Object... primaryKeys) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
-        if (entityCaches != null)
-        {
-            for (EntityCacheImpl<?> entityCacheImpl : entityCaches)
-            {
-                if (primaryKeys != null && primaryKeys.length > 0)
-                {
+        if (entityCaches != null) {
+            for (EntityCacheImpl<?> entityCacheImpl : entityCaches) {
+                if (primaryKeys != null && primaryKeys.length > 0) {
                     entityCacheImpl.removeEntity(primaryKeys);
                     entityCacheImpl.load(primaryKeys);
                 }

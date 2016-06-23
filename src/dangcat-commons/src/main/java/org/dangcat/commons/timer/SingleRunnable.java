@@ -2,21 +2,18 @@ package org.dangcat.commons.timer;
 
 /**
  * 单线程运行。
+ *
  * @author dangcat
- * 
  */
-public class SingleRunnable implements Runnable
-{
+public class SingleRunnable implements Runnable {
     private boolean isRunning = false;
     private Runnable runnable = null;
 
-    public SingleRunnable(Runnable runnable)
-    {
+    public SingleRunnable(Runnable runnable) {
         this.runnable = runnable;
     }
 
-    public Runnable getRunnable()
-    {
+    public Runnable getRunnable() {
         return runnable;
     }
 
@@ -24,23 +21,17 @@ public class SingleRunnable implements Runnable
         this.runnable = runnable;
     }
 
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return isRunning;
     }
 
     @Override
-    public void run()
-    {
-        if (!this.isRunning())
-        {
-            try
-            {
+    public void run() {
+        if (!this.isRunning()) {
+            try {
                 this.isRunning = true;
                 this.runnable.run();
-            }
-            finally
-            {
+            } finally {
                 this.isRunning = false;
             }
         }

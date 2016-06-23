@@ -11,8 +11,7 @@ import org.dangcat.net.ftp.exceptions.FTPSessionException;
 import java.io.IOException;
 import java.util.Locale;
 
-public class FTPClient extends org.apache.commons.net.ftp.FTPClient
-{
+public class FTPClient extends org.apache.commons.net.ftp.FTPClient {
     private static final Logger logger = Logger.getLogger(FTPClient.class);
     private static ResourceReader resourceReader = ResourceManager.getInstance().getResourceReader(FTPSessionException.class);
     private FTPClientPool ftpClientPool = null;
@@ -20,37 +19,27 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
     private boolean isTimeout = false;
     private int lastReplyCode = 0;
 
-    public FTPClient(FTPClientPool ftpClientPool)
-    {
+    public FTPClient(FTPClientPool ftpClientPool) {
         this.ftpClientPool = ftpClientPool;
         this.addProtocolCommandListener(new PrintCommandListener(new FTPPrintWriter(logger)));
         this.initialize();
     }
 
-    public void close()
-    {
-        if (this.isConnected())
-        {
+    public void close() {
+        if (this.isConnected()) {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to close ftpClient.");
-            if (this.isTimeout())
-            {
-                try
-                {
+            if (this.isTimeout()) {
+                try {
                     this.logout();
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     if (logger.isDebugEnabled())
                         logger.error(this, e);
                 }
             }
-            try
-            {
+            try {
                 this.disconnect();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 if (logger.isDebugEnabled())
                     logger.error(this, e);
             }
@@ -60,10 +49,8 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
         }
     }
 
-    protected void enterInit() throws FTPSessionException
-    {
-        try
-        {
+    protected void enterInit() throws FTPSessionException {
+        try {
             this.initialize();
             // 文件传输采用二进制，传输图片
             this.setFileType(this.ftpClientPool.getFileType());
@@ -72,19 +59,15 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
                 this.enterRemotePassiveMode();
 
             this.enterInitPath();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new FTPSessionException(e);
         }
     }
 
-    private void enterInitPath() throws IOException
-    {
+    private void enterInitPath() throws IOException {
         String initPath = this.ftpClientPool.getInitPath();
         this.changeWorkingDirectory("/");
-        if (!ValueUtils.isEmpty(initPath))
-        {
+        if (!ValueUtils.isEmpty(initPath)) {
             if (logger.isDebugEnabled())
                 logger.debug("ftpClient enter initPath :" + initPath);
             this.changeWorkingDirectory(initPath);
@@ -94,22 +77,18 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
         }
     }
 
-    public int getLastReplyCode()
-    {
+    public int getLastReplyCode() {
         return this.lastReplyCode;
     }
 
-    public String getReplyMessage(Integer replyCode, Locale locale)
-    {
+    public String getReplyMessage(Integer replyCode, Locale locale) {
         return resourceReader.getText(FTPSessionException.class.getSimpleName() + "." + replyCode, locale);
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         this.lastReplyCode = 0;
         // 设置连接模式
-        switch (this.ftpClientPool.getConnectMode())
-        {
+        switch (this.ftpClientPool.getConnectMode()) {
             case FTPClient.ACTIVE_LOCAL_DATA_CONNECTION_MODE:
                 this.enterLocalActiveMode();
                 break;
@@ -127,13 +106,11 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
         this.setControlEncoding(this.ftpClientPool.getControlEncoding());
     }
 
-    public boolean isLogined()
-    {
+    public boolean isLogined() {
         return this.isLogined;
     }
 
-    protected boolean isTimeout()
-    {
+    protected boolean isTimeout() {
         return this.isTimeout;
     }
 
@@ -141,35 +118,28 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
         this.isTimeout = isTimeout;
     }
 
-    public boolean isValidate()
-    {
+    public boolean isValidate() {
         boolean result = this.isLogined() && this.isAvailable();
-        if (result)
-        {
-            try
-            {
+        if (result) {
+            try {
                 int replyCode = this.pwd();
                 if (!FTPReply.isPositiveCompletion(replyCode))
                     result = false;
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 result = false;
             }
         }
         return result;
     }
 
-    public boolean login()
-    {
+    public boolean login() {
         if (this.isLogined)
             return this.isLogined;
 
         this.isLogined = false;
         this.lastReplyCode = 0;
         String ftpUrl = "ftp://" + this.ftpClientPool.getServer() + ":" + this.ftpClientPool.getPort();
-        try
-        {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug("connect to " + ftpUrl);
             this.connect(this.ftpClientPool.getServer(), this.ftpClientPool.getPort());
@@ -177,23 +147,17 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
             this.printReplyMessage();
             if (!FTPReply.isPositiveCompletion(replyCode))
                 logger.error("FTP server refused connection from " + ftpUrl);
-            else
-            {
+            else {
                 // 连接成功，身份验证
-                if (!this.login(this.ftpClientPool.getUserName(), this.ftpClientPool.getPassword()))
-                {
+                if (!this.login(this.ftpClientPool.getUserName(), this.ftpClientPool.getPassword())) {
                     this.printReplyMessage();
                     logger.error("The username " + this.ftpClientPool.getUserName() + " validate failure");
-                }
-                else
-                {
+                } else {
                     logger.info("login success: " + ftpUrl);
                     this.isLogined = true;
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = "can not login the ftp server by " + ftpUrl;
             if (logger.isDebugEnabled())
                 logger.error(message, e);
@@ -203,18 +167,14 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient
         return this.isLogined;
     }
 
-    private int printReplyMessage()
-    {
+    private int printReplyMessage() {
         int replyCode = this.getReplyCode();
         String message = this.getReplyMessage(replyCode, null);
-        if (!ValueUtils.isEmpty(message))
-        {
-            if (FTPReply.isPositiveCompletion(replyCode))
-            {
+        if (!ValueUtils.isEmpty(message)) {
+            if (FTPReply.isPositiveCompletion(replyCode)) {
                 if (logger.isDebugEnabled())
                     logger.debug("(" + replyCode + ")" + message);
-            }
-            else
+            } else
                 logger.error("(" + replyCode + ")" + message);
         }
         this.lastReplyCode = replyCode;

@@ -10,8 +10,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public abstract class ProcessModuleBase implements ProcessModule
-{
+public abstract class ProcessModuleBase implements ProcessModule {
     private Collection<ConfigPanel> configPanels = new LinkedList<ConfigPanel>();
     private Container container = null;
     private File currentPath = null;
@@ -21,35 +20,29 @@ public abstract class ProcessModuleBase implements ProcessModule
     private Collection<ProcessTask> processTasks = new LinkedList<ProcessTask>();
     private String title = null;
 
-    public ProcessModuleBase(String name, String title)
-    {
+    public ProcessModuleBase(String name, String title) {
         this.name = name;
         this.title = title;
     }
 
-    protected void addConfigPanel(ConfigPanel configPanel)
-    {
+    protected void addConfigPanel(ConfigPanel configPanel) {
         if (configPanel != null)
             this.configPanels.add(configPanel);
     }
 
-    protected void addProcessTask(ProcessTask processTask)
-    {
-        if (processTask != null)
-        {
+    protected void addProcessTask(ProcessTask processTask) {
+        if (processTask != null) {
             this.processTasks.add(processTask);
             processTask.setEnabled(this.isEnabled());
         }
     }
 
-    public Collection<ConfigPanel> getConfigPanels()
-    {
+    public Collection<ConfigPanel> getConfigPanels() {
         return this.configPanels;
     }
 
     @Override
-    public Container getContainer()
-    {
+    public Container getContainer() {
         return this.container;
     }
 
@@ -58,8 +51,7 @@ public abstract class ProcessModuleBase implements ProcessModule
         this.container = container;
     }
 
-    public File getCurrentPath()
-    {
+    public File getCurrentPath() {
         return this.currentPath;
     }
 
@@ -67,8 +59,7 @@ public abstract class ProcessModuleBase implements ProcessModule
         this.currentPath = currentPath;
     }
 
-    public String getDisplayName()
-    {
+    public String getDisplayName() {
         return this.displayName;
     }
 
@@ -76,23 +67,19 @@ public abstract class ProcessModuleBase implements ProcessModule
         this.displayName = displayName;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public Collection<ProcessTask> getProcessTasks()
-    {
+    public Collection<ProcessTask> getProcessTasks() {
         return this.processTasks;
     }
 
-    protected String getText(String key)
-    {
+    protected String getText(String key) {
         return ResourceUtils.getText(this.getClass(), key);
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         if (ValueUtils.isEmpty(this.title))
             return this.getText(this.name);
         return this.title;
@@ -100,13 +87,11 @@ public abstract class ProcessModuleBase implements ProcessModule
 
     public abstract void initialize();
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         for (ProcessTask processTask : this.processTasks)
             processTask.setEnabled(this.isEnabled());

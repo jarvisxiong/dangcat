@@ -7,24 +7,17 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ResourceUtils
-{
-    public static Map<Integer, String> createValueMap(String valueText)
-    {
+public class ResourceUtils {
+    public static Map<Integer, String> createValueMap(String valueText) {
         Map<Integer, String> valueMap = null;
-        if (!ValueUtils.isEmpty(valueText))
-        {
+        if (!ValueUtils.isEmpty(valueText)) {
             String[] options = valueText.split(";");
-            if (options != null && options.length > 0)
-            {
+            if (options != null && options.length > 0) {
                 valueMap = new HashMap<Integer, String>();
-                for (String option : options)
-                {
-                    if (!ValueUtils.isEmpty(option))
-                    {
+                for (String option : options) {
+                    if (!ValueUtils.isEmpty(option)) {
                         String[] valuePaire = option.split(":");
-                        if (valuePaire != null && valuePaire.length > 1)
-                        {
+                        if (valuePaire != null && valuePaire.length > 1) {
                             Integer key = ValueUtils.parseInt(valuePaire[0]);
                             if (key != null && !ValueUtils.isEmpty(valuePaire[1]))
                                 valueMap.put(key, valuePaire[1].trim());
@@ -36,8 +29,7 @@ public class ResourceUtils
         return valueMap;
     }
 
-    public static Object getObject(Class<?> classType, Locale locale, String key)
-    {
+    public static Object getObject(Class<?> classType, Locale locale, String key) {
         if (classType == null || Object.class.equals(classType))
             return null;
 
@@ -56,13 +48,11 @@ public class ResourceUtils
         return value;
     }
 
-    public static Object getObject(Class<?> classType, String key)
-    {
+    public static Object getObject(Class<?> classType, String key) {
         return getObject(classType, null, key);
     }
 
-    public static String getText(Class<?> classType, Locale locale, String key, Object... params)
-    {
+    public static String getText(Class<?> classType, Locale locale, String key, Object... params) {
         if (classType == null || Object.class.equals(classType))
             return null;
 
@@ -81,13 +71,11 @@ public class ResourceUtils
         return text;
     }
 
-    public static String getText(Class<?> classType, String key, Object... params)
-    {
+    public static String getText(Class<?> classType, String key, Object... params) {
         return getText(classType, null, key, params);
     }
 
-    public static Map<Integer, String> getValueMap(Class<?> classType, Locale locale, String key)
-    {
+    public static Map<Integer, String> getValueMap(Class<?> classType, Locale locale, String key) {
         if (classType == null || Object.class.equals(classType))
             return null;
 
@@ -106,8 +94,7 @@ public class ResourceUtils
         return valueMap;
     }
 
-    public static Map<Integer, String> getValueMap(Class<?> classType, String key)
-    {
+    public static Map<Integer, String> getValueMap(Class<?> classType, String key) {
         return getValueMap(classType, null, key);
     }
 }

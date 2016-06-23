@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Table Name="T_LOG_UserLogon">
-	<Columns>
-		<Column FieldName="EndTime" FieldClass="Date" primarykey="true" format="yyyy-MM-dd HH:mm:ss" />
-		<Column FieldName="Account" FieldClass="String" DisplaySize="128" primarykey="true"/>
-		<Column FieldName="ServiceId" FieldClass="Integer"/>
-		<Column FieldName="StartTime" FieldClass="Date" format="yyyy-MM-dd HH:mm:ss"/>
-		<Column FieldName="ServiceName" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="TimeLength" FieldClass="Integer" />
-		<Column FieldName="DownGigaTraffic" FieldClass="Integer" />
-		<Column FieldName="DownTraffic" FieldClass="Integer" />
-		<Column FieldName="UpGigaTraffic" FieldClass="Integer" />
-		<Column FieldName="UpTraffic" FieldClass="Integer" />
-		<Column FieldName="UserIp" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="UserMac" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="CallingId" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="NasIp" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="NasGutter" FieldClass="Integer" />
-		<Column FieldName="NasPort" FieldClass="Integer" />
-		<Column FieldName="VlanId" FieldClass="Integer" />
-		<Column FieldName="DownWay" FieldClass="Integer" />
-		<Column FieldName="Cash" FieldClass="Integer" />
-		<Column FieldName="UserGroupId" FieldClass="Integer" />
-		<Column FieldName="NasPortType" FieldClass="Integer" />
-		<Column FieldName="UserIpv6Prefix" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="UserIpv6InterfaceId" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="NasIpv6" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="SessionId" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="BusinessType" FieldClass="Integer" />
-		<Column FieldName="FeeSvcId" FieldClass="Integer" />
-		<Column FieldName="StrategySvcId" FieldClass="Integer" />
-		<Column FieldName="NasPortId" FieldClass="String" DisplaySize="128" />
-		<Column FieldName="UserName" FieldClass="String" DisplaySize="128" />
-	</Columns>
-	<Calculators>
-		<Calculator>org.dangcat.persistence.model.TableCalculator1</Calculator>
-		<Calculator>org.dangcat.persistence.model.TableCalculator2</Calculator>
-	</Calculators>
-	<OrderBy>ORDER BY EndTime,Account</OrderBy>
+    <Columns>
+        <Column FieldName="EndTime" FieldClass="Date" primarykey="true" format="yyyy-MM-dd HH:mm:ss"/>
+        <Column FieldName="Account" FieldClass="String" DisplaySize="128" primarykey="true"/>
+        <Column FieldName="ServiceId" FieldClass="Integer"/>
+        <Column FieldName="StartTime" FieldClass="Date" format="yyyy-MM-dd HH:mm:ss"/>
+        <Column FieldName="ServiceName" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="TimeLength" FieldClass="Integer"/>
+        <Column FieldName="DownGigaTraffic" FieldClass="Integer"/>
+        <Column FieldName="DownTraffic" FieldClass="Integer"/>
+        <Column FieldName="UpGigaTraffic" FieldClass="Integer"/>
+        <Column FieldName="UpTraffic" FieldClass="Integer"/>
+        <Column FieldName="UserIp" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="UserMac" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="CallingId" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="NasIp" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="NasGutter" FieldClass="Integer"/>
+        <Column FieldName="NasPort" FieldClass="Integer"/>
+        <Column FieldName="VlanId" FieldClass="Integer"/>
+        <Column FieldName="DownWay" FieldClass="Integer"/>
+        <Column FieldName="Cash" FieldClass="Integer"/>
+        <Column FieldName="UserGroupId" FieldClass="Integer"/>
+        <Column FieldName="NasPortType" FieldClass="Integer"/>
+        <Column FieldName="UserIpv6Prefix" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="UserIpv6InterfaceId" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="NasIpv6" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="SessionId" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="BusinessType" FieldClass="Integer"/>
+        <Column FieldName="FeeSvcId" FieldClass="Integer"/>
+        <Column FieldName="StrategySvcId" FieldClass="Integer"/>
+        <Column FieldName="NasPortId" FieldClass="String" DisplaySize="128"/>
+        <Column FieldName="UserName" FieldClass="String" DisplaySize="128"/>
+    </Columns>
+    <Calculators>
+        <Calculator>org.dangcat.persistence.model.TableCalculator1</Calculator>
+        <Calculator>org.dangcat.persistence.model.TableCalculator2</Calculator>
+    </Calculators>
+    <OrderBy>ORDER BY EndTime,Account</OrderBy>
 </Table>

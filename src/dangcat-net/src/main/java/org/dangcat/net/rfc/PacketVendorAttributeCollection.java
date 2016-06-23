@@ -8,27 +8,23 @@ import java.util.Map;
 
 /**
  * 厂商属性管理。
+ *
  * @author dangcat
- * 
  */
-public class PacketVendorAttributeCollection
-{
+public class PacketVendorAttributeCollection {
     private List<AttributeTemplate> attributeTemplateList = null;
     private Map<Integer, AttributeTemplate> attributeTemplateMap = null;
     private Integer vendorId = null;
     private String vendorName = null;
 
-    public PacketVendorAttributeCollection(Integer vendorId, String vendorName, List<AttributeTemplate> attributeTemplateList)
-    {
+    public PacketVendorAttributeCollection(Integer vendorId, String vendorName, List<AttributeTemplate> attributeTemplateList) {
         this.vendorId = vendorId;
         this.vendorName = vendorName;
         this.attributeTemplateList = attributeTemplateList;
     }
 
-    public AttributeTemplate getAttributeTemplate(Integer type)
-    {
-        if (this.attributeTemplateMap == null)
-        {
+    public AttributeTemplate getAttributeTemplate(Integer type) {
+        if (this.attributeTemplateMap == null) {
             Map<Integer, AttributeTemplate> attributeTemplateMap = new HashMap<Integer, AttributeTemplate>();
             for (AttributeTemplate attributeTemplate : this.attributeTemplateList)
                 attributeTemplateMap.put(attributeTemplate.getType(), attributeTemplate);
@@ -37,18 +33,15 @@ public class PacketVendorAttributeCollection
         return this.attributeTemplateMap.get(type);
     }
 
-    public List<AttributeTemplate> getAttributeTemplateList()
-    {
+    public List<AttributeTemplate> getAttributeTemplateList() {
         return attributeTemplateList;
     }
 
-    public Integer getVendorId()
-    {
+    public Integer getVendorId() {
         return vendorId;
     }
 
-    public String getVendorName()
-    {
+    public String getVendorName() {
         return vendorName;
     }
 }

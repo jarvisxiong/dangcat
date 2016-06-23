@@ -11,26 +11,22 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Collection;
 
-public class TestServiceXmlResolver
-{
-    private void testInterceptors(Collection<Class<?>> interceptors, int exceptValue)
-    {
+public class TestServiceXmlResolver {
+    private void testInterceptors(Collection<Class<?>> interceptors, int exceptValue) {
         Assert.assertEquals(3, interceptors.size());
         Class<?>[] classTypes = interceptors.toArray(new Class<?>[0]);
         for (int i = 0; i < classTypes.length; i++)
             Assert.assertEquals("org.dangcat.examples.settle.Interceptor" + (i + 1), classTypes[i].getName());
     }
 
-    private void testServiceInfo(ServiceInfo serviceInfo, int exceptValue)
-    {
+    private void testServiceInfo(ServiceInfo serviceInfo, int exceptValue) {
         Assert.assertEquals("org.dangcat.examples.settle.SettleService" + exceptValue, serviceInfo.getAccessType());
         Assert.assertEquals("org.dangcat.examples.settle.SettleServiceImpl" + exceptValue, serviceInfo.getServiceType());
         this.testInterceptors(serviceInfo.getInterceptors(), exceptValue);
     }
 
     @Test
-    public void testXmlResolver() throws DocumentException
-    {
+    public void testXmlResolver() throws DocumentException {
         String path = Environment.getHomePath() + "/test-classes/META-INF/stock.servicebeans.xml";
         File file = new File(FileUtils.decodePath(path));
         ServicesXmlResolver serviceBeansXmlResolver = new ServicesXmlResolver();

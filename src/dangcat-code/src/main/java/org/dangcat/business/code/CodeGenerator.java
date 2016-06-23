@@ -14,8 +14,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CodeGenerator
-{
+public class CodeGenerator {
     private static final String GBK = "gbk";
     private static final String PACKAGE_NAME = "packageName";
     protected Logger logger = Logger.getLogger(this.getClass());
@@ -30,40 +29,33 @@ public class CodeGenerator
     private String template = null;
     private boolean useCopy = false;
 
-    public CodeGenerator()
-    {
+    public CodeGenerator() {
     }
 
-    public CodeGenerator(Component parentComponent)
-    {
+    public CodeGenerator(Component parentComponent) {
         this.parentComponent = parentComponent;
     }
 
-    public CodeGenerator(String template, String outputFile)
-    {
+    public CodeGenerator(String template, String outputFile) {
         this(template, outputFile, false);
     }
 
-    public CodeGenerator(String template, String outputFile, boolean useCopy)
-    {
+    public CodeGenerator(String template, String outputFile, boolean useCopy) {
         this(template, outputFile, useCopy, GBK);
     }
 
-    public CodeGenerator(String template, String outputFile, boolean useCopy, String encoding)
-    {
+    public CodeGenerator(String template, String outputFile, boolean useCopy, String encoding) {
         this.template = template;
         this.outputFile = outputFile;
         this.useCopy = useCopy;
         this.encoding = encoding;
     }
 
-    public CodeGenerator(String template, String outputFile, String encoding)
-    {
+    public CodeGenerator(String template, String outputFile, String encoding) {
         this(template, outputFile, false, encoding);
     }
 
-    public void generate() throws Exception
-    {
+    public void generate() throws Exception {
         String outputPath = this.getOutputDir();
         if (!ValueUtils.isEmpty(outputPath))
             outputPath += File.separator;
@@ -71,8 +63,7 @@ public class CodeGenerator
             outputPath += this.getCodePath() + File.separator;
         outputPath += this.getOutputFile();
         File outputFile = new File(outputPath);
-        if (outputFile.exists())
-        {
+        if (outputFile.exists()) {
             String title = this.resourceReader.getText("prompt.title");
             String message = this.resourceReader.getText("prompt.file.exists", outputFile.getAbsolutePath());
             if (JOptionPane.showConfirmDialog(this.parentComponent, message, title, JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION)
@@ -82,14 +73,11 @@ public class CodeGenerator
         FileUtils.mkdir(outputFile.getParent());
 
         Class<?> classType = this.classType == null ? this.getClass() : this.classType;
-        if (this.isUseCopy())
-        {
+        if (this.isUseCopy()) {
             InputStream inputStream = classType.getResourceAsStream(this.getTemplate());
             if (inputStream != null)
                 FileUtils.copy(inputStream, outputFile);
-        }
-        else
-        {
+        } else {
             FileMarker fileMarker = new FileMarker(classType);
             fileMarker.getDataMap().putAll(this.params);
             if (this.getEncoding() != null)
@@ -100,8 +88,7 @@ public class CodeGenerator
         this.logger.info(this.resourceReader.getText("Generate") + ": " + this.getOutputFile() + " OK!");
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return this.classType;
     }
 
@@ -109,8 +96,7 @@ public class CodeGenerator
         this.classType = classType;
     }
 
-    public String getCodePath()
-    {
+    public String getCodePath() {
         return this.codePath;
     }
 
@@ -118,13 +104,11 @@ public class CodeGenerator
         this.codePath = codePath;
     }
 
-    public String getEncoding()
-    {
+    public String getEncoding() {
         return this.encoding;
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return this.logger;
     }
 
@@ -132,8 +116,7 @@ public class CodeGenerator
         this.logger = logger;
     }
 
-    public String getOutputDir()
-    {
+    public String getOutputDir() {
         return this.outputDir;
     }
 
@@ -141,58 +124,47 @@ public class CodeGenerator
         this.outputDir = outputDir;
     }
 
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         return this.outputFile;
     }
 
-    public String getPackageName()
-    {
+    public String getPackageName() {
         return (String) this.params.get(PACKAGE_NAME);
     }
 
-    public void setPackageName(String packageName)
-    {
+    public void setPackageName(String packageName) {
         this.params.put(PACKAGE_NAME, packageName);
     }
 
-    public Map<String, Object> getParams()
-    {
+    public Map<String, Object> getParams() {
         return this.params;
     }
 
-    public void setParams(Map<String, Object> params)
-    {
+    public void setParams(Map<String, Object> params) {
         this.params = params;
     }
 
-    public Component getParentComponent()
-    {
+    public Component getParentComponent() {
         return this.parentComponent;
     }
 
-    public void setParentComponent(Component parentComponent)
-    {
+    public void setParentComponent(Component parentComponent) {
         this.parentComponent = parentComponent;
     }
 
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return this.template;
     }
 
-    public boolean isUseCopy()
-    {
+    public boolean isUseCopy() {
         return this.useCopy;
     }
 
-    public void setUseCopy(boolean useCopy)
-    {
+    public void setUseCopy(boolean useCopy) {
         this.useCopy = useCopy;
     }
 
-    public void put(String name, Object value)
-    {
+    public void put(String name, Object value) {
         this.params.put(name, value);
     }
 }

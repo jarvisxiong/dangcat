@@ -8,11 +8,9 @@ import org.junit.Test;
 
 import java.util.*;
 
-public class TestIndexer
-{
+public class TestIndexer {
     @Test
-    public void testIndexDelete()
-    {
+    public void testIndexDelete() {
         Indexer indexer = new Indexer(ValueUtils.join(UserInfo.Name, UserInfo.Age));
         List<UserInfo> entityList = new ArrayList<UserInfo>();
         UserInfoUtils.createData(entityList, 100);
@@ -38,8 +36,7 @@ public class TestIndexer
         Assert.assertEquals(0, dataList.size());
     }
 
-    private void testIndexFind(String indexName, int count, FilterComparable filterComparable, int expected, int assertIndex)
-    {
+    private void testIndexFind(String indexName, int count, FilterComparable filterComparable, int expected, int assertIndex) {
         Indexer indexer = new Indexer(indexName);
         List<UserInfo> entityList = new ArrayList<UserInfo>();
         UserInfoUtils.createData(entityList, count);
@@ -55,45 +52,39 @@ public class TestIndexer
     }
 
     @Test
-    public void testIndexFindBetween()
-    {
+    public void testIndexFindBetween() {
         FilterComparable filterComparable = new FilterComparable();
         filterComparable.add(new FilterUnit(null, FilterType.between, 10, 19));
         this.testIndexFind(UserInfo.Id, 100, filterComparable, 10, 10);
     }
 
     @Test
-    public void testIndexFindEq()
-    {
+    public void testIndexFindEq() {
         FilterComparable filterComparable = new FilterComparable();
         filterComparable.add(new FilterUnit(null, FilterType.eq, 56));
         this.testIndexFind(UserInfo.Id, 100, filterComparable, 1, 56);
     }
 
     @Test
-    public void testIndexFindGt()
-    {
+    public void testIndexFindGt() {
         FilterComparable filterComparable = new FilterComparable();
         filterComparable.add(new FilterUnit(null, FilterType.gt, 80));
         this.testIndexFind(UserInfo.Id, 100, filterComparable, 19, 81);
     }
 
     @Test
-    public void testIndexFindLt()
-    {
+    public void testIndexFindLt() {
         FilterComparable filterComparable = new FilterComparable();
         filterComparable.add(new FilterUnit(null, FilterType.lt, 15));
         this.testIndexFind(UserInfo.Id, 100, filterComparable, 15, 0);
     }
 
     @Test
-    public void testIndexRepeatKey()
-    {
+    public void testIndexRepeatKey() {
         Indexer indexer = new Indexer(UserInfo.Id);
         List<UserInfo> entityList = new ArrayList<UserInfo>();
         UserInfoUtils.createData(entityList, 100);
-        for (UserInfo userInfo : entityList)
-        {
+        for (UserInfo userInfo : entityList) {
             userInfo.setId(0);
             indexer.add(userInfo);
         }
@@ -111,8 +102,7 @@ public class TestIndexer
     }
 
     @Test
-    public void testIndexUpdate()
-    {
+    public void testIndexUpdate() {
         Indexer indexer = new Indexer(ValueUtils.join(UserInfo.Name, UserInfo.Age));
         List<UserInfo> entityList = new ArrayList<UserInfo>();
         UserInfoUtils.createData(entityList, 100);
@@ -137,8 +127,7 @@ public class TestIndexer
         indexer.search(dataList, indexFilterMap);
 
         Assert.assertEquals(2, dataList.size());
-        for (UserInfo userInfo : dataList)
-        {
+        for (UserInfo userInfo : dataList) {
             Assert.assertEquals(UserInfoUtils.getName(10), userInfo.getName());
             Assert.assertEquals(UserInfoUtils.getAge(10), userInfo.getAge());
         }

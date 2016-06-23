@@ -14,16 +14,13 @@ import java.io.File;
 import java.util.EventObject;
 
 
-public abstract class ConfigFrameBase extends FrameBase implements ValueChangedListener
-{
+public abstract class ConfigFrameBase extends FrameBase implements ValueChangedListener {
     private static final long serialVersionUID = 1L;
     private ConfigFileAccess configFileAccess = new ConfigFileAccess();
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
-        if (actionEvent.getActionCommand().equals(ConfigToolBar.SAVE))
-        {
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getActionCommand().equals(ConfigToolBar.SAVE)) {
             if (this.validateData())
                 this.save();
             return;
@@ -32,22 +29,19 @@ public abstract class ConfigFrameBase extends FrameBase implements ValueChangedL
     }
 
     @Override
-    protected void cancel()
-    {
+    protected void cancel() {
         this.load();
         super.cancel();
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         Container container = super.createContentPane();
         this.getBodyContainer().addValueChangedListener(this);
         return container;
     }
 
-    protected void createDatabaseConfigModule(String name, Integer defaultDatabasePort)
-    {
+    protected void createDatabaseConfigModule(String name, Integer defaultDatabasePort) {
         String title = this.getText(name);
         DatabaseConfigModule databaseConfigModule = new DatabaseConfigModule("database." + name, title);
         databaseConfigModule.setDefaultDatabaseName(name);
@@ -58,8 +52,7 @@ public abstract class ConfigFrameBase extends FrameBase implements ValueChangedL
         this.getConfigFileAccess().addConfigureAccess(databaseConfigModule.getDatabaseConfigAccess());
     }
 
-    protected void createFtpConfigModule(String name, String title)
-    {
+    protected void createFtpConfigModule(String name, String title) {
         FtpConfigModule ftpConfigModule = new FtpConfigModule("ftp." + name, title);
         ftpConfigModule.createFtpConfigAccess(name, title);
         ftpConfigModule.setDefaultFtpName(name);
@@ -69,14 +62,12 @@ public abstract class ConfigFrameBase extends FrameBase implements ValueChangedL
     }
 
     @Override
-    protected ToolBarPanel createToolBarContainer()
-    {
+    protected ToolBarPanel createToolBarContainer() {
         return new ConfigToolBar();
     }
 
     @Override
-    protected void executeFinished()
-    {
+    protected void executeFinished() {
         String key = null;
         if (this.isSuccessFull())
             key = "Config.Successfull";
@@ -89,49 +80,40 @@ public abstract class ConfigFrameBase extends FrameBase implements ValueChangedL
 
     protected abstract File getConfigFile();
 
-    public ConfigFileAccess getConfigFileAccess()
-    {
+    public ConfigFileAccess getConfigFileAccess() {
         return this.configFileAccess;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.configFileAccess.setConfigFile(this.getConfigFile());
         this.configFileAccess.load();
     }
 
-    private void load()
-    {
+    private void load() {
         this.configFileAccess.load();
         this.getToolBarContainer().removeState(ToolBarPanel.PROCESS);
         this.getToolBarContainer().removeState(ConfigToolBar.CHANGED);
     }
 
     @Override
-    public void onValueChanged(EventObject eventObject)
-    {
+    public void onValueChanged(EventObject eventObject) {
         this.getToolBarContainer().addState(ConfigToolBar.CHANGED, true);
     }
 
     @Override
-    public void pack()
-    {
+    public void pack() {
         super.pack();
         this.load();
     }
 
-    protected void save()
-    {
+    protected void save() {
         this.logger.info("Save config data.");
-        try
-        {
+        try {
             this.configFileAccess.save();
             super.executeProcess();
             this.load();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logger.error("Save the resource file error", e);
         }
     }

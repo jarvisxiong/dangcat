@@ -4,8 +4,7 @@ import org.dangcat.commons.io.FileUtils;
 import org.dangcat.commons.reflect.ReflectUtils;
 import org.dangcat.commons.utils.ValueUtils;
 
-public final class ContentType
-{
+public final class ContentType {
     public static final String ai = "application/postscript";
     public static final String aif = "audio/x-aiff";
     public static final String aifc = "audio/x-aiff";
@@ -146,12 +145,10 @@ public final class ContentType
     public static final String xyz = "chemical/x-xyz";
     public static final String zip = "application/zip";
 
-    public static String getType(String fileName)
-    {
+    public static String getType(String fileName) {
         String contentType = bin;
         String extensionName = FileUtils.getExtension(fileName);
-        if (!ValueUtils.isEmpty(extensionName))
-        {
+        if (!ValueUtils.isEmpty(extensionName)) {
             Object value = ReflectUtils.getFieldValue(ContentType.class, extensionName);
             if (value != null)
                 contentType = (String) value;
@@ -159,8 +156,7 @@ public final class ContentType
         return contentType;
     }
 
-    public static String getType(String type, String charset)
-    {
+    public static String getType(String type, String charset) {
         if (!ValueUtils.isEmpty(charset))
             return type + "; charset=" + charset;
         return type;

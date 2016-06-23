@@ -8,56 +8,46 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * ÓÊ¼þÐ£ÑéÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class TelValidator extends LogicValidator
-{
+public class TelValidator extends LogicValidator {
     private static final String VALIDATOR_NAME = "Tel";
 
-    public TelValidator(Class<?> classType, Column column)
-    {
+    public TelValidator(Class<?> classType, Column column) {
         super(classType, column);
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return VALIDATOR_NAME;
     }
 
     @Override
-    protected void throwDataValidateException(Integer messageId, Object... params) throws DataValidateException
-    {
+    protected void throwDataValidateException(Integer messageId, Object... params) throws DataValidateException {
         throw new LogicValidatorException(this.getClassType(), this.getColumn().getName(), messageId, params);
     }
 
     @Override
-    public void validateValue(Object value) throws DataValidateException
-    {
+    public void validateValue(Object value) throws DataValidateException {
         String tel = (String) value;
-        if (!ValueUtils.isEmpty(tel))
-        {
+        if (!ValueUtils.isEmpty(tel)) {
             int countBracketsLeft = 0;
             int countBracketsRight = 0;
             int countPlusSign = 0;
-            for (int index = 0; index < tel.length(); index++)
-            {
+            for (int index = 0; index < tel.length(); index++) {
                 char charValue = tel.charAt(index);
                 if (Character.isDigit(charValue) || charValue == '-')
                     continue;
-                if (charValue == '+')
-                {
+                if (charValue == '+') {
                     countPlusSign++;
                     continue;
                 }
-                if (charValue == '(')
-                {
+                if (charValue == '(') {
                     countBracketsLeft++;
                     continue;
                 }
-                if (charValue == ')')
-                {
+                if (charValue == ')') {
                     countBracketsRight++;
                     continue;
                 }

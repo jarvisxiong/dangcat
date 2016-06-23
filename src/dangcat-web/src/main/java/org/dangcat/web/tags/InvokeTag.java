@@ -23,20 +23,17 @@ import java.util.List;
 
 /**
  * 服务调用标签。
+ *
  * @author dangcat
- * 
  */
-public class InvokeTag extends SimpleTagSupport
-{
+public class InvokeTag extends SimpleTagSupport {
     protected static final Logger logger = Logger.getLogger(InvokeTag.class);
     private String jndiName = null;
     private String method = "GET";
 
-    private ServiceCaller createServiceCaller() throws JspException, IOException
-    {
+    private ServiceCaller createServiceCaller() throws JspException, IOException {
         String jndiName = this.getJndiName();
-        if (jndiName.indexOf("/") == -1)
-        {
+        if (jndiName.indexOf("/") == -1) {
             ServiceContext serviceContext = ServiceContext.getInstance();
             jndiName = serviceContext.getServiceInfo().getJndiName() + "/" + jndiName;
         }
@@ -44,8 +41,7 @@ public class InvokeTag extends SimpleTagSupport
         ServiceCaller serviceCaller = new ServiceCaller();
         this.parseJndiName(serviceCaller, jndiName);
         RequestParser.parseMethod(this.getMethod(), serviceCaller);
-        if (this.getJspBody() != null)
-        {
+        if (this.getJspBody() != null) {
             StringWriter body = new StringWriter();
             this.getJspBody().invoke(body);
             serviceCaller.setContentData(body.toString());
@@ -54,22 +50,18 @@ public class InvokeTag extends SimpleTagSupport
     }
 
     @Override
-    public void doTag() throws JspTagException
-    {
+    public void doTag() throws JspTagException {
         if (ValueUtils.isEmpty(this.getJndiName()) && ValueUtils.isEmpty(this.getMethod()))
             throw new JspTagException("The invoke tag jndiName or method can't be empty.");
 
-        try
-        {
+        try {
             // 构建服务调用对象。
             ServiceCaller serviceCaller = this.createServiceCaller();
             // 调用服务方法。
             Object result = this.invoke(serviceCaller);
             // 反馈执行结果。
             this.writeResult(result);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
 
             Throwable rootCause = null;
@@ -79,8 +71,7 @@ public class InvokeTag extends SimpleTagSupport
         }
     }
 
-    public String getJndiName()
-    {
+    public String getJndiName() {
         return this.jndiName;
     }
 
@@ -88,8 +79,7 @@ public class InvokeTag extends SimpleTagSupport
         this.jndiName = jndiName;
     }
 
-    public String getMethod()
-    {
+    public String getMethod() {
         return this.method;
     }
 
@@ -97,8 +87,7 @@ public class InvokeTag extends SimpleTagSupport
         this.method = method;
     }
 
-    private Object invoke(ServiceCaller serviceCaller) throws Exception
-    {
+    private Object invoke(ServiceCaller serviceCaller) throws Exception {
         // 定位目标服务。
         ServiceInfo serviceInfo = ServiceFactory.getServiceLocator().getServiceInfo(serviceCaller.getJndiName());
         if (serviceInfo == null || serviceInfo.getInstance() == null)
@@ -112,21 +101,17 @@ public class InvokeTag extends SimpleTagSupport
         return serviceCaller.invoke(serviceInfo.getInstance(), methodInfo);
     }
 
-    private void parseJndiName(ServiceCaller serviceCaller, String requestURI)
-    {
+    private void parseJndiName(ServiceCaller serviceCaller, String requestURI) {
         List<String> resultList = new ArrayList<String>();
         String[] urlParts = requestURI.split("/");
-        for (String urlPart : urlParts)
-        {
+        for (String urlPart : urlParts) {
             if (!ValueUtils.isEmpty(urlPart))
                 resultList.add(urlPart);
         }
 
-        if (resultList.size() >= 2)
-        {
+        if (resultList.size() >= 2) {
             serviceCaller.setJndiName(resultList.get(0) + "/" + resultList.get(1));
-            if (resultList.size() > 2)
-            {
+            if (resultList.size() > 2) {
                 serviceCaller.setResourceId(ValueUtils.parseInt(resultList.get(2)));
                 if (serviceCaller.getResourceId() == null)
                     serviceCaller.setMethod(resultList.get(2));
@@ -134,17 +119,14 @@ public class InvokeTag extends SimpleTagSupport
         }
     }
 
-    private void writeResult(Object result) throws IOException
-    {
+    private void writeResult(Object result) throws IOException {
         PageContext pageContext = (PageContext) this.getJspContext();
         if (result == null)
             pageContext.getOut().println("null");
-        else if (!ReflectUtils.isConstClassType(result.getClass()))
-        {
+        else if (!ReflectUtils.isConstClassType(result.getClass())) {
             String data = JsonSerializer.serialize(result);
             pageContext.getOut().println(data);
-        }
-        else
+        } else
             pageContext.getOut().println(result);
     }
 }

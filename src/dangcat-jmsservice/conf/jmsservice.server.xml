@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!-- server configuration -->
+<!-- server configuration -->
 <Configuration>
-	<Version>V1.0</Version>
-	<MainService>org.dangcat.net.jms.JMSServer</MainService>
+    <Version>V1.0</Version>
+    <MainService>org.dangcat.net.jms.JMSServer</MainService>
 
-	<Message>
-		<ConfigFile>conf/jmsservice.activemq.xml</ConfigFile>
-		<ListenProcessSize>5</ListenProcessSize>
-	</Message>
+    <Message>
+        <ConfigFile>conf/jmsservice.activemq.xml</ConfigFile>
+        <ListenProcessSize>5</ListenProcessSize>
+    </Message>
 </Configuration>

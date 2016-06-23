@@ -2,21 +2,24 @@ package org.dangcat.boot.config;
 
 /**
  * œﬂ≥Ã≥ÿ≈‰÷√°£
+ *
  * @author dangcat
- * 
  */
-public class ThreadPoolConfig extends ServiceConfig
-{
+public class ThreadPoolConfig extends ServiceConfig {
     public static final String MaximumPoolSize = "MaximumPoolSize";
     public static final String QueueCapacity = "QueueCapacity";
     private static final String CONFIG_NAME = "ThreadPool";
     private static ThreadPoolConfig instance = new ThreadPoolConfig();
-    /** Maximum pool size */
+    /**
+     * Maximum pool size
+     */
     private int maximumPoolSize = 30;
-    /** Queuw capcacity */
+    /**
+     * Queuw capcacity
+     */
     private int queueCapacity = 10000;
-    private ThreadPoolConfig()
-    {
+
+    private ThreadPoolConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(MaximumPoolSize, int.class, this.maximumPoolSize);
@@ -32,13 +35,11 @@ public class ThreadPoolConfig extends ServiceConfig
         return instance;
     }
 
-    public int getMaximumPoolSize()
-    {
+    public int getMaximumPoolSize() {
         return this.getIntValue(MaximumPoolSize);
     }
 
-    public int getQueueCapacity()
-    {
+    public int getQueueCapacity() {
         return this.getIntValue(QueueCapacity);
     }
 }

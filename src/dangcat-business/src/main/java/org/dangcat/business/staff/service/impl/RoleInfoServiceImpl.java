@@ -21,27 +21,23 @@ import java.util.Map;
 
 /**
  * The service implements for RoleInfo.
+ *
  * @author dangcat
- * 
  */
-@Resources( { RoleInfoException.class })
+@Resources({RoleInfoException.class})
 @BusinessValidator(RoleInfoValidator.class)
 @PermissionProvider(BusinessPermissionProvider.class)
-public class RoleInfoServiceImpl extends BusinessServiceBase<RoleBasic, RoleInfo, RoleInfoFilter> implements RoleInfoService
-{
-    public RoleInfoServiceImpl(ServiceProvider parent)
-    {
+public class RoleInfoServiceImpl extends BusinessServiceBase<RoleBasic, RoleInfo, RoleInfoFilter> implements RoleInfoService {
+    public RoleInfoServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     @Override
-    protected void prepareStore(RoleInfo roleInfo)
-    {
+    protected void prepareStore(RoleInfo roleInfo) {
         Map<Integer, String> permissionInfoMap = RoleInfoCalculator.getPermissionInfoMap();
         Collection<RolePermission> rolePermissionCollection = roleInfo.getRolePermissions();
         rolePermissionCollection.clear();
-        for (PermissionInfo permissionInfo : roleInfo.getPermissions())
-        {
+        for (PermissionInfo permissionInfo : roleInfo.getPermissions()) {
             if (permissionInfoMap != null && !permissionInfoMap.containsKey(permissionInfo.getId()))
                 continue;
             if (ServiceCalculator.isMethod(permissionInfo.getId()))

@@ -9,37 +9,31 @@ import org.dangcat.persistence.entity.EntityMetaData;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-public class EntityResourceManager
-{
+public class EntityResourceManager {
     private static EntityResourceManager instance = new EntityResourceManager();
 
-    private EntityResourceManager()
-    {
+    private EntityResourceManager() {
     }
 
-    public static EntityResourceManager getInstance()
-    {
+    public static EntityResourceManager getInstance() {
         return instance;
     }
 
-    private void findEntityClassTypes(Class<?> classType, Collection<ResourceReader> resourceReaders)
-    {
+    private void findEntityClassTypes(Class<?> classType, Collection<ResourceReader> resourceReaders) {
         if (classType == null || Object.class.equals(classType))
             return;
 
         resourceReaders.add(ResourceManager.getInstance().getResourceReader(classType));
 
         Resources resourcesAnnotation = classType.getAnnotation(Resources.class);
-        if (resourcesAnnotation != null)
-        {
+        if (resourcesAnnotation != null) {
             for (Class<?> resourceClassType : resourcesAnnotation.value())
                 this.findEntityClassTypes(resourceClassType, resourceReaders);
         }
         this.findEntityClassTypes(classType.getSuperclass(), resourceReaders);
     }
 
-    public ResourceReader getResourceReader(Class<?> classType)
-    {
+    public ResourceReader getResourceReader(Class<?> classType) {
         ResourceReader resourceReader = ResourceManager.getInstance().getResourceReader(classType);
         if (resourceReader instanceof EntityResourceReader)
             return resourceReader;
@@ -55,8 +49,7 @@ public class EntityResourceManager
         return resourceReader;
     }
 
-    public ResourceReader getResourceReader(EntityMetaData entityMetaData)
-    {
+    public ResourceReader getResourceReader(EntityMetaData entityMetaData) {
         return this.getResourceReader(entityMetaData.getEntityClass());
     }
 }

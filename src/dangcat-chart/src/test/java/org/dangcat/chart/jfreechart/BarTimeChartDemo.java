@@ -7,24 +7,20 @@ import org.dangcat.persistence.filter.FilterUnit;
 import javax.swing.*;
 import java.util.Date;
 
-public class BarTimeChartDemo extends ChartDemoBase
-{
+public class BarTimeChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "Öù×´Ç÷ÊÆÍ³¼ÆÍ¼";
 
-    public BarTimeChartDemo()
-    {
+    public BarTimeChartDemo() {
         super(BarTimeChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new BarTimeChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         Date[] dates = SimulateTimeData.today();
 
         DataModule muiltiColumnDataModule = SimulateTimeData.createMultiColumnDataModule();

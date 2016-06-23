@@ -4,11 +4,9 @@ import org.dangcat.persistence.exception.TableException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestModelField
-{
+public class TestModelField {
     @Test
-    public void testField() throws TableException
-    {
+    public void testField() throws TableException {
         Field shortField = Field.newInstance();
         shortField.setObject(Short.valueOf("5"));
         Field integerField = Field.newInstance();

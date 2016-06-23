@@ -6,50 +6,59 @@ import java.util.Date;
 
 /**
  * 时间范围。
+ *
  * @author Administrator
- * 
  */
-public class TimeRange
-{
+public class TimeRange {
     private static final int TIMESTEP_COUNT = 120;
     private static final int TIMESTEP_DAY = 12 * 60 * 1000;
     private static final int TIMESTEP_HOUR = 30 * 1000;
     private static final int TIMESTEP_MONTH = 8 * 60 * 60 * 1000;
     private static final int TIMESTEP_WEEK = 3 * 24 * 60 * 1000;
     private static final int TIMESTEP_YEAR = 3 * 24 * 60 * 60 * 1000;
-    /** 时间步长。 */
+    /**
+     * 时间步长。
+     */
     private Date baseTime = null;
-    /** 起始时间。 */
+    /**
+     * 起始时间。
+     */
     private Date beginTime = null;
-    /** 截止时间。 */
+    /**
+     * 截止时间。
+     */
     private Date endTime = null;
-    /** 时长。 */
+    /**
+     * 时长。
+     */
     private long timeLength = 0;
-    /** 时间周期。 */
+    /**
+     * 时间周期。
+     */
     private Integer timePeriod = null;
-    /** 时间步长。 */
+    /**
+     * 时间步长。
+     */
     private long timeStep = 0;
-    /** 时间类型。 */
+    /**
+     * 时间类型。
+     */
     private TimeType timeType = null;
 
-    public TimeRange()
-    {
+    public TimeRange() {
     }
 
-    public TimeRange(TimeType timeType)
-    {
+    public TimeRange(TimeType timeType) {
         this(timeType, null);
     }
 
-    public TimeRange(TimeType timeType, Date baseTime)
-    {
+    public TimeRange(TimeType timeType, Date baseTime) {
         this.timeType = timeType;
         this.baseTime = baseTime;
         this.calculate();
     }
 
-    public void calculate()
-    {
+    public void calculate() {
         if (this.timeType == null)
             return;
         Date baseTime = this.getBaseTime();
@@ -68,103 +77,78 @@ public class TimeRange
         this.timeLength = this.endTime.getTime() - this.beginTime.getTime();
     }
 
-    protected void calculateDay(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateDay(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.DAY, baseTime, this.timePeriod);
             this.endTime = baseTime;
             this.timeStep = this.getDayTimeStep() * Math.abs(this.timePeriod);
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.getFirstTimeOfDay(baseTime);
             this.endTime = DateUtils.getLastTimeOfDay(baseTime);
             this.timeStep = this.getDayTimeStep();
         }
     }
 
-    protected void calculateHour(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateHour(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.HOUR, baseTime, this.timePeriod);
             this.endTime = baseTime;
             this.timeStep = this.getHourTimeStep() * Math.abs(this.timePeriod);
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.add(DateUtils.HOUR, baseTime, -1);
             this.endTime = baseTime;
             this.timeStep = this.getHourTimeStep();
         }
     }
 
-    protected void calculateMinute(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateMinute(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.MINUTE, baseTime, this.timePeriod);
             this.endTime = baseTime;
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.add(DateUtils.MINUTE, baseTime, -1);
             this.endTime = baseTime;
         }
         this.timeStep = (this.endTime.getTime() - this.beginTime.getTime()) / this.getTimeStepCount();
     }
 
-    protected void calculateMonth(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateMonth(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.MONTH, baseTime, this.timePeriod);
             this.endTime = baseTime;
             this.timeStep = this.getMonthTimeStep() * Math.abs(this.timePeriod);
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.getFirstDayOfMonth(baseTime);
             this.endTime = DateUtils.getLastDayOfMonth(baseTime);
             this.timeStep = this.getMonthTimeStep();
         }
     }
 
-    protected void calculateWeek(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateWeek(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.WEEK, baseTime, this.timePeriod);
             this.endTime = baseTime;
             this.timeStep = this.getWeekTimeStep() * Math.abs(this.timePeriod);
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.getFirstDayOfWeek(baseTime);
             this.endTime = DateUtils.getLastDayOfWeek(baseTime);
             this.timeStep = this.getWeekTimeStep();
         }
     }
 
-    protected void calculateYear(Date baseTime)
-    {
-        if (this.timePeriod != null)
-        {
+    protected void calculateYear(Date baseTime) {
+        if (this.timePeriod != null) {
             this.beginTime = DateUtils.add(DateUtils.YEAR, baseTime, this.timePeriod);
             this.endTime = baseTime;
             this.timeStep = this.getYearTimeStep() * Math.abs(this.timePeriod);
-        }
-        else
-        {
+        } else {
             this.beginTime = DateUtils.getFirstDayOfYear(baseTime);
             this.endTime = DateUtils.getLastDayOfYear(baseTime);
             this.timeStep = this.getYearTimeStep();
         }
     }
 
-    public Date getBaseTime()
-    {
+    public Date getBaseTime() {
         if (this.baseTime == null)
             return DateUtils.now();
         return this.baseTime;
@@ -175,8 +159,7 @@ public class TimeRange
         this.calculate();
     }
 
-    public Date getBeginTime()
-    {
+    public Date getBeginTime() {
         return this.beginTime;
     }
 
@@ -184,13 +167,11 @@ public class TimeRange
         this.beginTime = beginTime;
     }
 
-    protected int getDayTimeStep()
-    {
+    protected int getDayTimeStep() {
         return TIMESTEP_DAY;
     }
 
-    public Date getEndTime()
-    {
+    public Date getEndTime() {
         return this.endTime;
     }
 
@@ -198,70 +179,57 @@ public class TimeRange
         this.endTime = endTime;
     }
 
-    protected int getHourTimeStep()
-    {
+    protected int getHourTimeStep() {
         return TIMESTEP_HOUR;
     }
 
-    protected int getMonthTimeStep()
-    {
+    protected int getMonthTimeStep() {
         return TIMESTEP_MONTH;
     }
 
-    public long getTimeLength()
-    {
+    public long getTimeLength() {
         return this.timeLength;
     }
 
-    public void setTimeLength(long timeLength)
-    {
+    public void setTimeLength(long timeLength) {
         this.timeLength = timeLength;
     }
 
-    public Integer getTimePeriod()
-    {
+    public Integer getTimePeriod() {
         return this.timePeriod;
     }
 
-    public void setTimePeriod(Integer timePeriod)
-    {
+    public void setTimePeriod(Integer timePeriod) {
         this.timePeriod = timePeriod;
         this.calculate();
     }
 
-    public long getTimeStep()
-    {
+    public long getTimeStep() {
         return this.timeStep;
     }
 
-    public void setTimeStep(long timeStep)
-    {
+    public void setTimeStep(long timeStep) {
         this.timeStep = timeStep;
     }
 
-    protected int getTimeStepCount()
-    {
+    protected int getTimeStepCount() {
         return TIMESTEP_COUNT;
     }
 
-    public TimeType getTimeType()
-    {
+    public TimeType getTimeType() {
         return this.timeType;
     }
 
-    public void setTimeType(TimeType timeType)
-    {
+    public void setTimeType(TimeType timeType) {
         this.timeType = timeType;
         this.calculate();
     }
 
-    protected int getWeekTimeStep()
-    {
+    protected int getWeekTimeStep() {
         return TIMESTEP_WEEK;
     }
 
-    protected int getYearTimeStep()
-    {
+    protected int getYearTimeStep() {
         return TIMESTEP_YEAR;
     }
 }

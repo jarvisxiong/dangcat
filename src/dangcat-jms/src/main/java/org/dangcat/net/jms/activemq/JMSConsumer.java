@@ -9,10 +9,8 @@ import java.util.List;
 
 /**
  * JMS消费对象。
- * 
  */
-public class JMSConsumer implements MessageListener
-{
+public class JMSConsumer implements MessageListener {
     protected final Logger logger = Logger.getLogger(this.getClass());
     private String consumerName = null;
     private JMSSession jmsSession;
@@ -22,39 +20,32 @@ public class JMSConsumer implements MessageListener
     private long receiveTimeOut = 1000;
     private MessageProducer replyProducer;
 
-    public JMSConsumer(JMSSession jmsSession)
-    {
+    public JMSConsumer(JMSSession jmsSession) {
         this.jmsSession = jmsSession;
     }
 
     /**
      * 添加消息侦听对象。
+     *
      * @param messageListener 消息侦听器。
      */
-    public void addMessageListener(MessageListener messageListener)
-    {
+    public void addMessageListener(MessageListener messageListener) {
         if (messageListener != null && !this.messageListenerList.contains(messageListener))
             this.messageListenerList.add(messageListener);
     }
 
-    private void close()
-    {
-        try
-        {
-            if (this.messageConsumer != null)
-            {
+    private void close() {
+        try {
+            if (this.messageConsumer != null) {
                 this.messageConsumer.close();
                 this.messageConsumer = null;
             }
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
     }
 
-    public String getConsumerName()
-    {
+    public String getConsumerName() {
         return this.consumerName;
     }
 
@@ -65,11 +56,9 @@ public class JMSConsumer implements MessageListener
     /**
      * 初始化消费对象。
      */
-    protected void initialize() throws JMSException
-    {
+    protected void initialize() throws JMSException {
         JMSConnectionPool jmsConnectionPool = this.jmsSession.getJMSConnectionPool();
-        try
-        {
+        try {
             Session session = this.jmsSession.getSession();
             if (jmsConnectionPool.isDurable() && jmsConnectionPool.isTopic())
                 this.messageConsumer = session.createDurableSubscriber((Topic) this.jmsSession.getDestination(), this.getConsumerName());
@@ -80,11 +69,8 @@ public class JMSConsumer implements MessageListener
 
             this.replyProducer = session.createProducer(null);
             this.replyProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-        }
-        catch (JMSException e)
-        {
-            if (jmsConnectionPool.isCommunicationsException(e))
-            {
+        } catch (JMSException e) {
+            if (jmsConnectionPool.isCommunicationsException(e)) {
                 this.release();
                 jmsConnectionPool.close();
             }
@@ -93,15 +79,12 @@ public class JMSConsumer implements MessageListener
     }
 
     @Override
-    public void onMessage(Message message)
-    {
+    public void onMessage(Message message) {
         this.messagesReceived++;
-        try
-        {
+        try {
             Session session = this.jmsSession.getSession();
             // 需要回复消息。
-            if (message.getJMSReplyTo() != null)
-            {
+            if (message.getJMSReplyTo() != null) {
                 TextMessage textMessage = session.createTextMessage("Reply: " + message.getJMSMessageID());
                 this.replyProducer.send(message.getJMSReplyTo(), textMessage);
             }
@@ -113,24 +96,18 @@ public class JMSConsumer implements MessageListener
             // 批量处理事务
             JMSConnectionPool jmsConnectionPool = this.jmsSession.getJMSConnectionPool();
             long batch = jmsConnectionPool.getBatch();
-            if ((this.messagesReceived % batch) == 0)
-            {
-                if (jmsConnectionPool.isTransacted())
-                {
+            if ((this.messagesReceived % batch) == 0) {
+                if (jmsConnectionPool.isTransacted()) {
                     if (logger.isDebugEnabled())
                         logger.debug("Commiting transaction for last " + batch + " messages; messages so far = " + this.messagesReceived);
                     this.jmsSession.commit();
-                }
-                else if (jmsConnectionPool.getAcknownledge() == Session.CLIENT_ACKNOWLEDGE)
-                {
+                } else if (jmsConnectionPool.getAcknownledge() == Session.CLIENT_ACKNOWLEDGE) {
                     if (logger.isDebugEnabled())
                         logger.debug("Acknowledging last " + batch + " messages; messages so far = " + this.messagesReceived);
                     message.acknowledge();
                 }
             }
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
     }
@@ -138,47 +115,42 @@ public class JMSConsumer implements MessageListener
     /**
      * 启动侦听接收消息。
      */
-    public void receive() throws JMSException
-    {
+    public void receive() throws JMSException {
         if (this.messageListenerList.size() > 0)
             this.messageConsumer.setMessageListener(this);
     }
 
     /**
      * 启动侦听接收消息。
+     *
      * @param maxiumMessages 最大接收数量。
      * @throws JMSException 运行异常。
      */
-    public void receive(long maxiumMessages) throws JMSException
-    {
-        if (maxiumMessages > 0)
-        {
-            while (this.messagesReceived < maxiumMessages)
-            {
+    public void receive(long maxiumMessages) throws JMSException {
+        if (maxiumMessages > 0) {
+            while (this.messagesReceived < maxiumMessages) {
                 Message message = this.messageConsumer.receive(this.receiveTimeOut);
                 if (message != null)
                     this.onMessage(message);
             }
-        }
-        else
+        } else
             this.messageConsumer.setMessageListener(this);
     }
 
     /**
      * 释放会话对象。
      */
-    public void release()
-    {
+    public void release() {
         this.close();
         this.jmsSession.release();
     }
 
     /**
      * 删除消息侦听对象。
+     *
      * @param messageListener 消息侦听对象。
      */
-    public void removeMessageListener(MessageListener messageListener)
-    {
+    public void removeMessageListener(MessageListener messageListener) {
         if (messageListener != null && this.messageListenerList.contains(messageListener))
             this.messageListenerList.remove(messageListener);
     }

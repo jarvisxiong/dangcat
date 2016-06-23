@@ -9,50 +9,41 @@ import org.dangcat.persistence.event.EntityEventAdapter;
 
 /**
  * 数据批量管理。
+ *
  * @author dangcat
- * 
  */
-public class EntityBatchStorer
-{
+public class EntityBatchStorer {
     public static final Logger logger = Logger.getLogger(EntityBatchStorer.class);
     private String databaseName = null;
     private EntityBatchCollection entityBatchCollection = new EntityBatchCollection();
     private EntityEventAdapter entityEventAdapter = null;
     private EntityBatchCollection processEntityBatchCollection = null;
 
-    public EntityBatchStorer(String databaseName)
-    {
+    public EntityBatchStorer(String databaseName) {
         this.databaseName = databaseName;
     }
 
-    public void clear()
-    {
+    public void clear() {
         EntityBatchCollection entityBatchCollection = this.entityBatchCollection;
-        synchronized (entityBatchCollection)
-        {
+        synchronized (entityBatchCollection) {
             entityBatchCollection.clear();
         }
     }
 
-    public void delete(Object entity)
-    {
-        if (entity != null)
-        {
+    public void delete(Object entity) {
+        if (entity != null) {
             EntityBatchCollection entityBatchCollection = this.entityBatchCollection;
-            synchronized (entityBatchCollection)
-            {
+            synchronized (entityBatchCollection) {
                 entityBatchCollection.delete(entity);
             }
         }
     }
 
-    public String getDatabaseName()
-    {
+    public String getDatabaseName() {
         return databaseName;
     }
 
-    public EntityEventAdapter getEntityEventAdapter()
-    {
+    public EntityEventAdapter getEntityEventAdapter() {
         return entityEventAdapter;
     }
 
@@ -60,21 +51,17 @@ public class EntityBatchStorer
         this.entityEventAdapter = entityEventAdapter;
     }
 
-    private EntityManager getEntityManager()
-    {
+    private EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open(this.getDatabaseName());
     }
 
-    public void save()
-    {
-        if (this.size() > 0)
-        {
+    public void save() {
+        if (this.size() > 0) {
             SaveEntityContext saveEntityContext = new SaveEntityContext();
             saveEntityContext.setEntityManager(this.getEntityManager());
             saveEntityContext.setEntityEventAdapter(this.entityEventAdapter);
             this.processEntityBatchCollection = this.entityBatchCollection;
-            synchronized (this.processEntityBatchCollection)
-            {
+            synchronized (this.processEntityBatchCollection) {
                 this.entityBatchCollection = new EntityBatchCollection();
             }
             this.processEntityBatchCollection.save(saveEntityContext);
@@ -82,24 +69,19 @@ public class EntityBatchStorer
         }
     }
 
-    public void save(Object entity)
-    {
-        if (entity != null)
-        {
+    public void save(Object entity) {
+        if (entity != null) {
             EntityBatchCollection entityBatchCollection = this.entityBatchCollection;
-            synchronized (entityBatchCollection)
-            {
+            synchronized (entityBatchCollection) {
                 entityBatchCollection.save(entity);
             }
         }
     }
 
-    public int size()
-    {
+    public int size() {
         int size = 0;
         EntityBatchCollection entityBatchCollection = this.entityBatchCollection;
-        synchronized (entityBatchCollection)
-        {
+        synchronized (entityBatchCollection) {
             size = entityBatchCollection.size();
         }
         return size;

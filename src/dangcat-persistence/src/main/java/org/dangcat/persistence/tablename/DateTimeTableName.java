@@ -9,35 +9,29 @@ import java.util.Date;
 
 /**
  * 按时间分表名对象。
+ *
  * @author dangcat
- * 
  */
-public class DateTimeTableName extends FieldValueTableName implements DynamicTable
-{
+public class DateTimeTableName extends FieldValueTableName implements DynamicTable {
     private static final String DEFAULT_FIELDNAME = "DateTime";
     private DateFormat dateFormat = null;
     private Date dateTime = null;
     private int dateType = DateUtils.MONTH;
 
-    public DateTimeTableName(String name)
-    {
+    public DateTimeTableName(String name) {
         this(name, null, DEFAULT_FIELDNAME);
     }
 
-    public DateTimeTableName(String name, String fieldName)
-    {
+    public DateTimeTableName(String name, String fieldName) {
         this(name, null, fieldName);
     }
 
-    public DateTimeTableName(String name, String alias, String fieldName)
-    {
+    public DateTimeTableName(String name, String alias, String fieldName) {
         super(name, alias, fieldName);
     }
 
-    private DateFormat getDateFormat()
-    {
-        if (this.dateFormat == null)
-        {
+    private DateFormat getDateFormat() {
+        if (this.dateFormat == null) {
             String format = "'" + super.getName() + "'";
             if (this.getDateType() == DateUtils.DAY)
                 format += "_yyyy_MM_dd";
@@ -52,8 +46,7 @@ public class DateTimeTableName extends FieldValueTableName implements DynamicTab
         return this.dateFormat;
     }
 
-    public Date getDateTime()
-    {
+    public Date getDateTime() {
         return this.dateTime;
     }
 
@@ -61,13 +54,11 @@ public class DateTimeTableName extends FieldValueTableName implements DynamicTab
         this.dateTime = dateTime;
     }
 
-    protected Date getDateTime(Object data)
-    {
+    protected Date getDateTime(Object data) {
         return (Date) super.getValue(data);
     }
 
-    public int getDateType()
-    {
+    public int getDateType() {
         return this.dateType;
     }
 
@@ -77,45 +68,36 @@ public class DateTimeTableName extends FieldValueTableName implements DynamicTab
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         if (this.getDateTime() != null)
             return this.getName(this.getDateTime());
         return this.getName(DateUtils.now());
     }
 
     @Override
-    public String getName(Object value)
-    {
+    public String getName(Object value) {
         Date dateTime = null;
         if (value instanceof Date)
             dateTime = (Date) value;
         else
             dateTime = this.getDateTime(value);
-        if (dateTime != null)
-        {
+        if (dateTime != null) {
             DateFormat dateFormat = this.getDateFormat();
-            synchronized (dateFormat)
-            {
+            synchronized (dateFormat) {
                 return dateFormat.format(dateTime);
             }
         }
         return DynamicTableUtils.getActualTableName(this);
     }
 
-    public Date parse(String text)
-    {
+    public Date parse(String text) {
         Date date = null;
-        try
-        {
+        try {
             DateFormat dateFormat = this.getDateFormat();
-            synchronized (dateFormat)
-            {
+            synchronized (dateFormat) {
                 date = dateFormat.parse(text);
             }
-        }
-        catch (ParseException e)
-        {
+        } catch (ParseException e) {
         }
         return date;
     }

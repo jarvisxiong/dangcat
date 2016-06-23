@@ -7,29 +7,29 @@ import java.util.Queue;
 
 /**
  * 对象池
- * @author dangcat
- * 
+ *
  * @param <T>
+ * @author dangcat
  */
-public abstract class ObjectPool<T>
-{
+public abstract class ObjectPool<T> {
     protected final Logger logger = Logger.getLogger(this.getClass());
     private boolean isPoolEnabled = true;
-    /** 连接池队列。 */
+    /**
+     * 连接池队列。
+     */
     private Queue<T> pooledObjectQueue = new LinkedList<T>();
-    /** 正在使用的连接池队列。 */
+    /**
+     * 正在使用的连接池队列。
+     */
     private Queue<T> usedObjectPool = new LinkedList<T>();
 
-    public void close()
-    {
+    public void close() {
         this.close(this.usedObjectPool);
         this.close(this.pooledObjectQueue);
     }
 
-    private synchronized void close(Queue<T> pooledObjectQueue)
-    {
-        while (pooledObjectQueue.size() > 0)
-        {
+    private synchronized void close(Queue<T> pooledObjectQueue) {
+        while (pooledObjectQueue.size() > 0) {
             T pooledObject = pooledObjectQueue.poll();
             if (pooledObject != null)
                 this.close(pooledObject);
@@ -41,32 +41,27 @@ public abstract class ObjectPool<T>
      */
     protected abstract void close(T pooledObject);
 
-    public void closePooled()
-    {
+    public void closePooled() {
         this.close(this.pooledObjectQueue);
     }
 
     protected abstract T create();
 
-    public synchronized void destroy(T pooledObject)
-    {
+    public synchronized void destroy(T pooledObject) {
         this.usedObjectPool.remove(pooledObject);
         this.pooledObjectQueue.remove(pooledObject);
         this.close(pooledObject);
     }
 
-    public int getPoolSize()
-    {
+    public int getPoolSize() {
         return this.pooledObjectQueue.size();
     }
 
-    public int getUsedSize()
-    {
+    public int getUsedSize() {
         return this.usedObjectPool.size();
     }
 
-    public boolean isPoolEnabled()
-    {
+    public boolean isPoolEnabled() {
         return this.isPoolEnabled;
     }
 
@@ -74,16 +69,14 @@ public abstract class ObjectPool<T>
         this.isPoolEnabled = isPoolEnabled;
     }
 
-    public synchronized T peekPooled()
-    {
+    public synchronized T peekPooled() {
         return this.pooledObjectQueue.peek();
     }
 
     /**
      * 返回连接池中的一个数据库连接。
      */
-    public synchronized T poll()
-    {
+    public synchronized T poll() {
         T pooledObject = null;
         if (this.pooledObjectQueue.size() > 0)
             pooledObject = this.pooledObjectQueue.poll();
@@ -97,19 +90,14 @@ public abstract class ObjectPool<T>
     /**
      * 返回连接到连接池中。
      */
-    public synchronized void release(T usedObject)
-    {
-        if (usedObject != null)
-        {
-            if (this.isPoolEnabled())
-            {
-                if (this.usedObjectPool.contains(usedObject))
-                {
+    public synchronized void release(T usedObject) {
+        if (usedObject != null) {
+            if (this.isPoolEnabled()) {
+                if (this.usedObjectPool.contains(usedObject)) {
                     this.usedObjectPool.remove(usedObject);
                     this.pooledObjectQueue.add(usedObject);
                 }
-            }
-            else
+            } else
                 this.destroy(usedObject);
         }
     }

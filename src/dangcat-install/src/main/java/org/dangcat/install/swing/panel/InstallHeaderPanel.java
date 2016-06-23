@@ -7,16 +7,14 @@ import org.dangcat.swing.JImagePanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class InstallHeaderPanel extends JImagePanel
-{
+public class InstallHeaderPanel extends JImagePanel {
     private static final long serialVersionUID = 1L;
     private Image backgroundImage = null;
     private String backgroundName = "Background.png";
     private Font headerFont = new Font("ËÎÌו", Font.BOLD, 22);
     private String title = null;
 
-    public Image getBackgroundImage()
-    {
+    public Image getBackgroundImage() {
         if (this.backgroundImage == null && !ValueUtils.isEmpty(this.getBackgroundName()))
             return ImageUtils.loadImage(this.getClass(), this.getBackgroundName());
         return this.backgroundImage;
@@ -26,8 +24,7 @@ public class InstallHeaderPanel extends JImagePanel
         this.backgroundImage = backgroundImage;
     }
 
-    public String getBackgroundName()
-    {
+    public String getBackgroundName() {
         return this.backgroundName;
     }
 
@@ -35,8 +32,7 @@ public class InstallHeaderPanel extends JImagePanel
         this.backgroundName = backgroundName;
     }
 
-    private JLabel getFrameTitle()
-    {
+    private JLabel getFrameTitle() {
         JLabel frameTitle = new JLabel(this.title, JLabel.LEFT);
         frameTitle.setMaximumSize(new Dimension(Short.MAX_VALUE, 100));
         frameTitle.setForeground(Color.RED);
@@ -44,8 +40,7 @@ public class InstallHeaderPanel extends JImagePanel
         return frameTitle;
     }
 
-    public Font getHeaderFont()
-    {
+    public Font getHeaderFont() {
         return this.headerFont;
     }
 
@@ -53,8 +48,7 @@ public class InstallHeaderPanel extends JImagePanel
         this.headerFont = headerFont;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return this.title;
     }
 
@@ -62,8 +56,7 @@ public class InstallHeaderPanel extends JImagePanel
         this.title = title;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         this.setPreferredSize(new Dimension(Short.MAX_VALUE, 60));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 18, 20));
         this.setImage(this.getBackgroundImage());

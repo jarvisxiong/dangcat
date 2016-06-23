@@ -10,11 +10,10 @@ import java.util.Map;
 
 /**
  * 查询集合。
+ *
  * @author dangcat
- * 
  */
-public class Sqls
-{
+public class Sqls {
     private Class<?> classType = null;
     private String namePrefix = null;
     private Map<String, Sql> sqlNameMap = new HashMap<String, Sql>();
@@ -22,40 +21,37 @@ public class Sqls
     /**
      * 添加查询对象。
      */
-    public void add(Sql sql)
-    {
+    public void add(Sql sql) {
         String sqlName = this.getSqlName(sql.getDatabaseType(), sql.getName());
         this.sqlNameMap.put(sqlName, sql);
     }
 
     /**
      * 查找指定的查询对象。
+     *
      * @param databaseType 数据库类型。
      * @return 查询对象。
      */
-    public SqlBuilder find(DatabaseType databaseType)
-    {
+    public SqlBuilder find(DatabaseType databaseType) {
         return find(databaseType, null);
     }
 
     /**
      * 查找指定的查询对象。
+     *
      * @param databaseType 数据库类型。
-     * @param name 命名语句。
+     * @param name         命名语句。
      * @return 查询对象。
      */
-    public SqlBuilder find(DatabaseType databaseType, String name)
-    {
+    public SqlBuilder find(DatabaseType databaseType, String name) {
         SqlBuilder found = null;
         String sqlName = this.getSqlName(databaseType, name);
         Sql sql = this.sqlNameMap.get(sqlName);
-        if (sql == null || ValueUtils.isEmpty(sql.getSql()))
-        {
+        if (sql == null || ValueUtils.isEmpty(sql.getSql())) {
             sqlName = this.getSqlName(DatabaseType.Default, name);
             sql = this.sqlNameMap.get(sqlName);
         }
-        if (sql != null && !ValueUtils.isEmpty(sql.getSql()))
-        {
+        if (sql != null && !ValueUtils.isEmpty(sql.getSql())) {
             found = new SqlBuilder(sql.getSql());
             if (sql.getDelimiter() != null)
                 found.setDelimiter(sql.getDelimiter());
@@ -63,13 +59,11 @@ public class Sqls
         return found;
     }
 
-    public SqlBuilder find(String name)
-    {
+    public SqlBuilder find(String name) {
         return find(null, name);
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return classType;
     }
 
@@ -77,16 +71,14 @@ public class Sqls
         this.classType = classType;
     }
 
-    private String getNamePrefix(Class<?> classType)
-    {
+    private String getNamePrefix(Class<?> classType) {
         String fileName = this.namePrefix;
         if (ValueUtils.isEmpty(fileName))
             fileName = classType.getSimpleName();
         return fileName;
     }
 
-    private String getSqlName(DatabaseType databaseType, String name)
-    {
+    private String getSqlName(DatabaseType databaseType, String name) {
         if (databaseType == null)
             databaseType = DatabaseType.Default;
 
@@ -99,20 +91,20 @@ public class Sqls
 
     /**
      * 配置的查询语句。
+     *
      * @param classType 资源所在位置。
      */
-    public void read(Class<?> classType)
-    {
+    public void read(Class<?> classType) {
         this.read(classType, null);
     }
 
     /**
      * 配置的查询语句。
-     * @param classType 资源所在位置。
+     *
+     * @param classType  资源所在位置。
      * @param namePrefix 文件名前缀。
      */
-    public void read(Class<?> classType, String namePrefix)
-    {
+    public void read(Class<?> classType, String namePrefix) {
         if (classType == null || Object.class.equals(classType))
             return;
 
@@ -127,14 +119,12 @@ public class Sqls
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(Sqls.class.getSimpleName());
         info.append(" : ");
         boolean isFirst = true;
-        for (String key : this.sqlNameMap.keySet())
-        {
+        for (String key : this.sqlNameMap.keySet()) {
             if (!isFirst)
                 info.append(Environment.LINETAB_SEPARATOR);
             info.append(key + ": ");

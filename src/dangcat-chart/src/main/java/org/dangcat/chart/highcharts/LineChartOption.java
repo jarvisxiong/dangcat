@@ -1,10 +1,8 @@
 package org.dangcat.chart.highcharts;
 
-public class LineChartOption extends TimeChartOption
-{
+public class LineChartOption extends TimeChartOption {
     @Override
-    public ChartType getType()
-    {
+    public ChartType getType() {
         return ChartType.Line;
     }
 }

@@ -4,11 +4,10 @@ import org.dangcat.framework.event.Event;
 
 /**
  * 消息发送接口。
+ *
  * @author dangcat
- * 
  */
-public interface EventSender
-{
+public interface EventSender {
     /**
      * 消息源名称。
      */
@@ -16,6 +15,7 @@ public interface EventSender
 
     /**
      * 发送消息。
+     *
      * @param event 消息对象。
      */
     void send(Event event);

@@ -9,13 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class TestJsonSerializeBean
-{
-    private List<UserInfo> createData(int count)
-    {
+public class TestJsonSerializeBean {
+    private List<UserInfo> createData(int count) {
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             UserInfo userInfo = new UserInfo();
             this.createData(userInfo, i);
             userInfoList.add(userInfo);
@@ -23,13 +20,12 @@ public class TestJsonSerializeBean
         return userInfoList;
     }
 
-    private void createData(UserInfo userInfo, int i)
-    {
+    private void createData(UserInfo userInfo, int i) {
         userInfo.setId(i);
         userInfo.setName("Name " + i);
         userInfo.setBalance(i * 10 + i);
         userInfo.setBorth(new Date());
-        userInfo.setFriends(new String[] { "Friend 1" + i, "Friend 2" + i, "Friend 3" + i, "Friend 4" + i });
+        userInfo.setFriends(new String[]{"Friend 1" + i, "Friend 2" + i, "Friend 3" + i, "Friend 4" + i});
         userInfo.setTotal(i * 1000);
         userInfo.getAddresses().add("Address " + i);
         userInfo.getAddresses().add("Address " + (i + 1));
@@ -72,12 +68,10 @@ public class TestJsonSerializeBean
         userInfo.setRoomMap2(roomMap2);
     }
 
-    private ParamBean createParamBean(int count)
-    {
+    private ParamBean createParamBean(int count) {
         ParamBean paramBean = new ParamBean();
         this.createData(paramBean, 0);
-        for (int i = 1; i <= count; i++)
-        {
+        for (int i = 1; i <= count; i++) {
             UserInfo userInfo3 = new UserInfo();
             this.createData(userInfo3, i * 1000);
             paramBean.getManagers().put("Manager" + i, userInfo3);
@@ -86,8 +80,7 @@ public class TestJsonSerializeBean
     }
 
     @Test
-    public void testdeserializeList() throws IOException
-    {
+    public void testdeserializeList() throws IOException {
         List<UserInfo> userInfoList = this.createData(10);
         String data = JsonSerializer.serialize(userInfoList);
         List<UserInfo> userInfo2List = JsonDeserializer.deserializeList(data, UserInfo.class);
@@ -97,8 +90,7 @@ public class TestJsonSerializeBean
     }
 
     @Test
-    public void testdeserializeObject() throws IOException
-    {
+    public void testdeserializeObject() throws IOException {
         List<UserInfo> userInfoList = this.createData(1);
         UserInfo userInfo1 = userInfoList.get(0);
         String data = JsonSerializer.serialize(userInfo1);
@@ -107,13 +99,11 @@ public class TestJsonSerializeBean
     }
 
     @Test
-    public void testSerialize() throws IOException
-    {
+    public void testSerialize() throws IOException {
         this.testSerialize(1);
     }
 
-    private void testSerialize(int count) throws IOException
-    {
+    private void testSerialize(int count) throws IOException {
         List<UserInfo> userInfoList = this.createData(count);
         File file = File.createTempFile("DATA", ".json");
         JsonSerializer.serialize(userInfoList, new FileWriter(file));
@@ -126,19 +116,17 @@ public class TestJsonSerializeBean
     }
 
     @Test
-    public void testSerializeList() throws IOException
-    {
+    public void testSerializeList() throws IOException {
         this.testSerialize(100);
     }
 
     @Test
-    public void testSerializeParamBean() throws IOException
-    {
+    public void testSerializeParamBean() throws IOException {
         ParamBean srcParamBean = this.createParamBean(40);
         File file = File.createTempFile("DATA", ".json");
         JsonSerializer.serialize(srcParamBean, new FileWriter(file));
 
-        ParamBean dstParamBean = JsonDeserializer.deserialize(new FileReader(file), new Class<?>[] { ParamBean.class }, null);
+        ParamBean dstParamBean = JsonDeserializer.deserialize(new FileReader(file), new Class<?>[]{ParamBean.class}, null);
         Assert.assertEquals(srcParamBean.toString(), dstParamBean.toString());
         file.delete();
     }

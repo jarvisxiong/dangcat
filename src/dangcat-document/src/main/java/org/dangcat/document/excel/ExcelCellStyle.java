@@ -6,8 +6,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.Date;
 
-public class ExcelCellStyle
-{
+public class ExcelCellStyle {
     public static final short LOGIC_BODY = 1;
     public static final short LOGIC_HEADER = 0;
     public static final short LOGIC_PRIMARY = 3;
@@ -29,8 +28,8 @@ public class ExcelCellStyle
      * æ≈π¨Œª÷√£∫0-10
      */
     private int position;
-    public ExcelCellStyle(int position, int logic, Class<?> classType)
-    {
+
+    public ExcelCellStyle(int position, int logic, Class<?> classType) {
         this.position = position;
         this.logic = logic;
         this.classType = classType;
@@ -49,8 +48,7 @@ public class ExcelCellStyle
         return id;
     }
 
-    public void createCellStyle(Workbook workbook)
-    {
+    public void createCellStyle(Workbook workbook) {
         CellStyle cellStyle = workbook.createCellStyle();
         this.initBorder(cellStyle);
         this.initForegroundColor(cellStyle);
@@ -58,17 +56,14 @@ public class ExcelCellStyle
         this.cellStyle = cellStyle;
     }
 
-    public CellStyle getCellStyle()
-    {
+    public CellStyle getCellStyle() {
         return cellStyle;
     }
 
-    private void initAlign(CellStyle cellStyle)
-    {
+    private void initAlign(CellStyle cellStyle) {
         if (this.logic == LOGIC_HEADER)
             cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        else
-        {
+        else {
             if (Number.class.isAssignableFrom(this.classType))
                 cellStyle.setAlignment(CellStyle.ALIGN_RIGHT);
             else if (Date.class.isAssignableFrom(this.classType))
@@ -79,8 +74,7 @@ public class ExcelCellStyle
         cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
     }
 
-    private void initBorder(CellStyle cellStyle)
-    {
+    private void initBorder(CellStyle cellStyle) {
         short left = CellStyle.BORDER_THIN;
         short top = CellStyle.BORDER_THIN;
         short right = CellStyle.BORDER_THIN;
@@ -99,8 +93,7 @@ public class ExcelCellStyle
         if (this.position == 7 || this.position == 8 || this.position == 9 || this.position == 10)
             bottom = CellStyle.BORDER_DOUBLE;
 
-        if (this.position > 0)
-        {
+        if (this.position > 0) {
             cellStyle.setBorderRight(right);
             cellStyle.setRightBorderColor(borderColor);
             cellStyle.setBorderLeft(left);
@@ -112,8 +105,7 @@ public class ExcelCellStyle
         }
     }
 
-    private void initForegroundColor(CellStyle cellStyle)
-    {
+    private void initForegroundColor(CellStyle cellStyle) {
         if (this.logic == LOGIC_HEADER)
             cellStyle.setFillForegroundColor(COLOR_HEADER_INDEX);
         else if (this.logic == LOGIC_BODY)

@@ -7,12 +7,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataFormatorFactory
-{
+public class DataFormatorFactory {
     private static Map<String, Class<? extends ValueFormator>> valueFormatorMap = new HashMap<String, Class<? extends ValueFormator>>();
 
-    static
-    {
+    static {
         valueFormatorMap.put("octets", OctetsFormator.class);
         valueFormatorMap.put("octetsVelocity", OctetsVelocityFormator.class);
         valueFormatorMap.put("timeLength", TimeLengthFormator.class);
@@ -21,32 +19,26 @@ public class DataFormatorFactory
         valueFormatorMap.put("percent", PercentFormator.class);
     }
 
-    public static void addDataFormator(String logic, Class<? extends ValueFormator> classType)
-    {
+    public static void addDataFormator(String logic, Class<? extends ValueFormator> classType) {
         if (!ValueUtils.isEmpty(logic) && classType != null)
             valueFormatorMap.put(logic, classType);
     }
 
-    public static DataFormator getDataFormator(Class<?> classType, String format)
-    {
+    public static DataFormator getDataFormator(Class<?> classType, String format) {
         DataFormator dataFormator = null;
-        if (Date.class.isAssignableFrom(classType))
-        {
+        if (Date.class.isAssignableFrom(classType)) {
             if (!ValueUtils.isEmpty(format))
                 dataFormator = new DateFormator(format);
             else
                 dataFormator = DateFormator.getDateFormator(DateType.Full);
-        }
-        else if (ValueUtils.isNumber(classType))
-        {
+        } else if (ValueUtils.isNumber(classType)) {
             if (!ValueUtils.isEmpty(format))
                 dataFormator = new NumberFormator(format);
         }
         return dataFormator;
     }
 
-    public static ValueFormator getDataFormator(String logic)
-    {
+    public static ValueFormator getDataFormator(String logic) {
         ValueFormator valueFormator = null;
         Class<?> classType = valueFormatorMap.get(logic);
         if (classType == null)

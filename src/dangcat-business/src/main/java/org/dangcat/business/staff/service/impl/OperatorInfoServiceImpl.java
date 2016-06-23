@@ -23,23 +23,20 @@ import java.util.Date;
 
 /**
  * The service implements for Operator.
+ *
  * @author dangcat
- * 
  */
 @ConfigProvider(StaffConfig.class)
-@Resources( { OperatorInfoException.class })
+@Resources({OperatorInfoException.class})
 @BusinessValidator(OperatorInfoValidator.class)
 @PermissionProvider(OperatorInfoPermissionProvider.class)
-public class OperatorInfoServiceImpl extends BusinessServiceBase<OperatorInfo, OperatorInfo, OperatorInfoFilter> implements OperatorInfoService
-{
-    public OperatorInfoServiceImpl(ServiceProvider parent)
-    {
+public class OperatorInfoServiceImpl extends BusinessServiceBase<OperatorInfo, OperatorInfo, OperatorInfoFilter> implements OperatorInfoService {
+    public OperatorInfoServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     @Override
-    public boolean changePassword(String orgPassword, String newPassword) throws ServiceException
-    {
+    public boolean changePassword(String orgPassword, String newPassword) throws ServiceException {
         OperatorInfoPasswordChanger operatorInfoPasswordChanger = new OperatorInfoPasswordChanger(this.getEntityManager());
         OperatorInfo operatorInfo = operatorInfoPasswordChanger.execute(orgPassword, newPassword);
         this.save(operatorInfo);
@@ -47,25 +44,21 @@ public class OperatorInfoServiceImpl extends BusinessServiceBase<OperatorInfo, O
     }
 
     @Override
-    public StaffSetup config(StaffSetup staffSetup) throws ServiceException
-    {
+    public StaffSetup config(StaffSetup staffSetup) throws ServiceException {
         return (StaffSetup) super.config(staffSetup);
     }
 
     @Override
-    public OperatorInfo create(OperatorInfoCreate operatorInfo) throws ServiceException
-    {
+    public OperatorInfo create(OperatorInfoCreate operatorInfo) throws ServiceException {
         operatorInfo.setRegisterTime(DateUtils.now());
         return super.create(operatorInfo);
     }
 
     @Override
-    protected OperatorInfoFilter filter(OperatorInfoFilter operatorInfoFilter) throws ServiceException
-    {
+    protected OperatorInfoFilter filter(OperatorInfoFilter operatorInfoFilter) throws ServiceException {
         OperatorGroupLoader operatorGroupLoader = new OperatorGroupLoader(this.getEntityManager());
         Integer[] groupIds = operatorGroupLoader.loadMemberIds();
-        if (groupIds != null)
-        {
+        if (groupIds != null) {
             if (operatorInfoFilter == null)
                 operatorInfoFilter = new OperatorInfoFilter();
             operatorInfoFilter.setGroupIds(groupIds);
@@ -74,12 +67,10 @@ public class OperatorInfoServiceImpl extends BusinessServiceBase<OperatorInfo, O
     }
 
     @Override
-    protected void onCreate(OperatorInfo operatorInfo)
-    {
+    protected void onCreate(OperatorInfo operatorInfo) {
         StaffConfig operatorInfoConfig = StaffConfig.getInstance();
         operatorInfo.setUseAble(operatorInfoConfig.getDefaultUseAble());
-        if (operatorInfoConfig.getValidDays() != null && operatorInfoConfig.getValidDays() > 0)
-        {
+        if (operatorInfoConfig.getValidDays() != null && operatorInfoConfig.getValidDays() > 0) {
             Date expiryTime = DateUtils.add(DateUtils.DAY, DateUtils.now(), operatorInfoConfig.getValidDays());
             operatorInfo.setExpiryTime(expiryTime);
         }
@@ -87,14 +78,12 @@ public class OperatorInfoServiceImpl extends BusinessServiceBase<OperatorInfo, O
     }
 
     @Override
-    public Collection<OperatorInfoBase> pick(OperatorInfoFilter operatorInfoFilter) throws ServiceException
-    {
+    public Collection<OperatorInfoBase> pick(OperatorInfoFilter operatorInfoFilter) throws ServiceException {
         return super.pick(OperatorInfoBase.class, operatorInfoFilter);
     }
 
     @Override
-    public boolean resetPassword(String no, String password) throws ServiceException
-    {
+    public boolean resetPassword(String no, String password) throws ServiceException {
         OperatorInfoPasswordChanger operatorInfoPasswordChanger = new OperatorInfoPasswordChanger(this.getEntityManager());
         OperatorInfo operatorInfo = operatorInfoPasswordChanger.reset(no, password);
         this.save(operatorInfo);

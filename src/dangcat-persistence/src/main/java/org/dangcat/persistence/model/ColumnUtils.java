@@ -6,10 +6,8 @@ import org.dangcat.commons.utils.ValueUtils;
 
 import java.util.Map;
 
-class ColumnUtils
-{
-    protected static void assign(Column column, org.dangcat.persistence.annotation.Column columnAnnotation)
-    {
+class ColumnUtils {
+    protected static void assign(Column column, org.dangcat.persistence.annotation.Column columnAnnotation) {
         if (!ValueUtils.isEmpty(columnAnnotation.fieldName()))
             column.setFieldName(columnAnnotation.fieldName());
         column.setPrimaryKey(columnAnnotation.isPrimaryKey());
@@ -33,8 +31,7 @@ class ColumnUtils
         column.setRowNum(column.getName().equalsIgnoreCase("rowNum"));
     }
 
-    protected static void reset(Column column)
-    {
+    protected static void reset(Column column) {
         column.setPrimaryKey(false);
         column.setName(null);
         column.setFieldName(null);
@@ -60,8 +57,7 @@ class ColumnUtils
     /**
      * Êä³ö×Ö¶ÎÄÚÈÝ¡£
      */
-    protected static String toString(Column column)
-    {
+    protected static String toString(Column column) {
         StringBuffer info = new StringBuffer();
         if (!ValueUtils.isEmpty(column.getName()))
             info.append("Name=" + column.getName() + "\t");
@@ -94,18 +90,15 @@ class ColumnUtils
         if (!ValueUtils.isEmpty(column.getLogic()))
             info.append("Logic=" + column.getLogic() + "\t");
         Map<String, Object> params = column.getParams();
-        if (!params.isEmpty())
-        {
+        if (!params.isEmpty()) {
             for (String paramName : params.keySet())
                 info.append(paramName + "=" + params.get(paramName) + "\t");
         }
         return info.toString();
     }
 
-    protected static String toString(Column column, Object value)
-    {
-        if (value != null)
-        {
+    protected static String toString(Column column, Object value) {
+        if (value != null) {
             DataFormator dataFormator = column.getDataFormator();
             if (dataFormator != null && dataFormator instanceof DateFormator)
                 return dataFormator.format(value);

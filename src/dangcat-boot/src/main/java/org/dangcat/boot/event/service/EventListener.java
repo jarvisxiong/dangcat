@@ -2,11 +2,10 @@ package org.dangcat.boot.event.service;
 
 /**
  * ÏûÏ¢ÕìÌıÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public interface EventListener
-{
+public interface EventListener {
     /**
      * Æô¶¯ÕìÌıÆ÷¡£
      */

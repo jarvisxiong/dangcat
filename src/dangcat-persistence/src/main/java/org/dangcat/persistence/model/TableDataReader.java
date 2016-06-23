@@ -8,22 +8,19 @@ import java.util.List;
 
 /**
  * Table对象数据读取器。
+ *
  * @author dangcat
- * 
  */
-public class TableDataReader extends TableDataAccess implements DataReader
-{
+public class TableDataReader extends TableDataAccess implements DataReader {
     private FilterExpress filterExpress = null;
     private List<Row> rows = null;
 
-    public TableDataReader(Table table)
-    {
+    public TableDataReader(Table table) {
         super(table);
     }
 
     @Override
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         return filterExpress;
     }
 
@@ -34,20 +31,16 @@ public class TableDataReader extends TableDataAccess implements DataReader
     }
 
     @Override
-    public Object getValue(int index, String fieldName)
-    {
+    public Object getValue(int index, String fieldName) {
         List<Row> rows = this.rows;
         if (rows == null)
             rows = this.getTable().getRows();
 
         Object value = null;
-        if (index < this.size())
-        {
+        if (index < this.size()) {
             Row row = rows.get(index);
             value = row.getField(fieldName).getObject();
-        }
-        else if (index == this.size())
-        {
+        } else if (index == this.size()) {
             Row total = this.getTable().getTotal();
             if (total != null)
                 value = total.getField(fieldName).getObject();
@@ -56,16 +49,13 @@ public class TableDataReader extends TableDataAccess implements DataReader
     }
 
     @Override
-    public void refresh()
-    {
-        if (this.filterExpress == null)
-        {
+    public void refresh() {
+        if (this.filterExpress == null) {
             this.rows = null;
             return;
         }
         List<Row> rows = new LinkedList<Row>();
-        for (Row row : this.getTable().getRows())
-        {
+        for (Row row : this.getTable().getRows()) {
             if (this.filterExpress.isValid(row))
                 rows.add(row);
         }
@@ -73,8 +63,7 @@ public class TableDataReader extends TableDataAccess implements DataReader
     }
 
     @Override
-    public int size()
-    {
+    public int size() {
         return this.rows == null ? super.size() : this.rows.size();
     }
 }

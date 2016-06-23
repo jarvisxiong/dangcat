@@ -4,15 +4,12 @@ import org.dangcat.persistence.entity.EntityHelper;
 import org.dangcat.persistence.entity.EntityMetaData;
 import org.dangcat.persistence.model.Table;
 
-class ServiceTestUtils
-{
-    protected static void dropEntityTable(Class<?>... classTypes) throws Exception
-    {
+class ServiceTestUtils {
+    protected static void dropEntityTable(Class<?>... classTypes) throws Exception {
         if (classTypes == null || classTypes.length == 0)
             return;
 
-        for (Class<?> classType : classTypes)
-        {
+        for (Class<?> classType : classTypes) {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
             Table table = entityMetaData.getTable();
             if (table.exists())
@@ -20,13 +17,11 @@ class ServiceTestUtils
         }
     }
 
-    protected static void initEntityTable(Class<?>... classTypes) throws Exception
-    {
+    protected static void initEntityTable(Class<?>... classTypes) throws Exception {
         if (classTypes == null || classTypes.length == 0)
             return;
 
-        for (Class<?> classType : classTypes)
-        {
+        for (Class<?> classType : classTypes) {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
             Table table = entityMetaData.getTable();
             if (table.exists())

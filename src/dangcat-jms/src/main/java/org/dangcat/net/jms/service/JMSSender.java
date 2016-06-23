@@ -12,36 +12,32 @@ import javax.jms.Message;
 
 /**
  * JMS消息发送服务。
- * 
  */
-public class JMSSender extends JMSBase implements EventSender
-{
+public class JMSSender extends JMSBase implements EventSender {
     protected static final Logger logger = Logger.getLogger(JMSSender.class);
     private JMSProducer jmsProducer = null;
 
     /**
      * 构建服务
+     *
      * @param parent 所属服务。
-     * @param name 消息名称。
+     * @param name   消息名称。
      */
-    public JMSSender(String name)
-    {
+    public JMSSender(String name) {
         super(name);
     }
 
     /**
      * 设置消息的绑定属性。
-     * @param event 事件对象。
+     *
+     * @param event         事件对象。
      * @param objectMessage 消息对象。
      * @throws JMSException
      */
-    private void bindProperties(Event event, Message message) throws JMSException
-    {
+    private void bindProperties(Event event, Message message) throws JMSException {
         String bindProperties = this.getJMSSession().getJMSConnectionPool().getBindProperties();
-        if (!ValueUtils.isEmpty(bindProperties))
-        {
-            for (String bindProperty : bindProperties.split(";"))
-            {
+        if (!ValueUtils.isEmpty(bindProperties)) {
+            for (String bindProperty : bindProperties.split(";")) {
                 Object value = event.getParams().get(bindProperty);
                 if (value != null)
                     message.setObjectProperty(bindProperty, value);
@@ -49,35 +45,28 @@ public class JMSSender extends JMSBase implements EventSender
         }
     }
 
-    private JMSProducer getJMSProducer()
-    {
+    private JMSProducer getJMSProducer() {
         if (this.jmsProducer == null)
             this.start();
         return this.jmsProducer;
     }
 
     @Override
-    public void send(Event event)
-    {
-        try
-        {
+    public void send(Event event) {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug(event);
 
             JMSProducer jmsProducer = this.getJMSProducer();
-            if (jmsProducer != null)
-            {
+            if (jmsProducer != null) {
                 // 发送消息
                 Message message = this.getJMSSession().getSession().createObjectMessage(event);
-                if (message != null)
-                {
+                if (message != null) {
                     this.bindProperties(event, message);
                     jmsProducer.send(message);
                 }
             }
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             this.stop();
             if (logger.isDebugEnabled())
                 logger.error(this, e);
@@ -87,18 +76,13 @@ public class JMSSender extends JMSBase implements EventSender
     }
 
     @Override
-    public synchronized void start()
-    {
-        if (this.jmsProducer == null)
-        {
-            try
-            {
+    public synchronized void start() {
+        if (this.jmsProducer == null) {
+            try {
                 JMSSession jmsSession = this.getJMSSession();
                 if (jmsSession != null)
                     this.jmsProducer = jmsSession.createJMSProducer();
-            }
-            catch (JMSException e)
-            {
+            } catch (JMSException e) {
                 logger.error(this.getName(), e);
             }
         }
@@ -108,10 +92,8 @@ public class JMSSender extends JMSBase implements EventSender
      * 释放资源。
      */
     @Override
-    public synchronized void stop()
-    {
-        if (this.jmsProducer != null)
-        {
+    public synchronized void stop() {
+        if (this.jmsProducer != null) {
             this.jmsProducer.release();
             this.jmsProducer = null;
         }

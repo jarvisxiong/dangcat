@@ -7,22 +7,19 @@ import java.util.List;
 
 /**
  * Entity对象数据读取器。
+ *
  * @author dangcat
- * 
  */
-class EntityDataAccess<T> extends DataAccessBase
-{
+class EntityDataAccess<T> extends DataAccessBase {
     private Class<?> classType = null;
     private List<T> entityList = null;
     private T total = null;
 
-    public EntityDataAccess(List<T> entityList)
-    {
+    public EntityDataAccess(List<T> entityList) {
         this.entityList = entityList;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         if (this.classType == null && this.size() > 0)
             this.classType = this.getEntityList().get(0).getClass();
         return this.classType;
@@ -32,34 +29,28 @@ class EntityDataAccess<T> extends DataAccessBase
         this.classType = classType;
     }
 
-    public List<T> getEntityList()
-    {
+    public List<T> getEntityList() {
         return entityList;
     }
 
-    protected EntityMetaData getEntityMetaData()
-    {
+    protected EntityMetaData getEntityMetaData() {
         return EntityHelper.getEntityMetaData(this.getClassType());
     }
 
     @Override
-    protected Table getTable()
-    {
+    protected Table getTable() {
         return this.getEntityMetaData().getTable();
     }
 
-    public T getTotal()
-    {
+    public T getTotal() {
         return total;
     }
 
-    public void setTotal(T total)
-    {
+    public void setTotal(T total) {
         this.total = total;
     }
 
-    public int size()
-    {
+    public int size() {
         return this.entityList.size();
     }
 }

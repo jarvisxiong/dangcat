@@ -5,11 +5,10 @@ import java.util.List;
 
 /**
  * 归档压缩类型。
+ *
  * @author dangcat
- * 
  */
-public class ArchiveType
-{
+public class ArchiveType {
     public static final String cpgz = ".cpgz";
     public static final String cpio = ".cpio";
     public static final String jar = ".jar";
@@ -23,8 +22,7 @@ public class ArchiveType
     public static final String zip = ".zip";
     private static final List<ArchiveInfo> archiveTypeList = new ArrayList<ArchiveInfo>();
 
-    static
-    {
+    static {
         archiveTypeList.add(new ArchiveInfo(cpgz, CompressUtils.gz, cpio));
         archiveTypeList.add(new ArchiveInfo(cpio, null, cpio));
         archiveTypeList.add(new ArchiveInfo(jar, null, jar));
@@ -41,8 +39,7 @@ public class ArchiveType
     /**
      * 所有的归档类型。
      */
-    public static String[] getAllArchiveTypes()
-    {
+    public static String[] getAllArchiveTypes() {
         List<String> fileExtNameList = new ArrayList<String>();
         for (ArchiveInfo archiveInfo : archiveTypeList)
             fileExtNameList.add(archiveInfo.getFileExtName());
@@ -51,17 +48,15 @@ public class ArchiveType
 
     /**
      * 根据文件名读取归档类型。
+     *
      * @param fileName 文件名。
      * @return 归档信息。
      */
-    protected static ArchiveInfo getArchiveInfo(String fileName)
-    {
+    protected static ArchiveInfo getArchiveInfo(String fileName) {
         fileName = fileName.toLowerCase();
         ArchiveInfo result = null;
-        for (ArchiveInfo archiveInfo : archiveTypeList)
-        {
-            if (fileName.endsWith(archiveInfo.getFileExtName()))
-            {
+        for (ArchiveInfo archiveInfo : archiveTypeList) {
+            if (fileName.endsWith(archiveInfo.getFileExtName())) {
                 result = archiveInfo;
                 break;
             }

@@ -12,10 +12,8 @@ import java.util.Map;
 
 /**
  * JMS连接池。
- * 
  */
-public class JMSConnectionPool extends ConnectionPool<Connection> implements ExceptionListener
-{
+public class JMSConnectionPool extends ConnectionPool<Connection> implements ExceptionListener {
     private int acknownledge = Session.AUTO_ACKNOWLEDGE;
     private long batch = 10;
     private String bindProperties = null;
@@ -31,39 +29,30 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
     private String url = null;
     private String user = null;
 
-    public JMSConnectionPool(String name, Map<String, String> params)
-    {
+    public JMSConnectionPool(String name, Map<String, String> params) {
         super(name, params);
     }
 
     @Override
-    protected void close(Connection connection)
-    {
-        try
-        {
+    protected void close(Connection connection) {
+        try {
             connection.close();
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
     }
 
     @Override
-    protected Connection create()
-    {
+    protected Connection create() {
         Connection connection = null;
-        try
-        {
+        try {
             ActiveMQConnectionFactory connectionFactory = this.createConnectionFactory();
             connection = connectionFactory.createConnection();
             if (this.durable && !ValueUtils.isEmpty(this.clientId))
                 connection.setClientID(this.clientId);
             connection.setExceptionListener(this);
             connection.start();
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
         return connection;
@@ -72,8 +61,7 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
     /**
      * 产生连接工厂。
      */
-    private ActiveMQConnectionFactory createConnectionFactory()
-    {
+    private ActiveMQConnectionFactory createConnectionFactory() {
         ActiveMQConnectionFactory connectionFactory = null;
         if (!ValueUtils.isEmpty(this.getUser()))
             connectionFactory = new ActiveMQConnectionFactory(this.getUser(), this.getPassword(), this.getUrl());
@@ -82,8 +70,7 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
         return connectionFactory;
     }
 
-    public int getAcknownledge()
-    {
+    public int getAcknownledge() {
         return acknownledge;
     }
 
@@ -91,8 +78,7 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
         this.acknownledge = acknownledge;
     }
 
-    public long getBatch()
-    {
+    public long getBatch() {
         return batch;
     }
 
@@ -100,129 +86,104 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
         this.batch = batch;
     }
 
-    public String getBindProperties()
-    {
+    public String getBindProperties() {
         return bindProperties;
     }
 
-    public void setBindProperties(String bindProperties)
-    {
+    public void setBindProperties(String bindProperties) {
         this.bindProperties = bindProperties;
     }
 
-    public String getClientId()
-    {
+    public String getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId)
-    {
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getSelector()
-    {
+    public String getSelector() {
         return selector;
     }
 
-    public void setSelector(String selector)
-    {
+    public void setSelector(String selector) {
         this.selector = selector;
     }
 
-    public String getSubject()
-    {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject)
-    {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public long getTimeToLive()
-    {
+    public long getTimeToLive() {
         return timeToLive;
     }
 
-    public void setTimeToLive(long timeToLive)
-    {
+    public void setTimeToLive(long timeToLive) {
         this.timeToLive = timeToLive;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getUser()
-    {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(String user)
-    {
+    public void setUser(String user) {
         this.user = user;
     }
 
-    public boolean isDurable()
-    {
+    public boolean isDurable() {
         return durable;
     }
 
-    public void setDurable(boolean durable)
-    {
+    public void setDurable(boolean durable) {
         this.durable = durable;
     }
 
-    public boolean isPersistent()
-    {
+    public boolean isPersistent() {
         return persistent;
     }
 
-    public void setPersistent(boolean persistent)
-    {
+    public void setPersistent(boolean persistent) {
         this.persistent = persistent;
     }
 
-    public boolean isTopic()
-    {
+    public boolean isTopic() {
         return topic;
     }
 
-    public void setTopic(boolean topic)
-    {
+    public void setTopic(boolean topic) {
         this.topic = topic;
     }
 
-    public boolean isTransacted()
-    {
+    public boolean isTransacted() {
         return transacted;
     }
 
-    public void setTransacted(boolean transacted)
-    {
+    public void setTransacted(boolean transacted) {
         this.transacted = transacted;
     }
 
     @Override
-    public void onException(JMSException exception)
-    {
+    public void onException(JMSException exception) {
         logger.error(this, exception);
     }
 }

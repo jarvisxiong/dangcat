@@ -13,32 +13,28 @@ import org.dangcat.persistence.filter.FilterUnit;
 
 /**
  * The service filter for Role.
+ *
  * @author dangcat
- * 
  */
 @Table("RoleInfo")
-public class RoleInfoFilter extends DataFilter
-{
+public class RoleInfoFilter extends DataFilter {
     @Column(index = 1, displaySize = 20)
     private String name = null;
 
     @Override
     @Serialize(ignore = true)
-    public FilterExpress getFilterExpress()
-    {
+    public FilterExpress getFilterExpress() {
         FilterGroup filterGroup = new FilterGroup();
         if (!ValueUtils.isEmpty(this.getName()))
             filterGroup.add(new FilterUnit(RoleBasic.Name, FilterType.like, this.getName()));
         return this.getFilterExpress(filterGroup);
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -5,9 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target( { ElementType.ANNOTATION_TYPE, ElementType.TYPE })
+@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Index
-{
+public @interface Index {
     String value();
 }

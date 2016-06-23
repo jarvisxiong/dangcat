@@ -5,40 +5,40 @@ import java.util.Collection;
 
 /**
  * 执行结果
+ *
  * @author dangcat
- * 
  */
-public class QueryResult<T>
-{
-    /** 数据集合。 */
+public class QueryResult<T> {
+    /**
+     * 数据集合。
+     */
     private Collection<T> dataCollection = new ArrayList<T>();
-    /** 起始位置。 */
+    /**
+     * 起始位置。
+     */
     private Integer startRow = null;
-    /** 总记录数。 */
+    /**
+     * 总记录数。
+     */
     private Integer totalSize = null;
 
-    public Collection<T> getData()
-    {
+    public Collection<T> getData() {
         return this.dataCollection;
     }
 
-    public Integer getStartRow()
-    {
+    public Integer getStartRow() {
         return startRow;
     }
 
-    public void setStartRow(Integer startRow)
-    {
+    public void setStartRow(Integer startRow) {
         this.startRow = startRow;
     }
 
-    public Integer getTotalSize()
-    {
+    public Integer getTotalSize() {
         return totalSize;
     }
 
-    public void setTotalSize(Integer totalSize)
-    {
+    public void setTotalSize(Integer totalSize) {
         this.totalSize = totalSize;
     }
 }

@@ -3,10 +3,8 @@ package org.dangcat.business.code.entity;
 import org.dangcat.commons.database.Database;
 import org.dangcat.commons.database.MySqlDatabase;
 
-public class TestDomainCodeGenerator
-{
-    public static void main(String[] args) throws Exception
-    {
+public class TestDomainCodeGenerator {
+    public static void main(String[] args) throws Exception {
         Database database = new MySqlDatabase();
         database.setServer("localhost");
         database.setName("dangcat");

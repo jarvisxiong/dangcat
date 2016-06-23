@@ -8,13 +8,11 @@ import org.dangcat.framework.service.impl.ServiceFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestServiceBasic
-{
+public class TestServiceBasic {
     private static StockMainService stockMainService = null;
 
     @BeforeClass
-    public static void initialize()
-    {
+    public static void initialize() {
         ServiceHelper.addInjectProvider(new EntityResourceInjectProvider());
 
         ServiceFactory serviceFactory = ServiceFactory.createInstance(null);
@@ -23,15 +21,13 @@ public class TestServiceBasic
         stockMainService.initialize();
     }
 
-    private SettleService getSettleService()
-    {
+    private SettleService getSettleService() {
         AccountingService accountingService = stockMainService.getService(AccountingService.class);
         return accountingService.getSettleService();
     }
 
     @Test
-    public void testDatabaseInject()
-    {
+    public void testDatabaseInject() {
         SettleService settleService = this.getSettleService();
         // 测试数据库配置注入
         Assert.assertNotNull(settleService.getEntityManager());
@@ -42,8 +38,7 @@ public class TestServiceBasic
     }
 
     @Test
-    public void testGetService()
-    {
+    public void testGetService() {
         // 测试自身加入的服务
         UserInfoService userInfoService = stockMainService.getService(UserInfoService.class);
         Assert.assertNotNull(userInfoService);
@@ -55,8 +50,7 @@ public class TestServiceBasic
     }
 
     @Test
-    public void testJndiName()
-    {
+    public void testJndiName() {
         ServiceLocator serviceLocator = ServiceFactory.getServiceLocator();
         Object accountingService = serviceLocator.lookup("User/AccountingService");
         Assert.assertNotNull(accountingService);
@@ -73,8 +67,7 @@ public class TestServiceBasic
     }
 
     @Test
-    public void testPropertiesConfig()
-    {
+    public void testPropertiesConfig() {
         // 测试属性注入
         SettleServiceImpl settleServiceImpl = (SettleServiceImpl) this.getSettleService();
         Assert.assertNotNull(settleServiceImpl);
@@ -86,8 +79,7 @@ public class TestServiceBasic
     }
 
     @Test
-    public void testXmlInject()
-    {
+    public void testXmlInject() {
         AccountingService accountingService = stockMainService.getService(AccountingService.class);
         // 测试XML配置注入的服务
         Assert.assertNotNull(accountingService.getSettleService());

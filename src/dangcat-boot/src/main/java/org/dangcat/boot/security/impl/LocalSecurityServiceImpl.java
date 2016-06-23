@@ -19,49 +19,41 @@ import java.util.Properties;
 
 /**
  * 本地安全服务。
+ *
  * @author dangcat
- * 
  */
-@Resources( { SecurityLoginException.class })
-public class LocalSecurityServiceImpl extends LoginServiceBase
-{
+@Resources({SecurityLoginException.class})
+public class LocalSecurityServiceImpl extends LoginServiceBase {
     private static final String SECURITY_NAME = "LocalSecurity";
     private String configName = null;
     private Map<String, LoginUser> localeUserMap = null;
     private LocalSignResolveProvider signResolveProvider = null;
 
-    public LocalSecurityServiceImpl(String configName)
-    {
+    public LocalSecurityServiceImpl(String configName) {
         super(SECURITY_NAME);
         this.configName = configName;
     }
 
-    private File getConfigFile()
-    {
+    private File getConfigFile() {
         return new File(ApplicationContext.getInstance().getContextPath().getConf() + File.separator + this.configName);
     }
 
     @Override
-    protected SignResolveProvider getSignResolveProvider()
-    {
+    protected SignResolveProvider getSignResolveProvider() {
         return this.signResolveProvider;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         File configFile = this.getConfigFile();
-        if (!configFile.exists())
-        {
+        if (!configFile.exists()) {
             this.logger.warn("The local security file is not exists : " + configFile.getAbsolutePath());
             return;
         }
 
-        FileActionMonitor.getInstance().addFileWatcherAdaptor(new FileWatcherAdaptor(configFile)
-        {
+        FileActionMonitor.getInstance().addFileWatcherAdaptor(new FileWatcherAdaptor(configFile) {
             @Override
-            protected void onFileChange(File file)
-            {
+            protected void onFileChange(File file) {
                 LocalSecurityServiceImpl.this.loadConfig();
             }
         });
@@ -69,33 +61,27 @@ public class LocalSecurityServiceImpl extends LoginServiceBase
     }
 
     @Override
-    public LoginUser load(String no) throws SecurityLoginException
-    {
+    public LoginUser load(String no) throws SecurityLoginException {
         LoginUser loginUser = null;
         if (this.localeUserMap != null)
             loginUser = this.localeUserMap.get(no);
         return loginUser;
     }
 
-    private void loadConfig()
-    {
+    private void loadConfig() {
         File configFile = this.getConfigFile();
         InputStream inputStream = null;
-        try
-        {
+        try {
             Map<String, LoginUser> localeUserMap = new HashMap<String, LoginUser>();
             inputStream = new FileInputStream(configFile);
             Properties properties = new Properties();
             properties.load(inputStream);
-            for (Object user : properties.keySet())
-            {
+            for (Object user : properties.keySet()) {
                 String no = (String) user;
                 String value = (String) properties.get(user);
-                if (!ValueUtils.isEmpty(value))
-                {
+                if (!ValueUtils.isEmpty(value)) {
                     String[] values = value.split(";");
-                    if (values.length == 2)
-                    {
+                    if (values.length == 2) {
                         String role = values[0];
                         String password = values[1];
                         LoginUser localUser = new LoginUser(no, role, password, SECURITY_NAME);
@@ -107,19 +93,14 @@ public class LocalSecurityServiceImpl extends LoginServiceBase
                     }
                 }
             }
-            if (localeUserMap.size() > 0)
-            {
+            if (localeUserMap.size() > 0) {
                 this.localeUserMap = localeUserMap;
                 this.signResolveProvider = new LocalSignResolveProvider(this.localeUserMap);
             }
             this.logger.info("load the local security config : " + configFile.getAbsolutePath());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logger.error(configFile, e);
-        }
-        finally
-        {
+        } finally {
             inputStream = FileUtils.close(inputStream);
         }
     }

@@ -8,14 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LogPaneDemo extends JFrameExt
-{
+public class LogPaneDemo extends JFrameExt {
     private static final long serialVersionUID = 1L;
     protected static Logger logger = Logger.getLogger(LogPaneDemo.class);
     private JLogPane logPane = null;
 
-    public LogPaneDemo()
-    {
+    public LogPaneDemo() {
         super(LogPaneDemo.class.getSimpleName());
     }
 
@@ -24,8 +22,7 @@ public class LogPaneDemo extends JFrameExt
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setPreferredSize(new Dimension(400, 300));
 
@@ -39,11 +36,9 @@ public class LogPaneDemo extends JFrameExt
 
         JButton generateButton = new JButton("Generate");
         generateButton.setAlignmentX(CENTER_ALIGNMENT);
-        generateButton.addActionListener(new ActionListener()
-        {
+        generateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 LogPaneDemo.this.log();
             }
         });
@@ -57,8 +52,7 @@ public class LogPaneDemo extends JFrameExt
         return panel;
     }
 
-    private void log()
-    {
+    private void log() {
         logger.info("Test info message");
         logger.warn("Test warn message");
         logger.debug("Test debug message");
@@ -68,8 +62,7 @@ public class LogPaneDemo extends JFrameExt
     }
 
     @Override
-    public void pack()
-    {
+    public void pack() {
         super.pack();
         this.log();
     }

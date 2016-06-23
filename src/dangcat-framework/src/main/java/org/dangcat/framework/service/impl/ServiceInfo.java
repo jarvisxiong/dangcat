@@ -24,61 +24,98 @@ import java.util.*;
 
 /**
  * 服务信息。
+ *
  * @author dangcat
- * 
  */
-public class ServiceInfo extends ServiceParams
-{
+public class ServiceInfo extends ServiceParams {
     public static final String DEFAULT_MODULE = "Default";
     protected static final Logger logger = Logger.getLogger(ServiceInfo.class);
     private static final long serialVersionUID = 1L;
     private static final String SERVICE_TITLE = "service.title";
 
-    /** 服务访问类型。 */
+    /**
+     * 服务访问类型。
+     */
     private Class<?> accessClassType = null;
-    /** 服务访问类名。 */
+    /**
+     * 服务访问类名。
+     */
     private String accessType = null;
-    /** 事后拦截器映射表。 */
+    /**
+     * 事后拦截器映射表。
+     */
     private Map<Class<?>, AfterInterceptor> afterInvokeMap = new LinkedHashMap<Class<?>, AfterInterceptor>();
-    /** 事前拦截器映射表。 */
+    /**
+     * 事前拦截器映射表。
+     */
     private Map<Class<?>, BeforeInterceptor> beforeInvokeMap = new LinkedHashMap<Class<?>, BeforeInterceptor>();
-    /** 设置值。 */
+    /**
+     * 设置值。
+     */
     private ConfigProvider configProvider = null;
-    /** 异常信息读取器。 */
+    /**
+     * 异常信息读取器。
+     */
     private ExceptionReader exceptionReader = null;
-    /** 模块编号。 */
+    /**
+     * 模块编号。
+     */
     private Integer id = null;
-    /** 服务实例。 */
+    /**
+     * 服务实例。
+     */
     private Object instance = null;
-    /** 拦截器配置表。 */
+    /**
+     * 拦截器配置表。
+     */
     private Collection<Class<?>> interceptors = new LinkedHashSet<Class<?>>();
-    /** 服务是否池化。 */
+    /**
+     * 服务是否池化。
+     */
     private boolean isPool = false;
-    /** 服务是否使用代理。 */
+    /**
+     * 服务是否使用代理。
+     */
     private boolean isProxy = false;
-    /** 命名绑定。 */
+    /**
+     * 命名绑定。
+     */
     private String jndiName = null;
-    /** 模块命名。 */
+    /**
+     * 模块命名。
+     */
     private String moduleName = null;
-    /** 服务命名。 */
+    /**
+     * 服务命名。
+     */
     private String name = null;
-    /** 权限配置。 */
+    /**
+     * 权限配置。
+     */
     private PermissionProvider permissionProvider = null;
-    /** 配置属性。 */
+    /**
+     * 配置属性。
+     */
     private List<Property> properties = new ArrayList<Property>();
-    /** 资源读取器。 */
+    /**
+     * 资源读取器。
+     */
     private ResourceReader resourceReader = null;
-    /** 服务实例类型。 */
+    /**
+     * 服务实例类型。
+     */
     private Class<?> serviceClassType = null;
-    /** 方法信息。 */
+    /**
+     * 方法信息。
+     */
     private ServiceMethodInfo serviceMethodInfo = null;
-    /** 服务实例类名。 */
+    /**
+     * 服务实例类名。
+     */
     private String serviceType = null;
 
-    public void addInterceptors(Object... interceptors)
-    {
-        for (Object interceptor : interceptors)
-        {
+    public void addInterceptors(Object... interceptors) {
+        for (Object interceptor : interceptors) {
             Class<?> classType = interceptor.getClass();
             if (interceptor instanceof BeforeInterceptor && !this.beforeInvokeMap.containsKey(classType))
                 this.beforeInvokeMap.put(classType, (BeforeInterceptor) interceptor);
@@ -87,25 +124,21 @@ public class ServiceInfo extends ServiceParams
         }
     }
 
-    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result)
-    {
+    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result) {
         for (AfterInterceptor afterInterceptor : this.afterInvokeMap.values())
             afterInterceptor.afterInvoke(service, serviceContext, methodInfo, args, result);
     }
 
-    public void beforeInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args) throws ServiceException
-    {
+    public void beforeInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args) throws ServiceException {
         for (BeforeInterceptor beforeInterceptor : this.beforeInvokeMap.values())
             beforeInterceptor.beforeInvoke(service, serviceContext, methodInfo, args);
     }
 
-    public Object createInstance(ServiceProvider parent)
-    {
+    public Object createInstance(ServiceProvider parent) {
         return ServiceUtils.createInstance(this, parent);
     }
 
-    public Class<?> getAccessClassType()
-    {
+    public Class<?> getAccessClassType() {
         return this.accessClassType;
     }
 
@@ -113,8 +146,7 @@ public class ServiceInfo extends ServiceParams
         this.accessClassType = accessClassType;
     }
 
-    public String getAccessType()
-    {
+    public String getAccessType() {
         return this.accessType;
     }
 
@@ -122,8 +154,7 @@ public class ServiceInfo extends ServiceParams
         this.accessType = accessType;
     }
 
-    public ConfigProvider getConfigProvider()
-    {
+    public ConfigProvider getConfigProvider() {
         return this.configProvider;
     }
 
@@ -131,10 +162,8 @@ public class ServiceInfo extends ServiceParams
         this.configProvider = configProvider;
     }
 
-    public String getException(Locale locale, Integer messageId)
-    {
-        if (this.exceptionReader == null)
-        {
+    public String getException(Locale locale, Integer messageId) {
+        if (this.exceptionReader == null) {
             ServiceMethodInfo serviceMethodInfo = this.getServiceMethodInfo();
             Collection<Class<?>> classTypes = serviceMethodInfo.getResourceClassTypes();
             this.exceptionReader = new ExceptionReader(classTypes.toArray(new Class<?>[0]));
@@ -142,8 +171,7 @@ public class ServiceInfo extends ServiceParams
         return this.exceptionReader.getText(locale, messageId);
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
@@ -151,8 +179,7 @@ public class ServiceInfo extends ServiceParams
         this.id = id;
     }
 
-    public Object getInstance()
-    {
+    public Object getInstance() {
         return this.instance;
     }
 
@@ -160,13 +187,11 @@ public class ServiceInfo extends ServiceParams
         this.instance = instance;
     }
 
-    public Collection<Class<?>> getInterceptors()
-    {
+    public Collection<Class<?>> getInterceptors() {
         return this.interceptors;
     }
 
-    public String getJndiName()
-    {
+    public String getJndiName() {
         return this.jndiName;
     }
 
@@ -182,16 +207,14 @@ public class ServiceInfo extends ServiceParams
         this.jndiName = this.getModuleName() + "/" + this.getName();
     }
 
-    public String getMethodTitle(Locale locale, String name)
-    {
+    public String getMethodTitle(Locale locale, String name) {
         if (locale == null)
             locale = Environment.getDefaultLocale();
 
         return this.getResourceReader().getText(locale, "service." + name + ".title");
     }
 
-    public String getModuleName()
-    {
+    public String getModuleName() {
         return this.moduleName;
     }
 
@@ -199,8 +222,7 @@ public class ServiceInfo extends ServiceParams
         this.moduleName = moduleName;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -208,8 +230,7 @@ public class ServiceInfo extends ServiceParams
         this.name = name;
     }
 
-    public PermissionProvider getPermissionProvider()
-    {
+    public PermissionProvider getPermissionProvider() {
         return this.permissionProvider;
     }
 
@@ -217,15 +238,12 @@ public class ServiceInfo extends ServiceParams
         this.permissionProvider = permissionProvider;
     }
 
-    public Collection<Property> getProperties()
-    {
+    public Collection<Property> getProperties() {
         return this.properties;
     }
 
-    public ResourceReader getResourceReader()
-    {
-        if (this.resourceReader == null)
-        {
+    public ResourceReader getResourceReader() {
+        if (this.resourceReader == null) {
             ServiceMethodInfo serviceMethodInfo = this.getServiceMethodInfo();
             Collection<Class<?>> classTypeCollection = serviceMethodInfo.getResourceClassTypes();
             if (this.getPermissionProvider() != null)
@@ -237,8 +255,7 @@ public class ServiceInfo extends ServiceParams
         return this.resourceReader;
     }
 
-    public Class<?> getServiceClassType()
-    {
+    public Class<?> getServiceClassType() {
         return this.serviceClassType;
     }
 
@@ -246,10 +263,8 @@ public class ServiceInfo extends ServiceParams
         this.serviceClassType = serviceClassType;
     }
 
-    public ServiceMethodInfo getServiceMethodInfo()
-    {
-        if (this.serviceMethodInfo == null)
-        {
+    public ServiceMethodInfo getServiceMethodInfo() {
+        if (this.serviceMethodInfo == null) {
             ServiceMethodInfo serviceMethodInfo = new ServiceMethodInfo(this.getAccessClassType(), this.getServiceClassType());
             serviceMethodInfo.initialize();
             this.serviceMethodInfo = serviceMethodInfo;
@@ -257,8 +272,7 @@ public class ServiceInfo extends ServiceParams
         return this.serviceMethodInfo;
     }
 
-    public String getServiceType()
-    {
+    public String getServiceType() {
         return this.serviceType;
     }
 
@@ -266,21 +280,18 @@ public class ServiceInfo extends ServiceParams
         this.serviceType = serviceType;
     }
 
-    public String getTitle(Locale locale)
-    {
+    public String getTitle(Locale locale) {
         if (locale == null)
             locale = Environment.getDefaultLocale();
 
         return this.getResourceReader().getText(locale, SERVICE_TITLE);
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         if (this.serviceClassType == null)
             this.serviceClassType = ReflectUtils.loadClass(this.getServiceType());
 
-        if (this.accessClassType == null)
-        {
+        if (this.accessClassType == null) {
             if (ValueUtils.isEmpty(this.getAccessType()))
                 this.accessClassType = this.serviceClassType;
             else
@@ -291,16 +302,14 @@ public class ServiceInfo extends ServiceParams
             ServiceUtils.initialize(this);
     }
 
-    public Object invoke(String methodName, Object... params) throws Exception
-    {
+    public Object invoke(String methodName, Object... params) throws Exception {
         MethodInfo methodInfo = this.getServiceMethodInfo().getMethodInfo(methodName);
         if (methodInfo == null)
             throw new RuntimeException("The method " + methodName + " can't found.");
         return methodInfo.invoke(this.getInstance(), params);
     }
 
-    public boolean isPool()
-    {
+    public boolean isPool() {
         return this.isPool;
     }
 
@@ -308,8 +317,7 @@ public class ServiceInfo extends ServiceParams
         this.isPool = isPool;
     }
 
-    public boolean isProxy()
-    {
+    public boolean isProxy() {
         if (this.accessClassType == null || !this.accessClassType.isInterface())
             return false;
 
@@ -323,22 +331,18 @@ public class ServiceInfo extends ServiceParams
         return this.isProxy;
     }
 
-    public void setProxy(boolean isProxy)
-    {
+    public void setProxy(boolean isProxy) {
         this.isProxy = isProxy;
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         return this.getAccessClassType() != null && this.getServiceClassType() != null;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        if (!ValueUtils.isEmpty(this.getJndiName()))
-        {
+        if (!ValueUtils.isEmpty(this.getJndiName())) {
             info.append("JndiName : ");
             info.append(this.getJndiName());
             info.append(Environment.LINE_SEPARATOR);
@@ -348,40 +352,33 @@ public class ServiceInfo extends ServiceParams
         info.append(Environment.LINE_SEPARATOR);
         info.append("ServiceType : ");
         info.append(this.getServiceType());
-        if (this.isPool())
-        {
+        if (this.isPool()) {
             info.append(Environment.LINE_SEPARATOR);
             info.append("Pool : ");
             info.append(this.isPool());
         }
-        if (this.isProxy())
-        {
+        if (this.isProxy()) {
             info.append(Environment.LINE_SEPARATOR);
             info.append("Proxy : ");
             info.append(this.isProxy());
         }
-        if (this.properties.size() > 0)
-        {
+        if (this.properties.size() > 0) {
             info.append(Environment.LINE_SEPARATOR);
             info.append("Properties: ");
-            for (Property property : this.properties)
-            {
+            for (Property property : this.properties) {
                 info.append(Environment.LINETAB_SEPARATOR);
                 info.append(property);
             }
         }
-        if (this.interceptors.size() > 0)
-        {
+        if (this.interceptors.size() > 0) {
             info.append(Environment.LINE_SEPARATOR);
             info.append("Interceptors: ");
-            for (Class<?> interceptor : this.interceptors)
-            {
+            for (Class<?> interceptor : this.interceptors) {
                 info.append(Environment.LINETAB_SEPARATOR);
                 info.append(interceptor.getName());
             }
         }
-        if (this.serviceMethodInfo != null)
-        {
+        if (this.serviceMethodInfo != null) {
             info.append(Environment.LINE_SEPARATOR);
             info.append(this.serviceMethodInfo);
         }

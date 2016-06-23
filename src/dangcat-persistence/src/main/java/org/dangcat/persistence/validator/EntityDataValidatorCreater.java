@@ -13,26 +13,22 @@ import java.util.Map;
 
 /**
  * Table数据基本校验。
+ *
  * @author dangcat
- * 
  */
-public class EntityDataValidatorCreater
-{
+public class EntityDataValidatorCreater {
     private EntityMetaData entityMetaData = null;
 
-    public EntityDataValidatorCreater(EntityMetaData entityMetaData)
-    {
+    public EntityDataValidatorCreater(EntityMetaData entityMetaData) {
         this.entityMetaData = entityMetaData;
     }
 
-    public void create()
-    {
+    public void create() {
         Class<?> entityClass = this.entityMetaData.getEntityClass();
         Columns columns = this.entityMetaData.getTable().getColumns();
         columns.createDataValidators(entityClass);
 
-        for (EntityField entityField : this.entityMetaData.getEntityFieldCollection())
-        {
+        for (EntityField entityField : this.entityMetaData.getEntityFieldCollection()) {
             // 范围校验器。
             this.createRangeValidator(entityClass, columns, entityField);
             // 数值映射校验器。
@@ -42,14 +38,11 @@ public class EntityDataValidatorCreater
         }
     }
 
-    private void createLogicValidators(Class<?> entityClass, Columns columns, EntityField entityField)
-    {
+    private void createLogicValidators(Class<?> entityClass, Columns columns, EntityField entityField) {
         org.dangcat.persistence.validator.annotation.LogicValidators logicValidatorsAnnotation = BeanUtils.getAnnotation(entityClass, entityField.getName(),
                 org.dangcat.persistence.validator.annotation.LogicValidators.class);
-        if (logicValidatorsAnnotation != null)
-        {
-            for (Class<?> classType : logicValidatorsAnnotation.value())
-            {
+        if (logicValidatorsAnnotation != null) {
+            for (Class<?> classType : logicValidatorsAnnotation.value()) {
                 LogicValidator logicValidator = LogicValidatorUtils.creatInstance(classType, entityClass, entityField.getColumn());
                 if (logicValidator != null)
                     columns.addDataValidator(logicValidator);
@@ -57,16 +50,13 @@ public class EntityDataValidatorCreater
         }
     }
 
-    private void createRangeValidator(Class<?> entityClass, Columns columns, EntityField entityField)
-    {
+    private void createRangeValidator(Class<?> entityClass, Columns columns, EntityField entityField) {
         org.dangcat.persistence.validator.annotation.RangeValidator rangeValidatorAnnotation = BeanUtils.getAnnotation(entityClass, entityField.getName(),
                 org.dangcat.persistence.validator.annotation.RangeValidator.class);
-        if (rangeValidatorAnnotation != null)
-        {
+        if (rangeValidatorAnnotation != null) {
             Object minValue = ValueUtils.parseValue(entityField.getClassType(), rangeValidatorAnnotation.minValue());
             Object maxValue = ValueUtils.parseValue(entityField.getClassType(), rangeValidatorAnnotation.maxValue());
-            if (minValue != null || maxValue != null)
-            {
+            if (minValue != null || maxValue != null) {
                 RangeValidator rangeValidator = new RangeValidator(entityClass, entityField.getColumn());
                 rangeValidator.setMinValue(minValue);
                 rangeValidator.setMaxValue(maxValue);
@@ -75,12 +65,10 @@ public class EntityDataValidatorCreater
         }
     }
 
-    private void createValueMapValidator(Class<?> entityClass, Columns columns, EntityField entityField)
-    {
+    private void createValueMapValidator(Class<?> entityClass, Columns columns, EntityField entityField) {
         org.dangcat.persistence.validator.annotation.ValueMapValidator valueMapValidatorAnnotation = BeanUtils.getAnnotation(entityClass, entityField.getName(),
                 org.dangcat.persistence.validator.annotation.ValueMapValidator.class);
-        if (valueMapValidatorAnnotation != null)
-        {
+        if (valueMapValidatorAnnotation != null) {
             ResourceReader resourceReader = this.entityMetaData.getResourceReader();
             Map<Integer, String> valueMap = null;
             String resourceKey = valueMapValidatorAnnotation.resourceKey();

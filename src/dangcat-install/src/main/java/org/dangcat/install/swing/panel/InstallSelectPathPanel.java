@@ -5,13 +5,11 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.Map;
 
-public class InstallSelectPathPanel extends InstallSelectPanel
-{
+public class InstallSelectPathPanel extends InstallSelectPanel {
     private static final long serialVersionUID = 1L;
     private InstallPathPanel installPathPanel = null;
 
-    private JPanel createInstallPathPanel()
-    {
+    private JPanel createInstallPathPanel() {
         this.installPathPanel = new InstallPathPanel();
         this.installPathPanel.setBorder(new TitledBorder(this.getText("InstallPath")));
         this.installPathPanel.setMaximumSize(new Dimension(Short.MAX_VALUE, 500));
@@ -19,21 +17,18 @@ public class InstallSelectPathPanel extends InstallSelectPanel
         return this.installPathPanel;
     }
 
-    public InstallPathPanel getInstallPathPanel()
-    {
+    public InstallPathPanel getInstallPathPanel() {
         return this.installPathPanel;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
         this.add(this.createInstallPathPanel());
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         if (!super.validateData())
             return false;
 

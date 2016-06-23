@@ -7,11 +7,9 @@ import org.junit.Test;
 
 import java.io.File;
 
-public class TestFileCopyProcess
-{
+public class TestFileCopyProcess {
     @Test
-    public void testCopyDirectory()
-    {
+    public void testCopyDirectory() {
         File srcFile = new File("./src");
         File destFile = new File("./log/src");
         FileUtils.delete(destFile);
@@ -25,8 +23,7 @@ public class TestFileCopyProcess
     }
 
     @Test
-    public void testCopyFile()
-    {
+    public void testCopyFile() {
         File srcFile = new File("./src/main/resources/META-INF/MANIFEST.MF");
         File destFile = new File("./log/META-INF/MANIFEST.MF");
         FileUtils.delete(destFile);
@@ -39,13 +36,10 @@ public class TestFileCopyProcess
         this.testDeleteFile(destFile);
     }
 
-    private void testDeleteFile(File... files)
-    {
-        FileDeleteProcess fileDeleteProcess = new FileDeleteProcess()
-        {
+    private void testDeleteFile(File... files) {
+        FileDeleteProcess fileDeleteProcess = new FileDeleteProcess() {
             @Override
-            protected void afterProcess(File file)
-            {
+            protected void afterProcess(File file) {
                 if (this.getFinishedPercent() == 100)
                     System.out.println(this.getFinishedPercent() + "%");
                 super.afterProcess(file);

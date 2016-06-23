@@ -16,25 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class ServiceContextFilter implements Filter
-{
+public class ServiceContextFilter implements Filter {
     private static final Logger logger = Logger.getLogger(ServiceContextFilter.class);
     private static final String METHOD_NAME = "signin";
     private static final String SIGNID = "SIGNID";
 
-    private ServicePrincipal createServicePrincipal(HttpServletRequest httpServletRequest)
-    {
+    private ServicePrincipal createServicePrincipal(HttpServletRequest httpServletRequest) {
         ServicePrincipal servicePrincipal = null;
         String signId = httpServletRequest.getParameter(SIGNID);
-        try
-        {
+        try {
             ServiceInfo serviceInfo = ServiceFactory.getInstance().getServiceInfo(SecurityLoginService.class);
             MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(METHOD_NAME);
             ServiceContext.getInstance().addParam(MethodInfo.class, methodInfo);
             servicePrincipal = (ServicePrincipal) serviceInfo.invoke(methodInfo.getName(), signId);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (logger.isDebugEnabled())
                 logger.error(this, e);
             else
@@ -44,27 +39,22 @@ public class ServiceContextFilter implements Filter
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException
-    {
-        if (request instanceof HttpServletRequest)
-        {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpSession httpSession = httpServletRequest.getSession();
 
             ServicePrincipal servicePrincipal = (ServicePrincipal) httpSession.getAttribute(ServicePrincipal.class.getSimpleName());
-            if (servicePrincipal == null)
-            {
+            if (servicePrincipal == null) {
                 ResponseUtils.createServiceContext(httpServletRequest, (HttpServletResponse) response, null);
                 servicePrincipal = this.createServicePrincipal(httpServletRequest);
             }
 
-            if (servicePrincipal == null || !servicePrincipal.isValid())
-            {
+            if (servicePrincipal == null || !servicePrincipal.isValid()) {
                 SecurityLoginException securityLoginException = new SecurityLoginException(SecurityLoginException.INVALID_LOGIN);
                 ResponseUtils.responseException((HttpServletResponse) response, securityLoginException);
                 return;
@@ -73,18 +63,14 @@ public class ServiceContextFilter implements Filter
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             ResponseUtils.createServiceContext(httpServletRequest, httpServletResponse, servicePrincipal);
         }
-        try
-        {
+        try {
             filterChain.doFilter(request, response);
-        }
-        finally
-        {
+        } finally {
             ServiceContext.remove();
         }
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException
-    {
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 }

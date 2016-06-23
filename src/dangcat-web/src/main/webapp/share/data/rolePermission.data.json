@@ -1,185 +1,185 @@
 ﻿[
-	{
-		"id": 1,
-        "type": 0,
-		"name":"系统"
-	},
-	{
-		"id": 100,
-		"parentId": 1,
-        "type": 1,
-		"name":"服务器管理"
-	},
-	{
-		"id": 10000,
-		"parentId": 100,
-        "type": 2,
-		"name":"启动"
-	},
-	{
-		"id": 10001,
-		"parentId": 100,
-        "type": 2,
-		"name":"停止"
-	},
-	{
-		"id": 2,
-        "type": 0,
-		"name":"用户"
-	},
-	{
-		"id": 200,
-		"parentId": 2,
-        "type": 1,
-		"name":"账户组管理"
-	},
-	{
-		"id": 20000,
-		"parentId": 200,
-        "type": 2,
-		"name":"新增"
-	},
-	{
-		"id": 20001,
-		"parentId": 200,
-        "type": 2,
-		"name":"修改"
-	},
-	{
-		"id": 20002,
-		"parentId": 200,
-        "type": 2,
-		"name":"删除"
-	},
-	{
-		"id": 20003,
-		"parentId": 200,
-        "type": 2,
-		"name":"查询"
-	},
-	{
-		"id": 201,
-		"parentId": 2,
-        "type": 1,
-		"name":"账户管理"
-	},
-	{
-		"id": 20100,
-		"parentId": 201,
-        "type": 2,
-		"name":"新增"
-	},
-	{
-		"id": 20101,
-		"parentId": 201,
-        "type": 2,
-		"name":"修改"
-	},
-	{
-		"id": 20102,
-		"parentId": 201,
-        "type": 2,
-		"name":"删除"
-	},
-	{
-		"id": 20103,
-		"parentId": 201,
-        "type": 2,
-		"name":"查询"
-	},
-	{
-		"id": 3,
-        "type": 0,
-		"name":"业务"
-	},
-	{
-		"id": 301,
-		"parentId": 3,
-        "type": 1,
-		"name":"操作员组管理"
-	},
-	{
-		"id": 30100,
-		"parentId": 301,
-        "type": 2,
-		"name":"新增"
-	},
-	{
-		"id": 30101,
-		"parentId": 301,
-        "type": 2,
-		"name":"修改"
-	},
-	{
-		"id": 30102,
-		"parentId": 301,
-        "type": 2,
-		"name":"删除"
-	},
-	{
-		"id": 30103,
-		"parentId": 301,
-        "type": 2,
-		"name":"查询"
-	},
-	{
-		"id": 302,
-		"parentId": 3,
-        "type": 1,
-		"name":"操作员管理"
-	},
-	{
-		"id": 30200,
-		"parentId": 302,
-        "type": 2,
-		"name":"新增"
-	},
-	{
-		"id": 30201,
-		"parentId": 302,
-        "type": 2,
-		"name":"修改"
-	},
-	{
-		"id": 30202,
-		"parentId": 302,
-        "type": 2,
-		"name":"删除"
-	},
-	{
-		"id": 30203,
-		"parentId": 302,
-        "type": 2,
-		"name":"查询"
-	},
-	{
-		"id": 303,
-		"parentId": 3,
-        "type": 1,
-		"name":"角色管理"
-	},
-	{
-		"id": 30300,
-		"parentId": 303,
-        "type": 2,
-		"name":"新增"
-	},
-	{
-		"id": 30301,
-		"parentId": 303,
-        "type": 2,
-		"name":"修改"
-	},
-	{
-		"id": 30302,
-		"parentId": 303,
-        "type": 2,
-		"name":"删除"
-	},
-	{
-		"id": 30303,
-		"parentId": 303,
-        "type": 2,
-		"name":"查询"
-	}
+  {
+    "id": 1,
+    "type": 0,
+    "name": "系统"
+  },
+  {
+    "id": 100,
+    "parentId": 1,
+    "type": 1,
+    "name": "服务器管理"
+  },
+  {
+    "id": 10000,
+    "parentId": 100,
+    "type": 2,
+    "name": "启动"
+  },
+  {
+    "id": 10001,
+    "parentId": 100,
+    "type": 2,
+    "name": "停止"
+  },
+  {
+    "id": 2,
+    "type": 0,
+    "name": "用户"
+  },
+  {
+    "id": 200,
+    "parentId": 2,
+    "type": 1,
+    "name": "账户组管理"
+  },
+  {
+    "id": 20000,
+    "parentId": 200,
+    "type": 2,
+    "name": "新增"
+  },
+  {
+    "id": 20001,
+    "parentId": 200,
+    "type": 2,
+    "name": "修改"
+  },
+  {
+    "id": 20002,
+    "parentId": 200,
+    "type": 2,
+    "name": "删除"
+  },
+  {
+    "id": 20003,
+    "parentId": 200,
+    "type": 2,
+    "name": "查询"
+  },
+  {
+    "id": 201,
+    "parentId": 2,
+    "type": 1,
+    "name": "账户管理"
+  },
+  {
+    "id": 20100,
+    "parentId": 201,
+    "type": 2,
+    "name": "新增"
+  },
+  {
+    "id": 20101,
+    "parentId": 201,
+    "type": 2,
+    "name": "修改"
+  },
+  {
+    "id": 20102,
+    "parentId": 201,
+    "type": 2,
+    "name": "删除"
+  },
+  {
+    "id": 20103,
+    "parentId": 201,
+    "type": 2,
+    "name": "查询"
+  },
+  {
+    "id": 3,
+    "type": 0,
+    "name": "业务"
+  },
+  {
+    "id": 301,
+    "parentId": 3,
+    "type": 1,
+    "name": "操作员组管理"
+  },
+  {
+    "id": 30100,
+    "parentId": 301,
+    "type": 2,
+    "name": "新增"
+  },
+  {
+    "id": 30101,
+    "parentId": 301,
+    "type": 2,
+    "name": "修改"
+  },
+  {
+    "id": 30102,
+    "parentId": 301,
+    "type": 2,
+    "name": "删除"
+  },
+  {
+    "id": 30103,
+    "parentId": 301,
+    "type": 2,
+    "name": "查询"
+  },
+  {
+    "id": 302,
+    "parentId": 3,
+    "type": 1,
+    "name": "操作员管理"
+  },
+  {
+    "id": 30200,
+    "parentId": 302,
+    "type": 2,
+    "name": "新增"
+  },
+  {
+    "id": 30201,
+    "parentId": 302,
+    "type": 2,
+    "name": "修改"
+  },
+  {
+    "id": 30202,
+    "parentId": 302,
+    "type": 2,
+    "name": "删除"
+  },
+  {
+    "id": 30203,
+    "parentId": 302,
+    "type": 2,
+    "name": "查询"
+  },
+  {
+    "id": 303,
+    "parentId": 3,
+    "type": 1,
+    "name": "角色管理"
+  },
+  {
+    "id": 30300,
+    "parentId": 303,
+    "type": 2,
+    "name": "新增"
+  },
+  {
+    "id": 30301,
+    "parentId": 303,
+    "type": 2,
+    "name": "修改"
+  },
+  {
+    "id": 30302,
+    "parentId": 303,
+    "type": 2,
+    "name": "删除"
+  },
+  {
+    "id": 30303,
+    "parentId": 303,
+    "type": 2,
+    "name": "查询"
+  }
 ]

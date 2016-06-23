@@ -11,8 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ChartExporter
-{
+public class ChartExporter {
     private static final int DEFAULT_HEIGHT = 600;
     private static final int DEFAULT_WIDTH = 800;
     private static final String HIGHCHARTS_PATH = "/js/highcharts-3.0.7";
@@ -25,13 +24,11 @@ public class ChartExporter
     private String tempDir = null;
     private Integer width = null;
 
-    public ChartExporter(File baseDir)
-    {
+    public ChartExporter(File baseDir) {
         this.baseDir = baseDir;
     }
 
-    public boolean export(String options, String data, File output) throws IOException
-    {
+    public boolean export(String options, String data, File output) throws IOException {
         String basePath = FileUtils.getCanonicalPath(this.baseDir.getAbsolutePath());
         File convertFile = new File(basePath + HIGHCHARTS_PATH + "/highcharts-convert.js");
         File templateFile = new File(basePath + HIGHCHARTS_PATH + "/highcharts-convert.template");
@@ -57,8 +54,7 @@ public class ChartExporter
         return output.exists();
     }
 
-    public Integer getHeight()
-    {
+    public Integer getHeight() {
         return this.height == null ? DEFAULT_HEIGHT : this.height;
     }
 
@@ -66,8 +62,7 @@ public class ChartExporter
         this.height = height;
     }
 
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         return outputStream;
     }
 
@@ -75,8 +70,7 @@ public class ChartExporter
         this.outputStream = outputStream;
     }
 
-    private File getPhantomjs()
-    {
+    private File getPhantomjs() {
         File phantomjs = this.getPhantomjsFile(System.getProperty(PHANTOMJS_HOME));
         if (phantomjs == null || !phantomjs.exists())
             phantomjs = this.getPhantomjsFile(System.getenv(PHANTOMJS_HOME));
@@ -87,8 +81,7 @@ public class ChartExporter
         return phantomjs;
     }
 
-    private File getPhantomjsFile(String phantomjsPath)
-    {
+    private File getPhantomjsFile(String phantomjsPath) {
         String phantomjs = "";
         if (!ValueUtils.isEmpty(phantomjsPath))
             phantomjs += phantomjsPath + File.separator;
@@ -98,8 +91,7 @@ public class ChartExporter
         return new File(phantomjs);
     }
 
-    public File getTempDir()
-    {
+    public File getTempDir() {
         File tempDir = null;
         if (this.tempDir == null)
             tempDir = new File(System.getProperty("java.io.tmpdir"));
@@ -109,28 +101,23 @@ public class ChartExporter
         return tempDir;
     }
 
-    public void setTempDir(String tempDir)
-    {
+    public void setTempDir(String tempDir) {
         this.tempDir = tempDir;
     }
 
-    public Integer getWidth()
-    {
+    public Integer getWidth() {
         return this.width == null ? DEFAULT_WIDTH : this.width;
     }
 
-    public void setWidth(Integer width)
-    {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 
-    public boolean isRemoveTemp()
-    {
+    public boolean isRemoveTemp() {
         return removeTemp;
     }
 
-    public void setRemoveTemp(boolean removeTemp)
-    {
+    public void setRemoveTemp(boolean removeTemp) {
         this.removeTemp = removeTemp;
     }
 }

@@ -8,8 +8,7 @@ import org.dangcat.persistence.annotation.Table;
 import java.util.Date;
 
 @Table
-public class DateInfo
-{
+public class DateInfo {
     public static final String Day = "Day";
     public static final String Full = "Full";
     public static final String Id = "Id";
@@ -34,53 +33,43 @@ public class DateInfo
     @DateStyle(DateType.Second)
     private Date second;
 
-    public Date getDay()
-    {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(Date day)
-    {
+    public void setDay(Date day) {
         this.day = day;
     }
 
-    public Date getFull()
-    {
+    public Date getFull() {
         return full;
     }
 
-    public void setFull(Date full)
-    {
+    public void setFull(Date full) {
         this.full = full;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Date getMinute()
-    {
+    public Date getMinute() {
         return minute;
     }
 
-    public void setMinute(Date minute)
-    {
+    public void setMinute(Date minute) {
         this.minute = minute;
     }
 
-    public Date getSecond()
-    {
+    public Date getSecond() {
         return second;
     }
 
-    public void setSecond(Date second)
-    {
+    public void setSecond(Date second) {
         this.second = second;
     }
 }

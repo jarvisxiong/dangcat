@@ -8,29 +8,24 @@ import java.util.LinkedHashSet;
 
 /**
  * 实体保存缓存区。
+ *
  * @author dangcat
- * 
  */
-class EntityUpdateRecord
-{
+class EntityUpdateRecord {
     private Collection<Object> deleted = null;
     private Class<?> entityClass = null;
     private EntityMetaData entityMetaData = null;
     private Collection<Object> inserted = null;
     private Collection<Object> modified = null;
 
-    EntityUpdateRecord(Class<?> entityClass)
-    {
+    EntityUpdateRecord(Class<?> entityClass) {
         this.entityClass = entityClass;
         this.entityMetaData = EntityHelper.getEntityMetaData(entityClass);
     }
 
-    protected void addDelete(Object... entities)
-    {
-        if (entities != null)
-        {
-            for (Object entity : entities)
-            {
+    protected void addDelete(Object... entities) {
+        if (entities != null) {
+            for (Object entity : entities) {
                 if (this.deleted == null)
                     this.deleted = new LinkedHashSet<Object>();
                 Object[] values = this.entityMetaData.getPrimaryKeyValues(entity);
@@ -40,12 +35,9 @@ class EntityUpdateRecord
         }
     }
 
-    protected void addInsert(Object... entities)
-    {
-        if (entities != null)
-        {
-            for (Object entity : entities)
-            {
+    protected void addInsert(Object... entities) {
+        if (entities != null) {
+            for (Object entity : entities) {
                 if (this.inserted == null)
                     this.inserted = new LinkedHashSet<Object>();
                 Object[] values = this.entityMetaData.getPrimaryKeyValues(entity);
@@ -55,12 +47,9 @@ class EntityUpdateRecord
         }
     }
 
-    protected void addModify(Object... entities)
-    {
-        if (entities != null)
-        {
-            for (Object entity : entities)
-            {
+    protected void addModify(Object... entities) {
+        if (entities != null) {
+            for (Object entity : entities) {
                 if (this.modified == null)
                     this.modified = new LinkedHashSet<Object>();
                 Object[] values = this.entityMetaData.getPrimaryKeyValues(entity);
@@ -70,23 +59,19 @@ class EntityUpdateRecord
         }
     }
 
-    protected Collection<Object> getDeleted()
-    {
+    protected Collection<Object> getDeleted() {
         return this.deleted;
     }
 
-    protected Class<?> getEntityClass()
-    {
+    protected Class<?> getEntityClass() {
         return this.entityClass;
     }
 
-    protected Collection<Object> getInserted()
-    {
+    protected Collection<Object> getInserted() {
         return this.inserted;
     }
 
-    protected Collection<Object> getModified()
-    {
+    protected Collection<Object> getModified() {
         return this.modified;
     }
 }

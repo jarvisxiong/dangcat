@@ -7,24 +7,20 @@ import org.dangcat.persistence.filter.FilterUnit;
 import javax.swing.*;
 import java.util.Date;
 
-public class LineChartDemo extends ChartDemoBase
-{
+public class LineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "线性统计图";
 
-    public LineChartDemo()
-    {
+    public LineChartDemo() {
         super(LineChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new LineChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         Date[] dates = SimulateTimeData.today();
         DataModule columnDataModule = SimulateTimeData.createMultiColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));

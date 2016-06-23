@@ -5,15 +5,13 @@ import org.dangcat.install.database.mysql.MySqlInstaller;
 import org.dangcat.install.task.ProcessTask;
 
 
-public class MySqlUninstallTask extends MySqlInstaller implements ProcessTask
-{
+public class MySqlUninstallTask extends MySqlInstaller implements ProcessTask {
     private static final int TOTALSIZE = 2;
     private boolean enabled = true;
     private long finishedSize = 0l;
 
     @Override
-    public void execute(Logger logger)
-    {
+    public void execute(Logger logger) {
         this.setLogger(logger);
         this.stop();
         this.finishedSize++;
@@ -22,24 +20,20 @@ public class MySqlUninstallTask extends MySqlInstaller implements ProcessTask
     }
 
     @Override
-    public long getFinishedSize()
-    {
+    public long getFinishedSize() {
         return this.finishedSize;
     }
 
     @Override
-    public long getTaskSize()
-    {
+    public long getTaskSize() {
         return TOTALSIZE;
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

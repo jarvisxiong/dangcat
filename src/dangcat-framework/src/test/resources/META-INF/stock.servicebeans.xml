@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Services>
-	<Service AccessType="org.dangcat.examples.settle.SettleService1" ServiceType="org.dangcat.examples.settle.SettleServiceImpl1">
-		<Interceptors>
-			<Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
-		</Interceptors>
-		<Properties>
-			<Property name="name">Name A</Property>
-			<Property name="total">999.99</Property>
-			<Property name="count">100</Property>
-			<Property name="result">True</Property>
-			<Property name="dateTime">2012-05-10 08:30:00</Property>
-		</Properties>
-	</Service>
+    <Service AccessType="org.dangcat.examples.settle.SettleService1"
+             ServiceType="org.dangcat.examples.settle.SettleServiceImpl1">
+        <Interceptors>
+            <Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
+        </Interceptors>
+        <Properties>
+            <Property name="name">Name A</Property>
+            <Property name="total">999.99</Property>
+            <Property name="count">100</Property>
+            <Property name="result">True</Property>
+            <Property name="dateTime">2012-05-10 08:30:00</Property>
+        </Properties>
+    </Service>
 
-	<Service AccessType="org.dangcat.examples.settle.SettleService2" ServiceType="org.dangcat.examples.settle.SettleServiceImpl2">
-		<Interceptors>
-			<Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
-		</Interceptors>
-		<Properties>
-			<Property name="name">Name A</Property>
-			<Property name="total">999.99</Property>
-			<Property name="result">True</Property>
-			<Property name="dateTime">2012-05-10 08:30:00</Property>
-		</Properties>
-	</Service>
+    <Service AccessType="org.dangcat.examples.settle.SettleService2"
+             ServiceType="org.dangcat.examples.settle.SettleServiceImpl2">
+        <Interceptors>
+            <Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
+        </Interceptors>
+        <Properties>
+            <Property name="name">Name A</Property>
+            <Property name="total">999.99</Property>
+            <Property name="result">True</Property>
+            <Property name="dateTime">2012-05-10 08:30:00</Property>
+        </Properties>
+    </Service>
 
-	<Service AccessType="org.dangcat.examples.settle.SettleService3" ServiceType="org.dangcat.examples.settle.SettleServiceImpl3">
-		<Interceptors>
-			<Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
-			<Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
-		</Interceptors>
-		<Properties>
-			<Property name="name">Name A</Property>
-			<Property name="total">999.99</Property>
-			<Property name="count">100</Property>
-		</Properties>
-	</Service>
+    <Service AccessType="org.dangcat.examples.settle.SettleService3"
+             ServiceType="org.dangcat.examples.settle.SettleServiceImpl3">
+        <Interceptors>
+            <Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
+            <Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
+        </Interceptors>
+        <Properties>
+            <Property name="name">Name A</Property>
+            <Property name="total">999.99</Property>
+            <Property name="count">100</Property>
+        </Properties>
+    </Service>
 
-	<Interceptors>
-		<Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
-		<Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
-		<Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
-	</Interceptors>
+    <Interceptors>
+        <Interceptor>org.dangcat.examples.settle.Interceptor1</Interceptor>
+        <Interceptor>org.dangcat.examples.settle.Interceptor2</Interceptor>
+        <Interceptor>org.dangcat.examples.settle.Interceptor3</Interceptor>
+    </Interceptors>
 </Services>

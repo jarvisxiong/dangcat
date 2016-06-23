@@ -2,36 +2,30 @@ package org.dangcat.boot.statistics.values;
 
 import org.dangcat.commons.formator.ValueFormator;
 
-public abstract class AtomicValue
-{
+public abstract class AtomicValue {
     private String name = null;
     private ValueFormator valueFormator = new ValueFormator();
 
-    public AtomicValue(String name)
-    {
+    public AtomicValue(String name) {
         this.name = name;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
     public abstract long getValue();
 
-    public ValueFormator getValueFormator()
-    {
+    public ValueFormator getValueFormator() {
         return this.valueFormator;
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         return this.getValue() > 0;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(this.getName());
         info.append(" = ");

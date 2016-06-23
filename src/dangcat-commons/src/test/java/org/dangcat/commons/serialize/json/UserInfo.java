@@ -2,8 +2,7 @@ package org.dangcat.commons.serialize.json;
 
 import java.util.*;
 
-public class UserInfo implements DataStatus
-{
+public class UserInfo implements DataStatus {
     private Set<String> addresses = new HashSet<String>();
     private Set<String> addresses2 = null;
     private HashSet<String> addresses3 = null;
@@ -22,8 +21,7 @@ public class UserInfo implements DataStatus
     private long total = 0;
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -31,99 +29,74 @@ public class UserInfo implements DataStatus
         if (getClass() != obj.getClass())
             return false;
         UserInfo other = (UserInfo) obj;
-        if (addresses == null)
-        {
+        if (addresses == null) {
             if (other.addresses != null)
                 return false;
-        }
-        else if (!addresses.equals(other.addresses))
+        } else if (!addresses.equals(other.addresses))
             return false;
-        if (addresses2 == null)
-        {
+        if (addresses2 == null) {
             if (other.addresses2 != null)
                 return false;
-        }
-        else if (!addresses2.equals(other.addresses2))
+        } else if (!addresses2.equals(other.addresses2))
             return false;
         if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
             return false;
-        if (borth == null)
-        {
+        if (borth == null) {
             if (other.borth != null)
                 return false;
-        }
-        else if (!borth.equals(other.borth))
+        } else if (!borth.equals(other.borth))
             return false;
-        if (dataState == null)
-        {
+        if (dataState == null) {
             if (other.dataState != null)
                 return false;
-        }
-        else if (!dataState.equals(other.dataState))
+        } else if (!dataState.equals(other.dataState))
             return false;
         if (!Arrays.equals(friends, other.friends))
             return false;
-        if (id == null)
-        {
+        if (id == null) {
             if (other.id != null)
                 return false;
-        }
-        else if (!id.equals(other.id))
+        } else if (!id.equals(other.id))
             return false;
-        if (name == null)
-        {
+        if (name == null) {
             if (other.name != null)
                 return false;
-        }
-        else if (!name.equals(other.name))
+        } else if (!name.equals(other.name))
             return false;
-        if (rooms == null)
-        {
+        if (rooms == null) {
             if (other.rooms != null)
                 return false;
-        }
-        else if (!rooms.equals(other.rooms))
+        } else if (!rooms.equals(other.rooms))
             return false;
-        if (rooms2 == null)
-        {
+        if (rooms2 == null) {
             if (other.rooms2 != null)
                 return false;
-        }
-        else if (!rooms2.equals(other.rooms2))
+        } else if (!rooms2.equals(other.rooms2))
             return false;
-        if (rooms3 == null)
-        {
+        if (rooms3 == null) {
             if (other.rooms3 != null)
                 return false;
-        }
-        else if (!rooms3.equals(other.rooms3))
+        } else if (!rooms3.equals(other.rooms3))
             return false;
-        if (rooms4 == null)
-        {
+        if (rooms4 == null) {
             if (other.rooms4 != null)
                 return false;
-        }
-        else if (!rooms4.equals(other.rooms4))
+        } else if (!rooms4.equals(other.rooms4))
             return false;
-        if (roomMap1 == null)
-        {
+        if (roomMap1 == null) {
             if (other.roomMap1 != null)
                 return false;
-        }
-        else if (!roomMap1.equals(other.roomMap1))
+        } else if (!roomMap1.equals(other.roomMap1))
             return false;
-        if (roomMap2 == null)
-        {
+        if (roomMap2 == null) {
             if (other.roomMap2 != null)
                 return false;
-        }
-        else if (!roomMap2.equals(other.roomMap2))
+        } else if (!roomMap2.equals(other.roomMap2))
             return false;
         return total == other.total;
     }
 
-    public Set<String> getAddresses()
-    {
+    public Set<String> getAddresses() {
         return addresses;
     }
 
@@ -131,8 +104,7 @@ public class UserInfo implements DataStatus
         this.addresses = addresses;
     }
 
-    public Set<String> getAddresses2()
-    {
+    public Set<String> getAddresses2() {
         return addresses2;
     }
 
@@ -140,8 +112,7 @@ public class UserInfo implements DataStatus
         this.addresses2 = addresses2;
     }
 
-    public HashSet<String> getAddresses3()
-    {
+    public HashSet<String> getAddresses3() {
         return addresses3;
     }
 
@@ -149,8 +120,7 @@ public class UserInfo implements DataStatus
         this.addresses3 = addresses3;
     }
 
-    public double getBalance()
-    {
+    public double getBalance() {
         return balance;
     }
 
@@ -158,8 +128,7 @@ public class UserInfo implements DataStatus
         this.balance = balance;
     }
 
-    public Date getBorth()
-    {
+    public Date getBorth() {
         return borth;
     }
 
@@ -168,8 +137,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public DataState getDataState()
-    {
+    public DataState getDataState() {
         return dataState;
     }
 
@@ -178,8 +146,7 @@ public class UserInfo implements DataStatus
         this.dataState = dataState;
     }
 
-    public String[] getFriends()
-    {
+    public String[] getFriends() {
         return friends;
     }
 
@@ -187,8 +154,7 @@ public class UserInfo implements DataStatus
         this.friends = friends;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
@@ -196,8 +162,7 @@ public class UserInfo implements DataStatus
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -205,8 +170,7 @@ public class UserInfo implements DataStatus
         this.name = name;
     }
 
-    public HashMap<String, Integer> getRoomMap1()
-    {
+    public HashMap<String, Integer> getRoomMap1() {
         return roomMap1;
     }
 
@@ -214,8 +178,7 @@ public class UserInfo implements DataStatus
         this.roomMap1 = romMap1;
     }
 
-    public Map<String, Integer> getRoomMap2()
-    {
+    public Map<String, Integer> getRoomMap2() {
         return roomMap2;
     }
 
@@ -223,8 +186,7 @@ public class UserInfo implements DataStatus
         this.roomMap2 = romMap2;
     }
 
-    public List<Integer> getRooms()
-    {
+    public List<Integer> getRooms() {
         return rooms;
     }
 
@@ -232,8 +194,7 @@ public class UserInfo implements DataStatus
         this.rooms = rooms;
     }
 
-    public List<Integer> getRooms2()
-    {
+    public List<Integer> getRooms2() {
         return rooms2;
     }
 
@@ -241,8 +202,7 @@ public class UserInfo implements DataStatus
         this.rooms2 = rooms2;
     }
 
-    public LinkedList<Integer> getRooms3()
-    {
+    public LinkedList<Integer> getRooms3() {
         return rooms3;
     }
 
@@ -250,8 +210,7 @@ public class UserInfo implements DataStatus
         this.rooms3 = rooms3;
     }
 
-    public Collection<Integer> getRooms4()
-    {
+    public Collection<Integer> getRooms4() {
         return rooms4;
     }
 
@@ -259,8 +218,7 @@ public class UserInfo implements DataStatus
         this.rooms4 = rooms4;
     }
 
-    public long getTotal()
-    {
+    public long getTotal() {
         return total;
     }
 
@@ -269,8 +227,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
@@ -294,8 +251,7 @@ public class UserInfo implements DataStatus
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Id = " + this.getId());
         info.append(", Name = " + this.getName());
@@ -303,25 +259,21 @@ public class UserInfo implements DataStatus
         info.append(", Balance = " + this.getBalance());
         info.append(", Total = " + this.getTotal());
         info.append(", Addresses = [");
-        for (String address : this.addresses)
-        {
+        for (String address : this.addresses) {
             info.append(address);
             info.append(", ");
         }
         info.append("]");
-        if (this.getFriends() != null)
-        {
+        if (this.getFriends() != null) {
             info.append(", Friends = [");
-            for (String friend : this.getFriends())
-            {
+            for (String friend : this.getFriends()) {
                 info.append(friend);
                 info.append(", ");
             }
             info.append("]");
         }
         info.append(", Rooms = [");
-        for (Integer room : rooms)
-        {
+        for (Integer room : rooms) {
             info.append(room);
             info.append(", ");
         }

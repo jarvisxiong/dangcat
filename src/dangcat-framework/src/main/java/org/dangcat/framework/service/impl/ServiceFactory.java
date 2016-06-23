@@ -23,11 +23,10 @@ import java.util.*;
 
 /**
  * 服务工厂。
+ *
  * @author dangcat
- * 
  */
-public class ServiceFactory extends ServiceBase implements ServiceLocator
-{
+public class ServiceFactory extends ServiceBase implements ServiceLocator {
     private static final int CLEAN_PERIOD = 60 * 60 * 1000;
     private static final String DEFAULT_MODULE = ServiceInfo.DEFAULT_MODULE + "/";
     private static final String FILENAME_POSTFIX = ".servicebeans.xml";
@@ -54,31 +53,25 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
         super(parent);
     }
 
-    public static synchronized ServiceFactory createInstance(ServiceProvider parent)
-    {
+    public static synchronized ServiceFactory createInstance(ServiceProvider parent) {
         instance = new ServiceFactory(parent);
         instance.initialize();
         return instance;
     }
 
-    public static ServiceFactory getInstance()
-    {
+    public static ServiceFactory getInstance() {
         return instance;
     }
 
-    public static ServiceLocator getServiceLocator()
-    {
+    public static ServiceLocator getServiceLocator() {
         return instance;
     }
 
     @Override
-    public void addService(Class<?> classType, Object service)
-    {
-        if (service != null && service != this)
-        {
+    public void addService(Class<?> classType, Object service) {
+        if (service != null && service != this) {
             ServiceInfo serviceInfo = this.createServiceInfo(classType, service.getClass());
-            if (serviceInfo != null)
-            {
+            if (serviceInfo != null) {
                 this.addServiceInfo(serviceInfo);
                 serviceInfo.setInstance(service);
             }
@@ -86,81 +79,66 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
         super.addService(classType, service);
     }
 
-    public Object addService(ServiceInfo serviceInfo)
-    {
+    public Object addService(ServiceInfo serviceInfo) {
         return this.addService(this, serviceInfo);
     }
 
-    public Object addService(ServiceProvider parent, ServiceInfo serviceInfo)
-    {
+    public Object addService(ServiceProvider parent, ServiceInfo serviceInfo) {
         Object service = this.createService(parent, serviceInfo);
         if (service != null)
             this.addService(serviceInfo.getAccessClassType(), service);
         return service;
     }
 
-    private void addServiceInfo(ServiceInfo serviceInfo)
-    {
+    private void addServiceInfo(ServiceInfo serviceInfo) {
         this.serviceInfoMap.put(serviceInfo.getJndiName(), serviceInfo);
         this.serviceInfoClassMap.put(serviceInfo.getAccessClassType(), serviceInfo);
     }
 
-    public Object createService(ServiceProvider parent, ServiceInfo serviceInfo)
-    {
-        if (!serviceInfo.isValid())
-        {
+    public Object createService(ServiceProvider parent, ServiceInfo serviceInfo) {
+        if (!serviceInfo.isValid()) {
             this.logger.error("The service is not valid : " + serviceInfo);
             return null;
         }
 
         ServiceProvider serviceProvider = (parent == null ? this : parent);
         Object service = null;
-        if (serviceInfo.isProxy())
-        {
+        if (serviceInfo.isProxy()) {
             ClassLoader classLoader = serviceInfo.getServiceClassType().getClassLoader();
-            Class<?>[] interfaces = new Class[] { serviceInfo.getAccessClassType() };
+            Class<?>[] interfaces = new Class[]{serviceInfo.getAccessClassType()};
             InvocationHandler invocationHandler = null;
-            if (serviceInfo.isPool())
-            {
+            if (serviceInfo.isPool()) {
                 ServicePool serviceBeanPool = new ServicePool(serviceProvider, serviceInfo);
                 ServicePoolInvocationHandler servicePoolInvocationHandler = new ServicePoolInvocationHandler(serviceBeanPool);
-                if (servicePoolInvocationHandler.isValid())
-                {
+                if (servicePoolInvocationHandler.isValid()) {
                     this.servicePoolList.add(serviceBeanPool);
                     invocationHandler = servicePoolInvocationHandler;
                 }
-            }
-            else
-            {
+            } else {
                 ServiceInvocationHandler serviceInvocationHandler = new ServiceInvocationHandler(serviceProvider, serviceInfo);
                 if (serviceInvocationHandler.isValid())
                     invocationHandler = serviceInvocationHandler;
             }
             if (invocationHandler != null)
                 service = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
-        }
-        else
+        } else
             service = serviceInfo.createInstance(serviceProvider);
 
         if (service == null)
             this.logger.error("The service is not create : " + serviceInfo);
-        else if (!ValueUtils.isEmpty(serviceInfo.getJndiName()))
-        {
+        else if (!ValueUtils.isEmpty(serviceInfo.getJndiName())) {
             serviceInfo.setInstance(service);
             this.addServiceInfo(serviceInfo);
         }
         return service;
     }
 
-    public ServiceInfo createServiceInfo(Class<?> accessClassType, Class<?> serviceClassType)
-    {
+    public ServiceInfo createServiceInfo(Class<?> accessClassType, Class<?> serviceClassType) {
         ServiceInfo serviceInfo = null;
         String jndiName = ServiceUtils.readJndiName(accessClassType, serviceClassType);
-        if (!ValueUtils.isEmpty(jndiName))
-        {
+        if (!ValueUtils.isEmpty(jndiName)) {
             serviceInfo = this.serviceInfoMap.get(jndiName);
-            if (serviceInfo == null)
-            {
+            if (serviceInfo == null) {
                 serviceInfo = new ServiceInfo();
                 serviceInfo.setJndiName(jndiName);
                 serviceInfo.setAccessClassType(accessClassType);
@@ -171,13 +149,10 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
         return serviceInfo;
     }
 
-    public Collection<String> getJndiNames(boolean includeDefault)
-    {
+    public Collection<String> getJndiNames(boolean includeDefault) {
         List<String> jndiNameList = null;
-        if (this.serviceInfoMap.size() > 0)
-        {
-            for (String jndiName : this.serviceInfoMap.keySet())
-            {
+        if (this.serviceInfoMap.size() > 0) {
+            for (String jndiName : this.serviceInfoMap.keySet()) {
                 if (!includeDefault && jndiName.startsWith(DEFAULT_MODULE))
                     continue;
                 if (jndiNameList == null)
@@ -190,13 +165,11 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
         return jndiNameList;
     }
 
-    public ServiceInfo getServiceInfo(Class<?> classType)
-    {
+    public ServiceInfo getServiceInfo(Class<?> classType) {
         return this.serviceInfoClassMap.get(classType);
     }
 
-    public ServiceInfo getServiceInfo(String jndiName)
-    {
+    public ServiceInfo getServiceInfo(String jndiName) {
         if (ValueUtils.isEmpty(jndiName))
             return null;
         if (jndiName.indexOf("/") == -1)
@@ -205,15 +178,12 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
-        this.timer = new Timer(SERVICE_NAME, new Runnable()
-        {
+        this.timer = new Timer(SERVICE_NAME, new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 for (ServicePool servicePool : ServiceFactory.this.servicePoolList)
                     servicePool.cleatTimeOut(CLEAN_PERIOD);
             }
@@ -224,98 +194,85 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
 
     /**
      * 载入配置文件里的服务设定。
+     *
      * @param classType 服务类型。
      */
-    public void load(Class<?> classType)
-    {
+    public void load(Class<?> classType) {
         this.load(this, classType, null, FILENAME_POSTFIX);
     }
 
     /**
      * 载入配置文件里的服务设定。
+     *
      * @param file 配置文件。
      */
-    public void load(File file)
-    {
+    public void load(File file) {
         this.load(this, file);
     }
 
     /**
      * 载入配置文件里的服务设定。
-     * @param parent 所属父服务。
-     * @param classType 服务类型。
-     * @param namePreFix 配置前缀。
+     *
+     * @param parent      所属父服务。
+     * @param classType   服务类型。
+     * @param namePreFix  配置前缀。
      * @param namePostFix 配置后缀。
      */
-    public void load(ServiceBase parent, Class<?> classType, String namePreFix, String namePostFix)
-    {
+    public void load(ServiceBase parent, Class<?> classType, String namePreFix, String namePostFix) {
         ResourceLoader resourceLoader = new ResourceLoader(classType, namePreFix, namePostFix);
         resourceLoader.load();
-        try
-        {
-            for (Resource resource : resourceLoader.getResourceList())
-            {
+        try {
+            for (Resource resource : resourceLoader.getResourceList()) {
                 this.logger.info("Load service bean config from " + resource + " by " + classType.getSimpleName());
                 this.load(parent, resource.getInputStream());
             }
-        }
-        finally
-        {
+        } finally {
             resourceLoader.close();
         }
     }
 
     /**
      * 载入配置文件里的服务设定。
+     *
      * @param parent 所属父服务。
-     * @param file 配置文件。
+     * @param file   配置文件。
      */
-    public void load(ServiceBase parent, File file)
-    {
-        if (file == null || !file.exists())
-        {
+    public void load(ServiceBase parent, File file) {
+        if (file == null || !file.exists()) {
             this.logger.warn("The service bean config file " + file + " is not exists.");
             return;
         }
 
         InputStream inputStream = null;
-        try
-        {
+        try {
             inputStream = new FileInputStream(file);
             this.load(parent, inputStream);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             this.logger.error(file, e);
-        }
-        finally
-        {
+        } finally {
             inputStream = FileUtils.close(inputStream);
         }
     }
 
     /**
      * 载入配置文件里的服务设定。
+     *
      * @param serviceBase 服务实例。
      * @param inputStream 配置输入流。
      */
-    private void load(ServiceBase parent, InputStream inputStream)
-    {
-        try
-        {
+    private void load(ServiceBase parent, InputStream inputStream) {
+        try {
             ServicesXmlResolver servicesXmlResolver = new ServicesXmlResolver();
             servicesXmlResolver.open(inputStream);
             servicesXmlResolver.resolve();
             Collection<Object> interceptors = ServiceUtils.createInterceptors(servicesXmlResolver.getInterceptors());
-            for (ServiceInfo serviceInfo : servicesXmlResolver.getServiceInfos())
-            {
+            for (ServiceInfo serviceInfo : servicesXmlResolver.getServiceInfos()) {
                 serviceInfo.initialize();
                 if (interceptors != null && !interceptors.isEmpty())
                     serviceInfo.addInterceptors(interceptors.toArray());
 
                 Object service = this.createService(parent, serviceInfo);
-                if (service != null)
-                {
+                if (service != null) {
                     parent.addService(serviceInfo.getAccessClassType(), service);
 
                     if (service instanceof ServiceBase)
@@ -323,29 +280,24 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator
 
                     StringBuilder info = new StringBuilder();
                     StringTokenizer stringTokenizer = new StringTokenizer(serviceInfo.toString(), Environment.LINE_SEPARATOR);
-                    while (stringTokenizer.hasMoreElements())
-                    {
+                    while (stringTokenizer.hasMoreElements()) {
                         info.append(Environment.LINETAB_SEPARATOR);
                         info.append(stringTokenizer.nextToken());
                     }
                     this.logger.info(parent.getClass() + " load services : " + info.toString());
                 }
             }
-            for (ServiceInfo serviceInfo : servicesXmlResolver.getServiceInfos())
-            {
+            for (ServiceInfo serviceInfo : servicesXmlResolver.getServiceInfos()) {
                 if (serviceInfo.getInstance() != null)
                     ServiceHelper.inject(parent, serviceInfo.getInstance());
             }
-        }
-        catch (DocumentException e)
-        {
+        } catch (DocumentException e) {
             this.logger.error(parent, e);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T lookup(String jndiName)
-    {
+    public <T> T lookup(String jndiName) {
         ServiceInfo serviceInfo = this.serviceInfoMap.get(jndiName);
         return serviceInfo == null ? null : (T) serviceInfo.getInstance();
     }

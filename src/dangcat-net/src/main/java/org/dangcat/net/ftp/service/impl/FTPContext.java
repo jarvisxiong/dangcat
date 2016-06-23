@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 
-public class FTPContext
-{
+public class FTPContext {
     public static String OPT_DELETE = "Delete";
     public static String OPT_DOWNLOAD = "Download";
     public static String OPT_LIST = "List";
@@ -29,40 +28,34 @@ public class FTPContext
     private int totalCount = 0;
     private long totalSize = 0l;
 
-    public FTPContext(File localPath, String remotePath)
-    {
+    public FTPContext(File localPath, String remotePath) {
         this.localPath = localPath;
         this.remotePath = remotePath;
     }
 
-    public FTPContext(File localPath, String remotePath, FileFilter localFileFilter)
-    {
+    public FTPContext(File localPath, String remotePath, FileFilter localFileFilter) {
         this.localPath = localPath;
         this.remotePath = remotePath;
         this.localFileFilter = localFileFilter;
     }
 
-    public FTPContext(File localPath, String remotePath, FilenameFilter remoteFileFilter)
-    {
+    public FTPContext(File localPath, String remotePath, FilenameFilter remoteFileFilter) {
         this.localPath = localPath;
         this.remotePath = remotePath;
         this.remoteFileFilter = remoteFileFilter;
     }
 
-    public FTPContext(File localPath, String remotePath, FTPCallBack callBack)
-    {
+    public FTPContext(File localPath, String remotePath, FTPCallBack callBack) {
         this.localPath = localPath;
         this.remotePath = remotePath;
         this.callBack = callBack;
     }
 
-    public FTPContext(String remotePath)
-    {
+    public FTPContext(String remotePath) {
         this.remotePath = remotePath;
     }
 
-    public FTPCallBack getCallBack()
-    {
+    public FTPCallBack getCallBack() {
         return this.callBack;
     }
 
@@ -70,8 +63,7 @@ public class FTPContext
         this.callBack = callBack;
     }
 
-    public long getCostTime()
-    {
+    public long getCostTime() {
         return this.costTime;
     }
 
@@ -79,18 +71,15 @@ public class FTPContext
         this.costTime = costTime;
     }
 
-    public int getFinishedPercent()
-    {
+    public int getFinishedPercent() {
         return this.totalSize == 0l ? 0 : (int) (this.finishedSize * 100.0 / this.totalSize);
     }
 
-    public long getFinishedSize()
-    {
+    public long getFinishedSize() {
         return this.finishedSize;
     }
 
-    public FTPClient getFtpClient()
-    {
+    public FTPClient getFtpClient() {
         return this.ftpClient;
     }
 
@@ -98,8 +87,7 @@ public class FTPContext
         this.ftpClient = ftpClient;
     }
 
-    protected FTPSession getFtpSession()
-    {
+    protected FTPSession getFtpSession() {
         return this.ftpSession;
     }
 
@@ -107,13 +95,11 @@ public class FTPContext
         this.ftpSession = ftpSession;
     }
 
-    public long getLastResponseTime()
-    {
+    public long getLastResponseTime() {
         return this.lastResponseTime;
     }
 
-    public FileFilter getLocalFileFilter()
-    {
+    public FileFilter getLocalFileFilter() {
         return this.localFileFilter;
     }
 
@@ -121,13 +107,11 @@ public class FTPContext
         this.localFileFilter = localFileFilter;
     }
 
-    public File getLocalPath()
-    {
+    public File getLocalPath() {
         return this.localPath;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -135,8 +119,7 @@ public class FTPContext
         this.name = name;
     }
 
-    public FilenameFilter getRemoteFileFilter()
-    {
+    public FilenameFilter getRemoteFileFilter() {
         return this.remoteFileFilter;
     }
 
@@ -144,8 +127,7 @@ public class FTPContext
         this.remoteFileFilter = remoteFileFilter;
     }
 
-    public String getRemotePath()
-    {
+    public String getRemotePath() {
         return this.remotePath;
     }
 
@@ -153,40 +135,33 @@ public class FTPContext
         this.remotePath = remotePath;
     }
 
-    public int getTotalCount()
-    {
+    public int getTotalCount() {
         return this.totalCount;
     }
 
-    public long getTotalSize()
-    {
+    public long getTotalSize() {
         return this.totalSize;
     }
 
-    public void increaseCostTime(long value)
-    {
+    public void increaseCostTime(long value) {
         this.costTime += value;
     }
 
-    public void increaseFinished(long value)
-    {
+    public void increaseFinished(long value) {
         this.finishedSize += value;
         this.response();
     }
 
-    public void increaseTotalCount()
-    {
+    public void increaseTotalCount() {
         this.totalCount++;
         this.response();
     }
 
-    public void increaseTotalSize(long value)
-    {
+    public void increaseTotalSize(long value) {
         this.totalSize += value;
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.cancel;
     }
 
@@ -194,8 +169,7 @@ public class FTPContext
         this.cancel = cancel;
     }
 
-    public void reset()
-    {
+    public void reset() {
         this.totalSize = 0l;
         this.finishedSize = 0l;
         this.costTime = 0l;
@@ -204,8 +178,7 @@ public class FTPContext
         this.response();
     }
 
-    public void response()
-    {
+    public void response() {
         this.lastResponseTime = System.currentTimeMillis();
     }
 }

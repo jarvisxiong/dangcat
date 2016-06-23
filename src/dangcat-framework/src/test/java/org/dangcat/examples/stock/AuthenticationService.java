@@ -1,7 +1,6 @@
 package org.dangcat.examples.stock;
 
-public interface AuthenticationService
-{
+public interface AuthenticationService {
     SettleService getSettleService();
 
     UserInfoService getUserInfoService();

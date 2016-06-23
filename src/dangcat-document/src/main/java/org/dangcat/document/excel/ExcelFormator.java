@@ -6,12 +6,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 /**
  * 格式化文档。
  */
-public interface ExcelFormator
-{
+public interface ExcelFormator {
     /**
      * 格式化文档。
+     *
      * @param workbook 工作簿。
-     * @param sheet 标签页。
+     * @param sheet    标签页。
      */
     void format(Workbook workbook, Sheet sheet);
 }

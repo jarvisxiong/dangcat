@@ -2,8 +2,7 @@ package org.dangcat.persistence.index;
 
 import java.util.*;
 
-public class BinaryTree<K, V>
-{
+public class BinaryTree<K, V> {
     protected static final boolean BLACK = true;
     protected static final boolean RED = false;
     private Comparator<? super K> comparator;
@@ -11,30 +10,25 @@ public class BinaryTree<K, V>
     private Entry<K, V> root = null;
     private int size = 0;
 
-    public BinaryTree()
-    {
+    public BinaryTree() {
     }
 
-    public BinaryTree(Comparator<Object> comparator)
-    {
+    public BinaryTree(Comparator<Object> comparator) {
         this.comparator = comparator;
     }
 
-    public void clear()
-    {
+    public void clear() {
         this.size = 0;
         this.root = null;
         this.entryMap.clear();
     }
 
-    private boolean colorOf(Entry<K, V> entry)
-    {
+    private boolean colorOf(Entry<K, V> entry) {
         return entry == null ? BLACK : entry.color;
     }
 
     @SuppressWarnings("unchecked")
-    private int compare(K srcKey, K dstKey)
-    {
+    private int compare(K srcKey, K dstKey) {
         if (this.comparator != null)
             return this.comparator.compare(srcKey, dstKey);
 
@@ -42,18 +36,15 @@ public class BinaryTree<K, V>
         return comparable.compareTo(dstKey);
     }
 
-    public boolean containsKey(K key)
-    {
+    public boolean containsKey(K key) {
         return this.getEntry(key) != null;
     }
 
-    private void deleteEntry(Entry<K, V> entry)
-    {
+    private void deleteEntry(Entry<K, V> entry) {
         this.size--;
         this.entryMap.remove(entry.key);
 
-        if (entry.left != null && entry.right != null)
-        {
+        if (entry.left != null && entry.right != null) {
             Entry<K, V> findEntry = this.successor(entry);
             entry.key = findEntry.key;
             entry.value = findEntry.value;
@@ -62,8 +53,7 @@ public class BinaryTree<K, V>
         }
 
         Entry<K, V> replacement = (entry.left != null ? entry.left : entry.right);
-        if (replacement != null)
-        {
+        if (replacement != null) {
             replacement.parent = entry.parent;
             if (entry.parent == null)
                 root = replacement;
@@ -76,16 +66,13 @@ public class BinaryTree<K, V>
 
             if (entry.color == BLACK)
                 this.fixAfterDeletion(replacement);
-        }
-        else if (entry.parent == null)
+        } else if (entry.parent == null)
             this.root = null;
-        else
-        {
+        else {
             if (entry.color == BLACK)
                 this.fixAfterDeletion(entry);
 
-            if (entry.parent != null)
-            {
+            if (entry.parent != null) {
                 if (entry == entry.parent.left)
                     entry.parent.left = null;
                 else if (entry == entry.parent.right)
@@ -95,17 +82,14 @@ public class BinaryTree<K, V>
         }
     }
 
-    public Set<Entry<K, V>> find(Comparable<Object> comparable)
-    {
+    public Set<Entry<K, V>> find(Comparable<Object> comparable) {
         Set<Entry<K, V>> entrySet = new LinkedHashSet<Entry<K, V>>();
         this.find(this.root, comparable, entrySet);
         return entrySet;
     }
 
-    private void find(Entry<K, V> entry, Comparable<Object> comparable, Set<Entry<K, V>> entryList)
-    {
-        if (entry != null)
-        {
+    private void find(Entry<K, V> entry, Comparable<Object> comparable, Set<Entry<K, V>> entryList) {
+        if (entry != null) {
             int result = comparable.compareTo(entry.key);
             if (result <= 0)
                 this.find(entry.left, comparable, entryList);
@@ -116,32 +100,26 @@ public class BinaryTree<K, V>
         }
     }
 
-    /** From CLR */
-    private void fixAfterDeletion(Entry<K, V> entry)
-    {
-        while (entry != root && colorOf(entry) == BLACK)
-        {
-            if (entry == this.leftOf(this.parentOf(entry)))
-            {
+    /**
+     * From CLR
+     */
+    private void fixAfterDeletion(Entry<K, V> entry) {
+        while (entry != root && colorOf(entry) == BLACK) {
+            if (entry == this.leftOf(this.parentOf(entry))) {
                 Entry<K, V> findEntry = this.rightOf(this.parentOf(entry));
 
-                if (this.colorOf(findEntry) == RED)
-                {
+                if (this.colorOf(findEntry) == RED) {
                     this.setColor(findEntry, BLACK);
                     this.setColor(this.parentOf(entry), RED);
                     this.rotateLeft(this.parentOf(entry));
                     findEntry = this.rightOf(this.parentOf(entry));
                 }
 
-                if (this.leftColorOf(findEntry) == BLACK && this.rightColorOf(findEntry) == BLACK)
-                {
+                if (this.leftColorOf(findEntry) == BLACK && this.rightColorOf(findEntry) == BLACK) {
                     this.setColor(findEntry, RED);
                     entry = this.parentOf(entry);
-                }
-                else
-                {
-                    if (this.rightColorOf(findEntry) == BLACK)
-                    {
+                } else {
+                    if (this.rightColorOf(findEntry) == BLACK) {
                         this.setColor(this.leftOf(findEntry), BLACK);
                         this.setColor(findEntry, RED);
                         this.rotateRight(findEntry);
@@ -153,28 +131,21 @@ public class BinaryTree<K, V>
                     this.rotateLeft(this.parentOf(entry));
                     entry = root;
                 }
-            }
-            else
-            {
+            } else {
                 Entry<K, V> findEntry = this.leftOf(this.parentOf(entry));
 
-                if (this.colorOf(findEntry) == RED)
-                {
+                if (this.colorOf(findEntry) == RED) {
                     this.setColor(findEntry, BLACK);
                     this.setColor(this.parentOf(entry), RED);
                     this.rotateRight(this.parentOf(entry));
                     findEntry = this.leftOf(this.parentOf(entry));
                 }
 
-                if (this.rightColorOf(findEntry) == BLACK && this.leftColorOf(findEntry) == BLACK)
-                {
+                if (this.rightColorOf(findEntry) == BLACK && this.leftColorOf(findEntry) == BLACK) {
                     this.setColor(findEntry, RED);
                     entry = this.parentOf(entry);
-                }
-                else
-                {
-                    if (this.leftColorOf(findEntry) == BLACK)
-                    {
+                } else {
+                    if (this.leftColorOf(findEntry) == BLACK) {
                         this.setColor(this.rightOf(findEntry), BLACK);
                         this.setColor(findEntry, RED);
                         this.rotateLeft(findEntry);
@@ -192,26 +163,21 @@ public class BinaryTree<K, V>
         this.setColor(entry, BLACK);
     }
 
-    /** From CLR */
-    private void fixAfterInsertion(Entry<K, V> entry)
-    {
+    /**
+     * From CLR
+     */
+    private void fixAfterInsertion(Entry<K, V> entry) {
         entry.color = RED;
-        while (entry != null && entry != root && entry.parent.color == RED)
-        {
-            if (this.parentOf(entry) == this.leftOf(this.parentOf(this.parentOf(entry))))
-            {
+        while (entry != null && entry != root && entry.parent.color == RED) {
+            if (this.parentOf(entry) == this.leftOf(this.parentOf(this.parentOf(entry)))) {
                 Entry<K, V> findEntry = this.rightOf(this.parentOf(this.parentOf(entry)));
-                if (this.colorOf(findEntry) == RED)
-                {
+                if (this.colorOf(findEntry) == RED) {
                     this.setColor(this.parentOf(entry), BLACK);
                     this.setColor(findEntry, BLACK);
                     this.setColor(this.parentOf(this.parentOf(entry)), RED);
                     entry = this.parentOf(this.parentOf(entry));
-                }
-                else
-                {
-                    if (entry == this.rightOf(this.parentOf(entry)))
-                    {
+                } else {
+                    if (entry == this.rightOf(this.parentOf(entry))) {
                         entry = this.parentOf(entry);
                         this.rotateLeft(entry);
                     }
@@ -219,21 +185,15 @@ public class BinaryTree<K, V>
                     this.setColor(this.parentOf(this.parentOf(entry)), RED);
                     this.rotateRight(this.parentOf(this.parentOf(entry)));
                 }
-            }
-            else
-            {
+            } else {
                 Entry<K, V> findEntry = this.leftOf(this.parentOf(this.parentOf(entry)));
-                if (this.colorOf(findEntry) == RED)
-                {
+                if (this.colorOf(findEntry) == RED) {
                     this.setColor(this.parentOf(entry), BLACK);
                     this.setColor(findEntry, BLACK);
                     this.setColor(this.parentOf(this.parentOf(entry)), RED);
                     entry = this.parentOf(this.parentOf(entry));
-                }
-                else
-                {
-                    if (entry == this.leftOf(this.parentOf(entry)))
-                    {
+                } else {
+                    if (entry == this.leftOf(this.parentOf(entry))) {
                         entry = this.parentOf(entry);
                         this.rotateRight(entry);
                     }
@@ -246,62 +206,51 @@ public class BinaryTree<K, V>
         this.root.color = BLACK;
     }
 
-    public V get(K key)
-    {
+    public V get(K key) {
         Entry<K, V> entry = this.getEntryByKey(key);
         return entry == null ? null : entry.value;
     }
 
-    public Collection<Entry<K, V>> getEntities()
-    {
+    public Collection<Entry<K, V>> getEntities() {
         return entryMap.values();
     }
 
-    public Entry<K, V> getEntry(K key)
-    {
+    public Entry<K, V> getEntry(K key) {
         return this.getEntryByKey(key);
     }
 
-    private Entry<K, V> getEntryByKey(K key)
-    {
+    private Entry<K, V> getEntryByKey(K key) {
         if (key == null)
             throw new NullPointerException();
         return this.entryMap.get(key);
     }
 
-    public Set<K> getKeySet()
-    {
+    public Set<K> getKeySet() {
         return this.entryMap.keySet();
     }
 
-    private boolean leftColorOf(Entry<K, V> entry)
-    {
+    private boolean leftColorOf(Entry<K, V> entry) {
         return this.colorOf(this.leftOf(entry));
     }
 
-    private Entry<K, V> leftOf(Entry<K, V> entry)
-    {
+    private Entry<K, V> leftOf(Entry<K, V> entry) {
         return entry == null ? null : entry.left;
     }
 
-    private boolean parentColorOf(Entry<K, V> entry)
-    {
+    private boolean parentColorOf(Entry<K, V> entry) {
         return this.colorOf(this.parentOf(entry));
     }
 
-    private Entry<K, V> parentOf(Entry<K, V> entry)
-    {
+    private Entry<K, V> parentOf(Entry<K, V> entry) {
         return entry == null ? null : entry.parent;
     }
 
-    public V put(K key, V value)
-    {
+    public V put(K key, V value) {
         if (key == null)
             throw new NullPointerException();
 
         Entry<K, V> entry = this.root;
-        if (entry == null)
-        {
+        if (entry == null) {
             this.root = new Entry<K, V>(key, value, null);
             this.size = 1;
             this.entryMap.put(this.root.key, this.root);
@@ -310,8 +259,7 @@ public class BinaryTree<K, V>
 
         int result;
         Entry<K, V> parent;
-        do
-        {
+        do {
             parent = entry;
             result = this.compare(key, entry.key);
             if (result < 0)
@@ -333,33 +281,29 @@ public class BinaryTree<K, V>
         return value;
     }
 
-    public V remove(K key)
-    {
+    public V remove(K key) {
         V value = null;
         Entry<K, V> entry = this.getEntryByKey(key);
-        if (entry != null)
-        {
+        if (entry != null) {
             value = entry.value;
             this.deleteEntry(entry);
         }
         return value;
     }
 
-    private boolean rightColorOf(Entry<K, V> entry)
-    {
+    private boolean rightColorOf(Entry<K, V> entry) {
         return this.colorOf(this.rightOf(entry));
     }
 
-    private Entry<K, V> rightOf(Entry<K, V> entry)
-    {
+    private Entry<K, V> rightOf(Entry<K, V> entry) {
         return entry == null ? null : entry.right;
     }
 
-    /** From CLR */
-    private void rotateLeft(Entry<K, V> entry)
-    {
-        if (entry != null)
-        {
+    /**
+     * From CLR
+     */
+    private void rotateLeft(Entry<K, V> entry) {
+        if (entry != null) {
             Entry<K, V> right = entry.right;
             entry.right = right.left;
             if (right.left != null)
@@ -376,11 +320,11 @@ public class BinaryTree<K, V>
         }
     }
 
-    /** From CLR */
-    private void rotateRight(Entry<K, V> entry)
-    {
-        if (entry != null)
-        {
+    /**
+     * From CLR
+     */
+    private void rotateRight(Entry<K, V> entry) {
+        if (entry != null) {
             Entry<K, V> left = entry.left;
             entry.left = left.right;
             if (left.right != null)
@@ -397,35 +341,27 @@ public class BinaryTree<K, V>
         }
     }
 
-    private void setColor(Entry<K, V> entry, boolean color)
-    {
+    private void setColor(Entry<K, V> entry, boolean color) {
         if (entry != null)
             entry.color = color;
     }
 
-    public int size()
-    {
+    public int size() {
         return size;
     }
 
-    private Entry<K, V> successor(Entry<K, V> entry)
-    {
+    private Entry<K, V> successor(Entry<K, V> entry) {
         Entry<K, V> findEntry = null;
-        if (entry != null)
-        {
-            if (entry.right != null)
-            {
+        if (entry != null) {
+            if (entry.right != null) {
                 Entry<K, V> right = entry.right;
                 while (right.left != null)
                     right = right.left;
                 findEntry = right;
-            }
-            else
-            {
+            } else {
                 Entry<K, V> parent = entry.parent;
                 Entry<K, V> child = entry;
-                while (parent != null && child == parent.right)
-                {
+                while (parent != null && child == parent.right) {
                     child = parent;
                     parent = parent.parent;
                 }

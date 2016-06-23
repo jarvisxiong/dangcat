@@ -18,33 +18,28 @@ import java.util.Collection;
 
 /**
  * 缓存管理服务。
+ *
  * @author dangcat
- * 
  */
-public class EntityCacheServiceImpl extends ServiceControlBase implements Runnable, EntityUpdateNotifier
-{
+public class EntityCacheServiceImpl extends ServiceControlBase implements Runnable, EntityUpdateNotifier {
     /**
      * 所属父服务。
+     *
      * @param parent
      */
-    public EntityCacheServiceImpl(ServiceProvider parent)
-    {
+    public EntityCacheServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
-    private void createAlarmClock()
-    {
-        CronAlarmClock cronAlarmClock = new CronAlarmClock(this)
-        {
+    private void createAlarmClock() {
+        CronAlarmClock cronAlarmClock = new CronAlarmClock(this) {
             @Override
-            public String getCronExpression()
-            {
+            public String getCronExpression() {
                 return EntityCacheConfig.getInstance().getCronExpression();
             }
 
             @Override
-            public boolean isEnabled()
-            {
+            public boolean isEnabled() {
                 return !Environment.isTestEnabled() && EntityCacheConfig.getInstance().isEnabled();
             }
         };
@@ -54,11 +49,9 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     }
 
     @Override
-    public Object handle(Event event)
-    {
+    public Object handle(Event event) {
         // 其它系统更新表时通知系统联动。
-        if (event instanceof TableEvent)
-        {
+        if (event instanceof TableEvent) {
             TableEvent tableEvent = (TableEvent) event;
             if (DataState.Insert.equals(tableEvent.getDataState()) || DataState.Modified.equals(tableEvent.getDataState()))
                 this.update(tableEvent);
@@ -69,16 +62,13 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         EntityCacheConfig entityCacheConfig = EntityCacheConfig.getInstance();
-        entityCacheConfig.addConfigChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        entityCacheConfig.addConfigChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 if (EntityCacheConfig.CronExpression.equals(event.getId()))
                     EntityCacheServiceImpl.this.createAlarmClock();
             }
@@ -91,8 +81,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
             EntityCacheManager.getInstance().addEntityUpdateNotifier(this);
     }
 
-    private void notifyDeleted(String tableName, Collection<Object> deletedPrimaryKeys)
-    {
+    private void notifyDeleted(String tableName, Collection<Object> deletedPrimaryKeys) {
         TableEvent tableEvent = new TableEvent(tableName, DataState.Deleted);
         tableEvent.addPrimaryKey(deletedPrimaryKeys.toArray());
         EventSendService eventSendService = this.getService(EventSendService.class);
@@ -101,8 +90,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
             this.logger.debug("Send table deleted event : " + tableEvent);
     }
 
-    private void notifyUpdate(String tableName, Collection<Object> updateEntities)
-    {
+    private void notifyUpdate(String tableName, Collection<Object> updateEntities) {
         TableEvent tableEvent = new TableEvent(tableName, DataState.Modified);
         tableEvent.addValues(updateEntities.toArray());
         EventSendService eventSendService = this.getService(EventSendService.class);
@@ -112,11 +100,9 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     }
 
     @Override
-    public void notifyUpdate(String tableName, Collection<Object> deletedPrimaryKeys, Collection<Object> updateEntities)
-    {
+    public void notifyUpdate(String tableName, Collection<Object> deletedPrimaryKeys, Collection<Object> updateEntities) {
         EventSendService eventSendService = this.getService(EventSendService.class);
-        if (eventSendService != null)
-        {
+        if (eventSendService != null) {
             if (deletedPrimaryKeys != null && !deletedPrimaryKeys.isEmpty())
                 this.notifyDeleted(tableName, deletedPrimaryKeys);
             if (updateEntities != null && !updateEntities.isEmpty())
@@ -124,15 +110,12 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
         }
     }
 
-    private void remove(TableEvent tableEvent)
-    {
+    private void remove(TableEvent tableEvent) {
         String tableName = tableEvent.getTableName();
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
         // 通过主键刷新缓存
-        if (tableEvent.getPrimaryKeys() != null)
-        {
-            for (Object value : tableEvent.getPrimaryKeys())
-            {
+        if (tableEvent.getPrimaryKeys() != null) {
+            for (Object value : tableEvent.getPrimaryKeys()) {
                 if (value.getClass().isArray())
                     entityCacheManager.remove(tableName, (Object[]) value);
                 else
@@ -142,19 +125,16 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
                 this.logger.debug("The table " + tableName + " cache remove range : " + tableEvent.getPrimaryKeys());
         }
         // 通过实体刷新缓存
-        if (tableEvent.getValues() != null)
-        {
+        if (tableEvent.getValues() != null) {
             Object[] entities = tableEvent.getValues().toArray();
-            if (entities.length > 0)
-            {
+            if (entities.length > 0) {
                 entityCacheManager.removeEntities(tableName, entities);
                 if (this.logger.isDebugEnabled())
                     this.logger.debug("The table " + tableName + " cache update range : " + entities);
             }
         }
         // 通过过滤条件刷新缓存
-        if (tableEvent.getFilterExpress() != null)
-        {
+        if (tableEvent.getFilterExpress() != null) {
             entityCacheManager.remove(tableName, tableEvent.getFilterExpress());
             if (this.logger.isDebugEnabled())
                 this.logger.debug("The table " + tableName + " cache remove range : " + tableEvent.getFilterExpress());
@@ -165,20 +145,16 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
      * 定时清理过期的缓存数据。
      */
     @Override
-    public void run()
-    {
+    public void run() {
         EntityCacheManager.getInstance().clear(false);
     }
 
-    private void update(TableEvent tableEvent)
-    {
+    private void update(TableEvent tableEvent) {
         String tableName = tableEvent.getTableName();
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
         // 通过主键刷新缓存
-        if (tableEvent.getPrimaryKeys() != null)
-        {
-            for (Object value : tableEvent.getPrimaryKeys())
-            {
+        if (tableEvent.getPrimaryKeys() != null) {
+            for (Object value : tableEvent.getPrimaryKeys()) {
                 if (value.getClass().isArray())
                     entityCacheManager.update(tableName, (Object[]) value);
                 else
@@ -188,19 +164,16 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
                 this.logger.debug("The table " + tableName + " cache update range : " + tableEvent.getPrimaryKeys());
         }
         // 通过实体刷新缓存
-        if (tableEvent.getValues() != null)
-        {
+        if (tableEvent.getValues() != null) {
             Object[] entities = tableEvent.getValues().toArray();
-            if (entities.length > 0)
-            {
+            if (entities.length > 0) {
                 entityCacheManager.modifyEntities(tableName, entities);
                 if (this.logger.isDebugEnabled())
                     this.logger.debug("The table " + tableName + " cache update range : " + entities);
             }
         }
         // 通过过滤条件刷新缓存
-        if (tableEvent.getFilterExpress() != null)
-        {
+        if (tableEvent.getFilterExpress() != null) {
             entityCacheManager.update(tableName, tableEvent.getFilterExpress());
             if (this.logger.isDebugEnabled())
                 this.logger.debug("The table " + tableName + " cache update range : " + tableEvent.getFilterExpress());

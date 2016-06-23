@@ -4,24 +4,21 @@ import java.sql.*;
 
 /**
  * 自增序号记录表。
+ *
  * @author dangcat
- * 
  */
-public class TableGenerator
-{
+public class TableGenerator {
     private String idFieldName;
     private String tableName;
     private String valueFieldName;
 
-    public TableGenerator(String tableName, String idFieldName, String valueFieldName)
-    {
+    public TableGenerator(String tableName, String idFieldName, String valueFieldName) {
         this.tableName = tableName;
         this.idFieldName = idFieldName;
         this.valueFieldName = valueFieldName;
     }
 
-    private String getInsertSQL(String tableName)
-    {
+    private String getInsertSQL(String tableName) {
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ");
         sql.append(this.tableName);
@@ -35,8 +32,7 @@ public class TableGenerator
         return sql.toString();
     }
 
-    private String getQuerySQL(String tableName)
-    {
+    private String getQuerySQL(String tableName) {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ");
         sql.append(this.valueFieldName);
@@ -50,8 +46,7 @@ public class TableGenerator
         return sql.toString();
     }
 
-    private String getUpdateSQL(String tableName)
-    {
+    private String getUpdateSQL(String tableName) {
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE ");
         sql.append(this.tableName);
@@ -67,23 +62,20 @@ public class TableGenerator
 
     /**
      * 查询策略表当前值。
+     *
      * @param connection 数据库连接。
      * @throws SQLException 执行异常。
      */
-    public Long query(Connection connection, String tableName) throws SQLException
-    {
+    public Long query(Connection connection, String tableName) throws SQLException {
         Long value = null;
         Statement statement = null;
-        try
-        {
+        try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(this.getQuerySQL(tableName));
             if (resultSet.next() && resultSet.getObject(this.valueFieldName) != null)
                 value = resultSet.getLong(this.valueFieldName);
             resultSet.close();
-        }
-        finally
-        {
+        } finally {
             if (statement != null)
                 statement.close();
         }
@@ -92,14 +84,13 @@ public class TableGenerator
 
     /**
      * 更新序号策略表的值。
+     *
      * @param connection 数据库连接。
      * @throws SQLException 执行异常。
      */
-    public void update(Connection connection, String tableName, long value) throws SQLException
-    {
+    public void update(Connection connection, String tableName, long value) throws SQLException {
         PreparedStatement preparedStatement = null;
-        try
-        {
+        try {
             Long currentValue = this.query(connection, tableName);
             if (currentValue != null)
                 preparedStatement = connection.prepareStatement(this.getUpdateSQL(tableName));
@@ -107,9 +98,7 @@ public class TableGenerator
                 preparedStatement = connection.prepareStatement(this.getInsertSQL(tableName));
             preparedStatement.setLong(1, value);
             preparedStatement.executeUpdate();
-        }
-        finally
-        {
+        } finally {
             if (preparedStatement != null)
                 preparedStatement.close();
         }

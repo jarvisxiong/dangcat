@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Permissions>
-	<Module Id="1" Name="System">
-		<JndiName Id="1" Name="SystemInfo" />
-		<JndiName Id="2" Name="Security" />
-	</Module>
+    <Module Id="1" Name="System">
+        <JndiName Id="1" Name="SystemInfo"/>
+        <JndiName Id="2" Name="Security"/>
+    </Module>
 
-	<Module Id="2" Name="Staff">
-		<JndiName Id="1" Name="OperatorGroup" />
-		<JndiName Id="2" Name="RoleInfo" />
-		<JndiName Id="3" Name="OperatorInfo" />
-		<JndiName Id="4" Name="OperateLog" />
-	</Module>
-	
-	<Module Id="3" Name="Device">
-		<JndiName Id="1" Name="ServerInfo" />
-	</Module>
+    <Module Id="2" Name="Staff">
+        <JndiName Id="1" Name="OperatorGroup"/>
+        <JndiName Id="2" Name="RoleInfo"/>
+        <JndiName Id="3" Name="OperatorInfo"/>
+        <JndiName Id="4" Name="OperateLog"/>
+    </Module>
 
-	<Roles>
-		<Role Name="admin">
-			<Permissions>*</Permissions>
-		</Role>
-		<Role Name="operator">
-			<Permissions>02</Permissions>
-		</Role>
-		<Role Name="guest">
-			<Permissions>0201</Permissions>
-		</Role>
-		<Role Name="user">
-			<Permissions>020101</Permissions>
-		</Role>
-	</Roles>
+    <Module Id="3" Name="Device">
+        <JndiName Id="1" Name="ServerInfo"/>
+    </Module>
+
+    <Roles>
+        <Role Name="admin">
+            <Permissions>*</Permissions>
+        </Role>
+        <Role Name="operator">
+            <Permissions>02</Permissions>
+        </Role>
+        <Role Name="guest">
+            <Permissions>0201</Permissions>
+        </Role>
+        <Role Name="user">
+            <Permissions>020101</Permissions>
+        </Role>
+    </Roles>
 </Permissions>

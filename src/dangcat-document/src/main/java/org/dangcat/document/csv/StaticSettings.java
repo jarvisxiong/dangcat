@@ -1,7 +1,6 @@
 package org.dangcat.document.csv;
 
-class StaticSettings
-{
+class StaticSettings {
     protected static final int INITIAL_COLUMN_BUFFER_SIZE = 50;
     protected static final int INITIAL_COLUMN_COUNT = 10;
     // these are static instead of final so they can be changed in unit test

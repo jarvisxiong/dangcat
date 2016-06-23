@@ -7,19 +7,17 @@ import java.util.List;
 
 /**
  * 数据表集合。
+ *
  * @author dangcat
- * 
  */
-public class DataSet implements java.io.Serializable
-{
+public class DataSet implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private List<Table> tables = new ArrayList<Table>();
 
     /**
      * 增加数据表对象。
      */
-    public void add(Table table)
-    {
+    public void add(Table table) {
         if (!tables.contains(table))
             tables.add(table);
     }
@@ -27,16 +25,14 @@ public class DataSet implements java.io.Serializable
     /**
      * 数据表集合。
      */
-    public List<Table> getTables()
-    {
+    public List<Table> getTables() {
         return this.tables;
     }
 
     /**
      * 载入数据。
      */
-    public void load() throws TableException
-    {
+    public void load() throws TableException {
         for (Table table : this.tables)
             table.load();
     }
@@ -44,8 +40,7 @@ public class DataSet implements java.io.Serializable
     /**
      * 删除数据表对象。
      */
-    public void remove(Table table)
-    {
+    public void remove(Table table) {
         if (tables.contains(table))
             tables.remove(table);
     }
@@ -53,8 +48,7 @@ public class DataSet implements java.io.Serializable
     /**
      * 存储数据。
      */
-    public void save() throws TableException
-    {
+    public void save() throws TableException {
         for (Table table : this.tables)
             table.save();
     }

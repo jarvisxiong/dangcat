@@ -12,8 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class ServerCodePanel extends CodePanel
-{
+public class ServerCodePanel extends CodePanel {
     private static final String PACKAGE_NAME = "Package";
     private static final String PATH = "Path";
     private static final long serialVersionUID = 1L;
@@ -24,8 +23,7 @@ public class ServerCodePanel extends CodePanel
     private JTextField pathTextField = null;
     private JTextField serverNameTextField = null;
 
-    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -42,8 +40,7 @@ public class ServerCodePanel extends CodePanel
         constraints.gridy = y;
         panel.add(textField, constraints);
 
-        if (button != null)
-        {
+        if (button != null) {
             constraints.weightx = 0.1;
             constraints.gridx = 4;
             constraints.gridwidth = 1;
@@ -54,8 +51,7 @@ public class ServerCodePanel extends CodePanel
         }
     }
 
-    private JPanel createConfigPanel()
-    {
+    private JPanel createConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 0));
         panel.setBorder(new TitledBorder(this.getText("Config")));
@@ -76,11 +72,9 @@ public class ServerCodePanel extends CodePanel
         browseButton.setAlignmentX(CENTER_ALIGNMENT);
         browseButton.setMnemonic(KeyEvent.VK_B);
         browseButton.setDisplayedMnemonicIndex(browseButton.getText().indexOf("B"));
-        browseButton.addActionListener(new ActionListener()
-        {
+        browseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 ServerCodePanel.this.choicePath(ServerCodePanel.this.pathTextField);
             }
         });
@@ -94,11 +88,9 @@ public class ServerCodePanel extends CodePanel
         generateButton.setAlignmentX(CENTER_ALIGNMENT);
         generateButton.setMnemonic(KeyEvent.VK_G);
         generateButton.setDisplayedMnemonicIndex(generateButton.getText().indexOf("G"));
-        generateButton.addActionListener(new ActionListener()
-        {
+        generateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 ServerCodePanel.this.generate();
             }
         });
@@ -108,13 +100,11 @@ public class ServerCodePanel extends CodePanel
     }
 
     @Override
-    protected Logger createLogger()
-    {
+    protected Logger createLogger() {
         return new org.dangcat.commons.log.Logger(Logger.getLogger(ServerCodeGenerator.class), "BusinessCallback", this.logPane);
     }
 
-    private JPanel createLogPanel()
-    {
+    private JPanel createLogPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -130,8 +120,7 @@ public class ServerCodePanel extends CodePanel
         return panel;
     }
 
-    private void generate()
-    {
+    private void generate() {
         if (!this.validateEmpty(this.packageNameTextField, PACKAGE_NAME))
             return;
         if (!this.validateEmpty(this.serverNameTextField, SERVER_NAME))
@@ -139,8 +128,7 @@ public class ServerCodePanel extends CodePanel
         if (!this.validateEmpty(this.pathTextField, PATH))
             return;
 
-        try
-        {
+        try {
             this.getLogger().info(this.getText("BeginGenerate") + ": " + this.pathTextField.getText());
             ServerCodeGenerator serverCodeGenerator = new ServerCodeGenerator(this.packageNameTextField.getText(), this.serverNameTextField.getText());
             serverCodeGenerator.setParentComponent(this);
@@ -148,17 +136,14 @@ public class ServerCodePanel extends CodePanel
             serverCodeGenerator.setOutputDir(this.pathTextField.getText());
             serverCodeGenerator.generate();
             this.getLogger().info(this.getText("EndGenerate"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.getLogger().error(this, e);
             JOptionPane.showMessageDialog(this, this.getText("GenerateError"));
         }
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.createConfigPanel());
         this.add(this.createLogPanel());

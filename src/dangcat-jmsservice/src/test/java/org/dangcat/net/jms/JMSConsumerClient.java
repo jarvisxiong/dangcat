@@ -9,48 +9,37 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-public class JMSConsumerClient extends JMSClientBase
-{
+public class JMSConsumerClient extends JMSClientBase {
     private static final String TOPIC = "topic";
 
     public JMSConsumerClient(String subject) {
         super(subject);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         JMSConsumerClient jmsClient = new JMSConsumerClient(TOPIC);
         jmsClient.configure();
         jmsClient.start();
     }
 
     @Override
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             JMSSession jmsSession = JMSConnectionFactory.getInstance().openSession(this.getSubject());
             JMSConsumer jmsConsumer = jmsSession.createJMSConsumer();
-            jmsConsumer.addMessageListener(new MessageListener()
-            {
+            jmsConsumer.addMessageListener(new MessageListener() {
                 @Override
-                public void onMessage(Message message)
-                {
+                public void onMessage(Message message) {
                     TextMessage textMessage = (TextMessage) message;
-                    try
-                    {
+                    try {
                         System.out.println("receive message " + textMessage.getText());
-                    }
-                    catch (JMSException e)
-                    {
+                    } catch (JMSException e) {
                         logger.error(this, e);
                     }
                 }
             });
             jmsConsumer.receive();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
         }
     }

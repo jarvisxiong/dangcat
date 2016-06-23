@@ -14,36 +14,29 @@ import java.io.InputStream;
 
 /**
  * Jar—πÀı°£
+ *
  * @author dangcat
- * 
  */
-class JarArchiver extends Archiver
-{
+class JarArchiver extends Archiver {
     private ZipFile zipFile = null;
 
     @Override
-    protected void close()
-    {
-        try
-        {
+    protected void close() {
+        try {
             if (this.zipFile != null)
                 this.zipFile.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
         }
         super.close();
     }
 
     @Override
-    protected ArchiveEntry createArchiveEntry(String name, long size)
-    {
+    protected ArchiveEntry createArchiveEntry(String name, long size) {
         return new JarArchiveEntry(name);
     }
 
     @Override
-    protected InputStream createInputStream(File file) throws IOException
-    {
+    protected InputStream createInputStream(File file) throws IOException {
         if (!ValueUtils.isEmpty(this.getEncoding()))
             this.zipFile = new ZipFile(file, this.getEncoding());
         else
@@ -52,14 +45,12 @@ class JarArchiver extends Archiver
     }
 
     @Override
-    protected String getArchiverName()
-    {
+    protected String getArchiverName() {
         return ArchiveStreamFactory.JAR;
     }
 
     @Override
-    protected InputStream getInputStream(ArchiveInputStream archiveInputStream, ArchiveEntry archiveEntry) throws IOException
-    {
+    protected InputStream getInputStream(ArchiveInputStream archiveInputStream, ArchiveEntry archiveEntry) throws IOException {
         ZipArchiveEntry zipArchiveEntry = this.zipFile.getEntry(archiveEntry.getName());
         return this.zipFile.getInputStream(zipArchiveEntry);
     }

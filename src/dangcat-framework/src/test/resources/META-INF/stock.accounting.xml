@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Services>
-	<Service AccessType="org.dangcat.examples.stock.SettleService" ServiceType="org.dangcat.examples.stock.SettleServiceImpl">
-		<Properties>
-			<Property name="name">Name A</Property>
-			<Property name="total">999.99</Property>
-			<Property name="count">100</Property>
-			<Property name="result">True</Property>
-			<Property name="dateTime">2012-05-10 08:30:00</Property>
-		</Properties>
-	</Service>
+    <Service AccessType="org.dangcat.examples.stock.SettleService"
+             ServiceType="org.dangcat.examples.stock.SettleServiceImpl">
+        <Properties>
+            <Property name="name">Name A</Property>
+            <Property name="total">999.99</Property>
+            <Property name="count">100</Property>
+            <Property name="result">True</Property>
+            <Property name="dateTime">2012-05-10 08:30:00</Property>
+        </Properties>
+    </Service>
 </Services>

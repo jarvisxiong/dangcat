@@ -8,8 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Table
-public class BillInfo
-{
+public class BillInfo {
     public static final String Amount = "Amount";
     public static final String Id = "Id";
     public static final String Name = "Name";
@@ -17,7 +16,7 @@ public class BillInfo
     @Column
     private double amount = 0;
 
-    @Relation(parentFieldNames = { "id" }, childFieldNames = { "billId" })
+    @Relation(parentFieldNames = {"id"}, childFieldNames = {"billId"})
     private Set<BillDetail> billDetails = new LinkedHashSet<BillDetail>();
 
     @Column(isPrimaryKey = true, isAutoIncrement = true)
@@ -26,22 +25,19 @@ public class BillInfo
     @Column
     private String name;
 
-    public void addBillDetail(BillDetail billDetail)
-    {
+    public void addBillDetail(BillDetail billDetail) {
         if (this.billDetails.add(billDetail))
             this.amount += billDetail.getAmount();
     }
 
-    public void calculateTotal()
-    {
+    public void calculateTotal() {
         double totalAmount = 0;
         for (BillDetail billDetail : this.getBillDetails())
             totalAmount += billDetail.getAmount();
         this.amount = totalAmount;
     }
 
-    public double getAmount()
-    {
+    public double getAmount() {
         return amount;
     }
 
@@ -49,33 +45,27 @@ public class BillInfo
         this.amount = amount;
     }
 
-    public Set<BillDetail> getBillDetails()
-    {
+    public Set<BillDetail> getBillDetails() {
         return billDetails;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void removeBillDetail(BillDetail billDetail)
-    {
+    public void removeBillDetail(BillDetail billDetail) {
         if (this.billDetails.remove(billDetail))
             this.amount -= billDetail.getAmount();
     }

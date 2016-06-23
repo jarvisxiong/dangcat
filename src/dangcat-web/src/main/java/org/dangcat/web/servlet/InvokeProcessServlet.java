@@ -9,18 +9,16 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 执行进度查询。
+ *
  * @author dangcat
- * 
  */
-public class InvokeProcessServlet extends ServiceServletBase
-{
+public class InvokeProcessServlet extends ServiceServletBase {
     private static final String CANCEL = "cancel";
     private static final String JNDI_NAME = "jndiName";
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String jndiName = request.getParameter(JNDI_NAME);
         String invokeProcessName = jndiName + "/" + InvokeProcess.class.getSimpleName();
         HttpSession httpSession = request.getSession();

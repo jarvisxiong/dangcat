@@ -16,40 +16,36 @@ import org.dangcat.persistence.tablename.TableName;
 
 import java.util.List;
 
-class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends DataFilter> extends BusinessServiceInvoker<Q, V, F>
-{
-    BusinessServiceQuery(BusinessServiceBase<Q, V, F> businessServiceBase)
-    {
+class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends DataFilter> extends BusinessServiceInvoker<Q, V, F> {
+    BusinessServiceQuery(BusinessServiceBase<Q, V, F> businessServiceBase) {
         super(businessServiceBase);
     }
 
     /**
      * 触发加载后事件。
+     *
      * @param queryContext 操作上下文。
      */
-    private void afterQuery(QueryContext<Q> queryContext)
-    {
+    private void afterQuery(QueryContext<Q> queryContext) {
         if (this.isExtendEventEnabled())
             this.businessServiceBase.afterQuery(queryContext);
     }
 
     /**
      * 触发加载前事件。
+     *
      * @param queryContext 操作上下文。
      */
-    private void beforeQuery(QueryContext<Q> queryContext) throws ServiceException
-    {
+    private void beforeQuery(QueryContext<Q> queryContext) throws ServiceException {
         if (this.isExtendEventEnabled())
             this.businessServiceBase.beforeQuery(queryContext);
     }
 
-    protected QueryResult<Q> execute(F dataFilter) throws ServiceException
-    {
+    protected QueryResult<Q> execute(F dataFilter) throws ServiceException {
         return this.execute(dataFilter, null, null);
     }
 
-    protected QueryResult<Q> execute(F dataFilter, TableName tableName, String sqlName) throws ServiceException
-    {
+    protected QueryResult<Q> execute(F dataFilter, TableName tableName, String sqlName) throws ServiceException {
         Class<Q> classType = this.getQueryEntityClass();
 
         if (logger.isDebugEnabled())
@@ -60,8 +56,7 @@ class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends
         queryContext.setClassType(classType);
 
         long beginTime = DateUtils.currentTimeMillis();
-        try
-        {
+        try {
             EntityManager entityManager = this.getEntityManager();
             queryContext.setEntityManager(entityManager);
 
@@ -78,42 +73,33 @@ class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends
             loadEntityContext.setTableName(tableName);
             loadEntityContext.setSqlName(sqlName);
             List<Q> dataList = entityManager.load(loadEntityContext);
-            if (range != null)
-            {
+            if (range != null) {
                 queryResult.setTotalSize(range.getTotalSize());
                 queryResult.setStartRow(range.getFrom());
             }
-            if (dataList != null && dataList.size() > 0)
-            {
+            if (dataList != null && dataList.size() > 0) {
                 queryResult.getData().addAll(dataList);
                 EntityCalculator.calculate(dataList);
                 EntityUtils.resetDataState(dataList);
             }
             this.afterQuery(queryContext);
-        }
-        catch (EntityException e)
-        {
+        } catch (EntityException e) {
             logger.error(this, e);
             throw new BusinessException(BusinessException.LOAD_ERROR, classType);
-        }
-        finally
-        {
+        } finally {
             if (logger.isDebugEnabled())
                 logger.debug("End query entity, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
         }
         return queryResult;
     }
 
-    private OrderBy getOrderBy(F dataFilter, Class<Q> classType)
-    {
+    private OrderBy getOrderBy(F dataFilter, Class<Q> classType) {
         OrderBy orderBy = null;
         if (!ValueUtils.isEmpty(dataFilter.getOrderBy()))
             orderBy = OrderBy.parse(dataFilter.getOrderBy());
-        else
-        {
+        else {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
-            if (entityMetaData != null)
-            {
+            if (entityMetaData != null) {
                 orderBy = entityMetaData.getTable().getOrderBy();
                 if (orderBy == null)
                     orderBy = TableUtils.getOrderBy(entityMetaData.getTable());

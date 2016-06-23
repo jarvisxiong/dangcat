@@ -6,20 +6,16 @@ import org.dangcat.commons.resource.ResourceUtils;
 
 import java.io.File;
 
-public class FileDeleteTask extends FileDeleteProcess implements ProcessTask
-{
+public class FileDeleteTask extends FileDeleteProcess implements ProcessTask {
     private Logger currentLogger = null;
     private boolean enabled = true;
 
     @Override
-    protected void afterProcess(File file)
-    {
+    protected void afterProcess(File file) {
         super.afterProcess(file);
         File taskFile = null;
-        for (File dirFile : this.getTasks())
-        {
-            if (file.getAbsolutePath().startsWith(dirFile.getAbsolutePath()))
-            {
+        for (File dirFile : this.getTasks()) {
+            if (file.getAbsolutePath().startsWith(dirFile.getAbsolutePath())) {
                 taskFile = dirFile;
                 break;
             }
@@ -35,31 +31,26 @@ public class FileDeleteTask extends FileDeleteProcess implements ProcessTask
     }
 
     @Override
-    public void cancel()
-    {
+    public void cancel() {
         this.setCancel(true);
     }
 
     @Override
-    public void execute(Logger logger)
-    {
+    public void execute(Logger logger) {
         this.currentLogger = logger;
         this.innerExecute();
     }
 
     @Override
-    public long getTaskSize()
-    {
+    public long getTaskSize() {
         return this.getTotalSize();
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

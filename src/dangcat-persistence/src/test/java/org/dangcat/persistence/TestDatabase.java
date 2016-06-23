@@ -16,17 +16,14 @@ import org.junit.Test;
 import java.io.File;
 
 @Ignore
-public abstract class TestDatabase
-{
+public abstract class TestDatabase {
     protected static final Logger logger = Logger.getLogger(TestDatabase.class);
     private static final String TEST_DATABASES = "TEST_DATABASES";
     private static boolean hasInit = false;
 
     @BeforeClass
-    public static void initialize()
-    {
-        if (!hasInit)
-        {
+    public static void initialize() {
+        if (!hasInit) {
             Environment.setHomePath(TestDatabase.class);
             if (logger.isDebugEnabled())
                 logger.info(PropertiesManager.getInstance().toText());
@@ -35,16 +32,14 @@ public abstract class TestDatabase
         }
     }
 
-    private static void removeHsqldb()
-    {
+    private static void removeHsqldb() {
         File hsqlData = new File(Environment.getHomePath() + "/../log/HsqlData");
         if (!hsqlData.exists())
             hsqlData = new File(Environment.getHomePath() + "/log/HsqlData");
         FileUtils.delete(hsqlData);
     }
 
-    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue)
-    {
+    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue) {
         String value = System.getProperty(TEST_DATABASES);
         if (ValueUtils.isEmpty(value))
             value = System.getenv(TEST_DATABASES);
@@ -56,8 +51,7 @@ public abstract class TestDatabase
     protected abstract void testDatabase(String databaseName) throws TableException, EntityException;
 
     @Test
-    public void testDatabases() throws TableException, EntityException
-    {
+    public void testDatabases() throws TableException, EntityException {
         SessionFactory.getInstance().close();
         if (this.couldTestDatabase(DatabaseType.SqlServer, false))
             this.testDatabase(DatabaseType.SqlServer.name());

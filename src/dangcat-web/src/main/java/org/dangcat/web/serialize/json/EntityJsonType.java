@@ -7,8 +7,7 @@ import org.dangcat.persistence.model.Column;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class EntityJsonType
-{
+public class EntityJsonType {
     private static final String DATATYPE_BOOLEAN = "boolean";
     private static final String DATATYPE_DATE = "date";
     private static final String DATATYPE_DATETIME = "datetime";
@@ -16,8 +15,7 @@ public class EntityJsonType
     private static final String DATATYPE_INTEGER = "integer";
     private static final String DATATYPE_STRING = "string";
 
-    public static String getSerializeType(Column column)
-    {
+    public static String getSerializeType(Column column) {
         Class<?> classType = column.getFieldClass();
         String type = null;
         if (ValueUtils.isText(classType))
@@ -27,14 +25,12 @@ public class EntityJsonType
         else if (int.class.equals(classType) || Integer.class.equals(classType) || short.class.equals(classType) || Short.class.equals(classType) || long.class.equals(classType)
                 || Long.class.equals(classType))
             type = DATATYPE_INTEGER;
-        else if (Timestamp.class.equals(classType) || Date.class.equals(classType))
-        {
+        else if (Timestamp.class.equals(classType) || Date.class.equals(classType)) {
             if (DateType.Day.equals(column.getDateType()))
                 type = DATATYPE_DATE;
             else
                 type = DATATYPE_DATETIME;
-        }
-        else if (boolean.class.equals(classType) || Boolean.class.equals(classType))
+        } else if (boolean.class.equals(classType) || Boolean.class.equals(classType))
             type = DATATYPE_BOOLEAN;
         return type;
     }

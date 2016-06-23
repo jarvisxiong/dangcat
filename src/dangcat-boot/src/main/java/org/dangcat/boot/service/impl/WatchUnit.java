@@ -6,8 +6,7 @@ import org.dangcat.boot.service.WatchRunnable;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-class WatchUnit implements Runnable
-{
+class WatchUnit implements Runnable {
     protected static final int STATE_FINISHED = 2;
     protected static final int STATE_RUNNING = 1;
     protected static final int STATE_SUBMIT = 0;
@@ -17,40 +16,31 @@ class WatchUnit implements Runnable
     private int state = STATE_SUBMIT;
     private WatchRunnable watchRunnable = null;
 
-    WatchUnit(WatchRunnable watchRunnable)
-    {
+    WatchUnit(WatchRunnable watchRunnable) {
         this.watchRunnable = watchRunnable;
     }
 
-    protected void done()
-    {
+    protected void done() {
         Logger logger = this.getLogger();
-        try
-        {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to get result from the " + this.watchRunnable);
             this.result = this.future.get();
             if (logger.isDebugEnabled())
                 logger.debug("End get result from the " + this.watchRunnable);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (logger.isDebugEnabled())
                 logger.error("Get result from the " + this.watchRunnable + " error", e);
             else
                 logger.error("Get result from the " + this.watchRunnable + " error: " + e);
-        }
-        finally
-        {
-            synchronized (this)
-            {
+        } finally {
+            synchronized (this) {
                 this.notifyAll();
             }
         }
     }
 
-    protected Future<?> getFuture()
-    {
+    protected Future<?> getFuture() {
         return this.future;
     }
 
@@ -58,36 +48,30 @@ class WatchUnit implements Runnable
         this.future = future;
     }
 
-    protected Logger getLogger()
-    {
+    protected Logger getLogger() {
         Logger logger = this.watchRunnable.getLogger();
         if (logger == null)
             logger = WatchThreadExecutor.logger;
         return logger;
     }
 
-    protected Object getResult()
-    {
+    protected Object getResult() {
         return this.result;
     }
 
-    protected WatchRunnable getWatchRunnable()
-    {
+    protected WatchRunnable getWatchRunnable() {
         return this.watchRunnable;
     }
 
-    protected boolean isDone()
-    {
+    protected boolean isDone() {
         return this.isFinished() || (this.future != null && (this.future.isDone() || this.future.isCancelled()));
     }
 
-    protected boolean isFinished()
-    {
+    protected boolean isFinished() {
         return this.state == STATE_FINISHED;
     }
 
-    protected boolean isTimeOut()
-    {
+    protected boolean isTimeOut() {
         if (this.state == STATE_SUBMIT)
             return false;
 
@@ -97,11 +81,9 @@ class WatchUnit implements Runnable
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         Logger logger = this.getLogger();
-        try
-        {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to run in ThreadPool " + this.watchRunnable.getClass().getSimpleName());
             this.lastResponseTime = System.currentTimeMillis();
@@ -111,40 +93,30 @@ class WatchUnit implements Runnable
 
             if (logger.isDebugEnabled())
                 logger.debug("End run in ThreadPool " + this.watchRunnable.getClass().getSimpleName());
-        }
-        finally
-        {
+        } finally {
             this.state = STATE_FINISHED;
-            synchronized (this)
-            {
+            synchronized (this) {
                 this.notifyAll();
             }
         }
     }
 
-    protected void terminate()
-    {
+    protected void terminate() {
         Logger logger = this.getLogger();
-        try
-        {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to terminate the " + this.watchRunnable);
             this.watchRunnable.terminate();
             this.result = this.future.get(10, TimeUnit.MICROSECONDS);
             if (logger.isDebugEnabled())
                 logger.debug("End terminate the " + this.watchRunnable);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (logger.isDebugEnabled())
                 logger.error("Terminate the " + this.watchRunnable + " error", e);
             else
                 logger.error("Terminate the " + this.watchRunnable + " error: " + e);
-        }
-        finally
-        {
-            synchronized (this)
-            {
+        } finally {
+            synchronized (this) {
                 this.notifyAll();
             }
         }

@@ -17,12 +17,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class TestUpdateMemIndex extends TestEntityBase
-{
+public class TestUpdateMemIndex extends TestEntityBase {
     private static final int TEST_COUNT = 100;
 
-    private void createCache()
-    {
+    private void createCache() {
         Cache cache = new Cache();
         cache.getIndexList().add(ValueUtils.join(UserInfo.Name, UserInfo.Age));
         cache.setPreload(true);
@@ -33,8 +31,7 @@ public class TestUpdateMemIndex extends TestEntityBase
         Assert.assertEquals(TEST_COUNT, memCache.size());
     }
 
-    private void createData()
-    {
+    private void createData() {
         List<UserInfo> entityList = new ArrayList<UserInfo>();
         UserInfoUtils.createData(entityList, 100);
         for (UserInfo userInfo : entityList)
@@ -42,8 +39,7 @@ public class TestUpdateMemIndex extends TestEntityBase
         this.getEntityManager().save(entityList.toArray());
     }
 
-    private void createTable() throws TableException
-    {
+    private void createTable() throws TableException {
         Table table = UserInfoUtils.getTable();
 
         if (table.exists())
@@ -53,14 +49,12 @@ public class TestUpdateMemIndex extends TestEntityBase
         table.create();
     }
 
-    private void removeCache()
-    {
+    private void removeCache() {
         EntityCacheManager.getInstance().removeCache(UserInfo.class);
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         this.logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -74,8 +68,7 @@ public class TestUpdateMemIndex extends TestEntityBase
         this.logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void updateEntity()
-    {
+    private void updateEntity() {
         UserInfo userInfo10 = this.getEntityManager().load(UserInfo.class, 10);
         UserInfo userInfo20 = this.getEntityManager().load(UserInfo.class, 20);
         userInfo20.setName(userInfo10.getName());
@@ -83,10 +76,9 @@ public class TestUpdateMemIndex extends TestEntityBase
         this.getEntityManager().save(userInfo20);
 
         MemCache<UserInfo> memCache = EntityCacheManager.getInstance().getMemCache(UserInfo.class);
-        Collection<UserInfo> userInfoCollection = memCache.find(new String[] { UserInfo.Name, UserInfo.Age }, userInfo10.getName(), userInfo10.getAge());
+        Collection<UserInfo> userInfoCollection = memCache.find(new String[]{UserInfo.Name, UserInfo.Age}, userInfo10.getName(), userInfo10.getAge());
         Assert.assertEquals(2, userInfoCollection.size());
-        for (UserInfo userInfo : userInfoCollection)
-        {
+        for (UserInfo userInfo : userInfoCollection) {
             Assert.assertEquals(UserInfoUtils.getName(10), userInfo.getName());
             Assert.assertEquals(UserInfoUtils.getAge(10), userInfo.getAge());
         }

@@ -4,11 +4,10 @@ import org.dangcat.framework.exception.ServiceException;
 
 /**
  * 会话产生的异常。
+ *
  * @author dangcat
- * 
  */
-public class FTPSessionException extends ServiceException
-{
+public class FTPSessionException extends ServiceException {
     public static final Integer CONNECTION = 104;
     public static final Integer CREATEDIR = 102;
     public static final Integer DOWNLOAD = 101;
@@ -18,13 +17,11 @@ public class FTPSessionException extends ServiceException
     public static final Integer UPLOAD = 103;
     private static final long serialVersionUID = 1L;
 
-    public FTPSessionException(Integer messageId, Object... params)
-    {
+    public FTPSessionException(Integer messageId, Object... params) {
         super(messageId, params);
     }
 
-    public FTPSessionException(Throwable cause)
-    {
+    public FTPSessionException(Throwable cause) {
         super(cause);
     }
 }

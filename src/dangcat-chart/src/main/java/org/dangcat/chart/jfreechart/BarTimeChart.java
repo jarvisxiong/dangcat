@@ -4,17 +4,14 @@ import org.jfree.chart.renderer.xy.StackedXYBarRenderer;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 
-public class BarTimeChart extends TimeXYChart
-{
+public class BarTimeChart extends TimeXYChart {
     @Override
-    protected XYItemRenderer createXYItemRenderer()
-    {
+    protected XYItemRenderer createXYItemRenderer() {
         return new StackedXYBarRenderer();
     }
 
     @Override
-    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i)
-    {
+    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i) {
         super.iniItemRenderer(xyItemRenderer, i);
 
         XYBarRenderer xyBarRenderer = (XYBarRenderer) xyItemRenderer;
@@ -24,8 +21,7 @@ public class BarTimeChart extends TimeXYChart
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         boolean isStacked = this.getDataModule().getRowKeys().size() > 1;
         this.createDataConverter(isStacked);
 

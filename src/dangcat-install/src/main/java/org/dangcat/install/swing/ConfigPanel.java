@@ -12,8 +12,7 @@ import java.util.Collection;
 import java.util.EventObject;
 import java.util.LinkedList;
 
-public abstract class ConfigPanel extends JPanel
-{
+public abstract class ConfigPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private boolean changed = false;
     private String name = null;
@@ -22,8 +21,7 @@ public abstract class ConfigPanel extends JPanel
 
     private Collection<ValueChangedListener> valueChangedListeners = new LinkedList<ValueChangedListener>();
 
-    protected void addGridBagSpace(JPanel panel, int y)
-    {
+    protected void addGridBagSpace(JPanel panel, int y) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridx = 0;
@@ -33,19 +31,15 @@ public abstract class ConfigPanel extends JPanel
         panel.add(new JLabel(), constraints);
     }
 
-    public void addValueChangedListener(ValueChangedListener valueChangedListener)
-    {
-        if (valueChangedListener != null)
-        {
-            synchronized (this.valueChangedListeners)
-            {
+    public void addValueChangedListener(ValueChangedListener valueChangedListener) {
+        if (valueChangedListener != null) {
+            synchronized (this.valueChangedListeners) {
                 this.valueChangedListeners.add(valueChangedListener);
             }
         }
     }
 
-    protected void choicePath(JTextField pathTextField)
-    {
+    protected void choicePath(JTextField pathTextField) {
         File currentDirectory = new File(pathTextField.getText());
         if (!currentDirectory.exists())
             currentDirectory = new File(".");
@@ -53,11 +47,9 @@ public abstract class ConfigPanel extends JPanel
         fileChooser.setDialogTitle(this.getText("PathTitle"));
         fileChooser.setCurrentDirectory(currentDirectory);
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-        {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            if (!file.isDirectory())
-            {
+            if (!file.isDirectory()) {
                 JOptionPane.showMessageDialog(this, this.getText("PathNotExists"));
                 return;
             }
@@ -65,12 +57,9 @@ public abstract class ConfigPanel extends JPanel
         }
     }
 
-    public void fireValueChanged(EventObject eventObject)
-    {
-        if (eventObject != null)
-        {
-            synchronized (this.valueChangedListeners)
-            {
+    public void fireValueChanged(EventObject eventObject) {
+        if (eventObject != null) {
+            synchronized (this.valueChangedListeners) {
                 for (ValueChangedListener valueChangedListener : this.valueChangedListeners)
                     valueChangedListener.onValueChanged(eventObject);
             }
@@ -78,8 +67,7 @@ public abstract class ConfigPanel extends JPanel
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -88,18 +76,15 @@ public abstract class ConfigPanel extends JPanel
         this.name = name;
     }
 
-    protected String getText(Class<?> classType)
-    {
+    protected String getText(Class<?> classType) {
         return this.getText(classType.getSimpleName());
     }
 
-    public String getText(String key)
-    {
+    public String getText(String key) {
         return this.resourceReader.getText(key);
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         if (ValueUtils.isEmpty(this.title) && !ValueUtils.isEmpty(this.name))
             return this.getText(this.name);
         return this.title;
@@ -111,8 +96,7 @@ public abstract class ConfigPanel extends JPanel
 
     public abstract void initialize();
 
-    public boolean isChanged()
-    {
+    public boolean isChanged() {
         return this.changed;
     }
 
@@ -121,19 +105,15 @@ public abstract class ConfigPanel extends JPanel
         this.fireValueChanged(new EventObject(this));
     }
 
-    protected boolean isChanged(Component component)
-    {
-        if (component instanceof ConfigPanel)
-        {
+    protected boolean isChanged(Component component) {
+        if (component instanceof ConfigPanel) {
             ConfigPanel configPanel = (ConfigPanel) component;
             if (configPanel != this && configPanel.isChanged())
                 return true;
         }
-        if (component instanceof Container)
-        {
+        if (component instanceof Container) {
             Container container = (Container) component;
-            for (int i = 0; i < container.getComponentCount(); i++)
-            {
+            for (int i = 0; i < container.getComponentCount(); i++) {
                 if (this.isChanged(container.getComponent(i)))
                     return true;
             }
@@ -141,50 +121,39 @@ public abstract class ConfigPanel extends JPanel
         return false;
     }
 
-    public void removeValueChangedListener(ValueChangedListener valueChangedListener)
-    {
-        if (valueChangedListener != null)
-        {
-            synchronized (this.valueChangedListeners)
-            {
+    public void removeValueChangedListener(ValueChangedListener valueChangedListener) {
+        if (valueChangedListener != null) {
+            synchronized (this.valueChangedListeners) {
                 this.valueChangedListeners.remove(valueChangedListener);
             }
         }
     }
 
-    public void setChanged(Component component, boolean changed)
-    {
-        if (component instanceof ConfigPanel)
-        {
+    public void setChanged(Component component, boolean changed) {
+        if (component instanceof ConfigPanel) {
             ConfigPanel configPanel = (ConfigPanel) component;
             configPanel.setChanged(changed);
         }
-        if (component instanceof Container)
-        {
+        if (component instanceof Container) {
             Container container = (Container) component;
             for (int i = 0; i < container.getComponentCount(); i++)
                 this.setChanged(container.getComponent(i), changed);
         }
     }
 
-    public boolean validateData()
-    {
+    public boolean validateData() {
         return true;
     }
 
-    protected boolean validateData(Component component)
-    {
-        if (component instanceof ConfigPanel)
-        {
+    protected boolean validateData(Component component) {
+        if (component instanceof ConfigPanel) {
             ConfigPanel configPanel = (ConfigPanel) component;
             if (!configPanel.validateData())
                 return false;
         }
-        if (component instanceof Container)
-        {
+        if (component instanceof Container) {
             Container container = (Container) component;
-            for (int i = 0; i < container.getComponentCount(); i++)
-            {
+            for (int i = 0; i < container.getComponentCount(); i++) {
                 if (!this.validateData(container.getComponent(i)))
                     return false;
             }

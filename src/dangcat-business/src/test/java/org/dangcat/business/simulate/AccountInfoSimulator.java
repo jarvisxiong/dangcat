@@ -8,16 +8,13 @@ import org.dangcat.persistence.simulate.data.StringSimulator;
 import org.dangcat.persistence.simulate.data.ValueSimulator;
 import org.dangcat.persistence.simulate.table.EntityData;
 
-public class AccountInfoSimulator extends EntityData<AccountInfo>
-{
-    public AccountInfoSimulator()
-    {
+public class AccountInfoSimulator extends EntityData<AccountInfo> {
+    public AccountInfoSimulator() {
         super(AccountInfo.class);
     }
 
     @Override
-    public void create()
-    {
+    public void create() {
         ValueSimulator groupIdSimulator = this.getDataSimulator().findValueSimulator(AccountInfo.GroupId);
         groupIdSimulator.bind(GroupInfo.class, GroupInfo.Id);
 
@@ -28,8 +25,7 @@ public class AccountInfoSimulator extends EntityData<AccountInfo>
     }
 
     @Override
-    protected void initEntitySimulator(EntitySimulator entitySimulator)
-    {
+    protected void initEntitySimulator(EntitySimulator entitySimulator) {
         StringSimulator nameSimulator = entitySimulator.findValueSimulator(AccountInfo.Name);
         nameSimulator.setPrefix("Account Name ");
 
@@ -46,6 +42,6 @@ public class AccountInfoSimulator extends EntityData<AccountInfo>
         maxBalanceSimulator.setStep(0.001);
 
         NumberSimulator sexSimulator = entitySimulator.findValueSimulator(AccountInfo.Sex);
-        sexSimulator.setValues(new Object[] { 0, 1 });
+        sexSimulator.setValues(new Object[]{0, 1});
     }
 }

@@ -8,20 +8,17 @@ import org.dangcat.framework.exception.ServiceInformation;
 
 import java.io.IOException;
 
-public class ServiceInformationSerializer implements JsonSerialize
-{
+public class ServiceInformationSerializer implements JsonSerialize {
     private static final String FIELDNAME = "fieldName";
     private static final String ID = "id";
     private static final String INFO = "info";
 
-    public static void serialize(JsonWriter jsonWriter, ServiceInformation serviceInformation) throws IOException
-    {
+    public static void serialize(JsonWriter jsonWriter, ServiceInformation serviceInformation) throws IOException {
         jsonWriter.beginObject();
         if (serviceInformation.getMessageId() != null)
             jsonWriter.name(ID).value(serviceInformation.getMessageId().toString());
         Object fieldName = ReflectUtils.getProperty(serviceInformation, FIELDNAME);
-        if (fieldName != null && fieldName instanceof String)
-        {
+        if (fieldName != null && fieldName instanceof String) {
             String value = (String) fieldName;
             jsonWriter.name(FIELDNAME).value(ReflectUtils.toPropertyName(value));
         }
@@ -30,8 +27,7 @@ public class ServiceInformationSerializer implements JsonSerialize
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -40,23 +36,19 @@ public class ServiceInformationSerializer implements JsonSerialize
     }
 
     @Override
-    public String getSerializeName(Class<?> classType)
-    {
+    public String getSerializeName(Class<?> classType) {
         if (ServiceInformation.class.isAssignableFrom(classType))
             return INFO;
         return null;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return ServiceInformation.class.hashCode();
     }
 
-    public boolean serialize(JsonWriter jsonWriter, String name, Object instance) throws IOException
-    {
-        if (instance instanceof ServiceInformation)
-        {
+    public boolean serialize(JsonWriter jsonWriter, String name, Object instance) throws IOException {
+        if (instance instanceof ServiceInformation) {
             JsonWriter writer = JsonSerializer.getJsonWriter(jsonWriter, name);
             serialize(writer, (ServiceInformation) instance);
             return true;
@@ -65,10 +57,8 @@ public class ServiceInformationSerializer implements JsonSerialize
     }
 
     @Override
-    public boolean serializeClassType(JsonWriter jsonWriter, Class<?> classType) throws IOException
-    {
-        if (ServiceInformation.class.isAssignableFrom(classType))
-        {
+    public boolean serializeClassType(JsonWriter jsonWriter, Class<?> classType) throws IOException {
+        if (ServiceInformation.class.isAssignableFrom(classType)) {
             JsonWriter classTypeWriter = jsonWriter.name(INFO);
             classTypeWriter.beginObject();
             classTypeWriter.name(ID).value(Integer.class.getSimpleName());

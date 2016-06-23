@@ -10,24 +10,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class CodeGeneratorFrame extends JFrameExt
-{
+public class CodeGeneratorFrame extends JFrameExt {
     private static final long serialVersionUID = 1L;
     private static Dimension PERFECT_SIZE = new Dimension(800, 600);
 
-    public CodeGeneratorFrame()
-    {
+    public CodeGeneratorFrame() {
         super(ResourceManager.getInstance().getResourceReader(CodeGeneratorFrame.class).getText(CodeGeneratorFrame.class.getSimpleName()));
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new CodeGeneratorFrame());
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel content = new JPanel(new BorderLayout());
         content.setPreferredSize(PERFECT_SIZE);
 

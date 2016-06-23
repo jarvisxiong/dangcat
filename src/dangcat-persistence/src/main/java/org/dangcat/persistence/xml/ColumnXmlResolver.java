@@ -5,19 +5,19 @@ import org.dangcat.persistence.model.Column;
 
 /**
  * 栏位对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class ColumnXmlResolver extends XmlResolver
-{
-    /** 栏位对象。 */
+public class ColumnXmlResolver extends XmlResolver {
+    /**
+     * 栏位对象。
+     */
     private Column column = null;
 
     /**
      * 构建解析器。
      */
-    public ColumnXmlResolver()
-    {
+    public ColumnXmlResolver() {
         super(Column.class.getSimpleName());
     }
 
@@ -25,8 +25,7 @@ public class ColumnXmlResolver extends XmlResolver
      * 开始解析元素标签。
      */
     @Override
-    protected void startElement()
-    {
+    protected void startElement() {
         this.column = new Column();
         this.setResolveObject(column);
     }

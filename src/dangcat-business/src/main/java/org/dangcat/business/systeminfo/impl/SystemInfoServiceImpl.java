@@ -21,39 +21,32 @@ import java.util.Map;
 
 /**
  * 系统服务。
+ *
  * @author fanst174766
- * 
  */
-public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoService
-{
+public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoService {
     @Context
     private ServiceContext serviceContext = null;
 
-    public SystemInfoServiceImpl(ServiceProvider parent)
-    {
+    public SystemInfoServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
-    private Locale getLocale()
-    {
+    private Locale getLocale() {
         return this.serviceContext.getLocale();
     }
 
-    private ResourceReader getResourceReader()
-    {
+    private ResourceReader getResourceReader() {
         return ApplicationContext.getInstance().getResourceReader();
     }
 
-    private String getText(String key)
-    {
+    private String getText(String key) {
         return this.getResourceReader().getText(this.getLocale(), key);
     }
 
-    private void loadExtendSystemInfo(SystemInfo systemInfo)
-    {
+    private void loadExtendSystemInfo(SystemInfo systemInfo) {
         ExtendSystemInfo extendSystemInfoAnnotation = ReflectUtils.findAnnotation(ApplicationContext.getInstance().getMainService().getClass(), ExtendSystemInfo.class);
-        if (extendSystemInfoAnnotation != null && extendSystemInfoAnnotation.value() != null)
-        {
+        if (extendSystemInfoAnnotation != null && extendSystemInfoAnnotation.value() != null) {
             SystemInfoProvider systemInfoProvider = (SystemInfoProvider) ReflectUtils.newInstance(extendSystemInfoAnnotation.value());
             if (systemInfoProvider != null)
                 systemInfoProvider.createExtendInfos(systemInfo);
@@ -63,21 +56,18 @@ public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoServ
     /**
      * 加载系统菜单项。
      */
-    public Collection<Menu> loadMenus()
-    {
+    public Collection<Menu> loadMenus() {
         MenusLoader menusLoader = new MenusLoader(this.getResourceReader(), this.getLocale());
         Menus menus = menusLoader.load();
         return menus.getData();
     }
 
     @Override
-    public Map<Integer, String> loadParamMap(String name)
-    {
+    public Map<Integer, String> loadParamMap(String name) {
         Map<Integer, String> paramMap = new LinkedHashMap<Integer, String>();
         String propertyName = System.getProperty("ParamMap." + name + ".MaxValue");
         Integer maxValue = ValueUtils.parseInt(propertyName, 3);
-        for (int i = 0; i < maxValue; i++)
-        {
+        for (int i = 0; i < maxValue; i++) {
             String value = this.getText("ParamMap." + name + "." + i);
             if (!ValueUtils.isEmpty(value))
                 paramMap.put(i, value);
@@ -86,16 +76,14 @@ public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoServ
     }
 
     @Override
-    public Collection<PermissionInfo> loadPermissions()
-    {
+    public Collection<PermissionInfo> loadPermissions() {
         return new PermissionInfoCreator(this.getResourceReader(), this.getLocale()).create();
     }
 
     /**
      * 加载系统信息。
      */
-    public SystemInfo loadSystemInfo()
-    {
+    public SystemInfo loadSystemInfo() {
         SystemInfo systemInfo = new SystemInfo();
         systemInfo.setVersion(ApplicationContext.getInstance().getConfigureReader().getVersion());
         systemInfo.setProjectTitle(this.getText("projectTitle"));

@@ -4,13 +4,13 @@ import java.util.concurrent.RejectedExecutionHandler;
 
 /**
  * 线程池服务。
+ *
  * @author dangcat
- * 
  */
-public interface ThreadPoolService
-{
+public interface ThreadPoolService {
     /**
      * 添加拒绝处理侦听器。
+     *
      * @param rejectedExecutionHandler 处理器。
      */
     void addRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler);
@@ -37,6 +37,7 @@ public interface ThreadPoolService
 
     /**
      * 删除拒绝处理侦听器。
+     *
      * @param rejectedExecutionHandler 处理器。
      */
     void removeRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler);

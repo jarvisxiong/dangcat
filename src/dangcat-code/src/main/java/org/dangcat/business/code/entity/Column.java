@@ -1,7 +1,6 @@
 package org.dangcat.business.code.entity;
 
-public class Column
-{
+public class Column {
     private int displaySize = 0;
     private Class<?> fieldClass = null;
     private String fieldName = null;
@@ -11,8 +10,7 @@ public class Column
     private boolean isPrimaryKey = false;
     private String name = null;
 
-    public int getDisplaySize()
-    {
+    public int getDisplaySize() {
         return displaySize;
     }
 
@@ -20,8 +18,7 @@ public class Column
         this.displaySize = displaySize;
     }
 
-    public Class<?> getFieldClass()
-    {
+    public Class<?> getFieldClass() {
         return fieldClass;
     }
 
@@ -29,8 +26,7 @@ public class Column
         this.fieldClass = fieldClass;
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return fieldName;
     }
 
@@ -38,8 +34,7 @@ public class Column
         this.fieldName = fieldName;
     }
 
-    public int getIndex()
-    {
+    public int getIndex() {
         return index;
     }
 
@@ -47,46 +42,38 @@ public class Column
         this.index = index;
     }
 
-    public String getName()
-    {
+    public String getName() {
         if (this.name == null)
             this.name = TableUtils.toPropertyName(this.getFieldName());
         return this.name;
     }
 
-    public boolean isAutoIncrement()
-    {
+    public boolean isAutoIncrement() {
         return isAutoIncrement;
     }
 
-    public void setAutoIncrement(boolean isAutoIncrement)
-    {
+    public void setAutoIncrement(boolean isAutoIncrement) {
         this.isAutoIncrement = isAutoIncrement;
     }
 
-    public boolean isNullable()
-    {
+    public boolean isNullable() {
         return isNullable;
     }
 
-    public void setNullable(boolean isNullable)
-    {
+    public void setNullable(boolean isNullable) {
         this.isNullable = isNullable;
     }
 
-    public boolean isPrimaryKey()
-    {
+    public boolean isPrimaryKey() {
         return isPrimaryKey;
     }
 
-    public void setPrimaryKey(boolean isPrimaryKey)
-    {
+    public void setPrimaryKey(boolean isPrimaryKey) {
         this.isPrimaryKey = isPrimaryKey;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer info = new StringBuffer();
         info.append("Name=" + this.getName() + "\t");
         info.append("FieldName=" + this.getFieldName() + "\t");

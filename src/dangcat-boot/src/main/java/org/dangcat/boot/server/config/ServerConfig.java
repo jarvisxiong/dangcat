@@ -5,11 +5,10 @@ import org.dangcat.commons.utils.Environment;
 
 /**
  * 系统监控配置。
+ *
  * @author dangcat
- * 
  */
-public class ServerConfig extends ServiceConfig
-{
+public class ServerConfig extends ServiceConfig {
     public static final String CronExpression = "CronExpression";
     public static final String DiskPath = "DiskPath";
     public static final String LogMaxKeepLength = "LogMaxKeepLength";
@@ -17,18 +16,28 @@ public class ServerConfig extends ServiceConfig
     public static final String Type = "Type";
     private static final String CONFIG_NAME = "ServerConfig";
     private static ServerConfig instance = new ServerConfig();
-    /** 监控周期（秒）。 */
+    /**
+     * 监控周期（秒）。
+     */
     private String cronExpression = "0 0/5 * * * ?";
-    /** 监控路径。 */
+    /**
+     * 监控路径。
+     */
     private Integer diskPath = null;
-    /** 状态日志最大保留时间（天）。 */
+    /**
+     * 状态日志最大保留时间（天）。
+     */
     private Integer logMaxKeepLength = 7;
-    /** 同步消息主题。 */
+    /**
+     * 同步消息主题。
+     */
     private String messageName = null;
-    /** 服务器类型。 */
+    /**
+     * 服务器类型。
+     */
     private Integer type = null;
-    public ServerConfig()
-    {
+
+    public ServerConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(CronExpression, String.class, this.cronExpression);
@@ -47,34 +56,28 @@ public class ServerConfig extends ServiceConfig
         return instance;
     }
 
-    public String getCronExpression()
-    {
+    public String getCronExpression() {
         return super.getStringValue(CronExpression);
     }
 
-    public String getDiskPath()
-    {
+    public String getDiskPath() {
         return super.getStringValue(DiskPath);
     }
 
-    public Integer getLogMaxKeepLength()
-    {
+    public Integer getLogMaxKeepLength() {
         return super.getIntValue(LogMaxKeepLength);
     }
 
-    public String getMessageName()
-    {
+    public String getMessageName() {
         return super.getStringValue(MessageName);
     }
 
-    public Integer getType()
-    {
+    public Integer getType() {
         return super.getIntValue(Type);
     }
 
     @Override
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return !Environment.isTestEnabled() && super.isEnabled();
     }
 }

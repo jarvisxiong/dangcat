@@ -13,15 +13,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestCsvPerson extends TestEntityBase
-{
+public class TestCsvPerson extends TestEntityBase {
     private static final int TEST_COUNT = 100;
 
-    private List<Sale> createSales()
-    {
+    private List<Sale> createSales() {
         List<Sale> sales = new LinkedList<Sale>();
-        for (int i = 0; i < TEST_COUNT; i++)
-        {
+        for (int i = 0; i < TEST_COUNT; i++) {
             Sale sale = new Sale();
             sale.setId(i);
             sale.setName("Sale" + i);
@@ -32,8 +29,7 @@ public class TestCsvPerson extends TestEntityBase
     }
 
     @Test
-    public void testSales() throws IOException, EntityException
-    {
+    public void testSales() throws IOException, EntityException {
         List<Sale> srcSales = this.createSales();
         File file = File.createTempFile("Sales", ".csv");
         CsvDocument srcCsvDocument = new CsvDocument();

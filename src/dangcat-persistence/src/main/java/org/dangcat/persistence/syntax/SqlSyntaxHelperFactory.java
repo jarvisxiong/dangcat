@@ -3,22 +3,18 @@ package org.dangcat.persistence.syntax;
 import org.dangcat.commons.database.DatabaseType;
 import org.dangcat.persistence.orm.SqlSyntaxHelper;
 
-public class SqlSyntaxHelperFactory
-{
+public class SqlSyntaxHelperFactory {
     private static SqlSyntaxHelperFactory instance = new SqlSyntaxHelperFactory();
 
-    private SqlSyntaxHelperFactory()
-    {
+    private SqlSyntaxHelperFactory() {
 
     }
 
-    public static SqlSyntaxHelperFactory getInstance()
-    {
+    public static SqlSyntaxHelperFactory getInstance() {
         return instance;
     }
 
-    public SqlSyntaxHelper getSqlSyntaxHelper(DatabaseType databaseType)
-    {
+    public SqlSyntaxHelper getSqlSyntaxHelper(DatabaseType databaseType) {
         if (DatabaseType.MySql.equals(databaseType))
             return new MysqlSyntaxAdapter();
         else if (DatabaseType.SqlServer.equals(databaseType))

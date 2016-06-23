@@ -4,41 +4,33 @@ import org.dangcat.commons.utils.ValueUtils;
 
 /**
  * 表名对象。
+ *
  * @author dangcat
- * 
  */
-public class TableName
-{
+public class TableName {
     private String alias;
     private String name;
 
-    public TableName(String name)
-    {
+    public TableName(String name) {
         this(name, null);
     }
 
-    public TableName(String name, String alias)
-    {
+    public TableName(String name, String alias) {
         this.name = name;
         this.alias = alias;
     }
 
-    public TableName copy()
-    {
+    public TableName copy() {
         TableName tableName = null;
-        try
-        {
+        try {
             tableName = (TableName) super.clone();
-        }
-        catch (CloneNotSupportedException e)
-        {
+        } catch (CloneNotSupportedException e) {
         }
         return tableName;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (this.getClass() != obj.getClass())
@@ -48,8 +40,7 @@ public class TableName
         return false;
     }
 
-    public String getAlias()
-    {
+    public String getAlias() {
         if (ValueUtils.isEmpty(this.alias))
             return this.getName();
         return this.alias;
@@ -59,8 +50,7 @@ public class TableName
         this.alias = alias;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -68,14 +58,12 @@ public class TableName
         this.name = name;
     }
 
-    public String getPrefix()
-    {
+    public String getPrefix() {
         return this.name;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.getName() == null) ? 0 : this.getName().hashCode());
@@ -83,15 +71,13 @@ public class TableName
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         String name = this.getName();
         String alias = this.getAlias();
 
         StringBuilder info = new StringBuilder();
         info.append(name);
-        if (!ValueUtils.isEmpty(alias) && !alias.equals(name))
-        {
+        if (!ValueUtils.isEmpty(alias) && !alias.equals(name)) {
             info.append(" ");
             info.append(alias);
         }

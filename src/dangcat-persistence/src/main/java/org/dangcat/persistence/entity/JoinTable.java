@@ -9,40 +9,34 @@ import java.util.List;
 
 /**
  * 连接表对象。
+ *
  * @author dangcat
- * 
  */
-class JoinTable
-{
+class JoinTable {
     private List<JoinColumn> joinColumns = new ArrayList<JoinColumn>();
     private TableName joinTableName = null;
     private JoinType joinType = JoinType.Inner;
     private TableName tableName = null;
 
-    public JoinTable(TableName tableName, TableName joinTableName)
-    {
+    public JoinTable(TableName tableName, TableName joinTableName) {
         this.tableName = tableName;
         this.joinTableName = joinTableName;
     }
 
-    public JoinTable(TableName tableName, TableName joinTableName, org.dangcat.persistence.annotation.JoinTable joinTableAnnotation)
-    {
+    public JoinTable(TableName tableName, TableName joinTableName, org.dangcat.persistence.annotation.JoinTable joinTableAnnotation) {
         this.tableName = tableName;
         this.joinTableName = joinTableName;
         if (!ValueUtils.isEmpty(joinTableAnnotation.joinType()))
             this.joinType = joinTableAnnotation.joinType();
     }
 
-    public void addJoinColumn(String name, String joinName)
-    {
+    public void addJoinColumn(String name, String joinName) {
         this.getJoinColumns().add(new JoinColumn(this, name, joinName));
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj instanceof JoinTable)
-        {
+    public boolean equals(Object obj) {
+        if (obj instanceof JoinTable) {
             JoinTable joinTable = (JoinTable) obj;
             if (!this.getTableName().equals(joinTable.getTableName()))
                 return false;
@@ -52,8 +46,7 @@ class JoinTable
                 return false;
             if (this.joinColumns.size() != joinTable.getJoinColumns().size())
                 return false;
-            for (JoinColumn srcJoinColumn : this.joinColumns)
-            {
+            for (JoinColumn srcJoinColumn : this.joinColumns) {
                 if (!joinTable.getJoinColumns().contains(srcJoinColumn))
                     return false;
             }
@@ -62,29 +55,24 @@ class JoinTable
         return super.equals(obj);
     }
 
-    public List<JoinColumn> getJoinColumns()
-    {
+    public List<JoinColumn> getJoinColumns() {
         return this.joinColumns;
     }
 
-    public TableName getJoinTableName()
-    {
+    public TableName getJoinTableName() {
         return this.joinTableName;
     }
 
-    public JoinType getJoinType()
-    {
+    public JoinType getJoinType() {
         return this.joinType;
     }
 
-    public TableName getTableName()
-    {
+    public TableName getTableName() {
         return this.tableName;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.tableName == null) ? 0 : this.tableName.toString().hashCode());
@@ -95,8 +83,7 @@ class JoinTable
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(Environment.LINETAB_SEPARATOR);
         info.append(this.getJoinType().name().toUpperCase());

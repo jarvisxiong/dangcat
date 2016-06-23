@@ -15,21 +15,18 @@ import java.util.List;
 
 /**
  * 服务器管理。
+ *
  * @author
- * 
  */
-@Resources( { ServerInfoException.class, ServerResourceLog.class })
+@Resources({ServerInfoException.class, ServerResourceLog.class})
 @PermissionProvider(BusinessPermissionProvider.class)
-public class ServerInfoServiceImpl extends BusinessServiceBase<ServerInfoQuery, ServerInfoQuery, ServerInfoFilter> implements ServerInfoService
-{
-    public ServerInfoServiceImpl(ServiceProvider parent)
-    {
+public class ServerInfoServiceImpl extends BusinessServiceBase<ServerInfoQuery, ServerInfoQuery, ServerInfoFilter> implements ServerInfoService {
+    public ServerInfoServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     @Override
-    public long getTotalPhysicalMemory(Integer id)
-    {
+    public long getTotalPhysicalMemory(Integer id) {
         long totalPhysicalMemory = 0;
         ServerInfo serverInfo = this.getEntityManager().load(ServerInfo.class, id);
         if (serverInfo != null)
@@ -38,8 +35,7 @@ public class ServerInfoServiceImpl extends BusinessServiceBase<ServerInfoQuery, 
     }
 
     @Override
-    public TimeData<ServerResourceLog> loadServerResourceLogs(Integer id, TimeRange timeRange, Date lastTime)
-    {
+    public TimeData<ServerResourceLog> loadServerResourceLogs(Integer id, TimeRange timeRange, Date lastTime) {
         Date beginTime = timeRange.getBeginTime();
         if (lastTime != null && lastTime.compareTo(beginTime) > 0)
             beginTime = lastTime;

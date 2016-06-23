@@ -14,32 +14,27 @@ import javax.jms.ObjectMessage;
 
 /**
  * 消息侦听服务。
- * 
  */
-public class JMSListener extends JMSBase implements MessageListener, EventListener
-{
+public class JMSListener extends JMSBase implements MessageListener, EventListener {
     protected static final Logger logger = Logger.getLogger(JMSListener.class);
     private EventReceiveListener eventReceiveListener = null;
     private JMSConsumer jmsConsumer = null;
 
     /**
      * 构建服务
+     *
      * @param parent 所属服务。
-     * @param name 消息名称。
+     * @param name   消息名称。
      */
-    public JMSListener(String name, EventReceiveListener eventReceiveListener)
-    {
+    public JMSListener(String name, EventReceiveListener eventReceiveListener) {
         super(name);
         this.eventReceiveListener = eventReceiveListener;
     }
 
-    private JMSConsumer getJMSConsumer() throws JMSException
-    {
-        if (this.jmsConsumer == null)
-        {
+    private JMSConsumer getJMSConsumer() throws JMSException {
+        if (this.jmsConsumer == null) {
             JMSSession jmsSession = this.getJMSSession();
-            if (jmsSession != null)
-            {
+            if (jmsSession != null) {
                 this.jmsConsumer = jmsSession.createJMSConsumer();
                 this.jmsConsumer.addMessageListener(this);
             }
@@ -51,37 +46,31 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
      * 接收处理消息。
      */
     @Override
-    public void onMessage(Message message)
-    {
-        try
-        {
+    public void onMessage(Message message) {
+        try {
             Event event = this.resolveEvent(message);
-            if (event != null)
-            {
+            if (event != null) {
                 logger.info(this.getName() + " recived event: " + event.getId());
                 if (logger.isDebugEnabled())
                     logger.debug(event);
                 if (this.eventReceiveListener != null)
                     this.eventReceiveListener.onReceive(event);
             }
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
     }
 
     /**
      * 解析消息中的事件。
+     *
      * @param message 消息对象。
      * @return 解析后的有效事件对象。
      * @throws JMSException
      */
-    private Event resolveEvent(Message message) throws JMSException
-    {
+    private Event resolveEvent(Message message) throws JMSException {
         Event event = null;
-        if (message instanceof ObjectMessage)
-        {
+        if (message instanceof ObjectMessage) {
             ObjectMessage objectMessage = (ObjectMessage) message;
             if (objectMessage.getObject() instanceof Event)
                 event = (Event) objectMessage.getObject();
@@ -93,16 +82,12 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
      * 启动服务。
      */
     @Override
-    public void start()
-    {
-        try
-        {
+    public void start() {
+        try {
             JMSConsumer jmsConsumer = this.getJMSConsumer();
             if (jmsConsumer != null)
                 jmsConsumer.receive();
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
             logger.error(this, e);
         }
     }
@@ -111,10 +96,8 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
      * 释放资源。
      */
     @Override
-    public void stop()
-    {
-        if (this.jmsConsumer != null)
-        {
+    public void stop() {
+        if (this.jmsConsumer != null) {
             this.jmsConsumer.release();
             this.jmsConsumer = null;
         }

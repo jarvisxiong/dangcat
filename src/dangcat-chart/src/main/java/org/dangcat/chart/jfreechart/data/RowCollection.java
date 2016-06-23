@@ -4,22 +4,18 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-class RowCollection
-{
+class RowCollection {
     private Map<Comparable<?>, Number> valueMap = new LinkedHashMap<Comparable<?>, Number>();
 
-    protected Collection<Comparable<?>> getColumnKeys()
-    {
+    protected Collection<Comparable<?>> getColumnKeys() {
         return this.valueMap.keySet();
     }
 
-    protected Number getValue(Comparable<?> columnKey)
-    {
+    protected Number getValue(Comparable<?> columnKey) {
         return this.valueMap.get(columnKey);
     }
 
-    protected void putValue(Comparable<?> columnKey, Number value)
-    {
+    protected void putValue(Comparable<?> columnKey, Number value) {
         this.valueMap.put(columnKey, value);
     }
 }

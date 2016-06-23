@@ -11,46 +11,39 @@ import java.util.List;
 
 /**
  * 实体数据模拟器。
+ *
  * @author dangcat
- * 
  */
-public class EntitySimulator extends DataSimulator
-{
+public class EntitySimulator extends DataSimulator {
     private Class<?> classType = null;
 
-    public EntitySimulator(Class<?> classType)
-    {
+    public EntitySimulator(Class<?> classType) {
         this.classType = classType;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> void create(Collection<T> entityCollection, int size)
-    {
+    public <T> void create(Collection<T> entityCollection, int size) {
         this.setSize(size);
-        for (int index = 0; index < size; index++)
-        {
+        for (int index = 0; index < size; index++) {
             T entity = (T) this.create(index);
             if (entity != null)
                 entityCollection.add(entity);
         }
     }
 
-    public Object create(int index)
-    {
+    public Object create(int index) {
         Object entity = ReflectUtils.newInstance(this.classType);
         if (entity != null)
             this.modify(entity, index);
         return entity;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return classType;
     }
 
     @Override
-    public Table getTable()
-    {
+    public Table getTable() {
         Table table = null;
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.getClassType());
         if (entityMetaData != null)
@@ -59,36 +52,27 @@ public class EntitySimulator extends DataSimulator
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.classType);
-        if (entityMetaData != null)
-        {
+        if (entityMetaData != null) {
             for (EntityField entityField : entityMetaData.getEntityFieldCollection())
                 this.addValueSimulator(entityField.getColumn());
         }
     }
 
-    public void modify(List<?> entityList)
-    {
-        for (int index = 0; index < entityList.size(); index++)
-        {
+    public void modify(List<?> entityList) {
+        for (int index = 0; index < entityList.size(); index++) {
             Object entity = entityList.get(index);
             this.modify(entity, entityList.size() - index - 1);
         }
     }
 
-    public void modify(Object entity, int index)
-    {
-        if (entity != null)
-        {
+    public void modify(Object entity, int index) {
+        if (entity != null) {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
-            if (entityMetaData != null)
-            {
-                for (EntityField entityField : entityMetaData.getEntityFieldCollection())
-                {
-                    if (!entityField.getColumn().isAutoIncrement())
-                    {
+            if (entityMetaData != null) {
+                for (EntityField entityField : entityMetaData.getEntityFieldCollection()) {
+                    if (!entityField.getColumn().isAutoIncrement()) {
                         Object value = this.getValue(index, entityField.getName());
                         entityField.setValue(entity, value);
                     }

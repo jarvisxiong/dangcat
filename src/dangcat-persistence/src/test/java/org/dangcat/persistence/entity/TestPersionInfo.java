@@ -13,19 +13,16 @@ import org.junit.Assert;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestPersionInfo extends TestEntityBase
-{
+public class TestPersionInfo extends TestEntityBase {
     private static final int TEST_COUNT = 10;
 
     @Override
-    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue)
-    {
+    protected boolean couldTestDatabase(DatabaseType databaseType, boolean defaultValue) {
         return DatabaseType.MySql.equals(databaseType);
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         this.logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -45,16 +42,14 @@ public class TestPersionInfo extends TestEntityBase
         this.logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testPersonInfo() throws EntityException
-    {
+    private void testPersonInfo() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
 
         List<PersonInfo> personInfoList1 = entityManager.load(PersonInfo.class);
         Assert.assertNull(personInfoList1);
 
         personInfoList1 = new LinkedList<PersonInfo>();
-        for (int i = 0; i < TEST_COUNT; i++)
-        {
+        for (int i = 0; i < TEST_COUNT; i++) {
             PersonInfo personInfo = new PersonInfo();
             personInfo.setName("Name " + i);
             personInfoList1.add(personInfo);

@@ -7,22 +7,19 @@ import org.dangcat.commons.serialize.json.JsonSerializer;
 
 import java.io.IOException;
 
-public class ServiceExceptionSerializer implements JsonSerialize
-{
+public class ServiceExceptionSerializer implements JsonSerialize {
     private static final String ERROR = "error";
     private static final String FIELDNAME = "fieldName";
     private static final String ID = "id";
     private static final String MESSAGE_ID = "messageId";
 
-    public static void serialize(JsonWriter jsonWriter, Exception exception) throws IOException
-    {
+    public static void serialize(JsonWriter jsonWriter, Exception exception) throws IOException {
         jsonWriter.beginObject();
         Object messageId = ReflectUtils.getProperty(exception, MESSAGE_ID);
         if (messageId != null)
             jsonWriter.name(ID).value(messageId.toString());
         Object fieldName = ReflectUtils.getProperty(exception, FIELDNAME);
-        if (fieldName != null && fieldName instanceof String)
-        {
+        if (fieldName != null && fieldName instanceof String) {
             String value = (String) fieldName;
             jsonWriter.name(FIELDNAME).value(ReflectUtils.toPropertyName(value));
         }
@@ -31,8 +28,7 @@ public class ServiceExceptionSerializer implements JsonSerialize
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -41,24 +37,20 @@ public class ServiceExceptionSerializer implements JsonSerialize
     }
 
     @Override
-    public String getSerializeName(Class<?> classType)
-    {
+    public String getSerializeName(Class<?> classType) {
         if (Exception.class.isAssignableFrom(classType))
             return ERROR;
         return null;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Exception.class.hashCode();
     }
 
     @Override
-    public boolean serialize(JsonWriter jsonWriter, String name, Object instance) throws IOException
-    {
-        if (instance instanceof Exception)
-        {
+    public boolean serialize(JsonWriter jsonWriter, String name, Object instance) throws IOException {
+        if (instance instanceof Exception) {
             JsonWriter writer = JsonSerializer.getJsonWriter(jsonWriter, name);
             serialize(writer, (Exception) instance);
             return true;
@@ -67,10 +59,8 @@ public class ServiceExceptionSerializer implements JsonSerialize
     }
 
     @Override
-    public boolean serializeClassType(JsonWriter jsonWriter, Class<?> classType) throws IOException
-    {
-        if (Exception.class.isAssignableFrom(classType))
-        {
+    public boolean serializeClassType(JsonWriter jsonWriter, Class<?> classType) throws IOException {
+        if (Exception.class.isAssignableFrom(classType)) {
             JsonWriter classTypeWriter = jsonWriter.name(ERROR);
             classTypeWriter.beginObject();
             classTypeWriter.name(ID).value(Integer.class.getSimpleName());

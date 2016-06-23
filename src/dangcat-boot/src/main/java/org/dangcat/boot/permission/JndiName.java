@@ -1,13 +1,11 @@
 package org.dangcat.boot.permission;
 
-public class JndiName
-{
+public class JndiName {
     private Integer id = null;
     private String name = null;
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -15,18 +13,15 @@ public class JndiName
         if (getClass() != obj.getClass())
             return false;
         JndiName other = (JndiName) obj;
-        if (id == null)
-        {
+        if (id == null) {
             if (other.id != null)
                 return false;
-        }
-        else if (!id.equals(other.id))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
@@ -34,8 +29,7 @@ public class JndiName
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -44,8 +38,7 @@ public class JndiName
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -53,8 +46,7 @@ public class JndiName
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Id = ");
         info.append(this.getId());

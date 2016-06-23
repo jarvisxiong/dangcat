@@ -16,13 +16,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestEntityBatch extends TestEntityBase
-{
+public class TestEntityBatch extends TestEntityBase {
     private static final int TEST_COUNT = 1000;
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -35,8 +33,7 @@ public class TestEntityBatch extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testEntityBatchManager() throws EntityException
-    {
+    private void testEntityBatchManager() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         List<EntityData> saveEntityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(TEST_COUNT, saveEntityDataList.size());
@@ -44,20 +41,17 @@ public class TestEntityBatch extends TestEntityBase
         EntityBatchStorer entityBatchStorer = new EntityBatchStorer(null);
 
         List<EntityData> expectEntityDataList = new ArrayList<EntityData>();
-        for (int index = 0; index < TEST_COUNT; index++)
-        {
+        for (int index = 0; index < TEST_COUNT; index++) {
             EntityData entityData = saveEntityDataList.get(index);
             if (index % 2 == 0)
                 entityBatchStorer.delete(entityData);
-            else
-            {
+            else {
                 EntityDataUtils.modifyEntityData(entityData, TEST_COUNT - index);
                 entityBatchStorer.save(entityData);
                 expectEntityDataList.add(entityData);
             }
         }
-        for (int index = 0; index < TEST_COUNT; index++)
-        {
+        for (int index = 0; index < TEST_COUNT; index++) {
             EntityData entityData = EntityDataUtils.createEntityData(TEST_COUNT + index);
             entityBatchStorer.save(entityData);
             expectEntityDataList.add(entityData);
@@ -70,8 +64,7 @@ public class TestEntityBatch extends TestEntityBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(expectEntityDataList, actualEntityDataList));
     }
 
-    private void testEntityInsert() throws EntityException
-    {
+    private void testEntityInsert() throws EntityException {
         List<EntityData> entityDataList = new LinkedList<EntityData>();
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
 
@@ -84,8 +77,7 @@ public class TestEntityBatch extends TestEntityBase
         Assert.assertEquals(entityDataList.size(), saveEntityDataList.size());
     }
 
-    private void testTableCreate() throws TableException
-    {
+    private void testTableCreate() throws TableException {
         Table table = EntityDataUtils.getTable();
 
         if (table.exists())
@@ -95,8 +87,7 @@ public class TestEntityBatch extends TestEntityBase
         table.create();
     }
 
-    private void testTableDrop() throws TableException
-    {
+    private void testTableDrop() throws TableException {
         Table table = EntityDataUtils.getTable();
         table.drop();
         Assert.assertFalse(table.exists());

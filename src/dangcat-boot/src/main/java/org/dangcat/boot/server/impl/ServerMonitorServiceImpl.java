@@ -14,11 +14,10 @@ import org.dangcat.framework.service.annotation.Service;
 
 /**
  * 系统监控服务。
+ *
  * @author dangcat
- * 
  */
-public class ServerMonitorServiceImpl extends ThreadService
-{
+public class ServerMonitorServiceImpl extends ThreadService {
     private static final String SERVICE_NAME = "SERVER-MONITOR";
 
     @Service
@@ -26,26 +25,22 @@ public class ServerMonitorServiceImpl extends ThreadService
 
     /**
      * 构建服务
+     *
      * @param parent 所属父服务。
      */
-    public ServerMonitorServiceImpl(ServiceProvider parent)
-    {
+    public ServerMonitorServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
-    private void createAlarmClock()
-    {
-        CronAlarmClock cronAlarmClock = new CronAlarmClock(this)
-        {
+    private void createAlarmClock() {
+        CronAlarmClock cronAlarmClock = new CronAlarmClock(this) {
             @Override
-            public String getCronExpression()
-            {
+            public String getCronExpression() {
                 return ServerConfig.getInstance().getCronExpression();
             }
 
             @Override
-            public boolean isEnabled()
-            {
+            public boolean isEnabled() {
                 return ServerConfig.getInstance().isEnabled();
             }
         };
@@ -54,23 +49,19 @@ public class ServerMonitorServiceImpl extends ThreadService
     }
 
     @Override
-    protected boolean executeAtStarting()
-    {
+    protected boolean executeAtStarting() {
         return true;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         SystemMonitor.getInstance().addDiskPath(ServerConfig.getInstance().getDiskPath());
 
-        ServerConfig.getInstance().addConfigChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        ServerConfig.getInstance().addConfigChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 if (ServerConfig.CronExpression.equals(event.getId()))
                     ServerMonitorServiceImpl.this.createAlarmClock();
             }
@@ -82,13 +73,10 @@ public class ServerMonitorServiceImpl extends ThreadService
      * 独立线程执行接口。
      */
     @Override
-    protected void innerExecute()
-    {
-        if (ServerConfig.getInstance().isEnabled())
-        {
+    protected void innerExecute() {
+        if (ServerConfig.getInstance().isEnabled()) {
             ServerInfo serverInfo = ServerManager.getInstance().getServerInfo();
-            if (serverInfo != null)
-            {
+            if (serverInfo != null) {
                 SystemMonitor.getInstance().monitor(serverInfo);
                 this.logger.info(serverInfo.print());
 

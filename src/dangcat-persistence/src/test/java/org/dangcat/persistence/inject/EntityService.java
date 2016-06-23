@@ -9,8 +9,7 @@ import org.dangcat.persistence.domain.AccountInfoAlias;
 import org.dangcat.persistence.domain.EntityData;
 import org.dangcat.persistence.entity.EntityManager;
 
-public class EntityService
-{
+public class EntityService {
     @Cache(AccountInfoAlias.class)
     private MemCache<AccountInfoAlias> accountInfoAliasCache = null;
 
@@ -35,43 +34,35 @@ public class EntityService
     @Database("SqlServer")
     private EntityManager sqlServerEntityManager = null;
 
-    public MemCache<AccountInfoAlias> getAccountInfoAliasCache()
-    {
+    public MemCache<AccountInfoAlias> getAccountInfoAliasCache() {
         return this.accountInfoAliasCache;
     }
 
-    public EntityCache<AccountInfo> getAccountInfoCache()
-    {
+    public EntityCache<AccountInfo> getAccountInfoCache() {
         return this.accountInfoCache;
     }
 
-    protected EntityManager getDefaultEntityManager()
-    {
+    protected EntityManager getDefaultEntityManager() {
         return this.defaultEntityManager;
     }
 
-    public EntityCache<EntityData> getEntityDataCache()
-    {
+    public EntityCache<EntityData> getEntityDataCache() {
         return this.entityDataCache;
     }
 
-    public EntityManager getHsqldbEntityManager()
-    {
+    public EntityManager getHsqldbEntityManager() {
         return this.hsqldbEntityManager;
     }
 
-    public EntityManager getMySqlEntityManager()
-    {
+    public EntityManager getMySqlEntityManager() {
         return this.mySqlEntityManager;
     }
 
-    public EntityManager getOracleEntityManager()
-    {
+    public EntityManager getOracleEntityManager() {
         return this.oracleEntityManager;
     }
 
-    public EntityManager getSqlServerEntityManager()
-    {
+    public EntityManager getSqlServerEntityManager() {
         return this.sqlServerEntityManager;
     }
 }

@@ -2,11 +2,10 @@ package org.dangcat.persistence.filter;
 
 /**
  * 过滤类型。
+ *
  * @author dangcat
- * 
  */
-public enum FilterType
-{
+public enum FilterType {
     /**
      * 范围。
      */
@@ -51,19 +50,19 @@ public enum FilterType
 
     /**
      * 构造过滤类型。
+     *
      * @param value 过滤类型值。
      */
-    FilterType(int value)
-    {
+    FilterType(int value) {
         this.value = value;
     }
 
     /**
      * 取得过滤类型。
+     *
      * @return 过滤类型值。
      */
-    public int getValue()
-    {
+    public int getValue() {
         return this.value;
     }
 }

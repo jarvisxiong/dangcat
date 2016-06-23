@@ -9,20 +9,17 @@ import org.junit.BeforeClass;
 
 import java.io.IOException;
 
-public class TestEntityBase
-{
+public class TestEntityBase {
     protected Logger logger = Logger.getLogger(this.getClass());
 
     @BeforeClass
-    public static void setUpBeforeClass() throws IOException, SessionException
-    {
+    public static void setUpBeforeClass() throws IOException, SessionException {
         SimulateUtils.configure();
         EntityDataUtils.createEntitySimulator();
         TableDataUtils.createTableSimulator();
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 }

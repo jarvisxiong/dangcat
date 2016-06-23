@@ -4,17 +4,14 @@ import org.dangcat.commons.utils.ValueUtils;
 
 /**
  * 数据库类型。
+ *
  * @author dangcat
- * 
  */
-public enum DatabaseType
-{
+public enum DatabaseType {
     Default, Hsqldb, MySql, Oracle, SqlServer;
 
-    public static DatabaseType parse(String value)
-    {
-        if (!ValueUtils.isEmpty(value))
-        {
+    public static DatabaseType parse(String value) {
+        if (!ValueUtils.isEmpty(value)) {
             String text = value.toLowerCase();
             if (text.contains("hsql") || text.contains(Hsqldb.name().toLowerCase()))
                 return Hsqldb;

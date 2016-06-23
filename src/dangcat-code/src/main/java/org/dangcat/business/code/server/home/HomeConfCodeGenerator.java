@@ -6,21 +6,18 @@ import java.io.File;
 
 /**
  * 服务代码生成器。
+ *
  * @author dangcat
- * 
  */
-public class HomeConfCodeGenerator extends ConfCodeGenerator
-{
+public class HomeConfCodeGenerator extends ConfCodeGenerator {
     private static final String CODE_PATH = "home" + File.separator + "conf";
 
-    public HomeConfCodeGenerator(String serverName)
-    {
+    public HomeConfCodeGenerator(String serverName) {
         super(serverName);
     }
 
     @Override
-    public String getCodePath()
-    {
+    public String getCodePath() {
         return CODE_PATH;
     }
 }

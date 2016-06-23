@@ -8,10 +8,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-public class ImageUtils
-{
-    public static Image loadImage(Class<?> classType, String name)
-    {
+public class ImageUtils {
+    public static Image loadImage(Class<?> classType, String name) {
         if (Object.class == classType)
             return null;
 
@@ -20,34 +18,25 @@ public class ImageUtils
             return loadImage(classType.getSuperclass(), name);
 
         Image image = null;
-        try
-        {
+        try {
             image = ImageIO.read(inputStream);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
         return image;
     }
 
-    public static Image loadImage(File file)
-    {
+    public static Image loadImage(File file) {
         Image image = null;
-        if (file != null && file.exists())
-        {
-            try
-            {
+        if (file != null && file.exists()) {
+            try {
                 image = ImageIO.read(new FileInputStream(file));
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
         return image;
     }
 
-    public static ImageIcon loadImageIcon(Class<?> classType, String name)
-    {
+    public static ImageIcon loadImageIcon(Class<?> classType, String name) {
         if (Object.class == classType)
             return null;
 

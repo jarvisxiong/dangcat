@@ -9,31 +9,26 @@ import java.util.Map;
 
 /**
  * 厂商管理。
+ *
  * @author dangcat
- * 
  */
-public class VendorManager
-{
+public class VendorManager {
     private static Map<Integer, String> vendorMap = new HashMap<Integer, String>();
 
-    static
-    {
+    static {
         add(AttributeTemplateManager.DEFAULT_VENDORID, "RFC");
     }
 
-    public static void add(Integer vendorId, String vendorName)
-    {
+    public static void add(Integer vendorId, String vendorName) {
         if (vendorId != null && !ValueUtils.isEmpty(vendorName))
             vendorMap.put(vendorId, vendorName.replace("_", "-"));
     }
 
-    public static Collection<Integer> getAllVendorId()
-    {
+    public static Collection<Integer> getAllVendorId() {
         return vendorMap.keySet();
     }
 
-    public static String getDescription(Integer id)
-    {
+    public static String getDescription(Integer id) {
         String description = null;
         if (vendorMap.containsKey(id))
             description = vendorMap.get(id) + "(" + id + ")";
@@ -42,13 +37,11 @@ public class VendorManager
         return description;
     }
 
-    public static String getName(Integer vendorId)
-    {
+    public static String getName(Integer vendorId) {
         return vendorMap.get(vendorId);
     }
 
-    public static Integer parse(String text)
-    {
+    public static Integer parse(String text) {
         Integer vendorId = null;
         String[] names = text.split("-");
         if (names != null && names.length >= 2)

@@ -6,27 +6,23 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-class DataRange
-{
+class DataRange {
     private static final Integer ZERO = 0;
     private ValueRange rowRange = new ValueRange();
     private Map<Comparable<?>, ValueRange> rowRangeMap = new HashMap<Comparable<?>, ValueRange>();
     private ValueRange totalRange = new ValueRange();
     private Map<Comparable<?>, ValueRange> totalRangeMap = new HashMap<Comparable<?>, ValueRange>();
 
-    protected void clear()
-    {
+    protected void clear() {
         this.rowRange.clear();
         this.rowRangeMap.clear();
         this.totalRange.clear();
         this.totalRangeMap.clear();
     }
 
-    protected Number getMaxValue()
-    {
+    protected Number getMaxValue() {
         Number value = this.totalRange.max;
-        for (ValueRange valueRange : this.totalRangeMap.values())
-        {
+        for (ValueRange valueRange : this.totalRangeMap.values()) {
             if (ValueUtils.compare(valueRange.max, value) > 0)
                 value = valueRange.max;
         }
@@ -37,11 +33,9 @@ class DataRange
         this.totalRange.max = value;
     }
 
-    protected Number getMinValue()
-    {
+    protected Number getMinValue() {
         Number value = this.totalRange.min;
-        for (ValueRange valueRange : this.totalRangeMap.values())
-        {
+        for (ValueRange valueRange : this.totalRangeMap.values()) {
             if (ValueUtils.compare(valueRange.min, value) > 0)
                 value = valueRange.min;
         }
@@ -52,14 +46,12 @@ class DataRange
         this.totalRange.min = value;
     }
 
-    protected Number getRowMax(Comparable<?>... rowKeys)
-    {
+    protected Number getRowMax(Comparable<?>... rowKeys) {
         Number value = this.rowRange.max;
         if (rowKeys == null || rowKeys.length == 0)
             rowKeys = this.rowRangeMap.keySet().toArray(new Comparable<?>[0]);
 
-        for (Comparable<?> rowKey : rowKeys)
-        {
+        for (Comparable<?> rowKey : rowKeys) {
             Number number = this.getValueRange(this.rowRangeMap, rowKey).max;
             if (ValueUtils.compare(number, value) > 0)
                 value = number;
@@ -67,14 +59,12 @@ class DataRange
         return value;
     }
 
-    protected Number getRowMin(Comparable<?>... rowKeys)
-    {
+    protected Number getRowMin(Comparable<?>... rowKeys) {
         Number value = this.rowRange.min;
         if (rowKeys == null || rowKeys.length == 0)
             rowKeys = this.rowRangeMap.keySet().toArray(new Comparable<?>[0]);
 
-        for (Comparable<?> rowKey : rowKeys)
-        {
+        for (Comparable<?> rowKey : rowKeys) {
             Number number = this.getValueRange(this.rowRangeMap, rowKey).min;
             if (ValueUtils.compare(number, value) < 0)
                 value = number;
@@ -82,40 +72,33 @@ class DataRange
         return value;
     }
 
-    private ValueRange getValueRange(Map<Comparable<?>, ValueRange> rangeMap, Comparable<?> key)
-    {
+    private ValueRange getValueRange(Map<Comparable<?>, ValueRange> rangeMap, Comparable<?> key) {
         ValueRange valueRange = rangeMap.get(key);
-        if (valueRange == null)
-        {
+        if (valueRange == null) {
             valueRange = new ValueRange();
             rangeMap.put(key, valueRange);
         }
         return valueRange;
     }
 
-    protected void putValue(Comparable<?> rowKey, Comparable<?> columnKey, Number value)
-    {
+    protected void putValue(Comparable<?> rowKey, Comparable<?> columnKey, Number value) {
         this.getValueRange(this.rowRangeMap, rowKey).putValue(value);
         this.getValueRange(this.totalRangeMap, columnKey).sum(value);
     }
 
-    protected void setRowMaxValue(Number value, Comparable<?>... rowKeys)
-    {
+    protected void setRowMaxValue(Number value, Comparable<?>... rowKeys) {
         if (rowKeys == null || rowKeys.length == 0)
             this.rowRange.max = value;
-        else
-        {
+        else {
             for (Comparable<?> rowKey : rowKeys)
                 this.getValueRange(this.rowRangeMap, rowKey).max = value;
         }
     }
 
-    protected void setRowMinValue(Number value, Comparable<?>... rowKeys)
-    {
+    protected void setRowMinValue(Number value, Comparable<?>... rowKeys) {
         if (rowKeys == null || rowKeys.length == 0)
             this.rowRange.min = value;
-        else
-        {
+        else {
             for (Comparable<?> rowKey : rowKeys)
                 this.getValueRange(this.rowRangeMap, rowKey).min = value;
         }

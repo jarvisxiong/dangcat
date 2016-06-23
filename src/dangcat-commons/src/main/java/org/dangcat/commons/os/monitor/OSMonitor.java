@@ -3,12 +3,10 @@ package org.dangcat.commons.os.monitor;
 import java.io.File;
 import java.util.List;
 
-abstract class OSMonitor
-{
+abstract class OSMonitor {
     private File currentPath = new File(".");
 
-    protected void monitor(MonitorInfo monitorInfo)
-    {
+    protected void monitor(MonitorInfo monitorInfo) {
         this.monitorSpace(monitorInfo);
         this.monitorMemory(monitorInfo);
         this.monitorCPU(monitorInfo);
@@ -18,24 +16,18 @@ abstract class OSMonitor
 
     protected abstract void monitorMemory(MonitorInfo monitorInfo);
 
-    protected void monitorSpace(MonitorInfo monitorInfo)
-    {
+    protected void monitorSpace(MonitorInfo monitorInfo) {
         List<File> pathList = SystemMonitor.getInstance().getMonitorDiskPathList();
         long totalDiskSpace = 0;
         long freeDiskSpace = 0;
-        if (pathList.size() > 0)
-        {
-            synchronized (pathList)
-            {
-                for (File path : pathList)
-                {
+        if (pathList.size() > 0) {
+            synchronized (pathList) {
+                for (File path : pathList) {
                     totalDiskSpace += path.getTotalSpace();
                     freeDiskSpace += path.getFreeSpace();
                 }
             }
-        }
-        else
-        {
+        } else {
             totalDiskSpace += this.currentPath.getTotalSpace();
             freeDiskSpace += this.currentPath.getFreeSpace();
         }

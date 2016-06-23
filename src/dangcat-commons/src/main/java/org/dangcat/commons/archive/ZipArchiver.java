@@ -13,36 +13,29 @@ import java.io.OutputStream;
 
 /**
  * ZIPÑ¹Ëõ¡£
+ *
  * @author dangcat
- * 
  */
-class ZipArchiver extends Archiver
-{
+class ZipArchiver extends Archiver {
     private ZipFile zipFile = null;
 
     @Override
-    protected void close()
-    {
-        try
-        {
+    protected void close() {
+        try {
             if (this.zipFile != null)
                 this.zipFile.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
         }
         super.close();
     }
 
     @Override
-    protected ArchiveEntry createArchiveEntry(String name, long size)
-    {
+    protected ArchiveEntry createArchiveEntry(String name, long size) {
         return new ZipArchiveEntry(name);
     }
 
     @Override
-    protected InputStream createInputStream(File file) throws IOException
-    {
+    protected InputStream createInputStream(File file) throws IOException {
         if (!ValueUtils.isEmpty(this.getEncoding()))
             this.zipFile = new ZipFile(file, this.getEncoding());
         else
@@ -51,8 +44,7 @@ class ZipArchiver extends Archiver
     }
 
     @Override
-    protected InputStream decorateInputStream(InputStream inputStream) throws IOException
-    {
+    protected InputStream decorateInputStream(InputStream inputStream) throws IOException {
         InputStream decorateInputStream = null;
         if (!ValueUtils.isEmpty(this.getEncoding()))
             decorateInputStream = new ZipArchiveInputStream(inputStream, this.getEncoding(), true);
@@ -62,11 +54,9 @@ class ZipArchiver extends Archiver
     }
 
     @Override
-    protected OutputStream decorateOutputStream(OutputStream outputStream) throws IOException
-    {
+    protected OutputStream decorateOutputStream(OutputStream outputStream) throws IOException {
         OutputStream decorateOutputStream = super.decorateOutputStream(outputStream);
-        if (decorateOutputStream instanceof ZipArchiveOutputStream)
-        {
+        if (decorateOutputStream instanceof ZipArchiveOutputStream) {
             ZipArchiveOutputStream zipArchiveOutputStream = (ZipArchiveOutputStream) decorateOutputStream;
             if (!ValueUtils.isEmpty(this.getEncoding()))
                 zipArchiveOutputStream.setEncoding(this.getEncoding());
@@ -76,14 +66,12 @@ class ZipArchiver extends Archiver
     }
 
     @Override
-    protected String getArchiverName()
-    {
+    protected String getArchiverName() {
         return ArchiveStreamFactory.ZIP;
     }
 
     @Override
-    protected InputStream getInputStream(ArchiveInputStream archiveInputStream, ArchiveEntry archiveEntry) throws IOException
-    {
+    protected InputStream getInputStream(ArchiveInputStream archiveInputStream, ArchiveEntry archiveEntry) throws IOException {
         ZipArchiveEntry zipArchiveEntry = this.zipFile.getEntry(archiveEntry.getName());
         return this.zipFile.getInputStream(zipArchiveEntry);
     }

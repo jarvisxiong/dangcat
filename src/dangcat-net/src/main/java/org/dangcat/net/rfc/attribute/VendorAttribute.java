@@ -6,27 +6,27 @@ import org.dangcat.net.rfc.template.AttributeTemplateManager;
 
 /**
  * 厂商扩展属性。
+ *
  * @author dangcat
- * 
  */
-public class VendorAttribute extends AttributeData implements NotifyAttributeChanged
-{
-    /** 属性... */
+public class VendorAttribute extends AttributeData implements NotifyAttributeChanged {
+    /**
+     * 属性...
+     */
     private AttributeCollection attributeCollection = new AttributeCollection();
-    /** 厂商编号 */
+    /**
+     * 厂商编号
+     */
     private Integer vendorId = null;
 
-    public VendorAttribute(AttributeTemplate attributeTemplate, Integer vendorId)
-    {
+    public VendorAttribute(AttributeTemplate attributeTemplate, Integer vendorId) {
         super(attributeTemplate);
         this.vendorId = vendorId;
         this.setValue(this.attributeCollection);
     }
 
-    public AttributeCollection getAttributeCollection()
-    {
-        if (this.attributeCollection.getVendorAttributeTemplateManager() == null)
-        {
+    public AttributeCollection getAttributeCollection() {
+        if (this.attributeCollection.getVendorAttributeTemplateManager() == null) {
             AttributeTemplateManager attributeTemplateManager = this.getAttributeTemplate().getVendorAttributeTemplateManager().getAttributeTemplateManager();
             this.attributeCollection.setVendorAttributeTemplateManager(attributeTemplateManager.getVendorAttributeTemplateManager(this.getVendorId()));
             this.attributeCollection.setNotifyAttributeChanged(this);
@@ -34,20 +34,17 @@ public class VendorAttribute extends AttributeData implements NotifyAttributeCha
         return this.attributeCollection;
     }
 
-    public Integer getVendorId()
-    {
+    public Integer getVendorId() {
         return this.vendorId;
     }
 
     @Override
-    public void onAttributeChanged(Object sender)
-    {
+    public void onAttributeChanged(Object sender) {
         this.notifyChanged();
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         String lengthText = "   " + this.getLength();
         info.append(lengthText.substring(lengthText.length() - 3));
@@ -59,8 +56,7 @@ public class VendorAttribute extends AttributeData implements NotifyAttributeCha
         if (this.getAttributeCollection().size() > 1)
             info.append("[");
         info.append(this.getAttributeCollection());
-        if (this.getAttributeCollection().size() > 1)
-        {
+        if (this.getAttributeCollection().size() > 1) {
             info.append(Environment.LINETAB_SEPARATOR);
             info.append("     ]");
         }

@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LocalSecurity
-{
+public @interface LocalSecurity {
     String value() default "";
 }

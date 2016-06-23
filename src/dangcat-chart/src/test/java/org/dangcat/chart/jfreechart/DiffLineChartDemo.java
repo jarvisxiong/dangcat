@@ -9,24 +9,20 @@ import org.dangcat.persistence.filter.FilterUnit;
 import javax.swing.*;
 import java.util.Date;
 
-public class DiffLineChartDemo extends ChartDemoBase
-{
+public class DiffLineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "对比线性统计图";
 
-    public DiffLineChartDemo()
-    {
+    public DiffLineChartDemo() {
         super(DiffLineChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new DiffLineChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         TransRateMap transRateMap = new TransRateMap();
         transRateMap.addRowTransRate(SimulateCategoryData.DownOctets, -1.0);
 

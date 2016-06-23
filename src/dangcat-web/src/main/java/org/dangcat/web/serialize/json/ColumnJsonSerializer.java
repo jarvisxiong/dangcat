@@ -20,11 +20,10 @@ import java.util.Map.Entry;
 
 /**
  * 栏位对象序列化。
+ *
  * @author dangcat
- * 
  */
-class ColumnJsonSerializer
-{
+class ColumnJsonSerializer {
     protected static final Logger logger = Logger.getLogger(ColumnJsonSerializer.class);
     private static final String AUTO_INCREMENT = "autoIncrement";
     private static final String CALCULATE = "calculate";
@@ -48,15 +47,12 @@ class ColumnJsonSerializer
     private Map<String, ColumnExtendInfo> columnExtendInfoMap = new HashMap<String, ColumnExtendInfo>();
     private EntityMetaData entityMetaData = null;
 
-    ColumnJsonSerializer(EntityMetaData entityMetaData)
-    {
+    ColumnJsonSerializer(EntityMetaData entityMetaData) {
         this.entityMetaData = entityMetaData;
     }
 
-    private void createColumnExtendInfo() throws IOException
-    {
-        for (EntityField entityField : this.entityMetaData.getEntityFieldCollection())
-        {
+    private void createColumnExtendInfo() throws IOException {
+        for (EntityField entityField : this.entityMetaData.getEntityFieldCollection()) {
             ColumnExtendInfo columnExtendInfo = new ColumnExtendInfo(this.entityMetaData.getEntityClass(), entityField.getName());
             columnExtendInfo.create();
             if (columnExtendInfo.getColumnProperties().size() > 0 || columnExtendInfo.getFieldProperties().size() > 0)
@@ -64,8 +60,7 @@ class ColumnJsonSerializer
         }
     }
 
-    private void serializeColumn(JsonWriter jsonWriter, Column column) throws IOException
-    {
+    private void serializeColumn(JsonWriter jsonWriter, Column column) throws IOException {
         String name = ReflectUtils.toPropertyName(column.getName());
         JsonWriter propertiesWriter = jsonWriter.name(name);
         propertiesWriter.beginObject();
@@ -121,18 +116,14 @@ class ColumnJsonSerializer
         propertiesWriter.endObject();
     }
 
-    private void serializeColumnExtendInfo(JsonWriter jsonWriter, Column column, Map<String, ColumnExtendInfo> columnExtendInfoMap) throws IOException
-    {
+    private void serializeColumnExtendInfo(JsonWriter jsonWriter, Column column, Map<String, ColumnExtendInfo> columnExtendInfoMap) throws IOException {
         ColumnExtendInfo columnExtendInfo = columnExtendInfoMap.get(column.getName());
-        if (columnExtendInfo != null)
-        {
-            if (columnExtendInfo.getColumnProperties().size() > 0)
-            {
+        if (columnExtendInfo != null) {
+            if (columnExtendInfo.getColumnProperties().size() > 0) {
                 for (Entry<String, Object> param : columnExtendInfo.getColumnProperties().entrySet())
                     JsonSerializer.serialize(jsonWriter, param.getKey(), param.getValue());
             }
-            if (columnExtendInfo.getFieldProperties().size() > 0)
-            {
+            if (columnExtendInfo.getFieldProperties().size() > 0) {
                 JsonWriter fieldPropertiesJsonWriter = jsonWriter.name(FIELD_PROPERTIES);
                 fieldPropertiesJsonWriter.beginObject();
                 for (Entry<String, Object> param : columnExtendInfo.getFieldProperties().entrySet())
@@ -142,8 +133,7 @@ class ColumnJsonSerializer
         }
     }
 
-    protected void serializeColumns(JsonWriter jsonWriter, Columns columns) throws IOException
-    {
+    protected void serializeColumns(JsonWriter jsonWriter, Columns columns) throws IOException {
         this.createColumnExtendInfo();
 
         JsonWriter columnsJsonWriter = jsonWriter.name(COLUMNS);
@@ -153,21 +143,16 @@ class ColumnJsonSerializer
         columnsJsonWriter.endObject();
     }
 
-    private void serializeDataValidator(JsonWriter jsonWriter, Column column) throws IOException
-    {
+    private void serializeDataValidator(JsonWriter jsonWriter, Column column) throws IOException {
         DataValidator[] dataValidators = column.getDataValidators();
-        if (dataValidators != null)
-        {
-            for (DataValidator dataValidator : dataValidators)
-            {
-                if (dataValidator instanceof RangeValidator)
-                {
+        if (dataValidators != null) {
+            for (DataValidator dataValidator : dataValidators) {
+                if (dataValidator instanceof RangeValidator) {
                     RangeValidator rangeValidator = (RangeValidator) dataValidator;
                     JsonSerializer.serialize(jsonWriter, MIN_VALUE, rangeValidator.getMinValue());
                     JsonSerializer.serialize(jsonWriter, MAX_VALUE, rangeValidator.getMaxValue());
                 }
-                if (dataValidator instanceof LogicValidator)
-                {
+                if (dataValidator instanceof LogicValidator) {
                     LogicValidator logicValidator = (LogicValidator) dataValidator;
                     JsonSerializer.serialize(jsonWriter, LOGIC, logicValidator.getName());
                 }
@@ -175,10 +160,8 @@ class ColumnJsonSerializer
         }
     }
 
-    private void serializeParams(JsonWriter jsonWriter, Column column) throws IOException
-    {
-        if (column.getParams().size() > 0)
-        {
+    private void serializeParams(JsonWriter jsonWriter, Column column) throws IOException {
+        if (column.getParams().size() > 0) {
             JsonWriter paramsJsonWriter = jsonWriter.name(PARAMS);
             paramsJsonWriter.beginObject();
             for (Entry<String, Object> param : column.getParams().entrySet())

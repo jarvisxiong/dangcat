@@ -9,51 +9,46 @@ import java.util.List;
 
 /**
  * 服务信息反馈。
+ *
  * @author dangcat
- * 
  */
-public class ServiceFeedback
-{
-    /** 异常信息表。 */
+public class ServiceFeedback {
+    /**
+     * 异常信息表。
+     */
     private List<ServiceException> serviceExceptionList = null;
-    /** 提示信息表。 */
+    /**
+     * 提示信息表。
+     */
     private List<ServiceInformation> serviceInformationList = null;
 
-    public void addServiceException(ServiceException serviceException)
-    {
+    public void addServiceException(ServiceException serviceException) {
         if (this.serviceExceptionList == null)
             this.serviceExceptionList = new ArrayList<ServiceException>();
         if (serviceException != null && !this.serviceExceptionList.contains(serviceException))
             this.serviceExceptionList.add(serviceException);
     }
 
-    public void addServiceInformation(ServiceInformation serviceInformation)
-    {
+    public void addServiceInformation(ServiceInformation serviceInformation) {
         if (this.serviceInformationList == null)
             this.serviceInformationList = new ArrayList<ServiceInformation>();
         if (serviceInformation != null && !this.serviceInformationList.contains(serviceInformation))
             this.serviceInformationList.add(serviceInformation);
     }
 
-    public void clearServiceException()
-    {
+    public void clearServiceException() {
         this.serviceExceptionList = null;
     }
 
-    public void clearServiceInformation()
-    {
+    public void clearServiceInformation() {
         this.serviceInformationList = null;
     }
 
-    public ServiceException findServiceException(Integer messageId)
-    {
+    public ServiceException findServiceException(Integer messageId) {
         ServiceException found = null;
-        if (this.serviceExceptionList != null)
-        {
-            for (ServiceException serviceException : this.serviceExceptionList)
-            {
-                if (serviceException.getMessageId().equals(messageId))
-                {
+        if (this.serviceExceptionList != null) {
+            for (ServiceException serviceException : this.serviceExceptionList) {
+                if (serviceException.getMessageId().equals(messageId)) {
                     found = serviceException;
                     break;
                 }
@@ -62,15 +57,11 @@ public class ServiceFeedback
         return found;
     }
 
-    public ServiceInformation findServiceInformation(Integer messageId)
-    {
+    public ServiceInformation findServiceInformation(Integer messageId) {
         ServiceInformation found = null;
-        if (this.serviceInformationList != null)
-        {
-            for (ServiceInformation serviceInformation : this.serviceInformationList)
-            {
-                if (serviceInformation.getMessageId().equals(messageId))
-                {
+        if (this.serviceInformationList != null) {
+            for (ServiceInformation serviceInformation : this.serviceInformationList) {
+                if (serviceInformation.getMessageId().equals(messageId)) {
                     found = serviceInformation;
                     break;
                 }
@@ -80,24 +71,20 @@ public class ServiceFeedback
     }
 
     @Serialize(name = "errors")
-    public List<ServiceException> getServiceExceptionList()
-    {
+    public List<ServiceException> getServiceExceptionList() {
         return this.serviceExceptionList;
     }
 
     @Serialize(name = "infos")
-    public List<ServiceInformation> getServiceInformationList()
-    {
+    public List<ServiceInformation> getServiceInformationList() {
         return this.serviceInformationList;
     }
 
-    public boolean hasError()
-    {
+    public boolean hasError() {
         return this.serviceExceptionList != null && this.serviceExceptionList.size() > 0;
     }
 
-    public boolean hasInformation()
-    {
+    public boolean hasInformation() {
         return this.serviceInformationList != null && this.serviceInformationList.size() > 0;
     }
 }

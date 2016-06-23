@@ -7,8 +7,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import java.util.Date;
 
 @Table("UserInfoIndex")
-public class UserInfo extends EntityBase
-{
+public class UserInfo extends EntityBase {
     public static final String Address = "Address";
     public static final String Age = "Age";
     public static final String Id = "Id";
@@ -31,53 +30,43 @@ public class UserInfo extends EntityBase
     @Column
     private Date registerTime;
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public Integer getAge()
-    {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Integer age)
-    {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Date getRegisterTime()
-    {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime)
-    {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 }

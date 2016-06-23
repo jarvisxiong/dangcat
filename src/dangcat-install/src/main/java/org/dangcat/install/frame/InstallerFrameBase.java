@@ -19,8 +19,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Collection;
 
-public abstract class InstallerFrameBase extends InstallerFrame
-{
+public abstract class InstallerFrameBase extends InstallerFrame {
     private static final long serialVersionUID = 1L;
 
     private ConfigFileAccess configFileAccess = new ConfigFileAccess();
@@ -28,19 +27,15 @@ public abstract class InstallerFrameBase extends InstallerFrame
     private DatabaseInstallModule databaseInstallModule = null;
     private ServiceInstallModule serviceInstallModule = null;
 
-    protected boolean checkExists()
-    {
+    protected boolean checkExists() {
         if (this.checkExists(this.serviceInstallModule, this.serviceInstallModule.getServiceInstaller()))
             return true;
         return this.checkExists(this.databaseInstallModule, this.databaseInstallModule.getDatabaseInstaller());
     }
 
-    protected boolean checkExists(ProcessModuleBase processModuleBase, Installer installer)
-    {
-        if (processModuleBase.isEnabled())
-        {
-            if (installer.exists())
-            {
+    protected boolean checkExists(ProcessModuleBase processModuleBase, Installer installer) {
+        if (processModuleBase.isEnabled()) {
+            if (installer.exists()) {
                 String message = ResourceUtils.getText(ServiceInstaller.class, "service.exists", processModuleBase.getName());
                 JOptionPane.showMessageDialog(this, message);
                 return true;
@@ -49,8 +44,7 @@ public abstract class InstallerFrameBase extends InstallerFrame
         return false;
     }
 
-    private void createDatabaseConfigModule()
-    {
+    private void createDatabaseConfigModule() {
         String name = this.getDatabaseServiceName() + "-config";
         String title = this.getDatabaseTitle();
 
@@ -65,8 +59,7 @@ public abstract class InstallerFrameBase extends InstallerFrame
         this.databaseConfigModule = databaseConfigModule;
     }
 
-    private void createDatabaseInstallModule()
-    {
+    private void createDatabaseInstallModule() {
         String name = this.getDatabaseServiceName();
         String title = this.getDatabaseTitle();
 
@@ -83,8 +76,7 @@ public abstract class InstallerFrameBase extends InstallerFrame
         this.configFileAccess.addConfigureAccess(databaseInstallModule.getDatabaseAccess());
     }
 
-    protected FtpConfigModule createFtpConfigModule(String name, String title)
-    {
+    protected FtpConfigModule createFtpConfigModule(String name, String title) {
         FtpConfigModule ftpConfigModule = new FtpConfigModule("ftp." + name, title);
         ftpConfigModule.createFtpConfigAccess(name, title);
         ftpConfigModule.setDefaultFtpName(name);
@@ -95,16 +87,14 @@ public abstract class InstallerFrameBase extends InstallerFrame
     }
 
     @Override
-    protected InstallSelectPanel createInstallSelectPanel()
-    {
+    protected InstallSelectPanel createInstallSelectPanel() {
         InstallSelectPanel installSelectPanel = super.createInstallSelectPanel();
         installSelectPanel.addComponent(this.serviceInstallModule.getName(), this.serviceInstallModule.getTitle(), true);
         installSelectPanel.addComponent(this.databaseInstallModule.getName(), this.databaseInstallModule.getTitle(), true);
         return installSelectPanel;
     }
 
-    private void createServiceInstallModule()
-    {
+    private void createServiceInstallModule() {
         String name = this.getServiceName();
         String title = this.getText(name);
 
@@ -117,26 +107,21 @@ public abstract class InstallerFrameBase extends InstallerFrame
     }
 
     @Override
-    protected void executeInstall()
-    {
+    protected void executeInstall() {
         if (this.checkExists())
             return;
 
         InstallSelectPathPanel installSelectPanel = (InstallSelectPathPanel) this.getInstallSelectPanel();
-        if (this.serviceInstallModule.isEnabled())
-        {
+        if (this.serviceInstallModule.isEnabled()) {
             this.serviceInstallModule.setTargetDir(installSelectPanel.getInstallPathPanel().getInstallPath());
             String configFile = this.serviceInstallModule.getInstallShellDir() + File.separator + "conf" + File.separator + this.getConfigFileName();
             this.configFileAccess.setConfigFile(new File(configFile));
         }
 
         Collection<ProcessModule> processModules = this.getProcessModules();
-        if (processModules != null && !processModules.isEmpty())
-        {
-            for (ProcessModule processModule : processModules)
-            {
-                if (processModule instanceof InstallModuleBase)
-                {
+        if (processModules != null && !processModules.isEmpty()) {
+            for (ProcessModule processModule : processModules) {
+                if (processModule instanceof InstallModuleBase) {
                     InstallModuleBase installModuleBase = (InstallModuleBase) processModule;
                     installModuleBase.setTargetDir(installSelectPanel.getInstallPathPanel().getInstallPath());
                 }
@@ -146,8 +131,7 @@ public abstract class InstallerFrameBase extends InstallerFrame
         super.executeProcess();
     }
 
-    public ConfigFileAccess getConfigFileAccess()
-    {
+    public ConfigFileAccess getConfigFileAccess() {
         return this.configFileAccess;
     }
 
@@ -155,15 +139,13 @@ public abstract class InstallerFrameBase extends InstallerFrame
 
     protected abstract String getDatabaseName();
 
-    protected String getDatabaseServiceDisplayName()
-    {
+    protected String getDatabaseServiceDisplayName() {
         return null;
     }
 
     protected abstract String getDatabaseServiceName();
 
-    protected String getDatabaseTitle()
-    {
+    protected String getDatabaseTitle() {
         return this.getText(this.getDatabaseServiceName());
     }
 
@@ -172,16 +154,14 @@ public abstract class InstallerFrameBase extends InstallerFrame
     protected abstract String getServiceName();
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.createDatabaseInstallModule();
         this.createDatabaseConfigModule();
         this.createServiceInstallModule();
     }
 
     @Override
-    protected void updateBodyContent()
-    {
+    protected void updateBodyContent() {
         Collection<String> selectedValues = this.getInstallSelectPanel().getSelectedValues();
         boolean isInstallService = selectedValues.contains(this.getServiceName());
         this.serviceInstallModule.setEnabled(isInstallService);

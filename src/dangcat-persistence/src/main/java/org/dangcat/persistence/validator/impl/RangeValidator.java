@@ -7,41 +7,34 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * 数值范围校验。
+ *
  * @author dangcat
- * 
  */
-public class RangeValidator extends DataValidator
-{
+public class RangeValidator extends DataValidator {
     private Object maxValue = null;
     private Object minValue = null;
 
-    public RangeValidator(Class<?> classType, Column column)
-    {
+    public RangeValidator(Class<?> classType, Column column) {
         super(classType, column);
     }
 
-    public Object getMaxValue()
-    {
+    public Object getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(Object maxValue)
-    {
+    public void setMaxValue(Object maxValue) {
         this.maxValue = maxValue;
     }
 
-    public Object getMinValue()
-    {
+    public Object getMinValue() {
         return minValue;
     }
 
-    public void setMinValue(Object minValue)
-    {
+    public void setMinValue(Object minValue) {
         this.minValue = minValue;
     }
 
-    private boolean isInvalid(Object value)
-    {
+    private boolean isInvalid(Object value) {
         if (this.minValue != null && ValueUtils.compare(value, this.minValue) < 0)
             return true;
 
@@ -57,11 +50,9 @@ public class RangeValidator extends DataValidator
 
     }
 
-    public void validate(Object instance) throws DataValidateException
-    {
+    public void validate(Object instance) throws DataValidateException {
         Object value = this.getValue(instance);
-        if (this.isInvalid(value))
-        {
+        if (this.isInvalid(value)) {
             if (this.getMinValue() != null && this.getMaxValue() != null)
                 this.throwDataValidateException(DataValidateException.INVALIDATE_RANGE, this.getMinValue(), this.getMaxValue());
 

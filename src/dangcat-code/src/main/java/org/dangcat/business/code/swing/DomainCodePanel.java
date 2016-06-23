@@ -22,8 +22,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
 
-public class DomainCodePanel extends CodePanel implements ActionListener
-{
+public class DomainCodePanel extends CodePanel implements ActionListener {
     private static final String BASE_CLASS = "BaseClass";
     private static final String BASECLASS = "org.dangcat.persistence.entity.EntityBase";
     private static final String DATABASE = "Database";
@@ -52,15 +51,13 @@ public class DomainCodePanel extends CodePanel implements ActionListener
     private JTextField userTextField = null;
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
+    public void actionPerformed(ActionEvent actionEvent) {
         final Object source = actionEvent.getSource();
         if (source == this.databaseComboBox)
             this.initDatabaseConfig();
     }
 
-    private void addComponents(JPanel panel, int y, JLabel label, Component component)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, Component component) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -77,8 +74,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         panel.add(component, constraints);
     }
 
-    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button)
-    {
+    private void addComponents(JPanel panel, int y, JLabel label, JTextField textField, JButton button) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(2, 2, 2, 2);
@@ -95,8 +91,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         constraints.gridy = y;
         panel.add(textField, constraints);
 
-        if (button != null)
-        {
+        if (button != null) {
             constraints.weightx = 0.1;
             constraints.gridx = 4;
             constraints.gridwidth = 1;
@@ -106,8 +101,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         }
     }
 
-    private JPanel createCodeConfigPanel()
-    {
+    private JPanel createCodeConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 0));
         panel.setBorder(new TitledBorder(this.getText("Config")));
@@ -127,11 +121,9 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         browseButton.setAlignmentX(CENTER_ALIGNMENT);
         browseButton.setMnemonic(KeyEvent.VK_B);
         browseButton.setDisplayedMnemonicIndex(browseButton.getText().indexOf("B"));
-        browseButton.addActionListener(new ActionListener()
-        {
+        browseButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 DomainCodePanel.this.choicePath(DomainCodePanel.this.pathTextField);
             }
         });
@@ -145,11 +137,9 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         generateButton.setAlignmentX(CENTER_ALIGNMENT);
         generateButton.setMnemonic(KeyEvent.VK_G);
         generateButton.setDisplayedMnemonicIndex(generateButton.getText().indexOf("G"));
-        generateButton.addActionListener(new ActionListener()
-        {
+        generateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 DomainCodePanel.this.generate();
             }
         });
@@ -159,13 +149,12 @@ public class DomainCodePanel extends CodePanel implements ActionListener
     }
 
     @SuppressWarnings("unchecked")
-    private JPanel createDatabaseConfigPanel()
-    {
+    private JPanel createDatabaseConfigPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setMaximumSize(new Dimension(Short.MAX_VALUE, 0));
         panel.setBorder(new TitledBorder(this.getText(DATABASE)));
 
-        this.databaseComboBox = new JComboBox(new Database[] { new MySqlDatabase(), new OracleDatabase(), new SqlServerDatabase() });
+        this.databaseComboBox = new JComboBox(new Database[]{new MySqlDatabase(), new OracleDatabase(), new SqlServerDatabase()});
         this.databaseComboBox.setSize(Short.MAX_VALUE, 20);
         this.databaseComboBox.addActionListener(this);
         JLabel databaseTypeLabel = new JLabel(this.getText(DATABASE_TYPE), JLabel.RIGHT);
@@ -180,14 +169,11 @@ public class DomainCodePanel extends CodePanel implements ActionListener
 
         this.portTextField = new JTextField();
         this.portTextField.setColumns(Short.MAX_VALUE);
-        this.portTextField.addKeyListener(new KeyAdapter()
-        {
+        this.portTextField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent keyEvent)
-            {
+            public void keyTyped(KeyEvent keyEvent) {
                 char keyChar = keyEvent.getKeyChar();
-                if ((keyChar < '0' || keyChar > '9') && keyChar != ' ')
-                {
+                if ((keyChar < '0' || keyChar > '9') && keyChar != ' ') {
                     Toolkit.getDefaultToolkit().beep();
                     keyEvent.setKeyChar('\0');
                 }
@@ -219,11 +205,9 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         loadButton.setMargin(new Insets(0, 20, 0, 20));
         loadButton.setMnemonic(KeyEvent.VK_L);
         loadButton.setDisplayedMnemonicIndex(loadButton.getText().indexOf("L"));
-        loadButton.addActionListener(new ActionListener()
-        {
+        loadButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 DomainCodePanel.this.loadTables();
             }
         });
@@ -239,8 +223,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         return panel;
     }
 
-    private JPanel createDatabasePanel()
-    {
+    private JPanel createDatabasePanel() {
         JPanel panel = new JPanel(new GridLayout(1, 2));
         panel.setPreferredSize(new Dimension(Short.MAX_VALUE, 210));
         panel.add(this.createDatabaseConfigPanel());
@@ -252,13 +235,11 @@ public class DomainCodePanel extends CodePanel implements ActionListener
     }
 
     @Override
-    protected Logger createLogger()
-    {
+    protected Logger createLogger() {
         return new org.dangcat.commons.log.Logger(Logger.getLogger(DomainCodeGenerator.class), "EntityCallback", this.logPane);
     }
 
-    private JPanel createLogPanel()
-    {
+    private JPanel createLogPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -274,8 +255,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         return panel;
     }
 
-    private void generate()
-    {
+    private void generate() {
         if (!this.validateEmpty(this.databaseTextField, DATABASE_NAME))
             return;
         if (!this.validateEmpty(this.serverTextField, SERVER))
@@ -289,14 +269,12 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         if (!this.validateEmpty(this.packageTextField, PACKAGE))
             return;
         Collection<String> tableNames = this.tableList.getSelectedValues();
-        if (tableNames == null || tableNames.isEmpty())
-        {
+        if (tableNames == null || tableNames.isEmpty()) {
             JOptionPane.showMessageDialog(this, this.getText("TablesBeEmpty"));
             return;
         }
 
-        try
-        {
+        try {
             this.getLogger().info(this.getText("BeginGenerate") + ": " + this.pathTextField.getText());
             DomainCodeGenerator domainCodeGenerator = new DomainCodeGenerator();
             domainCodeGenerator.setParentComponent(this);
@@ -308,16 +286,13 @@ public class DomainCodePanel extends CodePanel implements ActionListener
             domainCodeGenerator.setDatabase((Database) this.databaseComboBox.getSelectedItem());
             domainCodeGenerator.generate();
             this.getLogger().info(this.getText("EndGenerate"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.getLogger().error(this, e);
             JOptionPane.showMessageDialog(this, this.getText("GenerateError"));
         }
     }
 
-    private void initDatabaseConfig()
-    {
+    private void initDatabaseConfig() {
         if (this.textDocumentListener != null)
             this.textDocumentListener.setEnabled(false);
 
@@ -333,8 +308,7 @@ public class DomainCodePanel extends CodePanel implements ActionListener
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(this.createDatabasePanel());
         this.add(this.createCodeConfigPanel());
@@ -351,19 +325,15 @@ public class DomainCodePanel extends CodePanel implements ActionListener
         this.textDocumentListener.initialize();
     }
 
-    private void loadTables()
-    {
-        try
-        {
+    private void loadTables() {
+        try {
             Database database = (Database) this.databaseComboBox.getSelectedItem();
             TableManager tableManager = new TableManager(database);
             tableManager.load();
             this.tableList.clear();
             for (Table table : tableManager.getTables())
                 this.tableList.addItem(table.getTableName());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.getLogger().error(this, e);
             JOptionPane.showMessageDialog(null, this.getText("LoadError"));
         }

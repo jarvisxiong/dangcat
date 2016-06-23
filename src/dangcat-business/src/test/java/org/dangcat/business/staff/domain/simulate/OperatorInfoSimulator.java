@@ -7,16 +7,13 @@ import org.dangcat.business.staff.domain.RoleInfo;
 import org.dangcat.persistence.simulate.data.ValueSimulator;
 import org.dangcat.persistence.simulate.table.EntityData;
 
-public class OperatorInfoSimulator extends EntityData<OperatorInfoCreate>
-{
-    public OperatorInfoSimulator()
-    {
+public class OperatorInfoSimulator extends EntityData<OperatorInfoCreate> {
+    public OperatorInfoSimulator() {
         super(OperatorInfoCreate.class);
     }
 
     @Override
-    public void create()
-    {
+    public void create() {
         ValueSimulator groupIdSimulator = this.getDataSimulator().findValueSimulator(OperatorInfo.GroupId);
         groupIdSimulator.bind(OperatorGroup.class, OperatorGroup.Id);
 

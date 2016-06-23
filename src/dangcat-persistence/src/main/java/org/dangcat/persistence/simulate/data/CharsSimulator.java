@@ -2,22 +2,19 @@ package org.dangcat.persistence.simulate.data;
 
 /**
  * ×Ö·ûÄ£ÄâÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class CharsSimulator extends ValueSimulator
-{
+public class CharsSimulator extends ValueSimulator {
     private static final char INIT_VALUE = 'A';
     private int length = 0;
 
-    public CharsSimulator(int length)
-    {
+    public CharsSimulator(int length) {
         super(char[].class);
         this.length = length;
     }
 
-    protected Object createValue(int index)
-    {
+    protected Object createValue(int index) {
         char[] chars = new char[this.length];
         for (int i = 0; i < this.length; i++)
             chars[i] = (char) (INIT_VALUE + (index % 26));

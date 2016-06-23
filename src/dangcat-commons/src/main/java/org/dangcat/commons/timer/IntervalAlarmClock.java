@@ -7,43 +7,36 @@ import java.util.Date;
 
 /**
  * 周期定时器。
+ *
  * @author dangcat
- * 
  */
-public class IntervalAlarmClock extends AlarmClock
-{
+public class IntervalAlarmClock extends AlarmClock {
     private long delay = 0l;
     private long interval = 0l;
 
-    public IntervalAlarmClock()
-    {
+    public IntervalAlarmClock() {
         super();
     }
 
-    public IntervalAlarmClock(long delay, long interval, Object target)
-    {
+    public IntervalAlarmClock(long delay, long interval, Object target) {
         super(target);
         this.delay = delay;
         this.interval = interval;
     }
 
-    public IntervalAlarmClock(long interval, Object target)
-    {
+    public IntervalAlarmClock(long interval, Object target) {
         this(0l, interval, target);
     }
 
-    public IntervalAlarmClock(Object target)
-    {
+    public IntervalAlarmClock(Object target) {
         this(0l, 0l, target);
     }
 
-    private int diffSecond(Calendar calendar)
-    {
+    private int diffSecond(Calendar calendar) {
         return (int) (Math.abs(calendar.getTimeInMillis() - this.getLastAlramTime().getTime()) / 1000l);
     }
 
-    public long getDelay()
-    {
+    public long getDelay() {
         return this.delay;
     }
 
@@ -51,8 +44,7 @@ public class IntervalAlarmClock extends AlarmClock
         this.delay = delay;
     }
 
-    public long getInterval()
-    {
+    public long getInterval() {
         return this.interval;
     }
 
@@ -61,11 +53,9 @@ public class IntervalAlarmClock extends AlarmClock
     }
 
     @Override
-    public Date getNextAlramTime()
-    {
+    public Date getNextAlramTime() {
         Date nextAlramTime = super.getNextAlramTime();
-        if (nextAlramTime == null)
-        {
+        if (nextAlramTime == null) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(this.getLastAlramTime());
             calendar.add(Calendar.SECOND, (int) this.getInterval());
@@ -76,10 +66,8 @@ public class IntervalAlarmClock extends AlarmClock
     }
 
     @Override
-    public boolean isTimeout(Calendar calendar)
-    {
-        if (this.diffSecond(calendar) > this.getDelay() + this.getInterval())
-        {
+    public boolean isTimeout(Calendar calendar) {
+        if (this.diffSecond(calendar) > this.getDelay() + this.getInterval()) {
             this.setLastAlramTime(calendar.getTime());
             return true;
         }
@@ -87,15 +75,13 @@ public class IntervalAlarmClock extends AlarmClock
     }
 
     @Override
-    protected void setLastAlramTime(Date lastAlramTime)
-    {
+    protected void setLastAlramTime(Date lastAlramTime) {
         super.setLastAlramTime(lastAlramTime);
         this.setNextAlramTime(DateUtils.add(DateUtils.SECOND, lastAlramTime, (int) this.getInterval()));
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder(super.toString());
         if (this.getDelay() != 0l)
             info.append("\tDelay =" + this.getDelay());

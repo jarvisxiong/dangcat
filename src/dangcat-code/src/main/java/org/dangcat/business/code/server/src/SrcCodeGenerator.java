@@ -8,16 +8,14 @@ import java.io.File;
 
 /**
  * 服务代码生成器。
+ *
  * @author dangcat
- * 
  */
-public class SrcCodeGenerator extends DirectoryCodeGenerator
-{
+public class SrcCodeGenerator extends DirectoryCodeGenerator {
     private static final String CODE_PATH = "src";
     private String packageName = null;
 
-    public SrcCodeGenerator(String packageName, String serverName)
-    {
+    public SrcCodeGenerator(String packageName, String serverName) {
         this.packageName = packageName;
 
         String outputName = serverName.substring(0, 1).toUpperCase() + serverName.substring(1);
@@ -43,42 +41,36 @@ public class SrcCodeGenerator extends DirectoryCodeGenerator
         this.addWebAppResourceCodeGenerator("SceneContext_zh_CN.properties.template", outputName + "SceneContext_zh_CN.properties", false, FileUtils.ENCODING_UTF_8);
     }
 
-    private void addMainJavaCodeGenerator(String templateName, String outputName, boolean useCopy)
-    {
+    private void addMainJavaCodeGenerator(String templateName, String outputName, boolean useCopy) {
         String outputPath = "main" + File.separator + "java" + File.separator + this.packageName.replace(".", File.separator);
         this.addCodeGenerator(new CodeGenerator(templateName, outputPath + File.separator + outputName, useCopy));
     }
 
-    private void addMainResourcesCodeGenerator(String templateName, String outputName, boolean useCopy)
-    {
+    private void addMainResourcesCodeGenerator(String templateName, String outputName, boolean useCopy) {
         String outputPath = "main" + File.separator + "resources" + File.separator + this.packageName.replace(".", File.separator);
         this.addCodeGenerator(new CodeGenerator(templateName, outputPath + File.separator + outputName, useCopy));
     }
 
-    private void addTestResourcesCodeGenerator(String templateName, String packageName, String outputName, boolean useCopy)
-    {
+    private void addTestResourcesCodeGenerator(String templateName, String packageName, String outputName, boolean useCopy) {
         String outputPath = "test" + File.separator + "resources" + File.separator;
         if (packageName != null)
             outputPath += packageName.replace(".", File.separator);
         this.addCodeGenerator(new CodeGenerator(templateName, outputPath + File.separator + outputName, useCopy));
     }
 
-    private void addWebAppResourceCodeGenerator(String templateName, String outputName, boolean useCopy, String encoding)
-    {
+    private void addWebAppResourceCodeGenerator(String templateName, String outputName, boolean useCopy, String encoding) {
         String outputPath = "main" + File.separator + "webapp" + File.separator;
         this.addCodeGenerator(new CodeGenerator(templateName, outputPath + File.separator + outputName, useCopy, encoding));
     }
 
     @Override
-    public void generate() throws Exception
-    {
+    public void generate() throws Exception {
         super.generate();
         FileUtils.mkdir(this.getOutputDir() + File.separator + this.getCodePath() + File.separator + "test" + File.separator + "java");
     }
 
     @Override
-    public String getCodePath()
-    {
+    public String getCodePath() {
         return CODE_PATH;
     }
 }

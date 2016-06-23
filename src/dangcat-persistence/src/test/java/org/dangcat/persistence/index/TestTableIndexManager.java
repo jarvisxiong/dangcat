@@ -14,16 +14,13 @@ import org.junit.Test;
 import java.util.Collection;
 import java.util.Date;
 
-public class TestTableIndexManager
-{
+public class TestTableIndexManager {
     protected static final Logger logger = Logger.getLogger(TestTableIndexManager.class);
     private static final int TEST_COUNT = 100000;
     private Table table = null;
 
-    private Table getTable()
-    {
-        if (this.table == null)
-        {
+    private Table getTable() {
+        if (this.table == null) {
             this.table = UserInfoUtils.getTable();
             UserInfoUtils.createData(this.table, TEST_COUNT);
             this.table.getRows().getIndexManager().appendIndex(ValueUtils.join(UserInfo.Name, UserInfo.Age));
@@ -32,8 +29,7 @@ public class TestTableIndexManager
     }
 
     @Test
-    public void testFilterIndex()
-    {
+    public void testFilterIndex() {
         Rows rows = this.getTable().getRows();
         // 注册时间+年龄定位
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Age);
@@ -42,15 +38,13 @@ public class TestTableIndexManager
         Indexer indexer = null;
         long indexCostTime = 0;
         long indexCount = 0;
-        for (int index = 0; index < TEST_COUNT; index += 1000)
-        {
+        for (int index = 0; index < TEST_COUNT; index += 1000) {
             FilterGroup filterGroup = new FilterGroup();
             filterGroup.add(UserInfo.RegisterTime, FilterType.eq, UserInfoUtils.getRegisterTime(index));
             filterGroup.add(UserInfo.Age, FilterType.eq, UserInfoUtils.getAge(index));
             filterGroup.add(UserInfo.Name, FilterType.eq, UserInfoUtils.getName(index));
 
-            if (indexer == null)
-            {
+            if (indexer == null) {
                 indexer = rows.getIndexManager().findIndexer(filterGroup);
                 Assert.assertEquals(indexName, indexer.getName());
             }
@@ -65,18 +59,16 @@ public class TestTableIndexManager
     }
 
     @Test
-    public void testMultiNameIndex()
-    {
+    public void testMultiNameIndex() {
         Rows rows = this.getTable().getRows();
         // 地址+名称定位
         String indexName = ValueUtils.join(UserInfo.Address, UserInfo.Name);
-        String[] indexNames = { UserInfo.Address, UserInfo.Name };
+        String[] indexNames = {UserInfo.Address, UserInfo.Name};
         rows.getIndexManager().appendIndex(indexName);
 
         long indexCostTime = 0;
         long indexCount = 0;
-        for (int index = 0; index < TEST_COUNT; index += 1000)
-        {
+        for (int index = 0; index < TEST_COUNT; index += 1000) {
             long beginTime = DateUtils.currentTimeMillis();
             Collection<Row> rowList = rows.find(indexNames, UserInfoUtils.getAddress(index), UserInfoUtils.getName(index));
             indexCostTime += DateUtils.currentTimeMillis() - beginTime;
@@ -87,18 +79,16 @@ public class TestTableIndexManager
     }
 
     @Test
-    public void testNameIndex()
-    {
+    public void testNameIndex() {
         Rows rows = this.getTable().getRows();
         // 名称定位
         rows.getIndexManager().appendIndex(UserInfo.Name);
 
         long indexCostTime = 0;
         long indexCount = 0;
-        for (int index = 0; index < TEST_COUNT; index += 1000)
-        {
+        for (int index = 0; index < TEST_COUNT; index += 1000) {
             long beginTime = DateUtils.currentTimeMillis();
-            Collection<Row> rowList = rows.find(new String[] { UserInfo.Name }, UserInfoUtils.getName(index));
+            Collection<Row> rowList = rows.find(new String[]{UserInfo.Name}, UserInfoUtils.getName(index));
             indexCostTime += DateUtils.currentTimeMillis() - beginTime;
             indexCount++;
             UserInfoUtils.assertRowList(rowList, index);
@@ -107,16 +97,14 @@ public class TestTableIndexManager
     }
 
     @Test
-    public void testPrimaryKeyIndex()
-    {
+    public void testPrimaryKeyIndex() {
         Rows rows = this.getTable().getRows();
         // 主键定位
         rows.getIndexManager().appendIndex(UserInfo.Id, true);
 
         long indexCostTime = 0;
         long indexCount = 0;
-        for (int index = 0; index < TEST_COUNT; index += 1000)
-        {
+        for (int index = 0; index < TEST_COUNT; index += 1000) {
             long beginTime = DateUtils.currentTimeMillis();
             Row row = rows.find(index);
             indexCostTime += DateUtils.currentTimeMillis() - beginTime;
@@ -127,8 +115,7 @@ public class TestTableIndexManager
     }
 
     @Test
-    public void testRangeFilterIndex()
-    {
+    public void testRangeFilterIndex() {
         Rows rows = this.getTable().getRows();
         // 注册时间+年龄定位
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Address, UserInfo.Name);
@@ -137,8 +124,7 @@ public class TestTableIndexManager
         Indexer indexer = null;
         long indexTotalCostTime = 0;
         long indexTotalCount = 0;
-        for (int index = 0; index < TEST_COUNT; index += 10000)
-        {
+        for (int index = 0; index < TEST_COUNT; index += 10000) {
             FilterGroup filterGroup = new FilterGroup();
             Date fromRegisterTime = UserInfoUtils.getRegisterTime(index + 4);
             Date toRegisterTime = UserInfoUtils.getRegisterTime(index + 4);
@@ -147,8 +133,7 @@ public class TestTableIndexManager
             filterGroup.add(UserInfo.Address, FilterType.le, UserInfoUtils.getAddress(index + 4));
             filterGroup.add(UserInfo.Name, FilterType.like, UserInfoUtils.getName(4));
 
-            if (indexer == null)
-            {
+            if (indexer == null) {
                 indexer = rows.getIndexManager().findIndexer(filterGroup);
                 Assert.assertEquals(indexName, indexer.getName());
             }
@@ -161,8 +146,7 @@ public class TestTableIndexManager
 
             beginTime = DateUtils.currentTimeMillis();
             int count = 0;
-            for (Row row : this.getTable().getRows())
-            {
+            for (Row row : this.getTable().getRows()) {
                 if (filterGroup.isValid(row))
                     count++;
             }

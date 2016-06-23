@@ -2,32 +2,27 @@ package org.dangcat.persistence.simulate.data;
 
 /**
  * Êý×ÖÄ£ÄâÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class NumberSimulator extends ValueSimulator
-{
+public class NumberSimulator extends ValueSimulator {
     private Number initValue = null;
     private Number step = null;
 
-    public NumberSimulator(Class<?> classType)
-    {
+    public NumberSimulator(Class<?> classType) {
         this(classType, 0, 1);
     }
 
-    public NumberSimulator(Class<?> classType, Number initValue, Number step)
-    {
+    public NumberSimulator(Class<?> classType, Number initValue, Number step) {
         super(classType);
         this.initValue = initValue;
         this.step = step;
     }
 
-    protected Object createValue(int index)
-    {
+    protected Object createValue(int index) {
         Object value = null;
         Class<?> classType = this.getClassType();
-        if (this.initValue != null && this.step != null)
-        {
+        if (this.initValue != null && this.step != null) {
             if (Integer.class.equals(classType) || int.class.equals(classType))
                 value = this.initValue.intValue() + this.step.intValue() * index;
             else if (Short.class.equals(classType) || short.class.equals(classType))
@@ -40,23 +35,19 @@ public class NumberSimulator extends ValueSimulator
         return value;
     }
 
-    public Number getInitValue()
-    {
+    public Number getInitValue() {
         return initValue;
     }
 
-    public void setInitValue(Number initValue)
-    {
+    public void setInitValue(Number initValue) {
         this.initValue = initValue;
     }
 
-    public Number getStep()
-    {
+    public Number getStep() {
         return step;
     }
 
-    public void setStep(Number step)
-    {
+    public void setStep(Number step) {
         this.step = step;
     }
 }

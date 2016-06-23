@@ -8,8 +8,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class DatabaseInstallListener implements DocumentListener
-{
+public class DatabaseInstallListener implements DocumentListener {
     private ConfigPanel configPanel = null;
     private DatabaseInstaller databaseInstaller = null;
     private JTextField databaseTextField = null;
@@ -18,21 +17,17 @@ public class DatabaseInstallListener implements DocumentListener
     private JTextField portTextField = null;
     private JTextField userTextField = null;
 
-    public DatabaseInstallListener(ConfigPanel configPanel)
-    {
+    public DatabaseInstallListener(ConfigPanel configPanel) {
         this.configPanel = configPanel;
     }
 
     @Override
-    public void changedUpdate(DocumentEvent e)
-    {
+    public void changedUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public void changedValue()
-    {
-        if (this.isEnabled())
-        {
+    public void changedValue() {
+        if (this.isEnabled()) {
             DatabaseInstaller databaseInstaller = this.getDatabaseInstaller();
             databaseInstaller.setDatabaseName(this.databaseTextField.getText());
             databaseInstaller.setPassword(new String(this.passwordTextField.getPassword()));
@@ -44,8 +39,7 @@ public class DatabaseInstallListener implements DocumentListener
         }
     }
 
-    public DatabaseInstaller getDatabaseInstaller()
-    {
+    public DatabaseInstaller getDatabaseInstaller() {
         return this.databaseInstaller;
     }
 
@@ -53,8 +47,7 @@ public class DatabaseInstallListener implements DocumentListener
         this.databaseInstaller = databaseInstaller;
     }
 
-    public JTextField getDatabaseTextField()
-    {
+    public JTextField getDatabaseTextField() {
         return this.databaseTextField;
     }
 
@@ -62,8 +55,7 @@ public class DatabaseInstallListener implements DocumentListener
         this.databaseTextField = databaseTextField;
     }
 
-    public JPasswordField getPasswordTextField()
-    {
+    public JPasswordField getPasswordTextField() {
         return this.passwordTextField;
     }
 
@@ -71,8 +63,7 @@ public class DatabaseInstallListener implements DocumentListener
         this.passwordTextField = passwordTextField;
     }
 
-    public JTextField getPortTextField()
-    {
+    public JTextField getPortTextField() {
         return this.portTextField;
     }
 
@@ -80,8 +71,7 @@ public class DatabaseInstallListener implements DocumentListener
         this.portTextField = portTextField;
     }
 
-    public JTextField getUserTextField()
-    {
+    public JTextField getUserTextField() {
         return this.userTextField;
     }
 
@@ -89,8 +79,7 @@ public class DatabaseInstallListener implements DocumentListener
         this.userTextField = userTextField;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         this.databaseTextField.getDocument().addDocumentListener(this);
         this.passwordTextField.getDocument().addDocumentListener(this);
         this.portTextField.getDocument().addDocumentListener(this);
@@ -98,24 +87,20 @@ public class DatabaseInstallListener implements DocumentListener
     }
 
     @Override
-    public void insertUpdate(DocumentEvent e)
-    {
+    public void insertUpdate(DocumentEvent e) {
         this.changedValue();
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
-    public void setEnabled(boolean enabled)
-    {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
     @Override
-    public void removeUpdate(DocumentEvent e)
-    {
+    public void removeUpdate(DocumentEvent e) {
         this.changedValue();
     }
 }

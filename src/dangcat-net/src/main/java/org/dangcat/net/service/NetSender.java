@@ -5,8 +5,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.io.IOException;
 import java.net.InetAddress;
 
-public abstract class NetSender
-{
+public abstract class NetSender {
     private boolean autoClose = true;
     private InetAddress localAddress = null;
     private Integer localPort = null;
@@ -15,8 +14,7 @@ public abstract class NetSender
 
     public abstract void close();
 
-    public InetAddress getLocalAddress()
-    {
+    public InetAddress getLocalAddress() {
         return this.localAddress;
     }
 
@@ -26,8 +24,7 @@ public abstract class NetSender
         this.localAddress = localAddress;
     }
 
-    public Integer getLocalPort()
-    {
+    public Integer getLocalPort() {
         return this.localPort;
     }
 
@@ -37,8 +34,7 @@ public abstract class NetSender
         this.localPort = localPort;
     }
 
-    public InetAddress getRemoteAddress()
-    {
+    public InetAddress getRemoteAddress() {
         return this.remoteAddress;
     }
 
@@ -48,8 +44,7 @@ public abstract class NetSender
         this.remoteAddress = remoteAddress;
     }
 
-    public Integer getRemotePort()
-    {
+    public Integer getRemotePort() {
         return this.remotePort;
     }
 
@@ -59,8 +54,7 @@ public abstract class NetSender
         this.remotePort = remotePort;
     }
 
-    public boolean isAutoClose()
-    {
+    public boolean isAutoClose() {
         return this.autoClose;
     }
 
@@ -70,24 +64,17 @@ public abstract class NetSender
 
     public abstract void send(byte[] dataBuffer) throws IOException;
 
-    public void send(byte[] dataBuffer, int tryTimes) throws IOException
-    {
+    public void send(byte[] dataBuffer, int tryTimes) throws IOException {
         IOException ioException = null;
         boolean success = false;
-        while (tryTimes > 0 && !success)
-        {
-            try
-            {
+        while (tryTimes > 0 && !success) {
+            try {
                 this.send(dataBuffer);
                 success = true;
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 ioException = e;
                 this.close();
-            }
-            finally
-            {
+            } finally {
                 tryTimes--;
             }
         }
@@ -97,10 +84,10 @@ public abstract class NetSender
 
     /**
      * 向指定地址和端口发送报文。
+     *
      * @throws IOException
      */
-    public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer) throws IOException
-    {
+    public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer) throws IOException {
         this.setRemoteAddress(remoteAddress);
         this.setRemotePort(remotePort);
         this.send(dataBuffer);
@@ -108,10 +95,10 @@ public abstract class NetSender
 
     /**
      * 等待接收回应报文。
+     *
      * @throws IOException
      */
-    public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer, int tryTimes) throws IOException
-    {
+    public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer, int tryTimes) throws IOException {
         this.setRemoteAddress(remoteAddress);
         this.setRemotePort(remotePort);
         this.send(dataBuffer, tryTimes);

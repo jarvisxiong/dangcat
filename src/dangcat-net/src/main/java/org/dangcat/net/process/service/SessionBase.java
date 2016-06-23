@@ -9,27 +9,41 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class SessionBase
-{
-    /** 起始时间。 */
+public abstract class SessionBase {
+    /**
+     * 起始时间。
+     */
     private long beginTime = DateUtils.currentTimeMillis();
-    /** 是否取消处理流程。 */
+    /**
+     * 是否取消处理流程。
+     */
     private boolean cancel = false;
-    /** 产生时间。 */
+    /**
+     * 产生时间。
+     */
     private Date createTime = DateUtils.now();
-    /** 是否已经完成处理流程。 */
+    /**
+     * 是否已经完成处理流程。
+     */
     private boolean handle = false;
-    /** 目标日志。 */
+    /**
+     * 目标日志。
+     */
     private Logger logger = null;
-    /** 参数表。 */
+    /**
+     * 参数表。
+     */
     private Map<String, Object> params = new HashMap<String, Object>();
-    /** 耗时统计表。 */
+    /**
+     * 耗时统计表。
+     */
     private Map<String, Long> timCostMap = new LinkedHashMap<String, Long>();
-    /** 耗时。 */
+    /**
+     * 耗时。
+     */
     private long totalTimeCost = 0;
 
-    public void end()
-    {
+    public void end() {
         this.totalTimeCost = DateUtils.currentTimeMillis() - this.getCreateTime().getTime();
 
         Logger logger = this.getLogger();
@@ -39,42 +53,35 @@ public abstract class SessionBase
             logger.info(this);
     }
 
-    public Date getCreateTime()
-    {
+    public Date getCreateTime() {
         return this.createTime;
     }
 
     public abstract String getDebugInfo();
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         if (this.logger == null)
             return Logger.getLogger(this.getClass());
         return this.logger;
     }
 
-    public Map<String, Object> getParams()
-    {
+    public Map<String, Object> getParams() {
         return this.params;
     }
 
-    public Map<String, Long> getTimCostMap()
-    {
+    public Map<String, Long> getTimCostMap() {
         return this.timCostMap;
     }
 
-    public long getTimeCostThreshold()
-    {
+    public long getTimeCostThreshold() {
         return 0l;
     }
 
-    public long getTotalTimeCost()
-    {
+    public long getTotalTimeCost() {
         return this.totalTimeCost;
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.cancel;
     }
 
@@ -82,8 +89,7 @@ public abstract class SessionBase
         this.cancel = cancel;
     }
 
-    public boolean isHandle()
-    {
+    public boolean isHandle() {
         return this.handle && !this.isCancel();
     }
 
@@ -91,15 +97,12 @@ public abstract class SessionBase
         this.handle = handle;
     }
 
-    public void logTimeCost(String message)
-    {
+    public void logTimeCost(String message) {
         long timeCost = DateUtils.currentTimeMillis() - this.beginTime;
         this.totalTimeCost += timeCost;
-        if (timeCost > 0)
-        {
+        if (timeCost > 0) {
             long timeCostThreshold = this.getTimeCostThreshold();
-            if (timeCostThreshold > 0 && timeCost > timeCostThreshold)
-            {
+            if (timeCostThreshold > 0 && timeCost > timeCostThreshold) {
                 if (this.timCostMap == null)
                     this.timCostMap = new LinkedHashMap<String, Long>();
                 this.timCostMap.put(message, timeCost);
@@ -110,6 +113,7 @@ public abstract class SessionBase
 
     /**
      * 验证报文的合法性。
+     *
      * @param datagramPacket 报文对象。
      * @return
      */

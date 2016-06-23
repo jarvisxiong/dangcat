@@ -8,30 +8,25 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
  * ÓÊ¼þÐ£ÑéÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class EmailValidator extends LogicValidator
-{
+public class EmailValidator extends LogicValidator {
     private static final String VALIDATOR_NAME = "Email";
 
-    public EmailValidator(Class<?> classType, Column column)
-    {
+    public EmailValidator(Class<?> classType, Column column) {
         super(classType, column);
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return VALIDATOR_NAME;
     }
 
     @Override
-    public void validateValue(Object value) throws DataValidateException
-    {
+    public void validateValue(Object value) throws DataValidateException {
         String email = (String) value;
-        if (!ValueUtils.isEmpty(email))
-        {
+        if (!ValueUtils.isEmpty(email)) {
             if (email.charAt(0) == '.' || email.charAt(0) == '@' || email.indexOf('@', 0) == -1 || email.indexOf('.', 0) == -1 || email.lastIndexOf("@") == email.length() - 1
                     || email.lastIndexOf(".") == email.length() - 1)
                 throw new LogicValidatorException(this.getClassType(), this.getColumn().getName(), LogicValidatorException.INVALIDATE_EMAIL);

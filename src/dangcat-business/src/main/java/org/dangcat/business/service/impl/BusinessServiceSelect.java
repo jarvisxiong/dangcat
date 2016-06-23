@@ -18,19 +18,15 @@ import org.dangcat.persistence.tablename.TableName;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-class BusinessServiceSelect<Q extends EntityBase, V extends EntityBase, F extends DataFilter, N extends Number> extends BusinessServiceInvoker<Q, V, F>
-{
-    BusinessServiceSelect(BusinessServiceBase<Q, V, F> businessServiceBase)
-    {
+class BusinessServiceSelect<Q extends EntityBase, V extends EntityBase, F extends DataFilter, N extends Number> extends BusinessServiceInvoker<Q, V, F> {
+    BusinessServiceSelect(BusinessServiceBase<Q, V, F> businessServiceBase) {
         super(businessServiceBase);
     }
 
-    private Table createValueMapTable(Class<?> classType, String[] fieldNames)
-    {
+    private Table createValueMapTable(Class<?> classType, String[] fieldNames) {
         Table valueMapTable = null;
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
-        if (entityMetaData.getEntityField(fieldNames[0]) != null && entityMetaData.getEntityField(fieldNames[1]) != null)
-        {
+        if (entityMetaData.getEntityField(fieldNames[0]) != null && entityMetaData.getEntityField(fieldNames[1]) != null) {
             valueMapTable = new Table(entityMetaData.getTableName().getName());
             valueMapTable.getColumns().add(fieldNames[0], Integer.class);
             valueMapTable.getColumns().add(fieldNames[1], String.class);
@@ -39,14 +35,12 @@ class BusinessServiceSelect<Q extends EntityBase, V extends EntityBase, F extend
         return valueMapTable;
     }
 
-    protected Map<N, String> execute(F dataFilter) throws ServiceException
-    {
+    protected Map<N, String> execute(F dataFilter) throws ServiceException {
         return this.execute(dataFilter, null, null);
     }
 
     @SuppressWarnings("unchecked")
-    protected Map<N, String> execute(F dataFilter, TableName tableName, String sqlName) throws ServiceException
-    {
+    protected Map<N, String> execute(F dataFilter, TableName tableName, String sqlName) throws ServiceException {
         Class<Q> classType = this.getQueryEntityClass();
 
         if (this.logger.isDebugEnabled())
@@ -54,15 +48,12 @@ class BusinessServiceSelect<Q extends EntityBase, V extends EntityBase, F extend
 
         Map<N, String> valueMap = null;
         long beginTime = DateUtils.currentTimeMillis();
-        try
-        {
+        try {
             String[] fieldNames = this.businessServiceBase.getSelectFieldNames();
             Table valueMapTable = this.createValueMapTable(classType, fieldNames);
-            if (valueMapTable != null)
-            {
+            if (valueMapTable != null) {
                 valueMap = new LinkedHashMap<N, String>();
-                if (dataFilter != null)
-                {
+                if (dataFilter != null) {
                     Range range = new Range();
                     range.setRange(dataFilter.getStartRow(), dataFilter.getPageSize());
                     range.setCalculateTotalSize(true);
@@ -74,21 +65,16 @@ class BusinessServiceSelect<Q extends EntityBase, V extends EntityBase, F extend
                 valueMapTable.setTableName(tableName);
                 valueMapTable.setSqlName(sqlName);
                 valueMapTable.load();
-                for (Row row : valueMapTable.getRows())
-                {
+                for (Row row : valueMapTable.getRows()) {
                     N key = row.getField(fieldNames[0]).getObject();
                     String value = row.getField(fieldNames[1]).getString();
                     valueMap.put(key, value);
                 }
             }
-        }
-        catch (EntityException e)
-        {
+        } catch (EntityException e) {
             this.logger.error(this, e);
             throw new BusinessException(BusinessException.LOAD_ERROR, classType);
-        }
-        finally
-        {
+        } finally {
             if (this.logger.isDebugEnabled())
                 this.logger.debug("End select entity, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
         }

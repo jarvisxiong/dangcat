@@ -6,15 +6,13 @@ import org.dangcat.commons.io.FileUtils;
 
 /**
  * 服务代码生成器。
+ *
  * @author dangcat
- * 
  */
-public class ConfCodeGenerator extends DirectoryCodeGenerator
-{
+public class ConfCodeGenerator extends DirectoryCodeGenerator {
     private static final String CODE_PATH = "conf";
 
-    public ConfCodeGenerator(String serverName)
-    {
+    public ConfCodeGenerator(String serverName) {
         this.addCodeGenerator(new CodeGenerator("server.cache.xml.template", serverName + ".cache.xml", true));
         this.addCodeGenerator(new CodeGenerator("server.log4j.properties.template", serverName + ".log4j.properties"));
         this.addCodeGenerator(new CodeGenerator("server.menus.xml.template", serverName + ".menus.xml", true));
@@ -27,8 +25,7 @@ public class ConfCodeGenerator extends DirectoryCodeGenerator
     }
 
     @Override
-    public String getCodePath()
-    {
+    public String getCodePath() {
         return CODE_PATH;
     }
 }

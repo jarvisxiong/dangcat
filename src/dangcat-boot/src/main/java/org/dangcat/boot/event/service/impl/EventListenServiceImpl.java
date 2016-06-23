@@ -13,32 +13,27 @@ import java.util.HashSet;
 
 /**
  * 消息侦听器。
+ *
  * @author dangcat
- * 
  */
-public class EventListenServiceImpl extends EventServiceBase implements EventListenService
-{
+public class EventListenServiceImpl extends EventServiceBase implements EventListenService {
     private static final String SERVICE_NAME = "EventRecv";
     private Collection<EventListener> eventListeners = new HashSet<EventListener>();
 
-    public EventListenServiceImpl(ServiceProvider parent)
-    {
+    public EventListenServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
     @Override
-    public void addEventListener(EventListener eventListener)
-    {
-        synchronized (this.eventListeners)
-        {
+    public void addEventListener(EventListener eventListener) {
+        synchronized (this.eventListeners) {
             if (eventListener != null && !this.eventListeners.contains(eventListener))
                 this.eventListeners.add(eventListener);
         }
     }
 
     @Override
-    protected void execute(Event event)
-    {
+    protected void execute(Event event) {
         EventStatistics eventStatistics = this.getEventStatistics();
         long beginTime = DateUtils.currentTimeMillis();
         eventStatistics.increaseHandleCount();
@@ -50,34 +45,29 @@ public class EventListenServiceImpl extends EventServiceBase implements EventLis
 
     /**
      * 处理事件消息。
+     *
      * @param event 消息对象。
      */
-    public void handleEvent(Event event)
-    {
+    public void handleEvent(Event event) {
         this.addTask(event);
     }
 
     @Override
-    public void onReceive(Event event)
-    {
+    public void onReceive(Event event) {
         this.addTask(event);
     }
 
     @Override
-    public void removeEventListener(EventListener eventListener)
-    {
-        synchronized (this.eventListeners)
-        {
+    public void removeEventListener(EventListener eventListener) {
+        synchronized (this.eventListeners) {
             if (eventListener != null && this.eventListeners.contains(eventListener))
                 this.eventListeners.remove(eventListener);
         }
     }
 
     @Override
-    public void start()
-    {
-        synchronized (this.eventListeners)
-        {
+    public void start() {
+        synchronized (this.eventListeners) {
             for (EventListener eventListener : this.eventListeners)
                 eventListener.start();
         }
@@ -85,10 +75,8 @@ public class EventListenServiceImpl extends EventServiceBase implements EventLis
     }
 
     @Override
-    public void stop()
-    {
-        synchronized (this.eventListeners)
-        {
+    public void stop() {
+        synchronized (this.eventListeners) {
             for (EventListener eventListener : this.eventListeners)
                 eventListener.stop();
         }

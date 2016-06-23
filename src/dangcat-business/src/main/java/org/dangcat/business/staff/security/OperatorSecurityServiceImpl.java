@@ -26,30 +26,27 @@ import java.util.List;
 
 /**
  * 操作员业务安全服务。
+ *
  * @author dangcat
- * 
  */
-public class OperatorSecurityServiceImpl extends LoginServiceBase
-{
+public class OperatorSecurityServiceImpl extends LoginServiceBase {
     private static final String SECURITY_NAME = "OperatorSecurity";
 
-    public OperatorSecurityServiceImpl()
-    {
+    public OperatorSecurityServiceImpl() {
         super(SECURITY_NAME);
     }
 
     /**
      * 建立默认的角色对象。
+     *
      * @param name 角色名称。
      */
-    private void createDefaultRole(String name)
-    {
+    private void createDefaultRole(String name) {
         if (!EntityUtils.exists(RoleInfo.class))
             return;
 
-        List<RoleBasic> roleList = this.getEntityManager().load(RoleBasic.class, new String[] { RoleBasic.Name }, name);
-        if (roleList == null || roleList.size() == 0)
-        {
+        List<RoleBasic> roleList = this.getEntityManager().load(RoleBasic.class, new String[]{RoleBasic.Name}, name);
+        if (roleList == null || roleList.size() == 0) {
             RoleInfo roleInfo = new RoleInfo();
             roleInfo.setName(name);
             this.restoreDefaultPermissions(roleInfo);
@@ -57,20 +54,17 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
         }
     }
 
-    protected LoginUser createLoginUser(LoginOperator loginOperator)
-    {
+    protected LoginUser createLoginUser(LoginOperator loginOperator) {
         LoginUser loginUser = new LoginUser(loginOperator.getId(), loginOperator.getNo(), loginOperator.getName(), loginOperator.getRoleName(), loginOperator.getPassword(), SECURITY_NAME);
         Collection<RolePermission> rolePermissions = loginOperator.getRolePermissions();
-        if (rolePermissions != null && rolePermissions.size() > 0)
-        {
+        if (rolePermissions != null && rolePermissions.size() > 0) {
             for (RolePermission rolePermission : rolePermissions)
                 loginUser.getPermissions().add(rolePermission.getPermissionId());
         }
         return loginUser;
     }
 
-    private void createOperateLog(LoginUser loginUser, Object result)
-    {
+    private void createOperateLog(LoginUser loginUser, Object result) {
         ServiceContext serviceContext = ServiceContext.getInstance();
         MethodInfo methodInfo = serviceContext.getParam(MethodInfo.class);
 
@@ -82,12 +76,10 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
             operateLog.setIpAddress("127.0.0.1");
         else
             operateLog.setIpAddress(clientIp);
-        if (result instanceof ServiceException)
-        {
+        if (result instanceof ServiceException) {
             ServiceException serviceException = (ServiceException) result;
             operateLog.setErrorCode(serviceException.getMessageId());
-        }
-        else
+        } else
             operateLog.setErrorCode(OperateLog.SUCCESS);
         operateLog.setRemark("No=" + loginUser.getNo());
 
@@ -95,17 +87,14 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
         entityBatchStorer.save(operateLog);
     }
 
-    protected EntityManager getEntityManager()
-    {
+    protected EntityManager getEntityManager() {
         return EntityManagerFactory.getInstance().open();
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         Collection<String> roles = PermissionManager.getInstance().getRoles();
-        if (roles != null && roles.size() > 0)
-        {
+        if (roles != null && roles.size() > 0) {
             for (String role : roles)
                 this.createDefaultRole(role);
         }
@@ -113,17 +102,15 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
 
     /**
      * 载入指定账号的登录用户。
+     *
      * @throws SecurityLoginException
      */
     @Override
-    public LoginUser load(String no) throws SecurityLoginException
-    {
+    public LoginUser load(String no) throws SecurityLoginException {
         LoginUser loginUser = null;
-        if (!ValueUtils.isEmpty(no))
-        {
+        if (!ValueUtils.isEmpty(no)) {
             LoginOperator loginOperator = this.loadLoginOperator(no);
-            if (loginOperator != null)
-            {
+            if (loginOperator != null) {
                 if (!loginOperator.getUseAble())
                     throw new SecurityLoginException(SecurityLoginException.FIELDNAME_NO, SecurityLoginException.NO_USEABLE_FALSE);
 
@@ -136,24 +123,19 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
         return loginUser;
     }
 
-    protected LoginOperator loadLoginOperator(String no)
-    {
+    protected LoginOperator loadLoginOperator(String no) {
         LoginOperator found = null;
-        try
-        {
-            List<LoginOperator> loginOperatorList = this.getEntityManager().load(LoginOperator.class, new String[] { LoginOperator.No }, no);
+        try {
+            List<LoginOperator> loginOperatorList = this.getEntityManager().load(LoginOperator.class, new String[]{LoginOperator.No}, no);
             if (loginOperatorList != null && !loginOperatorList.isEmpty())
                 found = loginOperatorList.get(0);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
         return found;
     }
 
     @Override
-    public ServicePrincipal login(LoginUser loginUser)
-    {
+    public ServicePrincipal login(LoginUser loginUser) {
         ServicePrincipal servicePrincipal = super.login(loginUser);
         if (servicePrincipal != null)
             this.createOperateLog(loginUser, servicePrincipal);
@@ -161,10 +143,8 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
     }
 
     @Override
-    public boolean logout(ServicePrincipal servicePrincipal)
-    {
-        if (super.logout(servicePrincipal))
-        {
+    public boolean logout(ServicePrincipal servicePrincipal) {
+        if (super.logout(servicePrincipal)) {
             LoginUser loginUser = servicePrincipal.getParam(LoginUser.class);
             this.createOperateLog(loginUser, servicePrincipal);
             return true;
@@ -173,22 +153,20 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase
     }
 
     @Override
-    protected void onError(LoginUser loginUser, SecurityLoginException securityLoginException)
-    {
+    protected void onError(LoginUser loginUser, SecurityLoginException securityLoginException) {
         this.createOperateLog(loginUser, securityLoginException);
     }
 
     /**
      * 回复默认的角色权限。
+     *
      * @param roleInfo 角色对象。
      * @return
      */
-    private int restoreDefaultPermissions(RoleInfo roleInfo)
-    {
+    private int restoreDefaultPermissions(RoleInfo roleInfo) {
         int count = 0;
         Collection<Integer> permissions = PermissionManager.getInstance().getPermissions(roleInfo.getName());
-        if (permissions != null && permissions.size() > 0)
-        {
+        if (permissions != null && permissions.size() > 0) {
             roleInfo.getRolePermissions().clear();
             for (Integer permissionId : permissions)
                 roleInfo.getRolePermissions().add(new RolePermission(roleInfo.getId(), permissionId));

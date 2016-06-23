@@ -14,36 +14,32 @@ import java.sql.SQLException;
 
 /**
  * 表管理器。
+ *
  * @author dangcat
- * 
  */
-class TableLoadManagerImpl extends TableManagerBase
-{
+class TableLoadManagerImpl extends TableManagerBase {
     private String databaseName = null;
 
-    TableLoadManagerImpl(String databaseName)
-    {
+    TableLoadManagerImpl(String databaseName) {
         this.databaseName = databaseName;
     }
 
     /**
      * 载入指定表的数据。
+     *
      * @param table 表对象。
      * @throws TableException 运行异常。
      */
-    protected void load(Table table) throws TableException
-    {
+    protected void load(Table table) throws TableException {
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin load the table: " + table.getTableName().getName());
 
             // 载入前事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeLoad(table))
                     return;
             }
@@ -51,12 +47,10 @@ class TableLoadManagerImpl extends TableManagerBase
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.databaseName);
             // 计算记录总数。
             Range range = table.getRange();
-            if (range != null && range.isCalculateTotalSize())
-            {
+            if (range != null && range.isCalculateTotalSize()) {
                 int totalSize = 0;
                 sqlBuilder = tableSqlBuilder.buildTotalSizeStatement();
-                if (sqlBuilder.length() > 0)
-                {
+                if (sqlBuilder.length() > 0) {
                     // 获取会话对象。
                     session = this.openSession(this.databaseName);
                     ResultSet resultSet = session.executeQuery(sqlBuilder.toString());
@@ -64,16 +58,14 @@ class TableLoadManagerImpl extends TableManagerBase
                         totalSize = resultSet.getInt(Range.TOTALSIZE);
                 }
                 range.setTotalSize(totalSize);
-                if (totalSize == 0)
-                {
+                if (totalSize == 0) {
                     table.getRows().clear();
                     return;
                 }
             }
             // 载入数据。
             sqlBuilder = tableSqlBuilder.buildLoadStatement();
-            if (sqlBuilder.length() > 0)
-            {
+            if (sqlBuilder.length() > 0) {
                 // 获取会话对象。
                 if (session == null)
                     session = this.openSession(this.databaseName);
@@ -97,9 +89,7 @@ class TableLoadManagerImpl extends TableManagerBase
 
             if (logger.isDebugEnabled())
                 logger.debug("End load table, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = sqlBuilder == null ? e.toString() : sqlBuilder.toString();
             if (logger.isDebugEnabled())
                 logger.error(message, e);
@@ -108,9 +98,7 @@ class TableLoadManagerImpl extends TableManagerBase
                 tableEventAdapter.onLoadError(table, e);
 
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             table.setTableState(TableState.Normal);
             if (session != null)
                 session.release();
@@ -119,14 +107,13 @@ class TableLoadManagerImpl extends TableManagerBase
 
     /**
      * 载入元数据内容。
+     *
      * @param table 表对象。
      * @throws TableException 运行异常。
      */
-    protected void loadMetaData(Table table) throws TableException
-    {
+    protected void loadMetaData(Table table) throws TableException {
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin loadMetaData: " + table.getTableName().getName());
@@ -141,13 +128,9 @@ class TableLoadManagerImpl extends TableManagerBase
 
             if (logger.isDebugEnabled())
                 logger.debug("End loadMetaData, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new TableException(e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
@@ -155,14 +138,14 @@ class TableLoadManagerImpl extends TableManagerBase
 
     /**
      * 解析数据结果。
-     * @param row 数据行对象。
+     *
+     * @param row       数据行对象。
      * @param resultSet 查询结果。
      * @throws SQLException
      * @throws TableException
      * @throws TableException
      */
-    private void parseData(Table table, ResultSet resultSet) throws SQLException, TableException
-    {
+    private void parseData(Table table, ResultSet resultSet) throws SQLException, TableException {
         Columns columns = table.getColumns();
         Rows rows = table.getRows();
         rows.clear();
@@ -171,11 +154,9 @@ class TableLoadManagerImpl extends TableManagerBase
         // 获取元数据。
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
-        while (resultSet.next())
-        {
+        while (resultSet.next()) {
             position++;
-            if (range != null && range.getMode() != Range.BY_SQLSYNTAX)
-            {
+            if (range != null && range.getMode() != Range.BY_SQLSYNTAX) {
                 if (position < range.getFrom())
                     continue;
                 else if (position > range.getTo())
@@ -183,12 +164,10 @@ class TableLoadManagerImpl extends TableManagerBase
             }
 
             Row row = rows.createNewRow();
-            for (int i = 1; i <= columnCount; i++)
-            {
+            for (int i = 1; i <= columnCount; i++) {
                 String fieldName = resultSetMetaData.getColumnLabel(i);
                 Column column = columns.findByFieldName(fieldName);
-                if (column != null)
-                {
+                if (column != null) {
                     Field field = row.getField(column.getName());
                     field.setObject(JdbcValueUtils.read(fieldName, resultSet, column.getFieldClass()));
                 }

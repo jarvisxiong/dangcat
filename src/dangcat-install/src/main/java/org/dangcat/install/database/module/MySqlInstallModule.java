@@ -5,24 +5,20 @@ import org.dangcat.install.database.task.MySqlInstallTask;
 
 import java.io.File;
 
-public class MySqlInstallModule extends DatabaseInstallModule
-{
+public class MySqlInstallModule extends DatabaseInstallModule {
     private MySqlInstallTask databaseInstaller = new MySqlInstallTask();
 
-    public MySqlInstallModule(String name, String title)
-    {
+    public MySqlInstallModule(String name, String title) {
         super(name, title);
     }
 
     @Override
-    public DatabaseInstaller getDatabaseInstaller()
-    {
+    public DatabaseInstaller getDatabaseInstaller() {
         return this.databaseInstaller;
     }
 
     @Override
-    public void prepare()
-    {
+    public void prepare() {
         this.clearCopyTasks();
         String currentPath = this.getCurrentPath().getAbsolutePath();
 

@@ -6,10 +6,8 @@ import org.junit.Test;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TestIpv6Validator
-{
-    private void assertIPV6(String ipv6, boolean result)
-    {
+public class TestIpv6Validator {
+    private void assertIPV6(String ipv6, boolean result) {
         Pattern pattern = Pattern.compile(Ipv6Validator.IPV6_Pattern);
         Matcher matcher = pattern.matcher(ipv6);
         if (result)
@@ -19,8 +17,7 @@ public class TestIpv6Validator
     }
 
     @Test
-    public void validator()
-    {
+    public void validator() {
         String ipv6 = "";
         assertIPV6(ipv6, false);
 

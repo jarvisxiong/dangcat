@@ -10,38 +10,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JMSConsumerClient extends Thread
-{
+public class JMSConsumerClient extends Thread {
     protected static final Logger logger = Logger.getLogger(JMSSession.class);
     private final List<Message> messageList = new ArrayList<Message>();
     private JMSConsumer jmsConsumer = null;
     private JMSSession jmsSession = null;
 
-    public static void main(String[] args) throws IOException, SessionException
-    {
+    public static void main(String[] args) throws IOException, SessionException {
         TestJMSSession.configure();
         new JMSConsumerClient().start();
     }
 
     @Override
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             jmsSession = JMSConnectionFactory.getInstance().openSession("queue");
             jmsConsumer = jmsSession.createJMSConsumer();
-            jmsConsumer.addMessageListener(new MessageListener()
-            {
+            jmsConsumer.addMessageListener(new MessageListener() {
                 @Override
-                public void onMessage(Message message)
-                {
+                public void onMessage(Message message) {
                     messageList.add(message);
                 }
             });
             jmsConsumer.receive();
-        }
-        catch (JMSException e)
-        {
+        } catch (JMSException e) {
         }
     }
 }

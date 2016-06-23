@@ -9,11 +9,10 @@ import org.dangcat.framework.service.ServiceStatus;
 
 /**
  * 服务控制基类
+ *
  * @author dangcat
- * 
  */
-public abstract class ServiceControlBase extends ServiceBase implements ServiceControl
-{
+public abstract class ServiceControlBase extends ServiceBase implements ServiceControl {
     private String name;
 
     /**
@@ -23,20 +22,20 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
 
     /**
      * 构造服务对象。
+     *
      * @param parent 所属服务。
      */
-    public ServiceControlBase(ServiceProvider parent)
-    {
+    public ServiceControlBase(ServiceProvider parent) {
         super(parent);
     }
 
     /**
      * 构造服务对象。
+     *
      * @param parent 所属服务。
-     * @param name 服务名称。
+     * @param name   服务名称。
      */
-    public ServiceControlBase(ServiceProvider parent, String name)
-    {
+    public ServiceControlBase(ServiceProvider parent, String name) {
         super(parent);
         this.name = name;
     }
@@ -44,8 +43,7 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     /**
      * 服务名称。
      */
-    public String getServiceName()
-    {
+    public String getServiceName() {
         if (!ValueUtils.isEmpty(this.name))
             return this.name;
         return this.getClass().getSimpleName();
@@ -59,8 +57,7 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
      * 服务状态。
      */
     @Override
-    public ServiceStatus getServiceStatus()
-    {
+    public ServiceStatus getServiceStatus() {
         return this.serviceStatus;
     }
 
@@ -74,35 +71,30 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     /**
      * 是否正在运行。
      */
-    protected boolean isRunning()
-    {
+    protected boolean isRunning() {
         return this.getServiceStatus().equals(ServiceStatus.Started);
     }
 
     @Override
-    public void restart()
-    {
+    public void restart() {
         this.stop();
         this.start();
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         this.serviceStatus = ServiceStatus.Started;
         logger.info("The service " + this.getServiceName() + " started. ");
     }
 
     @Override
-    public void stop()
-    {
+    public void stop() {
         this.serviceStatus = ServiceStatus.Stopped;
         logger.info("The service " + this.getServiceName() + " stopped. ");
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder(super.toString());
         info.append(Environment.LINETAB_SEPARATOR);
         info.append("ServiceName = " + this.getServiceName());

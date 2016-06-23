@@ -5,11 +5,10 @@ import org.dangcat.persistence.orderby.OrderBy;
 
 /**
  * 栏位对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class OrderByXmlResolver extends XmlResolver
-{
+public class OrderByXmlResolver extends XmlResolver {
     /**
      * 栏位对象。
      */
@@ -18,18 +17,17 @@ public class OrderByXmlResolver extends XmlResolver
     /**
      * 构建解析器。
      */
-    public OrderByXmlResolver()
-    {
+    public OrderByXmlResolver() {
         super(OrderBy.class.getSimpleName());
     }
 
     /**
      * 属性文本。
+     *
      * @param value 文本值。
      */
     @Override
-    protected void resolveElementText(String value)
-    {
+    protected void resolveElementText(String value) {
         this.orderBy = OrderBy.parse(value);
         this.setResolveObject(orderBy);
     }
@@ -38,8 +36,7 @@ public class OrderByXmlResolver extends XmlResolver
      * 开始解析元素标签。
      */
     @Override
-    protected void startElement()
-    {
+    protected void startElement() {
         orderBy = new OrderBy();
         this.setResolveObject(orderBy);
     }

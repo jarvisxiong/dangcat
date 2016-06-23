@@ -6,8 +6,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import org.dangcat.persistence.model.DataStatus;
 
 @Table
-public class UserService extends EntityBase implements DataStatus
-{
+public class UserService extends EntityBase implements DataStatus {
     public static final String Account = "Account";
     public static final String BindTime = "BindTime";
     public static final String ServiceId = "ServiceId";
@@ -21,33 +20,27 @@ public class UserService extends EntityBase implements DataStatus
     @Column(isPrimaryKey = true)
     private Integer serviceId;
 
-    public String getAccount()
-    {
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(String account)
-    {
+    public void setAccount(String account) {
         this.account = account;
     }
 
-    public String getBindTime()
-    {
+    public String getBindTime() {
         return bindTime;
     }
 
-    public void setBindTime(String bindTime)
-    {
+    public void setBindTime(String bindTime) {
         this.bindTime = bindTime;
     }
 
-    public Integer getServiceId()
-    {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(Integer serviceId)
-    {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 }

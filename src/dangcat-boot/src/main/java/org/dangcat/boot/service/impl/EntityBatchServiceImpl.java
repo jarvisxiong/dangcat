@@ -18,11 +18,10 @@ import java.util.Map;
 
 /**
  * 数据批量操作服务。
+ *
  * @author dangcat
- * 
  */
-public class EntityBatchServiceImpl extends ServiceControlBase implements EntityBatchService, Runnable
-{
+public class EntityBatchServiceImpl extends ServiceControlBase implements EntityBatchService, Runnable {
     private static EntityBatchServiceImpl instance = null;
     private String defaultName = null;
     private Map<String, EntityBatchStorer> entityBatchStorerMap = new HashMap<String, EntityBatchStorer>();
@@ -37,53 +36,43 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
         super(parent);
     }
 
-    public static synchronized EntityBatchService createInstance(ServiceProvider parent)
-    {
-        if (instance == null)
-        {
+    public static synchronized EntityBatchService createInstance(ServiceProvider parent) {
+        if (instance == null) {
             instance = new EntityBatchServiceImpl(parent);
             instance.initialize();
         }
         return instance;
     }
 
-    public static EntityBatchService getInstance()
-    {
+    public static EntityBatchService getInstance() {
         return instance;
     }
 
     /**
      * 清除所有待处理数据。
      */
-    public void clear()
-    {
+    public void clear() {
         Map<String, EntityBatchStorer> entityBatchStorerMap = this.getEntityBatchStorerMap();
-        synchronized (entityBatchStorerMap)
-        {
+        synchronized (entityBatchStorerMap) {
             for (EntityBatchStorer entityBatchStorer : entityBatchStorerMap.values())
                 entityBatchStorer.clear();
         }
     }
 
-    private void createAlarmClock()
-    {
-        CronAlarmClock cronAlarmClock = new CronAlarmClock(this)
-        {
+    private void createAlarmClock() {
+        CronAlarmClock cronAlarmClock = new CronAlarmClock(this) {
             @Override
-            public String getCronExpression()
-            {
+            public String getCronExpression() {
                 return EntityBatchConfig.getInstance().getCronExpression();
             }
 
             @Override
-            public int getPriority()
-            {
+            public int getPriority() {
                 return AlarmClock.LOW_PRIORITY;
             }
 
             @Override
-            public boolean isEnabled()
-            {
+            public boolean isEnabled() {
                 return isClockEnabled();
             }
         };
@@ -95,33 +84,30 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
 
     /**
      * 得到指定数据库的批量存储。
+     *
      * @return 批量操作对象。
      */
     @Override
-    public EntityBatchStorer getEntityBatchStorer()
-    {
+    public EntityBatchStorer getEntityBatchStorer() {
         return getEntityBatchStorer(null);
     }
 
     /**
      * 得到指定数据库的批量存储。
+     *
      * @param databaseName 数据库名。
      * @return 批量操作对象。
      */
     @Override
-    public EntityBatchStorer getEntityBatchStorer(String databaseName)
-    {
+    public EntityBatchStorer getEntityBatchStorer(String databaseName) {
         return this.getEntityBatchStorerMap().get(databaseName == null ? this.defaultName : databaseName);
     }
 
-    private Map<String, EntityBatchStorer> getEntityBatchStorerMap()
-    {
-        if (this.entityBatchStorerMap.size() == 0)
-        {
+    private Map<String, EntityBatchStorer> getEntityBatchStorerMap() {
+        if (this.entityBatchStorerMap.size() == 0) {
             this.defaultName = SessionFactory.getInstance().getDefaultName();
             String[] resourceNames = SessionFactory.getInstance().getResourceNames();
-            if (resourceNames != null && resourceNames.length > 0)
-            {
+            if (resourceNames != null && resourceNames.length > 0) {
                 Map<String, EntityBatchStorer> entityBatchStorerMap = new HashMap<String, EntityBatchStorer>();
                 for (String resourceName : resourceNames)
                     entityBatchStorerMap.put(resourceName, new EntityBatchStorer(resourceName));
@@ -131,8 +117,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
         return this.entityBatchStorerMap;
     }
 
-    private int getTotalSize()
-    {
+    private int getTotalSize() {
         int totalSize = 0;
         for (EntityBatchStorer entityBatchStorer : this.getEntityBatchStorerMap().values())
             totalSize += entityBatchStorer.size();
@@ -140,15 +125,12 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
-        EntityBatchConfig.getInstance().addConfigChangeEventAdaptor(new ChangeEventAdaptor()
-        {
+        EntityBatchConfig.getInstance().addConfigChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
-            public void afterChanged(Object sender, Event event)
-            {
+            public void afterChanged(Object sender, Event event) {
                 if (EntityBatchConfig.CronExpression.equals(event.getId()))
                     createAlarmClock();
             }
@@ -156,15 +138,12 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
         this.createAlarmClock();
     }
 
-    public boolean isClockEnabled()
-    {
+    public boolean isClockEnabled() {
         return EntityBatchConfig.getInstance().isEnabled() && this.getEntityBatchStorerMap().size() > 0;
     }
 
-    private boolean isTimeOut(int totalSize)
-    {
-        if (totalSize > 0)
-        {
+    private boolean isTimeOut(int totalSize) {
+        if (totalSize > 0) {
             if (totalSize > EntityBatchConfig.getInstance().getBatchSize())
                 return true;
 
@@ -179,8 +158,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
      * 定时清理过期的缓存数据。
      */
     @Override
-    public void run()
-    {
+    public void run() {
         this.save();
         if (Environment.isTestEnabled())
             this.save();
@@ -189,28 +167,22 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     /**
      * 调用批量存储操作。
      */
-    public void save()
-    {
+    public void save() {
         int totalSize = this.getTotalSize();
         if (!this.isTimeOut(totalSize))
             return;
 
-        try
-        {
+        try {
             if (logger.isDebugEnabled())
                 logger.debug("The entity batch store start: totalSize = " + totalSize + ". ");
 
             this.lastStoreTime = DateUtils.currentTimeMillis();
-            for (EntityBatchStorer entityBatchStorer : this.getEntityBatchStorerMap().values())
-            {
+            for (EntityBatchStorer entityBatchStorer : this.getEntityBatchStorerMap().values()) {
                 if (entityBatchStorer.size() > 0)
                     entityBatchStorer.save();
             }
-        }
-        finally
-        {
-            if (totalSize > 0)
-            {
+        } finally {
+            if (totalSize > 0) {
                 long costTime = DateUtils.currentTimeMillis() - this.lastStoreTime;
                 int second = (int) (costTime / 1000);
                 long velocity = 0;

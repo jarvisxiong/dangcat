@@ -13,22 +13,19 @@ import java.io.OutputStream;
 
 /**
  * Jar—πÀı°£
+ *
  * @author dangcat
- * 
  */
-class TarArchiver extends Archiver
-{
+class TarArchiver extends Archiver {
     @Override
-    protected ArchiveEntry createArchiveEntry(String name, long size)
-    {
+    protected ArchiveEntry createArchiveEntry(String name, long size) {
         TarArchiveEntry tarArchiveEntry = new TarArchiveEntry(name);
         tarArchiveEntry.setSize(size);
         return tarArchiveEntry;
     }
 
     @Override
-    protected InputStream decorateInputStream(InputStream inputStream) throws IOException
-    {
+    protected InputStream decorateInputStream(InputStream inputStream) throws IOException {
         InputStream decorateInputStream = null;
         if (!ValueUtils.isEmpty(this.getEncoding()))
             decorateInputStream = new TarArchiveInputStream(inputStream, this.getEncoding());
@@ -38,8 +35,7 @@ class TarArchiver extends Archiver
     }
 
     @Override
-    protected OutputStream decorateOutputStream(OutputStream outputStream) throws IOException
-    {
+    protected OutputStream decorateOutputStream(OutputStream outputStream) throws IOException {
         OutputStream decorateOutputStream = null;
         if (!ValueUtils.isEmpty(this.getEncoding()))
             decorateOutputStream = new TarArchiveOutputStream(outputStream, this.getEncoding());
@@ -49,8 +45,7 @@ class TarArchiver extends Archiver
     }
 
     @Override
-    protected String getArchiverName()
-    {
+    protected String getArchiverName() {
         return ArchiveStreamFactory.TAR;
     }
 }

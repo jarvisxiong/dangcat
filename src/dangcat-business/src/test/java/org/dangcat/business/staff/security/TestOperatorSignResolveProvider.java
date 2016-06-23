@@ -15,8 +15,7 @@ import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
-{
+public class TestOperatorSignResolveProvider extends ServiceUnitTestBase {
     private EntityManager entityManager = null;
     private TestHttpServletRequest httpServletRequest = new TestHttpServletRequest("192.168.5.6");
     private OperatorSecurityServiceImpl operatorSecurityService = null;
@@ -24,16 +23,12 @@ public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
 
     @Override
     @Before
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
-        try
-        {
+        try {
             this.initEntityTable(RoleBasic.class, OperatorInfoCreate.class);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             this.logger.error(this, e);
         }
 
@@ -45,8 +40,7 @@ public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
         roleInfo.setDescription("Description");
         this.entityManager.save(roleInfo);
 
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             OperatorInfoCreate operatorInfo = new OperatorInfoCreate();
             operatorInfo.setName("Name" + i);
             operatorInfo.setNo("No" + i);
@@ -54,7 +48,7 @@ public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
             operatorInfo.setUseAble(Boolean.TRUE);
             operatorInfo.setGroupId(0);
             operatorInfo.setRoleId(roleInfo.getId());
-            this.entityManager.delete(OperatorInfo.class, new String[] { OperatorInfo.Name }, operatorInfo.getName());
+            this.entityManager.delete(OperatorInfo.class, new String[]{OperatorInfo.Name}, operatorInfo.getName());
             this.entityManager.save(operatorInfo);
         }
         this.operatorSecurityService = operatorSecurityService;
@@ -65,8 +59,7 @@ public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
     }
 
     @Test
-    public void testSignResolveProviderError() throws SecurityLoginException
-    {
+    public void testSignResolveProviderError() throws SecurityLoginException {
         Assert.assertNull(this.signResolveProvider.parseLoginUser(null));
         Assert.assertNull(this.signResolveProvider.parseLoginUser("adsfgdg"));
 
@@ -77,8 +70,7 @@ public class TestOperatorSignResolveProvider extends ServiceUnitTestBase
     }
 
     @Test
-    public void testSignResolveProviderNormal() throws SecurityLoginException
-    {
+    public void testSignResolveProviderNormal() throws SecurityLoginException {
         LoginUser srcLoginUser = this.operatorSecurityService.load("No1");
         String signId = this.signResolveProvider.createSignId(srcLoginUser);
         Assert.assertNotNull(signId);

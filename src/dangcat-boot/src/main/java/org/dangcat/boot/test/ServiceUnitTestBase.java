@@ -16,13 +16,11 @@ import org.junit.BeforeClass;
 
 import java.io.File;
 
-public abstract class ServiceUnitTestBase extends ServiceBase
-{
+public abstract class ServiceUnitTestBase extends ServiceBase {
     private static final String RESOURCE_DEFAULT_PATH = "/test-classes/META-INF/resource.properties";
     protected Logger logger = Logger.getLogger(this.getClass());
 
-    public ServiceUnitTestBase()
-    {
+    public ServiceUnitTestBase() {
         super(null);
 
         // 定时器服务。
@@ -49,19 +47,16 @@ public abstract class ServiceUnitTestBase extends ServiceBase
         ConfigureManager.getInstance().configure(new File(FileUtils.decodePath(path)));
     }
 
-    protected void dropEntityTable(Class<?>... classTypes) throws Exception
-    {
+    protected void dropEntityTable(Class<?>... classTypes) throws Exception {
         ServiceTestUtils.dropEntityTable(classTypes);
     }
 
-    protected void initEntityTable(Class<?>... classTypes) throws Exception
-    {
+    protected void initEntityTable(Class<?>... classTypes) throws Exception {
         ServiceTestUtils.initEntityTable(classTypes);
     }
 
     @Before
-    public void injectServices()
-    {
+    public void injectServices() {
         super.inject();
     }
 }

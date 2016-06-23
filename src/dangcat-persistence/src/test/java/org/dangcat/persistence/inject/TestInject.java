@@ -14,26 +14,22 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class TestInject extends TestDatabase
-{
+public class TestInject extends TestDatabase {
     private static final String RESOURCE_NAME = "entity.cache.xml";
 
     @BeforeClass
-    public static void setUpBeforeClass() throws IOException, SessionException
-    {
+    public static void setUpBeforeClass() throws IOException, SessionException {
         SimulateUtils.configure();
         EntityCacheManager.getInstance().load(TestInject.class, RESOURCE_NAME);
         EntityManagerFactory.getInstance();
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
     }
 
     @Test
-    public void testInject()
-    {
+    public void testInject() {
         EntityService entityService = new EntityService();
         ServiceHelper.inject(null, entityService);
 

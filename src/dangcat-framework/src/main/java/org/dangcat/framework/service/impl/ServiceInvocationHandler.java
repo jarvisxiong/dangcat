@@ -12,25 +12,21 @@ import java.lang.reflect.Method;
 
 /**
  * 服务执行代理。
+ *
  * @author dangcat
- * 
  */
-public class ServiceInvocationHandler implements InvocationHandler
-{
+public class ServiceInvocationHandler implements InvocationHandler {
     private ServiceProvider parent = null;
     private Object service = null;
     private ServiceInfo serviceInfo = null;
 
-    public ServiceInvocationHandler(ServiceProvider parent, ServiceInfo serviceInfo)
-    {
+    public ServiceInvocationHandler(ServiceProvider parent, ServiceInfo serviceInfo) {
         this.parent = parent;
         this.serviceInfo = serviceInfo;
     }
 
-    private Object getService()
-    {
-        if (this.service == null)
-        {
+    private Object getService() {
+        if (this.service == null) {
             Object service = this.serviceInfo.createInstance(this.parent);
             if (service instanceof ServiceBase)
                 ((ServiceBase) service).initialize();
@@ -42,8 +38,7 @@ public class ServiceInvocationHandler implements InvocationHandler
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
-    {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object service = this.getService();
         ServiceContext serviceContext = ServiceContext.getInstance();
         ServiceInfo preServiceInfo = null;
@@ -51,33 +46,23 @@ public class ServiceInvocationHandler implements InvocationHandler
 
         Object result = null;
         Throwable throwable = null;
-        try
-        {
-            if (serviceContext != null)
-            {
+        try {
+            if (serviceContext != null) {
                 preServiceInfo = serviceContext.getServiceInfo();
                 serviceContext.addParam(ServiceInfo.class, this.serviceInfo);
                 methodInfo = this.serviceInfo.getServiceMethodInfo().getMethodInfo(method.getName());
             }
-            if (methodInfo != null)
-            {
+            if (methodInfo != null) {
                 ServiceUtils.injectContext(service, serviceContext);
                 this.serviceInfo.beforeInvoke(service, serviceContext, methodInfo, args);
             }
             result = method.invoke(service, args);
-        }
-        catch (InvocationTargetException e)
-        {
+        } catch (InvocationTargetException e) {
             throwable = e.getTargetException();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throwable = e;
-        }
-        finally
-        {
-            if (methodInfo != null)
-            {
+        } finally {
+            if (methodInfo != null) {
                 this.serviceInfo.afterInvoke(service, serviceContext, methodInfo, args, throwable != null ? throwable : result);
                 ServiceUtils.injectContext(service, null);
             }
@@ -89,8 +74,7 @@ public class ServiceInvocationHandler implements InvocationHandler
         return result;
     }
 
-    public boolean isValid()
-    {
+    public boolean isValid() {
         return this.getService() != null;
     }
 }

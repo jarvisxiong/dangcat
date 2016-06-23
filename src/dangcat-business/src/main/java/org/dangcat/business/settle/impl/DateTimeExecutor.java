@@ -20,8 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-class DateTimeExecutor
-{
+class DateTimeExecutor {
     private static final String DEFAULT_SQLNAME = "Settle";
     private static final String ID = "id";
     private Date dateTime = null;
@@ -32,22 +31,17 @@ class DateTimeExecutor
     private SettleUnit settleUnit = null;
     private Table sourceTable = null;
 
-    DateTimeExecutor(Date dateTime)
-    {
+    DateTimeExecutor(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    private SettleEntity append(SettleEntity data)
-    {
+    private SettleEntity append(SettleEntity data) {
         Object[] primaryKeyValues = this.entityMetaData.getPrimaryKeyValues(data);
         SettleEntity settleEntity = this.indexManager.find(primaryKeyValues);
-        if (settleEntity != null)
-        {
+        if (settleEntity != null) {
             this.settleUnit.merge(data, settleEntity);
             settleEntity.setDataState(DataState.Modified);
-        }
-        else
-        {
+        } else {
             this.indexManager.add(data);
             settleEntity = data;
             settleEntity.setDataState(DataState.Insert);
@@ -55,8 +49,7 @@ class DateTimeExecutor
         return settleEntity;
     }
 
-    private void createDestTable()
-    {
+    private void createDestTable() {
         Table table = (Table) this.entityMetaData.getTable().clone();
         DateTimeTableName dateTimeTableName = (DateTimeTableName) this.entityMetaData.getTable().getTableName();
         DateTimeTableName destTableName = new DateTimeTableName(dateTimeTableName.getPrefix(), dateTimeTableName.getFieldName());
@@ -65,41 +58,35 @@ class DateTimeExecutor
         this.destTable = table;
     }
 
-    private void createSourceTable()
-    {
+    private void createSourceTable() {
         this.sourceTable = new Table(this.createTableName(this.dateTime));
     }
 
-    private DateTimeTableName createTableName(Date dateTime)
-    {
+    private DateTimeTableName createTableName(Date dateTime) {
         DateTimeTableName dateTimeTableName = this.settleUnit.getSourceTableName();
         DateTimeTableName tableName = new DateTimeTableName(dateTimeTableName.getPrefix(), dateTimeTableName.getFieldName());
         tableName.setDateTime(dateTime);
         return tableName;
     }
 
-    protected int execute()
-    {
+    protected int execute() {
         if (!this.sourceTable.exists())
             return 0;
 
         SettleRecord settleRecord = this.getSettleRecord();
         List<SettleEntity> dataList = this.load(this.sourceTable.getTableName(), DEFAULT_SQLNAME, this.getFilterExpress(settleRecord));
-        if (dataList != null)
-        {
+        if (dataList != null) {
             this.loadSourceData(settleRecord);
 
             Collection<Object> entities = new ArrayList<Object>();
-            for (SettleEntity data : dataList)
-            {
+            for (SettleEntity data : dataList) {
                 SettleEntity settleEntity = this.append(data);
                 if (settleRecord.getMaxId() == null || settleRecord.getMaxId().compareTo(settleEntity.getMaxId()) < 0)
                     settleRecord.setMaxId(settleEntity.getMaxId());
                 entities.add(settleEntity);
             }
 
-            if (entities.size() > 0)
-            {
+            if (entities.size() > 0) {
                 SaveEntityContext saveEntityContext = new SaveEntityContext();
                 saveEntityContext.setTableName(this.destTable.getTableName());
                 this.entityManager.save(saveEntityContext, entities.toArray());
@@ -109,21 +96,18 @@ class DateTimeExecutor
         return dataList == null ? 0 : dataList.size();
     }
 
-    private FilterExpress getFilterExpress(SettleRecord settleRecord)
-    {
+    private FilterExpress getFilterExpress(SettleRecord settleRecord) {
         FilterExpress filterExpress = null;
         if (settleRecord != null && settleRecord.getMaxId() != null)
             filterExpress = new FilterUnit(ID, FilterType.gt, settleRecord.getMaxId());
         return filterExpress;
     }
 
-    protected String getName()
-    {
+    protected String getName() {
         return DynamicTableUtils.getActualTableName(this.sourceTable.getTableName());
     }
 
-    private SettleRecord getSettleRecord()
-    {
+    private SettleRecord getSettleRecord() {
         String sourceTableName = this.getName();
         SettleRecord settleRecord = null;
         Table table = EntityHelper.getEntityMetaData(SettleRecord.class).getTable();
@@ -136,8 +120,7 @@ class DateTimeExecutor
         return settleRecord;
     }
 
-    protected void initialize()
-    {
+    protected void initialize() {
         this.entityMetaData = EntityHelper.getEntityMetaData(this.settleUnit.getClassType());
         this.createDestTable();
         this.createSourceTable();
@@ -145,50 +128,39 @@ class DateTimeExecutor
         this.indexManager.appendIndex(primaryIndexName, true);
     }
 
-    protected boolean isEquals(Date dateTime)
-    {
+    protected boolean isEquals(Date dateTime) {
         String tableName = DynamicTableUtils.getActualTableName(this.createTableName(dateTime));
         return this.getName().equals(tableName);
     }
 
-    private List<SettleEntity> load(TableName tableName, String sqlName, FilterExpress filterExpress)
-    {
+    private List<SettleEntity> load(TableName tableName, String sqlName, FilterExpress filterExpress) {
         LoadEntityContext loadEntityContext = new LoadEntityContext(this.settleUnit.getClassType(), filterExpress);
         loadEntityContext.setTableName(tableName);
         loadEntityContext.setSqlName(sqlName);
         return this.entityManager.load(loadEntityContext);
     }
 
-    private void loadSourceData(SettleRecord settleRecord)
-    {
-        if (!this.destTable.exists())
-        {
+    private void loadSourceData(SettleRecord settleRecord) {
+        if (!this.destTable.exists()) {
             this.destTable.create();
             this.indexManager.clear();
-        }
-        else if (settleRecord.getMaxId() == null)
-        {
+        } else if (settleRecord.getMaxId() == null) {
             this.destTable.truncate();
             this.indexManager.clear();
-        }
-        else if (this.indexManager.getDataCollection().isEmpty())
-        {
+        } else if (this.indexManager.getDataCollection().isEmpty()) {
             List<SettleEntity> settleEntityList = this.load(this.destTable.getTableName(), null, null);
-            if (settleEntityList != null)
-            {
+            if (settleEntityList != null) {
                 for (SettleEntity settleEntity : settleEntityList)
                     this.indexManager.add(settleEntity);
             }
         }
     }
 
-    protected void setEntityManager(EntityManager entityManager)
-    {
+    protected void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    protected void setSettleUnit(SettleUnit settleUnit)
-    {
+    protected void setSettleUnit(SettleUnit settleUnit) {
         this.settleUnit = settleUnit;
     }
 }

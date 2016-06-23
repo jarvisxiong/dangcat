@@ -13,11 +13,10 @@ import java.util.Map;
 
 /**
  * ÉÏ´«ÄÚÈÝ¡£
+ *
  * @author dangcat
- * 
  */
-public class UploadContent implements ProgressListener
-{
+public class UploadContent implements ProgressListener {
     protected static Logger logger = Logger.getLogger(UploadContent.class);
 
     private long bytesReaded = 0;
@@ -26,49 +25,40 @@ public class UploadContent implements ProgressListener
     private InvokeStep invokeStep = null;
     private Map<String, String> params = new HashMap<String, String>();
 
-    public byte[] getBytes()
-    {
+    public byte[] getBytes() {
         return this.fileItem == null ? null : this.fileItem.get();
     }
 
-    public long getBytesReaded()
-    {
+    public long getBytesReaded() {
         return bytesReaded;
     }
 
-    public long getContentLength()
-    {
+    public long getContentLength() {
         return contentLength;
     }
 
-    public String getContentType()
-    {
+    public String getContentType() {
         return this.fileItem == null ? null : this.fileItem.getContentType();
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return this.fileItem == null ? null : this.fileItem.getFieldName();
     }
 
-    public File getFile()
-    {
+    public File getFile() {
         File uploadFile = new File(UploadManager.getInstance().getRepository(), this.getFileName());
         return this.write(uploadFile);
     }
 
-    public String getFileName()
-    {
+    public String getFileName() {
         return this.fileItem == null ? null : this.fileItem.getName();
     }
 
-    public InputStream getInputStream() throws IOException
-    {
+    public InputStream getInputStream() throws IOException {
         return this.fileItem == null ? null : this.fileItem.getInputStream();
     }
 
-    public InvokeStep getInvokeStep()
-    {
+    public InvokeStep getInvokeStep() {
         return invokeStep;
     }
 
@@ -76,49 +66,38 @@ public class UploadContent implements ProgressListener
         this.invokeStep = invokeStep;
     }
 
-    public Map<String, String> getParams()
-    {
+    public Map<String, String> getParams() {
         return this.params;
     }
 
-    public long getSize()
-    {
+    public long getSize() {
         return this.fileItem == null ? 0 : this.fileItem.getSize();
     }
 
-    protected void setFileItem(FileItem fileItem)
-    {
+    protected void setFileItem(FileItem fileItem) {
         this.fileItem = fileItem;
     }
 
     @Override
-    public void update(long bytesReaded, long contentLength, int items)
-    {
+    public void update(long bytesReaded, long contentLength, int items) {
         this.bytesReaded = bytesReaded;
         this.contentLength = contentLength;
-        if (this.invokeStep != null)
-        {
+        if (this.invokeStep != null) {
             this.invokeStep.setCurrent(bytesReaded);
             this.invokeStep.setTotal(contentLength);
         }
     }
 
-    public File write(File file)
-    {
-        if (this.fileItem != null)
-        {
-            try
-            {
+    public File write(File file) {
+        if (this.fileItem != null) {
+            try {
                 if (file == null)
                     file = UploadManager.getInstance().createTmpFile();
-                if (file != null)
-                {
+                if (file != null) {
                     this.fileItem.write(file);
                     logger.info("Upload content save to " + file.getAbsolutePath());
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.error(file, e);
             }
         }

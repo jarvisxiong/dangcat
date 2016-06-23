@@ -4,13 +4,11 @@ import org.dangcat.business.code.CodeGenerator;
 
 import java.io.File;
 
-public class QueryCodeGenerator extends CodeGenerator
-{
+public class QueryCodeGenerator extends CodeGenerator {
     private static final String TEMPLATE = "Query.java.template";
 
     @Override
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         String outputFile = "main" + File.separator + "java";
         outputFile += File.separator + this.getPackageName().replace(".", File.separator);
         outputFile += File.separator + "domain";
@@ -19,8 +17,7 @@ public class QueryCodeGenerator extends CodeGenerator
     }
 
     @Override
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return TEMPLATE;
     }
 }

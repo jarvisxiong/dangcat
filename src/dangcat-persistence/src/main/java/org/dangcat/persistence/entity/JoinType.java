@@ -1,6 +1,5 @@
 package org.dangcat.persistence.entity;
 
-public enum JoinType
-{
+public enum JoinType {
     Cross, Full, Inner, Left, Right
 }

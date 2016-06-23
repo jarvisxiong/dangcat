@@ -8,8 +8,7 @@ import org.dangcat.net.ftp.exceptions.FTPSessionException;
 
 import java.util.Map;
 
-public class FTPClientPool extends ConnectionPool<FTPClient>
-{
+public class FTPClientPool extends ConnectionPool<FTPClient> {
     private static final String ANONYMOUS = "anonymous";
     private static final int DEFAULT_CONNECTMODE = FTPClient.PASSIVE_LOCAL_DATA_CONNECTION_MODE;
     private static final int DEFAULT_CONNECTTIMEOUT = 30000;
@@ -34,13 +33,11 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
     private String server = null;
     private String userName = null;
 
-    public FTPClientPool()
-    {
+    public FTPClientPool() {
         super(null, null);
     }
 
-    public FTPClientPool(String name, Map<String, String> params)
-    {
+    public FTPClientPool(String name, Map<String, String> params) {
         super(name, params);
     }
 
@@ -48,19 +45,16 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
      * 关闭连接
      */
     @Override
-    protected void close(FTPClient ftpClient)
-    {
+    protected void close(FTPClient ftpClient) {
         ftpClient.close();
     }
 
     @Override
-    protected FTPClient create()
-    {
+    protected FTPClient create() {
         return new FTPClient(this);
     }
 
-    public int getConnectMode()
-    {
+    public int getConnectMode() {
         return this.connectMode == null ? DEFAULT_CONNECTMODE : this.connectMode;
     }
 
@@ -68,8 +62,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.connectMode = connectMode;
     }
 
-    public int getConnectTimeout()
-    {
+    public int getConnectTimeout() {
         return this.connectTimeout == null ? DEFAULT_CONNECTTIMEOUT : this.connectTimeout;
     }
 
@@ -77,8 +70,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.connectTimeout = connectTimeout;
     }
 
-    public String getControlEncoding()
-    {
+    public String getControlEncoding() {
         return this.controlEncoding == null ? DEFAULT_CONTROLENCODING : this.controlEncoding;
     }
 
@@ -86,8 +78,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.controlEncoding = controlEncoding;
     }
 
-    public int getDataTimeout()
-    {
+    public int getDataTimeout() {
         return this.dataTimeout == null ? DEFAULT_DATATIMEOUT : this.dataTimeout;
     }
 
@@ -95,8 +86,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.dataTimeout = dataTimeout;
     }
 
-    public int getDefaultTimeout()
-    {
+    public int getDefaultTimeout() {
         return this.defaultTimeout == null ? DEFAULT_TIMEOUT : this.defaultTimeout;
     }
 
@@ -104,8 +94,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.defaultTimeout = defaultTimeout;
     }
 
-    public int getExecuteTimeOut()
-    {
+    public int getExecuteTimeOut() {
         return this.executeTimeOut == null ? DEFAULT_EXECUTETIMEOUT : this.executeTimeOut;
     }
 
@@ -120,8 +109,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
      * 8; PAGE_STRUCTURE = 9; STREAM_TRANSFER_MODE = 10; BLOCK_TRANSFER_MODE =
      * 11; COMPRESSED_TRANSFER_MODE = 12;
      */
-    public int getFileType()
-    {
+    public int getFileType() {
         return this.fileType == null ? DEFAULT_FILETYPE : this.fileType;
     }
 
@@ -129,16 +117,13 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.fileType = fileType;
     }
 
-    public FTPClient getFTPClient() throws FTPSessionException
-    {
+    public FTPClient getFTPClient() throws FTPSessionException {
         if (this.logger.isDebugEnabled())
             this.logger.debug("Begin get FTPClient.");
 
         FTPClient ftpClient = null;
-        try
-        {
-            do
-            {
+        try {
+            do {
                 if (ftpClient != null)
                     this.destroy(ftpClient);
                 ftpClient = this.poll();
@@ -149,8 +134,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
                 result = ftpClient.login();
             else
                 result = ftpClient.isValidate();
-            if (!result)
-            {
+            if (!result) {
                 this.destroy(ftpClient);
                 Integer lastReplyCode = ftpClient.getLastReplyCode();
                 String lastReplyMessage = ftpClient.getReplyMessage(lastReplyCode, null);
@@ -164,9 +148,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
             ftpClient.enterInit();
             if (this.logger.isDebugEnabled())
                 this.logger.debug("Get ftpClient suceseful.");
-        }
-        catch (FTPSessionException e)
-        {
+        } catch (FTPSessionException e) {
             if (ftpClient != null)
                 this.destroy(ftpClient);
             throw e;
@@ -174,8 +156,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         return ftpClient;
     }
 
-    public String getInitPath()
-    {
+    public String getInitPath() {
         return this.initPath == null ? "" : this.initPath;
     }
 
@@ -183,8 +164,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.initPath = initPath;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         if (ValueUtils.isEmpty(this.userName))
             return ANONYMOUS + "@" + this.server;
         return this.password;
@@ -194,8 +174,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.password = password;
     }
 
-    public Integer getPort()
-    {
+    public Integer getPort() {
         return this.port;
     }
 
@@ -203,8 +182,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.port = port;
     }
 
-    public String getServer()
-    {
+    public String getServer() {
         return this.server;
     }
 
@@ -212,8 +190,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
         this.server = server;
     }
 
-    public String getUserName()
-    {
+    public String getUserName() {
         if (ValueUtils.isEmpty(this.userName))
             return ANONYMOUS;
         return this.userName;
@@ -225,23 +202,21 @@ public class FTPClientPool extends ConnectionPool<FTPClient>
 
     /**
      * 初始化连接池。
+     *
      * @throws SessionException
      */
     @Override
-    public void initialize() throws SessionException
-    {
+    public void initialize() throws SessionException {
         super.initialize();
         if (this.initPath != null)
             this.initPath = this.initPath.replace("\\", "/");
     }
 
-    public Boolean isContinueLoad()
-    {
+    public Boolean isContinueLoad() {
         return this.continueLoad == null ? DEFAULT_CONTINUELOAD : this.continueLoad;
     }
 
-    public void setContinueLoad(Boolean continueLoad)
-    {
+    public void setContinueLoad(Boolean continueLoad) {
         this.continueLoad = continueLoad;
     }
 }

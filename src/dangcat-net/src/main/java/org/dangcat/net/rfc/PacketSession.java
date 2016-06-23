@@ -8,73 +8,76 @@ import org.dangcat.net.udp.conf.ListenerConfig;
 
 /**
  * Packet 上下文。
+ *
  * @author dangcat
- * 
  */
-public abstract class PacketSession<T extends Packet> extends SessionBase
-{
-    /** 识别号。 */
+public abstract class PacketSession<T extends Packet> extends SessionBase {
+    /**
+     * 识别号。
+     */
     private Long id = null;
-    /** 发送报文是否需要回应。 */
+    /**
+     * 发送报文是否需要回应。
+     */
     private boolean isNeedReply = false;
-    /** 回应的原始报文。 */
+    /**
+     * 回应的原始报文。
+     */
     private DatagramEvent replyEvent = null;
-    /** 回复的报文对象。 */
+    /**
+     * 回复的报文对象。
+     */
     private T replyPacket = null;
-    /** 收到的原始报文。 */
+    /**
+     * 收到的原始报文。
+     */
     private DatagramEvent requestEvent = null;
-    /** 收到的报文对象。 */
+    /**
+     * 收到的报文对象。
+     */
     private T requestPacket = null;
-    /** 回复的原始报文。 */
+    /**
+     * 回复的原始报文。
+     */
     private DatagramEvent responseEvent = null;
-    /** 回应的报文对象。 */
+    /**
+     * 回应的报文对象。
+     */
     private T responsePacket = null;
 
-    public PacketSession()
-    {
+    public PacketSession() {
     }
 
-    public PacketSession(DatagramEvent requestEvent)
-    {
+    public PacketSession(DatagramEvent requestEvent) {
         this.requestEvent = requestEvent;
     }
 
-    public PacketSession(T requestPacket)
-    {
+    public PacketSession(T requestPacket) {
         this.requestPacket = requestPacket;
     }
 
-    public void createResponseEvent()
-    {
-        try
-        {
+    public void createResponseEvent() {
+        try {
             Packet responseRadiusPacket = this.getResponsePacket();
-            if (responseRadiusPacket != null)
-            {
+            if (responseRadiusPacket != null) {
                 byte[] dataBuffer = responseRadiusPacket.getBytes();
-                if (dataBuffer != null && dataBuffer.length > 0)
-                {
+                if (dataBuffer != null && dataBuffer.length > 0) {
                     DatagramEvent responseEvent = this.getRequestEvent().createReply(dataBuffer);
                     this.setResponseEvent(responseEvent);
                 }
             }
-        }
-        catch (ProtocolParseException e)
-        {
+        } catch (ProtocolParseException e) {
             this.getLogger().error(this, e);
         }
     }
 
     @Override
-    public String getDebugInfo()
-    {
+    public String getDebugInfo() {
         return PacketSessionUtils.createDebugText(this);
     }
 
-    public Long getId()
-    {
-        if (this.id == null && this.getRequestEvent() != null)
-        {
+    public Long getId() {
+        if (this.id == null && this.getRequestEvent() != null) {
             long id = (long) (Math.random() * 10000);
             byte[] dataBuffer = this.getRequestEvent().getDataBuffer();
             if (dataBuffer != null && dataBuffer.length > 2)
@@ -86,8 +89,7 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
 
     public abstract ListenerConfig getListenerConfig();
 
-    public DatagramEvent getReplyEvent()
-    {
+    public DatagramEvent getReplyEvent() {
         return this.replyEvent;
     }
 
@@ -95,8 +97,7 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
         this.replyEvent = replyEvent;
     }
 
-    public T getReplyPacket()
-    {
+    public T getReplyPacket() {
         return this.replyPacket;
     }
 
@@ -104,13 +105,11 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
         this.replyPacket = replyPacket;
     }
 
-    public DatagramEvent getRequestEvent()
-    {
+    public DatagramEvent getRequestEvent() {
         return this.requestEvent;
     }
 
-    public T getRequestPacket()
-    {
+    public T getRequestPacket() {
         return this.requestPacket;
     }
 
@@ -118,8 +117,7 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
         this.requestPacket = requestPacket;
     }
 
-    public DatagramEvent getResponseEvent()
-    {
+    public DatagramEvent getResponseEvent() {
         return this.responseEvent;
     }
 
@@ -127,8 +125,7 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
         this.responseEvent = responseEvent;
     }
 
-    public T getResponsePacket()
-    {
+    public T getResponsePacket() {
         return this.responsePacket;
     }
 
@@ -137,15 +134,13 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
     }
 
     @Override
-    public long getTimeCostThreshold()
-    {
+    public long getTimeCostThreshold() {
         if (this.getListenerConfig() != null)
             return this.getListenerConfig().getTimeCostThreshold();
         return super.getTimeCostThreshold();
     }
 
-    public boolean isNeedReply()
-    {
+    public boolean isNeedReply() {
         return this.isNeedReply;
     }
 
@@ -153,26 +148,22 @@ public abstract class PacketSession<T extends Packet> extends SessionBase
         this.isNeedReply = isNeedReply;
     }
 
-    public void logDebug(Object message)
-    {
+    public void logDebug(Object message) {
         PacketSessionUtils.logDebug(this, message);
     }
 
-    public void logError(String message, Object source, Throwable throwable)
-    {
+    public void logError(String message, Object source, Throwable throwable) {
         PacketSessionUtils.logError(this, message, source, throwable);
     }
 
-    public void logInfo(Object message)
-    {
+    public void logInfo(Object message) {
         PacketSessionUtils.logInfo(this, message);
     }
 
     public abstract void parse() throws ProtocolParseException;
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return PacketSessionUtils.createInfoText(this);
     }
 }

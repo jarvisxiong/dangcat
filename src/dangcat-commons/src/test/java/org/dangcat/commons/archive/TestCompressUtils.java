@@ -8,35 +8,30 @@ import org.junit.Test;
 
 import java.io.*;
 
-public class TestCompressUtils
-{
+public class TestCompressUtils {
     protected static final Logger logger = Logger.getLogger(TestCompressUtils.class);
     private static final String packetText = "01 01 00 47 2a ee 86 f0 8d 0d 55 96 9c a5 97 8e " + "0d 33 67 a2 01 08 66 6c 6f 70 73 79 03 13 16 e9 "
             + "75 57 c3 16 18 58 95 f2 93 ff 63 44 07 72 75 04 " + "06 c0 a8 01 10 05 06 00 00 00 14 06 06 00 00 00 " + "02 07 06 00 00 00 01 ";
 
-    private int getCompressRate(int totalSize, int compressSize)
-    {
+    private int getCompressRate(int totalSize, int compressSize) {
         return (int) (totalSize == 0 ? 0 : 100 - compressSize * 100.0 / totalSize);
     }
 
-    private byte[] getDataBytes() throws IOException
-    {
+    private byte[] getDataBytes() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         for (int i = 0; i < 10; i++)
             byteArrayOutputStream.write(ParseUtils.parseHex(packetText));
         return byteArrayOutputStream.toByteArray();
     }
 
-    private File getFileName(String fileExtName)
-    {
+    private File getFileName(String fileExtName) {
         File file = new File("log" + File.separator + "filecompress" + fileExtName);
         if (file.exists())
             FileUtils.delete(file);
         return file;
     }
 
-    private File getSourceFile() throws IOException
-    {
+    private File getSourceFile() throws IOException {
         File file = this.getFileName(".txt");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         byte[] dataBytes = this.getDataBytes();
@@ -46,41 +41,35 @@ public class TestCompressUtils
     }
 
     @Test
-    public void test_bz() throws IOException
-    {
+    public void test_bz() throws IOException {
         this.testDataCompress(CompressUtils.bz);
         this.testFileCompress(CompressUtils.bz);
     }
 
     @Test
-    public void test_bz2() throws IOException
-    {
+    public void test_bz2() throws IOException {
         this.testDataCompress(CompressUtils.bz2);
         this.testFileCompress(CompressUtils.bz2);
     }
 
     @Test
-    public void test_gz() throws IOException
-    {
+    public void test_gz() throws IOException {
         this.testDataCompress(CompressUtils.gz);
         this.testFileCompress(CompressUtils.gz);
     }
 
     @Test
-    public void test_xz() throws IOException
-    {
+    public void test_xz() throws IOException {
         this.testDataCompress(CompressUtils.xz);
         this.testFileCompress(CompressUtils.xz);
     }
 
     @Test
-    public void test_z() throws IOException
-    {
+    public void test_z() throws IOException {
         this.testDataCompress(CompressUtils.z);
     }
 
-    private void testDataCompress(String name) throws IOException
-    {
+    private void testDataCompress(String name) throws IOException {
         byte[] dataBytes = this.getDataBytes();
 
         // 压缩数组
@@ -97,8 +86,7 @@ public class TestCompressUtils
             Assert.assertEquals(dataBytes[i], upcompressData[i]);
     }
 
-    private void testFileCompress(String name) throws IOException
-    {
+    private void testFileCompress(String name) throws IOException {
         File sourceFile = this.getSourceFile();
 
         // 压缩文件

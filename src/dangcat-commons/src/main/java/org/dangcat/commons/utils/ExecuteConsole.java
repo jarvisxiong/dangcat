@@ -4,8 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 
-public class ExecuteConsole extends Thread
-{
+public class ExecuteConsole extends Thread {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private static final Logger LOGGER = Logger.getLogger(CommandExecutor.class);
     private boolean error = false;
@@ -13,13 +12,11 @@ public class ExecuteConsole extends Thread
     private Logger logger = null;
     private OutputStream outputStream;
 
-    public ExecuteConsole(InputStream inputStream)
-    {
+    public ExecuteConsole(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return this.logger == null ? LOGGER : this.logger;
     }
 
@@ -27,8 +24,7 @@ public class ExecuteConsole extends Thread
         this.logger = logger;
     }
 
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         return outputStream;
     }
 
@@ -36,8 +32,7 @@ public class ExecuteConsole extends Thread
         this.outputStream = outputStream;
     }
 
-    public boolean isError()
-    {
+    public boolean isError() {
         return error;
     }
 
@@ -45,10 +40,8 @@ public class ExecuteConsole extends Thread
         this.error = error;
     }
 
-    private void log(String message)
-    {
-        if (this.logger != null)
-        {
+    private void log(String message) {
+        if (this.logger != null) {
             if (this.isError())
                 this.logger.error(message);
             else
@@ -56,19 +49,16 @@ public class ExecuteConsole extends Thread
         }
     }
 
-    public void run()
-    {
+    public void run() {
         BufferedReader bufferedReader = null;
-        try
-        {
+        try {
             PrintWriter printWriter = null;
             if (this.outputStream != null)
                 printWriter = new PrintWriter(this.outputStream);
 
             bufferedReader = new BufferedReader(new InputStreamReader(this.inputStream));
             String message = null;
-            while ((message = bufferedReader.readLine()) != null)
-            {
+            while ((message = bufferedReader.readLine()) != null) {
                 if (printWriter != null)
                     printWriter.println(message);
 
@@ -76,20 +66,13 @@ public class ExecuteConsole extends Thread
             }
             if (printWriter != null)
                 printWriter.flush();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             this.getLogger().error(this, e);
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (bufferedReader != null)
                     bufferedReader.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
         }
     }

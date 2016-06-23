@@ -8,8 +8,7 @@ import org.dangcat.persistence.annotation.Table;
 import java.util.Date;
 
 @Table
-public class ServerInfo extends MonitorData
-{
+public class ServerInfo extends MonitorData {
     public static final String Id = "Id";
     public static final String Ip = "Ip";
     public static final String Name = "Name";
@@ -35,102 +34,84 @@ public class ServerInfo extends MonitorData
     @Column(index = 3)
     private Integer type = null;
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getIp()
-    {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(String ip)
-    {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public Date getLastResponseTime()
-    {
+    public Date getLastResponseTime() {
         return lastResponseTime;
     }
 
-    public void setLastResponseTime(Date lastResponseTime)
-    {
+    public void setLastResponseTime(Date lastResponseTime) {
         this.lastResponseTime = lastResponseTime;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getStatus()
-    {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status)
-    {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Integer getType()
-    {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Integer type)
-    {
+    public void setType(Integer type) {
         this.type = type;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        if (this.getId() != null)
-        {
+        if (this.getId() != null) {
             info.append(Id);
             info.append(" = ");
             info.append(this.getId());
         }
-        if (this.getName() != null)
-        {
+        if (this.getName() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(Name);
             info.append(" = ");
             info.append(this.getName());
         }
-        if (this.getIp() != null)
-        {
+        if (this.getIp() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(Ip);
             info.append(" = ");
             info.append(this.getIp());
         }
-        if (this.getType() != null)
-        {
+        if (this.getType() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(Type);
             info.append(" = ");
             info.append(this.getType());
         }
-        if (this.getStatus() != null)
-        {
+        if (this.getStatus() != null) {
             if (info.length() > 0)
                 info.append(", ");
             info.append(Status);

@@ -4,10 +4,8 @@ import org.apache.log4j.Logger;
 
 /**
  * 监控线程执行接口。
- * 
  */
-public interface WatchRunnable extends Runnable
-{
+public interface WatchRunnable extends Runnable {
     /**
      * 最后响应时间，单位毫秒。
      */

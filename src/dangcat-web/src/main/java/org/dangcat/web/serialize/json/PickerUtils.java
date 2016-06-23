@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PickerUtils
-{
+public class PickerUtils {
     private static final String CAN_BE_UNKNOWN_VALUE = "canBeUnknownValue";
     private static final String COMBO_BOX_ITEM = "ComboBoxItem";
     private static final String DATA_TYPE = "dataType";
@@ -35,12 +34,10 @@ public class PickerUtils
     private static final String VALUE_MAP = "valueMap";
     private static final String VISIBLE = "visible";
 
-    private static void createColumnProperties(ColumnExtendInfo columnExtendInfo, org.dangcat.web.annotation.Picker pickerAnnotation)
-    {
+    private static void createColumnProperties(ColumnExtendInfo columnExtendInfo, org.dangcat.web.annotation.Picker pickerAnnotation) {
         Class<? extends PickerInfo> classType = pickerAnnotation.value();
         PickerInfo pickerInfo = (PickerInfo) ReflectUtils.newInstance(classType);
-        if (pickerInfo != null)
-        {
+        if (pickerInfo != null) {
             Map<String, Object> columnProperties = columnExtendInfo.getColumnProperties();
             Map<String, Object> fieldProperties = columnExtendInfo.getFieldProperties();
             fieldProperties.put(CAN_BE_UNKNOWN_VALUE, pickerAnnotation.canBeUnknownValue());
@@ -65,8 +62,7 @@ public class PickerUtils
             String[] filterFields = pickerAnnotation.filterFields();
             if (filterFields == null || filterFields.length == 0)
                 filterFields = pickerInfo.getFilterFields();
-            if (filterFields != null && filterFields.length > 0)
-            {
+            if (filterFields != null && filterFields.length > 0) {
                 for (int i = 0; i < filterFields.length; i++)
                     filterFields[i] = ReflectUtils.toPropertyName(filterFields[i]);
                 fieldProperties.put(FILTER_FIELDS, filterFields);
@@ -88,8 +84,7 @@ public class PickerUtils
         }
     }
 
-    private static void createColumnProperties(ColumnExtendInfo columnExtendInfo, org.dangcat.web.annotation.PickList pickListAnnotation)
-    {
+    private static void createColumnProperties(ColumnExtendInfo columnExtendInfo, org.dangcat.web.annotation.PickList pickListAnnotation) {
         Map<String, Object> columnProperties = columnExtendInfo.getColumnProperties();
         Map<String, Object> fieldProperties = columnExtendInfo.getFieldProperties();
         fieldProperties.put(CAN_BE_UNKNOWN_VALUE, pickListAnnotation.canBeUnknownValue());
@@ -111,21 +106,18 @@ public class PickerUtils
             fieldProperties.put(PICKER_ICON_SRC, pickListAnnotation.pickerIconSrc());
 
         String[] filterFields = pickListAnnotation.filterFields();
-        if (filterFields != null && filterFields.length > 0)
-        {
+        if (filterFields != null && filterFields.length > 0) {
             for (int i = 0; i < filterFields.length; i++)
                 filterFields[i] = ReflectUtils.toPropertyName(filterFields[i]);
             fieldProperties.put(FILTER_FIELDS, filterFields);
         }
 
-        if (pickListAnnotation.resultClass() != null)
-        {
+        if (pickListAnnotation.resultClass() != null) {
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(pickListAnnotation.resultClass());
             Object[] pickListFields = createPickListFields(entityMetaData, entityMetaData.getTable().getColumns().toArray(new Column[0]));
             if (pickListFields != null && pickListFields.length > 0)
                 fieldProperties.put(PICK_LIST_FIELDS, pickListFields);
-            if (pickListAnnotation.pickData() != null)
-            {
+            if (pickListAnnotation.pickData() != null) {
                 Map<Integer, String> valueMap = entityMetaData.getResourceReader().getValueMap(pickListAnnotation.pickData());
                 if (valueMap != null)
                     fieldProperties.put(PICK_DATA, valueMap);
@@ -133,26 +125,21 @@ public class PickerUtils
         }
     }
 
-    public static void createPickList(ColumnExtendInfo columnExtendInfo)
-    {
+    public static void createPickList(ColumnExtendInfo columnExtendInfo) {
         org.dangcat.web.annotation.Picker pickerAnnotation = columnExtendInfo.getAnnotation(org.dangcat.web.annotation.Picker.class);
         if (pickerAnnotation != null && pickerAnnotation.value() != null)
             createColumnProperties(columnExtendInfo, pickerAnnotation);
-        else
-        {
+        else {
             org.dangcat.web.annotation.PickList pickListAnnotation = columnExtendInfo.getAnnotation(org.dangcat.web.annotation.PickList.class);
             if (pickListAnnotation != null)
                 createColumnProperties(columnExtendInfo, pickListAnnotation);
         }
     }
 
-    private static Object[] createPickListFields(EntityMetaData entityMetaData, Column[] columns)
-    {
+    private static Object[] createPickListFields(EntityMetaData entityMetaData, Column[] columns) {
         List<Object> columnList = new ArrayList<Object>();
-        if (columns != null && columns.length > 0)
-        {
-            for (Column column : columns)
-            {
+        if (columns != null && columns.length > 0) {
+            for (Column column : columns) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 // Name
                 String fieldName = ReflectUtils.toPropertyName(column.getName());

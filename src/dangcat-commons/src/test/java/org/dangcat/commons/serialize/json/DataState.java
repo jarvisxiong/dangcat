@@ -3,8 +3,7 @@ package org.dangcat.commons.serialize.json;
 /**
  * Êý¾Ý×´Ì¬¡£
  */
-enum DataState
-{
+enum DataState {
     /**
      * ä¯ÀÀ¡£
      */

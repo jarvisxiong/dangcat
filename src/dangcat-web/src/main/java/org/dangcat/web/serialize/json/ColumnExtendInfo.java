@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class ColumnExtendInfo
-{
+class ColumnExtendInfo {
     private static final String DATA_STATE_READ_ONLY = "dataStateReadOnly";
     private static final String DATA_STATE_VISIBLE = "dataStateVisible";
     private static final String PROPERTY_ENCRYPT_ALGORITHM = "encryptAlgorithm";
@@ -27,14 +26,12 @@ class ColumnExtendInfo
     private Map<String, Object> fieldProperties = new HashMap<String, Object>();
     private String name = null;
 
-    ColumnExtendInfo(Class<?> classType, String name)
-    {
+    ColumnExtendInfo(Class<?> classType, String name) {
         this.classType = classType;
         this.name = name;
     }
 
-    protected void create()
-    {
+    protected void create() {
         this.createValueMap();
         this.createColumnProperties();
         this.createFieldProperties();
@@ -45,86 +42,67 @@ class ColumnExtendInfo
         PickerUtils.createPickList(this);
     }
 
-    private void createColumnProperties()
-    {
+    private void createColumnProperties() {
         org.dangcat.web.annotation.ColumnProperties columnPropertiesAnnotation = this.getAnnotation(org.dangcat.web.annotation.ColumnProperties.class);
-        if (columnPropertiesAnnotation != null)
-        {
+        if (columnPropertiesAnnotation != null) {
             for (org.dangcat.web.annotation.ColumnProperty columnPropertyAnnotation : columnPropertiesAnnotation.value())
                 this.createColumnProperty(columnPropertyAnnotation);
-        }
-        else
+        } else
             this.createColumnProperty(this.getAnnotation(org.dangcat.web.annotation.ColumnProperty.class));
     }
 
-    private void createColumnProperty(org.dangcat.web.annotation.ColumnProperty columnPropertyAnnotation)
-    {
-        if (columnPropertyAnnotation != null)
-        {
+    private void createColumnProperty(org.dangcat.web.annotation.ColumnProperty columnPropertyAnnotation) {
+        if (columnPropertyAnnotation != null) {
             Object value = ValueUtils.parseValue(columnPropertyAnnotation.classType(), columnPropertyAnnotation.value());
             if (value != null)
                 this.getColumnProperties().put(columnPropertyAnnotation.name(), value);
         }
     }
 
-    private void createFieldProperties()
-    {
+    private void createFieldProperties() {
         org.dangcat.web.annotation.FieldProperties fieldPropertiesAnnotation = this.getAnnotation(org.dangcat.web.annotation.FieldProperties.class);
-        if (fieldPropertiesAnnotation != null)
-        {
+        if (fieldPropertiesAnnotation != null) {
             for (org.dangcat.web.annotation.FieldProperty fieldPropertyAnnotation : fieldPropertiesAnnotation.value())
                 this.createFieldProperty(fieldPropertyAnnotation);
-        }
-        else
+        } else
             this.createFieldProperty(this.getAnnotation(org.dangcat.web.annotation.FieldProperty.class));
     }
 
-    private void createFieldProperty(org.dangcat.web.annotation.FieldProperty fieldPropertyAnnotation)
-    {
-        if (fieldPropertyAnnotation != null)
-        {
+    private void createFieldProperty(org.dangcat.web.annotation.FieldProperty fieldPropertyAnnotation) {
+        if (fieldPropertyAnnotation != null) {
             Object value = ValueUtils.parseValue(fieldPropertyAnnotation.classType(), fieldPropertyAnnotation.value());
             if (value != null)
                 this.getFieldProperties().put(fieldPropertyAnnotation.name(), value);
         }
     }
 
-    private void createPassword()
-    {
+    private void createPassword() {
         org.dangcat.web.annotation.Password passwordAnnotation = this.getAnnotation(org.dangcat.web.annotation.Password.class);
-        if (passwordAnnotation != null && !ValueUtils.isEmpty(passwordAnnotation.value()))
-        {
+        if (passwordAnnotation != null && !ValueUtils.isEmpty(passwordAnnotation.value())) {
             this.getColumnProperties().put(PROPERTY_PASSWORD, ReflectUtils.toPropertyName(passwordAnnotation.value()));
             if (!ValueUtils.isEmpty(passwordAnnotation.algorithm()))
                 this.getColumnProperties().put(PROPERTY_ENCRYPT_ALGORITHM, passwordAnnotation.algorithm());
         }
     }
 
-    private void createPermission()
-    {
+    private void createPermission() {
         org.dangcat.web.annotation.Permission permissionAnnotation = this.getAnnotation(org.dangcat.web.annotation.Permission.class);
-        if (permissionAnnotation != null && !ValueUtils.isEmpty(permissionAnnotation.value()))
-        {
+        if (permissionAnnotation != null && !ValueUtils.isEmpty(permissionAnnotation.value())) {
             this.getColumnProperties().put(PROPERTY_PERMISSION, permissionAnnotation.value());
             if (permissionAnnotation.visible())
                 this.getColumnProperties().put(PROPERTY_PERMISSION_READONLY, true);
         }
     }
 
-    private void createReadOnlyDataStates()
-    {
+    private void createReadOnlyDataStates() {
         List<String> readOnlyList = new ArrayList<String>();
         org.dangcat.web.annotation.ReadOnlyDataStates readOnlyDataStatesAnnotation = this.getAnnotation(org.dangcat.web.annotation.ReadOnlyDataStates.class);
-        if (readOnlyDataStatesAnnotation != null)
-        {
+        if (readOnlyDataStatesAnnotation != null) {
             for (DataState dataState : readOnlyDataStatesAnnotation.value())
                 readOnlyList.add(dataState.name());
-        }
-        else
-        {
+        } else {
             org.dangcat.web.annotation.EditDataStates editDataStatesAnnotation = this.getAnnotation(org.dangcat.web.annotation.EditDataStates.class);
-            if (editDataStatesAnnotation != null)
-            {
+            if (editDataStatesAnnotation != null) {
                 for (DataState dataState : DataState.values())
                     readOnlyList.add(dataState.name());
                 for (DataState dataState : editDataStatesAnnotation.value())
@@ -135,18 +113,14 @@ class ColumnExtendInfo
             this.getColumnProperties().put(DATA_STATE_READ_ONLY, readOnlyList.toArray(new String[0]));
     }
 
-    private void createValueMap()
-    {
+    private void createValueMap() {
         org.dangcat.web.annotation.ValueMap valueMapAnnotation = this.getAnnotation(org.dangcat.web.annotation.ValueMap.class);
-        if (valueMapAnnotation != null)
-        {
-            if (!ValueUtils.isEmpty(valueMapAnnotation.jndiName()))
-            {
+        if (valueMapAnnotation != null) {
+            if (!ValueUtils.isEmpty(valueMapAnnotation.jndiName())) {
                 String key = (valueMapAnnotation.scopeAtRow() ? "row" : "field") + "ValueMapJndiName";
                 this.getColumnProperties().put(key, valueMapAnnotation.jndiName());
             }
-            if (!ValueUtils.isEmpty(valueMapAnnotation.resourceKey()))
-            {
+            if (!ValueUtils.isEmpty(valueMapAnnotation.resourceKey())) {
                 EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.classType);
                 Map<Integer, String> valueMap = entityMetaData.getResourceReader().getValueMap(valueMapAnnotation.resourceKey());
                 if (valueMap != null)
@@ -155,8 +129,7 @@ class ColumnExtendInfo
         }
     }
 
-    private void createVisibleDataStates()
-    {
+    private void createVisibleDataStates() {
         List<String> visibleList = new ArrayList<String>();
 
         DataState[] dataStates = DataState.values();
@@ -165,16 +138,14 @@ class ColumnExtendInfo
             dataStates = visibleDataStatesStatesAnnotation.value();
 
         org.dangcat.web.annotation.HiddenDataStates hiddenDataStatesAnnotation = this.getAnnotation(org.dangcat.web.annotation.HiddenDataStates.class);
-        if (hiddenDataStatesAnnotation != null || visibleDataStatesStatesAnnotation != null)
-        {
+        if (hiddenDataStatesAnnotation != null || visibleDataStatesStatesAnnotation != null) {
             if (dataStates == null)
                 dataStates = DataState.values();
             for (DataState dataState : dataStates)
                 visibleList.add(dataState.name());
         }
 
-        if (hiddenDataStatesAnnotation != null)
-        {
+        if (hiddenDataStatesAnnotation != null) {
             for (DataState dataState : hiddenDataStatesAnnotation.value())
                 visibleList.remove(dataState.name());
         }
@@ -182,18 +153,15 @@ class ColumnExtendInfo
             this.getColumnProperties().put(DATA_STATE_VISIBLE, visibleList.toArray(new String[0]));
     }
 
-    protected <T extends Annotation> T getAnnotation(Class<T> annotationType)
-    {
+    protected <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         return BeanUtils.getAnnotation(this.classType, this.name, annotationType);
     }
 
-    protected Map<String, Object> getColumnProperties()
-    {
+    protected Map<String, Object> getColumnProperties() {
         return columnProperties;
     }
 
-    protected Map<String, Object> getFieldProperties()
-    {
+    protected Map<String, Object> getFieldProperties() {
         return fieldProperties;
     }
 }

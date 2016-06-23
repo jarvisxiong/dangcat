@@ -6,8 +6,7 @@ import org.dangcat.commons.utils.ValueUtils;
 
 import java.io.File;
 
-public class ContextPath
-{
+public class ContextPath {
     public static final String DANGCAT_BASE = "dangcat.base";
     public static final String DANGCAT_BIN = "dangcat.bin";
     public static final String DANGCAT_CLASSPATH = "dangcat.classpath";
@@ -31,22 +30,18 @@ public class ContextPath
     private String log = null;
     private String webApps = null;
 
-    public String getBaseDir()
-    {
+    public String getBaseDir() {
         if (this.isDebug())
             return this.getHomePath("..");
         return this.getHome();
     }
 
-    private String getBasePath(String path)
-    {
+    private String getBasePath(String path) {
         return this.getBaseDir() + File.separator + path;
     }
 
-    public String getBin()
-    {
-        if (this.bin == null)
-        {
+    public String getBin() {
+        if (this.bin == null) {
             if (this.isDebug())
                 this.bin = this.getHomePath(CLASSES_DIRNAME);
             else
@@ -55,8 +50,7 @@ public class ContextPath
         return this.bin;
     }
 
-    public String getClassPath()
-    {
+    public String getClassPath() {
         return this.classPath;
     }
 
@@ -64,41 +58,34 @@ public class ContextPath
         this.classPath = classPath;
     }
 
-    public String getConf()
-    {
+    public String getConf() {
         if (this.conf == null)
             this.conf = FileUtils.getCanonicalPath(this.getBasePath(CONF_DIRNAME));
         return this.conf;
     }
 
-    public String getData()
-    {
+    public String getData() {
         if (this.data == null)
             this.data = FileUtils.getCanonicalPath(this.getBasePath(DATA_DIRNAME));
         return this.data;
     }
 
-    public String getHome()
-    {
+    public String getHome() {
         return Environment.getHomePath();
     }
 
-    private String getHomePath(String path)
-    {
+    private String getHomePath(String path) {
         return this.getHome() + File.separator + path;
     }
 
-    public String getLog()
-    {
+    public String getLog() {
         if (this.log == null)
             this.log = FileUtils.getCanonicalPath(this.getBasePath(LOG_DIRNAME));
         return this.log;
     }
 
-    public String getWebApps()
-    {
-        if (this.webApps == null)
-        {
+    public String getWebApps() {
+        if (this.webApps == null) {
             if (this.isDebug())
                 this.webApps = this.getHomePath(".." + File.separator + "src" + File.separator + "main" + File.separator + WEBAPPS_DIRNAME);
             else
@@ -107,8 +94,7 @@ public class ContextPath
         return this.webApps;
     }
 
-    protected void initSystemProperties()
-    {
+    protected void initSystemProperties() {
         System.setProperty(DANGCAT_BASE, this.getBaseDir());
         System.setProperty(DANGCAT_HOME, this.getHome());
         System.setProperty(DANGCAT_BIN, this.getBin());
@@ -118,14 +104,12 @@ public class ContextPath
         System.setProperty(DANGCAT_WEBAPPS, this.getWebApps());
     }
 
-    private boolean isDebug()
-    {
+    private boolean isDebug() {
         return Environment.getHomePath().endsWith(TARGET_DIRNAME);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(Environment.LINETAB_SEPARATOR);
         info.append("home: ");
@@ -150,8 +134,7 @@ public class ContextPath
         info.append(WEBAPPS_DIRNAME);
         info.append(": ");
         info.append(this.getWebApps());
-        if (!ValueUtils.isEmpty(this.getClassPath()))
-        {
+        if (!ValueUtils.isEmpty(this.getClassPath())) {
             info.append(Environment.LINETAB_SEPARATOR);
             info.append("classpath: " + this.getClassPath());
         }

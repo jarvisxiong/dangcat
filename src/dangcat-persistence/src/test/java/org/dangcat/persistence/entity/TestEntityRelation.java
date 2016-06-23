@@ -12,18 +12,15 @@ import org.junit.Assert;
 
 import java.util.List;
 
-public class TestEntityRelation extends TestEntityBase
-{
+public class TestEntityRelation extends TestEntityBase {
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
 
         List<Table> tableList = EntityRelationUtils.getTable();
-        for (Table table : tableList)
-        {
+        for (Table table : tableList) {
             if (table.exists())
                 table.drop();
             // 产生新的数据表
@@ -42,8 +39,7 @@ public class TestEntityRelation extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testDelete() throws EntityException
-    {
+    private void testDelete() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         BillInfo billInfo = entityManager.load(BillInfo.class, 0);
         BillDetail[] billDetailArray = billInfo.getBillDetails().toArray(new BillDetail[0]);
@@ -69,8 +65,7 @@ public class TestEntityRelation extends TestEntityBase
         Assert.assertTrue(SimulateUtils.compareDataCollection(billInfo.getBillDetails(), saveBillInfo2.getBillDetails()));
     }
 
-    private void testInsert() throws EntityException
-    {
+    private void testInsert() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         BillInfo billInfo = new BillInfo();
         billInfo.setName("B1");
@@ -101,8 +96,7 @@ public class TestEntityRelation extends TestEntityBase
         Assert.assertEquals(0, billInfo.getBillDetails().size());
     }
 
-    private void testModify() throws EntityException
-    {
+    private void testModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
         BillInfo billInfo = entityManager.load(BillInfo.class, 0);
         billInfo.setName("B2");

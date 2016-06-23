@@ -17,24 +17,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-class ParamInfoSerializer
-{
+class ParamInfoSerializer {
     private static final String ARRAY = "Array";
     private static final String MAP = "Map";
     private static final String PACKAGE_JAVA = "java";
 
-    private static void addClassType(Collection<Class<?>> usedClassTypeCollection, Class<?> classType)
-    {
+    private static void addClassType(Collection<Class<?>> usedClassTypeCollection, Class<?> classType) {
         if (usedClassTypeCollection != null && !isConstClassType(classType) && !usedClassTypeCollection.contains(classType))
             usedClassTypeCollection.add(classType);
     }
 
-    private static String getSerializeName(Class<?> classType)
-    {
-        if (JsonSerializer.serializes != null)
-        {
-            for (JsonSerialize jsonSerialize : JsonSerializer.serializes)
-            {
+    private static String getSerializeName(Class<?> classType) {
+        if (JsonSerializer.serializes != null) {
+            for (JsonSerialize jsonSerialize : JsonSerializer.serializes) {
                 if (jsonSerialize.getSerializeName(classType) != null)
                     return jsonSerialize.getSerializeName(classType);
             }
@@ -42,24 +37,19 @@ class ParamInfoSerializer
         return classType.getSimpleName();
     }
 
-    private static boolean isArrayClassType(Class<?> classType)
-    {
+    private static boolean isArrayClassType(Class<?> classType) {
         return classType.isArray() || Collection.class.isAssignableFrom(classType);
     }
 
-    private static boolean isConstClassType(Class<?> classType)
-    {
+    private static boolean isConstClassType(Class<?> classType) {
         return ReflectUtils.isConstClassType(classType) || classType.isEnum() || Object.class.equals(classType);
     }
 
-    private static void serializeArray(JsonWriter jsonWriter, String type, Collection<Class<?>> usedClassTypeCollection, Class<?>[] parameterizedClasses) throws IOException
-    {
+    private static void serializeArray(JsonWriter jsonWriter, String type, Collection<Class<?>> usedClassTypeCollection, Class<?>[] parameterizedClasses) throws IOException {
         String value = type;
-        if (parameterizedClasses != null && parameterizedClasses.length > 0)
-        {
+        if (parameterizedClasses != null && parameterizedClasses.length > 0) {
             StringBuilder valueBuider = new StringBuilder();
-            for (Class<?> parameterizedClass : parameterizedClasses)
-            {
+            for (Class<?> parameterizedClass : parameterizedClasses) {
                 if (valueBuider.length() > 0)
                     valueBuider.append(", ");
                 valueBuider.append(getSerializeName(parameterizedClass));
@@ -71,8 +61,7 @@ class ParamInfoSerializer
     }
 
     protected static void serializeClassType(JsonWriter jsonWriter, Class<?> classType, Map<String, Class<?>> genericClassMap, Collection<Class<?>> usedClassTypeCollection, boolean isReturnType)
-            throws IOException
-    {
+            throws IOException {
         if (isConstClassType(classType))
             jsonWriter.name(getSerializeName(classType)).value(classType.getSimpleName());
         else if (isArrayClassType(classType))
@@ -86,12 +75,9 @@ class ParamInfoSerializer
     }
 
     private static void serializeObject(JsonWriter jsonWriter, ParamInfo paramInfo, Collection<Class<?>> usedClassTypeCollection, Map<String, Method> propertyMap, boolean isReturnType)
-            throws IOException
-    {
-        if (JsonSerializer.serializes != null)
-        {
-            for (JsonSerialize jsonSerialize : JsonSerializer.serializes)
-            {
+            throws IOException {
+        if (JsonSerializer.serializes != null) {
+            for (JsonSerialize jsonSerialize : JsonSerializer.serializes) {
                 if (jsonSerialize.serializeClassType(jsonWriter, paramInfo.getClassType()))
                     return;
             }
@@ -105,24 +91,19 @@ class ParamInfoSerializer
     }
 
     private static void serializeObjectClassType(JsonWriter jsonWriter, Class<?> classType, Map<String, Class<?>> genericClassMap, Collection<Class<?>> usedClassTypeCollection, boolean isReturnType)
-            throws IOException
-    {
-        if (JsonSerializer.serializes != null)
-        {
-            for (JsonSerialize jsonSerialize : JsonSerializer.serializes)
-            {
+            throws IOException {
+        if (JsonSerializer.serializes != null) {
+            for (JsonSerialize jsonSerialize : JsonSerializer.serializes) {
                 if (jsonSerialize.serializeClassType(jsonWriter, classType))
                     return;
             }
         }
 
         List<PropertyDescriptor> propertyDescriptorList = BeanUtils.getPropertyDescriptorList(classType);
-        if (propertyDescriptorList != null && propertyDescriptorList.size() > 0)
-        {
+        if (propertyDescriptorList != null && propertyDescriptorList.size() > 0) {
             JsonWriter classTypeWriter = jsonWriter.name(classType.getSimpleName());
             classTypeWriter.beginObject();
-            for (PropertyDescriptor propertyDescriptor : propertyDescriptorList)
-            {
+            for (PropertyDescriptor propertyDescriptor : propertyDescriptorList) {
                 Method readMethod = propertyDescriptor.getReadMethod();
                 if (readMethod != null)
                     serializeProperty(jsonWriter, propertyDescriptor.getName(), readMethod, genericClassMap, usedClassTypeCollection, isReturnType);
@@ -131,8 +112,7 @@ class ParamInfoSerializer
         }
     }
 
-    protected static void serializeParamInfo(JsonWriter jsonWriter, ParamInfo paramInfo, Collection<Class<?>> usedClassTypeCollection, boolean isReturnType) throws IOException
-    {
+    protected static void serializeParamInfo(JsonWriter jsonWriter, ParamInfo paramInfo, Collection<Class<?>> usedClassTypeCollection, boolean isReturnType) throws IOException {
         JsonWriter paramWriter = jsonWriter.name(paramInfo.getName());
         Class<?> classType = paramInfo.getClassType();
         Class<?>[] parameterizedClasses = paramInfo.getParameterizedClasses();
@@ -145,15 +125,11 @@ class ParamInfoSerializer
             serializeArray(paramWriter, MAP, usedClassTypeCollection, parameterizedClasses);
         else if (classType.getPackage().getName().startsWith(PACKAGE_JAVA))
             paramWriter.value(classType.getName());
-        else
-        {
-            if (JsonSerializer.serializes != null)
-            {
-                for (JsonSerialize jsonSerialize : JsonSerializer.serializes)
-                {
+        else {
+            if (JsonSerializer.serializes != null) {
+                for (JsonSerialize jsonSerialize : JsonSerializer.serializes) {
                     String className = jsonSerialize.getSerializeName(classType);
-                    if (className != null)
-                    {
+                    if (className != null) {
                         paramWriter.value(className);
                         addClassType(usedClassTypeCollection, classType);
                         return;
@@ -162,8 +138,7 @@ class ParamInfoSerializer
             }
 
             Map<String, Method> propertyMap = BeanUtils.getPropertyMethodMap(classType, false);
-            if (propertyMap != null && propertyMap.size() > 0)
-            {
+            if (propertyMap != null && propertyMap.size() > 0) {
                 serializeObject(paramWriter, paramInfo, usedClassTypeCollection, propertyMap, isReturnType);
                 return;
             }
@@ -172,11 +147,9 @@ class ParamInfoSerializer
     }
 
     private static void serializeProperty(JsonWriter jsonWriter, String name, Method method, Map<String, Class<?>> genericClassMap, Collection<Class<?>> usedClassTypeCollection, boolean isReturnType)
-            throws IOException
-    {
+            throws IOException {
         Serialize serializeAnnotation = method.getAnnotation(Serialize.class);
-        if (serializeAnnotation != null)
-        {
+        if (serializeAnnotation != null) {
             if (serializeAnnotation.ignore())
                 return;
 
@@ -200,8 +173,7 @@ class ParamInfoSerializer
             serializeArray(methodWriter, MAP, usedClassTypeCollection, parameterizedClasses);
         else if (classType.getPackage().getName().startsWith(PACKAGE_JAVA))
             methodWriter.value(classType.getName());
-        else
-        {
+        else {
             methodWriter.value(getSerializeName(classType));
             addClassType(usedClassTypeCollection, classType);
         }

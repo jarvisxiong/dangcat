@@ -13,24 +13,19 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.util.Locale;
 
-public class ServiceSessionListener implements HttpSessionListener
-{
+public class ServiceSessionListener implements HttpSessionListener {
     protected static final Logger logger = Logger.getLogger(ServiceSessionListener.class);
 
     @Override
-    public void sessionCreated(HttpSessionEvent httpSessionEvent)
-    {
+    public void sessionCreated(HttpSessionEvent httpSessionEvent) {
     }
 
     @Override
-    public void sessionDestroyed(HttpSessionEvent httpSessionEvent)
-    {
-        try
-        {
+    public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
+        try {
             HttpSession httpSession = httpSessionEvent.getSession();
             ServicePrincipal servicePrincipal = (ServicePrincipal) httpSession.getAttribute(ServicePrincipal.class.getSimpleName());
-            if (servicePrincipal != null && servicePrincipal.isValid())
-            {
+            if (servicePrincipal != null && servicePrincipal.isValid()) {
                 ServiceInfo serviceInfo = ServiceFactory.getInstance().getServiceInfo(SecurityLoginService.class);
                 MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo("logout");
                 Locale locale = (Locale) httpSession.getAttribute(Locale.class.getSimpleName());
@@ -41,9 +36,7 @@ public class ServiceSessionListener implements HttpSessionListener
                 SecurityLoginService securityLoginService = ServiceFactory.getInstance().getService(SecurityLoginService.class);
                 securityLoginService.logout(servicePrincipal);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
         }
     }

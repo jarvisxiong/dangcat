@@ -10,11 +10,10 @@ import java.util.Random;
 
 /**
  * 数据模拟接口。
+ *
  * @author dangcat
- * 
  */
-public abstract class ValueSimulator
-{
+public abstract class ValueSimulator {
     private Class<?> classType = null;
     private DataSimulator dataSimulator = null;
     private int position = 0;
@@ -22,26 +21,21 @@ public abstract class ValueSimulator
     private int size = 0;
     private Object[] values = null;
 
-    public ValueSimulator(Class<?> classType)
-    {
+    public ValueSimulator(Class<?> classType) {
         this.classType = classType;
     }
 
-    public void bind(Class<?> classType, String fieldName)
-    {
+    public void bind(Class<?> classType, String fieldName) {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
         String tableName = entityMetaData.getTableName().getName();
         this.bind(tableName, fieldName);
     }
 
-    public void bind(String tableName, String fieldName)
-    {
+    public void bind(String tableName, String fieldName) {
         DatabaseSimulator databaseSimulator = this.dataSimulator.getDatabaseSimulator();
-        if (databaseSimulator != null)
-        {
+        if (databaseSimulator != null) {
             SimulateData simulateData = databaseSimulator.getSimulateData(tableName);
-            if (simulateData != null)
-            {
+            if (simulateData != null) {
                 ValueSimulator srcValueSimulator = simulateData.getDataSimulator().findValueSimulator(fieldName);
                 if (srcValueSimulator != null)
                     this.setValues(srcValueSimulator.getValues());
@@ -51,13 +45,11 @@ public abstract class ValueSimulator
 
     protected abstract Object createValue(int index);
 
-    protected Class<?> getClassType()
-    {
+    protected Class<?> getClassType() {
         return classType;
     }
 
-    public DataSimulator getDataSimulator()
-    {
+    public DataSimulator getDataSimulator() {
         return dataSimulator;
     }
 
@@ -65,8 +57,7 @@ public abstract class ValueSimulator
         this.dataSimulator = dataSimulator;
     }
 
-    public int getPosition()
-    {
+    public int getPosition() {
         return position;
     }
 
@@ -74,15 +65,13 @@ public abstract class ValueSimulator
         this.position = position;
     }
 
-    private synchronized int getRandomIndex()
-    {
+    private synchronized int getRandomIndex() {
         if (this.random == null)
             this.random = new Random();
         return this.random.nextInt() % this.size;
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return size;
     }
 
@@ -94,21 +83,19 @@ public abstract class ValueSimulator
 
     /**
      * 读取指定位置数据。
+     *
      * @param index 位置索引。
      * @return 产生的模拟数据。
      */
-    public Object getValue(int index)
-    {
+    public Object getValue(int index) {
         Object[] values = this.getValues();
         if (values == null || index < 0 || values.length == 0)
             return null;
         return values[index % this.size];
     }
 
-    public Object[] getValues()
-    {
-        if (this.values == null)
-        {
+    public Object[] getValues() {
+        if (this.values == null) {
             Object[] values = new Object[this.size];
             for (int i = 0; i < values.length; i++)
                 values[i] = this.createValue(i);
@@ -125,19 +112,19 @@ public abstract class ValueSimulator
 
     /**
      * 读取下一个随机模拟数据。
+     *
      * @return 产生的模拟数据。
      */
-    public Object nextRandom()
-    {
+    public Object nextRandom() {
         return this.getValue(this.getRandomIndex());
     }
 
     /**
      * 读取下一个顺序模拟数据。
+     *
      * @return 产生的模拟数据。
      */
-    public Object nextSequence()
-    {
+    public Object nextSequence() {
         if (this.position >= this.size)
             this.position = 0;
         return this.getValue(this.position);

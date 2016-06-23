@@ -7,12 +7,9 @@ import org.dangcat.persistence.simulate.SimulateUtils;
 
 import java.util.List;
 
-class EntityInheritUtils extends SimulateUtils
-{
-    protected static void createData(List<UserServerBind> entityList, int size)
-    {
-        for (int i = 1; i <= size; i++)
-        {
+class EntityInheritUtils extends SimulateUtils {
+    protected static void createData(List<UserServerBind> entityList, int size) {
+        for (int i = 1; i <= size; i++) {
             UserServerBind userServerBind = new UserServerBind();
             String account = "0000000000" + i;
             userServerBind.setAccount("ACCOUNT " + account.substring(account.length() - 10));
@@ -25,8 +22,7 @@ class EntityInheritUtils extends SimulateUtils
         }
     }
 
-    public static Table getTable()
-    {
+    public static Table getTable() {
         return EntityHelper.getEntityMetaData(UserServerBind.class).getTable();
     }
 }

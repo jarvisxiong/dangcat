@@ -6,11 +6,10 @@ import org.dangcat.persistence.model.Columns;
 
 /**
  * 栏位对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class ColumnsXmlResolver extends XmlResolver
-{
+public class ColumnsXmlResolver extends XmlResolver {
     /**
      * 栏位对象。
      */
@@ -19,27 +18,25 @@ public class ColumnsXmlResolver extends XmlResolver
     /**
      * 构建解析器。
      */
-    public ColumnsXmlResolver()
-    {
+    public ColumnsXmlResolver() {
         super(Columns.class.getSimpleName());
         this.addChildXmlResolver(new ColumnXmlResolver());
     }
 
     /**
      * 产生子元素对象。
+     *
      * @param elementName 子元素名称。
-     * @param child 子元素对象。
+     * @param child       子元素对象。
      */
     @Override
-    protected void afterChildCreate(String elementName, Object child)
-    {
+    protected void afterChildCreate(String elementName, Object child) {
         if (child != null)
             columns.add((Column) child);
     }
 
     @Override
-    public void setResolveObject(Object resolveObject)
-    {
+    public void setResolveObject(Object resolveObject) {
         this.columns = (Columns) resolveObject;
         super.setResolveObject(resolveObject);
     }

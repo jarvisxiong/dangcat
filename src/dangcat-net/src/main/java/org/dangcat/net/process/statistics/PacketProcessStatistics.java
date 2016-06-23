@@ -4,48 +4,41 @@ import org.dangcat.boot.statistics.ProcessStatistics;
 
 /**
  * 数据处理统计。
+ *
  * @author dangcat
- * 
  */
-public class PacketProcessStatistics extends ProcessStatistics<PacketProcessStatisticsData>
-{
-    public PacketProcessStatistics(String name)
-    {
+public class PacketProcessStatistics extends ProcessStatistics<PacketProcessStatisticsData> {
+    public PacketProcessStatistics(String name) {
         super(name);
     }
 
     @Override
-    protected PacketProcessStatisticsData creatStatisticsData(String name)
-    {
+    protected PacketProcessStatisticsData creatStatisticsData(String name) {
         return new PacketProcessStatisticsData(name);
     }
 
-    public long increaseIgnore()
-    {
+    public long increaseIgnore() {
         return this.increase(PacketProcessStatisticsData.Ignore);
     }
 
     /**
      * 解析错误。
      */
-    public long increaseParseError()
-    {
+    public long increaseParseError() {
         return this.increase(PacketProcessStatisticsData.ParseError);
     }
 
     /**
      * 接收数据大小。
      */
-    public long increaseReceive()
-    {
+    public long increaseReceive() {
         return this.increase(PacketProcessStatisticsData.Receive);
     }
 
     /**
      * 校验错误。
      */
-    public long increaseValidError()
-    {
+    public long increaseValidError() {
         return this.increase(PacketProcessStatisticsData.ValidError);
     }
 }

@@ -7,19 +7,16 @@ import org.dangcat.swing.JFrameExt;
 import javax.swing.*;
 import java.awt.*;
 
-public class DatabaseConfigFrame extends JFrameExt
-{
+public class DatabaseConfigFrame extends JFrameExt {
     private static final long serialVersionUID = 1L;
     private static Dimension PERFECT_SIZE = new Dimension(800, 600);
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new DatabaseConfigFrame());
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel content = new JPanel(new BorderLayout());
         content.setPreferredSize(PERFECT_SIZE);
 

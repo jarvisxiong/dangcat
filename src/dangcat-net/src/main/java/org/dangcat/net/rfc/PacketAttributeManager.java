@@ -13,42 +13,36 @@ import java.util.Map;
 
 /**
  * 包属性管理。
+ *
  * @author dangcat
- * 
  */
-public class PacketAttributeManager
-{
+public class PacketAttributeManager {
     private Map<String, List<PacketVendorAttributeCollection>> packetAttributeMap = new HashMap<String, List<PacketVendorAttributeCollection>>();
     private PacketMetaInfo packetMetaInfo = null;
 
-    public PacketAttributeManager(PacketMetaInfo packetMetaInfo)
-    {
+    public PacketAttributeManager(PacketMetaInfo packetMetaInfo) {
         this.packetMetaInfo = packetMetaInfo;
     }
 
     /**
      * 根据厂商号和包类型收集属性模板。
-     * @param vendorId 厂商号。
+     *
+     * @param vendorId   厂商号。
      * @param packetType 包类型。
      * @return 所有用到的属性集合。
      */
-    public List<AttributeTemplate> getAttributeTemplates(Integer vendorId, String packetType)
-    {
+    public List<AttributeTemplate> getAttributeTemplates(Integer vendorId, String packetType) {
         List<AttributeTemplate> attributeTemplateList = null;
         VendorAttributeTemplateManager vendorAttributeTemplateManager = this.packetMetaInfo.getAttributeTemplateManager().getVendorAttributeTemplateManager(vendorId);
-        if (vendorAttributeTemplateManager != null)
-        {
+        if (vendorAttributeTemplateManager != null) {
             PacketRuleValidator packetRuleValidator = vendorAttributeTemplateManager.getPacketRuleValidator(packetType);
-            if (packetRuleValidator != null)
-            {
-                for (RuleValidator ruleValidator : packetRuleValidator)
-                {
+            if (packetRuleValidator != null) {
+                for (RuleValidator ruleValidator : packetRuleValidator) {
                     if (RuleValidator.MUSTNOT_PRESENT.equalsIgnoreCase(ruleValidator.getRuleType()))
                         continue;
 
                     AttributeTemplate attributeTemplate = vendorAttributeTemplateManager.getAttributeTemplate(ruleValidator.getName());
-                    if (attributeTemplate != null)
-                    {
+                    if (attributeTemplate != null) {
                         if (attributeTemplateList == null)
                             attributeTemplateList = new ArrayList<AttributeTemplate>();
                         attributeTemplateList.add(attributeTemplate);
@@ -61,21 +55,17 @@ public class PacketAttributeManager
 
     /**
      * 根据指定的包类型读取所有属性模板。
+     *
      * @param packetType 包类型。
      * @return 厂商属性集合。
      */
-    public List<PacketVendorAttributeCollection> getVendorPacketAttributeMap(String packetType)
-    {
+    public List<PacketVendorAttributeCollection> getVendorPacketAttributeMap(String packetType) {
         List<PacketVendorAttributeCollection> vendorPacketAttributeCollectionList = this.packetAttributeMap.get(packetType);
-        if (vendorPacketAttributeCollectionList == null)
-        {
-            for (Integer vendorId : VendorManager.getAllVendorId())
-            {
+        if (vendorPacketAttributeCollectionList == null) {
+            for (Integer vendorId : VendorManager.getAllVendorId()) {
                 List<AttributeTemplate> attributeTemplateList = getAttributeTemplates(vendorId, packetType);
-                if (attributeTemplateList != null)
-                {
-                    if (vendorPacketAttributeCollectionList == null)
-                    {
+                if (attributeTemplateList != null) {
+                    if (vendorPacketAttributeCollectionList == null) {
                         vendorPacketAttributeCollectionList = new ArrayList<PacketVendorAttributeCollection>();
                         this.packetAttributeMap.put(packetType, vendorPacketAttributeCollectionList);
                     }

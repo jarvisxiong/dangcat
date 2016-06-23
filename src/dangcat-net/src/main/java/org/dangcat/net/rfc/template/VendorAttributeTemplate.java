@@ -12,21 +12,20 @@ import java.io.IOException;
 
 /**
  * 二进制类型属性模板。
+ *
  * @author dangcat
- * 
  */
-public class VendorAttributeTemplate extends AttributeTemplate
-{
+public class VendorAttributeTemplate extends AttributeTemplate {
     private static final int VENDORID_MAXLENGTH = 4;
 
     /**
      * 在本基线模板上建立新的属性对象。
+     *
      * @param value 属性值。
      * @return 属性对象。
      */
     @Override
-    public AttributeData createAttribute(Object value)
-    {
+    public AttributeData createAttribute(Object value) {
         return value == null ? null : new VendorAttribute(this, (Integer) value);
     }
 
@@ -34,20 +33,19 @@ public class VendorAttributeTemplate extends AttributeTemplate
      * 属性类型。
      */
     @Override
-    public AttributeDataType getDataType()
-    {
+    public AttributeDataType getDataType() {
         return AttributeDataType.string;
     }
 
     /**
      * 转换成字节数组。
-     * @param outputStream 输出流对象。
+     *
+     * @param outputStream  输出流对象。
      * @param attributeData 属性值。
      * @return 转换后的字节。
      * @throws IOException
      */
-    protected void outputValue(ByteArrayOutputStream outputStream, AttributeData attributeData) throws IOException
-    {
+    protected void outputValue(ByteArrayOutputStream outputStream, AttributeData attributeData) throws IOException {
         VendorAttribute vendorAttribute = (VendorAttribute) attributeData;
         AttributeCollection attributeCollection = vendorAttribute.getAttributeCollection();
         byte[] vendorBytes = ParseUtils.toBytes(attributeCollection.getVendorId(), VENDORID_MAXLENGTH);
@@ -57,11 +55,11 @@ public class VendorAttributeTemplate extends AttributeTemplate
 
     /**
      * 由报文解析属性对象。
+     *
      * @throws ProtocolParseException
      */
     @Override
-    public AttributeData parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException
-    {
+    public AttributeData parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException {
         int vendorId = ParseUtils.getInt(bytes, beginIndex, VENDORID_MAXLENGTH);
         beginIndex += VENDORID_MAXLENGTH;
 

@@ -1,6 +1,5 @@
 package org.dangcat.boot.menus;
 
-public interface MenuData
-{
+public interface MenuData {
 
 }

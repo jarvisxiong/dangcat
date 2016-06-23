@@ -1,6 +1,5 @@
 package org.dangcat.framework.service.impl;
 
-public interface ServiceResourceProvider
-{
+public interface ServiceResourceProvider {
 
 }

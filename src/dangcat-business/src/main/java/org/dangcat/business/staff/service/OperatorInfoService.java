@@ -15,14 +15,14 @@ import java.util.Map;
 
 /**
  * The service interface for Operator.
+ *
  * @author dangcat
- * 
  */
 @JndiName(module = "Staff", name = "OperatorInfo")
-public interface OperatorInfoService
-{
+public interface OperatorInfoService {
     /**
      * 修改指定账号的密码。
+     *
      * @param orgPassword 原始密码。
      * @param newPassword 新密码。
      * @return 执行结果。
@@ -36,6 +36,7 @@ public interface OperatorInfoService
 
     /**
      * 新增实体数据。
+     *
      * @param operatorInfo 实体对象。
      * @return 运行结果。
      */
@@ -43,6 +44,7 @@ public interface OperatorInfoService
 
     /**
      * 删除指定条件的数据。
+     *
      * @param id 主键。
      * @return 执行结果。
      */
@@ -50,6 +52,7 @@ public interface OperatorInfoService
 
     /**
      * 查询指定条件的基本操作员信息。
+     *
      * @param operatorInfoFilter 查询条件。
      * @return 查询结果。
      */
@@ -57,6 +60,7 @@ public interface OperatorInfoService
 
     /**
      * 查询指定条件的数据。
+     *
      * @param operatorInfoFilter 查询条件。
      * @return 查询结果。
      */
@@ -64,7 +68,8 @@ public interface OperatorInfoService
 
     /**
      * 重置指定账号的密码。
-     * @param no 操作员账号。
+     *
+     * @param no       操作员账号。
      * @param password 新密码。
      * @return 执行结果。
      */
@@ -72,6 +77,7 @@ public interface OperatorInfoService
 
     /**
      * 保存实体数据。
+     *
      * @param operatorInfo 实体对象。
      * @return 运行结果。
      */
@@ -79,6 +85,7 @@ public interface OperatorInfoService
 
     /**
      * 查询指定条件的列表。
+     *
      * @param operatorInfoFilter 查询条件。
      * @return 查询结果。
      */
@@ -86,6 +93,7 @@ public interface OperatorInfoService
 
     /**
      * 查看指定主键的数据。
+     *
      * @param id 主键值。
      * @return 查看结果。
      */

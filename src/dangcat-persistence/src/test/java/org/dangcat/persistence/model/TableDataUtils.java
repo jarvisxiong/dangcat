@@ -7,17 +7,14 @@ import org.dangcat.persistence.simulate.TableSimulator;
 import org.dangcat.persistence.simulate.data.NumberSimulator;
 import org.dangcat.persistence.simulate.data.StringSimulator;
 
-public class TableDataUtils
-{
+public class TableDataUtils {
     private static TableSimulator tableSimulator = null;
 
-    public static void createTableData(Table table, int size) throws TableException
-    {
+    public static void createTableData(Table table, int size) throws TableException {
         getTableSimulator().create(table, size);
     }
 
-    public static void createTableSimulator()
-    {
+    public static void createTableSimulator() {
         TableSimulator tableSimulator = new TableSimulator(getTable());
         tableSimulator.initialize();
         // FieldA
@@ -33,20 +30,17 @@ public class TableDataUtils
         TableDataUtils.tableSimulator = tableSimulator;
     }
 
-    public static Table getTable()
-    {
+    public static Table getTable() {
         return EntityDataUtils.getTable();
     }
 
-    private static TableSimulator getTableSimulator()
-    {
+    private static TableSimulator getTableSimulator() {
         if (tableSimulator == null)
             createTableSimulator();
         return tableSimulator;
     }
 
-    public static void modifyTableData(Table table) throws TableException
-    {
+    public static void modifyTableData(Table table) throws TableException {
         getTableSimulator().modify(table);
     }
 }

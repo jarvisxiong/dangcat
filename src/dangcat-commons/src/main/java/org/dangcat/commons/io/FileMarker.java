@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class FileMarker
-{
+public class FileMarker {
     protected static final Logger logger = Logger.getLogger(FileMarker.class);
     private Class<?> classType = null;
     private Configuration configuration = null;
@@ -25,41 +24,32 @@ public class FileMarker
     private File templateDir = null;
     private String templateName = null;
 
-    public FileMarker(Class<?> classType)
-    {
+    public FileMarker(Class<?> classType) {
         this(classType, "");
     }
 
-    public FileMarker(Class<?> classType, String prefix)
-    {
+    public FileMarker(Class<?> classType, String prefix) {
         this.classType = classType;
         this.prefix = prefix;
     }
 
-    public FileMarker(File template)
-    {
-        if (template.isFile())
-        {
+    public FileMarker(File template) {
+        if (template.isFile()) {
             this.templateDir = template.getParentFile();
             this.templateName = template.getName();
-        }
-        else if (template.isDirectory())
+        } else if (template.isDirectory())
             this.templateDir = template;
     }
 
-    private Configuration getConfiguration() throws IOException
-    {
-        if (this.configuration == null)
-        {
+    private Configuration getConfiguration() throws IOException {
+        if (this.configuration == null) {
             Configuration configuration = new Configuration();
             configuration.setObjectWrapper(new DefaultObjectWrapper());
             configuration.setEncoding(this.getLocale(), this.getEncoding());
             if (this.classType != null)
                 configuration.setClassForTemplateLoading(classType, this.prefix);
-            else if (this.templateDir != null)
-            {
-                if (!this.templateDir.exists() || !this.templateDir.isDirectory())
-                {
+            else if (this.templateDir != null) {
+                if (!this.templateDir.exists() || !this.templateDir.isDirectory()) {
                     String error = "The template directory " + this.templateDir.getAbsolutePath() + " is invalid.";
                     logger.error(error);
                     throw new IOException(error);
@@ -71,13 +61,11 @@ public class FileMarker
         return this.configuration;
     }
 
-    public Map<String, Object> getDataMap()
-    {
+    public Map<String, Object> getDataMap() {
         return dataMap;
     }
 
-    public String getEncoding()
-    {
+    public String getEncoding() {
         return encoding;
     }
 
@@ -85,8 +73,7 @@ public class FileMarker
         this.encoding = encoding;
     }
 
-    public Locale getLocale()
-    {
+    public Locale getLocale() {
         return locale;
     }
 
@@ -94,57 +81,44 @@ public class FileMarker
         this.locale = locale;
     }
 
-    public void process(File outputFile) throws IOException
-    {
+    public void process(File outputFile) throws IOException {
         this.process(this.templateName, outputFile);
     }
 
-    public void process(OutputStream outputStream) throws IOException
-    {
+    public void process(OutputStream outputStream) throws IOException {
         this.process(this.templateName, outputStream);
     }
 
-    public void process(String name, File outputFile) throws IOException
-    {
+    public void process(String name, File outputFile) throws IOException {
         OutputStream outputStream = null;
-        try
-        {
+        try {
             outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
             this.process(name, outputStream);
-        }
-        finally
-        {
+        } finally {
             if (outputStream != null)
                 outputStream.close();
         }
     }
 
-    public void process(String name, OutputStream outputStream) throws IOException
-    {
-        try
-        {
+    public void process(String name, OutputStream outputStream) throws IOException {
+        try {
             Configuration configuration = this.getConfiguration();
-            if (configuration != null && !ValueUtils.isEmpty(name))
-            {
+            if (configuration != null && !ValueUtils.isEmpty(name)) {
                 Template template = configuration.getTemplate(name);
-                if (template != null)
-                {
+                if (template != null) {
                     template.setEncoding(this.getEncoding());
                     Writer writer = new OutputStreamWriter(outputStream, this.getEncoding());
                     template.process(this.dataMap, writer);
                     writer.flush();
                 }
             }
-        }
-        catch (TemplateException e)
-        {
+        } catch (TemplateException e) {
             logger.error(name, e);
             throw new IOException(e.getMessage());
         }
     }
 
-    public void putData(String name, Object value)
-    {
+    public void putData(String name, Object value) {
         this.dataMap.put(name, value);
     }
 }

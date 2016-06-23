@@ -5,20 +5,17 @@ import org.apache.commons.net.ftp.FTPFile;
 import java.io.File;
 import java.util.Collection;
 
-class FTPFileInfo
-{
+class FTPFileInfo {
     private Collection<FTPFileInfo> children = null;
     private FTPFile ftpFile = null;
     private File localFile = null;
     private FTPFileInfo parent = null;
 
-    FTPFileInfo(FTPFileInfo parent)
-    {
+    FTPFileInfo(FTPFileInfo parent) {
         this.parent = parent;
     }
 
-    protected Collection<FTPFileInfo> getChildren()
-    {
+    protected Collection<FTPFileInfo> getChildren() {
         return this.children;
     }
 
@@ -26,8 +23,7 @@ class FTPFileInfo
         this.children = children;
     }
 
-    protected FTPFile getFtpFile()
-    {
+    protected FTPFile getFtpFile() {
         return this.ftpFile;
     }
 
@@ -35,8 +31,7 @@ class FTPFileInfo
         this.ftpFile = ftpFile;
     }
 
-    protected File getLocalFile()
-    {
+    protected File getLocalFile() {
         return this.localFile;
     }
 
@@ -44,13 +39,11 @@ class FTPFileInfo
         this.localFile = localFile;
     }
 
-    protected FTPFileInfo getParent()
-    {
+    protected FTPFileInfo getParent() {
         return this.parent;
     }
 
-    protected String getRemotePath()
-    {
+    protected String getRemotePath() {
         StringBuilder info = new StringBuilder();
         if (this.parent != null)
             info.append(this.getParent().getRemotePath());

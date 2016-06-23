@@ -4,18 +4,14 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LoggingEvent;
 
-public class CallbackAppender extends AppenderSkeleton
-{
+public class CallbackAppender extends AppenderSkeleton {
     private LogCallback[] logCallbacks = null;
 
-    public synchronized void addLogCallback(LogCallback logCallback)
-    {
-        if (logCallback != null)
-        {
+    public synchronized void addLogCallback(LogCallback logCallback) {
+        if (logCallback != null) {
             if (this.logCallbacks == null)
-                this.logCallbacks = new LogCallback[] { logCallback };
-            else
-            {
+                this.logCallbacks = new LogCallback[]{logCallback};
+            else {
                 LogCallback[] logCallbacks = new LogCallback[this.logCallbacks.length + 1];
                 for (int i = 0; i < this.logCallbacks.length; i++)
                     logCallbacks[i] = this.logCallbacks[i];
@@ -26,30 +22,23 @@ public class CallbackAppender extends AppenderSkeleton
     }
 
     @Override
-    protected void append(LoggingEvent loggingEvent)
-    {
-        try
-        {
+    protected void append(LoggingEvent loggingEvent) {
+        try {
             String message = this.getLayout().format(loggingEvent);
-            if (this.logCallbacks != null && this.logCallbacks.length > 0)
-            {
-                for (LogCallback logCallback : this.logCallbacks)
-                {
+            if (this.logCallbacks != null && this.logCallbacks.length > 0) {
+                for (LogCallback logCallback : this.logCallbacks) {
                     if (Level.DEBUG.equals(loggingEvent.getLevel()))
                         logCallback.debug(message);
                     else if (Level.WARN.equals(loggingEvent.getLevel()))
                         logCallback.warn(message);
                     else if (Level.INFO.equals(loggingEvent.getLevel()))
                         logCallback.info(message);
-                    else if (Level.FATAL.equals(loggingEvent.getLevel()) || Level.ERROR.equals(loggingEvent.getLevel()))
-                    {
+                    else if (Level.FATAL.equals(loggingEvent.getLevel()) || Level.ERROR.equals(loggingEvent.getLevel())) {
                         StringBuilder text = new StringBuilder();
                         text.append(message);
                         String[] errors = loggingEvent.getThrowableStrRep();
-                        if (errors != null && errors.length > 0)
-                        {
-                            for (int i = 0; i < errors.length; i++)
-                            {
+                        if (errors != null && errors.length > 0) {
+                            for (int i = 0; i < errors.length; i++) {
                                 if (i > 0)
                                     text.append("\r\n");
                                 text.append(errors[i]);
@@ -64,21 +53,17 @@ public class CallbackAppender extends AppenderSkeleton
                     }
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void close()
-    {
+    public void close() {
     }
 
     @Override
-    public boolean requiresLayout()
-    {
+    public boolean requiresLayout() {
         return true;
     }
 }

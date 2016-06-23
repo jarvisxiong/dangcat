@@ -5,24 +5,20 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.io.File;
 
-public class ImagePanelDemo extends JFrameExt
-{
+public class ImagePanelDemo extends JFrameExt {
     private static final long serialVersionUID = 1L;
     private static Dimension PERFECT_SIZE = new Dimension(400, 300);
 
-    public ImagePanelDemo()
-    {
+    public ImagePanelDemo() {
         super(ImagePanelDemo.class.getSimpleName());
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         show(new ImagePanelDemo());
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel contentPane = new JPanel();
         contentPane.setPreferredSize(PERFECT_SIZE);
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));

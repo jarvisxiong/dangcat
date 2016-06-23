@@ -11,22 +11,24 @@ import java.util.List;
 
 /**
  * 服务对象解析器。
+ *
  * @author dangcat
- * 
  */
-public class ServicesXmlResolver extends XmlResolver
-{
+public class ServicesXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Services";
-    /** 拦截器配置。 */
+    /**
+     * 拦截器配置。
+     */
     private Collection<Class<?>> interceptors = new LinkedHashSet<Class<?>>();
-    /** 配置的子服务列表。 */
+    /**
+     * 配置的子服务列表。
+     */
     private List<ServiceInfo> serviceInfos = new LinkedList<ServiceInfo>();
 
     /**
      * 构建解析器。
      */
-    public ServicesXmlResolver()
-    {
+    public ServicesXmlResolver() {
         super(RESOLVER_NAME);
         this.addChildXmlResolver(new ServiceXmlResolver());
         this.addChildXmlResolver(new InterceptorsXmlResolver());
@@ -34,52 +36,47 @@ public class ServicesXmlResolver extends XmlResolver
 
     /**
      * 产生子元素对象。
+     *
      * @param elementName 子元素名称。
-     * @param child 子元素对象。
+     * @param child       子元素对象。
      */
     @Override
-    protected void afterChildCreate(String elementName, Object child)
-    {
+    protected void afterChildCreate(String elementName, Object child) {
         if (child instanceof ServiceInfo)
             this.serviceInfos.add((ServiceInfo) child);
     }
 
     /**
      * 解析子元素之前。
-     * @param name 属性名称。
+     *
+     * @param name        属性名称。
      * @param xmlResolver 解析器。
      */
     @Override
-    protected void beforeChildResolve(String elementName, XmlResolver xmlResolver)
-    {
+    protected void beforeChildResolve(String elementName, XmlResolver xmlResolver) {
         if (InterceptorsXmlResolver.RESOLVER_NAME.equalsIgnoreCase(xmlResolver.getName()))
             xmlResolver.setResolveObject(this.getInterceptors());
     }
 
-    public Collection<Class<?>> getInterceptors()
-    {
+    public Collection<Class<?>> getInterceptors() {
         return this.interceptors;
     }
 
-    public List<ServiceInfo> getServiceInfos()
-    {
+    public List<ServiceInfo> getServiceInfos() {
         return this.serviceInfos;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Services: ");
-        for (ServiceInfo serviceInfo : this.serviceInfos)
-        {
+        for (ServiceInfo serviceInfo : this.serviceInfos) {
             info.append(Environment.LINETAB_SEPARATOR);
             info.append(serviceInfo);
         }
         info.append(Environment.LINE_SEPARATOR);
         info.append("Interceptors: ");
-        for (Class<?> interceptor : this.interceptors)
-        {
+        for (Class<?> interceptor : this.interceptors) {
             info.append(Environment.LINETAB_SEPARATOR);
             info.append(interceptor.getName());
         }

@@ -13,17 +13,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-public abstract class ChartDemoBase extends JFrameExt
-{
+public abstract class ChartDemoBase extends JFrameExt {
     private static final long serialVersionUID = 1L;
 
-    public ChartDemoBase(String title)
-    {
+    public ChartDemoBase(String title) {
         super(title);
     }
 
-    protected JPanel createChartPanel(JFreeChart chart)
-    {
+    protected JPanel createChartPanel(JFreeChart chart) {
         ChartPanel panel = new ChartPanel(chart);
         panel.setLayout(new LCBLayout(20));
         panel.setPreferredSize(new Dimension(700, 450));
@@ -32,8 +29,7 @@ public abstract class ChartDemoBase extends JFrameExt
     }
 
     @Override
-    protected Container createContentPane()
-    {
+    protected Container createContentPane() {
         JPanel content = new JPanel(new BorderLayout());
         JTabbedPane tabbedPane = new JTabbedPane();
         this.createTabbedPane(tabbedPane);
@@ -43,36 +39,28 @@ public abstract class ChartDemoBase extends JFrameExt
 
     protected abstract void createTabbedPane(JTabbedPane tabbedPane);
 
-    protected void initTimeChart(TimeChart timeChart, Date beginTime, Date endTime)
-    {
+    protected void initTimeChart(TimeChart timeChart, Date beginTime, Date endTime) {
         timeChart.setBeginTime(beginTime);
         timeChart.setEndTime(endTime);
         timeChart.setTimeStep(300);
     }
 
-    protected void renderFile(ChartBase chartBase, String name)
-    {
+    protected void renderFile(ChartBase chartBase, String name) {
         chartBase.setImageMapId(name + "_ImagMap");
 
         File imgFile = new File("./log/" + name + ".jpg");
-        try
-        {
+        try {
             chartBase.render(imgFile);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         File imgMapFile = new File("./log/" + name + ".txt");
-        try
-        {
+        try {
             PrintWriter printWriter = new PrintWriter(imgMapFile);
             printWriter.print(chartBase.getImageMap());
             printWriter.close();
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

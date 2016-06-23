@@ -2,27 +2,22 @@ package org.dangcat.install.module;
 
 import java.io.File;
 
-public abstract class InstallModuleBase extends ProcessModuleBase
-{
+public abstract class InstallModuleBase extends ProcessModuleBase {
     private String targetDir = null;
 
-    public InstallModuleBase(String name, String title)
-    {
+    public InstallModuleBase(String name, String title) {
         super(name, title);
     }
 
-    public String getInstallShellDir()
-    {
+    public String getInstallShellDir() {
         return this.getTargetDir() + File.separator + this.getName();
     }
 
-    public String getTargetDir()
-    {
+    public String getTargetDir() {
         return this.targetDir;
     }
 
-    public void setTargetDir(String targetDir)
-    {
+    public void setTargetDir(String targetDir) {
         this.targetDir = targetDir;
     }
 }

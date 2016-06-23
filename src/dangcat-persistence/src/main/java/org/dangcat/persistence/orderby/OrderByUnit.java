@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 /**
  * ÅÅÐòµ¥Ôª¡£
+ *
  * @author dangcat
- * 
  */
-public class OrderByUnit implements Serializable, Comparable<OrderByUnit>
-{
+public class OrderByUnit implements Serializable, Comparable<OrderByUnit> {
     private static final long serialVersionUID = 1L;
     /**
      * ×Ö¶ÎÃû³Æ¡£
@@ -29,83 +28,69 @@ public class OrderByUnit implements Serializable, Comparable<OrderByUnit>
      */
     private OrderByType orderByType = OrderByType.Asc;
 
-    public OrderByUnit(String fieldName)
-    {
+    public OrderByUnit(String fieldName) {
         this.fieldName = fieldName;
         this.formula = null;
     }
 
-    public OrderByUnit(String fieldName, OrderByType orderByType)
-    {
+    public OrderByUnit(String fieldName, OrderByType orderByType) {
         this(fieldName, orderByType, 0);
     }
 
-    public OrderByUnit(String fieldName, OrderByType orderByType, int index)
-    {
+    public OrderByUnit(String fieldName, OrderByType orderByType, int index) {
         this.fieldName = fieldName;
         this.orderByType = orderByType;
         this.formula = null;
         this.index = index;
     }
 
-    public OrderByUnit(String fieldName, String formula, OrderByType orderByType)
-    {
+    public OrderByUnit(String fieldName, String formula, OrderByType orderByType) {
         this.fieldName = fieldName;
         this.orderByType = orderByType;
         this.formula = formula;
     }
 
     @Override
-    public int compareTo(OrderByUnit orderByUnit)
-    {
+    public int compareTo(OrderByUnit orderByUnit) {
         return this.index - orderByUnit.getIndex();
     }
 
-    public String getFieldName()
-    {
+    public String getFieldName() {
         return fieldName;
     }
 
-    public void setFieldName(String fieldName)
-    {
+    public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
     }
 
-    public String getFormula()
-    {
+    public String getFormula() {
         return formula;
     }
 
-    public void setFormula(String formula)
-    {
+    public void setFormula(String formula) {
         this.formula = formula;
     }
 
-    public int getIndex()
-    {
+    public int getIndex() {
         return index;
     }
 
-    public void setIndex(int index)
-    {
+    public void setIndex(int index) {
         this.index = index;
     }
 
-    public OrderByType getOrderByType()
-    {
+    public OrderByType getOrderByType() {
         return orderByType;
     }
 
-    public void setOrderByType(OrderByType orderByType)
-    {
+    public void setOrderByType(OrderByType orderByType) {
         this.orderByType = orderByType;
     }
 
     /**
      * ×ª»»ÅÅÐòÓï¾ä¡£
      */
-    public String toString()
-    {
+    public String toString() {
         String formula = this.getFormula();
         if (formula == null || formula.equals(""))
             formula = this.getFieldName();

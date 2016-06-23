@@ -4,11 +4,10 @@ import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
  * 结算单元。
+ *
  * @author dangcat
- * 
  */
-public interface SettleUnit
-{
+public interface SettleUnit {
     /**
      * 结算类型。
      */
@@ -21,7 +20,8 @@ public interface SettleUnit
 
     /**
      * 合并数据。
-     * @param srcEntity 来源数据。
+     *
+     * @param srcEntity  来源数据。
      * @param destEntity 目标数据。
      */
     void merge(Object srcEntity, Object destEntity);

@@ -6,42 +6,33 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 
-public class TCPSenderTester
-{
+public class TCPSenderTester {
     private static final int PORT = 1541;
     private static File inputFile = new File("E:\\Setup\\database\\Oracle\\Tools\\sqldeveloper-2.1.0.63.73-no-jre.zip");
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         new TCPSenderTester().run();
     }
 
-    private byte[] getData()
-    {
+    private byte[] getData() {
         byte[] data = null;
-        try
-        {
+        try {
             BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(inputFile));
             int length = bufferedInputStream.available();
-            if (length > 0)
-            {
+            if (length > 0) {
                 data = new byte[length];
                 bufferedInputStream.read(data);
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return data;
     }
 
-    private void run() throws Exception
-    {
+    private void run() throws Exception {
         byte[] dataBuffer = this.getData();
-        if (dataBuffer != null && dataBuffer.length > 0)
-        {
+        if (dataBuffer != null && dataBuffer.length > 0) {
             TCPSender tcpSender = new TCPSender();
             InetAddress inetAddress = InetAddress.getLocalHost();
             tcpSender.send(inetAddress, PORT, dataBuffer);

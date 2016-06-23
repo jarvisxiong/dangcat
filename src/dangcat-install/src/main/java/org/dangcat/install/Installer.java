@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public abstract class Installer
-{
+public abstract class Installer {
     private static final String INSTALL = "install";
     private static final String RUNAS = "runAs";
     private static final String SERVICE_DISPLAYNAME = "serviceDisplayName";
@@ -27,18 +26,15 @@ public abstract class Installer
     private OutputStream outputStream = null;
     private Map<String, Object> params = new HashMap<String, Object>();
 
-    public Installer()
-    {
+    public Installer() {
         this.setRunAs(System.getProperty("user.name"));
     }
 
-    public void cancel()
-    {
+    public void cancel() {
         this.cancel = true;
     }
 
-    protected void execute(File exeFile, String... params)
-    {
+    protected void execute(File exeFile, String... params) {
         CommandExecutor commandExecutor = new CommandExecutor();
         commandExecutor.setLogger(this.getLogger());
         commandExecutor.setOutputStream(this.getOutputStream());
@@ -46,13 +42,11 @@ public abstract class Installer
         commandExecutor.exec(params);
     }
 
-    public boolean exists()
-    {
+    public boolean exists() {
         return SystemServiceUtils.exists(this.getServiceDisplayName());
     }
 
-    public Logger getLogger()
-    {
+    public Logger getLogger() {
         return this.logger;
     }
 
@@ -60,8 +54,7 @@ public abstract class Installer
         this.logger = logger;
     }
 
-    public OutputStream getOutputStream()
-    {
+    public OutputStream getOutputStream() {
         return this.outputStream;
     }
 
@@ -69,13 +62,11 @@ public abstract class Installer
         this.outputStream = outputStream;
     }
 
-    public Map<String, Object> getParams()
-    {
+    public Map<String, Object> getParams() {
         return this.params;
     }
 
-    public String getRunAs()
-    {
+    public String getRunAs() {
         return (String) this.params.get(RUNAS);
     }
 
@@ -83,8 +74,7 @@ public abstract class Installer
         this.params.put(RUNAS, runAs);
     }
 
-    public String getServiceDisplayName()
-    {
+    public String getServiceDisplayName() {
         String serviceDisplayName = (String) this.params.get(SERVICE_DISPLAYNAME);
         return ValueUtils.isEmpty(serviceDisplayName) ? this.getServiceName() : serviceDisplayName;
     }
@@ -95,8 +85,7 @@ public abstract class Installer
 
     protected abstract File getServiceFile();
 
-    public String getServiceName()
-    {
+    public String getServiceName() {
         return (String) this.params.get(SERVICE_NAME);
     }
 
@@ -104,75 +93,60 @@ public abstract class Installer
         this.params.put(SERVICE_NAME, serviceName);
     }
 
-    protected String getText(String key, Object... params)
-    {
+    protected String getText(String key, Object... params) {
         return ResourceUtils.getText(this.getClass(), key, params);
     }
 
-    public void install()
-    {
+    public void install() {
         if (this.exists())
             this.logService("service.exists");
-        else
-        {
+        else {
             this.logService("service.install");
             this.execute(this.getServiceFile(), INSTALL);
         }
     }
 
-    public boolean isCancel()
-    {
+    public boolean isCancel() {
         return this.cancel;
     }
 
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return SystemServiceUtils.isRunning(this.getServiceDisplayName());
     }
 
-    protected void log(String key, String name, Object... params)
-    {
+    protected void log(String key, String name, Object... params) {
         Collection<Object> paramCollection = new LinkedList<Object>();
         paramCollection.add(name);
-        if (params != null && params.length > 0)
-        {
+        if (params != null && params.length > 0) {
             for (Object param : params)
                 paramCollection.add(param);
         }
         this.logger.info(this.getText(key, paramCollection.toArray()));
     }
 
-    protected void logService(String key, Object... params)
-    {
+    protected void logService(String key, Object... params) {
         this.log(key, this.getServiceName(), params);
     }
 
-    public void prepare()
-    {
+    public void prepare() {
     }
 
-    public void start()
-    {
-        if (this.exists())
-        {
+    public void start() {
+        if (this.exists()) {
             this.logService("service.start");
             this.execute(this.getServiceFile(), START);
         }
     }
 
-    public void stop()
-    {
-        if (this.exists() && this.isRunning())
-        {
+    public void stop() {
+        if (this.exists() && this.isRunning()) {
             this.logService("service.stop");
             this.execute(this.getServiceFile(), STOP);
         }
     }
 
-    public void uninstall()
-    {
-        if (this.exists())
-        {
+    public void uninstall() {
+        if (this.exists()) {
             this.logService("service.uninstall");
             this.execute(this.getServiceFile(), UNINSTALL);
         }

@@ -11,20 +11,17 @@ import java.net.SocketAddress;
 
 /**
  * UDP报文端口侦听。
+ *
  * @author fanst174766
- * 
  */
-public class TCPListener extends NetListener
-{
+public class TCPListener extends NetListener {
     private ServerSocket serverSocket;
 
-    public TCPListener(String serviceName, Integer port, DatagramReceiveListener datagramReceiveListener)
-    {
+    public TCPListener(String serviceName, Integer port, DatagramReceiveListener datagramReceiveListener) {
         super(serviceName, port, datagramReceiveListener);
     }
 
-    private SocketAddress getServerBindAddress()
-    {
+    private SocketAddress getServerBindAddress() {
         SocketAddress socketAddress = null;
         if (this.getBindAddress() != null)
             socketAddress = new InetSocketAddress(this.getBindAddress(), this.getPort());
@@ -32,34 +29,26 @@ public class TCPListener extends NetListener
     }
 
     @Override
-    protected void innerRun() throws IOException
-    {
+    protected void innerRun() throws IOException {
         Socket socket = this.serverSocket.accept();
         new SocketListenHandler(socket, this.getDatagramReceiveListener()).start();
     }
 
     @Override
-    public void innerStartListener() throws IOException
-    {
+    public void innerStartListener() throws IOException {
         ServerSocket serverSocket = null;
-        try
-        {
+        try {
             serverSocket = new ServerSocket(this.getPort());
             SocketAddress serverBindAddress = this.getServerBindAddress();
             if (serverBindAddress != null)
                 serverSocket.bind(serverBindAddress);
             serverSocket.setSoTimeout(this.getSoTimeout());
             this.serverSocket = serverSocket;
-        }
-        catch (IOException e)
-        {
-            try
-            {
+        } catch (IOException e) {
+            try {
                 if (serverSocket != null)
                     serverSocket.close();
-            }
-            catch (IOException e1)
-            {
+            } catch (IOException e1) {
             }
             throw e;
         }
@@ -69,15 +58,11 @@ public class TCPListener extends NetListener
      * 停止侦听线程。
      */
     @Override
-    protected void innerStopListener()
-    {
-        try
-        {
+    protected void innerStopListener() {
+        try {
             if (this.serverSocket != null)
                 this.serverSocket.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
         }
         this.serverSocket = null;
     }

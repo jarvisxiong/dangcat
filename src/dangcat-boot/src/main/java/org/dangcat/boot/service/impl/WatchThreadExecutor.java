@@ -14,37 +14,53 @@ import java.util.concurrent.Future;
 
 /**
  * 监控线程服务。
- * 
  */
-public class WatchThreadExecutor extends ServiceControlBase implements Runnable
-{
+public class WatchThreadExecutor extends ServiceControlBase implements Runnable {
     public static final Logger logger = Logger.getLogger(WatchThreadExecutor.class);
     private static final String SERVICE_NAME = "WatchExecutor";
     private static WatchThreadExecutor instance = null;
-    /** 自动启动和关闭 */
+    /**
+     * 自动启动和关闭
+     */
     private boolean autoRun = true;
-    /** core pool size */
+    /**
+     * core pool size
+     */
     private int corePoolSize = 10;
-    /** Maximum pool size */
+    /**
+     * Maximum pool size
+     */
     private int maximumPoolSize = 10;
-    /** Queuw capcacity */
+    /**
+     * Queuw capcacity
+     */
     private int queueCapacity = 10000;
-    /** 线程池 */
+    /**
+     * 线程池
+     */
     private ThreadPoolExecutor threadPoolExecutor = null;
-    /** 处于阻塞的任务队列。 */
+    /**
+     * 处于阻塞的任务队列。
+     */
     private Timer timer = null;
-    /** 检查周期 */
+    /**
+     * 检查周期
+     */
     private int watchInterval = 1000;
-    /** 观察执行列表。 */
+    /**
+     * 观察执行列表。
+     */
     private Collection<WatchUnit> watchRunnables = new HashSet<WatchUnit>();
-    /** 处于阻塞的任务队列。 */
+    /**
+     * 处于阻塞的任务队列。
+     */
     private BlockingQueue<Runnable> workQueue = null;
-    private WatchThreadExecutor()
-    {
+
+    private WatchThreadExecutor() {
         this(null);
     }
-    private WatchThreadExecutor(ServiceProvider parent)
-    {
+
+    private WatchThreadExecutor(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
@@ -62,22 +78,17 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
         return instance;
     }
 
-    private void clearTask()
-    {
-        synchronized (this.watchRunnables)
-        {
-            for (WatchUnit watchUnit : this.watchRunnables)
-            {
-                synchronized (watchUnit)
-                {
+    private void clearTask() {
+        synchronized (this.watchRunnables) {
+            for (WatchUnit watchUnit : this.watchRunnables) {
+                synchronized (watchUnit) {
                     watchUnit.notifyAll();
                 }
             }
         }
     }
 
-    public int getCorePoolSize()
-    {
+    public int getCorePoolSize() {
         return this.corePoolSize;
     }
 
@@ -87,8 +98,7 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
             this.threadPoolExecutor.setCorePoolSize(corePoolSize);
     }
 
-    public int getMaximumPoolSize()
-    {
+    public int getMaximumPoolSize() {
         return this.maximumPoolSize;
     }
 
@@ -98,8 +108,7 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
             this.threadPoolExecutor.setMaximumPoolSize(maximumPoolSize);
     }
 
-    public int getQueueCapacity()
-    {
+    public int getQueueCapacity() {
         return this.queueCapacity;
     }
 
@@ -107,8 +116,7 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
         this.queueCapacity = queueCapacity;
     }
 
-    public int getWatchInterval()
-    {
+    public int getWatchInterval() {
         return this.watchInterval;
     }
 
@@ -116,13 +124,11 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
         this.watchInterval = watchInterval;
     }
 
-    public boolean isActive()
-    {
+    public boolean isActive() {
         return !this.watchRunnables.isEmpty() || this.threadPoolExecutor != null && this.threadPoolExecutor.getActiveCount() > 0;
     }
 
-    public boolean isAutoRun()
-    {
+    public boolean isAutoRun() {
         return this.autoRun;
     }
 
@@ -131,28 +137,22 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         WatchUnit[] watchUnits = null;
-        synchronized (this.watchRunnables)
-        {
+        synchronized (this.watchRunnables) {
             if (!this.watchRunnables.isEmpty())
                 watchUnits = this.watchRunnables.toArray(new WatchUnit[0]);
         }
-        if (watchUnits != null)
-        {
-            for (WatchUnit watchUnit : watchUnits)
-            {
+        if (watchUnits != null) {
+            for (WatchUnit watchUnit : watchUnits) {
                 if (watchUnit.isDone())
                     watchUnit.done();
                 else if (watchUnit.isTimeOut())
                     watchUnit.terminate();
             }
         }
-        if (this.isAutoRun())
-        {
-            synchronized (this.watchRunnables)
-            {
+        if (this.isAutoRun()) {
+            synchronized (this.watchRunnables) {
                 if (!this.isActive())
                     this.stopService();
             }
@@ -160,10 +160,8 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
     }
 
     @Override
-    public void start()
-    {
-        if (!this.isRunning())
-        {
+    public void start() {
+        if (!this.isRunning()) {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to start the " + this.getClass().getSimpleName());
 
@@ -172,8 +170,7 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
             if (this.threadPoolExecutor == null)
                 this.threadPoolExecutor = new ThreadPoolExecutor(this.getCorePoolSize(), this.getMaximumPoolSize(), SERVICE_NAME, this.workQueue);
             // 监控定时器。
-            if (this.timer == null)
-            {
+            if (this.timer == null) {
                 this.timer = new Timer(SERVICE_NAME + "-Timer", this, this.getWatchInterval(), this.getWatchInterval());
                 this.timer.start();
             }
@@ -185,16 +182,13 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
     }
 
     @Override
-    public void stop()
-    {
+    public void stop() {
         this.stopService();
         this.clearTask();
     }
 
-    private void stopService()
-    {
-        if (this.isRunning())
-        {
+    private void stopService() {
+        if (this.isRunning()) {
             if (logger.isDebugEnabled())
                 logger.debug("Begin to stop the " + this.getClass().getSimpleName());
 
@@ -214,35 +208,27 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
         }
     }
 
-    public Object submit(WatchRunnable watchRunnable)
-    {
+    public Object submit(WatchRunnable watchRunnable) {
         if (logger.isDebugEnabled())
             logger.debug("Begin to submit the " + watchRunnable);
         WatchUnit watchUnit = new WatchUnit(watchRunnable);
-        try
-        {
-            if (this.isAutoRun() || this.isRunning())
-            {
-                synchronized (this.watchRunnables)
-                {
+        try {
+            if (this.isAutoRun() || this.isRunning()) {
+                synchronized (this.watchRunnables) {
                     this.watchRunnables.add(watchUnit);
                     if (this.isAutoRun())
                         this.start();
                 }
             }
-            if (this.isRunning())
-            {
+            if (this.isRunning()) {
                 Future<?> future = this.threadPoolExecutor.submit(watchUnit);
                 watchUnit.setFuture(future);
-                synchronized (watchUnit)
-                {
+                synchronized (watchUnit) {
                     if (!watchUnit.isDone())
                         watchUnit.wait();
                 }
             }
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             Logger logger = watchUnit.getLogger();
             if (logger == null)
                 logger = WatchThreadExecutor.logger;
@@ -250,11 +236,8 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable
                 logger.error(watchRunnable, e);
             else
                 logger.error(watchRunnable.toString() + " execute error : " + e);
-        }
-        finally
-        {
-            synchronized (this.watchRunnables)
-            {
+        } finally {
+            synchronized (this.watchRunnables) {
                 this.watchRunnables.remove(watchUnit);
             }
             if (logger.isDebugEnabled())

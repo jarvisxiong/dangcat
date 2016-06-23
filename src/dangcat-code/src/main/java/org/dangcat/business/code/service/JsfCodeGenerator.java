@@ -6,10 +6,8 @@ import org.dangcat.commons.io.FileUtils;
 
 import java.io.File;
 
-public class JsfCodeGenerator extends DirectoryCodeGenerator
-{
-    public JsfCodeGenerator(String moduleName, String jndiName)
-    {
+public class JsfCodeGenerator extends DirectoryCodeGenerator {
+    public JsfCodeGenerator(String moduleName, String jndiName) {
         String outputFile = "main" + File.separator + "webapp" + File.separator + "Modules";
         outputFile += File.separator + moduleName;
         outputFile += File.separator + jndiName;

@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceXml
-{
+public @interface ServiceXml {
     String value() default "";
 }

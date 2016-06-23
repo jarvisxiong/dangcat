@@ -5,8 +5,7 @@ import org.dangcat.install.swing.ToolBarPanel;
 import java.awt.event.KeyEvent;
 
 
-public class ConfigToolBar extends ToolBarPanel
-{
+public class ConfigToolBar extends ToolBarPanel {
     public static final String CHANGED = "Changed";
     public static final String SAVE = "save";
     private static final String NEXT = "next";
@@ -14,8 +13,7 @@ public class ConfigToolBar extends ToolBarPanel
     private static final long serialVersionUID = 1L;
 
     @Override
-    public void checkButtonStates()
-    {
+    public void checkButtonStates() {
         Boolean isBof = (Boolean) this.getState("Bof");
         this.setEnabled(PRIOR, isBof != null && !isBof);
         Boolean isEof = (Boolean) this.getState("Eof");
@@ -30,8 +28,7 @@ public class ConfigToolBar extends ToolBarPanel
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.addButton(PRIOR, KeyEvent.VK_P, "P");
         this.addButton(NEXT, KeyEvent.VK_N, "N");
         this.addSeparator(40);

@@ -9,29 +9,25 @@ import org.jfree.ui.RectangleInsets;
 
 import java.awt.*;
 
-public class CustomChartTheme extends StandardChartTheme
-{
+public class CustomChartTheme extends StandardChartTheme {
     private static final long serialVersionUID = 1L;
-    public static Color[] COLORS = { new Color(31, 129, 188), new Color(92, 92, 97), new Color(144, 237, 125), new Color(255, 188, 117), new Color(153, 158, 255), new Color(255, 117, 153),
-            new Color(253, 236, 109), new Color(128, 133, 232), new Color(158, 90, 102), new Color(255, 204, 102) };
+    public static Color[] COLORS = {new Color(31, 129, 188), new Color(92, 92, 97), new Color(144, 237, 125), new Color(255, 188, 117), new Color(153, 158, 255), new Color(255, 117, 153),
+            new Color(253, 236, 109), new Color(128, 133, 232), new Color(158, 90, 102), new Color(255, 204, 102)};
     private Font defaultFont = new Font("宋体", Font.PLAIN, 12);
 
-    private Paint[] outLinePaintSequence = new Paint[] { Color.WHITE };
+    private Paint[] outLinePaintSequence = new Paint[]{Color.WHITE};
 
-    public CustomChartTheme(String name)
-    {
+    public CustomChartTheme(String name) {
         super(name);
         this.initialize();
     }
 
-    public DefaultDrawingSupplier getDefaultDrawingSupplier()
-    {
+    public DefaultDrawingSupplier getDefaultDrawingSupplier() {
         return new DefaultDrawingSupplier(COLORS, COLORS, outLinePaintSequence, DefaultDrawingSupplier.DEFAULT_STROKE_SEQUENCE, DefaultDrawingSupplier.DEFAULT_OUTLINE_STROKE_SEQUENCE,
                 DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE);
     }
 
-    public Font getDefaultFont()
-    {
+    public Font getDefaultFont() {
         return defaultFont;
     }
 
@@ -39,8 +35,7 @@ public class CustomChartTheme extends StandardChartTheme
         this.defaultFont = defaultFont;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         // 设置标题字体
         this.setExtraLargeFont(this.getDefaultFont());
         // 设置图例的字体

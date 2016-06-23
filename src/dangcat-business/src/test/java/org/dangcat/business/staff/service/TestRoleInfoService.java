@@ -31,16 +31,14 @@ import java.util.List;
 
 /**
  * The service test for Role
+ *
  * @author dangcat
- * 
  */
-public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService, RoleBasic, RoleInfo, RoleInfoFilter>
-{
+public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService, RoleBasic, RoleInfo, RoleInfoFilter> {
     private static final int TEST_COUNT = 100;
 
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new RolePermissionSimulator(), 0);
         databaseSimulator.add(new RoleInfoSimulator(), TEST_COUNT);
         databaseSimulator.add(new OperatorInfoSimulator(), TEST_COUNT);
@@ -48,8 +46,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         System.setProperty(ConfigureReader.KEY_SYSTEM_ID, "10");
         // 添加要测试的服务。
         this.addService(RoleInfoService.class, RoleInfoServiceImpl.class);
@@ -58,21 +55,18 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testDefaultNew() throws ServiceException
-    {
+    public void testDefaultNew() throws ServiceException {
         RoleInfo roleInfo = new RoleInfo();
         this.testDefaultNew(RoleInfo.class, roleInfo);
     }
 
     @Test
-    public void testDelete() throws ServiceException
-    {
+    public void testDelete() throws ServiceException {
         this.testDelete(RoleInfo.class, TEST_COUNT);
     }
 
     @Test
-    public void testDeleteRoleWithOperator() throws ServiceException
-    {
+    public void testDeleteRoleWithOperator() throws ServiceException {
         // 测试删除已经绑定操作员的操作组
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
@@ -86,15 +80,13 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testFilter() throws ServiceException
-    {
+    public void testFilter() throws ServiceException {
         TestServiceQuery<RoleBasic, RoleInfo, RoleInfoFilter> testServiceQuery = new TestServiceQuery<RoleBasic, RoleInfo, RoleInfoFilter>(this.getBusinessService());
         QueryAssert<RoleInfoFilter> queryAssert = new QueryAssert<RoleInfoFilter>(RoleBasic.class);
         RoleInfoFilter roleInfoFilter = new RoleInfoFilter();
         queryAssert.setDataFilter(roleInfoFilter);
 
-        for (Object entity : this.loadSamples(RoleInfo.class))
-        {
+        for (Object entity : this.loadSamples(RoleInfo.class)) {
             RoleInfo roleInfo = (RoleInfo) entity;
             roleInfoFilter.setName(roleInfo.getName());
             queryAssert.setExpectFilterExpress(new FilterUnit(RoleInfo.Name, FilterType.like, roleInfo.getName()));
@@ -104,8 +96,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testQuery() throws ServiceException
-    {
+    public void testQuery() throws ServiceException {
         TestServiceQuery<RoleBasic, RoleInfo, RoleInfoFilter> testServiceQuery = new TestServiceQuery<RoleBasic, RoleInfo, RoleInfoFilter>(this.getBusinessService());
         QueryAssert<RoleInfoFilter> queryAssert = new QueryAssert<RoleInfoFilter>(RoleBasic.class);
         queryAssert.setDataFilter(new RoleInfoFilter());
@@ -114,14 +105,12 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testSave() throws ServiceException
-    {
+    public void testSave() throws ServiceException {
         this.testSave(RoleInfo.class, TEST_COUNT);
     }
 
     @Test
-    public void testSaveRoleNameRepeat() throws ServiceException
-    {
+    public void testSaveRoleNameRepeat() throws ServiceException {
         // 操作员组的名称不能重复。
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo1 = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
@@ -142,8 +131,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testSaveRoleNotExists() throws ServiceException
-    {
+    public void testSaveRoleNotExists() throws ServiceException {
         // 所属操作员组不存在。
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
@@ -153,8 +141,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testSaveRolePermissions() throws ServiceException
-    {
+    public void testSaveRolePermissions() throws ServiceException {
         this.truncate(RoleInfo.class, RolePermission.class);
         // 所属操作员组不存在。
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
@@ -202,8 +189,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     }
 
     @Test
-    public void testView() throws ServiceException
-    {
+    public void testView() throws ServiceException {
         this.testView(RoleInfo.class, TEST_COUNT);
     }
 }

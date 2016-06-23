@@ -2,17 +2,15 @@ package org.dangcat.commons.archive;
 
 /**
  * 归档信息。
+ *
  * @author dangcat
- * 
  */
-class ArchiveInfo
-{
+class ArchiveInfo {
     private String archiverType = null;
     private String compressType = null;
     private String fileExtName = null;
 
-    ArchiveInfo(String extName, String compressType, String archiverType)
-    {
+    ArchiveInfo(String extName, String compressType, String archiverType) {
         this.fileExtName = extName;
         this.compressType = compressType;
         this.archiverType = archiverType;
@@ -21,8 +19,7 @@ class ArchiveInfo
     /**
      * 产生归档对象。
      */
-    protected Archiver createArchiver()
-    {
+    protected Archiver createArchiver() {
         if (ArchiveType.zip.equalsIgnoreCase(this.archiverType))
             return new ZipArchiver();
         if (ArchiveType.tar.equalsIgnoreCase(this.archiverType))
@@ -34,23 +31,19 @@ class ArchiveInfo
         return null;
     }
 
-    protected String getArchiverType()
-    {
+    protected String getArchiverType() {
         return archiverType;
     }
 
-    protected String getCompressType()
-    {
+    protected String getCompressType() {
         return compressType;
     }
 
-    protected String getFileExtName()
-    {
+    protected String getFileExtName() {
         return fileExtName;
     }
 
-    protected void setFileExtName(String fileExtName)
-    {
+    protected void setFileExtName(String fileExtName) {
         this.fileExtName = fileExtName;
     }
 }

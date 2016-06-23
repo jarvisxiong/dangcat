@@ -10,15 +10,13 @@ import org.dangcat.business.code.server.src.SrcCodeGenerator;
 
 /**
  * 服务代码生成器。
+ *
  * @author dangcat
- * 
  */
-public class ServerCodeGenerator extends DirectoryCodeGenerator
-{
+public class ServerCodeGenerator extends DirectoryCodeGenerator {
     private static final String SERVER_NAME = "serverName";
 
-    public ServerCodeGenerator(String packageName, String serverName)
-    {
+    public ServerCodeGenerator(String packageName, String serverName) {
         this.setPackageName(packageName);
         this.setServerName(serverName);
 
@@ -31,13 +29,11 @@ public class ServerCodeGenerator extends DirectoryCodeGenerator
         this.addCodeGenerator(new SrcCodeGenerator(this.getPackageName(), this.getServerName()));
     }
 
-    public String getServerName()
-    {
+    public String getServerName() {
         return (String) this.getParams().get(SERVER_NAME);
     }
 
-    public void setServerName(String serverName)
-    {
+    public void setServerName(String serverName) {
         this.getParams().put(SERVER_NAME, serverName);
     }
 }

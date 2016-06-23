@@ -6,21 +6,17 @@ import org.dangcat.framework.service.ServiceContext;
 import org.dangcat.framework.service.interceptor.AfterInterceptor;
 import org.dangcat.framework.service.interceptor.BeforeInterceptor;
 
-public class Interceptor2 implements BeforeInterceptor, AfterInterceptor
-{
+public class Interceptor2 implements BeforeInterceptor, AfterInterceptor {
     @Override
-    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result)
-    {
-        if (methodInfo.getName() == "setValue1" || methodInfo.getName() == "setValue2")
-        {
+    public void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result) {
+        if (methodInfo.getName() == "setValue1" || methodInfo.getName() == "setValue2") {
             SettleService2 settleService = (SettleService2) service;
             settleService.setValue((Integer) args[0]);
         }
     }
 
     @Override
-    public void beforeInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args) throws ServiceException
-    {
+    public void beforeInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args) throws ServiceException {
         if (methodInfo.getName() == "setValue1" || methodInfo.getName() == "setValue2")
             args[0] = (Integer) args[0] * 20;
     }

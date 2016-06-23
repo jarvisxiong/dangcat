@@ -7,17 +7,14 @@ import org.dangcat.persistence.entity.EntityManagerFactory;
 
 import java.lang.annotation.Annotation;
 
-public class DatabaseInjectProvider extends InjectProvider
-{
+public class DatabaseInjectProvider extends InjectProvider {
     @Override
-    public Class<? extends Annotation> getAnnotation()
-    {
+    public Class<? extends Annotation> getAnnotation() {
         return Database.class;
     }
 
     @Override
-    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation)
-    {
+    protected Object getObject(ServiceProvider serviceProvider, Object serviceInstance, Class<?> accessClassType, Annotation annotation) {
         return EntityManagerFactory.getInstance().open(((Database) annotation).value());
     }
 }

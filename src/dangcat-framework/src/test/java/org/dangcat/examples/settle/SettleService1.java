@@ -2,8 +2,7 @@ package org.dangcat.examples.settle;
 
 import org.dangcat.framework.service.ServiceContext;
 
-public interface SettleService1
-{
+public interface SettleService1 {
     ServiceContext getServiceContext();
 
     Integer getValue();

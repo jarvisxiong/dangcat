@@ -11,39 +11,47 @@ import java.net.InetAddress;
 
 /**
  * 接收事件。
+ *
  * @author dangcat
- * 
  */
-public class DatagramEvent extends Event
-{
+public class DatagramEvent extends Event {
     private static final long serialVersionUID = 1L;
-    /** 收到的数据内容。 */
+    /**
+     * 收到的数据内容。
+     */
     private byte[] dataBuffer;
-    /** 回应Socket。 */
+    /**
+     * 回应Socket。
+     */
     private DatagramSocket datagramSocket = null;
-    /** 本地地址。 */
+    /**
+     * 本地地址。
+     */
     private InetAddress localAddress;
-    /** 本地端口。 */
+    /**
+     * 本地端口。
+     */
     private Integer localPort = null;
-    /** 来源地址。 */
+    /**
+     * 来源地址。
+     */
     private InetAddress remoteAddress;
-    /** 来源端口。 */
+    /**
+     * 来源端口。
+     */
     private Integer remotePort = null;
 
-    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer)
-    {
+    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer) {
         this.remoteAddress = remoteAddress;
         this.remotePort = remotePort;
         this.dataBuffer = dataBuffer;
     }
 
-    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, InetAddress localAddress, Integer localPort, byte[] dataBuffer)
-    {
+    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, InetAddress localAddress, Integer localPort, byte[] dataBuffer) {
         this(remoteAddress, remotePort, localAddress, localPort, dataBuffer, null);
     }
 
-    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, InetAddress localAddress, Integer localPort, byte[] dataBuffer, DatagramSocket datagramSocket)
-    {
+    public DatagramEvent(InetAddress remoteAddress, Integer remotePort, InetAddress localAddress, Integer localPort, byte[] dataBuffer, DatagramSocket datagramSocket) {
         this.remoteAddress = remoteAddress;
         this.remotePort = remotePort;
         this.localAddress = localAddress;
@@ -52,71 +60,58 @@ public class DatagramEvent extends Event
         this.datagramSocket = datagramSocket;
     }
 
-    public DatagramEvent createReply(byte[] dataBuffer)
-    {
+    public DatagramEvent createReply(byte[] dataBuffer) {
         return new DatagramEvent(this.getRemoteAddress(), this.getRemotePort(), dataBuffer);
     }
 
-    public byte[] getDataBuffer()
-    {
+    public byte[] getDataBuffer() {
         return dataBuffer;
     }
 
-    public void setDataBuffer(byte[] dataBuffer)
-    {
+    public void setDataBuffer(byte[] dataBuffer) {
         this.dataBuffer = dataBuffer;
     }
 
-    public InetAddress getLocalAddress()
-    {
+    public InetAddress getLocalAddress() {
         return localAddress;
     }
 
-    public void setLocalAddress(InetAddress localAddress)
-    {
+    public void setLocalAddress(InetAddress localAddress) {
         this.localAddress = localAddress;
     }
 
-    public Integer getLocalPort()
-    {
+    public Integer getLocalPort() {
         return localPort;
     }
 
-    public void setLocalPort(int localPort)
-    {
+    public void setLocalPort(int localPort) {
         this.localPort = localPort;
     }
 
-    public InetAddress getRemoteAddress()
-    {
+    public InetAddress getRemoteAddress() {
         return remoteAddress;
     }
 
-    public void setRemoteAddress(InetAddress remoteAddress)
-    {
+    public void setRemoteAddress(InetAddress remoteAddress) {
         this.remoteAddress = remoteAddress;
     }
 
-    public Integer getRemotePort()
-    {
+    public Integer getRemotePort() {
         return remotePort;
     }
 
-    public void setRemotePort(int remotePort)
-    {
+    public void setRemotePort(int remotePort) {
         this.remotePort = remotePort;
     }
 
-    public void reply(byte[] dataBuffer) throws IOException
-    {
+    public void reply(byte[] dataBuffer) throws IOException {
         DatagramSocket datagramSocket = this.datagramSocket;
         if (datagramSocket != null)
             datagramSocket.send(new DatagramPacket(dataBuffer, dataBuffer.length, this.getRemoteAddress(), this.getRemotePort()));
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("RemoteAddress = ");
         info.append(this.getRemoteAddress());

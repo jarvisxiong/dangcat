@@ -9,22 +9,18 @@ import org.dangcat.persistence.simulate.data.StringSimulator;
 
 import java.util.List;
 
-public class EntityDataUtils
-{
+public class EntityDataUtils {
     private static EntitySimulator entitySimulator = null;
 
-    public static EntityData createEntityData(int index)
-    {
+    public static EntityData createEntityData(int index) {
         return (EntityData) entitySimulator.create(index);
     }
 
-    public static void createEntityDataList(List<EntityData> entityList, int size)
-    {
+    public static void createEntityDataList(List<EntityData> entityList, int size) {
         entitySimulator.create(entityList, size);
     }
 
-    public static void createEntitySimulator()
-    {
+    public static void createEntitySimulator() {
         EntitySimulator entitySimulator = new EntitySimulator(EntityData.class);
         entitySimulator.initialize();
         // FieldA
@@ -40,26 +36,22 @@ public class EntityDataUtils
         EntityDataUtils.entitySimulator = entitySimulator;
     }
 
-    public static Table getTable()
-    {
+    public static Table getTable() {
         Table table = (Table) entitySimulator.getTable().clone();
         if (table.getOrderBy() == null)
             table.setOrderBy(TableUtils.getOrderBy(table));
         return table;
     }
 
-    public static void modifyEntityData(EntityData entityData, int index)
-    {
+    public static void modifyEntityData(EntityData entityData, int index) {
         entitySimulator.modify(entityData, entitySimulator.getSize() - index - 1);
     }
 
-    public static void modifyEntityDataList(List<EntityData> entityList)
-    {
+    public static void modifyEntityDataList(List<EntityData> entityList) {
         entitySimulator.modify(entityList);
     }
 
-    public static void setSize(int size)
-    {
+    public static void setSize(int size) {
         entitySimulator.setSize(size);
     }
 }

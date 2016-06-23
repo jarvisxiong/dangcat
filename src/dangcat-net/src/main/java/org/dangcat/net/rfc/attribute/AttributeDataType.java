@@ -2,11 +2,10 @@ package org.dangcat.net.rfc.attribute;
 
 /**
  * 属性类型。
+ *
  * @author dangcat
- * 
  */
-public enum AttributeDataType
-{
+public enum AttributeDataType {
     /**
      * 32位二进制数值，最重要的字节排第一字节。
      */

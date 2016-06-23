@@ -8,8 +8,7 @@ import java.util.Map;
 /**
  * JMS连接工厂。
  */
-public class JMSConnectionFactory extends ConnectionFactory<JMSConnectionPool, JMSSession>
-{
+public class JMSConnectionFactory extends ConnectionFactory<JMSConnectionPool, JMSSession> {
     public static final String RESOURCETYPE = "jms";
     private static JMSConnectionFactory instance = null;
 
@@ -19,20 +18,14 @@ public class JMSConnectionFactory extends ConnectionFactory<JMSConnectionPool, J
     private JMSConnectionFactory() {
     }
 
-    public static JMSConnectionFactory getInstance()
-    {
-        if (instance == null)
-        {
-            synchronized (JMSConnectionFactory.class)
-            {
-                try
-                {
+    public static JMSConnectionFactory getInstance() {
+        if (instance == null) {
+            synchronized (JMSConnectionFactory.class) {
+                try {
                     JMSConnectionFactory instance = new JMSConnectionFactory();
                     instance.initialize();
                     JMSConnectionFactory.instance = instance;
-                }
-                catch (SessionException e)
-                {
+                } catch (SessionException e) {
                     logger.error("Create jms connection error!", e);
                 }
             }
@@ -41,28 +34,24 @@ public class JMSConnectionFactory extends ConnectionFactory<JMSConnectionPool, J
     }
 
     @Override
-    protected void close(JMSConnectionPool jmsConnectionPool)
-    {
+    protected void close(JMSConnectionPool jmsConnectionPool) {
         jmsConnectionPool.close();
     }
 
     @Override
-    protected JMSConnectionPool createConnectionPool(String name, Map<String, String> params) throws SessionException
-    {
+    protected JMSConnectionPool createConnectionPool(String name, Map<String, String> params) throws SessionException {
         JMSConnectionPool jmsConnectionPool = new JMSConnectionPool(name, params);
         jmsConnectionPool.initialize();
         return jmsConnectionPool;
     }
 
     @Override
-    protected JMSSession createSession(JMSConnectionPool jmsConnectionPool)
-    {
+    protected JMSSession createSession(JMSConnectionPool jmsConnectionPool) {
         return new JMSSession(jmsConnectionPool);
     }
 
     @Override
-    public String getResourceType()
-    {
+    public String getResourceType() {
         return RESOURCETYPE;
     }
 }

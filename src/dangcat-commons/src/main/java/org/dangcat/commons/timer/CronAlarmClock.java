@@ -11,41 +11,34 @@ import java.util.Date;
 
 /**
  * Cron¶¨Ê±Æ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class CronAlarmClock extends AlarmClock
-{
+public class CronAlarmClock extends AlarmClock {
     private static Logger logger = Logger.getLogger(CronAlarmClock.class);
     private String cronExpression = null;
     private CronTrigger cronTrigger = null;
 
-    public CronAlarmClock(Object target)
-    {
+    public CronAlarmClock(Object target) {
         super(target);
     }
 
-    public CronAlarmClock(String cronExpression, Object target)
-    {
+    public CronAlarmClock(String cronExpression, Object target) {
         super(target);
         this.cronExpression = cronExpression;
     }
 
-    public String getCronExpression()
-    {
+    public String getCronExpression() {
         return this.cronExpression;
     }
 
     @Override
-    public boolean isTimeout(Calendar calendar)
-    {
-        if (this.cronTrigger != null)
-        {
+    public boolean isTimeout(Calendar calendar) {
+        if (this.cronTrigger != null) {
             if (this.cronTrigger.getStartTime().after(calendar.getTime()))
                 this.cronTrigger.setStartTime(new Date(calendar.getTimeInMillis() - 1000));
             this.setNextAlramTime(this.cronTrigger.getFireTimeAfter(calendar.getTime()));
-            if (this.isInholdTime(calendar.getTime()) && this.cronTrigger.willFireOn(calendar))
-            {
+            if (this.isInholdTime(calendar.getTime()) && this.cronTrigger.willFireOn(calendar)) {
                 this.setLastAlramTime(calendar.getTime());
                 return true;
             }
@@ -53,16 +46,11 @@ public class CronAlarmClock extends AlarmClock
         return false;
     }
 
-    public boolean isValidExpression()
-    {
-        if (this.cronTrigger == null && CronExpression.isValidExpression(this.getCronExpression()))
-        {
-            try
-            {
+    public boolean isValidExpression() {
+        if (this.cronTrigger == null && CronExpression.isValidExpression(this.getCronExpression())) {
+            try {
                 this.cronTrigger = new CronTrigger("quartz", "DANGCAT", this.getCronExpression());
-            }
-            catch (ParseException e)
-            {
+            } catch (ParseException e) {
                 logger.error(this.getTarget(), e);
             }
         }
@@ -70,8 +58,7 @@ public class CronAlarmClock extends AlarmClock
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder(super.toString());
         if (ValueUtils.isEmpty(this.cronExpression))
             info.append("\tCronExpression =" + this.cronExpression);

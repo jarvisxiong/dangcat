@@ -10,25 +10,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DynamicTableUtils
-{
+public class DynamicTableUtils {
     private static final String DYNAMIC_TABLE_NAME = "<%tableName%>";
 
-    public static <T> Collection<DynamicTableData<T>> createDynamicTableDataCollection(Collection<T> valueCollection, TableName tableName)
-    {
+    public static <T> Collection<DynamicTableData<T>> createDynamicTableDataCollection(Collection<T> valueCollection, TableName tableName) {
         Collection<DynamicTableData<T>> dynamicTableDataCollection = null;
-        if (valueCollection != null)
-        {
+        if (valueCollection != null) {
             DateTimeTableName dateTimeTableName = null;
             if (tableName instanceof DateTimeTableName)
                 dateTimeTableName = (DateTimeTableName) tableName;
             Table table = null;
             DynamicTable dynamicTable = null;
             Map<String, DynamicTableData<T>> dynamicTableDataMap = null;
-            for (T value : valueCollection)
-            {
-                if (table == null)
-                {
+            for (T value : valueCollection) {
+                if (table == null) {
                     table = TableUtils.getTable(value);
                     if (table == null)
                         break;
@@ -38,13 +33,11 @@ public class DynamicTableUtils
                 }
 
                 String name = getTableName(dateTimeTableName == null ? table.getTableName() : dateTimeTableName, value);
-                if (!ValueUtils.isEmpty(name))
-                {
+                if (!ValueUtils.isEmpty(name)) {
                     if (dynamicTableDataMap == null)
                         dynamicTableDataMap = new HashMap<String, DynamicTableData<T>>();
                     DynamicTableData<T> dynamicTableData = dynamicTableDataMap.get(name);
-                    if (dynamicTableData == null)
-                    {
+                    if (dynamicTableData == null) {
                         dynamicTableData = new DynamicTableData<T>(name, (Table) table.clone());
                         dynamicTableDataMap.put(name, dynamicTableData);
                     }
@@ -57,38 +50,31 @@ public class DynamicTableUtils
         return dynamicTableDataCollection;
     }
 
-    public static String getActualTableName(TableName tableName)
-    {
+    public static String getActualTableName(TableName tableName) {
         String name = null;
-        if (tableName != null)
-        {
-            if (tableName instanceof DateTimeTableName)
-            {
+        if (tableName != null) {
+            if (tableName instanceof DateTimeTableName) {
                 DateTimeTableName dateTimeTableName = (DateTimeTableName) tableName;
                 if (dateTimeTableName.getDateTime() == null)
                     name = dateTimeTableName.getName(DateUtils.now());
                 else
                     name = dateTimeTableName.getName();
-            }
-            else
+            } else
                 name = tableName.getName();
         }
         return name;
     }
 
-    private static DynamicTable getDynamicTable(TableName tableName)
-    {
+    private static DynamicTable getDynamicTable(TableName tableName) {
         DynamicTable dynamicTable = null;
-        if (tableName != null)
-        {
+        if (tableName != null) {
             if (tableName instanceof DynamicTable)
                 dynamicTable = (DynamicTable) tableName;
         }
         return dynamicTable;
     }
 
-    public static String getTableName(TableName tableName)
-    {
+    public static String getTableName(TableName tableName) {
         String name = null;
         DynamicTable dynamicTable = getDynamicTable(tableName);
         if (dynamicTable != null)
@@ -98,12 +84,10 @@ public class DynamicTableUtils
         return name;
     }
 
-    public static String getTableName(TableName tableName, Object value)
-    {
+    public static String getTableName(TableName tableName, Object value) {
         String name = getTableName(tableName);
         DynamicTable dynamicTable = getDynamicTable(tableName);
-        if (dynamicTable != null)
-        {
+        if (dynamicTable != null) {
             String dynamicTableName = dynamicTable.getName(value);
             if (!ValueUtils.isEmpty(dynamicTableName))
                 name = dynamicTableName;
@@ -111,10 +95,8 @@ public class DynamicTableUtils
         return name;
     }
 
-    public static SqlBuilder replaceTableName(SqlBuilder sqlBuilder, TableName tableName)
-    {
-        if (tableName != null)
-        {
+    public static SqlBuilder replaceTableName(SqlBuilder sqlBuilder, TableName tableName) {
+        if (tableName != null) {
             String name = getActualTableName(tableName);
             if (!ValueUtils.isEmpty(name))
                 sqlBuilder = new SqlBuilder(replaceTableName(sqlBuilder.toString(), name));
@@ -122,8 +104,7 @@ public class DynamicTableUtils
         return sqlBuilder;
     }
 
-    public static String replaceTableName(String sql, String tableName)
-    {
+    public static String replaceTableName(String sql, String tableName) {
         return sql.replace(DYNAMIC_TABLE_NAME, tableName);
     }
 }

@@ -9,25 +9,21 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class TestCompressor
-{
+public class TestCompressor {
     protected static final Logger logger = Logger.getLogger(TestCompressor.class);
 
-    private File getCompressFile(String fileExtName)
-    {
+    private File getCompressFile(String fileExtName) {
         File file = new File("log" + File.separator + "compress" + fileExtName);
         if (file.exists())
             FileUtils.delete(file);
         return file;
     }
 
-    private File getLocalDirectory()
-    {
+    private File getLocalDirectory() {
         return new File(FileUtils.getResourcePath(TestCompressor.class, "org/dangcat/"));
     }
 
-    private File getUpcompressDirectory()
-    {
+    private File getUpcompressDirectory() {
         File dir = new File("log" + File.separator + "compress");
         if (dir.exists())
             FileUtils.delete(dir);
@@ -36,10 +32,8 @@ public class TestCompressor
     }
 
     @Test
-    public void testCompress() throws IOException
-    {
-        for (String archiveType : ArchiveType.getAllArchiveTypes())
-        {
+    public void testCompress() throws IOException {
+        for (String archiveType : ArchiveType.getAllArchiveTypes()) {
             // 压缩本地目录到指定文件
             File compressFile = this.getCompressFile(archiveType);
             Compressor compressor = new Compressor();

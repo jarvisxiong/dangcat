@@ -9,19 +9,14 @@ import java.util.Map;
 
 /**
  * 文件比较器。
- * 
  */
-public class FileCompare
-{
-    public static boolean compare(File srcFile, File destFile)
-    {
+public class FileCompare {
+    public static boolean compare(File srcFile, File destFile) {
         return compare(srcFile, destFile, false);
     }
 
-    public static boolean compare(File srcFile, File destFile, boolean deepCompare)
-    {
-        if (srcFile != null && destFile != null && srcFile.exists() && destFile.exists())
-        {
+    public static boolean compare(File srcFile, File destFile, boolean deepCompare) {
+        if (srcFile != null && destFile != null && srcFile.exists() && destFile.exists()) {
             if (srcFile.isFile() && destFile.isFile())
                 return compareFile(srcFile, destFile, deepCompare);
             if (srcFile.isDirectory() && destFile.isDirectory())
@@ -30,21 +25,18 @@ public class FileCompare
         return false;
     }
 
-    private static boolean compareDirectory(File srcFile, File destFile, boolean deepCompare)
-    {
+    private static boolean compareDirectory(File srcFile, File destFile, boolean deepCompare) {
         File[] srcFiles = srcFile.listFiles();
         File[] destFiles = destFile.listFiles();
         if (srcFiles == null && destFiles == null)
             return true;
         if (srcFiles.length == 0 && destFiles.length == 0)
             return true;
-        if (srcFiles.length == destFiles.length)
-        {
+        if (srcFiles.length == destFiles.length) {
             Map<String, File> fileMap = new HashMap<String, File>();
             for (File file : destFiles)
                 fileMap.put(file.getName(), file);
-            for (File source : srcFiles)
-            {
+            for (File source : srcFiles) {
                 File dest = fileMap.get(source.getName());
                 if (dest == null)
                     return false;
@@ -56,22 +48,17 @@ public class FileCompare
         return false;
     }
 
-    private static boolean compareFile(File srcFile, File destFile, boolean deepCompare)
-    {
+    private static boolean compareFile(File srcFile, File destFile, boolean deepCompare) {
         if (!srcFile.getName().equals(destFile.getName()))
             return false;
         if (srcFile.length() != destFile.length())
             return false;
-        if (deepCompare)
-        {
-            try
-            {
+        if (deepCompare) {
+            try {
                 byte[] srcBytes = FileUtils.readFileToBytes(srcFile);
                 byte[] destBytes = FileUtils.readFileToBytes(destFile);
                 return ValueUtils.compare(srcBytes, destBytes) == 0;
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
         }
         return true;

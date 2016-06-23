@@ -4,8 +4,7 @@ import org.dangcat.persistence.annotation.Column;
 import org.dangcat.persistence.annotation.Table;
 
 @Table
-public class UserServerBind extends UserService
-{
+public class UserServerBind extends UserService {
     public static final String BindItemId = "BindItemId";
     public static final String Value = "Value";
     private static final long serialVersionUID = 1L;
@@ -15,8 +14,7 @@ public class UserServerBind extends UserService
     @Column(displaySize = 128)
     private String value;
 
-    public Integer getBindItemId()
-    {
+    public Integer getBindItemId() {
         return bindItemId;
     }
 
@@ -25,18 +23,15 @@ public class UserServerBind extends UserService
     }
 
     @Column(isPrimaryKey = true, displaySize = 40)
-    public String getBindTime()
-    {
+    public String getBindTime() {
         return super.getBindTime();
     }
 
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(String value)
-    {
+    public void setValue(String value) {
         this.value = value;
     }
 }

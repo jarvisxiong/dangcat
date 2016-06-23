@@ -12,14 +12,14 @@ import java.util.Map;
 
 /**
  * 账户管理服务接口。
+ *
  * @author dangcat
- * 
  */
 @JndiName(module = "Account", name = "AccountInfo")
-public interface AccountService
-{
+public interface AccountService {
     /**
      * 新增实体数据。
+     *
      * @param entity 实体对象。
      * @return 运行结果。
      */
@@ -27,6 +27,7 @@ public interface AccountService
 
     /**
      * 测试多个基本参数接口。
+     *
      * @param id 主键值。
      * @return 查询结果。
      */
@@ -35,6 +36,7 @@ public interface AccountService
 
     /**
      * 删除指定条件的数据。
+     *
      * @param id 主键。
      * @return 执行结果。
      */
@@ -42,6 +44,7 @@ public interface AccountService
 
     /**
      * 测试多个基本参数接口。
+     *
      * @param id 主键值。
      * @return 查询结果。
      */
@@ -49,6 +52,7 @@ public interface AccountService
 
     /**
      * 查询指定条件的数据。
+     *
      * @param dataFilter 查询范围。
      * @return 查询结果。
      */
@@ -56,6 +60,7 @@ public interface AccountService
 
     /**
      * 保存实体数据。
+     *
      * @param entity 实体对象。
      * @return 运行结果。
      */
@@ -63,6 +68,7 @@ public interface AccountService
 
     /**
      * 查询指定条件的列表。
+     *
      * @param dataFilter 查询范围。
      * @return 查询结果。
      */
@@ -70,6 +76,7 @@ public interface AccountService
 
     /**
      * 查看指定主键的数据。
+     *
      * @param id 主键值。
      * @return 查询结果。
      */

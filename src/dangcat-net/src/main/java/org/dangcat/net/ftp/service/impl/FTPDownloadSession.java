@@ -13,19 +13,16 @@ import java.util.LinkedList;
 
 /**
  * FTP下载会话。
+ *
  * @author dangcat
- * 
  */
-class FTPDownloadSession extends FTPSessionExecutor
-{
-    FTPDownloadSession(FTPContext ftpContext, FTPSession ftpSession)
-    {
+class FTPDownloadSession extends FTPSessionExecutor {
+    FTPDownloadSession(FTPContext ftpContext, FTPSession ftpSession) {
         super(ftpContext, ftpSession);
         ftpContext.setName(FTPContext.OPT_DOWNLOAD);
     }
 
-    private String createDebugInfo(File localFile, String remotePath, long finishedSize, long costTime)
-    {
+    private String createDebugInfo(File localFile, String remotePath, long finishedSize, long costTime) {
         StringBuilder info = new StringBuilder();
         info.append("End download file: ");
         info.append(localFile.getAbsolutePath());
@@ -35,21 +32,18 @@ class FTPDownloadSession extends FTPSessionExecutor
         return info.toString();
     }
 
-    private FTPFileInfo createFileInfo(FTPFileInfo parent, FTPFile ftpFile)
-    {
+    private FTPFileInfo createFileInfo(FTPFileInfo parent, FTPFile ftpFile) {
         FTPFileInfo ftpFileInfo = new FTPFileInfo(parent);
         ftpFileInfo.setFtpFile(ftpFile);
         return ftpFileInfo;
     }
 
-    private InputStream createInputStream(FTPClient ftpClient, String remotePath, String remoteFile) throws IOException
-    {
+    private InputStream createInputStream(FTPClient ftpClient, String remotePath, String remoteFile) throws IOException {
         String ftpFileName = this.getFTPFileName(remotePath, remoteFile);
         return ftpClient.retrieveFileStream(ftpFileName);
     }
 
-    private InputStream createInputStream(FTPFile ftpFile, String remotePath, FTPClient ftpClient) throws IOException
-    {
+    private InputStream createInputStream(FTPFile ftpFile, String remotePath, FTPClient ftpClient) throws IOException {
         String remoteRootPath = this.getFtpContext().getRemotePath();
         InputStream inputStream = null;
         if (remoteRootPath.equalsIgnoreCase(ftpFile.getName()) || remoteRootPath.endsWith(FILE_SEPARATOR + ftpFile.getName()))
@@ -59,32 +53,24 @@ class FTPDownloadSession extends FTPSessionExecutor
         return inputStream;
     }
 
-    private OutputStream createOutputStream(FTPFile ftpFile, File localFile, InputStream inputStream) throws IOException
-    {
+    private OutputStream createOutputStream(FTPFile ftpFile, File localFile, InputStream inputStream) throws IOException {
         OutputStream outputStream = null;
-        if (Boolean.TRUE.equals(this.isContinueLoad()) && localFile.exists() && localFile.length() <= ftpFile.getSize())
-        {
-            if (localFile.length() < ftpFile.getSize())
-            {
+        if (Boolean.TRUE.equals(this.isContinueLoad()) && localFile.exists() && localFile.length() <= ftpFile.getSize()) {
+            if (localFile.length() < ftpFile.getSize()) {
                 outputStream = new BufferedOutputStream(new FileOutputStream(localFile, true));
                 inputStream.skip(localFile.length());
             }
             this.increaseFinished(localFile.length());
-        }
-        else
-        {
+        } else {
             FileUtils.mkdir(localFile.getParent());
             outputStream = new BufferedOutputStream(new FileOutputStream(localFile));
         }
         return outputStream;
     }
 
-    private void download(Collection<FTPFileInfo> ftpFileInfos) throws IOException, FTPSessionException
-    {
-        if (ftpFileInfos != null && !ftpFileInfos.isEmpty())
-        {
-            for (FTPFileInfo ftpFileInfo : ftpFileInfos)
-            {
+    private void download(Collection<FTPFileInfo> ftpFileInfos) throws IOException, FTPSessionException {
+        if (ftpFileInfos != null && !ftpFileInfos.isEmpty()) {
+            for (FTPFileInfo ftpFileInfo : ftpFileInfos) {
                 if (this.getFtpContext().isCancel())
                     break;
                 this.download(ftpFileInfo);
@@ -93,21 +79,17 @@ class FTPDownloadSession extends FTPSessionExecutor
         }
     }
 
-    private void download(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException
-    {
+    private void download(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException {
         File localFile = ftpFileInfo.getLocalFile();
         FTPFile ftpFile = ftpFileInfo.getFtpFile();
-        if (ftpFile.isDirectory())
-        {
+        if (ftpFile.isDirectory()) {
             FileUtils.mkdir(localFile.getAbsolutePath());
             return;
-        }
-        else if (!localFile.exists() || localFile.length() != ftpFile.getSize())
+        } else if (!localFile.exists() || localFile.length() != ftpFile.getSize())
             this.downloadFile(ftpFileInfo);
     }
 
-    private void downloadFile(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException
-    {
+    private void downloadFile(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException {
         File localFile = ftpFileInfo.getLocalFile();
         String remotePath = ftpFileInfo.getRemotePath();
 
@@ -122,26 +104,20 @@ class FTPDownloadSession extends FTPSessionExecutor
         OutputStream outputStream = null;
         InputStream inputStream = null;
         boolean result = false;
-        try
-        {
+        try {
             FTPFile ftpFile = ftpFileInfo.getFtpFile();
             inputStream = this.createInputStream(ftpFile, remotePath, ftpClient);
-            if (inputStream != null)
-            {
+            if (inputStream != null) {
                 outputStream = this.createOutputStream(ftpFile, localFile, inputStream);
                 if (outputStream != null)
                     finishedSize = this.copyStream(ftpContext, inputStream, outputStream);
                 result = true;
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             if (ftpCallBack != null)
                 ftpCallBack.onFailure(ftpContext, localFile, remotePath, e);
             throw e;
-        }
-        finally
-        {
+        } finally {
             FileUtils.close(inputStream);
             FileUtils.close(outputStream);
             if (result)
@@ -158,8 +134,7 @@ class FTPDownloadSession extends FTPSessionExecutor
             ftpCallBack.onSucess(ftpContext, localFile, remotePath);
     }
 
-    private String getRemotePath(String remotePath)
-    {
+    private String getRemotePath(String remotePath) {
         String remoteRootPath = this.getRemoteRootPath();
         if (ValueUtils.isEmpty(remotePath))
             return remoteRootPath;
@@ -170,36 +145,30 @@ class FTPDownloadSession extends FTPSessionExecutor
 
     /**
      * 下载文件。
+     *
      * @throws FTPSessionException
      */
     @Override
-    protected void innerExecute() throws FTPSessionException, IOException
-    {
+    protected void innerExecute() throws FTPSessionException, IOException {
         Collection<FTPFileInfo> ftpFileInfos = this.loadFileInfos();
-        if (ftpFileInfos != null && !ftpFileInfos.isEmpty())
-        {
+        if (ftpFileInfos != null && !ftpFileInfos.isEmpty()) {
             File localPath = this.getFtpContext().getLocalPath();
             this.loadFTPFileInfo(localPath, ftpFileInfos);
             this.download(ftpFileInfos);
         }
     }
 
-    private Collection<FTPFileInfo> loadFileInfos() throws IOException
-    {
+    private Collection<FTPFileInfo> loadFileInfos() throws IOException {
         String remotePath = this.getRemoteRootPath();
         if (this.logger.isDebugEnabled())
             this.logger.debug("Begin loadFileInfos from " + remotePath);
 
         Collection<FTPFileInfo> ftpFileInfos = null;
         long beginTime = System.currentTimeMillis();
-        try
-        {
+        try {
             ftpFileInfos = this.loadFileInfos(null, null);
-        }
-        finally
-        {
-            if (this.logger.isDebugEnabled())
-            {
+        } finally {
+            if (this.logger.isDebugEnabled()) {
                 long costTime = System.currentTimeMillis() - beginTime;
                 StringBuilder info = new StringBuilder();
                 info.append("End loadFileInfos");
@@ -214,20 +183,18 @@ class FTPDownloadSession extends FTPSessionExecutor
 
     /**
      * 列出远程的文件。
+     *
      * @param ftpFileInfos 本地文件信息。
-     * @param ftpFile 远程文件。
+     * @param ftpFile      远程文件。
      * @throws IOException
      */
-    private Collection<FTPFileInfo> loadFileInfos(FTPFileInfo parent, String remotePath) throws IOException
-    {
+    private Collection<FTPFileInfo> loadFileInfos(FTPFileInfo parent, String remotePath) throws IOException {
         FTPContext ftpContext = this.getFtpContext();
         Collection<FTPFileInfo> ftpFileInfos = null;
         FTPFile[] ftpFiles = this.listFTPFiles(this.getRemotePath(remotePath));
-        if (ftpFiles != null && ftpFiles.length > 0)
-        {
+        if (ftpFiles != null && ftpFiles.length > 0) {
             ftpFileInfos = new LinkedList<FTPFileInfo>();
-            for (FTPFile ftpFile : ftpFiles)
-            {
+            for (FTPFile ftpFile : ftpFiles) {
                 if (ftpContext.isCancel())
                     break;
 
@@ -235,13 +202,11 @@ class FTPDownloadSession extends FTPSessionExecutor
                     continue;
 
                 FTPFileInfo ftpFileInfo = this.createFileInfo(parent, ftpFile);
-                if (ftpFile.isDirectory())
-                {
+                if (ftpFile.isDirectory()) {
                     Collection<FTPFileInfo> children = this.loadFileInfos(ftpFileInfo, ftpFileInfo.getRemotePath());
                     if (children != null && !children.isEmpty())
                         ftpFileInfo.setChildren(children);
-                }
-                else if (ftpFile.isFile())
+                } else if (ftpFile.isFile())
                     ftpContext.increaseTotalSize(ftpFile.getSize());
                 ftpFileInfos.add(ftpFileInfo);
             }
@@ -249,13 +214,10 @@ class FTPDownloadSession extends FTPSessionExecutor
         return ftpFileInfos;
     }
 
-    private void loadFTPFileInfo(File localPath, Collection<FTPFileInfo> ftpFileInfos) throws IOException
-    {
-        if (ftpFileInfos != null && !ftpFileInfos.isEmpty())
-        {
+    private void loadFTPFileInfo(File localPath, Collection<FTPFileInfo> ftpFileInfos) throws IOException {
+        if (ftpFileInfos != null && !ftpFileInfos.isEmpty()) {
             FTPContext ftpContext = this.getFtpContext();
-            for (FTPFileInfo ftpFileInfo : ftpFileInfos)
-            {
+            for (FTPFileInfo ftpFileInfo : ftpFileInfos) {
                 if (ftpContext.isCancel())
                     break;
 

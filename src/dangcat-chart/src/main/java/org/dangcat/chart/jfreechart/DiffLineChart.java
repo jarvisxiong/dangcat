@@ -7,19 +7,16 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 
 import java.awt.*;
 
-public class DiffLineChart extends TimeXYChart
-{
+public class DiffLineChart extends TimeXYChart {
     private Paint negativePaint = new Color(255, 0, 0, 70);
     private Paint positivePaint = Color.green;
 
     @Override
-    protected XYItemRenderer createXYItemRenderer()
-    {
+    protected XYItemRenderer createXYItemRenderer() {
         return new XYDifferenceRenderer(this.getPositivePaint(), this.getNegativePaint(), false);
     }
 
-    public Paint getNegativePaint()
-    {
+    public Paint getNegativePaint() {
         return negativePaint;
     }
 
@@ -27,8 +24,7 @@ public class DiffLineChart extends TimeXYChart
         this.negativePaint = negativePaint;
     }
 
-    public Paint getPositivePaint()
-    {
+    public Paint getPositivePaint() {
         return positivePaint;
     }
 
@@ -37,8 +33,7 @@ public class DiffLineChart extends TimeXYChart
     }
 
     @Override
-    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i)
-    {
+    protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i) {
         super.iniItemRenderer(xyItemRenderer, i);
 
         XYDifferenceRenderer xyDifferenceRenderer = (XYDifferenceRenderer) xyItemRenderer;
@@ -46,8 +41,7 @@ public class DiffLineChart extends TimeXYChart
     }
 
     @Override
-    protected void initPlot(Plot plot)
-    {
+    protected void initPlot(Plot plot) {
         super.initPlot(plot);
 
         XYPlot xyPlot = (XYPlot) plot;
@@ -58,8 +52,7 @@ public class DiffLineChart extends TimeXYChart
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         this.load(false);
     }
 }

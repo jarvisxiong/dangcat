@@ -8,45 +8,60 @@ import org.dangcat.commons.reflect.ReflectUtils;
 import org.dangcat.persistence.annotation.Column;
 import org.dangcat.persistence.entity.EntityBase;
 
-public class MonitorData extends EntityBase implements MonitorInfo
-{
+public class MonitorData extends EntityBase implements MonitorInfo {
     private static final long serialVersionUID = 1L;
-    /** 剩余的磁盘空间。 */
+    /**
+     * 剩余的磁盘空间。
+     */
     @Column(index = 9, logic = "octets")
     private long freeDiskSpace;
-    /** 百分数格式化。 */
+    /**
+     * 百分数格式化。
+     */
     private PercentFormator percentFormator = new PercentFormator();
-    /** 进程的CPU占用率。 */
+    /**
+     * 进程的CPU占用率。
+     */
     @Column(index = 19, logic = "percent")
     private double processCpuRatio;
-    /** 进程占用的内存。 */
+    /**
+     * 进程占用的内存。
+     */
     @Column(index = 16, logic = "octets")
     private long processUsageMemory;
-    /** CPU利用率。 */
+    /**
+     * CPU利用率。
+     */
     @Column(index = 18, logic = "percent")
     private double totalCpuRatio;
-    /** 磁盘空间。 */
+    /**
+     * 磁盘空间。
+     */
     @Column(index = 10, logic = "octets")
     private long totalDiskSpace;
-    /** 总物理内存。 */
+    /**
+     * 总物理内存。
+     */
     @Column(index = 13, logic = "octets")
     private long totalPhysicalMemory;
-    /** 已经使用的物理内存。 */
+    /**
+     * 已经使用的物理内存。
+     */
     @Column(index = 14, logic = "octets")
     private long totalUsageMemory;
-    /** 流量格式化。 */
+    /**
+     * 流量格式化。
+     */
     private ValueFormator valueFormator = new OctetsFormator();
 
-    private double calculatePercent(long used, long total)
-    {
+    private double calculatePercent(long used, long total) {
         if (total != 0)
             return used * 100.0 / total;
         return 0;
     }
 
     @Column(index = 11, logic = "octets", isCalculate = true)
-    public long getDiskUsageSpace()
-    {
+    public long getDiskUsageSpace() {
         return this.totalDiskSpace - this.freeDiskSpace;
     }
 
@@ -54,13 +69,11 @@ public class MonitorData extends EntityBase implements MonitorInfo
      * 磁盘占用率。
      */
     @Column(index = 12, logic = "percent", isCalculate = true)
-    public double getDiskUsageSpaceRatio()
-    {
+    public double getDiskUsageSpaceRatio() {
         return this.calculatePercent(this.getDiskUsageSpace(), this.totalDiskSpace);
     }
 
-    public long getFreeDiskSpace()
-    {
+    public long getFreeDiskSpace() {
         return freeDiskSpace;
     }
 
@@ -68,8 +81,7 @@ public class MonitorData extends EntityBase implements MonitorInfo
         this.freeDiskSpace = freeDiskSpace;
     }
 
-    public double getProcessCpuRatio()
-    {
+    public double getProcessCpuRatio() {
         return processCpuRatio;
     }
 
@@ -77,8 +89,7 @@ public class MonitorData extends EntityBase implements MonitorInfo
         this.processCpuRatio = processCpuRatio;
     }
 
-    public long getProcessUsageMemory()
-    {
+    public long getProcessUsageMemory() {
         return processUsageMemory;
     }
 
@@ -90,13 +101,11 @@ public class MonitorData extends EntityBase implements MonitorInfo
      * 进程的内存利用率。
      */
     @Column(index = 17, logic = "percent", isCalculate = true)
-    public double getProcessUsageMemoryRatio()
-    {
+    public double getProcessUsageMemoryRatio() {
         return this.calculatePercent(this.processUsageMemory, this.totalPhysicalMemory);
     }
 
-    public double getTotalCpuRatio()
-    {
+    public double getTotalCpuRatio() {
         return totalCpuRatio;
     }
 
@@ -104,8 +113,7 @@ public class MonitorData extends EntityBase implements MonitorInfo
         this.totalCpuRatio = totalCpuRatio;
     }
 
-    public long getTotalDiskSpace()
-    {
+    public long getTotalDiskSpace() {
         return totalDiskSpace;
     }
 
@@ -113,8 +121,7 @@ public class MonitorData extends EntityBase implements MonitorInfo
         this.totalDiskSpace = totalDiskSpace;
     }
 
-    public long getTotalPhysicalMemory()
-    {
+    public long getTotalPhysicalMemory() {
         return totalPhysicalMemory;
     }
 
@@ -122,8 +129,7 @@ public class MonitorData extends EntityBase implements MonitorInfo
         this.totalPhysicalMemory = totalPhysicalMemory;
     }
 
-    public long getTotalUsageMemory()
-    {
+    public long getTotalUsageMemory() {
         return totalUsageMemory;
     }
 
@@ -135,19 +141,16 @@ public class MonitorData extends EntityBase implements MonitorInfo
      * 总的内存利用率。
      */
     @Column(index = 15, logic = "percent", isCalculate = true)
-    public double getTotalUsageMemoryRatio()
-    {
+    public double getTotalUsageMemoryRatio() {
         return this.calculatePercent(this.totalUsageMemory, this.totalPhysicalMemory);
     }
 
     @Override
-    public Number getValue(String name)
-    {
+    public Number getValue(String name) {
         return (Number) ReflectUtils.getProperty(this, name);
     }
 
-    public String print()
-    {
+    public String print() {
         StringBuilder info = new StringBuilder();
         info.append("TotalDiskSpace = ");
         info.append(this.valueFormator.format(this.getTotalDiskSpace()));
@@ -173,14 +176,12 @@ public class MonitorData extends EntityBase implements MonitorInfo
     }
 
     @Override
-    public void setValue(String name, Number value)
-    {
+    public void setValue(String name, Number value) {
         ReflectUtils.setProperty(this, name, value);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.print();
     }
 }

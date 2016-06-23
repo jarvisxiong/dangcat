@@ -12,16 +12,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 系统信息。
+ *
  * @author dangcat
- * 
  */
-public class SystemInfoServlet extends ServiceServletBase
-{
+public class SystemInfoServlet extends ServiceServletBase {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    protected void executeService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = request;
         HttpSession httpSession = httpServletRequest.getSession();
 

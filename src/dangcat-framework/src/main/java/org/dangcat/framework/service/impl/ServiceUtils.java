@@ -20,43 +20,35 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ServiceUtils
-{
+public class ServiceUtils {
     protected static final Logger logger = Logger.getLogger(ServiceInfo.class);
 
-    private static void createConfigProvider(ServiceInfo serviceInfo)
-    {
+    private static void createConfigProvider(ServiceInfo serviceInfo) {
         org.dangcat.framework.service.annotation.ConfigProvider configProviderAnnotation = readServiceAnnotation(serviceInfo, org.dangcat.framework.service.annotation.ConfigProvider.class);
         if (configProviderAnnotation != null && configProviderAnnotation.value() != null)
             serviceInfo.setConfigProvider((ConfigProvider) ReflectUtils.getInstance(configProviderAnnotation.value()));
     }
 
-    protected static Object createInstance(ServiceInfo serviceInfo, ServiceProvider parent)
-    {
-        Object service = ReflectUtils.newInstance(serviceInfo.getServiceClassType(), new Class<?>[] { ServiceProvider.class }, new Object[] { parent });
-        if (service != null)
-        {
+    protected static Object createInstance(ServiceInfo serviceInfo, ServiceProvider parent) {
+        Object service = ReflectUtils.newInstance(serviceInfo.getServiceClassType(), new Class<?>[]{ServiceProvider.class}, new Object[]{parent});
+        if (service != null) {
             for (Property property : serviceInfo.getProperties())
                 ReflectUtils.setProperty(service, property.getName(), property.getValue());
         }
         return service;
     }
 
-    protected static Collection<Object> createInterceptors(Collection<Class<?>> interceptorClasses)
-    {
+    protected static Collection<Object> createInterceptors(Collection<Class<?>> interceptorClasses) {
         Collection<Object> interceptors = null;
-        for (Class<?> interceptorClass : interceptorClasses)
-        {
-            if (!BeforeInterceptor.class.isAssignableFrom(interceptorClass) && !AfterInterceptor.class.isAssignableFrom(interceptorClass))
-            {
+        for (Class<?> interceptorClass : interceptorClasses) {
+            if (!BeforeInterceptor.class.isAssignableFrom(interceptorClass) && !AfterInterceptor.class.isAssignableFrom(interceptorClass)) {
                 logger.error("The interceptor class " + interceptorClass.getName() + " is invalid.");
                 continue;
             }
             Object interceptor = ReflectUtils.newInstance(interceptorClass);
             if (interceptor == null)
                 logger.error("The interceptor instance " + interceptorClass.getName() + " is not create.");
-            else
-            {
+            else {
                 if (interceptors == null)
                     interceptors = new LinkedHashSet<Object>();
                 interceptors.add(interceptor);
@@ -65,33 +57,28 @@ public class ServiceUtils
         return interceptors;
     }
 
-    protected static void createInterceptors(ServiceInfo serviceInfo)
-    {
+    protected static void createInterceptors(ServiceInfo serviceInfo) {
         Collection<Class<?>> interceptorClasses = serviceInfo.getInterceptors();
         org.dangcat.framework.service.annotation.Interceptors interceptorsAnnotation = readServiceAnnotation(serviceInfo, org.dangcat.framework.service.annotation.Interceptors.class);
-        if (interceptorsAnnotation != null)
-        {
+        if (interceptorsAnnotation != null) {
             for (Class<?> interceptorClass : interceptorsAnnotation.value())
                 interceptorClasses.add(interceptorClass);
         }
-        if (!interceptorClasses.isEmpty())
-        {
+        if (!interceptorClasses.isEmpty()) {
             Collection<Object> interceptors = createInterceptors(interceptorClasses);
             if (interceptors != null)
                 serviceInfo.addInterceptors(interceptors.toArray());
         }
     }
 
-    public static void createJndiName(ServiceInfo serviceInfo)
-    {
+    public static void createJndiName(ServiceInfo serviceInfo) {
         if (!ValueUtils.isEmpty(serviceInfo.getJndiName()))
             return;
 
         JndiName jndiName = readServiceAnnotation(serviceInfo, JndiName.class);
         String moduleName = ServiceInfo.DEFAULT_MODULE;
         String name = serviceInfo.getAccessClassType().getSimpleName();
-        if (jndiName != null)
-        {
+        if (jndiName != null) {
             if (!ValueUtils.isEmpty(jndiName.module()))
                 moduleName = jndiName.module();
             if (!ValueUtils.isEmpty(jndiName.name()))
@@ -100,13 +87,10 @@ public class ServiceUtils
         serviceInfo.setJndiName(moduleName + "/" + name);
     }
 
-    private static void createMethodIds(ServiceInfo serviceInfo)
-    {
+    private static void createMethodIds(ServiceInfo serviceInfo) {
         Collection<MethodInfo> methodInfoCollection = serviceInfo.getServiceMethodInfo().getMethodInfos();
-        if (methodInfoCollection != null)
-        {
-            for (MethodInfo methodInfo : methodInfoCollection)
-            {
+        if (methodInfoCollection != null) {
+            for (MethodInfo methodInfo : methodInfoCollection) {
                 MethodId methodIdAnnotation = methodInfo.getMethod().getAnnotation(MethodId.class);
                 if (methodIdAnnotation != null)
                     methodInfo.setId(methodIdAnnotation.value());
@@ -114,15 +98,13 @@ public class ServiceUtils
         }
     }
 
-    private static void createPermissionProvider(ServiceInfo serviceInfo)
-    {
+    private static void createPermissionProvider(ServiceInfo serviceInfo) {
         org.dangcat.framework.service.annotation.PermissionProvider permissionProviderAnnotation = readServiceAnnotation(serviceInfo, org.dangcat.framework.service.annotation.PermissionProvider.class);
         if (permissionProviderAnnotation != null && permissionProviderAnnotation.value() != null)
             serviceInfo.setPermissionProvider((PermissionProvider) ReflectUtils.newInstance(permissionProviderAnnotation.value()));
     }
 
-    private static void createPermissions(ServiceInfo serviceInfo)
-    {
+    private static void createPermissions(ServiceInfo serviceInfo) {
         createPermissionProvider(serviceInfo);
 
         PermissionProvider permissionProvider = serviceInfo.getPermissionProvider();
@@ -135,13 +117,10 @@ public class ServiceUtils
 
         Collection<Integer> permissions = new HashSet<Integer>();
         Collection<MethodInfo> methodInfoCollection = serviceInfo.getServiceMethodInfo().getMethodInfos();
-        if (methodInfoCollection != null)
-        {
-            for (MethodInfo methodInfo : methodInfoCollection)
-            {
+        if (methodInfoCollection != null) {
+            for (MethodInfo methodInfo : methodInfoCollection) {
                 Permission permission = permissionProvider.getMethodPermission(methodInfo.getName());
-                if (permission != null)
-                {
+                if (permission != null) {
                     methodInfo.setPermission(permission);
                     permissions.add(permission.getId());
                 }
@@ -150,16 +129,14 @@ public class ServiceUtils
 
         // 过滤不存在的权限。
         Integer[] permissionIds = permissionMap.keySet().toArray(new Integer[0]);
-        for (Integer permissionId : permissionIds)
-        {
+        for (Integer permissionId : permissionIds) {
             Permission permission = permissionMap.get(permissionId);
             if (permission.isMethodPermission() && !permissions.contains(permissionId))
                 permissionMap.remove(permissionId);
         }
     }
 
-    protected static void initialize(ServiceInfo serviceInfo)
-    {
+    protected static void initialize(ServiceInfo serviceInfo) {
         createJndiName(serviceInfo);
         createInterceptors(serviceInfo);
         createPermissions(serviceInfo);
@@ -167,33 +144,25 @@ public class ServiceUtils
         createMethodIds(serviceInfo);
     }
 
-    public static void injectContext(Object instance, ServiceContext serviceContext)
-    {
-        if (instance != null)
-        {
+    public static void injectContext(Object instance, ServiceContext serviceContext) {
+        if (instance != null) {
             List<Field> fieldList = ReflectUtils.findFields(instance.getClass(), Context.class);
-            for (Field field : fieldList)
-            {
-                try
-                {
+            for (Field field : fieldList) {
+                try {
                     field.setAccessible(true);
                     field.set(instance, serviceContext);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     logger.error(e, e);
                 }
             }
         }
     }
 
-    public static String readJndiName(Class<?> accessClassType, Class<?> serviceClassType)
-    {
+    public static String readJndiName(Class<?> accessClassType, Class<?> serviceClassType) {
         JndiName jndiName = readServiceAnnotation(accessClassType, serviceClassType, JndiName.class);
         String module = ServiceInfo.DEFAULT_MODULE;
         String name = accessClassType.getSimpleName();
-        if (jndiName != null)
-        {
+        if (jndiName != null) {
             if (!ValueUtils.isEmpty(jndiName.name()))
                 name = jndiName.name();
             if (!ValueUtils.isEmpty(jndiName.module()))
@@ -202,16 +171,14 @@ public class ServiceUtils
         return module + "/" + name;
     }
 
-    private static <T extends Annotation> T readServiceAnnotation(Class<?> accessClassType, Class<?> serviceClassType, Class<T> annotationClass)
-    {
+    private static <T extends Annotation> T readServiceAnnotation(Class<?> accessClassType, Class<?> serviceClassType, Class<T> annotationClass) {
         T annotation = ReflectUtils.findAnnotation(accessClassType, annotationClass);
         if (annotation == null && serviceClassType != null)
             annotation = ReflectUtils.findAnnotation(serviceClassType, annotationClass);
         return annotation;
     }
 
-    private static <T extends Annotation> T readServiceAnnotation(ServiceInfo serviceInfo, Class<T> annotationClass)
-    {
+    private static <T extends Annotation> T readServiceAnnotation(ServiceInfo serviceInfo, Class<T> annotationClass) {
         return readServiceAnnotation(serviceInfo.getAccessClassType(), serviceInfo.getServiceClassType(), annotationClass);
     }
 }

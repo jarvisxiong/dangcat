@@ -9,36 +9,27 @@ import org.dangcat.persistence.validator.impl.NotNullValidator;
 
 /**
  * 实体数据基本校验。
+ *
  * @author dangcat
- * 
  */
-public class EntityBasicDataValidator extends EntityDataValidator
-{
-    private DataValidator[] getDataValidators(Object entity)
-    {
+public class EntityBasicDataValidator extends EntityDataValidator {
+    private DataValidator[] getDataValidators(Object entity) {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
         return entityMetaData.getTable().getColumns().getDataValidators();
     }
 
     @Override
-    protected void validateInsert(SaveEntityContext saveEntityContext, Object entity) throws DataValidateException
-    {
+    protected void validateInsert(SaveEntityContext saveEntityContext, Object entity) throws DataValidateException {
         DataValidator[] dataValidators = this.getDataValidators(entity);
-        if (dataValidators != null)
-        {
-            for (DataValidator dataValidator : dataValidators)
-            {
-                if (dataValidator instanceof NotNullValidator)
-                {
+        if (dataValidators != null) {
+            for (DataValidator dataValidator : dataValidators) {
+                if (dataValidator instanceof NotNullValidator) {
                     if (dataValidator.getColumn().isAutoIncrement() || dataValidator.getColumn().isAssociate())
                         continue;
                 }
-                try
-                {
+                try {
                     dataValidator.validate(entity);
-                }
-                catch (DataValidateException e)
-                {
+                } catch (DataValidateException e) {
                     if (entity instanceof EntityBase)
                         ((EntityBase) entity).addServiceException(e);
                     else
@@ -49,19 +40,13 @@ public class EntityBasicDataValidator extends EntityDataValidator
     }
 
     @Override
-    protected void validateModify(SaveEntityContext saveEntityContext, Object entity) throws DataValidateException
-    {
+    protected void validateModify(SaveEntityContext saveEntityContext, Object entity) throws DataValidateException {
         DataValidator[] dataValidators = this.getDataValidators(entity);
-        if (dataValidators != null)
-        {
-            for (DataValidator dataValidator : dataValidators)
-            {
-                try
-                {
+        if (dataValidators != null) {
+            for (DataValidator dataValidator : dataValidators) {
+                try {
                     dataValidator.validate(entity);
-                }
-                catch (DataValidateException e)
-                {
+                } catch (DataValidateException e) {
                     if (entity instanceof EntityBase)
                         ((EntityBase) entity).addServiceException(e);
                     else

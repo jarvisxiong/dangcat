@@ -8,24 +8,20 @@ import org.dangcat.persistence.filter.FilterUnit;
 import javax.swing.*;
 import java.util.Date;
 
-public class MultiLineChartDemo extends ChartDemoBase
-{
+public class MultiLineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
     private static final String TITLE = "多轴线性统计图";
 
-    public MultiLineChartDemo()
-    {
+    public MultiLineChartDemo() {
         super(MultiLineChart.class.getSimpleName());
     }
 
-    public static void main(final String[] args)
-    {
+    public static void main(final String[] args) {
         show(new MultiLineChartDemo());
     }
 
     @Override
-    protected void createTabbedPane(JTabbedPane tabbedPane)
-    {
+    protected void createTabbedPane(JTabbedPane tabbedPane) {
         Date[] dates = SimulateTimeData.today();
         DataModule columnDataModule = SimulateTimeData.createMultiColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));
@@ -47,7 +43,7 @@ public class MultiLineChartDemo extends ChartDemoBase
         multiLineChart2.setDataModule(rowDataModule);
         this.initTimeChart(multiLineChart2, dates[0], dates[1]);
         multiLineChart2.getDataConverters().add(
-                new DataConverter("Sample Axis", new String[] { SimulateBase.Octets, SimulateBase.OctetsVelocity, SimulateBase.Value, SimulateBase.Velocity, SimulateBase.TimeLength }));
+                new DataConverter("Sample Axis", new String[]{SimulateBase.Octets, SimulateBase.OctetsVelocity, SimulateBase.Value, SimulateBase.Velocity, SimulateBase.TimeLength}));
         multiLineChart2.getDataConverters().add(new DataConverter(SimulateBase.Percent));
         multiLineChart2.initialize();
         tabbedPane.add("Combo Axis", this.createChartPanel(multiLineChart2.getChart()));

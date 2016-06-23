@@ -13,12 +13,13 @@ import java.util.List;
 
 /**
  * 会话对象。
+ *
  * @author dangcat
- * 
  */
-public class Session
-{
-    /** 批量处理的数量。 */
+public class Session {
+    /**
+     * 批量处理的数量。
+     */
     protected int batchCount = 0;
     /**
      * 查询结果
@@ -28,32 +29,42 @@ public class Session
      * 查询表达式。
      */
     protected Statement statement = null;
-    /** 连接对象。 */
+    /**
+     * 连接对象。
+     */
     private Connection connection = null;
-    /** 数据库连接对象。 */
+    /**
+     * 数据库连接对象。
+     */
     private DatabaseConnectionPool databaseConnectionPool;
-    /** 执行器 */
+    /**
+     * 执行器
+     */
     private SessionExecutor sessionExecutor = new SessionExecutor(this);
-    /** SQL跟踪器。 */
+    /**
+     * SQL跟踪器。
+     */
     private SqlProfile sqlProfile = new SqlProfile();
-    /** 使用事务。 */
+    /**
+     * 使用事务。
+     */
     private boolean useTransaction = false;
 
     /**
      * 构造会话对象。
+     *
      * @param connection 连接对象。
      */
-    public Session(DatabaseConnectionPool connectionPool)
-    {
+    public Session(DatabaseConnectionPool connectionPool) {
         this.databaseConnectionPool = connectionPool;
     }
 
     /**
      * 开启事务。
+     *
      * @throws SQLException
      */
-    public void beginTransaction() throws SQLException
-    {
+    public void beginTransaction() throws SQLException {
         if (!this.databaseConnectionPool.isUseExtendTransaction())
             this.getConnection().setAutoCommit(false);
         this.useTransaction = true;
@@ -61,10 +72,10 @@ public class Session
 
     /**
      * 提交事务。
+     *
      * @throws SQLException
      */
-    public void commit() throws SQLException
-    {
+    public void commit() throws SQLException {
         this.useTransaction = false;
         this.sqlProfile.end();
         Connection connection = this.getConnection();
@@ -73,8 +84,7 @@ public class Session
             connection.commit();
     }
 
-    public void destroy()
-    {
+    public void destroy() {
         this.releaseStatement();
         this.databaseConnectionPool.destroy(this.connection);
         this.connection = null;
@@ -82,15 +92,14 @@ public class Session
 
     /**
      * 执行命令。
+     *
      * @param sql 表达语句。
      * @throws SQLException
      */
-    public int execute(String sql) throws SQLException
-    {
+    public int execute(String sql) throws SQLException {
         if (ValueUtils.isEmpty(sql))
             return 0;
-        if (!this.useTransaction)
-        {
+        if (!this.useTransaction) {
             this.sqlProfile.begin();
             this.sqlProfile.appendSql(sql);
         }
@@ -103,30 +112,25 @@ public class Session
 
     /**
      * 以数据源为参数批量执行SQL命令。
-     * @param dataReader 数据来源。
+     *
+     * @param dataReader   数据来源。
      * @param sqlBatchList 批量语句。
      * @throws SQLException 运行异常。
      */
-    public int executeBatch(DataReader dataReader, List<String> sqlBatchList) throws SQLException
-    {
-        if (!this.useTransaction)
-        {
+    public int executeBatch(DataReader dataReader, List<String> sqlBatchList) throws SQLException {
+        if (!this.useTransaction) {
             this.sqlProfile.begin();
             this.sqlProfile.appendSql(sqlBatchList);
         }
 
         BatchExecutSession batchExecutSession = new BatchExecutSession(this, dataReader, sqlBatchList);
-        try
-        {
+        try {
             SessionExecutor sessionExecutor = new SessionExecutor(this);
             batchExecutSession.prepare();
-            for (int index = 0; index < dataReader.size(); index++)
-            {
+            for (int index = 0; index < dataReader.size(); index++) {
                 boolean submit = this.batchCount >= this.databaseConnectionPool.getBatchSize();
-                for (BatchExecutor batchExecutor : batchExecutSession.getBatchExecutorList())
-                {
-                    if (this.statement != null)
-                    {
+                for (BatchExecutor batchExecutor : batchExecutSession.getBatchExecutorList()) {
+                    if (this.statement != null) {
                         sessionExecutor.execute(SessionExecutor.EXECUTE_BATCHUPDATE, submit);
                         submit = false;
                     }
@@ -137,9 +141,7 @@ public class Session
             }
             if (this.batchCount > 0)
                 sessionExecutor.execute(SessionExecutor.EXECUTE_BATCHUPDATE, true);
-        }
-        finally
-        {
+        } finally {
             batchExecutSession.release();
             this.statement = null;
             if (!this.useTransaction)
@@ -150,13 +152,12 @@ public class Session
 
     /**
      * 批量执行存储命令。
+     *
      * @param rows 数据行对象。
      * @throws SQLException
      */
-    public int executeBatch(List<String> sqlBatchList) throws SQLException
-    {
-        if (!this.useTransaction)
-        {
+    public int executeBatch(List<String> sqlBatchList) throws SQLException {
+        if (!this.useTransaction) {
             this.sqlProfile.begin();
             this.sqlProfile.appendSql(sqlBatchList);
         }
@@ -168,11 +169,11 @@ public class Session
 
     /**
      * 执行更新命令。
+     *
      * @param values 参数对象。
      * @throws SQLException
      */
-    public int executeBatchUpdate(boolean submit) throws SQLException
-    {
+    public int executeBatchUpdate(boolean submit) throws SQLException {
         this.batchCount++;
         if (!submit)
             submit = this.batchCount >= this.databaseConnectionPool.getBatchSize();
@@ -181,14 +182,13 @@ public class Session
 
     /**
      * 执行查询命令
+     *
      * @param sql
      * @return ResultSet 查询结果
      * @throws SQLException
      */
-    public ResultSet executeQuery(String sql) throws SQLException
-    {
-        if (!this.useTransaction)
-        {
+    public ResultSet executeQuery(String sql) throws SQLException {
+        if (!this.useTransaction) {
             this.sqlProfile.begin();
             this.sqlProfile.appendSql(sql);
         }
@@ -200,50 +200,44 @@ public class Session
 
     /**
      * 执行更新命令。
+     *
      * @param values 参数对象。
      * @throws SQLException
      */
-    public void executeUpdate() throws SQLException
-    {
+    public void executeUpdate() throws SQLException {
         this.sessionExecutor.execute(SessionExecutor.EXECUTE_UPDATE);
     }
 
-    private AutoIncrementManager getAutoIncrementManager()
-    {
+    private AutoIncrementManager getAutoIncrementManager() {
         return this.databaseConnectionPool.getAutoIncrementManager();
     }
 
-    public Connection getConnection()
-    {
+    public Connection getConnection() {
         if (this.connection == null)
             this.connection = this.databaseConnectionPool.poll();
         return this.connection;
     }
 
-    protected DatabaseConnectionPool getDatabaseConnectionPool()
-    {
+    protected DatabaseConnectionPool getDatabaseConnectionPool() {
         return this.databaseConnectionPool;
     }
 
     /**
      * 返回产生的主键值。。
+     *
      * @throws SQLException
      */
-    public ResultSet getGeneratedKeys() throws SQLException
-    {
+    public ResultSet getGeneratedKeys() throws SQLException {
         return this.statement.getGeneratedKeys();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.databaseConnectionPool.getName();
     }
 
-    private ResultSet getResultSet(Table table, ResultSet resultSet) throws SQLException
-    {
+    private ResultSet getResultSet(Table table, ResultSet resultSet) throws SQLException {
         ResultSet metaDataResultSet = resultSet;
-        if (metaDataResultSet == null)
-        {
+        if (metaDataResultSet == null) {
             String sql = null;
             SqlBuilder sqlBuilder = table.getSql();
             if (sqlBuilder.length() == 0 && !ValueUtils.isEmpty(table.getTableName().getName()))
@@ -258,12 +252,12 @@ public class Session
 
     /**
      * 在指定结果集中还原元数据。
-     * @param table 数据表对象。
+     *
+     * @param table     数据表对象。
      * @param resultSet 结果集。
      * @throws SQLException 执行异常。
      */
-    public void loadMetaData(Table table, ResultSet resultSet) throws SQLException
-    {
+    public void loadMetaData(Table table, ResultSet resultSet) throws SQLException {
         ResultSet metaDataResultSet = this.getResultSet(table, resultSet);
         if (metaDataResultSet == null)
             return;
@@ -274,8 +268,7 @@ public class Session
         // 还原栏位的信息。
         Columns columns = table.getColumns();
         int columnCount = resultSetMetaData.getColumnCount();
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++)
-        {
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
             String fieldName = resultSetMetaData.getColumnLabel(columnIndex);
             Class<?> fieldClass = JdbcValueUtils.getFieldType(resultSetMetaData, columnIndex);
             int displaySize = resultSetMetaData.getColumnDisplaySize(columnIndex);
@@ -283,8 +276,7 @@ public class Session
             Column column = columns.find(fieldName);
             if (column == null)
                 column = columns.add(fieldName, fieldClass, displaySize, isPrimaryKey);
-            else
-            {
+            else {
                 column.setFieldClass(fieldClass);
                 column.setDisplaySize(displaySize);
                 column.setPrimaryKey(isPrimaryKey);
@@ -299,49 +291,45 @@ public class Session
 
     /**
      * 载入主键元数据。
+     *
      * @param table 数据表对象。
      */
-    private Collection<String> loadPrimayKeyMetaData(String tableName)
-    {
+    private Collection<String> loadPrimayKeyMetaData(String tableName) {
         Collection<String> primayKeys = new HashSet<String>();
-        try
-        {
+        try {
             DatabaseMetaData databaseMetaData = this.getConnection().getMetaData();
             ResultSet resultSet = databaseMetaData.getPrimaryKeys(null, null, tableName);
             while (resultSet.next())
                 primayKeys.add(resultSet.getString("COLUMN_NAME"));
             resultSet.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
         return primayKeys;
     }
 
     /**
      * 根据表名字段名读取下一个主键序列。
-     * @param tableName 表名。
-     * @param fieldName 字段名。
-     * @param classType 字段类型。
+     *
+     * @param tableName      表名。
+     * @param fieldName      字段名。
+     * @param classType      字段类型。
      * @param tableGenerator 序号策略。
      * @return 主键序列。
      * @throws SQLException
      */
-    public Object nextSequence(String tableName, String fieldName, Class<?> classType, TableGenerator tableGenerator) throws SQLException
-    {
+    public Object nextSequence(String tableName, String fieldName, Class<?> classType, TableGenerator tableGenerator) throws SQLException {
         return this.getAutoIncrementManager().nextSequence(this.getConnection(), tableName, fieldName, classType, tableGenerator);
     }
 
     /**
      * 预查询。
-     * @param sql 查询语句。
+     *
+     * @param sql        查询语句。
      * @param fieldNames 返回字段名。
      * @throws SQLException
      */
-    public void prepare(String sql, String... fieldNames) throws SQLException
-    {
-        if (!this.useTransaction)
-        {
+    public void prepare(String sql, String... fieldNames) throws SQLException {
+        if (!this.useTransaction) {
             this.sqlProfile.begin();
             this.sqlProfile.appendSql(sql);
         }
@@ -355,8 +343,7 @@ public class Session
     /**
      * 释放会话对象。
      */
-    public void release()
-    {
+    public void release() {
         this.releaseStatement();
         this.databaseConnectionPool.release(this.connection);
         this.connection = null;
@@ -367,61 +354,47 @@ public class Session
     /**
      * 释放查询对象对象。
      */
-    private void releaseStatement()
-    {
-        try
-        {
-            if (this.resultSet != null)
-            {
+    private void releaseStatement() {
+        try {
+            if (this.resultSet != null) {
                 this.resultSet.close();
                 this.resultSet = null;
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
         }
 
-        try
-        {
-            if (this.statement != null)
-            {
+        try {
+            if (this.statement != null) {
                 this.statement.close();
                 this.statement = null;
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
         }
     }
 
     /**
      * 回滚事务。
      */
-    public void rollback()
-    {
+    public void rollback() {
         this.sqlProfile.end();
         this.useTransaction = false;
-        if (!this.databaseConnectionPool.isUseExtendTransaction())
-        {
-            try
-            {
+        if (!this.databaseConnectionPool.isUseExtendTransaction()) {
+            try {
                 this.getConnection().rollback();
-            }
-            catch (SQLException e)
-            {
+            } catch (SQLException e) {
             }
         }
     }
 
     /**
      * 设置参数。
+     *
      * @param parameterIndex 参数索引位置。
-     * @param value 参数值。
-     * @param column 数据库类型。
+     * @param value          参数值。
+     * @param column         数据库类型。
      * @throws SQLException
      */
-    public void setParam(int parameterIndex, Object value, Column column) throws SQLException
-    {
+    public void setParam(int parameterIndex, Object value, Column column) throws SQLException {
         JdbcValueUtils.write((PreparedStatement) this.statement, parameterIndex + 1, value, column);
     }
 }

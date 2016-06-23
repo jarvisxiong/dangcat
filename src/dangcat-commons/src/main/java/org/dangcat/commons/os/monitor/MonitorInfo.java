@@ -2,11 +2,10 @@ package org.dangcat.commons.os.monitor;
 
 /**
  * 监控的资源信息。
+ *
  * @author dangcat
- * 
  */
-public interface MonitorInfo extends java.io.Serializable
-{
+public interface MonitorInfo extends java.io.Serializable {
     String DiskUsageSpaceRatio = "DiskUsageSpaceRatio";
     String FreeDiskSpace = "FreeDiskSpace";
     String ProcessCpuRatio = "ProcessCpuRatio";

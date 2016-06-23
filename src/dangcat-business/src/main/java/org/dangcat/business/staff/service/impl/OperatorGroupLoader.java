@@ -10,18 +10,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OperatorGroupLoader
-{
+public class OperatorGroupLoader {
     private EntityManager entityManager = null;
     private OperatorInfo loginOperatorInfo = null;
 
-    public OperatorGroupLoader(EntityManager entityManager)
-    {
+    public OperatorGroupLoader(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public Integer getCurrentGroupId()
-    {
+    public Integer getCurrentGroupId() {
         Integer groupId = null;
         OperatorInfo loginOperatorInfo = this.getLoginOperatorInfo();
         if (loginOperatorInfo != null)
@@ -29,15 +26,12 @@ public class OperatorGroupLoader
         return groupId;
     }
 
-    public OperatorInfo getLoginOperatorInfo()
-    {
-        if (this.loginOperatorInfo == null)
-        {
+    public OperatorInfo getLoginOperatorInfo() {
+        if (this.loginOperatorInfo == null) {
             ServiceContext serviceContext = ServiceContext.getInstance();
-            if (serviceContext != null)
-            {
+            if (serviceContext != null) {
                 ServicePrincipal servicePrincipal = serviceContext.getServicePrincipal();
-                List<OperatorInfo> operatorInfoList = this.entityManager.load(OperatorInfo.class, new String[] { OperatorInfo.No }, servicePrincipal.getNo());
+                List<OperatorInfo> operatorInfoList = this.entityManager.load(OperatorInfo.class, new String[]{OperatorInfo.No}, servicePrincipal.getNo());
                 if (operatorInfoList != null && operatorInfoList.size() > 0)
                     this.loginOperatorInfo = operatorInfoList.get(0);
             }
@@ -48,8 +42,7 @@ public class OperatorGroupLoader
     /**
      * 当前用户的所有子组列表。
      */
-    public Integer[] loadMemberIds()
-    {
+    public Integer[] loadMemberIds() {
         Integer[] groupIds = null;
         Map<Integer, String> operatorGroupMap = this.loadMembers(null);
         if (operatorGroupMap != null)
@@ -57,18 +50,15 @@ public class OperatorGroupLoader
         return groupIds;
     }
 
-    public Map<Integer, String> loadMembers(Integer parentId)
-    {
+    public Map<Integer, String> loadMembers(Integer parentId) {
         Map<Integer, String> operatorGroupMap = new LinkedHashMap<Integer, String>();
         if (parentId == null)
             parentId = this.getCurrentGroupId();
         List<OperatorGroup> operatorGroupList = this.entityManager.load(OperatorGroup.class);
-        if (operatorGroupList != null && operatorGroupList.size() > 0)
-        {
+        if (operatorGroupList != null && operatorGroupList.size() > 0) {
             if (parentId != null)
                 this.loadMembers(operatorGroupMap, operatorGroupList, parentId);
-            else
-            {
+            else {
                 for (OperatorGroup operatorGroup : operatorGroupList)
                     operatorGroupMap.put(operatorGroup.getId(), operatorGroup.getName());
             }
@@ -76,12 +66,9 @@ public class OperatorGroupLoader
         return operatorGroupMap;
     }
 
-    private void loadMembers(Map<Integer, String> operatorGroupMap, List<OperatorGroup> operatorGroupList, Integer parentId)
-    {
-        if (operatorGroupList != null)
-        {
-            for (OperatorGroup operatorGroup : operatorGroupList)
-            {
+    private void loadMembers(Map<Integer, String> operatorGroupMap, List<OperatorGroup> operatorGroupList, Integer parentId) {
+        if (operatorGroupList != null) {
+            for (OperatorGroup operatorGroup : operatorGroupList) {
                 if (parentId.equals(operatorGroup.getId()))
                     operatorGroupMap.put(operatorGroup.getId(), operatorGroup.getName());
                 else if (parentId.equals(operatorGroup.getParentId()) && !operatorGroupMap.containsKey(operatorGroup.getId()))

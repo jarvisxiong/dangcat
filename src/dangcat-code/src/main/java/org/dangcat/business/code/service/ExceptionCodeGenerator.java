@@ -4,13 +4,11 @@ import org.dangcat.business.code.CodeGenerator;
 
 import java.io.File;
 
-public class ExceptionCodeGenerator extends CodeGenerator
-{
+public class ExceptionCodeGenerator extends CodeGenerator {
     private static final String TEMPLATE = "Exception.java.template";
 
     @Override
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         String outputFile = "main" + File.separator + "java";
         outputFile += File.separator + this.getPackageName().replace(".", File.separator);
         outputFile += File.separator + "exception";
@@ -19,8 +17,7 @@ public class ExceptionCodeGenerator extends CodeGenerator
     }
 
     @Override
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return TEMPLATE;
     }
 }

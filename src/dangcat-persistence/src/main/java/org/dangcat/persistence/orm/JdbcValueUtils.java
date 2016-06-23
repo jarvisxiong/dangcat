@@ -6,21 +6,19 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Date;
 
-public class JdbcValueUtils
-{
+public class JdbcValueUtils {
     /**
      * 根据元数据定义字段类型。
+     *
      * @param resultSetMetaData 元数据对象。
-     * @param columnIndex 栏位索引。
+     * @param columnIndex       栏位索引。
      * @return SQL数据类型。
      * @throws SQLException
      */
-    public static Class<?> getFieldType(ResultSetMetaData resultSetMetaData, int columnIndex) throws SQLException
-    {
+    public static Class<?> getFieldType(ResultSetMetaData resultSetMetaData, int columnIndex) throws SQLException {
         Class<?> fieldClass = null;
         int sqlType = resultSetMetaData.getColumnType(columnIndex);
-        switch (sqlType)
-        {
+        switch (sqlType) {
             case Types.NCLOB:
             case Types.CLOB:
             case Types.NCHAR:
@@ -78,11 +76,11 @@ public class JdbcValueUtils
 
     /**
      * 根据数据类型取得SQL类型。
+     *
      * @param fieldClass 字段类型。
      * @return SQL数据类型。
      */
-    public static int getSqlType(Class<?> fieldClass)
-    {
+    public static int getSqlType(Class<?> fieldClass) {
         if (String.class.equals(fieldClass) || Character[].class.equals(fieldClass) || char[].class.equals(fieldClass))
             return Types.VARCHAR;
         else if (Byte.class.equals(fieldClass) || byte.class.equals(fieldClass))
@@ -108,26 +106,26 @@ public class JdbcValueUtils
 
     /**
      * 由数据集解析数据行。
+     *
      * @param fieldName 字段名。
      * @param resultSet 原始数据集合。
      * @throws SQLException 异常对象。
      * @throws IOException
      */
-    public static Object read(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException
-    {
+    public static Object read(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         return JdbcValueReader.read(fieldName, resultSet, targetClass);
     }
 
     /**
      * 写入表达式值。
+     *
      * @param preparedStatement 表达式对象。
-     * @param parameterIndex 参数序号。
-     * @param value 值对象。
-     * @param column 数据库类型。
+     * @param parameterIndex    参数序号。
+     * @param value             值对象。
+     * @param column            数据库类型。
      * @throws SQLException 运行异常。
      */
-    public static void write(PreparedStatement preparedStatement, int parameterIndex, Object value, Column column) throws SQLException
-    {
+    public static void write(PreparedStatement preparedStatement, int parameterIndex, Object value, Column column) throws SQLException {
         JdbcValueWriter.write(preparedStatement, parameterIndex, value, column);
     }
 }

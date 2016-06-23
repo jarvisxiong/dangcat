@@ -4,11 +4,9 @@ import junit.framework.Assert;
 import org.dangcat.commons.reflect.examples.FieldValue2;
 import org.junit.Test;
 
-public class TestFieldReflect
-{
+public class TestFieldReflect {
     @Test
-    public void testFieldReflect()
-    {
+    public void testFieldReflect() {
         FieldValue2 instance = new FieldValue2();
         ReflectUtils.setFieldValue(instance, "value1", 100);
         ReflectUtils.setFieldValue(instance, "value2", 200);

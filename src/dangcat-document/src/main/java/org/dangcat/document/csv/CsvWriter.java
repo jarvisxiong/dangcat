@@ -26,8 +26,7 @@ import java.nio.charset.Charset;
 /**
  * A stream based writer for writing delimited text data to a file or a stream.
  */
-public class CsvWriter
-{
+public class CsvWriter {
     private Charset charset = null;
     private boolean closed = false;
     private String fileName = null;
@@ -42,14 +41,13 @@ public class CsvWriter
     /**
      * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using an
      * OutputStream to write data to.
-     * 
+     *
      * @param outputStream The stream to write the column delimited data to.
-     * @param delimiter The character to use as the column delimiter.
-     * @param charset The {@link java.nio.charset.Charset Charset} to use while
-     *            writing the data.
+     * @param delimiter    The character to use as the column delimiter.
+     * @param charset      The {@link java.nio.charset.Charset Charset} to use while
+     *                     writing the data.
      */
-    public CsvWriter(OutputStream outputStream, char delimiter, Charset charset)
-    {
+    public CsvWriter(OutputStream outputStream, char delimiter, Charset charset) {
         this(new OutputStreamWriter(outputStream, charset), delimiter);
     }
 
@@ -57,25 +55,23 @@ public class CsvWriter
      * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a file
      * as the data destination.&nbsp;Uses a comma as the column delimiter and
      * ISO-8859-1 as the {@link java.nio.charset.Charset Charset}.
-     * 
+     *
      * @param fileName The path to the file to output the data.
      */
-    public CsvWriter(String fileName)
-    {
+    public CsvWriter(String fileName) {
         this(fileName, Letters.COMMA, Charset.forName("ISO-8859-1"));
     }
 
     /**
      * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a file
      * as the data destination.
-     * 
-     * @param fileName The path to the file to output the data.
+     *
+     * @param fileName  The path to the file to output the data.
      * @param delimiter The character to use as the column delimiter.
-     * @param charset The {@link java.nio.charset.Charset Charset} to use while
-     *            writing the data.
+     * @param charset   The {@link java.nio.charset.Charset Charset} to use while
+     *                  writing the data.
      */
-    public CsvWriter(String fileName, char delimiter, Charset charset)
-    {
+    public CsvWriter(String fileName, char delimiter, Charset charset) {
         if (fileName == null)
             throw new IllegalArgumentException("Parameter fileName can not be null.");
 
@@ -87,20 +83,18 @@ public class CsvWriter
         this.charset = charset;
     }
 
-    public CsvWriter(Writer writer)
-    {
+    public CsvWriter(Writer writer) {
         this(writer, Letters.COMMA);
     }
 
     /**
      * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a Writer
      * to write data to.
-     * 
+     *
      * @param outputStream The stream to write the column delimited data to.
-     * @param delimiter The character to use as the column delimiter.
+     * @param delimiter    The character to use as the column delimiter.
      */
-    public CsvWriter(Writer outputStream, char delimiter)
-    {
+    public CsvWriter(Writer outputStream, char delimiter) {
         if (outputStream == null)
             throw new IllegalArgumentException("Parameter outputStream can not be null.");
 
@@ -109,16 +103,13 @@ public class CsvWriter
         this.initialized = true;
     }
 
-    private void checkClosed() throws IOException
-    {
+    private void checkClosed() throws IOException {
         if (this.closed)
             throw new IOException("This instance of the CsvWriter class has already been closed.");
     }
 
-    private void checkInit() throws IOException
-    {
-        if (!this.initialized)
-        {
+    private void checkInit() throws IOException {
+        if (!this.initialized) {
             if (this.fileName != null)
                 this.outputStream = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName), this.charset));
 
@@ -129,29 +120,22 @@ public class CsvWriter
     /**
      * Closes and releases all related resources.
      */
-    public void close()
-    {
-        if (!this.closed)
-        {
+    public void close() {
+        if (!this.closed) {
             this.close(true);
             this.closed = true;
         }
     }
 
-    private void close(boolean closing)
-    {
-        if (!this.closed)
-        {
+    private void close(boolean closing) {
+        if (!this.closed) {
             if (closing)
                 this.charset = null;
 
-            try
-            {
+            try {
                 if (this.initialized)
                     this.outputStream.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // just eat the exception
             }
 
@@ -162,12 +146,11 @@ public class CsvWriter
 
     /**
      * Ends the current record by sending the record delimiter.
-     * 
-     * @exception IOException Thrown if an error occurs while writing data to
-     *                the destination stream.
+     *
+     * @throws IOException Thrown if an error occurs while writing data to
+     *                     the destination stream.
      */
-    public void endRecord() throws IOException
-    {
+    public void endRecord() throws IOException {
         this.checkClosed();
         this.checkInit();
 
@@ -179,27 +162,25 @@ public class CsvWriter
     }
 
     /**
-	 * 
-	 */
+     *
+     */
     @Override
-    protected void finalize()
-    {
+    protected void finalize() {
         this.close(false);
     }
 
     /**
      * Clears all buffers for the current writer and causes any buffered data to
      * be written to the underlying device.
-     * @exception IOException Thrown if an error occurs while writing data to
-     *                the destination stream.
+     *
+     * @throws IOException Thrown if an error occurs while writing data to
+     *                     the destination stream.
      */
-    public void flush() throws IOException
-    {
+    public void flush() throws IOException {
         this.outputStream.flush();
     }
 
-    public char getComment()
-    {
+    public char getComment() {
         return this.userSettings.Comment;
     }
 
@@ -212,8 +193,7 @@ public class CsvWriter
      *
      * @return The character being used as the column delimiter.
      */
-    public char getDelimiter()
-    {
+    public char getDelimiter() {
         return this.userSettings.Delimiter;
     }
 
@@ -222,18 +202,15 @@ public class CsvWriter
      *
      * @param delimiter The character to use as the column delimiter.
      */
-    public void setDelimiter(char delimiter)
-    {
+    public void setDelimiter(char delimiter) {
         this.userSettings.Delimiter = delimiter;
     }
 
-    public int getEscapeMode()
-    {
+    public int getEscapeMode() {
         return this.userSettings.EscapeMode;
     }
 
-    public void setEscapeMode(int escapeMode)
-    {
+    public void setEscapeMode(int escapeMode) {
         this.userSettings.EscapeMode = escapeMode;
     }
 
@@ -243,8 +220,7 @@ public class CsvWriter
      *
      * @return Whether fields will be forced to be qualified or not.
      */
-    public boolean getForceQualifier()
-    {
+    public boolean getForceQualifier() {
         return this.userSettings.ForceQualifier;
     }
 
@@ -255,8 +231,7 @@ public class CsvWriter
      *
      * @param forceQualifier Whether to force the fields to be qualified or not.
      */
-    public void setForceQualifier(boolean forceQualifier)
-    {
+    public void setForceQualifier(boolean forceQualifier) {
         this.userSettings.ForceQualifier = forceQualifier;
     }
 
@@ -268,11 +243,10 @@ public class CsvWriter
      * Sets the character to use as the record delimiter.
      *
      * @param recordDelimiter The character to use as the record delimiter.
-     *            Default is combination of standard end of line characters for
-     *            Windows, Unix, or Mac.
+     *                        Default is combination of standard end of line characters for
+     *                        Windows, Unix, or Mac.
      */
-    public void setRecordDelimiter(char recordDelimiter)
-    {
+    public void setRecordDelimiter(char recordDelimiter) {
         this.useCustomRecordDelimiter = true;
         this.userSettings.RecordDelimiter = recordDelimiter;
     }
@@ -296,10 +270,9 @@ public class CsvWriter
      * Sets the character to use as a text qualifier in the data.
      *
      * @param textQualifier The character to use as a text qualifier in the
-     *            data.
+     *                      data.
      */
-    public void setTextQualifier(char textQualifier)
-    {
+    public void setTextQualifier(char textQualifier) {
         this.userSettings.TextQualifier = textQualifier;
     }
 
@@ -307,8 +280,7 @@ public class CsvWriter
         return this.userSettings;
     }
 
-    public void setUserSettings(WriteUserSettings userSettings)
-    {
+    public void setUserSettings(WriteUserSettings userSettings) {
         this.userSettings = userSettings;
     }
 
@@ -323,39 +295,36 @@ public class CsvWriter
 
     /**
      * Sets whether text qualifiers will be used while writing data or not.
-     * 
+     *
      * @param useTextQualifier Whether to use a text qualifier while writing
-     *            data or not.
+     *                         data or not.
      */
-    public void setUseTextQualifier(boolean useTextQualifier)
-    {
+    public void setUseTextQualifier(boolean useTextQualifier) {
         this.userSettings.UseTextQualifier = useTextQualifier;
     }
 
     /**
      * Writes another column of data to this record.&nbsp;Does not preserve
      * leading and trailing whitespace in this column of data.
-     * 
+     *
      * @param content The data for the new column.
-     * @exception IOException Thrown if an error occurs while writing data to
-     *                the destination stream.
+     * @throws IOException Thrown if an error occurs while writing data to
+     *                     the destination stream.
      */
-    public void write(String content) throws IOException
-    {
+    public void write(String content) throws IOException {
         this.write(content, false);
     }
 
     /**
      * Writes another column of data to this record.
-     * 
-     * @param content The data for the new column.
+     *
+     * @param content        The data for the new column.
      * @param preserveSpaces Whether to preserve leading and trailing whitespace
-     *            in this column of data.
-     * @exception IOException Thrown if an error occurs while writing data to
-     *                the destination stream.
+     *                       in this column of data.
+     * @throws IOException Thrown if an error occurs while writing data to
+     *                     the destination stream.
      */
-    public void write(String content, boolean preserveSpaces) throws IOException
-    {
+    public void write(String content, boolean preserveSpaces) throws IOException {
         this.checkClosed();
         this.checkInit();
 
@@ -373,25 +342,22 @@ public class CsvWriter
         if (!textQualify
                 && this.userSettings.UseTextQualifier
                 && (content.indexOf(this.userSettings.TextQualifier) > -1 || content.indexOf(this.userSettings.Delimiter) > -1
-                        || (!this.useCustomRecordDelimiter && (content.indexOf(Letters.LF) > -1 || content.indexOf(Letters.CR) > -1))
-                        || (this.useCustomRecordDelimiter && content.indexOf(this.userSettings.RecordDelimiter) > -1)
-                        || (this.firstColumn && content.length() > 0 && content.charAt(0) == this.userSettings.Comment) ||
+                || (!this.useCustomRecordDelimiter && (content.indexOf(Letters.LF) > -1 || content.indexOf(Letters.CR) > -1))
+                || (this.useCustomRecordDelimiter && content.indexOf(this.userSettings.RecordDelimiter) > -1)
+                || (this.firstColumn && content.length() > 0 && content.charAt(0) == this.userSettings.Comment) ||
                 // check for empty first column, which if on its own line must
                 // be qualified or the line will be skipped
-                (this.firstColumn && content.length() == 0)))
-        {
+                (this.firstColumn && content.length() == 0))) {
             textQualify = true;
         }
 
-        if (this.userSettings.UseTextQualifier && !textQualify && content.length() > 0 && preserveSpaces)
-        {
+        if (this.userSettings.UseTextQualifier && !textQualify && content.length() > 0 && preserveSpaces) {
             char firstLetter = content.charAt(0);
 
             if (firstLetter == Letters.SPACE || firstLetter == Letters.TAB)
                 textQualify = true;
 
-            if (!textQualify && content.length() > 1)
-            {
+            if (!textQualify && content.length() > 1) {
                 char lastLetter = content.charAt(content.length() - 1);
 
                 if (lastLetter == Letters.SPACE || lastLetter == Letters.TAB)
@@ -399,33 +365,26 @@ public class CsvWriter
             }
         }
 
-        if (textQualify)
-        {
+        if (textQualify) {
             this.outputStream.write(this.userSettings.TextQualifier);
 
-            if (this.userSettings.EscapeMode == WriteUserSettings.ESCAPE_MODE_BACKSLASH)
-            {
+            if (this.userSettings.EscapeMode == WriteUserSettings.ESCAPE_MODE_BACKSLASH) {
                 content = CsvWriterUtils.replace(content, "" + Letters.BACKSLASH, "" + Letters.BACKSLASH + Letters.BACKSLASH);
                 content = CsvWriterUtils.replace(content, "" + this.userSettings.TextQualifier, "" + Letters.BACKSLASH + this.userSettings.TextQualifier);
-            }
-            else
+            } else
                 content = CsvWriterUtils.replace(content, "" + this.userSettings.TextQualifier, "" + this.userSettings.TextQualifier + this.userSettings.TextQualifier);
-        }
-        else if (this.userSettings.EscapeMode == WriteUserSettings.ESCAPE_MODE_BACKSLASH)
-        {
+        } else if (this.userSettings.EscapeMode == WriteUserSettings.ESCAPE_MODE_BACKSLASH) {
             content = CsvWriterUtils.replace(content, "" + Letters.BACKSLASH, "" + Letters.BACKSLASH + Letters.BACKSLASH);
             content = CsvWriterUtils.replace(content, "" + this.userSettings.Delimiter, "" + Letters.BACKSLASH + this.userSettings.Delimiter);
 
             if (this.useCustomRecordDelimiter)
                 content = CsvWriterUtils.replace(content, "" + this.userSettings.RecordDelimiter, "" + Letters.BACKSLASH + this.userSettings.RecordDelimiter);
-            else
-            {
+            else {
                 content = CsvWriterUtils.replace(content, "" + Letters.CR, "" + Letters.BACKSLASH + Letters.CR);
                 content = CsvWriterUtils.replace(content, "" + Letters.LF, "" + Letters.BACKSLASH + Letters.LF);
             }
 
-            if (this.firstColumn && content.length() > 0 && content.charAt(0) == this.userSettings.Comment)
-            {
+            if (this.firstColumn && content.length() > 0 && content.charAt(0) == this.userSettings.Comment) {
                 if (content.length() > 1)
                     content = "" + Letters.BACKSLASH + this.userSettings.Comment + content.substring(1);
                 else
@@ -441,8 +400,7 @@ public class CsvWriter
         this.firstColumn = false;
     }
 
-    public void writeComment(String commentText) throws IOException
-    {
+    public void writeComment(String commentText) throws IOException {
         this.checkClosed();
         this.checkInit();
         this.outputStream.write(this.userSettings.Comment);
@@ -458,32 +416,26 @@ public class CsvWriter
 
     /**
      * Writes a new record using the passed in array of values.
-     * 
+     *
      * @param values Values to be written.
-     * 
      * @throws IOException Thrown if an error occurs while writing data to the
-     *             destination stream.
+     *                     destination stream.
      */
-    public void writeRecord(String[] values) throws IOException
-    {
+    public void writeRecord(String[] values) throws IOException {
         this.writeRecord(values, false);
     }
 
     /**
      * Writes a new record using the passed in array of values.
-     * 
-     * @param values Values to be written.
-     * 
+     *
+     * @param values         Values to be written.
      * @param preserveSpaces Whether to preserver leading and trailing spaces in
-     *            columns while writing out to the record or not.
-     * 
+     *                       columns while writing out to the record or not.
      * @throws IOException Thrown if an error occurs while writing data to the
-     *             destination stream.
+     *                     destination stream.
      */
-    public void writeRecord(String[] values, boolean preserveSpaces) throws IOException
-    {
-        if (values != null && values.length > 0)
-        {
+    public void writeRecord(String[] values, boolean preserveSpaces) throws IOException {
+        if (values != null && values.length > 0) {
             for (int i = 0; i < values.length; i++)
                 this.write(values[i], preserveSpaces);
             this.endRecord();

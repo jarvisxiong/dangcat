@@ -5,11 +5,10 @@ import java.util.Date;
 
 /**
  * ∂® ±–°ƒ÷÷”°£
+ *
  * @author dangcat
- * 
  */
-public abstract class AlarmClock implements Comparable<AlarmClock>
-{
+public abstract class AlarmClock implements Comparable<AlarmClock> {
     public static final int LOW_PRIORITY = 200;
     public static final int MAX_PRIORITY = 0;
     public static final int NORMAL_PRIORITY = 100;
@@ -23,27 +22,22 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
     private SingleRunnable singleRunnable = null;
     private Object target;
 
-    public AlarmClock()
-    {
+    public AlarmClock() {
     }
 
-    public AlarmClock(Object target)
-    {
+    public AlarmClock(Object target) {
         this.target = target;
     }
 
-    public int compareTo(AlarmClock alarmClock)
-    {
+    public int compareTo(AlarmClock alarmClock) {
         return this.getPriority() - alarmClock.getPriority();
     }
 
-    public boolean couldRun()
-    {
+    public boolean couldRun() {
         return this.singleRunnable == null || !this.singleRunnable.isRunning();
     }
 
-    protected Date getLastAlramTime()
-    {
+    protected Date getLastAlramTime() {
         return this.lastAlramTime;
     }
 
@@ -51,8 +45,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.lastAlramTime = lastAlramTime;
     }
 
-    public long getMinAlramTimeLength()
-    {
+    public long getMinAlramTimeLength() {
         return this.minAlramTimeLength;
     }
 
@@ -60,8 +53,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.minAlramTimeLength = minAlramTimeLength;
     }
 
-    public Date getNextAlramTime()
-    {
+    public Date getNextAlramTime() {
         return this.nextAlramTime;
     }
 
@@ -69,8 +61,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.nextAlramTime = nextAlramTime;
     }
 
-    public int getPriority()
-    {
+    public int getPriority() {
         return this.priority;
     }
 
@@ -78,14 +69,12 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.priority = priority;
     }
 
-    public Runnable getRunnable()
-    {
+    public Runnable getRunnable() {
         Runnable runnable = null;
         if (this.target instanceof Runnable)
             runnable = (Runnable) this.target;
 
-        if (this.isSingleRunnable())
-        {
+        if (this.isSingleRunnable()) {
             if (this.singleRunnable == null)
                 this.singleRunnable = new SingleRunnable(runnable);
             runnable = this.singleRunnable;
@@ -93,8 +82,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         return runnable;
     }
 
-    public Object getTarget()
-    {
+    public Object getTarget() {
         return this.target;
     }
 
@@ -105,8 +93,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.target = target;
     }
 
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return this.enabled;
     }
 
@@ -114,20 +101,17 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
         this.enabled = enabled;
     }
 
-    protected boolean isInholdTime(Date alramTime)
-    {
+    protected boolean isInholdTime(Date alramTime) {
         if (this.lastAlramTime == null)
             return false;
         return Math.abs(this.lastAlramTime.getTime() - alramTime.getTime()) > this.getMinAlramTimeLength();
     }
 
-    public boolean isSingleRunnable()
-    {
+    public boolean isSingleRunnable() {
         return this.isSingleRunnable;
     }
 
-    public void setSingleRunnable(boolean isSingleRunnable)
-    {
+    public void setSingleRunnable(boolean isSingleRunnable) {
         this.isSingleRunnable = isSingleRunnable;
     }
 
@@ -137,8 +121,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock>
     public abstract boolean isTimeout(Calendar calendar);
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append("Target = " + this.getTarget().getClass().getSimpleName());
         return info.toString();

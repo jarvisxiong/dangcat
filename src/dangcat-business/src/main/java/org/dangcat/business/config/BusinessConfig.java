@@ -13,13 +13,11 @@ import java.util.Collection;
 
 /**
  * “µŒÒ≈‰÷√°£
+ *
  * @author dangcat
- * 
  */
-public abstract class BusinessConfig extends ConfigBase
-{
-    public BusinessConfig(String name)
-    {
+public abstract class BusinessConfig extends ConfigBase {
+    public BusinessConfig(String name) {
         super(name);
         this.initlialize();
     }
@@ -27,20 +25,16 @@ public abstract class BusinessConfig extends ConfigBase
     public abstract EntityBase createDefaultEntity();
 
     @Override
-    protected ConfigValue getConfigValue(String configName)
-    {
+    protected ConfigValue getConfigValue(String configName) {
         BusinessConfigManager.getInstance();
         return super.getConfigValue(configName);
     }
 
-    public EntityBase getCurrentEntity()
-    {
+    public EntityBase getCurrentEntity() {
         EntityBase entity = this.createDefaultEntity();
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity);
-        if (entityMetaData != null)
-        {
-            for (EntityField entityField : entityMetaData.getEntityFieldCollection())
-            {
+        if (entityMetaData != null) {
+            for (EntityField entityField : entityMetaData.getEntityFieldCollection()) {
                 Object value = this.getCurrentValue(entityField.getFieldName());
                 entityField.setValue(entity, value);
             }
@@ -48,14 +42,11 @@ public abstract class BusinessConfig extends ConfigBase
         return entity;
     }
 
-    private void initlialize()
-    {
+    private void initlialize() {
         Object entity = this.createDefaultEntity();
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity);
-        if (entityMetaData != null)
-        {
-            for (EntityField entityField : entityMetaData.getEntityFieldCollection())
-            {
+        if (entityMetaData != null) {
+            for (EntityField entityField : entityMetaData.getEntityFieldCollection()) {
                 String name = entityField.getFieldName();
                 Object value = entityField.getValue(entity);
                 this.addConfigValue(name, entityField.getClassType(), value);
@@ -63,10 +54,8 @@ public abstract class BusinessConfig extends ConfigBase
         }
     }
 
-    public void load(Collection<BusinessSetup> systemConfigCollection)
-    {
-        for (BusinessSetup businessSetup : systemConfigCollection)
-        {
+    public void load(Collection<BusinessSetup> systemConfigCollection) {
+        for (BusinessSetup businessSetup : systemConfigCollection) {
             if (!this.getName().equals(businessSetup.getName()))
                 continue;
 
@@ -76,13 +65,10 @@ public abstract class BusinessConfig extends ConfigBase
         }
     }
 
-    public void save(Object entity) throws ServiceException
-    {
+    public void save(Object entity) throws ServiceException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity);
-        if (entityMetaData != null)
-        {
-            for (EntityField entityField : entityMetaData.getEntityFieldCollection())
-            {
+        if (entityMetaData != null) {
+            for (EntityField entityField : entityMetaData.getEntityFieldCollection()) {
                 String name = entityField.getFieldName();
                 Object value = entityField.getValue(entity);
                 ConfigValue configValue = this.getConfigValue(name);

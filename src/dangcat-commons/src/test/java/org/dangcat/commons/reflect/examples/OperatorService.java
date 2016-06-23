@@ -4,8 +4,7 @@ import org.dangcat.commons.reflect.Parameter;
 
 import java.util.List;
 
-public interface OperatorService
-{
+public interface OperatorService {
     boolean delete(@Parameter(name = "operatorInfo") OperatorInfo operatorInfo);
 
     LoadResult<UserInfo> load(@Parameter(name = "operatorInfo") OperatorInfo operatorInfo);

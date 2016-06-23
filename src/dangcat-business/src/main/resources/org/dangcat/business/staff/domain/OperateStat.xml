@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Sqls>
-	<Sql Name="Settle"><![CDATA[SELECT OperatorId, SUM(CASE WHEN ErrorCode = 0 THEN 1 ELSE 0 END) AS Success, SUM(CASE WHEN ErrorCode = 0 THEN 0 ELSE 1 END) AS Failure, MAX(Id) as MaxId
+    <Sql Name="Settle"><![CDATA[SELECT OperatorId, SUM(CASE WHEN ErrorCode = 0 THEN 1 ELSE 0 END) AS Success, SUM(CASE WHEN ErrorCode = 0 THEN 0 ELSE 1 END) AS Failure, MAX(Id) as MaxId
 FROM <%tableName%>
 WHERE 1=1 ${filter}
 GROUP BY OperatorId
 ]]></Sql>
-	<Sql Name="QUERY"><![CDATA[SELECT OperatorId, OperatorInfo.No AS OperatorNo, OperatorInfo.Name AS OperatorName, OperatorGroup.Name AS GroupName, Success, Failure
+    <Sql Name="QUERY"><![CDATA[SELECT OperatorId, OperatorInfo.No AS OperatorNo, OperatorInfo.Name AS OperatorName, OperatorGroup.Name AS GroupName, Success, Failure
 FROM <%tableName%>
 	INNER JOIN OperatorInfo ON OperatorInfo.Id = OperatorId
 	INNER JOIN OperatorGroup ON OperatorGroup.Id = OperatorInfo.GroupId
 WHERE 1=1 ${filter}
 ORDER BY OperatorNo
 ]]></Sql>
-	<Sql Name="TOTALSIZE"><![CDATA[SELECT COUNT(*) AS TotalSize
+    <Sql Name="TOTALSIZE"><![CDATA[SELECT COUNT(*) AS TotalSize
 FROM <%tableName%>
 	INNER JOIN OperatorInfo ON OperatorInfo.Id = OperatorId
 	INNER JOIN OperatorGroup ON OperatorGroup.Id = OperatorInfo.GroupId

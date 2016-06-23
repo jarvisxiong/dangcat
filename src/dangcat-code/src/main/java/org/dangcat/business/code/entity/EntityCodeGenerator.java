@@ -6,16 +6,14 @@ import java.io.File;
 
 /**
  * 实体对象代码产生工具。
+ *
  * @author dangcat
- * 
  */
-public class EntityCodeGenerator extends CodeGenerator
-{
+public class EntityCodeGenerator extends CodeGenerator {
     private static final String TEMPLATE = "Entity.java.template";
 
     @Override
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         String outputFile = "main" + File.separator + "java";
         outputFile += File.separator + this.getPackageName().replace(".", File.separator);
         outputFile += File.separator + this.getParams().get("entityName") + ".java";
@@ -23,8 +21,7 @@ public class EntityCodeGenerator extends CodeGenerator
     }
 
     @Override
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return TEMPLATE;
     }
 }

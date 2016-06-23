@@ -15,31 +15,25 @@ import java.util.Map;
 
 /**
  * ¶ÁÈ¡×ÊÔ´×Ö´®¡£
+ *
  * @author dangcat
- * 
  */
-public class ResourceTag extends SimpleTagSupport
-{
+public class ResourceTag extends SimpleTagSupport {
     protected static final Logger logger = Logger.getLogger(ResourceTag.class);
     private boolean isMap = false;
     private String key = null;
 
     @Override
-    public void doTag() throws JspTagException
-    {
+    public void doTag() throws JspTagException {
         if (ValueUtils.isEmpty(this.getKey()))
             return;
-        try
-        {
+        try {
             ServiceContext serviceContext = ServiceContext.getInstance();
-            if (serviceContext != null)
-            {
+            if (serviceContext != null) {
                 ResourceReader resourceReader = serviceContext.getServiceInfo().getResourceReader();
                 String message = resourceReader.getText(serviceContext.getLocale(), this.getKey());
-                if (!ValueUtils.isEmpty(message))
-                {
-                    if (this.isMap())
-                    {
+                if (!ValueUtils.isEmpty(message)) {
+                    if (this.isMap()) {
                         Map<Integer, String> map = ResourceUtils.createValueMap(message);
                         if (map != null)
                             message = JsonSerializer.serialize(map);
@@ -48,9 +42,7 @@ public class ResourceTag extends SimpleTagSupport
                     pageContext.getOut().print(message);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error(this, e);
 
             Throwable rootCause = null;
@@ -60,23 +52,19 @@ public class ResourceTag extends SimpleTagSupport
         }
     }
 
-    public String getKey()
-    {
+    public String getKey() {
         return this.key;
     }
 
-    public void setKey(String key)
-    {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    public boolean isMap()
-    {
+    public boolean isMap() {
         return this.isMap;
     }
 
-    public void setMap(boolean isMap)
-    {
+    public void setMap(boolean isMap) {
         this.isMap = isMap;
     }
 }

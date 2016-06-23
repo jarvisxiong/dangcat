@@ -5,24 +5,29 @@ import org.dangcat.boot.config.ServiceConfig;
 
 /**
  * 上传配置。
+ *
  * @author dangcat
- * 
  */
-public class UploadConfig extends ServiceConfig
-{
+public class UploadConfig extends ServiceConfig {
     public static final String MaxMemorySize = "MaxMemorySize";
     public static final String MaxRequestSize = "MaxRequestSize";
     public static final String Repository = "Repository";
     private static final String CONFIG_NAME = "Upload";
     private static UploadConfig instance = new UploadConfig();
-    /** 最大内存。 */
+    /**
+     * 最大内存。
+     */
     private Integer maxMemorySize = DiskFileItemFactory.DEFAULT_SIZE_THRESHOLD;
-    /** 最大文件上传。 */
+    /**
+     * 最大文件上传。
+     */
     private Integer maxRequestSize = null;
-    /** 临时目录路径。 */
+    /**
+     * 临时目录路径。
+     */
     private String repository = System.getProperty("java.io.tmpdir");
-    public UploadConfig()
-    {
+
+    public UploadConfig() {
         super(CONFIG_NAME);
 
         this.addConfigValue(Repository, Integer.class, this.repository);
@@ -39,18 +44,15 @@ public class UploadConfig extends ServiceConfig
         return instance;
     }
 
-    public Integer getMaxMemorySize()
-    {
+    public Integer getMaxMemorySize() {
         return this.getIntValue(MaxMemorySize);
     }
 
-    public Integer getMaxRequestSize()
-    {
+    public Integer getMaxRequestSize() {
         return this.getIntValue(MaxRequestSize);
     }
 
-    public String getRepository()
-    {
+    public String getRepository() {
         return this.getStringValue(Repository);
     }
 }

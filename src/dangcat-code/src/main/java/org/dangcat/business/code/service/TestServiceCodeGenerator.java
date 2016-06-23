@@ -4,13 +4,11 @@ import org.dangcat.business.code.CodeGenerator;
 
 import java.io.File;
 
-public class TestServiceCodeGenerator extends CodeGenerator
-{
+public class TestServiceCodeGenerator extends CodeGenerator {
     private static final String TEMPLATE = "TestService.java.template";
 
     @Override
-    protected String getOutputFile()
-    {
+    protected String getOutputFile() {
         String outputFile = "test" + File.separator + "java";
         outputFile += File.separator + this.getPackageName().replace(".", File.separator);
         outputFile += File.separator + "service";
@@ -19,8 +17,7 @@ public class TestServiceCodeGenerator extends CodeGenerator
     }
 
     @Override
-    protected String getTemplate()
-    {
+    protected String getTemplate() {
         return TEMPLATE;
     }
 }

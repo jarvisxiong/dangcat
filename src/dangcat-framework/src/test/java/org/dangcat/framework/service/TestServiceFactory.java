@@ -15,27 +15,23 @@ import org.junit.Test;
 import java.io.File;
 import java.lang.reflect.Proxy;
 
-public class TestServiceFactory
-{
+public class TestServiceFactory {
     private static final String SESSIONID = "SESSIONID";
 
     @BeforeClass
-    public static void initialize()
-    {
+    public static void initialize() {
         String path = Environment.getHomePath() + "/test-classes/META-INF/stock.testservice.xml";
         File file = new File(FileUtils.decodePath(path));
         ServiceFactory.createInstance(null).load(file);
     }
 
     @Before
-    public void initServiceContext()
-    {
+    public void initServiceContext() {
         ServiceContext.set(new ServiceContext(SESSIONID));
     }
 
     @Test
-    public void testSettleService1()
-    {
+    public void testSettleService1() {
         SettleService1 settleService1 = ServiceFactory.getServiceLocator().lookup("Default/SettleService1");
         Assert.assertNotNull(settleService1);
         Assert.assertTrue(Proxy.isProxyClass(settleService1.getClass()));
@@ -52,8 +48,7 @@ public class TestServiceFactory
     }
 
     @Test
-    public void testSettleService2()
-    {
+    public void testSettleService2() {
         SettleService2 settleService2 = ServiceFactory.getServiceLocator().lookup("Default/SettleService2");
         Assert.assertNotNull(settleService2);
         Assert.assertTrue(Proxy.isProxyClass(settleService2.getClass()));
@@ -73,8 +68,7 @@ public class TestServiceFactory
     }
 
     @Test
-    public void testSettleServiceInfo()
-    {
+    public void testSettleServiceInfo() {
         ServiceInfo serviceInfo1 = ServiceFactory.getServiceLocator().getServiceInfo("Default/SettleService2");
         ServiceInfo serviceInfo2 = ServiceFactory.getServiceLocator().getServiceInfo("SettleService2");
         Assert.assertEquals(serviceInfo1, serviceInfo2);

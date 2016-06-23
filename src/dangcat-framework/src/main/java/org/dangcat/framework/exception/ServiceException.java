@@ -16,14 +16,13 @@ import java.util.Locale;
 
 /**
  * 应用层异常的基类。
+ *
  * @author dangcat
- * 
  */
-public class ServiceException extends Exception
-{
+public class ServiceException extends Exception {
     private static final long serialVersionUID = -3548883238371600261L;
-    static
-    {
+
+    static {
         JsonSerializer.addSerialize(new ServiceExceptionSerializer());
     }
 
@@ -36,13 +35,21 @@ public class ServiceException extends Exception
      * passed back at once.
      */
     private List<ServiceException> exceptionList = null;
-    /** 消息国际化。 */
+    /**
+     * 消息国际化。
+     */
     private Locale locale = null;
-    /** The ID to the bundle message. */
+    /**
+     * The ID to the bundle message.
+     */
     private Integer messageId = null;
-    /** The key to the bundle message. */
+    /**
+     * The key to the bundle message.
+     */
     private String messageKey = null;
-    /** 异常参数。 */
+    /**
+     * 异常参数。
+     */
     private List<Object> paramList = null;
     /**
      * An optional nested exceptions used to provide the ability to encapsulate
@@ -51,32 +58,27 @@ public class ServiceException extends Exception
      */
     private Throwable rootCause = null;
 
-    public ServiceException()
-    {
+    public ServiceException() {
         super();
     }
 
-    public ServiceException(Integer messageId, Object... params)
-    {
+    public ServiceException(Integer messageId, Object... params) {
         this.messageId = messageId;
         this.addParams(params);
     }
 
-    public ServiceException(String messageKey, Object... params)
-    {
+    public ServiceException(String messageKey, Object... params) {
         super(messageKey);
         this.messageKey = messageKey;
         this.addParams(params);
     }
 
-    public ServiceException(Throwable cause)
-    {
+    public ServiceException(Throwable cause) {
         super(cause);
         this.rootCause = cause;
     }
 
-    public ServiceException(Throwable cause, Integer messageId)
-    {
+    public ServiceException(Throwable cause, Integer messageId) {
         super(cause);
         this.rootCause = cause;
         this.messageId = messageId;
@@ -84,12 +86,11 @@ public class ServiceException extends Exception
 
     /**
      * 添加子异常，
+     *
      * @param serviceException 子异常。
      */
-    public void addException(ServiceException serviceException)
-    {
-        if (serviceException != null)
-        {
+    public void addException(ServiceException serviceException) {
+        if (serviceException != null) {
             if (this.exceptionList == null)
                 this.exceptionList = new ArrayList<ServiceException>();
             if (!this.exceptionList.contains(serviceException))
@@ -100,18 +101,15 @@ public class ServiceException extends Exception
     /**
      * Set an object array that can be used for parametric replacement.
      */
-    public void addParams(Object... params)
-    {
-        if (params != null && params.length > 0)
-        {
+    public void addParams(Object... params) {
+        if (params != null && params.length > 0) {
             if (this.paramList == null)
                 this.paramList = new ArrayList<Object>();
             this.paramList.addAll(Arrays.asList(params));
         }
     }
 
-    protected String format(String message)
-    {
+    protected String format(String message) {
         if (this.paramList != null && this.paramList.size() > 0)
             message = MessageFormat.format(message, this.paramList.toArray());
         return message;
@@ -120,13 +118,11 @@ public class ServiceException extends Exception
     /**
      * 子异常列表。
      */
-    public List<ServiceException> getChildExceptionList()
-    {
+    public List<ServiceException> getChildExceptionList() {
         return this.exceptionList;
     }
 
-    public Locale getLocale()
-    {
+    public Locale getLocale() {
         return this.locale == null ? Environment.getDefaultLocale() : this.locale;
     }
 
@@ -135,10 +131,8 @@ public class ServiceException extends Exception
     }
 
     @Override
-    public String getMessage()
-    {
-        if (this.getMessageId() != null)
-        {
+    public String getMessage() {
+        if (this.getMessageId() != null) {
             String message = ResourceUtils.getText(this.getClass(), this.getLocale(), this.getMessageId().toString());
             if (ValueUtils.isEmpty(message))
                 return this.getMessageId().toString();
@@ -147,8 +141,7 @@ public class ServiceException extends Exception
         return super.getMessage();
     }
 
-    public Integer getMessageId()
-    {
+    public Integer getMessageId() {
         return messageId;
     }
 
@@ -159,8 +152,7 @@ public class ServiceException extends Exception
     /**
      * 异常主键值。
      */
-    public String getMessageKey()
-    {
+    public String getMessageKey() {
         return messageKey;
     }
 
@@ -174,16 +166,14 @@ public class ServiceException extends Exception
     /**
      * 参数列表。
      */
-    public Object[] getParams()
-    {
+    public Object[] getParams() {
         return this.paramList == null ? null : this.paramList.toArray();
     }
 
     /**
      * Return the root cause exceptions, if one exists.
      */
-    public Throwable getRootCause()
-    {
+    public Throwable getRootCause() {
         return rootCause;
     }
 
@@ -199,8 +189,7 @@ public class ServiceException extends Exception
      * Print both the normal and rootCause stack traces.
      */
     @Override
-    public void printStackTrace()
-    {
+    public void printStackTrace() {
         printStackTrace(System.err);
     }
 
@@ -208,8 +197,7 @@ public class ServiceException extends Exception
      * Print both the normal and rootCause stack traces.
      */
     @Override
-    public void printStackTrace(PrintStream outStream)
-    {
+    public void printStackTrace(PrintStream outStream) {
         this.printStackTrace(new PrintWriter(outStream));
     }
 
@@ -217,8 +205,7 @@ public class ServiceException extends Exception
      * Print both the normal and rootCause stack traces.
      */
     @Override
-    public void printStackTrace(PrintWriter writer)
-    {
+    public void printStackTrace(PrintWriter writer) {
         super.printStackTrace(writer);
         if (this.getRootCause() != null)
             this.getRootCause().printStackTrace(writer);

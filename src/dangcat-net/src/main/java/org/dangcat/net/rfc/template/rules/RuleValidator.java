@@ -9,11 +9,10 @@ import java.util.Map;
 
 /**
  * 属性规则校验器。
+ *
  * @author dangcat
- * 
  */
-public abstract class RuleValidator
-{
+public abstract class RuleValidator {
     public static final String EXACTLYONE_PRESENT = "1";
     public static final String MUSTNOT_PRESENT = "0";
     public static final String ZEROORONE_PRESENT = "0-1";
@@ -22,8 +21,7 @@ public abstract class RuleValidator
     private PacketRuleValidator packetRuleValidator;
     private String ruleType = null;
 
-    public static RuleValidator createInstance(Rule rule)
-    {
+    public static RuleValidator createInstance(Rule rule) {
         RuleValidator ruleValidator = null;
         if (MUSTNOT_PRESENT.equalsIgnoreCase(rule.getRuleType()))
             ruleValidator = new MustNotPresentRuleValidator();
@@ -31,51 +29,42 @@ public abstract class RuleValidator
             ruleValidator = new ZeroOrOnePresentRuleValidator();
         else if (EXACTLYONE_PRESENT.equalsIgnoreCase(rule.getRuleType()))
             ruleValidator = new ExactlyOnePresentRuleValidator();
-        if (ruleValidator != null)
-        {
+        if (ruleValidator != null) {
             ruleValidator.setName(rule.getName());
             ruleValidator.setRuleType(rule.getRuleType());
         }
         return ruleValidator;
     }
 
-    public AttributeTemplate getAttributeTemplate()
-    {
-        if (this.attributeTemplate == null)
-        {
+    public AttributeTemplate getAttributeTemplate() {
+        if (this.attributeTemplate == null) {
             VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getPacketRuleValidator().getVendorAttributeTemplateManager();
             this.attributeTemplate = vendorAttributeTemplateManager.getAttributeTemplate(this.getName());
         }
         return this.attributeTemplate;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    private void setName(String name)
-    {
+    private void setName(String name) {
         this.name = name;
     }
 
-    protected PacketRuleValidator getPacketRuleValidator()
-    {
+    protected PacketRuleValidator getPacketRuleValidator() {
         return packetRuleValidator;
     }
 
-    protected void setPacketRuleValidator(PacketRuleValidator packetRuleValidator)
-    {
+    protected void setPacketRuleValidator(PacketRuleValidator packetRuleValidator) {
         this.packetRuleValidator = packetRuleValidator;
     }
 
-    public String getRuleType()
-    {
+    public String getRuleType() {
         return ruleType;
     }
 
-    private void setRuleType(String ruleType)
-    {
+    private void setRuleType(String ruleType) {
         this.ruleType = ruleType;
     }
 

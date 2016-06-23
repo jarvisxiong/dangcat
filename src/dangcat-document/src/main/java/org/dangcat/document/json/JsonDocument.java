@@ -15,71 +15,56 @@ import java.io.OutputStreamWriter;
 
 /**
  * Json文档输入输出。
+ *
  * @author dangcat
- * 
  */
-public class JsonDocument extends DocumentBase
-{
+public class JsonDocument extends DocumentBase {
     protected static final String INDENT_SPACE = "    ";
     protected static final String JSON_ENCODING = "UTF-8";
 
     /**
      * 从数据流加载数据。
+     *
      * @param dataWriter 数据输出接口。
      * @return 读入的行数。
      */
     @Override
-    public int read(DataWriter dataWriter)
-    {
+    public int read(DataWriter dataWriter) {
         JsonReader jsonReader = null;
-        try
-        {
+        try {
             jsonReader = new JsonReader(new InputStreamReader(this.getInputStream(), JSON_ENCODING));
             jsonReader.beginArray();
             while (jsonReader.hasNext())
                 this.readObject(dataWriter, jsonReader, dataWriter.size());
             jsonReader.endArray();
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("The object " + dataWriter.size() + " is error: ", e);
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (jsonReader != null)
                     jsonReader.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
         }
         return dataWriter.size();
     }
 
-    private void readObject(DataWriter dataWriter, JsonReader jsonReader, int index) throws IOException
-    {
+    private void readObject(DataWriter dataWriter, JsonReader jsonReader, int index) throws IOException {
         jsonReader.beginObject();
-        while (jsonReader.hasNext())
-        {
+        while (jsonReader.hasNext()) {
             String fieldName = jsonReader.nextName();
             Column column = dataWriter.getColumns().find(fieldName);
-            if (column != null)
-            {
+            if (column != null) {
                 JsonToken jsonToken = jsonReader.peek();
-                if (jsonToken == JsonToken.STRING || jsonToken == JsonToken.NUMBER)
-                {
+                if (jsonToken == JsonToken.STRING || jsonToken == JsonToken.NUMBER) {
                     Object value = column.parse(jsonReader.nextString());
                     dataWriter.setValue(index, fieldName, value);
-                }
-                else if (jsonToken == JsonToken.BOOLEAN)
+                } else if (jsonToken == JsonToken.BOOLEAN)
                     dataWriter.setValue(index, fieldName, jsonReader.nextBoolean());
                 else
                     jsonReader.skipValue();
-            }
-            else
+            } else
                 jsonReader.skipValue();
         }
         jsonReader.endObject();
@@ -87,49 +72,38 @@ public class JsonDocument extends DocumentBase
 
     /**
      * 导出数据到数据流。
+     *
      * @param dataReader 数据输入接口。
      * @return 写入的行数。
      */
     @Override
-    public int write(DataReader dataReader)
-    {
+    public int write(DataReader dataReader) {
         JsonWriter jsonWriter = null;
         int result = 0;
-        try
-        {
+        try {
             jsonWriter = new JsonWriter(new OutputStreamWriter(this.getOutputStream(), JSON_ENCODING));
             jsonWriter.setIndent(INDENT_SPACE);
             jsonWriter.beginArray();
-            for (int index = 0; index < dataReader.size(); index++)
-            {
+            for (int index = 0; index < dataReader.size(); index++) {
                 this.writeObject(dataReader, jsonWriter, index);
                 result++;
             }
             jsonWriter.endArray();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("The object " + result + " is error: ", e);
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (jsonWriter != null)
                     jsonWriter.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
         }
         return result;
     }
 
-    private void writeObject(DataReader dataReader, JsonWriter jsonWriter, int index) throws IOException
-    {
+    private void writeObject(DataReader dataReader, JsonWriter jsonWriter, int index) throws IOException {
         jsonWriter.beginObject();
-        for (Column column : dataReader.getColumns())
-        {
+        for (Column column : dataReader.getColumns()) {
             String name = column.getName();
             Object value = dataReader.getValue(index, name);
             if (value == null)

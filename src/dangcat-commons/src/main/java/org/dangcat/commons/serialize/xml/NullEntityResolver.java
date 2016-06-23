@@ -7,12 +7,10 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class NullEntityResolver implements EntityResolver
-{
-    private static ByteArrayInputStream emptyInputStream = new ByteArrayInputStream(new byte[] {});
+public class NullEntityResolver implements EntityResolver {
+    private static ByteArrayInputStream emptyInputStream = new ByteArrayInputStream(new byte[]{});
 
-    public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException
-    {
+    public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
         return new InputSource(emptyInputStream);
     }
 }

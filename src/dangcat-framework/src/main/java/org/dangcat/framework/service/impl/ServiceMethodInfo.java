@@ -9,27 +9,31 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.*;
 
-public class ServiceMethodInfo
-{
-    /** 服务访问类型。 */
+public class ServiceMethodInfo {
+    /**
+     * 服务访问类型。
+     */
     private Class<?> accessClassType = null;
-    /** 方法信息。 */
+    /**
+     * 方法信息。
+     */
     private Map<String, MethodInfo> methodInfoMap = null;
-    /** 方法信息。 */
+    /**
+     * 方法信息。
+     */
     private Map<Integer, MethodInfo> methodInfoValueMap = null;
-    /** 服务实例类型。 */
+    /**
+     * 服务实例类型。
+     */
     private Class<?> serviceClassType = null;
 
-    public ServiceMethodInfo(Class<?> accessClassType, Class<?> serviceClassType)
-    {
+    public ServiceMethodInfo(Class<?> accessClassType, Class<?> serviceClassType) {
         this.accessClassType = accessClassType;
         this.serviceClassType = serviceClassType;
     }
 
-    private void addResourceClass(Collection<Class<?>> classTypeCollection, Class<?> classType)
-    {
-        if (classType != null)
-        {
+    private void addResourceClass(Collection<Class<?>> classTypeCollection, Class<?> classType) {
+        if (classType != null) {
             if (Object.class.equals(classType))
                 return;
             classTypeCollection.add(classType);
@@ -37,21 +41,17 @@ public class ServiceMethodInfo
         }
     }
 
-    public MethodInfo getMethodInfo(Integer value)
-    {
+    public MethodInfo getMethodInfo(Integer value) {
         return this.methodInfoValueMap == null ? null : this.methodInfoValueMap.get(value);
     }
 
-    public MethodInfo getMethodInfo(String name)
-    {
+    public MethodInfo getMethodInfo(String name) {
         return this.methodInfoMap == null ? null : this.methodInfoMap.get(name);
     }
 
-    public Collection<MethodInfo> getMethodInfos()
-    {
+    public Collection<MethodInfo> getMethodInfos() {
         List<MethodInfo> methodInfoList = null;
-        if (this.methodInfoMap != null)
-        {
+        if (this.methodInfoMap != null) {
             methodInfoList = new ArrayList<MethodInfo>();
             methodInfoList.addAll(this.methodInfoMap.values());
             Collections.sort(methodInfoList);
@@ -59,8 +59,7 @@ public class ServiceMethodInfo
         return methodInfoList;
     }
 
-    public Map<Integer, MethodInfo> getMethodInfoValueMap()
-    {
+    public Map<Integer, MethodInfo> getMethodInfoValueMap() {
         return this.methodInfoValueMap;
     }
 
@@ -68,13 +67,10 @@ public class ServiceMethodInfo
         this.methodInfoValueMap = methodInfoValueMap;
     }
 
-    public Collection<Class<?>> getResourceClassTypes()
-    {
+    public Collection<Class<?>> getResourceClassTypes() {
         Collection<Class<?>> classTypeCollection = new LinkedHashSet<Class<?>>();
-        for (MethodInfo methodInfo : this.methodInfoMap.values())
-        {
-            for (Class<?> classType : methodInfo.getParameterizedClasses())
-            {
+        for (MethodInfo methodInfo : this.methodInfoMap.values()) {
+            for (Class<?> classType : methodInfo.getParameterizedClasses()) {
                 if (ServiceResourceProvider.class.isAssignableFrom(classType) && !classTypeCollection.contains(classType))
                     classTypeCollection.add(classType);
             }
@@ -84,18 +80,14 @@ public class ServiceMethodInfo
         return classTypeCollection;
     }
 
-    public void initialize()
-    {
+    public void initialize() {
         Class<?> classType = Proxy.isProxyClass(this.serviceClassType) ? this.accessClassType : this.serviceClassType;
         Map<String, MethodInfo> methodInfoMap = GenericUtils.getMethodInfoMap(classType);
-        if (this.accessClassType.isInterface())
-        {
+        if (this.accessClassType.isInterface()) {
             Map<String, MethodInfo> interfaceMethodInfoMap = new HashMap<String, MethodInfo>();
-            for (Method method : this.accessClassType.getMethods())
-            {
+            for (Method method : this.accessClassType.getMethods()) {
                 MethodInfo methodInfo = methodInfoMap.get(method.getName());
-                if (methodInfo != null)
-                {
+                if (methodInfo != null) {
                     MethodInfo interfaceMethodInfo = new MethodInfo(method);
                     interfaceMethodInfo.setParamInfoList(methodInfo.getParamInfoList());
                     interfaceMethodInfo.setGenericClassMap(methodInfo.getGenericClassMap());
@@ -104,13 +96,11 @@ public class ServiceMethodInfo
                 }
             }
             this.methodInfoMap = interfaceMethodInfoMap;
-        }
-        else
+        } else
             this.methodInfoMap = methodInfoMap;
     }
 
-    private void readResources(Class<?> classType, Collection<Class<?>> classTypeCollection)
-    {
+    private void readResources(Class<?> classType, Collection<Class<?>> classTypeCollection) {
         if (classType == null || Object.class.equals(classType))
             return;
 
@@ -118,35 +108,27 @@ public class ServiceMethodInfo
 
         this.addResourceClass(classTypeCollection, classType);
         Resources resourcesAnnotation = classType.getAnnotation(Resources.class);
-        if (resourcesAnnotation != null)
-        {
+        if (resourcesAnnotation != null) {
             for (Class<?> resourceClassType : resourcesAnnotation.value())
                 this.addResourceClass(classTypeCollection, resourceClassType);
         }
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        if (this.methodInfoMap != null && this.methodInfoMap.size() > 0)
-        {
+        if (this.methodInfoMap != null && this.methodInfoMap.size() > 0) {
             info.append("MethodInfos: ");
-            for (MethodInfo methodInfo : this.methodInfoMap.values())
-            {
-                if (methodInfo.getParamInfoList() != null && methodInfo.getParamInfoList().size() > 1)
-                {
+            for (MethodInfo methodInfo : this.methodInfoMap.values()) {
+                if (methodInfo.getParamInfoList() != null && methodInfo.getParamInfoList().size() > 1) {
                     StringBuilder methodInfoText = new StringBuilder();
                     StringTokenizer stringTokenizer = new StringTokenizer(methodInfo.toString(), Environment.LINE_SEPARATOR);
-                    while (stringTokenizer.hasMoreElements())
-                    {
+                    while (stringTokenizer.hasMoreElements()) {
                         info.append(Environment.LINETAB_SEPARATOR);
                         info.append(stringTokenizer.nextToken());
                     }
                     info.append(methodInfoText);
-                }
-                else
-                {
+                } else {
                     info.append(Environment.LINETAB_SEPARATOR);
                     info.append(methodInfo);
                 }

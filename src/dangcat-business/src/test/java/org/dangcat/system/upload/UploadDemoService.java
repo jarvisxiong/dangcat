@@ -11,12 +11,11 @@ import java.io.InputStream;
 
 /**
  * 文件上传。
+ *
  * @author Administrator
- * 
  */
 @JndiName(module = "System", name = "UploadDemo")
-public interface UploadDemoService
-{
+public interface UploadDemoService {
     /**
      * 上传字节数组。
      */

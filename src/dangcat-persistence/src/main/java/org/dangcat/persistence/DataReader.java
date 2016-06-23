@@ -4,11 +4,10 @@ import org.dangcat.persistence.filter.FilterExpress;
 
 /**
  * 数据读取接口。
+ *
  * @author dangcat
- * 
  */
-public interface DataReader extends DataAccess
-{
+public interface DataReader extends DataAccess {
     /**
      * 读取过滤条件。
      */
@@ -21,7 +20,8 @@ public interface DataReader extends DataAccess
 
     /**
      * 指定位置的栏位数据。
-     * @param index 行数。
+     *
+     * @param index     行数。
      * @param fieldName 字段名。
      * @return 数值对象。
      */

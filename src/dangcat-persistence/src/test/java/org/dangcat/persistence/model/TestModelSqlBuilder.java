@@ -10,13 +10,11 @@ import org.dangcat.persistence.orm.SqlBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestModelSqlBuilder
-{
+public class TestModelSqlBuilder {
     protected static final Logger logger = Logger.getLogger(TestModelSqlBuilder.class);
 
     @Test
-    public void testParams() throws TableException
-    {
+    public void testParams() throws TableException {
         String sqlExpress1 = "SELECT FieldA, FieldB, FieldC, FieldD, FieldF \nFROM TestTable \nWHERE FieldA=:FieldA AND FieldB>:FieldA OR FieldB<:FieldC\n";
         Table table = new Table("TestTable");
         // 测试动态查询参数。
@@ -55,8 +53,7 @@ public class TestModelSqlBuilder
     }
 
     @Test
-    public void testTextMarker() throws TableException
-    {
+    public void testTextMarker() throws TableException {
         String sqlExpress1 = "SELECT FieldA, FieldB, FieldC, FieldD, FieldF \nFROM TestTable \nWHERE FieldA=${FieldA} AND FieldB>${FieldA} OR FieldB<${FieldC}\n";
         Table table = new Table("TestTable");
         // 测试动态查询参数。

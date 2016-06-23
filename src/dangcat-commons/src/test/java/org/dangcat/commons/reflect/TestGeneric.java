@@ -10,11 +10,9 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestGeneric
-{
+public class TestGeneric {
     @Test
-    public void testMethodInfoSerializer() throws IOException
-    {
+    public void testMethodInfoSerializer() throws IOException {
         Map<String, MethodInfo> methodInfoMap = new HashMap<String, MethodInfo>();
         methodInfoMap = GenericUtils.getMethodInfoMap(OperatorService.class);
         StringWriter writer = new StringWriter();

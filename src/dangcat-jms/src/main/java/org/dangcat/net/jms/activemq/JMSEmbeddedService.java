@@ -8,10 +8,8 @@ import java.io.File;
 
 /**
  * 嵌入式JMS服务。
- * 
  */
-public class JMSEmbeddedService
-{
+public class JMSEmbeddedService {
     protected static final Logger logger = Logger.getLogger(JMSEmbeddedService.class);
     private static final String DEFAULT_CONNECTOR = "tcp://localhost:61616";
     private static JMSEmbeddedService instance = new JMSEmbeddedService();
@@ -22,8 +20,8 @@ public class JMSEmbeddedService
     private boolean isUseJmx = true;
     private String name = null;
     private File tmpDataDirectory = null;
-    private JMSEmbeddedService()
-    {
+
+    private JMSEmbeddedService() {
 
     }
 
@@ -31,63 +29,51 @@ public class JMSEmbeddedService
         return instance;
     }
 
-    public BrokerService getBrokerService()
-    {
+    public BrokerService getBrokerService() {
         return this.brokerService;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public File getTmpDataDirectory()
-    {
+    public File getTmpDataDirectory() {
         return this.tmpDataDirectory;
     }
 
-    public void setTmpDataDirectory(File tmpDataDirectory)
-    {
+    public void setTmpDataDirectory(File tmpDataDirectory) {
         this.tmpDataDirectory = tmpDataDirectory;
     }
 
-    public boolean isPersistent()
-    {
+    public boolean isPersistent() {
         return this.isPersistent;
     }
 
-    public void setPersistent(boolean isPersistent)
-    {
+    public void setPersistent(boolean isPersistent) {
         this.isPersistent = isPersistent;
     }
 
-    public boolean isRunning()
-    {
+    public boolean isRunning() {
         return this.brokerService != null;
     }
 
-    public boolean isSupportFailOver()
-    {
+    public boolean isSupportFailOver() {
         return this.isSupportFailOver;
     }
 
-    public void setSupportFailOver(boolean isSupportFailOver)
-    {
+    public void setSupportFailOver(boolean isSupportFailOver) {
         this.isSupportFailOver = isSupportFailOver;
     }
 
-    public boolean isUseJmx()
-    {
+    public boolean isUseJmx() {
         return this.isUseJmx;
     }
 
-    public void setUseJmx(boolean isUseJmx)
-    {
+    public void setUseJmx(boolean isUseJmx) {
         this.isUseJmx = isUseJmx;
     }
 
@@ -98,12 +84,9 @@ public class JMSEmbeddedService
     /**
      * 启动服务。
      */
-    public synchronized void start()
-    {
-        if (!this.isRunning())
-        {
-            try
-            {
+    public synchronized void start() {
+        if (!this.isRunning()) {
+            try {
                 BrokerService brokerService = new BrokerService();
                 brokerService.setUseJmx(this.isUseJmx());
                 brokerService.setPersistent(this.isPersistent);
@@ -116,9 +99,7 @@ public class JMSEmbeddedService
                     brokerService.addConnector(DEFAULT_CONNECTOR);
                 brokerService.start();
                 this.brokerService = brokerService;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.error(this, e);
             }
         }
@@ -127,17 +108,12 @@ public class JMSEmbeddedService
     /**
      * 停止服务。
      */
-    public synchronized void stop()
-    {
-        if (this.isRunning())
-        {
-            try
-            {
+    public synchronized void stop() {
+        if (this.isRunning()) {
+            try {
                 this.brokerService.stop();
                 this.brokerService = null;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 logger.error(this, e);
             }
         }

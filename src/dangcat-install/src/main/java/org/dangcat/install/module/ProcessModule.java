@@ -7,8 +7,7 @@ import java.awt.*;
 import java.util.Collection;
 
 
-public interface ProcessModule
-{
+public interface ProcessModule {
     Collection<ConfigPanel> getConfigPanels();
 
     Container getContainer();

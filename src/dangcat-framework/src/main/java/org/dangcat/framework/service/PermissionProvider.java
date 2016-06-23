@@ -6,13 +6,13 @@ import java.util.Map;
 
 /**
  * 权限控制表。
+ *
  * @author dangcat
- * 
  */
-public interface PermissionProvider
-{
+public interface PermissionProvider {
     /**
      * 读取方法的权限对象。
+     *
      * @param methodName 方法名。
      * @return 权限对象。
      */
@@ -25,6 +25,7 @@ public interface PermissionProvider
 
     /**
      * 读取根权限对象。
+     *
      * @return 权限对象。
      */
     Permission getRootPermission();

@@ -18,20 +18,17 @@ import java.util.Collection;
 
 /**
  * 栏位对象序列化。
+ *
  * @author dangcat
- * 
  */
-public class EntityJsonSerializer
-{
+public class EntityJsonSerializer {
     protected static final Logger logger = Logger.getLogger(EntityJsonSerializer.class);
     private static final String CHILDREN_NAMES = "childrenNames";
     private static final String JNDI_NAME = "jndiName";
 
-    public void serialize(Writer writer, Class<?> classType, String name) throws IOException
-    {
+    public void serialize(Writer writer, Class<?> classType, String name) throws IOException {
         JsonWriter jsonWriter = null;
-        try
-        {
+        try {
             StringWriter stringWriter = new StringWriter();
             jsonWriter = new JsonWriter(stringWriter);
             jsonWriter.beginObject();
@@ -44,26 +41,18 @@ public class EntityJsonSerializer
             int lastIndex = result.lastIndexOf("}");
             result = result.substring(0, lastIndex);
             writer.write(result);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.error("serialize the classType " + classType + " is error: ", e);
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 if (jsonWriter != null)
                     jsonWriter.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
         }
     }
 
-    private void serializeEntity(JsonWriter jsonWriter, Class<?> classType, String name) throws IOException
-    {
+    private void serializeEntity(JsonWriter jsonWriter, Class<?> classType, String name) throws IOException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
         if (ValueUtils.isEmpty(name))
             name = ReflectUtils.toPropertyName(classType.getSimpleName());
@@ -71,18 +60,15 @@ public class EntityJsonSerializer
         this.serializeRelations(classType, jsonWriter);
     }
 
-    private void serializeJndiName(EntityMetaData entityMetaData, JsonWriter jsonWriter) throws IOException
-    {
+    private void serializeJndiName(EntityMetaData entityMetaData, JsonWriter jsonWriter) throws IOException {
         JndiName jndiName = ReflectUtils.findAnnotation(entityMetaData.getEntityClass(), JndiName.class);
         if (jndiName != null)
             jsonWriter.name(JNDI_NAME).value(jndiName.module() + "/" + jndiName.name());
     }
 
-    private void serializeRelationNames(Class<?> classType, JsonWriter jsonWriter) throws IOException
-    {
+    private void serializeRelationNames(Class<?> classType, JsonWriter jsonWriter) throws IOException {
         Collection<Relation> relationCollection = EntityUtils.getSerializeRelations(classType);
-        if (relationCollection != null && relationCollection.size() > 0)
-        {
+        if (relationCollection != null && relationCollection.size() > 0) {
             JsonWriter childrenNamesWriter = jsonWriter.name(CHILDREN_NAMES);
             childrenNamesWriter.beginArray();
             for (Relation relation : relationCollection)
@@ -91,18 +77,15 @@ public class EntityJsonSerializer
         }
     }
 
-    private void serializeRelations(Class<?> classType, JsonWriter jsonWriter) throws IOException
-    {
+    private void serializeRelations(Class<?> classType, JsonWriter jsonWriter) throws IOException {
         Collection<Relation> relationCollection = EntityUtils.getSerializeRelations(classType);
-        if (relationCollection != null && relationCollection.size() > 0)
-        {
+        if (relationCollection != null && relationCollection.size() > 0) {
             for (Relation relation : relationCollection)
                 this.serializeEntity(jsonWriter, relation.getMemberType(), ReflectUtils.toPropertyName(relation.getName()));
         }
     }
 
-    private void serializeTable(EntityMetaData entityMetaData, JsonWriter jsonWriter, String name) throws IOException
-    {
+    private void serializeTable(EntityMetaData entityMetaData, JsonWriter jsonWriter, String name) throws IOException {
         Table table = entityMetaData.getTable();
         JsonWriter tableJsonWriter = jsonWriter.name(name);
         tableJsonWriter.beginObject();

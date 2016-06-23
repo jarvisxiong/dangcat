@@ -5,8 +5,7 @@ import org.dangcat.persistence.entity.EntityBase;
 
 import java.util.Date;
 
-public class PersonInfo extends EntityBase
-{
+public class PersonInfo extends EntityBase {
     public static final String Description = "Description";
     public static final String Email = "Email";
     public static final String ExpireTime = "ExpireTime";
@@ -42,87 +41,70 @@ public class PersonInfo extends EntityBase
     @Column(index = 3, displaySize = 20)
     private String tel = null;
 
-    public PersonInfo()
-    {
+    public PersonInfo() {
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Date getExpireTime()
-    {
+    public Date getExpireTime() {
         return this.expireTime;
     }
 
-    public void setExpireTime(Date expireTime)
-    {
+    public void setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getMobile()
-    {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile)
-    {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Date getRegisterTime()
-    {
+    public Date getRegisterTime() {
         return this.registerTime;
     }
 
-    public void setRegisterTime(Date registerTime)
-    {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
-    public String getTel()
-    {
+    public String getTel() {
         return this.tel;
     }
 
-    public void setTel(String tel)
-    {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 }

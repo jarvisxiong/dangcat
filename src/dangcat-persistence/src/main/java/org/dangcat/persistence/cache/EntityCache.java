@@ -6,12 +6,11 @@ import java.util.Collection;
 
 /**
  * 实体缓存。
- * @author dangcat
- * 
+ *
  * @param <T>
+ * @author dangcat
  */
-public interface EntityCache<T> extends MemCache<T>
-{
+public interface EntityCache<T> extends MemCache<T> {
     /**
      * 删除指定条件的缓存数据和数据库数据。
      */
@@ -24,6 +23,7 @@ public interface EntityCache<T> extends MemCache<T>
 
     /**
      * 按照指定的条件在索引上查找数据。
+     *
      * @param filterExpress 索引条件。
      * @return 数据集合。
      */
@@ -31,6 +31,7 @@ public interface EntityCache<T> extends MemCache<T>
 
     /**
      * 根据主键值找到记录行。
+     *
      * @param params 主键参数值。
      * @return 找到的数据行。
      */
@@ -38,8 +39,9 @@ public interface EntityCache<T> extends MemCache<T>
 
     /**
      * 按照指定的字段值查找数据。
+     *
      * @param fieldNames 字段名，多字段以分号间隔。
-     * @param values 字段数值，必须与字段对应。
+     * @param values     字段数值，必须与字段对应。
      * @return 找到的记录行。
      */
     Collection<T> load(String[] fieldNames, Object... values);
@@ -51,6 +53,7 @@ public interface EntityCache<T> extends MemCache<T>
 
     /**
      * 刷新内存数据。
+     *
      * @param data 目标数据。
      * @return 刷新后数据。
      */
@@ -58,6 +61,7 @@ public interface EntityCache<T> extends MemCache<T>
 
     /**
      * 刷新指定主键的内存数据。
+     *
      * @param primaryKeys 目标主键数据。
      * @return 刷新后数据。
      */

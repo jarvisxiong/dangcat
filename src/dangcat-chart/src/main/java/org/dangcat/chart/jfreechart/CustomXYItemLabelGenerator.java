@@ -14,8 +14,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
-class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
-{
+class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator {
     private DateType dateType = DateType.Second;
     private String format = "{0} {1}: {2}";
     private int index = 0;
@@ -23,15 +22,13 @@ class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
     private XYToolTipGenerator standXYToolTipGenerator = null;
     private TimeChart timeChart = null;
 
-    public CustomXYItemLabelGenerator(TimeChart timeChart, int index)
-    {
+    public CustomXYItemLabelGenerator(TimeChart timeChart, int index) {
         this.timeChart = timeChart;
         this.index = index;
     }
 
     @Override
-    public String generateToolTip(XYDataset dataset, int series, int item)
-    {
+    public String generateToolTip(XYDataset dataset, int series, int item) {
         XYToolTipGenerator xyToolTipGenerator = this.getStandXYToolTipGenerator();
         String text = xyToolTipGenerator.generateToolTip(dataset, series, item);
         DataConverter dataConverter = this.timeChart.getDataConverter(this.index);
@@ -41,8 +38,7 @@ class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
     }
 
     @Override
-    public String generateURL(XYDataset dataset, int series, int item)
-    {
+    public String generateURL(XYDataset dataset, int series, int item) {
         Number number = dataset.getY(series, item);
         if (number == null)
             return null;
@@ -59,8 +55,7 @@ class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
         return url.toString();
     }
 
-    public DateType getDateType()
-    {
+    public DateType getDateType() {
         return dateType;
     }
 
@@ -69,8 +64,7 @@ class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
         this.standXYToolTipGenerator = null;
     }
 
-    public String getFormat()
-    {
+    public String getFormat() {
         return format;
     }
 
@@ -79,10 +73,8 @@ class CustomXYItemLabelGenerator implements XYToolTipGenerator, XYURLGenerator
         this.standXYToolTipGenerator = null;
     }
 
-    private XYToolTipGenerator getStandXYToolTipGenerator()
-    {
-        if (this.standXYToolTipGenerator == null)
-        {
+    private XYToolTipGenerator getStandXYToolTipGenerator() {
+        if (this.standXYToolTipGenerator == null) {
             DateFormat dateFormat = DateFormator.getDateFormat(this.dateType);
             NumberFormat numberFormat = new DecimalFormat(this.numberFormat);
             this.standXYToolTipGenerator = new StandardXYToolTipGenerator(this.format, dateFormat, numberFormat);

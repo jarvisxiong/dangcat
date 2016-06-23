@@ -14,82 +14,61 @@ import java.io.InputStream;
 
 /**
  * 系统菜单管理。
+ *
  * @author dangcat
- * 
  */
-public class MenusManager
-{
+public class MenusManager {
     protected static Logger logger = Logger.getLogger(MenusManager.class);
     private static MenusManager instance = new MenusManager();
     private Menus menus = null;
 
-    private MenusManager()
-    {
+    private MenusManager() {
     }
 
-    public static MenusManager getInstance()
-    {
+    public static MenusManager getInstance() {
         return instance;
     }
 
-    public Menus getMenus()
-    {
+    public Menus getMenus() {
         return this.menus;
     }
 
-    public void load(Class<?> classType, String name)
-    {
-        if (!ValueUtils.isEmpty(name))
-        {
+    public void load(Class<?> classType, String name) {
+        if (!ValueUtils.isEmpty(name)) {
             InputStream inputStream = ResourceLoader.load(classType, name);
-            if (inputStream != null)
-            {
-                try
-                {
+            if (inputStream != null) {
+                try {
                     this.load(inputStream);
-                }
-                finally
-                {
+                } finally {
                     FileUtils.close(inputStream);
                 }
             }
         }
     }
 
-    public void load(File file)
-    {
-        if (file == null || !file.exists())
-        {
+    public void load(File file) {
+        if (file == null || !file.exists()) {
             logger.warn("The system munus file " + file + " is not exists.");
             return;
         }
 
         InputStream inputStream = null;
-        try
-        {
+        try {
             inputStream = new FileInputStream(file);
             this.load(inputStream);
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             logger.error(file, e);
-        }
-        finally
-        {
+        } finally {
             inputStream = FileUtils.close(inputStream);
         }
     }
 
-    private void load(InputStream inputStream)
-    {
-        try
-        {
+    private void load(InputStream inputStream) {
+        try {
             MenusXmlResolver menusXmlResolver = new MenusXmlResolver();
             menusXmlResolver.open(inputStream);
             this.menus = (Menus) menusXmlResolver.resolve();
-        }
-        catch (DocumentException e)
-        {
+        } catch (DocumentException e) {
             logger.error(this, e);
         }
     }

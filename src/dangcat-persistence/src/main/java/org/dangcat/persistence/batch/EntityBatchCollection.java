@@ -9,43 +9,34 @@ import java.util.LinkedHashSet;
 
 /**
  * 批量存储数据集合。
+ *
  * @author dangcat
- * 
  */
-class EntityBatchCollection
-{
+class EntityBatchCollection {
     private Collection<Object> deletedCollection = new LinkedHashSet<Object>();
     private Collection<Object> saveCollection = new LinkedHashSet<Object>();
 
-    protected void clear()
-    {
+    protected void clear() {
         this.deletedCollection.clear();
         this.saveCollection.clear();
     }
 
-    protected void delete(Object entity)
-    {
-        if (entity != null)
-        {
+    protected void delete(Object entity) {
+        if (entity != null) {
             this.saveCollection.remove(entity);
             this.deletedCollection.add(entity);
         }
     }
 
-    private int getSize(Collection<Object> collection)
-    {
+    private int getSize(Collection<Object> collection) {
         return collection == null ? 0 : collection.size();
     }
 
-    protected void save(Object entity)
-    {
-        if (entity != null)
-        {
-            if (entity instanceof DataStatus)
-            {
+    protected void save(Object entity) {
+        if (entity != null) {
+            if (entity instanceof DataStatus) {
                 DataStatus dataStatus = (DataStatus) entity;
-                if (DataState.Deleted.equals(dataStatus.getDataState()))
-                {
+                if (DataState.Deleted.equals(dataStatus.getDataState())) {
                     this.delete(entity);
                     return;
                 }
@@ -57,10 +48,8 @@ class EntityBatchCollection
         }
     }
 
-    protected void save(SaveEntityContext saveEntityContext)
-    {
-        if (this.size() > 0)
-        {
+    protected void save(SaveEntityContext saveEntityContext) {
+        if (this.size() > 0) {
             for (Object entity : this.deletedCollection)
                 saveEntityContext.delete(entity);
 
@@ -69,8 +58,7 @@ class EntityBatchCollection
         }
     }
 
-    protected int size()
-    {
+    protected int size() {
         int size = 0;
         size += this.getSize(this.deletedCollection);
         size += this.getSize(this.saveCollection);

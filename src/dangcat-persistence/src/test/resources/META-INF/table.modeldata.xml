@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Table name="ModelData">
-	<Columns>
-		<Column Name="Id" AutoIncrement="true" FieldClass="java.lang.Integer" PrimaryKey="true" />
-		<Column Name="FieldA" FieldClass="java.lang.String" DisplaySize="40" />
-		<Column Name="FieldB" FieldClass="java.lang.Integer" />
-		<Column Name="FieldC" FieldClass="double" Scale="2" />
-		<Column Name="FieldD" FieldClass="java.lang.Long" />
-		<Column Name="FieldE" FieldClass="java.sql.Timestamp" />
-		<Column Name="FieldF" FieldClass="char[]" DisplaySize="1" />
-		<Column Name="FieldG" FieldClass="java.lang.Short" />
-		<Column Name="FieldH" FieldClass="byte[]" />
-	</Columns>
-	<Sql><![CDATA[SELECT Id, FieldA, FieldB, FieldC, FieldD, FieldE, FieldG
+    <Columns>
+        <Column Name="Id" AutoIncrement="true" FieldClass="java.lang.Integer" PrimaryKey="true"/>
+        <Column Name="FieldA" FieldClass="java.lang.String" DisplaySize="40"/>
+        <Column Name="FieldB" FieldClass="java.lang.Integer"/>
+        <Column Name="FieldC" FieldClass="double" Scale="2"/>
+        <Column Name="FieldD" FieldClass="java.lang.Long"/>
+        <Column Name="FieldE" FieldClass="java.sql.Timestamp"/>
+        <Column Name="FieldF" FieldClass="char[]" DisplaySize="1"/>
+        <Column Name="FieldG" FieldClass="java.lang.Short"/>
+        <Column Name="FieldH" FieldClass="byte[]"/>
+    </Columns>
+    <Sql><![CDATA[SELECT Id, FieldA, FieldB, FieldC, FieldD, FieldE, FieldG
 FROM ModelData
 WHERE 1=1]]></Sql>
-	<Filter>
-		<FilterGroup GroupType="Or">
-			<FilterUnit FieldName="FieldB" FilterType="between">
-				<Value ClassType="int">0</Value>
-				<Value ClassType="int">100</Value>
-			</FilterUnit>
-			<FilterUnit FieldName="FieldC" FilterType="between" Not="true">
-				<Value ClassType="double">12.5</Value>
-				<Value ClassType="double">74.5</Value>
-			</FilterUnit>
-		</FilterGroup>
-		<FilterUnit FieldName="FieldA" FilterType="between">
-			<Value ClassType="String">AAA</Value>
-			<Value ClassType="String">ZZZ</Value>
-		</FilterUnit>
-	</Filter>
-	<OrderBy>ORDER BY Id Desc</OrderBy>
-	<Params>
-		<Param name="ParamA" ClassType="String">AAA</Param>
-		<Param name="ParamB" ClassType="int">222222</Param>
-		<Param name="ParamC" ClassType="long">10247874909</Param>
-		<Param name="ParamD" ClassType="short">2</Param>
-		<Param name="ParamE" ClassType="boolean">false</Param>
-	</Params>
+    <Filter>
+        <FilterGroup GroupType="Or">
+            <FilterUnit FieldName="FieldB" FilterType="between">
+                <Value ClassType="int">0</Value>
+                <Value ClassType="int">100</Value>
+            </FilterUnit>
+            <FilterUnit FieldName="FieldC" FilterType="between" Not="true">
+                <Value ClassType="double">12.5</Value>
+                <Value ClassType="double">74.5</Value>
+            </FilterUnit>
+        </FilterGroup>
+        <FilterUnit FieldName="FieldA" FilterType="between">
+            <Value ClassType="String">AAA</Value>
+            <Value ClassType="String">ZZZ</Value>
+        </FilterUnit>
+    </Filter>
+    <OrderBy>ORDER BY Id Desc</OrderBy>
+    <Params>
+        <Param name="ParamA" ClassType="String">AAA</Param>
+        <Param name="ParamB" ClassType="int">222222</Param>
+        <Param name="ParamC" ClassType="long">10247874909</Param>
+        <Param name="ParamD" ClassType="short">2</Param>
+        <Param name="ParamE" ClassType="boolean">false</Param>
+    </Params>
 </Table>

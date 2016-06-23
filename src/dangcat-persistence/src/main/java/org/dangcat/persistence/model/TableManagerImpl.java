@@ -14,31 +14,28 @@ import java.util.List;
 
 /**
  * 表管理器。
+ *
  * @author dangcat
- * 
  */
-public class TableManagerImpl extends TableManagerBase implements TableManager
-{
+public class TableManagerImpl extends TableManagerBase implements TableManager {
     /**
      * 在当前的数据源中构建数据表。
+     *
      * @param table 表对象。
      * @return 建表结果。
      * @throws TableException 运行异常。
      */
-    public int create(Table table) throws TableException
-    {
+    public int create(Table table) throws TableException {
         int result = 0;
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin create :");
 
             // 触发建表前事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeCreate(table))
                     return result;
             }
@@ -60,9 +57,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
             if (logger.isDebugEnabled())
                 logger.debug("End create, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (session != null)
                 session.rollback();
 
@@ -74,9 +69,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
                 tableEventAdapter.onCreateError(table, e);
 
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
@@ -85,24 +78,22 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 删除指定表的数据。
+     *
      * @param table 表对象。
      * @return 删除数量。
      * @throws TableException 运行异常。
      */
-    public int delete(Table table) throws TableException
-    {
+    public int delete(Table table) throws TableException {
         int result = 0;
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin delete table: " + table.getTableName().getName());
 
             // 删除前事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeDelete(table))
                     return result;
             }
@@ -122,9 +113,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
             if (logger.isDebugEnabled())
                 logger.debug("End delete table, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (session != null)
                 session.rollback();
 
@@ -135,9 +124,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
             if (logger.isDebugEnabled())
                 logger.error(message, e);
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
@@ -146,35 +133,33 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 删除指定的表。
+     *
      * @param tableName 表名。
      * @return 删除结果。
      * @throws TableException 运行异常。
      */
-    public int drop(String tableName) throws TableException
-    {
+    public int drop(String tableName) throws TableException {
         return this.drop(new Table(tableName));
     }
 
     /**
      * 删除指定的表。
+     *
      * @param table 表对象。
      * @return 删除结果。
      * @throws TableException 运行异常。
      */
-    public int drop(Table table) throws TableException
-    {
+    public int drop(Table table) throws TableException {
         int result = 0;
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin drop :");
 
             // 删表后事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeDrop(table))
                     return result;
             }
@@ -192,9 +177,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
             if (logger.isDebugEnabled())
                 logger.debug("End drop, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = sqlBuilder == null ? e.toString() : sqlBuilder.toString();
             if (logger.isDebugEnabled())
                 logger.error(message, e);
@@ -203,9 +186,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
                 tableEventAdapter.onDropError(table, e);
 
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
@@ -214,18 +195,17 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 执行表的SQL语句。
+     *
      * @param table 表对象。
-     * @param name SQL命名。
+     * @param name  SQL命名。
      * @return 执行结果。
      * @throws TableException 运行异常。
      */
-    public int execute(Table table) throws TableException
-    {
+    public int execute(Table table) throws TableException {
         int result = 0;
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.getDatabaseName(table));
             sqlBuilder = tableSqlBuilder.buildExecuteStatement();
             List<String> sqlBatchList = sqlBuilder.getBatchSqlList();
@@ -237,8 +217,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
                 logger.debug("Begin execute :");
 
             // 执行前事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeExecute(table))
                     return result;
             }
@@ -255,9 +234,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
             if (logger.isDebugEnabled())
                 logger.debug("End execute, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             if (session != null)
                 session.rollback();
 
@@ -269,22 +246,18 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
                 tableEventAdapter.onExecuteError(table, e);
 
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
         return result;
     }
 
-    private int executeBatch(Session session, Table table, List<String> sqlBatchList) throws SQLException
-    {
+    private int executeBatch(Session session, Table table, List<String> sqlBatchList) throws SQLException {
         int result = 0;
         if (BatchExecutHelper.isContainsParams(sqlBatchList))
             result = session.executeBatch(new TableDataReader(table), sqlBatchList);
-        else
-        {
+        else {
             if (sqlBatchList.size() > 1)
                 result = session.executeBatch(sqlBatchList);
             else
@@ -295,35 +268,30 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 判断表是否存在。
+     *
      * @param tableName 表名。
      * @return 是否存在。
      */
-    public boolean exists(String tableName)
-    {
+    public boolean exists(String tableName) {
         return this.exists(new Table(tableName));
     }
 
     /**
      * 判断表是否存在。
+     *
      * @param table 表对象。
      * @return 是否存在。
      */
-    public boolean exists(Table table)
-    {
+    public boolean exists(Table table) {
         boolean result = true;
         Session session = null;
-        try
-        {
+        try {
             // 获取会话对象。
             session = this.openSession(this.getDatabaseName(table));
             result = TableUtils.exists(table, session);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             result = false;
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }
@@ -333,27 +301,25 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
     /**
      * 数据库名称。
      */
-    protected String getDatabaseName()
-    {
+    protected String getDatabaseName() {
         return null;
     }
 
     /**
      * 数据库名称。
      */
-    private String getDatabaseName(Table table)
-    {
+    private String getDatabaseName(Table table) {
         String databaseName = this.getDatabaseName();
         return ValueUtils.isEmpty(databaseName) ? table.getDatabaseName() : databaseName;
     }
 
     /**
      * 载入指定表的数据。
+     *
      * @param table 表对象。
      * @throws TableException 运行异常。
      */
-    public void load(Table table) throws TableException
-    {
+    public void load(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
         TableLoadManagerImpl tableLoadManager = new TableLoadManagerImpl(databaseName);
         tableLoadManager.load(table);
@@ -361,11 +327,11 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 载入元数据内容。
+     *
      * @param table 表对象。
      * @throws TableException 运行异常。
      */
-    public void loadMetaData(Table table) throws TableException
-    {
+    public void loadMetaData(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
         TableLoadManagerImpl tableLoadManager = new TableLoadManagerImpl(databaseName);
         tableLoadManager.loadMetaData(table);
@@ -373,11 +339,11 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 存储指定表的数据。
+     *
      * @param table 表对象。
      * @throws TableException 运行异常。
      */
-    public void save(Table table) throws TableException
-    {
+    public void save(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
         TableSaveManagerImpl tableSaveManager = new TableSaveManagerImpl(databaseName);
         tableSaveManager.save(table);
@@ -385,35 +351,33 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
     /**
      * 清除指定表数据。
+     *
      * @param tableName 表名称。
      * @return 清除结果。
      * @throws TableException 运行异常。
      */
-    public int truncate(String tableName) throws TableException
-    {
+    public int truncate(String tableName) throws TableException {
         return this.truncate(new Table(tableName));
     }
 
     /**
      * 清除指定表数据。
+     *
      * @param table 表对象。
      * @return 清除结果。
      * @throws TableException 运行异常。
      */
-    public int truncate(Table table) throws TableException
-    {
+    public int truncate(Table table) throws TableException {
         int result = 0;
         SqlBuilder sqlBuilder = null;
         Session session = null;
-        try
-        {
+        try {
             long beginTime = DateUtils.currentTimeMillis();
             if (logger.isDebugEnabled())
                 logger.debug("Begin truncate table: " + table.getTableName().getName());
 
             // 清除前事件。
-            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
-            {
+            for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeTruncate(table))
                     return result;
             }
@@ -431,9 +395,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
 
             if (logger.isDebugEnabled())
                 logger.debug("End truncate table, cost " + (DateUtils.currentTimeMillis() - beginTime) + " (ms)");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             String message = sqlBuilder == null ? e.toString() : sqlBuilder.toString();
             if (logger.isDebugEnabled())
                 logger.error(message, e);
@@ -442,9 +404,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager
                 tableEventAdapter.onTruncateError(table, e);
 
             throw new TableException(message, e);
-        }
-        finally
-        {
+        } finally {
             if (session != null)
                 session.release();
         }

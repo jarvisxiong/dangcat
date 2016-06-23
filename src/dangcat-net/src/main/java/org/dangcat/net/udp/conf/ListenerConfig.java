@@ -9,11 +9,10 @@ import java.net.UnknownHostException;
 
 /**
  * 侦听端口配置。
+ *
  * @author dangcat
- * 
  */
-public abstract class ListenerConfig extends ServiceConfig
-{
+public abstract class ListenerConfig extends ServiceConfig {
     public static final String BindAddress = "BindAddress";
     public static final String BufferSize = "BufferSize";
     public static final String IdentifierEnabled = "IdentifierEnabled";
@@ -25,23 +24,36 @@ public abstract class ListenerConfig extends ServiceConfig
     public static final String Timeout = "Timeout";
     public static final String TryTimes = "TryTimes";
 
-    /** 缓冲池大小（字节）。 */
+    /**
+     * 缓冲池大小（字节）。
+     */
     private int bufferSize = 90000;
-    /** 启用标识跟踪。 */
+    /**
+     * 启用标识跟踪。
+     */
     private boolean identifierEnabled = true;
-    /** 最大并发数量。 */
+    /**
+     * 最大并发数量。
+     */
     private int maxConcurrentSize = 10;
-    /** 最大队列容量。 */
+    /**
+     * 最大队列容量。
+     */
     private int maxQueueCapacity = 10000;
-    /** 跟踪事件消耗的阈值。 */
+    /**
+     * 跟踪事件消耗的阈值。
+     */
     private long timeCostThreshold = 0;
-    /** 阻塞超时（毫秒）。 */
+    /**
+     * 阻塞超时（毫秒）。
+     */
     private int timeout = 1000;
-    /** 尝试等待回应报文次数。 */
+    /**
+     * 尝试等待回应报文次数。
+     */
     private int tryTimes = 3;
 
-    public ListenerConfig(String configName)
-    {
+    public ListenerConfig(String configName) {
         super(configName);
 
         this.addConfigValue(TimeCostThreshold, long.class, this.timeCostThreshold);
@@ -56,71 +68,57 @@ public abstract class ListenerConfig extends ServiceConfig
         this.addConfigValue(BindAddress, String.class, null);
     }
 
-    public InetAddress getBindAddress()
-    {
+    public InetAddress getBindAddress() {
         InetAddress inetAddress = null;
-        try
-        {
+        try {
             String bindAddress = this.getStringValue(BindAddress);
             if (!ValueUtils.isEmpty(bindAddress))
                 inetAddress = InetAddress.getByName(bindAddress);
-            else
-            {
+            else {
                 InetAddress serverAddress = ServerManager.getInstance().getServerAddress();
                 if (!serverAddress.isLoopbackAddress())
                     inetAddress = serverAddress;
             }
-        }
-        catch (UnknownHostException e)
-        {
+        } catch (UnknownHostException e) {
         }
         return inetAddress;
     }
 
-    public int getBufferSize()
-    {
+    public int getBufferSize() {
         return super.getIntValue(BufferSize);
     }
 
     protected abstract Integer getDefaultPort();
 
-    public boolean getIdentifierEnabled()
-    {
+    public boolean getIdentifierEnabled() {
         return this.getBooleanValue(IdentifierEnabled);
     }
 
-    public int getMaxConcurrentSize()
-    {
+    public int getMaxConcurrentSize() {
         return this.getIntValue(MaxConcurrentSize);
     }
 
-    public int getMaxQueueCapacity()
-    {
+    public int getMaxQueueCapacity() {
         return this.getIntValue(MaxQueueCapacity);
     }
 
-    public Integer getPort()
-    {
+    public Integer getPort() {
         return this.getIntValue(Port);
     }
 
-    public Integer getReplyPort()
-    {
+    public Integer getReplyPort() {
         return this.getIntValue(ReplyPort);
     }
 
-    public long getTimeCostThreshold()
-    {
+    public long getTimeCostThreshold() {
         return this.getLongValue(TimeCostThreshold);
     }
 
-    public int getTimeout()
-    {
+    public int getTimeout() {
         return this.getIntValue(Timeout);
     }
 
-    public int getTryTimes()
-    {
+    public int getTryTimes() {
         return this.getIntValue(TryTimes);
     }
 }

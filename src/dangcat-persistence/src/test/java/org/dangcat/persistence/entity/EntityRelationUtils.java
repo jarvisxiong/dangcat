@@ -5,10 +5,8 @@ import org.dangcat.persistence.model.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-class EntityRelationUtils
-{
-    private static Table createBillDetail()
-    {
+class EntityRelationUtils {
+    private static Table createBillDetail() {
         Table table = new Table("BillDetail");
         table.getColumns().add("Id", Integer.class, true);
         table.getColumns().add("Name", String.class, 40);
@@ -17,8 +15,7 @@ class EntityRelationUtils
         return table;
     }
 
-    private static Table createBillInfo()
-    {
+    private static Table createBillInfo() {
         Table table = new Table("BillInfo");
         table.getColumns().add("Id", Integer.class, true);
         table.getColumns().add("Name", String.class, 40);
@@ -26,8 +23,7 @@ class EntityRelationUtils
         return table;
     }
 
-    static List<Table> getTable()
-    {
+    static List<Table> getTable() {
         List<Table> tableList = new ArrayList<Table>();
         Table masterTable = createBillInfo();
         tableList.add(masterTable);

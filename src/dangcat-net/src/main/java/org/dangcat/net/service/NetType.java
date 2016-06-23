@@ -1,6 +1,5 @@
 package org.dangcat.net.service;
 
-public enum NetType
-{
+public enum NetType {
     TCP, UDP
 }

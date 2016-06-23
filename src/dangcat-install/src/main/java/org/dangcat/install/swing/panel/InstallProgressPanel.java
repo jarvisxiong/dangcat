@@ -10,16 +10,14 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class InstallProgressPanel extends ConfigPanel implements LogCallback
-{
+public class InstallProgressPanel extends ConfigPanel implements LogCallback {
     protected static final Logger logger = Logger.getLogger(InstallProgressPanel.class);
     private static final long serialVersionUID = 1L;
 
     private JLogPane logPane = null;
     private JProgressPanel progressPanel = null;
 
-    private JPanel createLogPanel()
-    {
+    private JPanel createLogPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
@@ -36,30 +34,25 @@ public class InstallProgressPanel extends ConfigPanel implements LogCallback
     }
 
     @Override
-    public void debug(String message)
-    {
+    public void debug(String message) {
         this.logPane.debug(message);
     }
 
     @Override
-    public void error(String message)
-    {
+    public void error(String message) {
         this.logPane.error(message);
     }
 
     @Override
-    public void fatal(String message)
-    {
+    public void fatal(String message) {
         this.logPane.fatal(message);
     }
 
-    public Logger getLogger(Class<?> classType)
-    {
+    public Logger getLogger(Class<?> classType) {
         return new org.dangcat.commons.log.Logger(Logger.getLogger(classType), "InstallCallback", this.logPane);
     }
 
-    public int getMin()
-    {
+    public int getMin() {
         return this.progressPanel.getMin();
     }
 
@@ -67,8 +60,7 @@ public class InstallProgressPanel extends ConfigPanel implements LogCallback
         this.progressPanel.setMin(min);
     }
 
-    public int getValue()
-    {
+    public int getValue() {
         return this.progressPanel.getValue();
     }
 
@@ -77,14 +69,12 @@ public class InstallProgressPanel extends ConfigPanel implements LogCallback
     }
 
     @Override
-    public void info(String message)
-    {
+    public void info(String message) {
         this.logPane.info(message);
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.progressPanel = new JProgressPanel(false);
         this.progressPanel.setBorder(new TitledBorder(this.getText("InstallProgress")));
@@ -92,20 +82,17 @@ public class InstallProgressPanel extends ConfigPanel implements LogCallback
         this.add(this.createLogPanel());
     }
 
-    public void reset()
-    {
+    public void reset() {
         this.progressPanel.setValue(0);
         this.logPane.clear();
     }
 
-    public void setMax(int max)
-    {
+    public void setMax(int max) {
         this.progressPanel.setMax(max);
     }
 
     @Override
-    public void warn(String message)
-    {
+    public void warn(String message) {
         this.logPane.warn(message);
     }
 }

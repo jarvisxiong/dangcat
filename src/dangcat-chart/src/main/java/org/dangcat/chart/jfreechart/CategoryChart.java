@@ -24,28 +24,32 @@ import java.text.DecimalFormat;
 
 /**
  * 柱状统计图。
+ *
  * @author dangcat
- * 
  */
-public abstract class CategoryChart extends AxisChart
-{
-    /** 横标签是否可见。 */
+public abstract class CategoryChart extends AxisChart {
+    /**
+     * 横标签是否可见。
+     */
     private boolean domainAxisVisible = true;
-    /** 图板方向。 */
+    /**
+     * 图板方向。
+     */
     private PlotOrientation orientation = PlotOrientation.VERTICAL;
-    /** 纵标签是否可见。 */
+    /**
+     * 纵标签是否可见。
+     */
     private boolean rangeAxisVisible = true;
-    /** 是否显示标签。 */
+    /**
+     * 是否显示标签。
+     */
     private boolean showItemLabel = true;
 
-    protected CategoryDataset createCategoryDataset(DataConverter dataConverter)
-    {
+    protected CategoryDataset createCategoryDataset(DataConverter dataConverter) {
         DataModule dataModule = this.getDataModule();
         DefaultCategoryDataset categoryDataset = new DefaultCategoryDataset();
-        for (Comparable<?> rowKey : dataModule.getRowKeys())
-        {
-            for (Comparable<?> columnKey : dataModule.getColumnKeys(rowKey))
-            {
+        for (Comparable<?> rowKey : dataModule.getRowKeys()) {
+            for (Comparable<?> columnKey : dataModule.getColumnKeys(rowKey)) {
                 Double value = dataConverter.getValue(rowKey, columnKey);
                 categoryDataset.addValue(value, rowKey, columnKey);
             }
@@ -55,8 +59,7 @@ public abstract class CategoryChart extends AxisChart
 
     protected abstract JFreeChart createChart();
 
-    public PlotOrientation getOrientation()
-    {
+    public PlotOrientation getOrientation() {
         return orientation;
     }
 
@@ -64,8 +67,7 @@ public abstract class CategoryChart extends AxisChart
         this.orientation = orientation;
     }
 
-    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i)
-    {
+    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i) {
         // 显示每个柱的数值，并修改该数值的字体属性
         CustomCategoryItemLabelGenerator categoryItemLabelGenerator = new CustomCategoryItemLabelGenerator(this);
         categoryItemRenderer.setBaseItemLabelGenerator(categoryItemLabelGenerator);
@@ -76,8 +78,7 @@ public abstract class CategoryChart extends AxisChart
         categoryItemRenderer.setBaseItemURLGenerator(categoryItemLabelGenerator);
     }
 
-    protected void initDomainAxis(CategoryAxis domainAxis)
-    {
+    protected void initDomainAxis(CategoryAxis domainAxis) {
         this.initAxis(domainAxis);
         // 横坐标是否可见。
         domainAxis.setVisible(this.isDomainAxisVisible());
@@ -87,8 +88,7 @@ public abstract class CategoryChart extends AxisChart
     }
 
     @Override
-    protected void initPlot(Plot plot)
-    {
+    protected void initPlot(Plot plot) {
         super.initPlot(plot);
 
         CategoryPlot categoryPlot = (CategoryPlot) plot;
@@ -109,12 +109,10 @@ public abstract class CategoryChart extends AxisChart
         // 设定横坐标。
         this.initRangeAxis((NumberAxis) categoryPlot.getRangeAxis());
         // 设置固定颜色范围。
-        for (int i = 0; i < categoryPlot.getRendererCount(); i++)
-        {
+        for (int i = 0; i < categoryPlot.getRendererCount(); i++) {
             CategoryItemRenderer categoryItemRenderer = categoryPlot.getRenderer(i);
             this.iniItemRenderer(categoryItemRenderer, i);
-            for (int k = 0; k < ColorFactory.MAX_ITEM; k++)
-            {
+            for (int k = 0; k < ColorFactory.MAX_ITEM; k++) {
                 int index = k + i;
                 if (index >= ColorFactory.MAX_ITEM)
                     index = index - ColorFactory.MAX_ITEM;
@@ -125,16 +123,14 @@ public abstract class CategoryChart extends AxisChart
         }
 
         BarRenderer renderer = (BarRenderer) categoryPlot.getRenderer();
-        for (int i = 0; i < ColorFactory.MAX_ITEM; i++)
-        {
+        for (int i = 0; i < ColorFactory.MAX_ITEM; i++) {
             Color color = ColorFactory.sequence(i);
             if (color != null)
                 renderer.setSeriesPaint(i, color);
         }
     }
 
-    private void initRangeAxis(NumberAxis rangeAxis)
-    {
+    private void initRangeAxis(NumberAxis rangeAxis) {
         this.initAxis(rangeAxis);
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         // 设置最高的一个大柱子与图片顶端的距离。
@@ -149,23 +145,19 @@ public abstract class CategoryChart extends AxisChart
         rangeAxis.setUpperBound(this.getMaxValue());
     }
 
-    public boolean isDomainAxisVisible()
-    {
+    public boolean isDomainAxisVisible() {
         return this.domainAxisVisible;
     }
 
-    public void setDomainAxisVisible(boolean domainAxisVisible)
-    {
+    public void setDomainAxisVisible(boolean domainAxisVisible) {
         this.domainAxisVisible = domainAxisVisible;
     }
 
-    public boolean isRangeAxisVisible()
-    {
+    public boolean isRangeAxisVisible() {
         return this.rangeAxisVisible;
     }
 
-    public void setRangeAxisVisible(boolean rangeAxisVisible)
-    {
+    public void setRangeAxisVisible(boolean rangeAxisVisible) {
         this.rangeAxisVisible = rangeAxisVisible;
     }
 
@@ -173,8 +165,7 @@ public abstract class CategoryChart extends AxisChart
         return this.showItemLabel;
     }
 
-    public void setShowItemLabel(boolean showItemLabel)
-    {
+    public void setShowItemLabel(boolean showItemLabel) {
         this.showItemLabel = showItemLabel;
     }
 

@@ -1,7 +1,6 @@
 package org.dangcat.document.csv;
 
-class DataBuffer
-{
+class DataBuffer {
     protected char[] Buffer = new char[StaticSettings.MAX_BUFFER_SIZE];
     // / <summary>
     // / The position of the cursor in the buffer when the

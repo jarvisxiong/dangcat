@@ -15,11 +15,10 @@ import java.util.List;
 
 /**
  * 关联对象。
+ *
  * @author dangcat
- * 
  */
-public class Relation
-{
+public class Relation {
     private boolean associateDelete = true;
     private boolean associateLoad = true;
     private boolean associateSave = true;
@@ -29,32 +28,28 @@ public class Relation
     private String[] parentFieldNames;
     private OrderBy sortBy = null;
 
-    public Relation(EntityField entityField, org.dangcat.persistence.annotation.Relation relationAnnotation)
-    {
+    public Relation(EntityField entityField, org.dangcat.persistence.annotation.Relation relationAnnotation) {
         this(entityField, relationAnnotation.parentFieldNames(), relationAnnotation.childFieldNames(), relationAnnotation.associateLoad(), relationAnnotation.associateSave(), relationAnnotation
                 .associateDelete(), relationAnnotation.sortBy());
     }
 
     /**
      * 建立关联关系。
-     * @param fieldName 字段名。
-     * @param parentFieldNames 父表字段关系。
+     *
+     * @param fieldName           字段名。
+     * @param parentFieldNames    父表字段关系。
      * @param childEntityMetaData 子实体元数据。
-     * @param childFieldNames 子表映射关系。
+     * @param childFieldNames     子表映射关系。
      */
-    public Relation(EntityField entityField, String[] parentFieldNames, String[] childFieldNames, boolean associateLoad, boolean associateSave, boolean associateDelete, String sortBy)
-    {
+    public Relation(EntityField entityField, String[] parentFieldNames, String[] childFieldNames, boolean associateLoad, boolean associateSave, boolean associateDelete, String sortBy) {
         this.entityField = entityField;
         this.parentFieldNames = parentFieldNames;
         this.childFieldNames = childFieldNames;
-        if (this.parentFieldNames.length == 0)
-        {
+        if (this.parentFieldNames.length == 0) {
             this.associateLoad = false;
             this.associateSave = false;
             this.associateDelete = false;
-        }
-        else
-        {
+        } else {
             this.associateLoad = associateLoad;
             this.associateSave = associateSave;
             this.associateDelete = associateDelete;
@@ -62,19 +57,18 @@ public class Relation
         this.sortBy = OrderBy.parse(sortBy);
     }
 
-    public String[] getChildFieldNames()
-    {
+    public String[] getChildFieldNames() {
         return childFieldNames;
     }
 
     /**
      * 由父表实体产生子表过滤条件。
+     *
      * @param parentEntity 父实体对象。
      * @return 过滤条件。
      * @throws EntityException
      */
-    public FilterExpress getChildFilterExpress(Object parentEntity) throws EntityException
-    {
+    public FilterExpress getChildFilterExpress(Object parentEntity) throws EntityException {
         if (parentEntity == null)
             return null;
 
@@ -82,14 +76,12 @@ public class Relation
         EntityMetaData childEntityMetaData = EntityHelper.getEntityMetaData(this.getMemberType());
 
         FilterGroup filterGroup = new FilterGroup();
-        for (int i = 0; i < this.parentFieldNames.length; i++)
-        {
+        for (int i = 0; i < this.parentFieldNames.length; i++) {
             Object value = null;
             EntityField parentEntityField = parentEntityMetaData.getEntityField(this.parentFieldNames[i]);
             if (parentEntityField != null)
                 value = parentEntityField.getValue(parentEntity);
-            if (value != null)
-            {
+            if (value != null) {
                 EntityField childEntityField = childEntityMetaData.getEntityField(this.childFieldNames[i]);
                 if (childEntityField == null)
                     return null;
@@ -103,49 +95,41 @@ public class Relation
 
     /**
      * 读取明细数据的关联对象。
+     *
      * @param instance 父实例对象。
      * @return
      */
     @SuppressWarnings("unchecked")
-    public Collection<Object> getMembers(Object instance)
-    {
+    public Collection<Object> getMembers(Object instance) {
         Collection<Object> members = null;
-        try
-        {
+        try {
             Object value = this.entityField.getValue(instance);
-            if (value != null)
-            {
+            if (value != null) {
                 if (this.isCollectionMember())
                     members = (Collection) value;
-                else
-                {
+                else {
                     members = new HashSet<Object>();
                     members.add(value);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
         return members;
     }
 
     /**
      * 读取字段的泛型类型。
+     *
      * @param field 字段对象。
      * @param index 泛型位置。
      * @return 泛型类型
      */
-    public Class<?> getMemberType()
-    {
-        if (this.memberType == null)
-        {
+    public Class<?> getMemberType() {
+        if (this.memberType == null) {
             this.memberType = this.entityField.getClassType();
-            if (Collection.class.isAssignableFrom(this.entityField.getClassType()))
-            {
+            if (Collection.class.isAssignableFrom(this.entityField.getClassType())) {
                 Type genericFieldType = this.entityField.getGenericType();
-                if (genericFieldType instanceof ParameterizedType)
-                {
+                if (genericFieldType instanceof ParameterizedType) {
                     ParameterizedType parameterizedType = (ParameterizedType) genericFieldType;
                     Type[] actualTypes = parameterizedType.getActualTypeArguments();
                     if (actualTypes.length > 0)
@@ -156,23 +140,19 @@ public class Relation
         return this.memberType;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.entityField.getName();
     }
 
-    public String[] getParentFieldNames()
-    {
+    public String[] getParentFieldNames() {
         return parentFieldNames;
     }
 
-    public OrderBy getSortBy()
-    {
+    public OrderBy getSortBy() {
         return sortBy;
     }
 
-    public boolean isAssociateDelete()
-    {
+    public boolean isAssociateDelete() {
         return associateDelete;
     }
 
@@ -180,8 +160,7 @@ public class Relation
         this.associateDelete = associateDelete;
     }
 
-    public boolean isAssociateLoad()
-    {
+    public boolean isAssociateLoad() {
         return associateLoad;
     }
 
@@ -189,8 +168,7 @@ public class Relation
         this.associateLoad = associateLoad;
     }
 
-    public boolean isAssociateSave()
-    {
+    public boolean isAssociateSave() {
         return this.associateSave;
     }
 
@@ -198,52 +176,44 @@ public class Relation
         this.associateSave = associateSave;
     }
 
-    public boolean isCollectionMember()
-    {
+    public boolean isCollectionMember() {
         return Collection.class.isAssignableFrom(this.entityField.getClassType());
     }
 
     /**
      * 载入关联属性。
-     * @param entity 父实体。
+     *
+     * @param entity     父实体。
      * @param entityList 子实体列表。
      * @throws EntityException
      */
     @SuppressWarnings("unchecked")
-    public void load(Object entity, List<?> entityList)
-    {
+    public void load(Object entity, List<?> entityList) {
         if (entity == null || entityList == null || entityList.size() == 0)
             return;
 
-        try
-        {
+        try {
             Object value = this.entityField.getValue(entity);
             // 泛型集合保存多个明细对象。
-            if (Collection.class.isAssignableFrom(entityField.getClassType()))
-            {
+            if (Collection.class.isAssignableFrom(entityField.getClassType())) {
                 if (value != null) // 必须内建实例对象。
                 {
                     Collection entityCollection = (Collection) value;
                     entityCollection.clear();
                     entityCollection.addAll(entityList);
                 }
-            }
-            else if (entityList.size() == 1) // 非集合只能有一个对象。
+            } else if (entityList.size() == 1) // 非集合只能有一个对象。
             {
                 if (this.entityField.getClassType().isAssignableFrom(entityList.get(0).getClass()))
                     this.entityField.setValue(entity, entityList.get(0));
-            }
-            else
+            } else
                 this.entityField.setValue(entity, null);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
         }
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
         info.append(Relation.class.getSimpleName());
         info.append(" : ");
@@ -251,8 +221,7 @@ public class Relation
         info.append(this.getName());
         info.append(", parentFieldNames = {");
         boolean isFirst = true;
-        for (String fieldName : this.getParentFieldNames())
-        {
+        for (String fieldName : this.getParentFieldNames()) {
             if (!isFirst)
                 info.append(", ");
             info.append(fieldName);
@@ -260,8 +229,7 @@ public class Relation
         }
         info.append("}, childFieldNames = {");
         isFirst = true;
-        for (String fieldName : this.getChildFieldNames())
-        {
+        for (String fieldName : this.getChildFieldNames()) {
             if (!isFirst)
                 info.append(", ");
             info.append(fieldName);
@@ -278,28 +246,23 @@ public class Relation
 
     /**
      * 同步父实体和子实体关联数据。
+     *
      * @param parentEntity 父实体。
-     * @param childEntity 子实体。
+     * @param childEntity  子实体。
      * @throws EntityException
      */
-    public void update(Object parentEntity, Collection<Object> members) throws EntityException
-    {
+    public void update(Object parentEntity, Collection<Object> members) throws EntityException {
         EntityMetaData parentEntityMetaData = EntityHelper.getEntityMetaData(parentEntity.getClass());
-        for (int i = 0; i < this.parentFieldNames.length; i++)
-        {
+        for (int i = 0; i < this.parentFieldNames.length; i++) {
             EntityField parentEntityField = parentEntityMetaData.getEntityField(this.parentFieldNames[i]);
-            if (parentEntityField != null)
-            {
+            if (parentEntityField != null) {
                 EntityField childEntityField = null;
-                for (Object member : members)
-                {
-                    if (childEntityField == null)
-                    {
+                for (Object member : members) {
+                    if (childEntityField == null) {
                         EntityMetaData childEntityMetaData = EntityHelper.getEntityMetaData(member.getClass());
                         childEntityField = childEntityMetaData.getEntityField(this.childFieldNames[i]);
                     }
-                    if (childEntityField != null)
-                    {
+                    if (childEntityField != null) {
                         Object value = parentEntityField.getValue(parentEntity);
                         if (parentEntityField.getColumn().isSequenceGeneration() && value == null)
                             continue;

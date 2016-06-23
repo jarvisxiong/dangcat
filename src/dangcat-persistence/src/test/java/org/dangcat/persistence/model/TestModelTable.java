@@ -10,15 +10,12 @@ import org.dangcat.persistence.orderby.OrderByUnit;
 import org.dangcat.persistence.orm.SessionFactory;
 import org.junit.Assert;
 
-public class TestModelTable extends TestEntityBase
-{
+public class TestModelTable extends TestEntityBase {
     private static final int TEST_COUNT = 1000;
 
-    private void compareTableFieldB(Table table, int beginValue, int endValue, int count)
-    {
+    private void compareTableFieldB(Table table, int beginValue, int endValue, int count) {
         int index = 0;
-        for (Row row : table.getRows())
-        {
+        for (Row row : table.getRows()) {
             Assert.assertEquals((Integer) (beginValue + index), row.getField("FieldB").getInteger());
             index++;
         }
@@ -26,8 +23,7 @@ public class TestModelTable extends TestEntityBase
     }
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
         long beginTime = DateUtils.currentTimeMillis();
         logger.info("Begin to test " + databaseName);
         SessionFactory.getInstance().setDefaultName(databaseName);
@@ -43,8 +39,7 @@ public class TestModelTable extends TestEntityBase
         logger.info("End test " + databaseName + ", cost " + (DateUtils.currentTimeMillis() - beginTime) + " ms.");
     }
 
-    private void testTableBatchExecute() throws TableException
-    {
+    private void testTableBatchExecute() throws TableException {
         Table table = new Table("TestTable");
         if (table.exists())
             table.drop();
@@ -60,8 +55,7 @@ public class TestModelTable extends TestEntityBase
         table.drop();
     }
 
-    private void testTableCreate() throws TableException
-    {
+    private void testTableCreate() throws TableException {
         Table table1 = TableDataUtils.getTable();
 
         if (table1.exists())
@@ -79,8 +73,7 @@ public class TestModelTable extends TestEntityBase
         Assert.assertEquals(0, table2.getRows().size());
     }
 
-    private void testTableDelete() throws TableException
-    {
+    private void testTableDelete() throws TableException {
         Table table1 = TableDataUtils.getTable();
         table1.load();
         Rows rows1 = table1.getRows();
@@ -125,15 +118,13 @@ public class TestModelTable extends TestEntityBase
         Assert.assertEquals(2, table3.getRows().size());
     }
 
-    private void testTableDrop() throws TableException
-    {
+    private void testTableDrop() throws TableException {
         Table table = TableDataUtils.getTable();
         table.drop();
         Assert.assertFalse(table.exists());
     }
 
-    private void testTableInsert() throws TableException
-    {
+    private void testTableInsert() throws TableException {
         Table table1 = TableDataUtils.getTable();
         Rows rows1 = table1.getRows();
         table1.load();
@@ -145,12 +136,10 @@ public class TestModelTable extends TestEntityBase
         table1.save();
         // 检查状态
         Assert.assertEquals(DataState.Browse, table1.getDataState());
-        for (int i = 0; i < TEST_COUNT; i++)
-        {
+        for (int i = 0; i < TEST_COUNT; i++) {
             Row row = rows1.get(i);
             Assert.assertEquals(DataState.Browse, row.getDataState());
-            for (Column column : table1.getColumns())
-            {
+            for (Column column : table1.getColumns()) {
                 Assert.assertEquals(DataState.Browse, row.getField(column.getName()).getDataState());
             }
         }
@@ -162,8 +151,7 @@ public class TestModelTable extends TestEntityBase
         Assert.assertTrue(TableUtils.equalsContent(table1, table2));
     }
 
-    private void testTableModify() throws TableException
-    {
+    private void testTableModify() throws TableException {
         Table table1 = TableDataUtils.getTable();
         table1.load();
         Rows rows1 = table1.getRows();
@@ -182,12 +170,10 @@ public class TestModelTable extends TestEntityBase
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
         Assert.assertEquals(0, table1.getRows().getModifiedRows().size());
         Assert.assertEquals(DataState.Browse, table1.getDataState());
-        for (int i = 0; i < TEST_COUNT; i++)
-        {
+        for (int i = 0; i < TEST_COUNT; i++) {
             Row row = rows1.get(i);
             Assert.assertEquals(DataState.Browse, row.getDataState());
-            for (Column column : table1.getColumns())
-            {
+            for (Column column : table1.getColumns()) {
                 Assert.assertEquals(DataState.Browse, row.getField(column.getName()).getDataState());
             }
         }
@@ -209,12 +195,10 @@ public class TestModelTable extends TestEntityBase
 
         // 测试修改表为插入状态，重新插入的功能。
         table2.setTableState(TableState.Insert);
-        for (int i = 0; i < TEST_COUNT; i++)
-        {
+        for (int i = 0; i < TEST_COUNT; i++) {
             Row row = table2.getRows().get(i);
             Assert.assertEquals(DataState.Insert, row.getDataState());
-            for (Column column : table2.getColumns())
-            {
+            for (Column column : table2.getColumns()) {
                 Assert.assertEquals(DataState.Insert, row.getField(column.getName()).getDataState());
             }
         }
@@ -227,8 +211,7 @@ public class TestModelTable extends TestEntityBase
         Assert.assertTrue(TableUtils.equalsContent(table1, table5));
     }
 
-    private void testTableRange() throws TableException
-    {
+    private void testTableRange() throws TableException {
         Table table = TableDataUtils.getTable();
         Range range = new Range(1);
         range.setCalculateTotalSize(true);

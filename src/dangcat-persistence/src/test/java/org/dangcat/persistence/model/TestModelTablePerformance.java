@@ -7,16 +7,13 @@ import org.dangcat.persistence.exception.EntityException;
 import org.dangcat.persistence.exception.TableException;
 import org.dangcat.persistence.orm.SessionFactory;
 
-public class TestModelTablePerformance extends TestEntityBase
-{
+public class TestModelTablePerformance extends TestEntityBase {
     private static final int TEST_COUNT = 10000;
     private Table table = null;
 
     @Override
-    protected void testDatabase(String databaseName) throws TableException, EntityException
-    {
-        if (this.table == null)
-        {
+    protected void testDatabase(String databaseName) throws TableException, EntityException {
+        if (this.table == null) {
             this.table = TableDataUtils.getTable();
             TableDataUtils.createTableData(this.table, TEST_COUNT);
         }

@@ -4,16 +4,13 @@ import org.dangcat.persistence.calculate.Calculator;
 
 import java.util.Collection;
 
-public class TableCalculator1 implements Calculator
-{
+public class TableCalculator1 implements Calculator {
 
     @Override
-    public void calculate(Collection<?> entityCollection)
-    {
+    public void calculate(Collection<?> entityCollection) {
     }
 
     @Override
-    public void calculate(Object entity)
-    {
+    public void calculate(Object entity) {
     }
 }

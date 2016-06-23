@@ -3,8 +3,7 @@ package org.dangcat.swing;
 import javax.swing.*;
 import java.awt.*;
 
-public class JProgressPanel extends JPanel
-{
+public class JProgressPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static Dimension MaximumSize = new Dimension(Short.MAX_VALUE, 22);
     private JLabel messageLabel = null;
@@ -12,21 +11,18 @@ public class JProgressPanel extends JPanel
     private JProgressBar progressBar = null;
     private boolean showMessage = true;
 
-    public JProgressPanel()
-    {
+    public JProgressPanel() {
         this(true);
     }
 
-    public JProgressPanel(boolean showMessage)
-    {
+    public JProgressPanel(boolean showMessage) {
         super();
 
         this.showMessage = showMessage;
         this.createComponents();
     }
 
-    private void createComponents()
-    {
+    private void createComponents() {
         this.setLayout(new GridBagLayout());
 
         int y = 0;
@@ -37,8 +33,7 @@ public class JProgressPanel extends JPanel
         constraints.gridx = 0;
         constraints.gridwidth = 2;
         constraints.gridy = y;
-        if (this.isShowMessage())
-        {
+        if (this.isShowMessage()) {
             this.messageLabel = new JLabel();
             this.messageLabel.setMinimumSize(MaximumSize);
             this.add(this.messageLabel, constraints);
@@ -66,44 +61,36 @@ public class JProgressPanel extends JPanel
         this.setMaximumSize(new Dimension(Short.MAX_VALUE, this.isShowMessage() ? 50 : 30));
     }
 
-    public int getMax()
-    {
+    public int getMax() {
         return this.progressBar.getMaximum();
     }
 
-    public void setMax(int max)
-    {
+    public void setMax(int max) {
         this.progressBar.setMaximum(max);
     }
 
-    public String getMessage()
-    {
+    public String getMessage() {
         return this.messageLabel.getText();
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         if (this.messageLabel != null)
             this.messageLabel.setText(message);
     }
 
-    public int getMin()
-    {
+    public int getMin() {
         return this.progressBar.getMinimum();
     }
 
-    public void setMin(int min)
-    {
+    public void setMin(int min) {
         this.progressBar.setMinimum(min);
     }
 
-    public int getValue()
-    {
+    public int getValue() {
         return this.progressBar.getValue();
     }
 
-    public void setValue(int value)
-    {
+    public void setValue(int value) {
         this.progressBar.setValue(value);
         int percent = 0;
         if (this.getMax() != 0)

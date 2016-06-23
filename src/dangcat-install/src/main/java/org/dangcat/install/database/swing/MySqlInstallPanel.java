@@ -9,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class MySqlInstallPanel extends DatabaseInstallPanel
-{
+public class MySqlInstallPanel extends DatabaseInstallPanel {
     private static final String BASE_DIR = "BaseDir";
     private static final String DATA_DIR = "DataDir";
     private static final long serialVersionUID = 1L;
@@ -19,8 +18,7 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
     private JTextField dataDirField = null;
 
     @Override
-    protected DatabaseInstallListener createDatabaseInstallListener()
-    {
+    protected DatabaseInstallListener createDatabaseInstallListener() {
         MySqlInstallListener mySqlInstallListener = new MySqlInstallListener(this);
         mySqlInstallListener.setBaseDirField(this.baseDirField);
         mySqlInstallListener.setDataDirField(this.dataDirField);
@@ -28,8 +26,7 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
     }
 
     @Override
-    protected JPanel createDatabaseInstallPanel(JPanel panel, int y)
-    {
+    protected JPanel createDatabaseInstallPanel(JPanel panel, int y) {
         ImageIcon browseImage = ImageUtils.loadImageIcon(this.getClass(), "browse.png");
         this.baseDirField = new JTextField();
         this.baseDirField.setColumns(Short.MAX_VALUE);
@@ -39,11 +36,9 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
         baseDirButton.setAlignmentX(CENTER_ALIGNMENT);
         baseDirButton.setMnemonic(KeyEvent.VK_B);
         baseDirButton.setDisplayedMnemonicIndex(baseDirButton.getText().lastIndexOf("B"));
-        baseDirButton.addActionListener(new ActionListener()
-        {
+        baseDirButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 MySqlInstallPanel.this.choicePath(MySqlInstallPanel.this.baseDirField);
             }
         });
@@ -57,11 +52,9 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
         dataDirButton.setAlignmentX(CENTER_ALIGNMENT);
         dataDirButton.setMnemonic(KeyEvent.VK_L);
         dataDirButton.setDisplayedMnemonicIndex(dataDirButton.getText().lastIndexOf("L"));
-        dataDirButton.addActionListener(new ActionListener()
-        {
+        dataDirButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 MySqlInstallPanel.this.choicePath(MySqlInstallPanel.this.dataDirField);
             }
         });
@@ -71,8 +64,7 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
         super.update();
         MySqlInstaller mySqlInstaller = (MySqlInstaller) this.getDatabaseInstaller();
         this.baseDirField.setText(mySqlInstaller.getBaseDir());
@@ -80,8 +72,7 @@ public class MySqlInstallPanel extends DatabaseInstallPanel
     }
 
     @Override
-    public boolean validateData()
-    {
+    public boolean validateData() {
         if (!ValidateUtils.validateBaseDir(this, this.baseDirField, BASE_DIR))
             return false;
         if (!ValidateUtils.validateInstallPath(this, this.baseDirField, BASE_DIR))

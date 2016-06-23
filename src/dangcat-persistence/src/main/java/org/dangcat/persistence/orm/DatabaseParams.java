@@ -1,7 +1,6 @@
 package org.dangcat.persistence.orm;
 
-public interface DatabaseParams
-{
+public interface DatabaseParams {
     String AutoCommit = "autoCommit";
     String BatchSize = "batchSize";
     String Driver = "driver";

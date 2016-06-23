@@ -13,16 +13,14 @@ import java.io.Reader;
 
 /**
  * CSV文档输入输出。
+ *
  * @author dangcat
- * 
  */
-public class CsvDocument extends TextDocumentBase
-{
+public class CsvDocument extends TextDocumentBase {
     private ReadUserSettings readUserSettings = null;
     private WriteUserSettings writeUserSettings = null;
 
-    public ReadUserSettings getReadUserSettings()
-    {
+    public ReadUserSettings getReadUserSettings() {
         return this.readUserSettings;
     }
 
@@ -30,8 +28,7 @@ public class CsvDocument extends TextDocumentBase
         this.readUserSettings = readUserSettings;
     }
 
-    public WriteUserSettings getWriteUserSettings()
-    {
+    public WriteUserSettings getWriteUserSettings() {
         return this.writeUserSettings;
     }
 
@@ -41,14 +38,14 @@ public class CsvDocument extends TextDocumentBase
 
     /**
      * 从缓冲流加载数据。
+     *
      * @param bufferedReader 数据缓冲流。
-     * @param dataWriter 数据输出接口。
+     * @param dataWriter     数据输出接口。
      * @return 读入的行数。
      * @throws IOException 异常。
      */
     @Override
-    public int read(Reader reader, DataWriter dataWriter) throws IOException
-    {
+    public int read(Reader reader, DataWriter dataWriter) throws IOException {
         Columns columns = dataWriter.getColumns();
         if (columns.size() == 0)
             return 0;
@@ -59,14 +56,11 @@ public class CsvDocument extends TextDocumentBase
         if (this.isFirstHeader() && csvReader.readHeaders())
             columns = this.readHeader(columns, csvReader.getHeaders());
 
-        while (csvReader.readRecord())
-        {
+        while (csvReader.readRecord()) {
             int columnIndex = 0;
             int rowIndex = dataWriter.size();
-            for (Column column : columns)
-            {
-                if (column.getFieldClass() != null && !ValueUtils.isEmpty(column.getName()))
-                {
+            for (Column column : columns) {
+                if (column.getFieldClass() != null && !ValueUtils.isEmpty(column.getName())) {
                     String textValue = csvReader.get(columnIndex);
                     Object value = column.parse(textValue);
                     dataWriter.setValue(rowIndex, column.getName(), value);
@@ -78,15 +72,12 @@ public class CsvDocument extends TextDocumentBase
         return dataWriter.size();
     }
 
-    private Columns readHeader(Columns columns, String[] textArray)
-    {
+    private Columns readHeader(Columns columns, String[] textArray) {
         Columns columnList = new Columns();
-        for (int i = 0; i < textArray.length; i++)
-        {
+        for (int i = 0; i < textArray.length; i++) {
             String fieldName = textArray[i];
             Column column = columns.find(fieldName);
-            if (column == null)
-            {
+            if (column == null) {
                 column = new Column();
                 column.setTitle(fieldName);
             }
@@ -97,13 +88,13 @@ public class CsvDocument extends TextDocumentBase
 
     /**
      * 导出实体对象数据到数据流。
+     *
      * @param outputStream 输出流。
-     * @param dataReader 数据来源。
+     * @param dataReader   数据来源。
      * @param 输出数量。
      */
     @Override
-    public int write(DataReader dataReader)
-    {
+    public int write(DataReader dataReader) {
         if (dataReader == null || dataReader.size() == 0)
             return 0;
 
@@ -112,22 +103,18 @@ public class CsvDocument extends TextDocumentBase
             return 0;
 
         PrintWriter writer = this.getPrintWriter();
-        try
-        {
+        try {
             CsvWriter csvWriter = new CsvWriter(writer, Letters.COMMA);
             if (this.writeUserSettings != null)
                 csvWriter.setUserSettings(this.writeUserSettings);
             if (this.isFirstHeader())
                 this.writeHeader(csvWriter, columns);
             // 输出数据内容。
-            for (int i = 0; i < dataReader.size(); i++)
-            {
-                for (Column column : columns)
-                {
+            for (int i = 0; i < dataReader.size(); i++) {
+                for (Column column : columns) {
                     if (ValueUtils.isEmpty(column.getName()))
                         csvWriter.write(null);
-                    else
-                    {
+                    else {
                         Object value = dataReader.getValue(i, column.getName());
                         csvWriter.write(column.toString(value));
                     }
@@ -135,9 +122,7 @@ public class CsvDocument extends TextDocumentBase
                 csvWriter.endRecord();
                 this.lineCount++;
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             this.logger.error(this, e);
         }
         return dataReader.size();
@@ -145,10 +130,10 @@ public class CsvDocument extends TextDocumentBase
 
     /**
      * 输出标题。
+     *
      * @throws IOException
      */
-    private void writeHeader(CsvWriter writer, Columns columns) throws IOException
-    {
+    private void writeHeader(CsvWriter writer, Columns columns) throws IOException {
         for (Column column : columns)
             writer.write(column.getTitle());
         writer.endRecord();

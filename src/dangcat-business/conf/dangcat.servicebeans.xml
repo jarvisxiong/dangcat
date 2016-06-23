@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<!-- Services configuration -->
+<!-- Services configuration -->
 <Services>
-	<Service AccessType="org.dangcat.business.account.service.AccountService"
-		ServiceType="org.dangcat.business.account.service.impl.AccountServiceImpl" />
+    <Service AccessType="org.dangcat.business.account.service.AccountService"
+             ServiceType="org.dangcat.business.account.service.impl.AccountServiceImpl"/>
 
-	<Service AccessType="org.dangcat.system.upload.UploadDemoService"
-		ServiceType="org.dangcat.system.upload.impl.UploadDemoServiceImpl" />
+    <Service AccessType="org.dangcat.system.upload.UploadDemoService"
+             ServiceType="org.dangcat.system.upload.impl.UploadDemoServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.systeminfo.SystemInfoService"
-		ServiceType="org.dangcat.business.systeminfo.impl.SystemInfoServiceImpl" />
+    <Service AccessType="org.dangcat.business.systeminfo.SystemInfoService"
+             ServiceType="org.dangcat.business.systeminfo.impl.SystemInfoServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.staff.service.OperatorInfoService"
-		ServiceType="org.dangcat.business.staff.service.impl.OperatorInfoServiceImpl" />
+    <Service AccessType="org.dangcat.business.staff.service.OperatorInfoService"
+             ServiceType="org.dangcat.business.staff.service.impl.OperatorInfoServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.staff.service.OperatorGroupService"
-		ServiceType="org.dangcat.business.staff.service.impl.OperatorGroupServiceImpl" />
+    <Service AccessType="org.dangcat.business.staff.service.OperatorGroupService"
+             ServiceType="org.dangcat.business.staff.service.impl.OperatorGroupServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.staff.service.RoleInfoService"
-		ServiceType="org.dangcat.business.staff.service.impl.RoleInfoServiceImpl" />
+    <Service AccessType="org.dangcat.business.staff.service.RoleInfoService"
+             ServiceType="org.dangcat.business.staff.service.impl.RoleInfoServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.staff.service.OperateLogService"
-		ServiceType="org.dangcat.business.staff.service.impl.OperateLogServiceImpl" />
+    <Service AccessType="org.dangcat.business.staff.service.OperateLogService"
+             ServiceType="org.dangcat.business.staff.service.impl.OperateLogServiceImpl"/>
 
-	<Service AccessType="org.dangcat.business.server.ServerInfoService"
-		ServiceType="org.dangcat.business.server.ServerInfoServiceImpl" />
+    <Service AccessType="org.dangcat.business.server.ServerInfoService"
+             ServiceType="org.dangcat.business.server.ServerInfoServiceImpl"/>
 
-	<Interceptors>
-		<Interceptor>org.dangcat.business.security.BusinessSecurityInterceptor</Interceptor>
-		<Interceptor>org.dangcat.business.log.BusinessOperateLogInterceptor</Interceptor>
-	</Interceptors>
+    <Interceptors>
+        <Interceptor>org.dangcat.business.security.BusinessSecurityInterceptor</Interceptor>
+        <Interceptor>org.dangcat.business.log.BusinessOperateLogInterceptor</Interceptor>
+    </Interceptors>
 </Services>

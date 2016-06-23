@@ -8,13 +8,12 @@ import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
  * ²Ù×÷Í³¼Æ¡£
+ *
  * @author dangcat
- * 
  */
 @Table(tableName = DateTimeTableName.class)
 @SqlXml
-public class OperateStat extends SettleEntity
-{
+public class OperateStat extends SettleEntity {
     public static final String Failure = "Failure";
     public static final String GroupName = "GroupName";
     public static final String OperatorId = "OperatorId";
@@ -40,63 +39,51 @@ public class OperateStat extends SettleEntity
     @Column(index = 4, isNullable = false)
     private Integer success = 0;
 
-    public Integer getFailure()
-    {
+    public Integer getFailure() {
         return failure;
     }
 
-    public void setFailure(Integer failure)
-    {
+    public void setFailure(Integer failure) {
         this.failure = failure;
     }
 
-    public String getGroupName()
-    {
+    public String getGroupName() {
         return groupName;
     }
 
-    public void setGroupName(String groupName)
-    {
+    public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    public Integer getOperatorId()
-    {
+    public Integer getOperatorId() {
         return operatorId;
     }
 
-    public void setOperatorId(Integer operatorId)
-    {
+    public void setOperatorId(Integer operatorId) {
         this.operatorId = operatorId;
     }
 
-    public String getOperatorName()
-    {
+    public String getOperatorName() {
         return operatorName;
     }
 
-    public void setOperatorName(String operatorName)
-    {
+    public void setOperatorName(String operatorName) {
         this.operatorName = operatorName;
     }
 
-    public String getOperatorNo()
-    {
+    public String getOperatorNo() {
         return operatorNo;
     }
 
-    public void setOperatorNo(String operatorNo)
-    {
+    public void setOperatorNo(String operatorNo) {
         this.operatorNo = operatorNo;
     }
 
-    public Integer getSuccess()
-    {
+    public Integer getSuccess() {
         return success;
     }
 
-    public void setSuccess(Integer success)
-    {
+    public void setSuccess(Integer success) {
         this.success = success;
     }
 }

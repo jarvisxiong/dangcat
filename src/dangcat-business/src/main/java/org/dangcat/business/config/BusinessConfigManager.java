@@ -12,25 +12,20 @@ import java.util.*;
 
 /**
  * 业务配置服务。
+ *
  * @author dangcat
- * 
  */
-public class BusinessConfigManager
-{
+public class BusinessConfigManager {
     private static BusinessConfigManager instance = null;
     private Map<String, BusinessConfig> businessConfigMap = new HashMap<String, BusinessConfig>();
 
     private BusinessConfigManager() {
     }
 
-    public static BusinessConfigManager getInstance()
-    {
-        if (instance == null)
-        {
-            synchronized (BusinessConfigManager.class)
-            {
-                if (instance == null)
-                {
+    public static BusinessConfigManager getInstance() {
+        if (instance == null) {
+            synchronized (BusinessConfigManager.class) {
+                if (instance == null) {
                     instance = new BusinessConfigManager();
                     instance.initialize();
                 }
@@ -39,17 +34,13 @@ public class BusinessConfigManager
         return instance;
     }
 
-    private void initialize()
-    {
+    private void initialize() {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         Collection<String> jndiNames = serviceFactory.getJndiNames(false);
-        if (jndiNames != null)
-        {
-            for (String jndiName : jndiNames)
-            {
+        if (jndiNames != null) {
+            for (String jndiName : jndiNames) {
                 ServiceInfo serviceInfo = serviceFactory.getServiceInfo(jndiName);
-                if (serviceInfo != null && serviceInfo.getConfigProvider() instanceof BusinessConfig)
-                {
+                if (serviceInfo != null && serviceInfo.getConfigProvider() instanceof BusinessConfig) {
                     BusinessConfig businessConfig = (BusinessConfig) serviceInfo.getConfigProvider();
                     this.businessConfigMap.put(businessConfig.getName(), businessConfig);
                 }
@@ -61,27 +52,21 @@ public class BusinessConfigManager
     /**
      * 载入配置。
      */
-    public void load()
-    {
+    public void load() {
         Table systemConfigTable = EntityHelper.getEntityMetaData(BusinessSetup.class).getTable();
-        if (systemConfigTable.exists())
-        {
+        if (systemConfigTable.exists()) {
             EntityManager entityManager = EntityManagerFactory.getInstance().open();
             List<BusinessSetup> businessSetupList = entityManager.load(BusinessSetup.class);
-            if (businessSetupList != null && businessSetupList.size() > 0)
-            {
+            if (businessSetupList != null && businessSetupList.size() > 0) {
                 for (BusinessConfig businessConfig : this.businessConfigMap.values())
                     businessConfig.load(businessSetupList);
             }
         }
     }
 
-    private void read(Collection<BusinessSetup> businessSetupCollection, BusinessConfig businessConfig)
-    {
-        for (ConfigValue configValue : businessConfig.getConfigValueMap().values())
-        {
-            if (!configValue.isDefaultValue())
-            {
+    private void read(Collection<BusinessSetup> businessSetupCollection, BusinessConfig businessConfig) {
+        for (ConfigValue configValue : businessConfig.getConfigValueMap().values()) {
+            if (!configValue.isDefaultValue()) {
                 BusinessSetup businessSetup = new BusinessSetup();
                 businessSetup.setName(businessConfig.getName());
                 businessSetup.setConfigName(configValue.getName());
@@ -93,10 +78,10 @@ public class BusinessConfigManager
 
     /**
      * 保存业务配置。
+     *
      * @param businessConfig
      */
-    public void save(BusinessConfig businessConfig)
-    {
+    public void save(BusinessConfig businessConfig) {
         Collection<BusinessSetup> businessSetupCollection = new HashSet<BusinessSetup>();
         this.read(businessSetupCollection, businessConfig);
         Table businessSetupTable = EntityHelper.getEntityMetaData(BusinessSetup.class).getTable();
@@ -104,7 +89,7 @@ public class BusinessConfigManager
             businessSetupTable.create();
 
         EntityManager entityManager = EntityManagerFactory.getInstance().open();
-        entityManager.delete(BusinessSetup.class, new String[] { BusinessSetup.Name }, businessConfig.getName());
+        entityManager.delete(BusinessSetup.class, new String[]{BusinessSetup.Name}, businessConfig.getName());
         if (businessSetupCollection.size() > 0)
             entityManager.save(businessSetupCollection.toArray());
     }

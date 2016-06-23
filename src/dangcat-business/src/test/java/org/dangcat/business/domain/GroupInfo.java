@@ -5,8 +5,7 @@ import org.dangcat.persistence.annotation.Table;
 import org.dangcat.persistence.entity.EntityBase;
 
 @Table
-public class GroupInfo extends EntityBase
-{
+public class GroupInfo extends EntityBase {
     public static final String Id = "Id";
     public static final String Name = "Name";
     private static final long serialVersionUID = 1L;
@@ -17,23 +16,19 @@ public class GroupInfo extends EntityBase
     @Column(displaySize = 20)
     private String name = null;
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 }

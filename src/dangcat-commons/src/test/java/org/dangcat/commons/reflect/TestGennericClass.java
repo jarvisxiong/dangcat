@@ -7,13 +7,11 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-public class TestGennericClass
-{
+public class TestGennericClass {
     private Map<String, MethodInfo> methodInfoMap = GenericUtils.getMethodInfoMap(MethodExample2.class);
 
     @Test
-    public void testMethodExecute1()
-    {
+    public void testMethodExecute1() {
         MethodInfo method = methodInfoMap.get("execute1");
         ParamInfo[] paramInfos = method.getParamInfos();
 
@@ -27,8 +25,7 @@ public class TestGennericClass
     }
 
     @Test
-    public void testMethodExecute2()
-    {
+    public void testMethodExecute2() {
         MethodInfo method = methodInfoMap.get("execute2");
         ParamInfo[] paramInfos = method.getParamInfos();
 
@@ -44,8 +41,7 @@ public class TestGennericClass
     }
 
     @Test
-    public void testMethodExecute3()
-    {
+    public void testMethodExecute3() {
         MethodInfo method = methodInfoMap.get("execute3");
         ParamInfo[] paramInfos = method.getParamInfos();
 
@@ -65,8 +61,7 @@ public class TestGennericClass
     }
 
     @Test
-    public void testMethodExecute4()
-    {
+    public void testMethodExecute4() {
         MethodInfo method = methodInfoMap.get("execute4");
         ParamInfo[] paramInfos = method.getParamInfos();
 

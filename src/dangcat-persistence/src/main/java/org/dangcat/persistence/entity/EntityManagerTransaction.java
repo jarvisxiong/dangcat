@@ -5,21 +5,22 @@ import org.dangcat.persistence.orm.Session;
 
 import java.sql.SQLException;
 
-class EntityManagerTransaction
-{
-    /** 实体管理器。 */
+class EntityManagerTransaction {
+    /**
+     * 实体管理器。
+     */
     protected EntityManagerImpl entityManager = null;
     private SaveEntityContext saveEntityContext = null;
-    /** 数据库会话。 */
+    /**
+     * 数据库会话。
+     */
     private Session session = null;
 
-    EntityManagerTransaction(EntityManager entityManager)
-    {
+    EntityManagerTransaction(EntityManager entityManager) {
         this.entityManager = (EntityManagerImpl) entityManager;
     }
 
-    protected Session beginTransaction() throws SessionException, SQLException
-    {
+    protected Session beginTransaction() throws SessionException, SQLException {
         if (this.entityManager.getSession() != null)
             return this.entityManager.getSession();
 
@@ -28,23 +29,19 @@ class EntityManagerTransaction
         return this.session;
     }
 
-    protected void commit() throws SQLException
-    {
-        if (this.session != null)
-        {
+    protected void commit() throws SQLException {
+        if (this.session != null) {
             this.session.commit();
             this.saveEntityContext.afterCommit();
         }
         this.release();
     }
 
-    protected String getDatabaseName()
-    {
+    protected String getDatabaseName() {
         return this.entityManager.getDatabaseName();
     }
 
-    protected Session openSession() throws SessionException
-    {
+    protected Session openSession() throws SessionException {
         if (this.entityManager.getSession() != null)
             return this.entityManager.getSession();
 
@@ -52,8 +49,7 @@ class EntityManagerTransaction
         return this.session;
     }
 
-    protected void prepare(SaveEntityContext saveEntityContext)
-    {
+    protected void prepare(SaveEntityContext saveEntityContext) {
         if (this.entityManager.getSession() != null)
             this.entityManager.addSaveEntityContext(saveEntityContext);
 
@@ -62,14 +58,12 @@ class EntityManagerTransaction
         this.saveEntityContext = saveEntityContext;
     }
 
-    protected void release()
-    {
+    protected void release() {
         if (this.session != null)
             this.session.release();
     }
 
-    protected void rollback()
-    {
+    protected void rollback() {
         if (this.session != null)
             this.session.rollback();
         this.release();

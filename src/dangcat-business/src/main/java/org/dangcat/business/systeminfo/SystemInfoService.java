@@ -8,12 +8,11 @@ import java.util.Map;
 
 /**
  * 系统服务。
+ *
  * @author Administrator
- * 
  */
 @JndiName(module = "System", name = "SystemInfo")
-public interface SystemInfoService
-{
+public interface SystemInfoService {
     /**
      * 加载系统菜单项。
      */

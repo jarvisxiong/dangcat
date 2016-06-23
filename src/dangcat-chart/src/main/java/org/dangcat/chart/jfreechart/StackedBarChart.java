@@ -13,14 +13,12 @@ import org.jfree.ui.TextAnchor;
 
 /**
  * 堆栈柱状统计图。
+ *
  * @author dangcat
- * 
  */
-public class StackedBarChart extends CategoryChart
-{
+public class StackedBarChart extends CategoryChart {
     @Override
-    protected JFreeChart createChart()
-    {
+    protected JFreeChart createChart() {
         // 建立统计对象。
         JFreeChart chart = ChartFactory.createStackedBarChart(this.getTitle(), // 标题
                 this.getDomainTitle(), // 横坐标标题。
@@ -34,8 +32,7 @@ public class StackedBarChart extends CategoryChart
     }
 
     @Override
-    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i)
-    {
+    protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i) {
         super.iniItemRenderer(categoryItemRenderer, i);
         BarRenderer renderer = (BarRenderer) categoryItemRenderer;
         renderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER_RIGHT));
@@ -43,8 +40,7 @@ public class StackedBarChart extends CategoryChart
     }
 
     @Override
-    public void load()
-    {
+    public void load() {
         DataConverter dataConverter = this.createDataConverter(true);
         CategoryDataset categoryDataset = this.createCategoryDataset(dataConverter);
         if (categoryDataset != null)

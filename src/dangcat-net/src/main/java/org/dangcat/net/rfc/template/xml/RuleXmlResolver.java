@@ -4,26 +4,23 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
  * 属性规则解析器。
+ *
  * @author dangcat
- * 
  */
-public class RuleXmlResolver extends XmlResolver
-{
+public class RuleXmlResolver extends XmlResolver {
     private Rule rule = null;
 
     /**
      * 构建解析器。
      */
-    public RuleXmlResolver()
-    {
+    public RuleXmlResolver() {
         this(Rule.class.getSimpleName());
     }
 
     /**
      * 构建解析器。
      */
-    public RuleXmlResolver(String name)
-    {
+    public RuleXmlResolver(String name) {
         super(name);
     }
 
@@ -31,8 +28,7 @@ public class RuleXmlResolver extends XmlResolver
      * 开始解析元素标签。
      */
     @Override
-    protected void startElement()
-    {
+    protected void startElement() {
         this.rule = new Rule();
         this.setResolveObject(this.rule);
     }

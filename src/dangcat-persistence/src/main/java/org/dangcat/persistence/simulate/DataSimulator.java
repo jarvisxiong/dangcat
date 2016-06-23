@@ -11,26 +11,36 @@ import java.util.Map;
 
 /**
  * 实体数据模拟器。
+ *
  * @author dangcat
- * 
  */
-public abstract class DataSimulator
-{
-    /** 随机产生数据。 **/
+public abstract class DataSimulator {
+    /**
+     * 随机产生数据。
+     **/
     public static final int MODE_RANDOM = 1;
-    /** 按照序列产生数据。 **/
+    /**
+     * 按照序列产生数据。
+     **/
     public static final int MODE_SEQUENCE = 0;
-    /** 关联模拟数据库。 **/
+    /**
+     * 关联模拟数据库。
+     **/
     private DatabaseSimulator databaseSimulator = null;
-    /** 字段映射表。 **/
+    /**
+     * 字段映射表。
+     **/
     private Map<String, ValueSimulator> fieldSimulatorMap = new HashMap<String, ValueSimulator>();
-    /** 数据产生模式 。 **/
+    /**
+     * 数据产生模式 。
+     **/
     private int simulateMode = 0;
-    /** 模拟数据数量。 **/
+    /**
+     * 模拟数据数量。
+     **/
     private int size = 0;
 
-    protected void addValueSimulator(Column column)
-    {
+    protected void addValueSimulator(Column column) {
         ValueSimulator valueSimulator = null;
         if (String.class.equals(column.getFieldClass()))
             valueSimulator = new StringSimulator(column.getName(), column.getDisplaySize());
@@ -44,21 +54,18 @@ public abstract class DataSimulator
             valueSimulator = new NumberSimulator(column.getFieldClass());
         else if (ValueUtils.isBoolean(column.getFieldClass()))
             valueSimulator = new BooleanSimulator();
-        if (valueSimulator != null)
-        {
+        if (valueSimulator != null) {
             valueSimulator.setDataSimulator(this);
             this.fieldSimulatorMap.put(column.getName(), valueSimulator);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends ValueSimulator> T findValueSimulator(String fieldName)
-    {
+    public <T extends ValueSimulator> T findValueSimulator(String fieldName) {
         return (T) this.fieldSimulatorMap.get(fieldName);
     }
 
-    public DatabaseSimulator getDatabaseSimulator()
-    {
+    public DatabaseSimulator getDatabaseSimulator() {
         return databaseSimulator;
     }
 
@@ -66,8 +73,7 @@ public abstract class DataSimulator
         this.databaseSimulator = databaseSimulator;
     }
 
-    public int getSimulateMode()
-    {
+    public int getSimulateMode() {
         return simulateMode;
     }
 
@@ -75,8 +81,7 @@ public abstract class DataSimulator
         this.simulateMode = simulateMode;
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return size;
     }
 
@@ -92,13 +97,11 @@ public abstract class DataSimulator
 
     public abstract Table getTable();
 
-    public String getTableName()
-    {
+    public String getTableName() {
         return this.getTable().getTableName().getName();
     }
 
-    protected Object getValue(int index, String fieldName)
-    {
+    protected Object getValue(int index, String fieldName) {
         Object value = null;
         ValueSimulator valueSimulator = this.findValueSimulator(fieldName);
         if (valueSimulator != null)
@@ -106,12 +109,10 @@ public abstract class DataSimulator
         return value;
     }
 
-    protected Object getValue(String fieldName)
-    {
+    protected Object getValue(String fieldName) {
         Object value = null;
         ValueSimulator valueSimulate = this.findValueSimulator(fieldName);
-        if (valueSimulate != null)
-        {
+        if (valueSimulate != null) {
             if (this.getSimulateMode() == MODE_RANDOM)
                 value = valueSimulate.nextRandom();
             else

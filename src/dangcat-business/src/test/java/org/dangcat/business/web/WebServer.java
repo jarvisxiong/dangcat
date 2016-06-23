@@ -15,17 +15,14 @@ import org.dangcat.framework.service.ServiceProvider;
 @LocalSecurity
 @ExtendSecurity(OperatorSecurityServiceImpl.class)
 @ExtendSystemInfo(WebServerSystemInfoProvider.class)
-public class WebServer extends MainServiceBase
-{
+public class WebServer extends MainServiceBase {
     public static final String SERVICE_NAME = "dangcat";
 
-    public WebServer(ServiceProvider parent)
-    {
+    public WebServer(ServiceProvider parent) {
         super(parent);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Launcher.start(WebServer.class, SERVICE_NAME, false);
     }
 
@@ -33,8 +30,7 @@ public class WebServer extends MainServiceBase
      * 初始化服务。
      */
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         super.initialize();
 
         // 结算服务。

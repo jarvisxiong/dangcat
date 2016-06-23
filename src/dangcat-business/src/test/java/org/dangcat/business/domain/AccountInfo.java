@@ -9,8 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Table
-public class AccountInfo extends AccountBasic
-{
+public class AccountInfo extends AccountBasic {
     public static final String AccountBills = "AccountBills";
     public static final String AccountServiceBinds = "AccountServiceBinds";
     public static final String Address = "Address";
@@ -19,10 +18,10 @@ public class AccountInfo extends AccountBasic
     public static final String MinBalance = "MinBalance";
     private static final long serialVersionUID = 1L;
 
-    @Relation(parentFieldNames = { Id }, childFieldNames = { AccountBill.AccountId })
+    @Relation(parentFieldNames = {Id}, childFieldNames = {AccountBill.AccountId})
     private Set<AccountBill> accountBills = new LinkedHashSet<AccountBill>();
 
-    @Relation(parentFieldNames = { Id }, childFieldNames = { AccountBill.AccountId })
+    @Relation(parentFieldNames = {Id}, childFieldNames = {AccountBill.AccountId})
     private Set<AccountServiceBind> accountServiceBinds = new LinkedHashSet<AccountServiceBind>();
 
     @Column(displaySize = 60)
@@ -40,53 +39,43 @@ public class AccountInfo extends AccountBasic
     @RangeValidator(minValue = "10")
     private Double minBalance = null;
 
-    public Set<AccountBill> getAccountBills()
-    {
+    public Set<AccountBill> getAccountBills() {
         return accountBills;
     }
 
-    public Set<AccountServiceBind> getAccountServiceBinds()
-    {
+    public Set<AccountServiceBind> getAccountServiceBinds() {
         return accountServiceBinds;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public Double getBalance()
-    {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance)
-    {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public Double getMaxBalance()
-    {
+    public Double getMaxBalance() {
         return maxBalance;
     }
 
-    public void setMaxBalance(Double maxBalance)
-    {
+    public void setMaxBalance(Double maxBalance) {
         this.maxBalance = maxBalance;
     }
 
-    public Double getMinBalance()
-    {
+    public Double getMinBalance() {
         return minBalance;
     }
 
-    public void setMinBalance(Double minBalance)
-    {
+    public void setMinBalance(Double minBalance) {
         this.minBalance = minBalance;
     }
 }

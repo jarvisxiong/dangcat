@@ -10,24 +10,22 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class ServiceContext extends ServiceParams
-{
+public class ServiceContext extends ServiceParams {
     private static final long serialVersionUID = 1L;
     private static ThreadLocal<ServiceContext> ThreadLocal = new ThreadLocal<ServiceContext>();
     private Date beginTime = DateUtils.now();
     private ServicePrincipal servicePrincipal = null;
     private String sessionId = null;
 
-    public ServiceContext(String sessionId)
-    {
+    public ServiceContext(String sessionId) {
         this.sessionId = sessionId;
     }
-    public ServiceContext(String sessionId, Locale locale)
-    {
+
+    public ServiceContext(String sessionId, Locale locale) {
         this(sessionId, null, locale);
     }
-    public ServiceContext(String sessionId, ServicePrincipal servicePrincipal, Locale locale)
-    {
+
+    public ServiceContext(String sessionId, ServicePrincipal servicePrincipal, Locale locale) {
         this.sessionId = sessionId;
         this.servicePrincipal = servicePrincipal;
         Environment.setLocale(locale);
@@ -46,36 +44,30 @@ public class ServiceContext extends ServiceParams
         ThreadLocal.set(serviceContext);
     }
 
-    public <T> void addSession(Class<T> classType, T value)
-    {
+    public <T> void addSession(Class<T> classType, T value) {
         HttpSession httpSession = this.getParam(HttpSession.class);
         if (httpSession != null)
             httpSession.setAttribute(this.getServiceInfo().getJndiName() + "/" + classType.getSimpleName(), value);
     }
 
-    public Date getBeginTime()
-    {
+    public Date getBeginTime() {
         return this.beginTime;
     }
 
-    public Locale getLocale()
-    {
+    public Locale getLocale() {
         return Environment.getCurrentLocale();
     }
 
-    public ServiceInfo getServiceInfo()
-    {
+    public ServiceInfo getServiceInfo() {
         return this.getParam(ServiceInfo.class);
     }
 
-    public ServicePrincipal getServicePrincipal()
-    {
+    public ServicePrincipal getServicePrincipal() {
         return this.servicePrincipal;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getSession(Class<T> classType)
-    {
+    public <T> T getSession(Class<T> classType) {
         T value = null;
         HttpSession httpSession = this.getParam(HttpSession.class);
         if (httpSession != null)
@@ -83,19 +75,15 @@ public class ServiceContext extends ServiceParams
         return value;
     }
 
-    public String getSessionId()
-    {
+    public String getSessionId() {
         return this.sessionId;
     }
 
-    public boolean hasPermission(Integer permissionId)
-    {
+    public boolean hasPermission(Integer permissionId) {
         ServiceInfo serviceInfo = this.getParam(ServiceInfo.class);
-        if (serviceInfo != null && serviceInfo.getPermissionProvider() != null)
-        {
+        if (serviceInfo != null && serviceInfo.getPermissionProvider() != null) {
             Map<Integer, Permission> permiisionMap = serviceInfo.getPermissionProvider().getPermissionMap();
-            if (permiisionMap != null)
-            {
+            if (permiisionMap != null) {
                 Permission permission = permiisionMap.get(permissionId);
                 if (permission != null)
                     return this.getServicePrincipal().hasPermission(permission.getValue());
@@ -104,8 +92,7 @@ public class ServiceContext extends ServiceParams
         return true;
     }
 
-    public void removeSession(Class<?> classType)
-    {
+    public void removeSession(Class<?> classType) {
         HttpSession httpSession = this.getParam(HttpSession.class);
         if (httpSession != null)
             httpSession.removeAttribute(this.getServiceInfo().getJndiName() + "/" + classType.getSimpleName());

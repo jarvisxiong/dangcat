@@ -7,24 +7,20 @@ import org.dangcat.persistence.model.Table;
 
 /**
  * TableÊý¾ÝÄ£ÄâÆ÷¡£
+ *
  * @author dangcat
- * 
  */
-public class TableSimulator extends DataSimulator
-{
+public class TableSimulator extends DataSimulator {
     private Table table = null;
 
-    public TableSimulator(Table table)
-    {
+    public TableSimulator(Table table) {
         this.table = table;
     }
 
-    public void create(Table table, int size)
-    {
+    public void create(Table table, int size) {
         this.setSize(size);
         Rows rows = table.getRows();
-        for (int index = 0; index < size; index++)
-        {
+        for (int index = 0; index < size; index++) {
             Row row = rows.createNewRow();
             this.modify(row, index);
             rows.add(row);
@@ -32,24 +28,19 @@ public class TableSimulator extends DataSimulator
     }
 
     @Override
-    public Table getTable()
-    {
+    public Table getTable() {
         return this.table;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         for (Column column : this.table.getColumns())
             this.addValueSimulator(column);
     }
 
-    public void modify(Row row, int index)
-    {
-        if (row != null)
-        {
-            for (Column column : this.table.getColumns())
-            {
+    public void modify(Row row, int index) {
+        if (row != null) {
+            for (Column column : this.table.getColumns()) {
                 if (column.isAutoIncrement())
                     continue;
 
@@ -59,11 +50,9 @@ public class TableSimulator extends DataSimulator
         }
     }
 
-    public void modify(Table table)
-    {
+    public void modify(Table table) {
         Rows rows = table.getRows();
-        for (int index = 0; index < rows.size(); index++)
-        {
+        for (int index = 0; index < rows.size(); index++) {
             Row row = rows.get(index);
             this.modify(row, rows.size() - index - 1);
         }

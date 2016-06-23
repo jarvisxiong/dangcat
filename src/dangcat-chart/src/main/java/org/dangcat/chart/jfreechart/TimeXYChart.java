@@ -10,21 +10,17 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-public abstract class TimeXYChart extends TimeChart
-{
+public abstract class TimeXYChart extends TimeChart {
     @Override
-    protected XYDataset createXYDataset(Collection<Comparable<?>> rowKeys)
-    {
+    protected XYDataset createXYDataset(Collection<Comparable<?>> rowKeys) {
         DataModule dataModule = this.getDataModule();
         TimeTableXYDataset timeTableXYDataset = new TimeTableXYDataset();
-        for (Comparable<?> rowKey : dataModule.getRowKeys())
-        {
+        for (Comparable<?> rowKey : dataModule.getRowKeys()) {
             if (rowKeys != null && !rowKeys.contains(rowKey))
                 continue;
 
             Map<Date, Double> valueMap = this.getTimeData(rowKey);
-            for (Date date : valueMap.keySet())
-            {
+            for (Date date : valueMap.keySet()) {
                 Double value = valueMap.get(date);
                 if (value == null)
                     value = ZREO;
@@ -35,8 +31,7 @@ public abstract class TimeXYChart extends TimeChart
         return timeTableXYDataset;
     }
 
-    protected void load(boolean isStacked)
-    {
+    protected void load(boolean isStacked) {
         this.createDataConverter(isStacked);
 
         this.setXYDataset(this.createXYDataset());

@@ -14,20 +14,16 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Collection;
 
-public abstract class UninstallFrameBase extends InstallProcessFrame
-{
+public abstract class UninstallFrameBase extends InstallProcessFrame {
     private static final long serialVersionUID = 1L;
     private MySqlUninstallModule databaseUninstallModule = null;
     private ServiceUninstallModule serviceUninstallModule = null;
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent)
-    {
-        if (actionEvent.getActionCommand().equals(UninstallToolBar.UNINSTALL))
-        {
-        	this.updateBodyContent();
-            if (this.getInstallSelectPanel().validateData())
-            {
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getActionCommand().equals(UninstallToolBar.UNINSTALL)) {
+            this.updateBodyContent();
+            if (this.getInstallSelectPanel().validateData()) {
                 this.getBodyContainer().last();
                 this.uninstall();
             }
@@ -35,8 +31,7 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
         super.actionPerformed(actionEvent);
     }
 
-    private void createDatabaseUninstallModule()
-    {
+    private void createDatabaseUninstallModule() {
         String name = this.getDatabaseServiceName();
         String title = this.getText(name);
 
@@ -48,24 +43,21 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
     }
 
     @Override
-    protected InstallSelectPanel createInstallSelectPanel()
-    {
+    protected InstallSelectPanel createInstallSelectPanel() {
         InstallSelectPanel installSelectPanel = super.createInstallSelectPanel();
         this.createInstallSelectPanel(installSelectPanel, this.serviceUninstallModule);
         this.createInstallSelectPanel(installSelectPanel, this.databaseUninstallModule);
         return installSelectPanel;
     }
 
-    private void createInstallSelectPanel(InstallSelectPanel installSelectPanel, ProcessModuleBase processModule)
-    {
+    private void createInstallSelectPanel(InstallSelectPanel installSelectPanel, ProcessModuleBase processModule) {
         boolean enabled = this.exists(processModule.getName(), processModule.getDisplayName());
         if (enabled)
             installSelectPanel.addComponent(processModule.getName(), processModule.getTitle(), true);
         processModule.setEnabled(enabled);
     }
 
-    private void createServiceUninstallModule()
-    {
+    private void createServiceUninstallModule() {
         String name = this.getServiceName();
         String title = this.getText(name);
         ServiceUninstallModule serviceUninstallModule = new ServiceUninstallModule(name, title);
@@ -75,22 +67,17 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
     }
 
     @Override
-    protected ToolBarPanel createToolBarContainer()
-    {
+    protected ToolBarPanel createToolBarContainer() {
         return new UninstallToolBar();
     }
 
     @Override
-    protected void executeFinished()
-    {
+    protected void executeFinished() {
         String key = null;
-        if (this.isSuccessFull() && !this.exists(this.serviceUninstallModule.getName(), this.serviceUninstallModule.getDisplayName()))
-        {
+        if (this.isSuccessFull() && !this.exists(this.serviceUninstallModule.getName(), this.serviceUninstallModule.getDisplayName())) {
             this.getToolBarContainer().addState(ToolBarPanel.FINISHED, true);
             key = "Uninstall.Successfull";
-        }
-        else
-        {
+        } else {
             this.getToolBarContainer().removeState(ToolBarPanel.FINISHED);
             key = "Uninstall.Error";
         }
@@ -99,8 +86,7 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
         super.executeFinished();
     }
 
-    private boolean exists(String serviceName, String serviceDisplayName)
-    {
+    private boolean exists(String serviceName, String serviceDisplayName) {
         File servicePath = this.getServicePath(serviceName);
         if (!servicePath.isDirectory() || !servicePath.exists())
             return false;
@@ -109,8 +95,7 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
         return SystemServiceUtils.exists(serviceName);
     }
 
-    protected String getDatabaseServiceDisplayName()
-    {
+    protected String getDatabaseServiceDisplayName() {
         return null;
     }
 
@@ -118,20 +103,17 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
 
     protected abstract String getServiceName();
 
-    private File getServicePath(String serviceName)
-    {
+    private File getServicePath(String serviceName) {
         return new File(this.getCurrentPath().getAbsolutePath() + File.separator + serviceName);
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         this.createServiceUninstallModule();
         this.createDatabaseUninstallModule();
     }
 
-    protected void uninstall()
-    {
+    protected void uninstall() {
         File baseDir = this.getServicePath(this.databaseUninstallModule.getName());
         this.databaseUninstallModule.setCurrentPath(baseDir);
 
@@ -141,10 +123,9 @@ public abstract class UninstallFrameBase extends InstallProcessFrame
         this.logger.info("Uninstall process begin execute.");
         super.executeProcess();
     }
-    
+
     @Override
-    protected void updateBodyContent()
-    {
+    protected void updateBodyContent() {
         Collection<String> selectedValues = this.getInstallSelectPanel().getSelectedValues();
         boolean isInstallService = selectedValues.contains(this.getServiceName());
         this.serviceUninstallModule.setEnabled(isInstallService);

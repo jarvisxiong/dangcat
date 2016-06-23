@@ -7,8 +7,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import org.dangcat.web.annotation.Picker;
 
 @Table("OperatorGroup")
-public class OperatorGroupBase extends EntityBase
-{
+public class OperatorGroupBase extends EntityBase {
     public static final String Id = "Id";
     public static final String Name = "Name";
     public static final String ParentId = "ParentId";
@@ -24,37 +23,30 @@ public class OperatorGroupBase extends EntityBase
     @Picker(OperatorGroupPicker.class)
     private Integer parentId = null;
 
-    public OperatorGroupBase()
-    {
+    public OperatorGroupBase() {
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getParentId()
-    {
+    public Integer getParentId() {
         return this.parentId;
     }
 
-    public void setParentId(Integer parentId)
-    {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 }

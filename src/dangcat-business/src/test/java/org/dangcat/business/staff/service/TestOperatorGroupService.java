@@ -31,18 +31,15 @@ import java.util.Map;
 
 /**
  * The service test for OperatorGroup
+ *
  * @author dangcat
- * 
  */
-public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGroupService, OperatorGroup, OperatorGroup, OperatorGroupFilter>
-{
+public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGroupService, OperatorGroup, OperatorGroup, OperatorGroupFilter> {
     private static final int TEST_COUNT = 100;
 
-    private void createMembers(List<OperatorGroup> operatorGroupList, int count) throws ServiceException
-    {
+    private void createMembers(List<OperatorGroup> operatorGroupList, int count) throws ServiceException {
         // 造出有关联的四个组。
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             OperatorGroup operatorGroup = operatorGroupList.get(i);
             if (i == 0)
                 operatorGroup.setParentId(null);
@@ -55,8 +52,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new RolePermissionSimulator(), 0);
         databaseSimulator.add(new RoleInfoSimulator(), 10);
         databaseSimulator.add(new OperatorGroupSimulator(), TEST_COUNT);
@@ -65,8 +61,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(OperatorGroupService.class, OperatorGroupServiceImpl.class);
         this.addService(OperatorInfoService.class, OperatorInfoServiceImpl.class);
@@ -76,15 +71,13 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Test
-    public void testDefaultNew() throws ServiceException
-    {
+    public void testDefaultNew() throws ServiceException {
         OperatorGroup operatorGroup = new OperatorGroup();
         this.testDefaultNew(OperatorGroup.class, operatorGroup);
     }
 
     @Test
-    public void testDelete() throws ServiceException
-    {
+    public void testDelete() throws ServiceException {
         this.truncate(OperatorInfo.class);
         this.testDelete(OperatorGroup.class, TEST_COUNT);
     }
@@ -93,8 +86,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能删除已绑定操作员的操作组。
      */
     @Test
-    public void testDeleteGroupWithOperator() throws ServiceException
-    {
+    public void testDeleteGroupWithOperator() throws ServiceException {
         // 测试删除已经绑定操作员的操作组
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
@@ -112,8 +104,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能删除登录用户所在的组或者子组以外的操作组。
      */
     @Test
-    public void testDeleteMembers() throws ServiceException
-    {
+    public void testDeleteMembers() throws ServiceException {
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup1 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         OperatorGroup operatorGroup2 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 2);
@@ -132,8 +123,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能删除已绑定为父组的操作组。
      */
     @Test
-    public void testDeleteParent() throws ServiceException
-    {
+    public void testDeleteParent() throws ServiceException {
         this.truncate(OperatorInfo.class);
         int count = 4;
         // 造出有关联的四个组。
@@ -145,8 +135,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Test
-    public void testFilter() throws ServiceException
-    {
+    public void testFilter() throws ServiceException {
         TestServiceQuery<OperatorGroup, OperatorGroup, OperatorGroupFilter> testServiceQuery = new TestServiceQuery<OperatorGroup, OperatorGroup, OperatorGroupFilter>(this.getBusinessService());
         QueryAssert<OperatorGroupFilter> queryAssert = new QueryAssert<OperatorGroupFilter>(OperatorGroup.class);
         OperatorGroupFilter operatorGroupFilter = new OperatorGroupFilter();
@@ -155,8 +144,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
         OperatorGroupLoader operatorGroupLoader = new OperatorGroupLoader(this.getEntityManager());
         Integer[] groupIds = operatorGroupLoader.loadMemberIds();
 
-        for (Object entity : this.loadSamples(OperatorGroup.class))
-        {
+        for (Object entity : this.loadSamples(OperatorGroup.class)) {
             OperatorGroup operatorGroup = (OperatorGroup) entity;
             operatorGroupFilter.setName(operatorGroup.getName());
             FilterGroup filterGroup = new FilterGroup();
@@ -173,8 +161,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 只能查询登录用户所在的组或者子组的数据。
      */
     @Test
-    public void testLoadMembers() throws ServiceException
-    {
+    public void testLoadMembers() throws ServiceException {
         int count = 4;
         // 造出有关联的四个组。
         List<OperatorGroup> operatorGroupList = this.getEntityManager().load(OperatorGroup.class);
@@ -183,16 +170,14 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
         List<OperatorInfo> operatorInfoList = this.getEntityManager().load(OperatorInfo.class);
         // 造出四个操作员绑定上面用户
         OperatorInfoService operatorInfoService = this.getService(OperatorInfoService.class);
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             OperatorInfo operatorInfo = operatorInfoList.get(i);
             operatorInfo.setGroupId(operatorGroupList.get(i).getId());
             operatorInfoService.save(operatorInfo);
             Assert.assertFalse(operatorInfo.hasError());
         }
         // 以第一个账号登录。
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             this.login(operatorInfoList.get(i).getNo());
             Map<Integer, String> members = this.getService().loadMembers();
             Assert.assertNotNull(members);
@@ -207,8 +192,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能修改登录用户所在的组或者子组以外的操作组。
      */
     @Test
-    public void testModifyMembers() throws ServiceException
-    {
+    public void testModifyMembers() throws ServiceException {
         this.truncate(OperatorInfo.class);
 
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
@@ -226,8 +210,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Test
-    public void testQuery() throws ServiceException
-    {
+    public void testQuery() throws ServiceException {
         TestServiceQuery<OperatorGroup, OperatorGroup, OperatorGroupFilter> testServiceQuery = new TestServiceQuery<OperatorGroup, OperatorGroup, OperatorGroupFilter>(this.getBusinessService());
         QueryAssert<OperatorGroupFilter> queryAssert = new QueryAssert<OperatorGroupFilter>(OperatorGroup.class);
         queryAssert.setDataFilter(new OperatorGroupFilter());
@@ -236,8 +219,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Test
-    public void testSave() throws ServiceException
-    {
+    public void testSave() throws ServiceException {
         this.testSave(OperatorGroup.class, TEST_COUNT);
     }
 
@@ -245,8 +227,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 操作组的名称不能重复。
      */
     @Test
-    public void testSaveGroupNameRepeat() throws ServiceException
-    {
+    public void testSaveGroupNameRepeat() throws ServiceException {
         // 操作员组的名称不能重复。
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup1 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
@@ -270,8 +251,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能存储不存在的操作组。
      */
     @Test
-    public void testSaveGroupNotExists() throws ServiceException
-    {
+    public void testSaveGroupNotExists() throws ServiceException {
         // 所属操作员组不存在。
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
@@ -284,8 +264,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能循环绑定操作组。
      */
     @Test
-    public void testSaveGroupParentCycling() throws ServiceException
-    {
+    public void testSaveGroupParentCycling() throws ServiceException {
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup1 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(operatorGroup1);
@@ -308,8 +287,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
      * 不能绑定不存在的父操作组。
      */
     @Test
-    public void testSaveParentGroupNotExists() throws ServiceException
-    {
+    public void testSaveParentGroupNotExists() throws ServiceException {
         // 所属操作员组不存在。
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
@@ -319,8 +297,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     @Test
-    public void testView() throws ServiceException
-    {
+    public void testView() throws ServiceException {
         this.testView(OperatorGroup.class, TEST_COUNT);
     }
 }

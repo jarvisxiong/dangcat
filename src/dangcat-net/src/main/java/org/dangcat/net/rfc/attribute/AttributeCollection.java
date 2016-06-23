@@ -17,23 +17,27 @@ import java.util.Map.Entry;
 
 /**
  * 属性集合。
+ *
  * @author dangcat
- * 
  */
-public class AttributeCollection extends ArrayList<AttributeData>
-{
+public class AttributeCollection extends ArrayList<AttributeData> {
     protected static final Logger logger = Logger.getLogger(AttributeCollection.class);
     private static final long serialVersionUID = 1L;
-    /** 解析后的字节数组。 */
+    /**
+     * 解析后的字节数组。
+     */
     private byte[] attributeBytes = null;
-    /** 属性变化通知。 */
+    /**
+     * 属性变化通知。
+     */
     private NotifyAttributeChanged notifyAttributeChanged = null;
-    /** 厂商属性模板管理。 */
+    /**
+     * 厂商属性模板管理。
+     */
     private VendorAttributeTemplateManager vendorAttributeTemplateManager = null;
 
     @Override
-    public boolean add(AttributeData attributeData)
-    {
+    public boolean add(AttributeData attributeData) {
         attributeData.setParent(this);
         this.onAttributeChanged(attributeData);
         return super.add(attributeData);
@@ -41,12 +45,12 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 添加属性。
-     * @param type 属性类型。
+     *
+     * @param type  属性类型。
      * @param value 属性值。
      * @throws ProtocolParseException
      */
-    public boolean addAttribute(Integer type, Object value) throws ProtocolParseException
-    {
+    public boolean addAttribute(Integer type, Object value) throws ProtocolParseException {
         AttributeTemplate attributeTemplate = this.getVendorAttributeTemplateManager().getAttributeTemplate(type);
         if (value == null)
             throw new ProtocolParseException(ProtocolParseException.ATTRIBUTE_TYPEERROR, attributeTemplate.getFullName());
@@ -57,8 +61,7 @@ public class AttributeCollection extends ArrayList<AttributeData>
     /**
      * 比较属性集合。
      */
-    public int compare(AttributeCollection attributeCollection)
-    {
+    public int compare(AttributeCollection attributeCollection) {
         if (attributeCollection == null)
             return 1;
 
@@ -70,14 +73,12 @@ public class AttributeCollection extends ArrayList<AttributeData>
         if (result != 0)
             return result;
 
-        for (AttributeData srcAttributeData : this)
-        {
+        for (AttributeData srcAttributeData : this) {
             List<AttributeData> attributeDataList = attributeCollection.findAttributes(srcAttributeData.getType());
             if (attributeDataList == null)
                 return 1;
 
-            for (AttributeData dstAttributeData : attributeDataList)
-            {
+            for (AttributeData dstAttributeData : attributeDataList) {
                 if (srcAttributeData == dstAttributeData)
                     break;
                 result = srcAttributeData.compareTo(dstAttributeData);
@@ -90,15 +91,13 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 找到指定类型的属性对象。
+     *
      * @param type 属性类型。
      */
-    public AttributeData findAttribute(Integer type)
-    {
+    public AttributeData findAttribute(Integer type) {
         AttributeData findAttributeData = null;
-        for (AttributeData attributeData : this)
-        {
-            if (attributeData.getType().equals(type))
-            {
+        for (AttributeData attributeData : this) {
+            if (attributeData.getType().equals(type)) {
                 findAttributeData = attributeData;
                 break;
             }
@@ -108,16 +107,14 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 找到指定类型的属性对象。
+     *
      * @param vendorId 厂商编号。
-     * @param type 属性类型。
+     * @param type     属性类型。
      */
-    public List<AttributeData> findAttributes(Integer type)
-    {
+    public List<AttributeData> findAttributes(Integer type) {
         List<AttributeData> attributeDataList = null;
-        for (AttributeData attributeData : this)
-        {
-            if (attributeData.getType().equals(type))
-            {
+        for (AttributeData attributeData : this) {
+            if (attributeData.getType().equals(type)) {
                 if (attributeDataList == null)
                     attributeDataList = new ArrayList<AttributeData>();
                 attributeDataList.add(attributeData);
@@ -128,33 +125,26 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 根据厂商类型分类。
+     *
      * @return 按厂商类型分类。
      */
-    public Map<Integer, List<AttributeData>> getAttributeDataMap()
-    {
+    public Map<Integer, List<AttributeData>> getAttributeDataMap() {
         List<AttributeData> attributeDataList = null;
         Map<Integer, List<AttributeData>> attributeDataMap = new HashMap<Integer, List<AttributeData>>();
-        for (AttributeData attributeData : this)
-        {
-            if (attributeData instanceof VendorAttribute)
-            {
+        for (AttributeData attributeData : this) {
+            if (attributeData instanceof VendorAttribute) {
                 VendorAttribute vendorAttribute = (VendorAttribute) attributeData;
                 Map<Integer, List<AttributeData>> vendorAttributeDataMap = vendorAttribute.getAttributeCollection().getAttributeDataMap();
-                for (Entry<Integer, List<AttributeData>> entry : vendorAttributeDataMap.entrySet())
-                {
+                for (Entry<Integer, List<AttributeData>> entry : vendorAttributeDataMap.entrySet()) {
                     List<AttributeData> entryAttributeDataList = attributeDataMap.get(entry.getKey());
-                    if (entryAttributeDataList == null)
-                    {
+                    if (entryAttributeDataList == null) {
                         entryAttributeDataList = new ArrayList<AttributeData>();
                         attributeDataMap.put(entry.getKey(), entryAttributeDataList);
                     }
                     entryAttributeDataList.addAll(entry.getValue());
                 }
-            }
-            else
-            {
-                if (attributeDataList == null)
-                {
+            } else {
+                if (attributeDataList == null) {
                     attributeDataList = new ArrayList<AttributeData>();
                     attributeDataMap.put(this.getVendorId(), attributeDataList);
                 }
@@ -166,18 +156,16 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 转换成字节数组。
-     * @param outputStream 输出流对象。
+     *
+     * @param outputStream  输出流对象。
      * @param AttributeData 属性值。
      * @return 转换后的字节。
      * @throws IOException
      */
-    public byte[] getAttributesBytes() throws IOException
-    {
-        if (this.attributeBytes == null)
-        {
+    public byte[] getAttributesBytes() throws IOException {
+        if (this.attributeBytes == null) {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            for (AttributeData attributeData : this)
-            {
+            for (AttributeData attributeData : this) {
                 if (!attributeData.isEmpty())
                     outputStream.write(attributeData.toBytes());
             }
@@ -186,8 +174,7 @@ public class AttributeCollection extends ArrayList<AttributeData>
         return this.attributeBytes;
     }
 
-    protected NotifyAttributeChanged getNotifyAttributeChanged()
-    {
+    protected NotifyAttributeChanged getNotifyAttributeChanged() {
         return notifyAttributeChanged;
     }
 
@@ -195,8 +182,7 @@ public class AttributeCollection extends ArrayList<AttributeData>
         this.notifyAttributeChanged = notifyAttributeChanged;
     }
 
-    public VendorAttributeTemplateManager getVendorAttributeTemplateManager()
-    {
+    public VendorAttributeTemplateManager getVendorAttributeTemplateManager() {
         return this.vendorAttributeTemplateManager;
     }
 
@@ -204,18 +190,14 @@ public class AttributeCollection extends ArrayList<AttributeData>
         this.vendorAttributeTemplateManager = vendorAttributeTemplateManager;
     }
 
-    public Integer getVendorId()
-    {
+    public Integer getVendorId() {
         return this.getVendorAttributeTemplateManager().getVendorId();
     }
 
     @Override
-    public int indexOf(Object o)
-    {
-        if (o instanceof Integer)
-        {
-            for (int index = 0; index < this.size(); index++)
-            {
+    public int indexOf(Object o) {
+        if (o instanceof Integer) {
+            for (int index = 0; index < this.size(); index++) {
                 AttributeData attributeData = this.get(index);
                 if (attributeData.getType().equals(o))
                     return index;
@@ -227,13 +209,11 @@ public class AttributeCollection extends ArrayList<AttributeData>
     /**
      * 是否是厂商属性。
      */
-    public boolean isVendor()
-    {
+    public boolean isVendor() {
         return this.getVendorId() != AttributeTemplateManager.DEFAULT_VENDORID;
     }
 
-    public void onAttributeChanged(AttributeData attributeData)
-    {
+    public void onAttributeChanged(AttributeData attributeData) {
         this.attributeBytes = null;
         if (this.notifyAttributeChanged != null)
             this.notifyAttributeChanged.onAttributeChanged(this);
@@ -241,29 +221,25 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 由报文解析属性对象。
+     *
      * @throws ProtocolParseException
      */
-    public void parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException
-    {
+    public void parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException {
         int index = 0;
-        while (index < length)
-        {
+        while (index < length) {
             // 属性类型。
             int attributeType = bytes[beginIndex++];
             // 属性长度。
             int attributeLength = bytes[beginIndex++];
             AttributeTemplate attributeTemplate = this.getVendorAttributeTemplateManager().getAttributeTemplate(attributeType);
-            if (attributeTemplate != null)
-            {
+            if (attributeTemplate != null) {
                 if (attributeLength <= AttributeTemplate.OFFSET)
                     throw new ProtocolParseException(ProtocolParseException.ATTRIBUTE_ERROR, attributeTemplate.getFullName());
 
                 AttributeData attributeData = attributeTemplate.parse(bytes, beginIndex, attributeLength - AttributeTemplate.OFFSET);
                 attributeData.setLength(attributeLength);
                 this.add(attributeData);
-            }
-            else
-            {
+            } else {
                 if (logger.isDebugEnabled())
                     logger.warn("The Attribute " + attributeType + " is not found.");
             }
@@ -273,31 +249,27 @@ public class AttributeCollection extends ArrayList<AttributeData>
     }
 
     @Override
-    public AttributeData remove(int index)
-    {
+    public AttributeData remove(int index) {
         this.onAttributeChanged(this.get(index));
         return super.remove(index);
     }
 
     @Override
-    public boolean remove(Object attributeData)
-    {
+    public boolean remove(Object attributeData) {
         this.onAttributeChanged((AttributeData) attributeData);
         return super.remove(attributeData);
     }
 
     /**
      * 删除指定类型的属性对象。
+     *
      * @param type 属性类型。
      */
-    public int removeAttribute(Integer type)
-    {
+    public int removeAttribute(Integer type) {
         int result = 0;
-        for (int index = this.size() - 1; index >= 0; index--)
-        {
+        for (int index = this.size() - 1; index >= 0; index--) {
             AttributeData attributeData = this.get(index);
-            if (attributeData.getType().equals(type))
-            {
+            if (attributeData.getType().equals(type)) {
                 this.remove(index);
                 result++;
             }
@@ -307,17 +279,14 @@ public class AttributeCollection extends ArrayList<AttributeData>
 
     /**
      * 删除属性对象。
+     *
      * @param attributeDatas 属性对象。
      */
-    public void removeAttributes(AttributeData[] attributeDatas)
-    {
-        for (AttributeData destAttributeData : attributeDatas)
-        {
+    public void removeAttributes(AttributeData[] attributeDatas) {
+        for (AttributeData destAttributeData : attributeDatas) {
             this.remove(destAttributeData);
-            for (AttributeData attributeData : this)
-            {
-                if (attributeData instanceof VendorAttribute)
-                {
+            for (AttributeData attributeData : this) {
+                if (attributeData instanceof VendorAttribute) {
                     VendorAttribute vendorAttribute = (VendorAttribute) attributeData;
                     vendorAttribute.getAttributeCollection().remove(destAttributeData);
                 }
@@ -326,13 +295,10 @@ public class AttributeCollection extends ArrayList<AttributeData>
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder info = new StringBuilder();
-        for (AttributeData attributeData : this)
-        {
-            if (this.size() > 1)
-            {
+        for (AttributeData attributeData : this) {
+            if (this.size() > 1) {
                 info.append(Environment.LINETAB_SEPARATOR);
                 if (this.isVendor())
                     info.append("\t");

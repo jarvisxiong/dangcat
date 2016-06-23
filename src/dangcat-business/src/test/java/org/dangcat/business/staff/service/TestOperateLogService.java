@@ -19,16 +19,14 @@ import org.junit.Test;
 
 /**
  * The service test for Operator
+ *
  * @author dangcat
- * 
  */
-public class TestOperateLogService extends BusinessServiceTestBase<OperateLogService, OperateStat, OperateStat, OperateLogFilter>
-{
+public class TestOperateLogService extends BusinessServiceTestBase<OperateLogService, OperateStat, OperateStat, OperateLogFilter> {
     private static final int TEST_COUNT = 100;
 
     @Override
-    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator)
-    {
+    protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
         databaseSimulator.add(new OperatorGroupSimulator(), 10);
         databaseSimulator.add(new OperatorInfoSimulator(), TEST_COUNT);
         databaseSimulator.add(new OperateStatSimulator(), TEST_COUNT);
@@ -37,8 +35,7 @@ public class TestOperateLogService extends BusinessServiceTestBase<OperateLogSer
 
     @Before
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         // 添加要测试的服务。
         this.addService(OperatorGroupService.class, OperatorGroupServiceImpl.class);
         this.addService(OperatorInfoService.class, OperatorInfoServiceImpl.class);
@@ -48,8 +45,7 @@ public class TestOperateLogService extends BusinessServiceTestBase<OperateLogSer
     }
 
     @Test
-    public void testQuery() throws ServiceException
-    {
+    public void testQuery() throws ServiceException {
         TestServiceQuery<OperateStat, OperateStat, OperateLogFilter> testServiceQuery = new TestServiceQuery<OperateStat, OperateStat, OperateLogFilter>(this.getBusinessService());
         QueryAssert<OperateLogFilter> queryAssert = new QueryAssert<OperateLogFilter>(OperateStat.class);
         queryAssert.setDataFilter(new OperateLogFilter());
@@ -58,8 +54,7 @@ public class TestOperateLogService extends BusinessServiceTestBase<OperateLogSer
     }
 
     @Test
-    public void testView() throws ServiceException
-    {
+    public void testView() throws ServiceException {
         this.testView(OperateStat.class, TEST_COUNT);
     }
 }

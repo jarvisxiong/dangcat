@@ -8,10 +8,8 @@ import org.dangcat.net.udp.service.UDPListener;
 import org.dangcat.net.udp.service.UDPSender;
 import org.dangcat.net.udp.service.impl.UDPSendServiceImpl;
 
-public class NetServiceFactory
-{
-    public static NetListener createNetListener(NetType netType, String serviceName, Integer port, DatagramReceiveListener datagramReceiveListener)
-    {
+public class NetServiceFactory {
+    public static NetListener createNetListener(NetType netType, String serviceName, Integer port, DatagramReceiveListener datagramReceiveListener) {
         NetListener netListener = null;
         if (NetType.TCP.equals(netType))
             netListener = new TCPListener(serviceName, port, datagramReceiveListener);
@@ -20,8 +18,7 @@ public class NetServiceFactory
         return netListener;
     }
 
-    public static NetSender createNetSender(NetType netType)
-    {
+    public static NetSender createNetSender(NetType netType) {
         NetSender netSender = null;
         if (NetType.TCP.equals(netType))
             netSender = new TCPSender();
@@ -30,8 +27,7 @@ public class NetServiceFactory
         return netSender;
     }
 
-    public static NetSendService createNetSendService(NetType netType)
-    {
+    public static NetSendService createNetSendService(NetType netType) {
         NetSendService netSendService = null;
         if (NetType.TCP.equals(netType))
             netSendService = new TCPSendServiceImpl();

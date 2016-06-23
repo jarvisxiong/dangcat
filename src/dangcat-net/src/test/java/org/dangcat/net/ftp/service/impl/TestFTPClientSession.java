@@ -5,15 +5,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestFTPClientSession extends TestFTPSession
-{
+public class TestFTPClientSession extends TestFTPSession {
     private FTPClientSession ftpClientSession = null;
 
     @Override
-    protected FTPSession getFTPSession()
-    {
-        if (this.ftpClientSession == null)
-        {
+    protected FTPSession getFTPSession() {
+        if (this.ftpClientSession == null) {
             FTPClientSession ftpClientSession = new FTPClientSession();
             ftpClientSession.setServer("localhost");
             ftpClientSession.setUserName("dangcat");
@@ -28,16 +25,14 @@ public class TestFTPClientSession extends TestFTPSession
 
     @Override
     @After
-    public void release()
-    {
+    public void release() {
         if (this.ftpClientSession != null)
             this.ftpClientSession.close();
         this.ftpClientSession = null;
     }
 
     @Test
-    public void testConnection() throws FTPSessionException
-    {
+    public void testConnection() throws FTPSessionException {
         FTPClientSession ftpSession = (FTPClientSession) this.getFTPSession();
         ftpSession.setUserName("xxx");
         FTPSessionException exception = ftpSession.testConnect();

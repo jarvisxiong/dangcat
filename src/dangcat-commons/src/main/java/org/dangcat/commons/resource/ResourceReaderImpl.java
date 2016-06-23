@@ -7,35 +7,29 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ResourceReaderImpl extends ResourceReader
-{
+public class ResourceReaderImpl extends ResourceReader {
     private Class<?> classType = null;
     private Map<Locale, ResourceHelper> localeResourceHelperMap = new HashMap<Locale, ResourceHelper>();
 
-    public ResourceReaderImpl(Class<?> classType)
-    {
+    public ResourceReaderImpl(Class<?> classType) {
         this.classType = classType;
     }
 
-    public Class<?> getClassType()
-    {
+    public Class<?> getClassType() {
         return this.classType;
     }
 
     @Override
-    public Object getObject(Locale locale, String key)
-    {
+    public Object getObject(Locale locale, String key) {
         if (locale == null)
             locale = Environment.getDefaultLocale();
 
         return this.getResourceHelper(locale).getObject(key);
     }
 
-    public synchronized ResourceHelper getResourceHelper(Locale locale)
-    {
+    public synchronized ResourceHelper getResourceHelper(Locale locale) {
         ResourceHelper resourceHelper = this.localeResourceHelperMap.get(locale);
-        if (resourceHelper == null)
-        {
+        if (resourceHelper == null) {
             resourceHelper = new ResourceHelper(this.getClassType(), locale);
             this.localeResourceHelperMap.put(locale, resourceHelper);
         }
@@ -43,8 +37,7 @@ public class ResourceReaderImpl extends ResourceReader
     }
 
     @Override
-    public String getText(Locale locale, String key, Object... params)
-    {
+    public String getText(Locale locale, String key, Object... params) {
         if (locale == null)
             locale = Environment.getDefaultLocale();
 
@@ -55,8 +48,7 @@ public class ResourceReaderImpl extends ResourceReader
     }
 
     @Override
-    public Map<Integer, String> getValueMap(Locale locale, String key)
-    {
+    public Map<Integer, String> getValueMap(Locale locale, String key) {
         if (locale == null)
             locale = Environment.getDefaultLocale();
 
