@@ -31,7 +31,7 @@ public class TestJMSSession {
     }
 
     public static File createTmpDirectory(String path) {
-        File dir = new File("log" + File.separator + path);
+        File dir = new File("   log" + File.separator + path);
         if (dir.exists())
             FileUtils.delete(dir);
         FileUtils.mkdir(dir.getAbsolutePath());

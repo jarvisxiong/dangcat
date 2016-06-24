@@ -62,8 +62,11 @@ class SocketProcess {
         InputStream inputStream = this.getInputStream();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int data;
-        while ((data = inputStream.read()) != '\n')
+        while ((data = inputStream.read()) != '\n') {
+            if (data < 0)
+                break;
             outputStream.write(data);
+        }
         return new String(outputStream.toByteArray());
     }
 
