@@ -5,7 +5,7 @@ import org.dangcat.persistence.validator.DataValidator;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * ��󳤶�У�顣
+ * 最大长度校验。
  *
  * @author dangcat
  */

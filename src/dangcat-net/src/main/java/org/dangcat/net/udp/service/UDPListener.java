@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 
 /**
- * UDP±¨ÎÄ¶Ë¿ÚÕìÌı¡£
+ * UDPæŠ¥æ–‡ç«¯å£ä¾¦å¬ã€‚
  *
  * @author fanst174766
  */
@@ -36,7 +36,7 @@ public class UDPListener extends NetListener {
     }
 
     /**
-     * Æô¶¯ÕìÌıÏß³Ì¡£
+     * å¯åŠ¨ä¾¦å¬çº¿ç¨‹ã€‚
      *
      * @throws IOException
      */
@@ -52,7 +52,7 @@ public class UDPListener extends NetListener {
             datagramSocket.setSoTimeout(this.getSoTimeout());
             this.datagramSocket = datagramSocket;
         } catch (IOException e) {
-            // ¹Ø±ÕÌ×½Ó¿Ú
+            // å…³é—­å¥—æ¥å£
             if (datagramSocket != null)
                 datagramSocket.close();
             throw e;
@@ -60,7 +60,7 @@ public class UDPListener extends NetListener {
     }
 
     /**
-     * Í£Ö¹ÕìÌıÏß³Ì¡£
+     * åœæ­¢ä¾¦å¬çº¿ç¨‹ã€‚
      */
     @Override
     protected void innerStopListener() {
@@ -78,10 +78,10 @@ public class UDPListener extends NetListener {
         int localPort = this.datagramSocket.getLocalPort();
         while (this.isRunning()) {
             try {
-                // ½ÓÊÕ£¬×èÈû
+                // æ¥æ”¶ï¼Œé˜»å¡
                 this.datagramSocket.receive(datagramPacket);
                 if (datagramPacket.getLength() > 0) {
-                    // ¸ù¾İ½ÓÊÕµ½µÄ×Ö½ÚÊı×éÉú³ÉÏàÓ¦µÄ×Ö·û´®
+                    // æ ¹æ®æ¥æ”¶åˆ°çš„å­—èŠ‚æ•°ç»„ç”Ÿæˆç›¸åº”çš„å­—ç¬¦ä¸²
                     byte[] receivedBytes = new byte[datagramPacket.getLength()];
                     System.arraycopy(datagramPacket.getData(), 0, receivedBytes, 0, receivedBytes.length);
 

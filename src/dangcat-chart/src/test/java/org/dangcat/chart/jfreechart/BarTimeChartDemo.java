@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class BarTimeChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "Öù×´Ç÷ÊÆÍ³¼ÆÍ¼";
+    private static final String TITLE = "æŸ±çŠ¶è¶‹åŠ¿ç»Ÿè®¡å›¾";
 
     public BarTimeChartDemo() {
         super(BarTimeChart.class.getSimpleName());

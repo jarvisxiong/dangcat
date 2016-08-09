@@ -32,22 +32,22 @@ public class OperatorOptLogCalculator implements Calculator {
         Integer serviceId = ServiceCalculator.getParentId(operatorOptLog.getMethodId());
         if (serviceId != null) {
             ServiceInfo serviceInfo = PermissionManager.getInstance().getServiceInfo(serviceId);
-            // Ä£¿éÃû
+            // æ¨¡å—å
             operatorOptLog.setModuleName(this.getModuleName(serviceInfo.getModuleName()));
-            // ·şÎñÃû
+            // æœåŠ¡å
             operatorOptLog.setServiceName(serviceInfo.getTitle(this.getLocale()));
-            // µ÷ÓÃ·½·¨Ãû
+            // è°ƒç”¨æ–¹æ³•å
             MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(operatorOptLog.getMethodId());
             if (methodInfo != null) {
                 String methodName = serviceInfo.getMethodTitle(this.getLocale(), methodInfo.getName());
                 operatorOptLog.setMethodName(methodName);
             }
-            // µ÷ÓÃ½á¹û
+            // è°ƒç”¨ç»“æœ
             if (operatorOptLog.getErrorCode() == 0)
                 operatorOptLog.setResult(this.getFieldTitle(SUCCESS));
             else {
                 operatorOptLog.setResult(this.getFieldTitle(FAILURE));
-                // Òì³£ĞÅÏ¢¡£
+                // å¼‚å¸¸ä¿¡æ¯ã€‚
                 String error = serviceInfo.getException(this.getLocale(), operatorOptLog.getErrorCode());
                 operatorOptLog.setError(error);
             }

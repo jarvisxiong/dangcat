@@ -28,10 +28,10 @@ public class CommandExecutor {
     }
 
     /**
-     * Ö´ÐÐÍâ²¿ÃüÁî¡£
+     * æ‰§è¡Œå¤–éƒ¨å‘½ä»¤ã€‚
      *
-     * @param params ÃüÁî×Ö´®¡£
-     * @return Ö´ÐÐ½á¹û¡£
+     * @param params å‘½ä»¤å­—ä¸²ã€‚
+     * @return æ‰§è¡Œç»“æžœã€‚
      */
     public boolean exec(String... params) {
         boolean result = false;

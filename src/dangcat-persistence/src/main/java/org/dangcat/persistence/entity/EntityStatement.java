@@ -55,10 +55,10 @@ public class EntityStatement {
 
     public void initialize(SaveEntityContext saveEntityContext) {
         EntitySqlBuilder entitySqlBuilder = new EntitySqlBuilder(this.entityMetaData, this.databaseName, saveEntityContext);
-        // ¹¹½¨²éÑ¯Óï¾ä
+        // æ„å»ºæŸ¥è¯¢è¯­å¥
         this.insertSql = entitySqlBuilder.buildInsertStatement(this.insertFieldNameList);
         this.deleteSql = entitySqlBuilder.buildDeleteStatement(this.primaryKeyList);
-        // ×ÔÔöÖ÷¼üÁĞ±í¡£
+        // è‡ªå¢ä¸»é”®åˆ—è¡¨ã€‚
         Column[] primaryKeys = this.entityMetaData.getTable().getColumns().getPrimaryKeys();
         for (Column column : primaryKeys) {
             if (column.isIndentityGeneration())

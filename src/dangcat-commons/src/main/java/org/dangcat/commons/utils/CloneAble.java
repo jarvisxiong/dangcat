@@ -1,7 +1,7 @@
 package org.dangcat.commons.utils;
 
 /**
- * �ɿ�¡�ӿڡ�
+ * 可克隆接口。
  *
  * @param <T>
  */

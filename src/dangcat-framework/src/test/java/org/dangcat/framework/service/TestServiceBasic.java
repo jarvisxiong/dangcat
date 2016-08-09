@@ -29,7 +29,7 @@ public class TestServiceBasic {
     @Test
     public void testDatabaseInject() {
         SettleService settleService = this.getSettleService();
-        // ²âÊÔÊı¾İ¿âÅäÖÃ×¢Èë
+        // æµ‹è¯•æ•°æ®åº“é…ç½®æ³¨å…¥
         Assert.assertNotNull(settleService.getEntityManager());
         Assert.assertNotNull(settleService.getMySqlEntityManager());
         Assert.assertNotNull(settleService.getOracleEntityManager());
@@ -39,13 +39,13 @@ public class TestServiceBasic {
 
     @Test
     public void testGetService() {
-        // ²âÊÔ×ÔÉí¼ÓÈëµÄ·şÎñ
+        // æµ‹è¯•è‡ªèº«åŠ å…¥çš„æœåŠ¡
         UserInfoService userInfoService = stockMainService.getService(UserInfoService.class);
         Assert.assertNotNull(userInfoService);
 
         AccountingService accountingService = stockMainService.getService(AccountingService.class);
         Assert.assertNotNull(accountingService);
-        // ²âÊÔÏòÉÏÑ°ÕÒ·şÎñ
+        // æµ‹è¯•å‘ä¸Šå¯»æ‰¾æœåŠ¡
         Assert.assertNotNull(accountingService.getUserInfoService());
     }
 
@@ -68,7 +68,7 @@ public class TestServiceBasic {
 
     @Test
     public void testPropertiesConfig() {
-        // ²âÊÔÊôĞÔ×¢Èë
+        // æµ‹è¯•å±æ€§æ³¨å…¥
         SettleServiceImpl settleServiceImpl = (SettleServiceImpl) this.getSettleService();
         Assert.assertNotNull(settleServiceImpl);
         Assert.assertEquals("Name A", settleServiceImpl.getName());
@@ -81,7 +81,7 @@ public class TestServiceBasic {
     @Test
     public void testXmlInject() {
         AccountingService accountingService = stockMainService.getService(AccountingService.class);
-        // ²âÊÔXMLÅäÖÃ×¢ÈëµÄ·şÎñ
+        // æµ‹è¯•XMLé…ç½®æ³¨å…¥çš„æœåŠ¡
         Assert.assertNotNull(accountingService.getSettleService());
     }
 }

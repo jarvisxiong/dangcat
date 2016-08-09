@@ -5,17 +5,17 @@ import org.dangcat.net.rfc.template.AttributeTemplate;
 import org.dangcat.net.rfc.template.AttributeTemplateManager;
 
 /**
- * ³§ÉÌÀ©Õ¹ÊôĞÔ¡£
+ * å‚å•†æ‰©å±•å±æ€§ã€‚
  *
  * @author dangcat
  */
 public class VendorAttribute extends AttributeData implements NotifyAttributeChanged {
     /**
-     * ÊôĞÔ...
+     * å±æ€§...
      */
     private AttributeCollection attributeCollection = new AttributeCollection();
     /**
-     * ³§ÉÌ±àºÅ
+     * å‚å•†ç¼–å·
      */
     private Integer vendorId = null;
 

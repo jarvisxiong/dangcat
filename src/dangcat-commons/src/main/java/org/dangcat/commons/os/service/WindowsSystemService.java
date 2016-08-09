@@ -7,11 +7,11 @@ import java.text.MessageFormat;
 
 class WindowsSystemService extends SystemService {
     /**
-     * É¾³ı·şÎñ¡£
+     * åˆ é™¤æœåŠ¡ã€‚
      */
     private static final String CMD_DELETE_CMD = "sc delete {0}";
     /**
-     * ÅĞ¶Ï·şÎñÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­æœåŠ¡æ˜¯å¦å­˜åœ¨ã€‚
      */
     private static final String CMD_EXISTS_CMD = "sc query {0} | find \"STATE\"";
 

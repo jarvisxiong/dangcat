@@ -3,17 +3,17 @@ package org.dangcat.business.exceptions;
 import org.dangcat.persistence.validator.exception.DataValidateInformation;
 
 /**
- * ÒµÎñ·şÎñĞÅÏ¢¡£
+ * ä¸šåŠ¡æœåŠ¡ä¿¡æ¯ã€‚
  *
  * @author dangcat
  */
 public class BusinessInformation extends DataValidateInformation {
     /**
-     * Ã»ÓĞÕÒµ½·ûºÏÌõ¼şµÄ½á¹û¡£
+     * æ²¡æœ‰æ‰¾åˆ°ç¬¦åˆæ¡ä»¶çš„ç»“æœã€‚
      */
     public static final Integer DATA_NOTFOUND = 50;
     /**
-     * ³É¹¦É¾³ıÊı¾İ¡£
+     * æˆåŠŸåˆ é™¤æ•°æ®ã€‚
      */
     public static final Integer DELETE_SUCCESS = 51;
     private static final long serialVersionUID = 1L;

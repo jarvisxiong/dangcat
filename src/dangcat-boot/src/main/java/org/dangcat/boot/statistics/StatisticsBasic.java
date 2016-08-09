@@ -3,29 +3,29 @@ package org.dangcat.boot.statistics;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * Êı¾İ´¦ÀíÍ³¼Æ¡£
+ * æ•°æ®å¤„ç†ç»Ÿè®¡ã€‚
  *
  * @author dangcat
  */
 public abstract class StatisticsBasic implements StatisticsAble {
     /**
-     * ÊµÊ±Êı¾İ
+     * å®æ—¶æ•°æ®
      */
     private static final String STATISTICS_REAL = "Real";
     /**
-     * ºÏ¼ÆÊı¾İ
+     * åˆè®¡æ•°æ®
      */
     private static final String STATISTICS_TOTAL = "Total";
     /**
-     * Í³¼ÆÃû³Æ¡£
+     * ç»Ÿè®¡åç§°ã€‚
      */
     private String name;
     /**
-     * ÊµÊ±Êı¾İ
+     * å®æ—¶æ•°æ®
      */
     private StatisticsBase realData = null;
     /**
-     * ×Ü¼ÆÊı¾İ¡£
+     * æ€»è®¡æ•°æ®ã€‚
      */
     private StatisticsBase totalData = null;
 
@@ -111,7 +111,7 @@ public abstract class StatisticsBasic implements StatisticsAble {
     }
 
     /**
-     * ÏÔÊ¾Í³¼ÆĞÅÏ¢¡£
+     * æ˜¾ç¤ºç»Ÿè®¡ä¿¡æ¯ã€‚
      */
     @Override
     public String toString() {
@@ -120,7 +120,7 @@ public abstract class StatisticsBasic implements StatisticsAble {
 
     private String toString(StatisticsBase realData, StatisticsBase totalData) {
         StringBuilder info = new StringBuilder();
-        // Í³¼ÆÀàĞÍÃû³Æ¡£
+        // ç»Ÿè®¡ç±»å‹åç§°ã€‚
         info.append(this.getName());
         info.append(": ");
         String realDataText = realData.toString();

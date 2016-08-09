@@ -1,7 +1,7 @@
 package org.dangcat.boot.config;
 
 /**
- * Ïß³Ì³ØÅäÖÃ¡£
+ * çº¿ç¨‹æ± é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -29,7 +29,7 @@ public class ThreadPoolConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static ThreadPoolConfig getInstance() {
         return instance;

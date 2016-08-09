@@ -20,10 +20,10 @@ public class TestRegexValidator {
     @Test
     public void testGBK() {
         GBKValidator validator = new GBKValidator();
-        Assert.assertTrue(validator.isValid("²â"));
-        Assert.assertTrue(validator.isValid("²âÊÔ"));
-        Assert.assertTrue(validator.isValid("A²âÊÔB"));
-        Assert.assertTrue(validator.isValid("AB²âÊÔ"));
+        Assert.assertTrue(validator.isValid("æµ‹"));
+        Assert.assertTrue(validator.isValid("æµ‹è¯•"));
+        Assert.assertTrue(validator.isValid("Aæµ‹è¯•B"));
+        Assert.assertTrue(validator.isValid("ABæµ‹è¯•"));
         Assert.assertFalse(validator.isValid("AA"));
         Assert.assertFalse(validator.isValid("11"));
     }

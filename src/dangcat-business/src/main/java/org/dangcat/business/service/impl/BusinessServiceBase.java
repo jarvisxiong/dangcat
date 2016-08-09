@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ÒµÎñ·şÎñ»ù´¡¡£
+ * ä¸šåŠ¡æœåŠ¡åŸºç¡€ã€‚
  *
  * @param <V>
  * @param <F>
@@ -45,9 +45,9 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     private ServiceContext serviceContext;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¶ÔÏó¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡å¯¹è±¡ã€‚
      */
     public BusinessServiceBase(ServiceProvider parent) {
         super(parent);
@@ -59,49 +59,49 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ´¥·¢É¾³ıºóÊÂ¼ş¡£
+     * è§¦å‘åˆ é™¤åäº‹ä»¶ã€‚
      *
-     * @param deleteContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param deleteContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void afterDelete(LoadContext<V> deleteContext) {
     }
 
     /**
-     * ´¥·¢ĞÂÔöºóÊÂ¼ş¡£
+     * è§¦å‘æ–°å¢åäº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void afterInsert(SaveContext<V> saveContext) {
     }
 
     /**
-     * ´¥·¢¼ÓÔØÊı¾İºóÊÂ¼ş¡£
+     * è§¦å‘åŠ è½½æ•°æ®åäº‹ä»¶ã€‚
      *
-     * @param loadContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param loadContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void afterLoad(LoadContext<V> loadContext) {
     }
 
     /**
-     * ´¥·¢¼ÓÔØºóÊÂ¼ş¡£
+     * è§¦å‘åŠ è½½åäº‹ä»¶ã€‚
      *
-     * @param queryContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param queryContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void afterQuery(QueryContext<Q> queryContext) {
     }
 
     /**
-     * ´¥·¢´æ´¢ºóÊÂ¼ş¡£
+     * è§¦å‘å­˜å‚¨åäº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void afterSave(SaveContext<V> saveContext) {
     }
 
     /**
-     * ´¥·¢É¾³ıÇ°ÊÂ¼ş¡£
+     * è§¦å‘åˆ é™¤å‰äº‹ä»¶ã€‚
      *
-     * @param deleteContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param deleteContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void beforeDelete(LoadContext<V> deleteContext) throws ServiceException {
         BusinessValidator<V> businessValidator = this.getBusinessValidator();
@@ -110,34 +110,34 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ´¥·¢ĞÂÔöÇ°ÊÂ¼ş¡£
+     * è§¦å‘æ–°å¢å‰äº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void beforeInsert(SaveContext<V> saveContext) throws ServiceException {
         this.beforeSave(saveContext);
     }
 
     /**
-     * ´¥·¢¼ÓÔØÊı¾İÇ°ÊÂ¼ş¡£
+     * è§¦å‘åŠ è½½æ•°æ®å‰äº‹ä»¶ã€‚
      *
-     * @param loadContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param loadContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void beforeLoad(LoadContext<V> loadContext) throws ServiceException {
     }
 
     /**
-     * ´¥·¢¼ÓÔØÇ°ÊÂ¼ş¡£
+     * è§¦å‘åŠ è½½å‰äº‹ä»¶ã€‚
      *
-     * @param queryContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param queryContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void beforeQuery(QueryContext<Q> queryContext) throws ServiceException {
     }
 
     /**
-     * ´¥·¢´æ´¢Ç°ÊÂ¼ş¡£
+     * è§¦å‘å­˜å‚¨å‰äº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     protected void beforeSave(SaveContext<V> saveContext) throws ServiceException {
         this.validate(saveContext);
@@ -148,7 +148,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ±£´æ²ÎÊıÅäÖÃ¡£
+     * ä¿å­˜å‚æ•°é…ç½®ã€‚
      */
     public EntityBase config(EntityBase config) throws ServiceException {
         ServiceInfo serviceInfo = this.getServiceContext().getServiceInfo();
@@ -164,7 +164,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ĞÂ½¨Êı¾İ¡£
+     * æ–°å»ºæ•°æ®ã€‚
      */
     @Override
     public V create(V entity) throws ServiceException {
@@ -177,7 +177,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      */
     @Override
     public boolean delete(Integer id) throws ServiceException {
@@ -235,10 +235,10 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÓĞÈ¨ÏŞ¡£
+     * åˆ¤æ–­æ˜¯å¦æœ‰æƒé™ã€‚
      *
-     * @param permissionId È¨ÏŞÂë¡£
-     * @return ÊÇ·ñÓĞÖ¸¶¨È¨ÏŞ¡£
+     * @param permissionId æƒé™ç ã€‚
+     * @return æ˜¯å¦æœ‰æŒ‡å®šæƒé™ã€‚
      */
     public boolean hasPermission(Integer permissionId) {
         return this.getServiceContext().hasPermission(permissionId);
@@ -255,7 +255,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ĞÂÔöÊµÌåÊı¾İ¡£
+     * æ–°å¢å®ä½“æ•°æ®ã€‚
      */
     protected void onCreate(V entity) {
     }
@@ -276,7 +276,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ¼ÓÔØÖ¸¶¨·¶Î§µÄÊı¾İ¡£
+     * åŠ è½½æŒ‡å®šèŒƒå›´çš„æ•°æ®ã€‚
      */
     @Override
     public QueryResult<Q> query(F dataFilter) throws ServiceException {
@@ -288,7 +288,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ±£´æÊµÌåÊı¾İ¡£
+     * ä¿å­˜å®ä½“æ•°æ®ã€‚
      */
     @Override
     public V save(V entity) throws ServiceException {
@@ -301,7 +301,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ¼ÓÔØÖ¸¶¨·¶Î§µÄÁĞ±í¡£
+     * åŠ è½½æŒ‡å®šèŒƒå›´çš„åˆ—è¡¨ã€‚
      */
     public Map<Integer, String> select(F dataFilter) throws ServiceException {
         return this.select(dataFilter, null, null);
@@ -322,7 +322,7 @@ public class BusinessServiceBase<Q extends EntityBase, V extends EntityBase, F e
     }
 
     /**
-     * ²éÑ¯Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      */
     @Override
     public V view(Integer id) throws ServiceException {

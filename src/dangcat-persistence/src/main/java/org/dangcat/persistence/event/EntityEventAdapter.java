@@ -5,7 +5,7 @@ import org.dangcat.persistence.entity.SaveEntityContext;
 import org.dangcat.persistence.exception.EntityException;
 
 /**
- * ÊµÌåÊÂ¼ş¹ÜÀí¡£
+ * å®ä½“äº‹ä»¶ç®¡ç†ã€‚
  *
  * @author dangcat
  */

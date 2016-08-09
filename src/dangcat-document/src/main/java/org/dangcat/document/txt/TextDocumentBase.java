@@ -6,7 +6,7 @@ import org.dangcat.persistence.DataWriter;
 import java.io.*;
 
 /**
- * ÎÄµµÊäÈëÊä³ö¡£
+ * æ–‡æ¡£è¾“å…¥è¾“å‡ºã€‚
  *
  * @author dangcat
  */
@@ -38,10 +38,10 @@ public abstract class TextDocumentBase extends DocumentBase {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
      */
     @Override
     public int read(DataWriter dataWriter) {
@@ -49,11 +49,11 @@ public abstract class TextDocumentBase extends DocumentBase {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file       Ä¿±êÎÄ¼ş¡£
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
+     * @param file       ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
      */
     @Override
     public int read(File file, DataWriter dataWriter) {
@@ -76,12 +76,12 @@ public abstract class TextDocumentBase extends DocumentBase {
     }
 
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param bufferedReader Êı¾İ»º³åÁ÷¡£
-     * @param dataWriter     Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param bufferedReader æ•°æ®ç¼“å†²æµã€‚
+     * @param dataWriter     æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public abstract int read(Reader reader, DataWriter dataWriter) throws IOException;
 }

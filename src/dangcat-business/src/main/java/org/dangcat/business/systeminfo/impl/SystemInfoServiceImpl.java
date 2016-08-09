@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * ÏµÍ³·şÎñ¡£
+ * ç³»ç»ŸæœåŠ¡ã€‚
  *
  * @author fanst174766
  */
@@ -54,7 +54,7 @@ public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoServ
     }
 
     /**
-     * ¼ÓÔØÏµÍ³²Ëµ¥Ïî¡£
+     * åŠ è½½ç³»ç»Ÿèœå•é¡¹ã€‚
      */
     public Collection<Menu> loadMenus() {
         MenusLoader menusLoader = new MenusLoader(this.getResourceReader(), this.getLocale());
@@ -81,7 +81,7 @@ public class SystemInfoServiceImpl extends ServiceBase implements SystemInfoServ
     }
 
     /**
-     * ¼ÓÔØÏµÍ³ĞÅÏ¢¡£
+     * åŠ è½½ç³»ç»Ÿä¿¡æ¯ã€‚
      */
     public SystemInfo loadSystemInfo() {
         SystemInfo systemInfo = new SystemInfo();

@@ -7,7 +7,7 @@ import org.dangcat.persistence.calculate.CalculatorImpl;
 import org.dom4j.Element;
 
 /**
- * ¼ÆËãÆ÷¶ÔÏó½âÎöÆ÷¡£
+ * è®¡ç®—å™¨å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -17,7 +17,7 @@ public class CalculatorsXmlResolver extends XmlResolver {
     private CalculatorImpl calculators = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public CalculatorsXmlResolver() {
         super(RESOLVER_NAME);
@@ -30,9 +30,9 @@ public class CalculatorsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎö×ÓÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå­å…ƒç´ æ ‡ç­¾ã€‚
      *
-     * @param element ×ÓÔªËØÃû³Æ¡£
+     * @param element å­å…ƒç´ åç§°ã€‚
      */
     protected void resolveChildElement(Element element) {
         if (CHILDELEMENT_NAME.equalsIgnoreCase(element.getName()) && !ValueUtils.isEmpty(element.getText())) {

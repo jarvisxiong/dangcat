@@ -13,14 +13,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
 
 /**
- * ¼à¿ØÏß³Ì·şÎñ¡£
+ * ç›‘æ§çº¿ç¨‹æœåŠ¡ã€‚
  */
 public class WatchThreadExecutor extends ServiceControlBase implements Runnable {
     public static final Logger logger = Logger.getLogger(WatchThreadExecutor.class);
     private static final String SERVICE_NAME = "WatchExecutor";
     private static WatchThreadExecutor instance = null;
     /**
-     * ×Ô¶¯Æô¶¯ºÍ¹Ø±Õ
+     * è‡ªåŠ¨å¯åŠ¨å’Œå…³é—­
      */
     private boolean autoRun = true;
     /**
@@ -36,23 +36,23 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable 
      */
     private int queueCapacity = 10000;
     /**
-     * Ïß³Ì³Ø
+     * çº¿ç¨‹æ± 
      */
     private ThreadPoolExecutor threadPoolExecutor = null;
     /**
-     * ´¦ÓÚ×èÈûµÄÈÎÎñ¶ÓÁĞ¡£
+     * å¤„äºé˜»å¡çš„ä»»åŠ¡é˜Ÿåˆ—ã€‚
      */
     private Timer timer = null;
     /**
-     * ¼ì²éÖÜÆÚ
+     * æ£€æŸ¥å‘¨æœŸ
      */
     private int watchInterval = 1000;
     /**
-     * ¹Û²ìÖ´ĞĞÁĞ±í¡£
+     * è§‚å¯Ÿæ‰§è¡Œåˆ—è¡¨ã€‚
      */
     private Collection<WatchUnit> watchRunnables = new HashSet<WatchUnit>();
     /**
-     * ´¦ÓÚ×èÈûµÄÈÎÎñ¶ÓÁĞ¡£
+     * å¤„äºé˜»å¡çš„ä»»åŠ¡é˜Ÿåˆ—ã€‚
      */
     private BlockingQueue<Runnable> workQueue = null;
 
@@ -169,7 +169,7 @@ public class WatchThreadExecutor extends ServiceControlBase implements Runnable 
                 this.workQueue = new ArrayBlockingQueue<Runnable>(this.getQueueCapacity());
             if (this.threadPoolExecutor == null)
                 this.threadPoolExecutor = new ThreadPoolExecutor(this.getCorePoolSize(), this.getMaximumPoolSize(), SERVICE_NAME, this.workQueue);
-            // ¼à¿Ø¶¨Ê±Æ÷¡£
+            // ç›‘æ§å®šæ—¶å™¨ã€‚
             if (this.timer == null) {
                 this.timer = new Timer(SERVICE_NAME + "-Timer", this, this.getWatchInterval(), this.getWatchInterval());
                 this.timer.start();

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * ÎÄ¼ş´¦Àí½ø³Ì¡£
+ * æ–‡ä»¶å¤„ç†è¿›ç¨‹ã€‚
  */
 public abstract class FileProcessBase implements Runnable {
     private boolean cancel = false;

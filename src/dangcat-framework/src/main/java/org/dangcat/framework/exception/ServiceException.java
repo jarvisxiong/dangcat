@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Ó¦ÓÃ²ãÒì³£µÄ»ùÀà¡£
+ * åº”ç”¨å±‚å¼‚å¸¸çš„åŸºç±»ã€‚
  *
  * @author dangcat
  */
@@ -36,7 +36,7 @@ public class ServiceException extends Exception {
      */
     private List<ServiceException> exceptionList = null;
     /**
-     * ÏûÏ¢¹ú¼Ê»¯¡£
+     * æ¶ˆæ¯å›½é™…åŒ–ã€‚
      */
     private Locale locale = null;
     /**
@@ -48,7 +48,7 @@ public class ServiceException extends Exception {
      */
     private String messageKey = null;
     /**
-     * Òì³£²ÎÊı¡£
+     * å¼‚å¸¸å‚æ•°ã€‚
      */
     private List<Object> paramList = null;
     /**
@@ -85,9 +85,9 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Ìí¼Ó×ÓÒì³££¬
+     * æ·»åŠ å­å¼‚å¸¸ï¼Œ
      *
-     * @param serviceException ×ÓÒì³£¡£
+     * @param serviceException å­å¼‚å¸¸ã€‚
      */
     public void addException(ServiceException serviceException) {
         if (serviceException != null) {
@@ -116,7 +116,7 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * ×ÓÒì³£ÁĞ±í¡£
+     * å­å¼‚å¸¸åˆ—è¡¨ã€‚
      */
     public List<ServiceException> getChildExceptionList() {
         return this.exceptionList;
@@ -150,7 +150,7 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * Òì³£Ö÷¼üÖµ¡£
+     * å¼‚å¸¸ä¸»é”®å€¼ã€‚
      */
     public String getMessageKey() {
         return messageKey;
@@ -164,7 +164,7 @@ public class ServiceException extends Exception {
     }
 
     /**
-     * ²ÎÊıÁĞ±í¡£
+     * å‚æ•°åˆ—è¡¨ã€‚
      */
     public Object[] getParams() {
         return this.paramList == null ? null : this.paramList.toArray();

@@ -8,49 +8,49 @@ import org.dangcat.net.rfc.template.StringAttributeTemplate;
 import java.util.Map;
 
 /**
- * ÅäÖÃÊôĞÔ¡£
+ * é…ç½®å±æ€§ã€‚
  *
  * @author dangcat
  */
 public class Attribute {
     /**
-     * ÊôĞÔ¶ÔÏóÀàĞÍ¡£
+     * å±æ€§å¯¹è±¡ç±»å‹ã€‚
      */
     private String classType;
     /**
-     * ÊôĞÔÀàĞÍ¡£
+     * å±æ€§ç±»å‹ã€‚
      */
     private AttributeDataType dataType;
     /**
-     * ¼ÓÃÜÊôĞÔ¡£
+     * åŠ å¯†å±æ€§ã€‚
      */
     private Boolean encrypt = Boolean.FALSE;
     /**
-     * ÊôĞÔ³¤¶È¡£
+     * å±æ€§é•¿åº¦ã€‚
      */
     private Integer length;
     /**
-     * ×î´óÖµ¡£
+     * æœ€å¤§å€¼ã€‚
      */
     private Integer max;
     /**
-     * ×îĞ¡Öµ¡£
+     * æœ€å°å€¼ã€‚
      */
     private Integer min;
     /**
-     * ÊôĞÔÃû³Æ¡£
+     * å±æ€§åç§°ã€‚
      */
     private String name;
     /**
-     * Ñ¡ÏîÁĞ±í¡£
+     * é€‰é¡¹åˆ—è¡¨ã€‚
      */
     private Map<Integer, String> options = null;
     /**
-     * ÊÇ·ñ½øĞĞÑ¡ÏîĞ£Ñé¡£
+     * æ˜¯å¦è¿›è¡Œé€‰é¡¹æ ¡éªŒã€‚
      */
     private boolean optionValidate = true;
     /**
-     * ÊôĞÔ±àºÅ¡£
+     * å±æ€§ç¼–å·ã€‚
      */
     private Integer type;
 

@@ -23,17 +23,17 @@ public abstract class ServiceUnitTestBase extends ServiceBase {
     public ServiceUnitTestBase() {
         super(null);
 
-        // ¶¨Ê±Æ÷·şÎñ¡£
+        // å®šæ—¶å™¨æœåŠ¡ã€‚
         TimerService timerService = TimerServiceImpl.createInstance(this);
         this.addService(TimerService.class, timerService);
 
-        // Êı¾İ»º´æ·şÎñ¡£
+        // æ•°æ®ç¼“å­˜æœåŠ¡ã€‚
         EntityManagerFactory.getInstance();
         EntityCacheServiceImpl entityCacheService = new EntityCacheServiceImpl(this);
         this.addService(EntityCacheServiceImpl.class, entityCacheService);
         entityCacheService.initialize();
 
-        // Êı¾İÅúÁ¿²Ù×÷·şÎñ¡£
+        // æ•°æ®æ‰¹é‡æ“ä½œæœåŠ¡ã€‚
         EntityBatchService entityBatchService = EntityBatchServiceImpl.createInstance(this);
         this.addService(EntityBatchService.class, entityBatchService);
 

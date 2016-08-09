@@ -8,7 +8,7 @@ import org.dangcat.net.rfc.template.xml.Rule;
 import java.util.Map;
 
 /**
- * ÊôĞÔ¹æÔòĞ£ÑéÆ÷¡£
+ * å±æ€§è§„åˆ™æ ¡éªŒå™¨ã€‚
  *
  * @author dangcat
  */
@@ -69,7 +69,7 @@ public abstract class RuleValidator {
     }
 
     /**
-     * ÊôĞÔÊÇ·ñÓĞĞ§¡£
+     * å±æ€§æ˜¯å¦æœ‰æ•ˆã€‚
      */
     public abstract void validate(Map<Integer, Integer> attributeDataCountMap) throws ProtocolValidateException;
 }

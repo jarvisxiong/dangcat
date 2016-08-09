@@ -5,7 +5,7 @@ import org.dangcat.framework.exception.ServiceInformation;
 import org.dangcat.persistence.entity.EntityUtils;
 
 /**
- * Êı¾İĞ£ÑéÌáÊ¾¡£
+ * æ•°æ®æ ¡éªŒæç¤ºã€‚
  *
  * @author dangcat
  */
@@ -14,11 +14,11 @@ public class DataValidateInformation extends ServiceInformation {
     private static final String EXCEPTION_FIELDTITLE = "{fieldTitle}";
     private static final long serialVersionUID = 1L;
     /**
-     * ÊµÌåÀàĞÍ
+     * å®ä½“ç±»å‹
      */
     private Class<?> classType = null;
     /**
-     * ¼ìÑéµÄ×Ö¶ÎÃû¡£
+     * æ£€éªŒçš„å­—æ®µåã€‚
      */
     private String fieldName = null;
 

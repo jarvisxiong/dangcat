@@ -1,7 +1,7 @@
 package org.dangcat.persistence.simulate.data;
 
 /**
- * ×Ö½ÚÊı×éÄ£ÄâÆ÷¡£
+ * å­—èŠ‚æ•°ç»„æ¨¡æ‹Ÿå™¨ã€‚
  *
  * @author dangcat
  */

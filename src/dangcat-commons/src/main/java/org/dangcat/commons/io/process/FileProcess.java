@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 
 /**
- * ÎÄ¼ş´¦Àí½ø³Ì¡£
+ * æ–‡ä»¶å¤„ç†è¿›ç¨‹ã€‚
  */
 public abstract class FileProcess extends FileProcessBase {
     private Collection<File> prepareTasks = null;

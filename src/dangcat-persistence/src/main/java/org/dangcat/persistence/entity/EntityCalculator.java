@@ -3,15 +3,15 @@ package org.dangcat.persistence.entity;
 import java.util.Collection;
 
 /**
- * ÊµÌå¼ÆËãÆ÷¡£
+ * å®ä½“è®¡ç®—å™¨ã€‚
  *
  * @author dangcat
  */
 public class EntityCalculator {
     /**
-     * ¼ÆËãÊµÌå¼¯ºÏ¡£
+     * è®¡ç®—å®ä½“é›†åˆã€‚
      *
-     * @param entityCollection ÊµÌå¶ÔÏó¼¯ºÏ¡£
+     * @param entityCollection å®ä½“å¯¹è±¡é›†åˆã€‚
      */
     public static void calculate(Collection<?> entityCollection) {
         if (entityCollection != null && !entityCollection.isEmpty()) {
@@ -24,9 +24,9 @@ public class EntityCalculator {
     }
 
     /**
-     * ¼ÆËãµ¥¸öÊµÌå¡£
+     * è®¡ç®—å•ä¸ªå®ä½“ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
      */
     public static void calculate(Object entity) {
         if (entity != null) {

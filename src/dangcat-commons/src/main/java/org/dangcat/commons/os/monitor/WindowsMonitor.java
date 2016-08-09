@@ -35,7 +35,7 @@ class WindowsMonitor extends OSMonitor {
     @Override
     protected void monitorCPU(MonitorInfo monitorInfo) {
         try {
-            // È¡½ø³ÌĞÅÏ¢
+            // å–è¿›ç¨‹ä¿¡æ¯
             CpuInfo currentCpuInfo = this.readProcessInfo();
             if (this.priorCpuInfo == null) {
                 this.priorCpuInfo = currentCpuInfo;
@@ -43,7 +43,7 @@ class WindowsMonitor extends OSMonitor {
                 currentCpuInfo = this.readProcessInfo();
             }
             if (this.priorCpuInfo != null && currentCpuInfo != null) {
-                // ÏµÍ³×ÜµÄCPUÕ¼ÓÃÂÊ
+                // ç³»ç»Ÿæ€»çš„CPUå ç”¨ç‡
                 long idleTime = currentCpuInfo.systemIdleTime - this.priorCpuInfo.systemIdleTime;
                 long busyTime = currentCpuInfo.totalUsageTime - this.priorCpuInfo.totalUsageTime;
                 long totalTime = busyTime + idleTime;
@@ -52,16 +52,16 @@ class WindowsMonitor extends OSMonitor {
                     totalCpuRatio = Math.min(Math.max(totalCpuRatio, 0.0), 100.0);
                     monitorInfo.setValue(MonitorInfo.TotalCpuRatio, totalCpuRatio);
                 }
-                // ×Ü¹²Ê¹ÓÃµÄÄÚ´æÊı¡£
+                // æ€»å…±ä½¿ç”¨çš„å†…å­˜æ•°ã€‚
                 monitorInfo.setValue(MonitorInfo.TotalUsageMemory, currentCpuInfo.totalUsageMemory);
-                // ½ø³ÌµÄCPUÕ¼ÓÃÂÊ
+                // è¿›ç¨‹çš„CPUå ç”¨ç‡
                 long processTime = currentCpuInfo.processUsageTime - this.priorCpuInfo.processUsageTime;
                 if (totalTime > 0) {
                     double processCpuRatio = 100.0 * processTime / totalTime;
                     processCpuRatio = Math.min(Math.max(processCpuRatio, 0.0), 100.0);
                     monitorInfo.setValue(MonitorInfo.ProcessCpuRatio, processCpuRatio);
                 }
-                // ½ø³ÌÕ¼ÓÃµÄÄÚ´æÊı¡£
+                // è¿›ç¨‹å ç”¨çš„å†…å­˜æ•°ã€‚
                 monitorInfo.setValue(MonitorInfo.ProcessUsageMemory, currentCpuInfo.processUsageMemory);
             }
             this.priorCpuInfo = currentCpuInfo;
@@ -119,21 +119,21 @@ class WindowsMonitor extends OSMonitor {
                 if (commandLine.indexOf("wmic") >= 0)
                     continue;
 
-                // ¶ÁÈ¡CPUµÄ¿ÕÏĞÊ±¼ä¡£
+                // è¯»å–CPUçš„ç©ºé—²æ—¶é—´ã€‚
                 if (caption.equals("System Idle Process") || caption.equals("System")) {
                     cpuInfo.systemIdleTime += parseLong(line, kernelModeTimeIndex, userModeTimeIndex);
                     cpuInfo.systemIdleTime += parseLong(line, userModeTimeIndex, workingSetSizeIndex);
                     continue;
                 }
 
-                // ¶ÁÈ¡CPUµÄÏûºÄÊ±¼ä¡£
+                // è¯»å–CPUçš„æ¶ˆè€—æ—¶é—´ã€‚
                 long kernelTime = parseLong(line, kernelModeTimeIndex, userModeTimeIndex);
                 long userTime = parseLong(line, userModeTimeIndex, workingSetSizeIndex);
                 cpuInfo.totalUsageTime += kernelTime + userTime;
 
                 long workingSetSize = parseLong(line, workingSetSizeIndex, line.length());
                 cpuInfo.totalUsageMemory += workingSetSize;
-                // ½ø³ÌµÄCPUÕ¼ÓÃÂÊºÍÄÚ´æÕ¼ÓÃÊı¡£
+                // è¿›ç¨‹çš„CPUå ç”¨ç‡å’Œå†…å­˜å ç”¨æ•°ã€‚
                 String subString = substring(line, handleIndex, kernelModeTimeIndex - 1);
                 Integer handle = ValueUtils.parseInt(subString);
                 if (currentPID.equals(handle)) {

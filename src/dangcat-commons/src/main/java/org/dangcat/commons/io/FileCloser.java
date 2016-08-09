@@ -3,14 +3,14 @@ package org.dangcat.commons.io;
 import java.io.*;
 
 /**
- * ÎÄ¼ş¹¤¾ßÀà
+ * æ–‡ä»¶å·¥å…·ç±»
  */
 class FileCloser {
     /**
-     * ¹Ø±ÕÊäÈëÁ÷¡£
+     * å…³é—­è¾“å…¥æµã€‚
      *
-     * @param inputStream ÊäÈëÁ÷¡£
-     * @return ¹Ø±ÕºóµÄ½á¹û¡£
+     * @param inputStream è¾“å…¥æµã€‚
+     * @return å…³é—­åçš„ç»“æœã€‚
      */
     protected static InputStream close(InputStream inputStream) {
         if (inputStream != null) {
@@ -24,10 +24,10 @@ class FileCloser {
     }
 
     /**
-     * ¹Ø±ÕÊä³öÁ÷¡£
+     * å…³é—­è¾“å‡ºæµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @return ¹Ø±ÕºóµÄ½á¹û¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @return å…³é—­åçš„ç»“æœã€‚
      */
     protected static OutputStream close(OutputStream outputStream) {
         if (outputStream != null) {

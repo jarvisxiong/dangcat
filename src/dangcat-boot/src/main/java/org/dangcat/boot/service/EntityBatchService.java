@@ -3,33 +3,33 @@ package org.dangcat.boot.service;
 import org.dangcat.persistence.batch.EntityBatchStorer;
 
 /**
- * Êı¾İÅúÁ¿²Ù×÷·şÎñ¡£
+ * æ•°æ®æ‰¹é‡æ“ä½œæœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface EntityBatchService {
     /**
-     * Çå³ıËùÓĞ´ı´¦ÀíÊı¾İ¡£
+     * æ¸…é™¤æ‰€æœ‰å¾…å¤„ç†æ•°æ®ã€‚
      */
     void clear();
 
     /**
-     * µÃµ½Ö¸¶¨Êı¾İ¿âµÄÅúÁ¿´æ´¢¡£
+     * å¾—åˆ°æŒ‡å®šæ•°æ®åº“çš„æ‰¹é‡å­˜å‚¨ã€‚
      *
-     * @return ÅúÁ¿²Ù×÷¶ÔÏó¡£
+     * @return æ‰¹é‡æ“ä½œå¯¹è±¡ã€‚
      */
     EntityBatchStorer getEntityBatchStorer();
 
     /**
-     * µÃµ½Ö¸¶¨Êı¾İ¿âµÄÅúÁ¿´æ´¢¡£
+     * å¾—åˆ°æŒ‡å®šæ•°æ®åº“çš„æ‰¹é‡å­˜å‚¨ã€‚
      *
-     * @param databaseName Êı¾İ¿âÃû¡£
-     * @return ÅúÁ¿²Ù×÷¶ÔÏó¡£
+     * @param databaseName æ•°æ®åº“åã€‚
+     * @return æ‰¹é‡æ“ä½œå¯¹è±¡ã€‚
      */
     EntityBatchStorer getEntityBatchStorer(String databaseName);
 
     /**
-     * µ÷ÓÃÅúÁ¿´æ´¢²Ù×÷¡£
+     * è°ƒç”¨æ‰¹é‡å­˜å‚¨æ“ä½œã€‚
      */
     void save();
 }

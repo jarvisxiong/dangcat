@@ -12,7 +12,7 @@ import org.dangcat.persistence.entity.EntityMetaData;
 import java.util.Collection;
 
 /**
- * ÒµÎñÅäÖÃ¡£
+ * ä¸šåŠ¡é…ç½®ã€‚
  *
  * @author dangcat
  */

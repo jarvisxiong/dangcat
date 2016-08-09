@@ -48,7 +48,7 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         if (this.getService(accessClassType) == null) {
             Object service = ReflectUtils.newInstance(serviceClassType, new Class<?>[]{ServiceProvider.class}, new Object[]{this});
             if (service != null) {
-                // ∑˛ŒÒπ§≥ß
+                // ÊúçÂä°Â∑•ÂéÇ
                 ServiceLocator serviceLocator = this.getService(ServiceLocator.class);
                 if (serviceLocator == null) {
                     ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -160,7 +160,7 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
 
     protected ServicePrincipal getServicePrincipal() {
         if (this.servicePrincipal == null)
-            this.servicePrincipal = new ServicePrincipal("admin", "—ßœ∞µÀº⁄œ»", "SBEH", "127.0.0.1", null, null);
+            this.servicePrincipal = new ServicePrincipal("admin", "Â≠¶‰π†ÈÇìÁ®ºÂÖà", "SBEH", "127.0.0.1", null, null);
         return this.servicePrincipal;
     }
 
@@ -271,29 +271,29 @@ public abstract class BusinessServiceTestBase<S, Q extends EntityBase, T extends
         int indexOffSet = this.getIndexOffSet();
         int pageSize = 10;
         queryAssert.setExpectPageSize(pageSize);
-        // ≤‚ ‘ ◊“≥≤È—Ø°£
+        // ÊµãËØïÈ¶ñÈ°µÊü•ËØ¢„ÄÇ
         int startRow = 1;
         queryAssert.setExpectStartRow(startRow);
         queryAssert.setExpectFilterExpress(new FilterUnit(idFieldName, FilterType.between, indexOffSet, 9 + indexOffSet));
         this.testQuery(testServiceQuery, startRow, pageSize, queryAssert);
-        // ≤‚ ‘µ⁄∂˛“≥≤È—Ø°£
+        // ÊµãËØïÁ¨¨‰∫åÈ°µÊü•ËØ¢„ÄÇ
         startRow = 11;
         queryAssert.setExpectStartRow(startRow);
         queryAssert.setExpectFilterExpress(new FilterUnit(idFieldName, FilterType.between, 10 + indexOffSet, 19 + indexOffSet));
         this.testQuery(testServiceQuery, startRow, pageSize, queryAssert);
-        // ≤‚ ‘≥¨π˝◊‹“≥≤È—Ø°£
+        // ÊµãËØïË∂ÖËøáÊÄªÈ°µÊü•ËØ¢„ÄÇ
         startRow = queryAssert.getExpectTotaleSize() + 1;
         queryAssert.setExpectStartRow(queryAssert.getExpectTotaleSize() - pageSize + 1);
         queryAssert.setExpectFilterExpress(new FilterUnit(idFieldName, FilterType.between, queryAssert.getExpectTotaleSize() - 10 + indexOffSet, queryAssert.getExpectTotaleSize() - 1 + indexOffSet));
         this.testQuery(testServiceQuery, startRow, pageSize, queryAssert);
-        // ≤‚ ‘”‡“≥≤È—Ø°£
+        // ÊµãËØï‰ΩôÈ°µÊü•ËØ¢„ÄÇ
         pageSize = 30;
         startRow = 91;
         queryAssert.setExpectStartRow(startRow);
         queryAssert.setExpectPageSize(10);
         queryAssert.setExpectFilterExpress(new FilterUnit(idFieldName, FilterType.between, queryAssert.getExpectTotaleSize() - 10 + indexOffSet, queryAssert.getExpectTotaleSize() - 1 + indexOffSet));
         this.testQuery(testServiceQuery, startRow, pageSize, queryAssert);
-        // ≤‚ ‘≥¨¥Û“≥≤È—Ø°£
+        // ÊµãËØïË∂ÖÂ§ßÈ°µÊü•ËØ¢„ÄÇ
         pageSize = queryAssert.getExpectTotaleSize() * 10;
         startRow = 1;
         queryAssert.setExpectStartRow(startRow);

@@ -31,7 +31,7 @@ public class TestTableIndexManager {
     @Test
     public void testFilterIndex() {
         Rows rows = this.getTable().getRows();
-        // 注册时间+年龄定位
+        // 娉ㄥ唽鏃堕棿+骞撮緞瀹氫綅
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Age);
         rows.getIndexManager().appendIndex(indexName);
 
@@ -61,7 +61,7 @@ public class TestTableIndexManager {
     @Test
     public void testMultiNameIndex() {
         Rows rows = this.getTable().getRows();
-        // 地址+名称定位
+        // 鍦板潃+鍚嶇О瀹氫綅
         String indexName = ValueUtils.join(UserInfo.Address, UserInfo.Name);
         String[] indexNames = {UserInfo.Address, UserInfo.Name};
         rows.getIndexManager().appendIndex(indexName);
@@ -81,7 +81,7 @@ public class TestTableIndexManager {
     @Test
     public void testNameIndex() {
         Rows rows = this.getTable().getRows();
-        // 名称定位
+        // 鍚嶇О瀹氫綅
         rows.getIndexManager().appendIndex(UserInfo.Name);
 
         long indexCostTime = 0;
@@ -99,7 +99,7 @@ public class TestTableIndexManager {
     @Test
     public void testPrimaryKeyIndex() {
         Rows rows = this.getTable().getRows();
-        // 主键定位
+        // 涓婚敭瀹氫綅
         rows.getIndexManager().appendIndex(UserInfo.Id, true);
 
         long indexCostTime = 0;
@@ -117,7 +117,7 @@ public class TestTableIndexManager {
     @Test
     public void testRangeFilterIndex() {
         Rows rows = this.getTable().getRows();
-        // 注册时间+年龄定位
+        // 娉ㄥ唽鏃堕棿+骞撮緞瀹氫綅
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Address, UserInfo.Name);
         rows.getIndexManager().appendIndex(indexName);
 

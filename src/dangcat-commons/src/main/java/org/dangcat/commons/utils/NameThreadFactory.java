@@ -4,19 +4,19 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Ïß³Ì¹¤³§Àà£¬ÓÃÓÚÉèÖÃÏß³ÌµÄÃû³Æ
+ * çº¿ç¨‹å·¥å‚ç±»ï¼Œç”¨äºè®¾ç½®çº¿ç¨‹çš„åç§°
  */
 public class NameThreadFactory implements ThreadFactory {
     private final AtomicInteger threadNumber = new AtomicInteger(1);
     /**
-     * Ïß³ÌÃû³ÆÇ°×º
+     * çº¿ç¨‹åç§°å‰ç¼€
      */
     private String namePrefix;
 
     /**
-     * ¹¹Ôìº¯Êı
+     * æ„é€ å‡½æ•°
      *
-     * @param namePrefix ÃüÃûÇ°×º¡£
+     * @param namePrefix å‘½åå‰ç¼€ã€‚
      */
     public NameThreadFactory(String namePrefix) {
         this.namePrefix = namePrefix;

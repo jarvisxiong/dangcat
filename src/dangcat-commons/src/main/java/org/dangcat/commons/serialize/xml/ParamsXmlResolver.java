@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ²ÎÊıÁĞ±í¶ÔÏó½âÎöÆ÷¡£
+ * å‚æ•°åˆ—è¡¨å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class ParamsXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Params";
     /**
-     * ²ÎÊıÁĞ±í¶ÔÏó¡£
+     * å‚æ•°åˆ—è¡¨å¯¹è±¡ã€‚
      */
     private Map<String, Object> params;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ParamsXmlResolver() {
         this(RESOLVER_NAME, null);
@@ -29,10 +29,10 @@ public class ParamsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         Param param = (Param) child;

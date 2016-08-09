@@ -7,7 +7,7 @@ import org.dangcat.persistence.model.Columns;
 import java.util.List;
 
 /**
- * ExcelÎÄµµ²Ù×÷¡£
+ * Excelæ–‡æ¡£æ“ä½œã€‚
  *
  * @author dangcat
  */
@@ -26,10 +26,10 @@ public class ExcelDocumentReader extends ExcelReader {
     }
 
     /**
-     * ¶ÁÈ¡ÎÄµµµÄÊı¾İÄÚÈİ¡£
+     * è¯»å–æ–‡æ¡£çš„æ•°æ®å†…å®¹ã€‚
      *
-     * @param sheet      Ò³Ãæ±êÇ©¡£
-     * @param dataWriter Êı¾İ½ÓÊÕ¶ÔÏó¡£
+     * @param sheet      é¡µé¢æ ‡ç­¾ã€‚
+     * @param dataWriter æ•°æ®æ¥æ”¶å¯¹è±¡ã€‚
      */
     private void readBody(List<Object> values) {
         for (int i = 0; i < values.size(); i++) {
@@ -41,7 +41,7 @@ public class ExcelDocumentReader extends ExcelReader {
             if (column == null)
                 continue;
 
-            // ·ÀÖ¹ÀàĞÍ²»Ò»ÖÂ¡£
+            // é˜²æ­¢ç±»å‹ä¸ä¸€è‡´ã€‚
             if (value != null && !column.getFieldClass().isAssignableFrom(value.getClass()))
                 value = column.parse(value.toString());
             this.dataWriter.setValue(this.rowIndex, column.getName(), value);
@@ -50,10 +50,10 @@ public class ExcelDocumentReader extends ExcelReader {
     }
 
     /**
-     * ¶ÁÈ¡ÎÄµµµÄÀ¸Î»±êÌâ¡£
+     * è¯»å–æ–‡æ¡£çš„æ ä½æ ‡é¢˜ã€‚
      *
-     * @param sheet      Ò³Ãæ±êÇ©¡£
-     * @param dataWriter Êı¾İ½ÓÊÕ¶ÔÏó¡£
+     * @param sheet      é¡µé¢æ ‡ç­¾ã€‚
+     * @param dataWriter æ•°æ®æ¥æ”¶å¯¹è±¡ã€‚
      */
     private void readHeader(List<Object> values) {
         Columns columns = new Columns();

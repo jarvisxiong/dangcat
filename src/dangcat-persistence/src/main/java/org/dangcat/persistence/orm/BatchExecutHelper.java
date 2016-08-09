@@ -6,11 +6,11 @@ import java.util.List;
 
 public class BatchExecutHelper {
     /**
-     * ·ÖÎöÓï¾äÖĞµÄ²ÎÊı¡£
+     * åˆ†æè¯­å¥ä¸­çš„å‚æ•°ã€‚
      *
-     * @param sql           Ô­Ê¼Óï¾ä¡£
-     * @param filedNameList ²úÉú²ÎÊıË³Ğò¡£
-     * @return ·ÖÎöºóµÄJDBCÓï¾ä¡£
+     * @param sql           åŸå§‹è¯­å¥ã€‚
+     * @param filedNameList äº§ç”Ÿå‚æ•°é¡ºåºã€‚
+     * @return åˆ†æåçš„JDBCè¯­å¥ã€‚
      */
     public static String analyze(String sql, List<String> filedNameList) {
         StringBuilder sqlBuilder = new StringBuilder();
@@ -31,10 +31,10 @@ public class BatchExecutHelper {
     }
 
     /**
-     * ·ÖÎö²ÎÊıÃû¡£
+     * åˆ†æå‚æ•°åã€‚
      *
-     * @param sql SQL×Ö¾ä¡£
-     * @return ²ÎÊıÃû¡£
+     * @param sql SQLå­—å¥ã€‚
+     * @return å‚æ•°åã€‚
      */
     private static String analyzeParamName(String sql) {
         StringBuilder paramName = new StringBuilder();
@@ -48,10 +48,10 @@ public class BatchExecutHelper {
     }
 
     /**
-     * ÊÇ·ñ°üº¬²ÎÊıÉèÖÃ¡£
+     * æ˜¯å¦åŒ…å«å‚æ•°è®¾ç½®ã€‚
      *
-     * @param sqlBatchList ÅúÁ¿SQLÓï¾ä¡£
-     * @return °üº¬´øÉè¶¨²ÎÊı¡£
+     * @param sqlBatchList æ‰¹é‡SQLè¯­å¥ã€‚
+     * @return åŒ…å«å¸¦è®¾å®šå‚æ•°ã€‚
      */
     public static boolean isContainsParams(List<String> sqlBatchList) {
         boolean result = false;
@@ -67,10 +67,10 @@ public class BatchExecutHelper {
     }
 
     /**
-     * ÊÇ·ñ°üº¬²ÎÊıÉèÖÃ¡£
+     * æ˜¯å¦åŒ…å«å‚æ•°è®¾ç½®ã€‚
      *
-     * @param sql SQLÓï¾ä¡£
-     * @return °üº¬´øÉè¶¨²ÎÊı¡£
+     * @param sql SQLè¯­å¥ã€‚
+     * @return åŒ…å«å¸¦è®¾å®šå‚æ•°ã€‚
      */
     public static boolean isContainsParams(String sql) {
         boolean result = false;
@@ -88,10 +88,10 @@ public class BatchExecutHelper {
     }
 
     /**
-     * ÊÇ·ñ°üº¬²ÎÊıÉèÖÃ¡£
+     * æ˜¯å¦åŒ…å«å‚æ•°è®¾ç½®ã€‚
      *
-     * @param sql SQLÓï¾ä¡£
-     * @return °üº¬´øÉè¶¨²ÎÊı¡£
+     * @param sql SQLè¯­å¥ã€‚
+     * @return åŒ…å«å¸¦è®¾å®šå‚æ•°ã€‚
      */
     private static boolean isParams(String value) {
         boolean result = false;

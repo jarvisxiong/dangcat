@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * ½ÇÉ«¶ÔÏó½âÎöÆ÷¡£
+ * è§’è‰²å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -14,12 +14,12 @@ public class RolesXmlResolver extends XmlResolver {
     protected static final String RESOLVER_NAME = "Roles";
 
     /**
-     * ½ÇÉ«È¨ÏŞ¡£
+     * è§’è‰²æƒé™ã€‚
      */
     private Collection<RolePermission> rolePermissions = new HashSet<RolePermission>();
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public RolesXmlResolver() {
         super(RESOLVER_NAME);
@@ -27,10 +27,10 @@ public class RolesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         if (child instanceof RolePermission)

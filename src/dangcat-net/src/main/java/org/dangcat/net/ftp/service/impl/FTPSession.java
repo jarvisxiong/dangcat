@@ -8,7 +8,7 @@ import org.dangcat.net.ftp.service.FTPCallBack;
 import java.io.File;
 
 /**
- * FTP»á»°¡£
+ * FTPä¼šè¯ã€‚
  *
  * @author dangcat
  */
@@ -22,19 +22,19 @@ public class FTPSession {
     }
 
     /**
-     * É¾³ıÔ¶¶ËÎÄ¼ş¡£
+     * åˆ é™¤è¿œç«¯æ–‡ä»¶ã€‚
      *
-     * @param ftpContext FTPÉÏÏÂÎÄ¡£
-     * @throws FTPSessionException Ô¶³Ì²Ù×÷Òì³£¡£
+     * @param ftpContext FTPä¸Šä¸‹æ–‡ã€‚
+     * @throws FTPSessionException è¿œç¨‹æ“ä½œå¼‚å¸¸ã€‚
      */
     public void delete(FTPContext ftpContext) throws FTPSessionException {
         this.execute(new FTPDeleteSession(ftpContext, this));
     }
 
     /**
-     * É¾³ıÔ¶¶ËÎÄ¼ş¡£
+     * åˆ é™¤è¿œç«¯æ–‡ä»¶ã€‚
      *
-     * @param remotePath Ô¶³ÌÂ·¾¶¡£
+     * @param remotePath è¿œç¨‹è·¯å¾„ã€‚
      * @throws FTPSessionException
      */
     public void delete(String remotePath) throws FTPSessionException {
@@ -42,11 +42,11 @@ public class FTPSession {
     }
 
     /**
-     * ÏÂÔØÎÄ¼ş¡£
+     * ä¸‹è½½æ–‡ä»¶ã€‚
      *
-     * @param localPath   ±¾µØÎÄ¼şÂ·¾¶¡£
-     * @param remotePath  Ô¶¶ËÂ·¾¶¡£
-     * @param ftpCallBack »Øµ÷½Ó¿Ú¡£
+     * @param localPath   æœ¬åœ°æ–‡ä»¶è·¯å¾„ã€‚
+     * @param remotePath  è¿œç«¯è·¯å¾„ã€‚
+     * @param ftpCallBack å›è°ƒæ¥å£ã€‚
      * @throws FTPSessionException
      */
     public void download(File localPath, String remotePath, FTPCallBack ftpCallBack) throws FTPSessionException {
@@ -54,10 +54,10 @@ public class FTPSession {
     }
 
     /**
-     * ÏÂÔØÎÄ¼ş¡£
+     * ä¸‹è½½æ–‡ä»¶ã€‚
      *
-     * @param ftpContext FTPÉÏÏÂÎÄ¡£
-     * @throws FTPSessionException ÔËĞĞÒì³£¡£
+     * @param ftpContext FTPä¸Šä¸‹æ–‡ã€‚
+     * @throws FTPSessionException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void download(FTPContext ftpContext) throws FTPSessionException {
         this.execute(new FTPDownloadSession(ftpContext, this));
@@ -93,9 +93,9 @@ public class FTPSession {
     }
 
     /**
-     * ÁĞ³öÔ¶¶ËÎÄ¼şÃû¡£
+     * åˆ—å‡ºè¿œç«¯æ–‡ä»¶åã€‚
      *
-     * @param ftpContext FTPÉÏÏÂÎÄ¡£
+     * @param ftpContext FTPä¸Šä¸‹æ–‡ã€‚
      * @throws FTPSessionException
      */
     public FTPFile[] list(FTPContext ftpContext) throws FTPSessionException {
@@ -105,21 +105,21 @@ public class FTPSession {
     }
 
     /**
-     * Ã¶¾ÙÔ¶³ÌÂ·¾¶µÄÄÚÈİ¡£
+     * æšä¸¾è¿œç¨‹è·¯å¾„çš„å†…å®¹ã€‚
      *
-     * @param remotePath Ô¶³ÌÂ·¾¶¡£
+     * @param remotePath è¿œç¨‹è·¯å¾„ã€‚
      * @return
-     * @throws FTPSessionException Ô¶³Ì²Ù×÷Òì³£¡£
+     * @throws FTPSessionException è¿œç¨‹æ“ä½œå¼‚å¸¸ã€‚
      */
     public FTPFile[] list(String remotePath) throws FTPSessionException {
         return this.list(new FTPContext(remotePath));
     }
 
     /**
-     * ÖØĞÂÃüÃû¡£
+     * é‡æ–°å‘½åã€‚
      *
-     * @param from À´Ô´ÎÄ¼ş¡£
-     * @param to   Ä¿±êÎÄ¼ş¡£
+     * @param from æ¥æºæ–‡ä»¶ã€‚
+     * @param to   ç›®æ ‡æ–‡ä»¶ã€‚
      */
     public boolean rename(String from, String to) {
         FTPRenameSession ftpRenameSession = new FTPRenameSession(new FTPContext(from), this);
@@ -137,7 +137,7 @@ public class FTPSession {
     }
 
     /**
-     * ²âÊÔÊÇ·ñ¿ÉÒÔÕı³£Á¬½Óµ½·şÎñÆ÷¡£
+     * æµ‹è¯•æ˜¯å¦å¯ä»¥æ­£å¸¸è¿æ¥åˆ°æœåŠ¡å™¨ã€‚
      */
     public FTPSessionException testConnect() {
         FTPSessionExecutor ftpSessionExecutor = new FTPTestConnectionSession(new FTPContext(""), this);
@@ -146,11 +146,11 @@ public class FTPSession {
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş»òÄ¿Â¼¡£
+     * ä¸Šä¼ æ–‡ä»¶æˆ–ç›®å½•ã€‚
      *
-     * @param localPath   ±¾µØÂ·¾¶¡£
-     * @param remotePath  Ô¶³ÌÂ·¾¶¡£
-     * @param ftpCallBack »Øµ÷½Ó¿Ú¡£
+     * @param localPath   æœ¬åœ°è·¯å¾„ã€‚
+     * @param remotePath  è¿œç¨‹è·¯å¾„ã€‚
+     * @param ftpCallBack å›è°ƒæ¥å£ã€‚
      * @throws FTPSessionException
      */
     public void upload(File localPath, String remotePath, FTPCallBack ftpCallBack) throws FTPSessionException {
@@ -158,9 +158,9 @@ public class FTPSession {
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş»òÄ¿Â¼¡£
+     * ä¸Šä¼ æ–‡ä»¶æˆ–ç›®å½•ã€‚
      *
-     * @param ftpContext FTPÉÏÏÂÎÄ¡£
+     * @param ftpContext FTPä¸Šä¸‹æ–‡ã€‚
      * @throws FTPSessionException
      */
     public void upload(FTPContext ftpContext) throws FTPSessionException {

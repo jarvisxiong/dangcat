@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Ö´ĞĞ½á¹û
+ * æ‰§è¡Œç»“æœ
  *
  * @author dangcat
  */
 public class QueryResult<T> {
     /**
-     * Êı¾İ¼¯ºÏ¡£
+     * æ•°æ®é›†åˆã€‚
      */
     private Collection<T> dataCollection = new ArrayList<T>();
     /**
-     * ÆğÊ¼Î»ÖÃ¡£
+     * èµ·å§‹ä½ç½®ã€‚
      */
     private Integer startRow = null;
     /**
-     * ×Ü¼ÇÂ¼Êı¡£
+     * æ€»è®°å½•æ•°ã€‚
      */
     private Integer totalSize = null;
 

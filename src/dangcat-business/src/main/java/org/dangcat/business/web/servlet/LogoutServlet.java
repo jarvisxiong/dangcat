@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ϵͳ�ǳ���ڡ�
+ * 系统登出入口。
  *
  * @author dangcat
  */

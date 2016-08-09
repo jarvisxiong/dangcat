@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * °´Ê±¼ä·Ö±íÃû¶ÔÏó¡£
+ * æŒ‰æ—¶é—´åˆ†è¡¨åå¯¹è±¡ã€‚
  *
  * @author dangcat
  */

@@ -1,7 +1,7 @@
 package org.dangcat.boot.statistics;
 
 /**
- * Êı¾İ´¦ÀíÍ³¼Æ¡£
+ * æ•°æ®å¤„ç†ç»Ÿè®¡ã€‚
  *
  * @author dangcat
  */

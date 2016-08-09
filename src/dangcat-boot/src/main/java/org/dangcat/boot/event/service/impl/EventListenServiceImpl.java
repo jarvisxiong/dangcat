@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * ÏûÏ¢ÕìÌıÆ÷¡£
+ * æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
  *
  * @author dangcat
  */
@@ -44,9 +44,9 @@ public class EventListenServiceImpl extends EventServiceBase implements EventLis
     }
 
     /**
-     * ´¦ÀíÊÂ¼şÏûÏ¢¡£
+     * å¤„ç†äº‹ä»¶æ¶ˆæ¯ã€‚
      *
-     * @param event ÏûÏ¢¶ÔÏó¡£
+     * @param event æ¶ˆæ¯å¯¹è±¡ã€‚
      */
     public void handleEvent(Event event) {
         this.addTask(event);

@@ -6,7 +6,7 @@ import org.dangcat.persistence.validator.DataValidator;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * ��ֵ��ΧУ�顣
+ * 数值范围校验。
  *
  * @author dangcat
  */

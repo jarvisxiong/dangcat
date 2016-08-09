@@ -1,7 +1,7 @@
 package org.dangcat.net.ftp.service;
 
 /**
- * FTP·şÎñ¡£
+ * FTPæœåŠ¡ã€‚
  *
  * @author dangcat
  */

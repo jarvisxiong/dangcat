@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Locale;
 
 /**
- * ϵͳ��½��ڡ�
+ * 系统登陆入口。
  *
  * @author dangcat
  */

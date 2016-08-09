@@ -8,18 +8,18 @@ public enum TimeType {
     private final int value;
 
     /**
-     * ¹¹ÔìÊ±¼äÀàĞÍ¡£
+     * æ„é€ æ—¶é—´ç±»å‹ã€‚
      *
-     * @param value ¹ıÂËÀàĞÍÖµ¡£
+     * @param value è¿‡æ»¤ç±»å‹å€¼ã€‚
      */
     TimeType(int value) {
         this.value = value;
     }
 
     /**
-     * È¡µÃÊ±¼äÀàĞÍ¡£
+     * å–å¾—æ—¶é—´ç±»å‹ã€‚
      *
-     * @return ¹ıÂËÀàĞÍÖµ¡£
+     * @return è¿‡æ»¤ç±»å‹å€¼ã€‚
      */
     public int getValue() {
         return this.value;

@@ -61,10 +61,10 @@ public class TestCompositeEntity extends TestDatabase {
         teacherInfoUtils.createList(teacherInfoList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, teacherInfoList.size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.save(teacherInfoList.toArray());
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<TeacherInfo> saveTeacherInfoList = entityManager.load(TeacherInfo.class);
         Assert.assertEquals(teacherInfoList.size(), saveTeacherInfoList.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(teacherInfoList, saveTeacherInfoList));
@@ -72,15 +72,15 @@ public class TestCompositeEntity extends TestDatabase {
 
     private void testEntityModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<TeacherInfo> teacherInfoList = entityManager.load(TeacherInfo.class);
         teacherInfoUtils.modifyList(teacherInfoList);
         Assert.assertEquals(TEST_COUNT, teacherInfoList.size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         entityManager.save(teacherInfoList.toArray());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<TeacherInfo> saveTeacherInfoList = entityManager.load(TeacherInfo.class);
         Assert.assertEquals(teacherInfoList.size(), saveTeacherInfoList.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(teacherInfoList, saveTeacherInfoList));

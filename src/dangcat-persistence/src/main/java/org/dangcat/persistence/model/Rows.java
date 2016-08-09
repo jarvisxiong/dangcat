@@ -11,19 +11,19 @@ import java.util.List;
 public class Rows extends ArrayList<Row> implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * Êı¾İ±íµÄÊı¾İ×´Ì¬£º²éÑ¯»ò±»ĞŞ¸Ä¡£
+     * æ•°æ®è¡¨çš„æ•°æ®çŠ¶æ€ï¼šæŸ¥è¯¢æˆ–è¢«ä¿®æ”¹ã€‚
      */
     private DataState dataState = DataState.Browse;
     /**
-     * ÒÑ¾­É¾³ıµÄÊı¾İĞĞ¡£
+     * å·²ç»åˆ é™¤çš„æ•°æ®è¡Œã€‚
      */
     private List<Row> deletedRows = new ArrayList<Row>();
     /**
-     * Ë÷Òı¼¯ºÏ
+     * ç´¢å¼•é›†åˆ
      */
     private IndexManager<Row> indexManager = new IndexManager<Row>(this);
     /**
-     * ËùÊôÊı¾İ±í¶ÔÏó¡£
+     * æ‰€å±æ•°æ®è¡¨å¯¹è±¡ã€‚
      */
     private Table parent;
 
@@ -71,9 +71,9 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * ½¨Á¢ĞÂµÄÊı¾İĞĞ¡£
+     * å»ºç«‹æ–°çš„æ•°æ®è¡Œã€‚
      *
-     * @return ĞÂµÄĞĞ¡£
+     * @return æ–°çš„è¡Œã€‚
      */
     public Row createNewRow() {
         Row row = Row.newInstance();
@@ -90,9 +90,9 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨µÄ¹ıÂËÆ÷£¬ÕÒµ½Âú×ãÌõ¼şµÄÊı¾İĞĞ¡£
+     * æ ¹æ®æŒ‡å®šçš„è¿‡æ»¤å™¨ï¼Œæ‰¾åˆ°æ»¡è¶³æ¡ä»¶çš„æ•°æ®è¡Œã€‚
      *
-     * @param filterExpress ¹ıÂËÆ÷¡£
+     * @param filterExpress è¿‡æ»¤å™¨ã€‚
      * @return
      */
     public Collection<Row> find(FilterExpress filterExpress) {
@@ -100,21 +100,21 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * ¸ù¾İÖ÷¼üÖµÕÒµ½¼ÇÂ¼ĞĞ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     public Row find(Object... params) {
         return this.indexManager.find(params);
     }
 
     /**
-     * Ö¸¶¨À¸Î»ÃûºÍÖµ£¬ÕÒµ½ËùÓĞÂú×ãÌõ¼şµÄÊı¾İĞĞ¡£
+     * æŒ‡å®šæ ä½åå’Œå€¼ï¼Œæ‰¾åˆ°æ‰€æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®è¡Œã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à¸ö×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param params     ²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¼¯ºÏ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šä¸ªå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param params     å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œé›†åˆã€‚
      */
     public Collection<Row> find(String[] fieldNames, Object... params) {
         return this.indexManager.find(fieldNames, params);
@@ -136,7 +136,7 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * È¡µÃÒÑ¾­É¾³ıµÄÊı¾İĞĞÁĞ±í¡£
+     * å–å¾—å·²ç»åˆ é™¤çš„æ•°æ®è¡Œåˆ—è¡¨ã€‚
      */
     public List<Row> getDeletedRows() {
         return deletedRows;
@@ -147,7 +147,7 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * È¡µÃĞÂÔöµÄÊı¾İĞĞÁĞ±í¡£
+     * å–å¾—æ–°å¢çš„æ•°æ®è¡Œåˆ—è¡¨ã€‚
      */
     public List<Row> getInsertedRows() {
         List<Row> rowList = new ArrayList<Row>();
@@ -161,7 +161,7 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * È¡µÃĞÂÔöµÄÊı¾İĞĞÁĞ±í¡£
+     * å–å¾—æ–°å¢çš„æ•°æ®è¡Œåˆ—è¡¨ã€‚
      */
     public List<Row> getModifiedRows() {
         List<Row> rowList = new ArrayList<Row>();
@@ -184,10 +184,10 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * Í¨ÖªÊı¾İĞĞ×´Ì¬·¢Éú±ä»¯¡£
+     * é€šçŸ¥æ•°æ®è¡ŒçŠ¶æ€å‘ç”Ÿå˜åŒ–ã€‚
      *
-     * @param row   ×´Ì¬·¢Éú±ä»¯µÄÊı¾İĞĞ¡£
-     * @param field ±»ĞŞ¸ÄµÄÀ¸Î»¡£
+     * @param row   çŠ¶æ€å‘ç”Ÿå˜åŒ–çš„æ•°æ®è¡Œã€‚
+     * @param field è¢«ä¿®æ”¹çš„æ ä½ã€‚
      */
     protected void notify(Row row, Field field) {
         if (row != null) {
@@ -243,7 +243,7 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * É¾³ıËùÓĞµÄÊı¾İĞĞ¡£
+     * åˆ é™¤æ‰€æœ‰çš„æ•°æ®è¡Œã€‚
      */
     public void removeAll() {
         this.removeRange(0, this.size());
@@ -259,12 +259,12 @@ public class Rows extends ArrayList<Row> implements java.io.Serializable {
     }
 
     /**
-     * Êä³ö×Ö¶ÎÄÚÈİ¡£
+     * è¾“å‡ºå­—æ®µå†…å®¹ã€‚
      */
     public String toString() {
         StringBuffer info = new StringBuffer();
         info.append("Row Size: " + this.size() + "\n");
-        // Êä³ö±íÍ·
+        // è¾“å‡ºè¡¨å¤´
         for (Column column : this.getParent().getColumns()) {
             info.append(column.getName());
             if (column.isPrimaryKey())

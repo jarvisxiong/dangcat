@@ -5,7 +5,7 @@ import org.dangcat.business.code.DirectoryCodeGenerator;
 import org.dangcat.commons.io.FileUtils;
 
 /**
- * ·şÎñ´úÂëÉú³ÉÆ÷¡£
+ * æœåŠ¡ä»£ç ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */

@@ -3,7 +3,7 @@ package org.dangcat.persistence.simulate.data;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * ×Ö´®Ä£ÄâÆ÷¡£
+ * å­—ä¸²æ¨¡æ‹Ÿå™¨ã€‚
  *
  * @author dangcat
  */

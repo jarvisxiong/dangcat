@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * °üÊ¶±ğºÅ·şÎñ¡£
+ * åŒ…è¯†åˆ«å·æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -22,9 +22,9 @@ public class PacketIdentifierManager extends ServiceBase implements PacketIdenti
     }
 
     /**
-     * ½¨Á¢·şÎñÊµÀı¡£
+     * å»ºç«‹æœåŠ¡å®ä¾‹ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      * @return
      */
     public static synchronized PacketIdentifierService createInstance(ServiceProvider parent) {
@@ -36,9 +36,9 @@ public class PacketIdentifierManager extends ServiceBase implements PacketIdenti
     }
 
     /**
-     * Ìí¼Ó°üÀàĞÍµÄÊ¶±ğºÅ¡£
+     * æ·»åŠ åŒ…ç±»å‹çš„è¯†åˆ«å·ã€‚
      *
-     * @param radiusPacketType °üÀàĞÍ¡£
+     * @param radiusPacketType åŒ…ç±»å‹ã€‚
      */
     public void addPacketType(Integer... packetTypes) {
         Map<Integer, PacketIdentifier> packetIdentifierMap = new HashMap<Integer, PacketIdentifier>();
@@ -49,31 +49,31 @@ public class PacketIdentifierManager extends ServiceBase implements PacketIdenti
     }
 
     /**
-     * Ìí¼ÓÖ¸¶¨°üµÄ´¦ÀíÊ¶±ğºÅ¡£¡£
+     * æ·»åŠ æŒ‡å®šåŒ…çš„å¤„ç†è¯†åˆ«å·ã€‚ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @param identifier Ê¶±ğºÅ¡£
-     * @return ÊÇ·ñ¿ÉÒÔ½øĞĞ´¦Àí¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @param identifier è¯†åˆ«å·ã€‚
+     * @return æ˜¯å¦å¯ä»¥è¿›è¡Œå¤„ç†ã€‚
      */
     public boolean addProcess(InetAddress inetAddress, Integer packetType, Integer identifier) {
         return this.packetIdentifierMap.get(packetType).addProcess(inetAddress, identifier);
     }
 
     /**
-     * ÌáÈ¡°üÀàĞÍµÄÊ¶±ğºÅ¡£
+     * æå–åŒ…ç±»å‹çš„è¯†åˆ«å·ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @return Ê¶±ğºÅ¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return è¯†åˆ«å·ã€‚
      */
     public int nextIdentifier(Integer packetType) {
         return this.packetIdentifierMap.get(packetType).nextIdentifier();
     }
 
     /**
-     * É¾³ıÖ¸¶¨°üµÄ´¦ÀíÊ¶±ğºÅ¡£¡£
+     * åˆ é™¤æŒ‡å®šåŒ…çš„å¤„ç†è¯†åˆ«å·ã€‚ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @param identifier Ê¶±ğºÅ¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @param identifier è¯†åˆ«å·ã€‚
      */
     public void removeProcess(InetAddress inetAddress, Integer packetType, Integer identifier) {
         this.packetIdentifierMap.get(packetType).removeProcess(inetAddress, identifier);

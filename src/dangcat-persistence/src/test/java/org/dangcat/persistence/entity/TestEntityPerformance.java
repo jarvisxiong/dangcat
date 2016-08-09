@@ -29,7 +29,7 @@ public class TestEntityPerformance extends TestEntityBase {
 
         logger.info("Begin test database: " + databaseName);
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityUtils.resetAutoIncrement(this.entityList);
         long beginTime = DateUtils.currentTimeMillis();
         EntityManager entityManager = this.getEntityManager();

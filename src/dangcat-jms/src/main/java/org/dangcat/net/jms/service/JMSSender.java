@@ -11,27 +11,27 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 
 /**
- * JMSÏûÏ¢·¢ËÍ·şÎñ¡£
+ * JMSæ¶ˆæ¯å‘é€æœåŠ¡ã€‚
  */
 public class JMSSender extends JMSBase implements EventSender {
     protected static final Logger logger = Logger.getLogger(JMSSender.class);
     private JMSProducer jmsProducer = null;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô·şÎñ¡£
-     * @param name   ÏûÏ¢Ãû³Æ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
+     * @param name   æ¶ˆæ¯åç§°ã€‚
      */
     public JMSSender(String name) {
         super(name);
     }
 
     /**
-     * ÉèÖÃÏûÏ¢µÄ°ó¶¨ÊôĞÔ¡£
+     * è®¾ç½®æ¶ˆæ¯çš„ç»‘å®šå±æ€§ã€‚
      *
-     * @param event         ÊÂ¼ş¶ÔÏó¡£
-     * @param objectMessage ÏûÏ¢¶ÔÏó¡£
+     * @param event         äº‹ä»¶å¯¹è±¡ã€‚
+     * @param objectMessage æ¶ˆæ¯å¯¹è±¡ã€‚
      * @throws JMSException
      */
     private void bindProperties(Event event, Message message) throws JMSException {
@@ -59,7 +59,7 @@ public class JMSSender extends JMSBase implements EventSender {
 
             JMSProducer jmsProducer = this.getJMSProducer();
             if (jmsProducer != null) {
-                // ·¢ËÍÏûÏ¢
+                // å‘é€æ¶ˆæ¯
                 Message message = this.getJMSSession().getSession().createObjectMessage(event);
                 if (message != null) {
                     this.bindProperties(event, message);
@@ -89,7 +89,7 @@ public class JMSSender extends JMSBase implements EventSender {
     }
 
     /**
-     * ÊÍ·Å×ÊÔ´¡£
+     * é‡Šæ”¾èµ„æºã€‚
      */
     @Override
     public synchronized void stop() {

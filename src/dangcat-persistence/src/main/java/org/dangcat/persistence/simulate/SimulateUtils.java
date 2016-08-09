@@ -20,11 +20,11 @@ public class SimulateUtils {
     private static final String RESOURCE_DEFAULT_PATH = "/test-classes/META-INF/resource.properties";
 
     /**
-     * ±È½ÏÁ½¸öÊµÌå¶ÔÏó¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¯¹è±¡ã€‚
      *
-     * @param srcData  À´Ô´ÊµÌå¡£
-     * @param destData Ä¿±êÊµÌå¡£
-     * @return ÊÇ·ñÏàÍ¬¡£
+     * @param srcData  æ¥æºå®ä½“ã€‚
+     * @param destData ç›®æ ‡å®ä½“ã€‚
+     * @return æ˜¯å¦ç›¸åŒã€‚
      */
     public static boolean compareData(Object srcData, Object destData) {
         return compareData(srcData, destData, true);
@@ -37,11 +37,11 @@ public class SimulateUtils {
     }
 
     /**
-     * ±È½ÏÊµÌå¼¯ºÏ¡£
+     * æ¯”è¾ƒå®ä½“é›†åˆã€‚
      *
-     * @param srcCollection  À´Ô´ÊµÌå¼¯ºÏ¡£
-     * @param destCollection Ä¿±êÊµÌå¼¯ºÏ¡£
-     * @return ÊÇ·ñÏàÍ¬¡£
+     * @param srcCollection  æ¥æºå®ä½“é›†åˆã€‚
+     * @param destCollection ç›®æ ‡å®ä½“é›†åˆã€‚
+     * @return æ˜¯å¦ç›¸åŒã€‚
      */
     public static boolean compareDataCollection(Collection<?> srcCollection, Collection<?> destCollection) {
         Object[] srcDataArray = srcCollection.toArray();
@@ -63,11 +63,11 @@ public class SimulateUtils {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊµÌå¶ÔÏó¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¯¹è±¡ã€‚
      *
-     * @param srcEntity  À´Ô´ÊµÌå¡£
-     * @param destEntity Ä¿±êÊµÌå¡£
-     * @return ÊÇ·ñÏàÍ¬¡£
+     * @param srcEntity  æ¥æºå®ä½“ã€‚
+     * @param destEntity ç›®æ ‡å®ä½“ã€‚
+     * @return æ˜¯å¦ç›¸åŒã€‚
      */
     private static boolean compareEntity(Object srcEntity, Object destEntity, boolean showError) {
         EntityMetaData srcEntityMetaData = EntityHelper.getEntityMetaData(srcEntity.getClass());
@@ -95,11 +95,11 @@ public class SimulateUtils {
     }
 
     /**
-     * ±È½ÏÁ½¸öĞĞ¶ÔÏó¡£
+     * æ¯”è¾ƒä¸¤ä¸ªè¡Œå¯¹è±¡ã€‚
      *
-     * @param srcEntity  À´Ô´ÊµÌå¡£
-     * @param destEntity Ä¿±êÊµÌå¡£
-     * @return ÊÇ·ñÏàÍ¬¡£
+     * @param srcEntity  æ¥æºå®ä½“ã€‚
+     * @param destEntity ç›®æ ‡å®ä½“ã€‚
+     * @return æ˜¯å¦ç›¸åŒã€‚
      */
     private static boolean compareRow(Row srcRow, Row destRow, boolean showError) {
         for (Column column : srcRow.getParent().getColumns()) {
@@ -125,21 +125,21 @@ public class SimulateUtils {
     }
 
     /**
-     * ÅäÖÃ²âÊÔ×ÊÔ´¡£
+     * é…ç½®æµ‹è¯•èµ„æºã€‚
      */
     public static void configure() {
         configure(Environment.getHomePath() + RESOURCE_DEFAULT_PATH);
     }
 
     /**
-     * ÅäÖÃ²âÊÔ×ÊÔ´¡£
+     * é…ç½®æµ‹è¯•èµ„æºã€‚
      */
     public static void configure(String path) {
         ConfigureManager.getInstance().configure(new File(FileUtils.decodePath(path)));
     }
 
     /**
-     * ²úÉú²âÊÔµÄÁÙÊ±Ä¿Â¼¡£
+     * äº§ç”Ÿæµ‹è¯•çš„ä¸´æ—¶ç›®å½•ã€‚
      */
     public static File createTmpDirectory(String path) {
         File dir = new File("log" + File.separator + path);

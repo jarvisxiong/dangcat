@@ -32,7 +32,7 @@ public class ConfigureReader {
     }
 
     /**
-     * ÅäÖÃÎÄ¼ş¡£
+     * é…ç½®æ–‡ä»¶ã€‚
      */
     protected File getConfigFile() {
         String configFileName = ApplicationContext.getInstance().getName() + ".server.xml";
@@ -79,10 +79,10 @@ public class ConfigureReader {
     }
 
     /**
-     * ¶ÁÈ¡ÅäÖÃÄÚÈİ¡£
+     * è¯»å–é…ç½®å†…å®¹ã€‚
      *
-     * @param nodePath ÅäÖÃÂ·¾¶¡£
-     * @return ÅäÖÃµÄÖµ¡£
+     * @param nodePath é…ç½®è·¯å¾„ã€‚
+     * @return é…ç½®çš„å€¼ã€‚
      */
     public String getXmlValue(String nodePath) {
         String value = null;
@@ -98,7 +98,7 @@ public class ConfigureReader {
     }
 
     /**
-     * ÔØÈëÅäÖÃÄÚÈİ¡£
+     * è½½å…¥é…ç½®å†…å®¹ã€‚
      *
      * @throws DocumentException
      */

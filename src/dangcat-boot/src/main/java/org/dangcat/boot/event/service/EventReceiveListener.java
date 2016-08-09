@@ -3,15 +3,15 @@ package org.dangcat.boot.event.service;
 import org.dangcat.framework.event.Event;
 
 /**
- * ÏûÏ¢½ÓÊÕÆ÷¡£
+ * æ¶ˆæ¯æ¥æ”¶å™¨ã€‚
  *
  * @author dangcat
  */
 public interface EventReceiveListener {
     /**
-     * ½ÓÊÕÊı¾İ¡£
+     * æ¥æ”¶æ•°æ®ã€‚
      *
-     * @param event ½ÓÊÕÊÂ¼ş¡£
+     * @param event æ¥æ”¶äº‹ä»¶ã€‚
      */
     void onReceive(Event event);
 }

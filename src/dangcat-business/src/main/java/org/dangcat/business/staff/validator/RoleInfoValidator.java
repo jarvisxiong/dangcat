@@ -10,7 +10,7 @@ import org.dangcat.framework.exception.ServiceException;
 public class RoleInfoValidator extends BusinessValidator<RoleInfo> {
     @Override
     public void beforeDelete(RoleInfo roleInfo) throws ServiceException {
-        // ÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ½ÇÉ«²»ÄÜÉ¾³ı¡£
+        // å·²ç»ç»‘å®šæ“ä½œå‘˜çš„è§’è‰²ä¸èƒ½åˆ é™¤ã€‚
         if (this.exists(OperatorInfo.class, OperatorInfo.RoleId, roleInfo.getId()))
             throw new RoleInfoException(RoleInfoException.CHILE_OPERATOR_EXISTS);
     }
@@ -24,7 +24,7 @@ public class RoleInfoValidator extends BusinessValidator<RoleInfo> {
 
     private void validateExists(RoleInfo roleInfo) {
         if (roleInfo.getId() != null) {
-            // ½ÇÉ«±ØĞë´æÔÚ¡£
+            // è§’è‰²å¿…é¡»å­˜åœ¨ã€‚
             if (!this.exists(RoleInfo.class, RoleInfo.Id, roleInfo.getId()))
                 roleInfo.addServiceException(new RoleInfoException(RoleInfo.Name, RoleInfoException.DATA_NOTEXISTS));
         }
@@ -32,7 +32,7 @@ public class RoleInfoValidator extends BusinessValidator<RoleInfo> {
 
     private void validateName(RoleInfo roleInfo) {
         if (!ValueUtils.isEmpty(roleInfo.getName())) {
-            // ²Ù×÷Ô±×éµÄÃû³Æ²»ÄÜÖØ¸´¡£
+            // æ“ä½œå‘˜ç»„çš„åç§°ä¸èƒ½é‡å¤ã€‚
             if (this.checkRepeat(RoleInfo.class, roleInfo, RoleInfo.Name, roleInfo.getName()))
                 roleInfo.addServiceException(new RoleInfoException(RoleInfo.Name, RoleInfoException.DATA_REPEAT));
         }

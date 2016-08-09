@@ -47,7 +47,7 @@ class EntityFieldInfoCreator {
     }
 
     private void createFieldName(EntityField entityField) {
-        // ÉèÖÃ×Ö¶ÎÃû¡£
+        // è®¾ç½®å­—æ®µåã€‚
         org.dangcat.persistence.annotation.Column columnAnnotation = this.getEntityFieldAnnotation(entityField, org.dangcat.persistence.annotation.Column.class);
         if (columnAnnotation != null) {
             String fieldName = ValueUtils.isEmpty(columnAnnotation.fieldName()) ? entityField.getName() : columnAnnotation.fieldName();
@@ -83,7 +83,7 @@ class EntityFieldInfoCreator {
             JoinTable joinTable = EntityHelper.createJoinTable(this.entityMetaData, joinTableAnnotation);
             entityField.setTableName(joinTable.getTableName());
             entityField.setJoin(true);
-            // Á¬½Ó±íÊı¾İ¶¼Ëã¼ÆËã×Ö¶Î¡£
+            // è¿æ¥è¡¨æ•°æ®éƒ½ç®—è®¡ç®—å­—æ®µã€‚
             entityField.getColumn().setCalculate(true);
         }
     }
@@ -120,20 +120,20 @@ class EntityFieldInfoCreator {
         OrderBy orderBy = null;
         for (EntityField entityField : this.entityMetaData.getEntityFieldCollection()) {
             this.createFieldName(entityField);
-            // ×ÔÔö×Ö¶Î¡£
+            // è‡ªå¢å­—æ®µã€‚
             this.createAutoIncrement(entityField);
-            // ²úÉú¹ØÁª±íĞÅÏ¢¡£
+            // äº§ç”Ÿå…³è”è¡¨ä¿¡æ¯ã€‚
             this.createJoinTable(entityField);
-            // ÅÅĞòÌõ¼ş¡£
+            // æ’åºæ¡ä»¶ã€‚
             orderBy = this.createOrderBy(entityField, orderBy);
             // Params
             this.createParams(entityField);
-            // ¸ñÊ½»¯¶ÔÏó¡£
+            // æ ¼å¼åŒ–å¯¹è±¡ã€‚
             this.createFormatProvider(entityField);
-            // ÈÕÆÚÀàĞÍ¡£
+            // æ—¥æœŸç±»å‹ã€‚
             this.createDateTime(entityField);
         }
-        // Èç¹ûÓĞ¹ØÁª±í£¬ĞèÒªÉèÖÃÄ¬ÈÏÀ¸Î»µÄÖ÷±í¡£
+        // å¦‚æœæœ‰å…³è”è¡¨ï¼Œéœ€è¦è®¾ç½®é»˜è®¤æ ä½çš„ä¸»è¡¨ã€‚
         if (this.entityMetaData.getJoinTableCollection().size() > 0) {
             for (EntityField entityField : this.entityMetaData.getEntityFieldCollection()) {
                 if (entityField.getTableName() == null)
@@ -142,7 +142,7 @@ class EntityFieldInfoCreator {
         }
         this.entityMetaData.sort();
 
-        // ÉèÖÃÅÅĞòÌõ¼ş¡£
+        // è®¾ç½®æ’åºæ¡ä»¶ã€‚
         if (orderBy != null)
             this.entityMetaData.getTable().setOrderBy(orderBy);
     }

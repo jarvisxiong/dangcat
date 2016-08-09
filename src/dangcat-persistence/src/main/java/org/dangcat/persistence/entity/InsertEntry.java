@@ -14,10 +14,10 @@ class InsertEntry {
     }
 
     /**
-     * Ö÷±í²åÈëºó¸üĞÂ¹ØÁª×Ö¶Î¡£
+     * ä¸»è¡¨æ’å…¥åæ›´æ–°å…³è”å­—æ®µã€‚
      */
     protected void update() {
-        // Í¬²½Ã÷Ï¸±íµÄ¹ØÁª×Ö¶Î¡£
+        // åŒæ­¥æ˜ç»†è¡¨çš„å…³è”å­—æ®µã€‚
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(this.entity.getClass());
         for (Relation relation : entityMetaData.getRelations()) {
             String[] fieldNames = relation.getParentFieldNames();

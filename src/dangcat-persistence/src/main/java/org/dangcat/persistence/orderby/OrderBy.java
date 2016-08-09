@@ -7,7 +7,7 @@ import org.dangcat.persistence.filter.FilterUtils;
 import java.util.*;
 
 /**
- * ÅÅĞò¶ÔÏó¡£
+ * æ’åºå¯¹è±¡ã€‚
  *
  * @author dangcat
  */
@@ -15,9 +15,9 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     private static final long serialVersionUID = 1L;
 
     /**
-     * Í¨¹ıÅÅĞòµ¥Ôª¹¹ÔìÅÅĞòÄÚÈİ¡£
+     * é€šè¿‡æ’åºå•å…ƒæ„é€ æ’åºå†…å®¹ã€‚
      *
-     * @param orderByUnits ÅÅĞòµ¥ÔªÊı×é¡£
+     * @param orderByUnits æ’åºå•å…ƒæ•°ç»„ã€‚
      */
     public OrderBy(OrderByUnit... orderByUnits) {
         if (orderByUnits != null && orderByUnits.length > 0)
@@ -25,7 +25,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     /**
-     * ×ª»»×Ö´®µ½ÅÅĞò¶ÔÏó¡£
+     * è½¬æ¢å­—ä¸²åˆ°æ’åºå¯¹è±¡ã€‚
      */
     public static OrderBy parse(String orderByText) {
         OrderBy orderBy = null;
@@ -64,7 +64,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     /**
-     * ×ª»»×Ö´®µ½ÅÅĞò¶ÔÏó¡£
+     * è½¬æ¢å­—ä¸²åˆ°æ’åºå¯¹è±¡ã€‚
      */
     public static OrderBy parse(String fieldName, String orderByText) {
         OrderBy orderBy = null;
@@ -130,7 +130,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     /**
-     * ¸ù¾İµ±Ç°ÅÅĞò¶ÔÏó½øĞĞÅÅĞòÊı¾İĞĞ¼¯ºÏ¡£
+     * æ ¹æ®å½“å‰æ’åºå¯¹è±¡è¿›è¡Œæ’åºæ•°æ®è¡Œé›†åˆã€‚
      */
     public void sort(Collection<Object> collection) {
         if (collection == null || collection.size() == 0)
@@ -174,7 +174,7 @@ public class OrderBy extends ArrayList<OrderByUnit> implements java.io.Serializa
     }
 
     /**
-     * ×ª»»ÅÅĞòÓï¾ä¡£
+     * è½¬æ¢æ’åºè¯­å¥ã€‚
      */
     public String toString() {
         String index = this.toIndex();

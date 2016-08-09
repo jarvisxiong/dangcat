@@ -14,7 +14,7 @@ import org.dangcat.persistence.model.Range;
 import java.util.List;
 
 /**
- * ÒµÎñĞ£Ñé¡£
+ * ä¸šåŠ¡æ ¡éªŒã€‚
  *
  * @author dangcat
  */
@@ -22,9 +22,9 @@ public abstract class BusinessValidator<T extends EntityBase> {
     private EntityManager entityManager = null;
 
     /**
-     * ´¥·¢É¾³ıÇ°ÊÂ¼ş¡£
+     * è§¦å‘åˆ é™¤å‰äº‹ä»¶ã€‚
      *
-     * @param deleteContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param deleteContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     public void beforeDelete(LoadContext<T> deleteContext) throws ServiceException {
         this.setEntityManager(deleteContext.getEntityManager());
@@ -34,9 +34,9 @@ public abstract class BusinessValidator<T extends EntityBase> {
     public abstract void beforeDelete(T entity) throws ServiceException;
 
     /**
-     * ´¥·¢´æ´¢Ç°ÊÂ¼ş¡£
+     * è§¦å‘å­˜å‚¨å‰äº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     public void beforeSave(SaveContext<T> saveContext) throws ServiceException {
         this.setEntityManager(saveContext.getEntityManager());

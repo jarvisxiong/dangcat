@@ -1,23 +1,23 @@
 package org.dangcat.boot.statistics;
 
 /**
- * Í³¼Æ½Ó¿Ú¡£
+ * ç»Ÿè®¡æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface StatisticsAble {
     /**
-     * Í³¼ÆĞÅÏ¢ÊÇ·ñÓĞĞ§¡£
+     * ç»Ÿè®¡ä¿¡æ¯æ˜¯å¦æœ‰æ•ˆã€‚
      */
     boolean isValid();
 
     /**
-     * ¶ÁÈ¡²¢ÖØÖÃÊµÊ±ĞÅÏ¢¡£
+     * è¯»å–å¹¶é‡ç½®å®æ—¶ä¿¡æ¯ã€‚
      */
     String readRealInfo();
 
     /**
-     * ÖØÖÃÍ³¼ÆĞÅÏ¢¡£
+     * é‡ç½®ç»Ÿè®¡ä¿¡æ¯ã€‚
      */
     void reset();
 }

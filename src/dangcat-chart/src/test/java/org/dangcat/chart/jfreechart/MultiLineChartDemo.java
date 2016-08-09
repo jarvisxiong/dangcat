@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class MultiLineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "多轴线性统计图";
+    private static final String TITLE = "澶氳酱绾挎�х粺璁″浘";
 
     public MultiLineChartDemo() {
         super(MultiLineChart.class.getSimpleName());
@@ -27,7 +27,7 @@ public class MultiLineChartDemo extends ChartDemoBase {
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));
         MultiLineChart multiLineChart1 = new MultiLineChart();
         multiLineChart1.setTitle(TITLE);
-        multiLineChart1.setRangeTitle("流量");
+        multiLineChart1.setRangeTitle("娴侀噺");
         multiLineChart1.setDataModule(columnDataModule);
         this.initTimeChart(multiLineChart1, dates[0], dates[1]);
         multiLineChart1.initialize();
@@ -39,7 +39,7 @@ public class MultiLineChartDemo extends ChartDemoBase {
         MultiLineChart multiLineChart2 = new MultiLineChart();
         multiLineChart2.setLegendVisible(true);
         multiLineChart2.setTitle(TITLE);
-        multiLineChart2.setRangeTitle("流量");
+        multiLineChart2.setRangeTitle("娴侀噺");
         multiLineChart2.setDataModule(rowDataModule);
         this.initTimeChart(multiLineChart2, dates[0], dates[1]);
         multiLineChart2.getDataConverters().add(

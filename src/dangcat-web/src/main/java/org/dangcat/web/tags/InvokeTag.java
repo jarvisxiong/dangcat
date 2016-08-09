@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ·şÎñµ÷ÓÃ±êÇ©¡£
+ * æœåŠ¡è°ƒç”¨æ ‡ç­¾ã€‚
  *
  * @author dangcat
  */
@@ -55,11 +55,11 @@ public class InvokeTag extends SimpleTagSupport {
             throw new JspTagException("The invoke tag jndiName or method can't be empty.");
 
         try {
-            // ¹¹½¨·şÎñµ÷ÓÃ¶ÔÏó¡£
+            // æ„å»ºæœåŠ¡è°ƒç”¨å¯¹è±¡ã€‚
             ServiceCaller serviceCaller = this.createServiceCaller();
-            // µ÷ÓÃ·şÎñ·½·¨¡£
+            // è°ƒç”¨æœåŠ¡æ–¹æ³•ã€‚
             Object result = this.invoke(serviceCaller);
-            // ·´À¡Ö´ĞĞ½á¹û¡£
+            // åé¦ˆæ‰§è¡Œç»“æœã€‚
             this.writeResult(result);
         } catch (Exception e) {
             logger.error(this, e);
@@ -88,12 +88,12 @@ public class InvokeTag extends SimpleTagSupport {
     }
 
     private Object invoke(ServiceCaller serviceCaller) throws Exception {
-        // ¶¨Î»Ä¿±ê·şÎñ¡£
+        // å®šä½ç›®æ ‡æœåŠ¡ã€‚
         ServiceInfo serviceInfo = ServiceFactory.getServiceLocator().getServiceInfo(serviceCaller.getJndiName());
         if (serviceInfo == null || serviceInfo.getInstance() == null)
             throw new JspTagException("The request " + this.getJndiName() + " and method " + this.getMethod() + " can't find serviceInfo.");
 
-        // ÕÒµ½Ö´ĞĞµÄ·½·¨¡£
+        // æ‰¾åˆ°æ‰§è¡Œçš„æ–¹æ³•ã€‚
         MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(serviceCaller.getMethod());
         if (methodInfo == null)
             throw new JspTagException("The request " + serviceCaller + " can't find destination.");

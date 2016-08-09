@@ -14,7 +14,7 @@ import org.dangcat.net.ftp.service.FTPCallBack;
 import java.io.*;
 
 /**
- * FTPобть╩А╩╟║ё
+ * FTPД╦▀Х╫╫Д╪ Х╞²Ц─┌
  *
  * @author dangcat
  */
@@ -231,10 +231,10 @@ abstract class FTPSessionExecutor implements WatchRunnable {
     }
 
     /**
-     * апЁЖFTPио╣днд╪Ч║ё
+     * Е┬≈Е┤╨FTPД╦┼Г └Ф√┤Д╩╤Ц─┌
      *
-     * @param ftpContext иообнд║ё
-     * @param remotePath т╤╤кб╥╬╤║ё
+     * @param ftpContext Д╦┼Д╦▀Ф√┤Ц─┌
+     * @param remotePath Х©°Г╚╞Х╥╞Е╬└Ц─┌
      * @return
      * @throws IOException
      */

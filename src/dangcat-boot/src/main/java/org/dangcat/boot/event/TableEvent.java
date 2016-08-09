@@ -9,30 +9,30 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 
 /**
- * Êı¾İ±íÊÂ¼ş¡£
+ * æ•°æ®è¡¨äº‹ä»¶ã€‚
  *
  * @author dangcat
  */
 public class TableEvent extends Event {
     private static final long serialVersionUID = 1L;
     /**
-     * Êı¾İ×´Ì¬¡£
+     * æ•°æ®çŠ¶æ€ã€‚
      */
     private DataState dataState = null;
     /**
-     * ¹ıÂËÌõ¼ş¡£
+     * è¿‡æ»¤æ¡ä»¶ã€‚
      */
     private FilterExpress filterExpress = null;
     /**
-     * Ä¿±êÖ÷¼üÁĞ±í¡£
+     * ç›®æ ‡ä¸»é”®åˆ—è¡¨ã€‚
      */
     private Collection<Object> primaryKeys = null;
     /**
-     * Ä¿±ê±íÃû¡£
+     * ç›®æ ‡è¡¨åã€‚
      */
     private String tableName = null;
     /**
-     * Ä¿±êÁĞ±í¡£
+     * ç›®æ ‡åˆ—è¡¨ã€‚
      */
     private Collection<Object> values = null;
 

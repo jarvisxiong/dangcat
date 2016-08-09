@@ -1,31 +1,31 @@
 package org.dangcat.commons.utils;
 
 /**
- * ±¨ÎÄ½âÎö¹¤¾ß¡£
+ * æŠ¥æ–‡è§£æžå·¥å…·ã€‚
  */
 public class ParseUtils {
     private static final String HEX_SPACE = " ";
     private static final String HEX_TEXT = "0123456789ABCDEF";
 
     /**
-     * ÓÉ¶þ½øÖÆÊý×é½âÎöÕûÊý¡£
+     * ç”±äºŒè¿›åˆ¶æ•°ç»„è§£æžæ•´æ•°ã€‚
      *
-     * @param bytes      ¶þ½øÖÆÊý×é¡£
-     * @param beginIndex ÆäÊµË÷ÒýÎ»ÖÃ¡£
-     * @param length     ³¤¶È¡£
-     * @return ½âÎöºóµÄÕûÊý¡£
+     * @param bytes      äºŒè¿›åˆ¶æ•°ç»„ã€‚
+     * @param beginIndex å…¶å®žç´¢å¼•ä½ç½®ã€‚
+     * @param length     é•¿åº¦ã€‚
+     * @return è§£æžåŽçš„æ•´æ•°ã€‚
      */
     public static final int getInt(byte[] bytes, int beginIndex, int length) {
         return (int) getLong(bytes, beginIndex, length);
     }
 
     /**
-     * ÓÉ¶þ½øÖÆÊý×é½âÎö³¤ÕûÊý¡£
+     * ç”±äºŒè¿›åˆ¶æ•°ç»„è§£æžé•¿æ•´æ•°ã€‚
      *
-     * @param bytes      ¶þ½øÖÆÊý×é¡£
-     * @param beginIndex ÆäÊµË÷ÒýÎ»ÖÃ¡£
-     * @param length     ³¤¶È¡£
-     * @return ½âÎöºóµÄÕûÊý¡£
+     * @param bytes      äºŒè¿›åˆ¶æ•°ç»„ã€‚
+     * @param beginIndex å…¶å®žç´¢å¼•ä½ç½®ã€‚
+     * @param length     é•¿åº¦ã€‚
+     * @return è§£æžåŽçš„æ•´æ•°ã€‚
      */
     public static final long getLong(byte[] bytes, int beginIndex, int length) {
         long value = 0;
@@ -35,21 +35,21 @@ public class ParseUtils {
     }
 
     /**
-     * ÓÉ×Ö·û´®½âÎö¶þ½øÖÆÊý×é¡£
+     * ç”±å­—ç¬¦ä¸²è§£æžäºŒè¿›åˆ¶æ•°ç»„ã€‚
      *
-     * @param text ×Ö·û´®¡£
-     * @return ½âÎöºóµÄÊý×é¡£
+     * @param text å­—ç¬¦ä¸²ã€‚
+     * @return è§£æžåŽçš„æ•°ç»„ã€‚
      */
     public static final byte[] parseHex(String text) {
         return parseHex(text, HEX_SPACE);
     }
 
     /**
-     * ÓÉ×Ö·û´®½âÎö¶þ½øÖÆÊý×é¡£
+     * ç”±å­—ç¬¦ä¸²è§£æžäºŒè¿›åˆ¶æ•°ç»„ã€‚
      *
-     * @param text  ×Ö·û´®¡£
-     * @param space ·Ö¸î×Ö·û¡£
-     * @return ½âÎöºóµÄÊý×é¡£
+     * @param text  å­—ç¬¦ä¸²ã€‚
+     * @param space åˆ†å‰²å­—ç¬¦ã€‚
+     * @return è§£æžåŽçš„æ•°ç»„ã€‚
      */
     public static final byte[] parseHex(String text, String space) {
         if (ValueUtils.isEmpty(text))
@@ -75,22 +75,22 @@ public class ParseUtils {
     }
 
     /**
-     * ÓÉÕûÊý×ª»»³ÉÖ¸¶¨³¤¶ÈµÄ¶þ½øÖÆÊý×é¡£
+     * ç”±æ•´æ•°è½¬æ¢æˆæŒ‡å®šé•¿åº¦çš„äºŒè¿›åˆ¶æ•°ç»„ã€‚
      *
-     * @param value  ÕûÊýÊýÖµ¡£
-     * @param length ³¤¶È¡£
-     * @return ×ª»»ºóµÄ¶þ½øÖÆÊý×é¡£
+     * @param value  æ•´æ•°æ•°å€¼ã€‚
+     * @param length é•¿åº¦ã€‚
+     * @return è½¬æ¢åŽçš„äºŒè¿›åˆ¶æ•°ç»„ã€‚
      */
     public static final byte[] toBytes(int value, int length) {
         return toBytes((long) value, length);
     }
 
     /**
-     * ÓÉ³¤ÕûÊý×ª»»³ÉÖ¸¶¨³¤¶ÈµÄ¶þ½øÖÆÊý×é¡£
+     * ç”±é•¿æ•´æ•°è½¬æ¢æˆæŒ‡å®šé•¿åº¦çš„äºŒè¿›åˆ¶æ•°ç»„ã€‚
      *
-     * @param value  ÕûÊýÊýÖµ¡£
-     * @param length ³¤¶È¡£
-     * @return ×ª»»ºóµÄ¶þ½øÖÆÊý×é¡£
+     * @param value  æ•´æ•°æ•°å€¼ã€‚
+     * @param length é•¿åº¦ã€‚
+     * @return è½¬æ¢åŽçš„äºŒè¿›åˆ¶æ•°ç»„ã€‚
      */
     public static byte[] toBytes(long value, int length) {
         byte[] bytes = new byte[length];
@@ -100,10 +100,10 @@ public class ParseUtils {
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param value ×Ö½ÚÊý¾Ý¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param value å­—èŠ‚æ•°æ®ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     public static final String toHex(byte value) {
         StringBuffer info = new StringBuffer(2);
@@ -112,33 +112,33 @@ public class ParseUtils {
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param value ×Ö½ÚÊý¾Ý¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param value å­—èŠ‚æ•°æ®ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     public static final String toHex(byte[] bytes) {
         return toHex(bytes, 0);
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param bytes      ×Ö½ÚÊý¾Ý¡£
-     * @param changeLine »»ÐÐÂëÊý¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param bytes      å­—èŠ‚æ•°æ®ã€‚
+     * @param changeLine æ¢è¡Œç æ•°ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     public static final String toHex(byte[] bytes, int changeLine) {
         return toHex(bytes, changeLine, HEX_SPACE);
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param bytes      ×Ö½ÚÊý¾Ý¡£
-     * @param changeLine »»ÐÐÂëÊý¡£
-     * @param space      ×Ö·û¼ä¸ô¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param bytes      å­—èŠ‚æ•°æ®ã€‚
+     * @param changeLine æ¢è¡Œç æ•°ã€‚
+     * @param space      å­—ç¬¦é—´éš”ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     public static final String toHex(byte[] bytes, int changeLine, String space) {
         StringBuffer info = new StringBuffer(2);
@@ -158,21 +158,21 @@ public class ParseUtils {
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param bytes ×Ö½ÚÊý¾Ý¡£
-     * @param space ×Ö·û¼ä¸ô¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param bytes å­—èŠ‚æ•°æ®ã€‚
+     * @param space å­—ç¬¦é—´éš”ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     public static final String toHex(byte[] bytes, String space) {
         return toHex(bytes, 0, space);
     }
 
     /**
-     * ×ª»»×Ö½ÚÎª16½øÖÆ±í´ï×Ö´®¡£
+     * è½¬æ¢å­—èŠ‚ä¸º16è¿›åˆ¶è¡¨è¾¾å­—ä¸²ã€‚
      *
-     * @param value ×Ö½ÚÊý¾Ý¡£
-     * @return ×ª»»ºóµÄ×Ö´®¡£
+     * @param value å­—èŠ‚æ•°æ®ã€‚
+     * @return è½¬æ¢åŽçš„å­—ä¸²ã€‚
      */
     private static void toHex(StringBuffer info, byte value) {
         info.append(HEX_TEXT.charAt(0xf & value >>> 4));

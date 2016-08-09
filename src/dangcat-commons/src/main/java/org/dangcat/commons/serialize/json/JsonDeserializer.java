@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * JSON¸ñÊ½·´ĞòÁĞ»¯¶ÔÏó¡£
+ * JSONæ ¼å¼ååºåˆ—åŒ–å¯¹è±¡ã€‚
  */
 public class JsonDeserializer {
     protected static final Logger logger = Logger.getLogger(JsonDeserializer.class);
@@ -54,11 +54,11 @@ public class JsonDeserializer {
     }
 
     /**
-     * ´ÓÊı¾İÁ÷·´ĞòÁĞ»¯¶ÔÏó¡£
+     * ä»æ•°æ®æµååºåˆ—åŒ–å¯¹è±¡ã€‚
      *
-     * @param inputStream À´Ô´Êı¾İÁ÷¡£
-     * @param instance    Ä¿±êÊı¾İ¶ÔÏó¡£
-     * @return ĞòÁĞ»¯ºóµÄ¶ÔÏóÊµÀı¡£
+     * @param inputStream æ¥æºæ•°æ®æµã€‚
+     * @param instance    ç›®æ ‡æ•°æ®å¯¹è±¡ã€‚
+     * @return åºåˆ—åŒ–åçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(Reader reader, Class<?>[] classTypes, Object instance) {
@@ -97,11 +97,11 @@ public class JsonDeserializer {
     }
 
     /**
-     * ´ÓÊı¾İÁ÷·´ĞòÁĞ»¯¶ÔÏó¡£
+     * ä»æ•°æ®æµååºåˆ—åŒ–å¯¹è±¡ã€‚
      *
-     * @param reader    À´Ô´Êı¾İÁ÷¡£
-     * @param classType Ä¿±êÊı¾İÀàĞÍ¡£
-     * @return ĞòÁĞ»¯ºóµÄ¶ÔÏóÊµÀı¡£
+     * @param reader    æ¥æºæ•°æ®æµã€‚
+     * @param classType ç›®æ ‡æ•°æ®ç±»å‹ã€‚
+     * @return åºåˆ—åŒ–åçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> List<T> deserialize(Reader reader, Class<T> classType) {
@@ -145,11 +145,11 @@ public class JsonDeserializer {
     }
 
     /**
-     * ´ÓÊı¾İÁ÷·´ĞòÁĞ»¯¶ÔÏó¡£
+     * ä»æ•°æ®æµååºåˆ—åŒ–å¯¹è±¡ã€‚
      *
-     * @param reader    À´Ô´Êı¾İÁ÷¡£
-     * @param classType Ä¿±êÊı¾İÀàĞÍ¡£
-     * @return ĞòÁĞ»¯ºóµÄ¶ÔÏóÊµÀı¡£
+     * @param reader    æ¥æºæ•°æ®æµã€‚
+     * @param classType ç›®æ ‡æ•°æ®ç±»å‹ã€‚
+     * @return åºåˆ—åŒ–åçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     public static Map<String, Object> deserialize(Reader reader, Map<String, Class<?>[]> classTypeMap) {
         Map<String, Object> valueMap = new LinkedHashMap<String, Object>();
@@ -348,10 +348,10 @@ public class JsonDeserializer {
     }
 
     /**
-     * ¶ÁÈ¡ÀàĞÍµÄÊôĞÔÃèÊö±í¡£
+     * è¯»å–ç±»å‹çš„å±æ€§æè¿°è¡¨ã€‚
      *
-     * @param classType Ä¿±êÀàĞÍ¡£
-     * @return ÊôĞÔÃèÊö±í¡£
+     * @param classType ç›®æ ‡ç±»å‹ã€‚
+     * @return å±æ€§æè¿°è¡¨ã€‚
      */
     private static Map<String, PropertyDescriptor> getPropertyDescriptorMap(Class<?> classType) {
         Map<String, PropertyDescriptor> methodMap = null;

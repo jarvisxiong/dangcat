@@ -19,65 +19,65 @@ import java.util.Map;
 @JndiName(module = "Staff", name = "OperatorGroup")
 public interface OperatorGroupService {
     /**
-     * ĞÂÔöÊµÌåÊı¾İ¡£
+     * æ–°å¢å®ä½“æ•°æ®ã€‚
      *
-     * @param operatorGroup ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param operatorGroup å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     OperatorGroup create(@Parameter(name = "operatorGroup") OperatorGroup operatorGroup) throws ServiceException;
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼ü¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param id ä¸»é”®ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean delete(@Parameter(name = "id") Integer id) throws ServiceException;
 
     /**
-     * ²é¿´µ±Ç°ÓÃ»§ËùÊôµÄ²Ù×÷Ô±×éµÄ×Ó×éÁĞ±í¡£
+     * æŸ¥çœ‹å½“å‰ç”¨æˆ·æ‰€å±çš„æ“ä½œå‘˜ç»„çš„å­ç»„åˆ—è¡¨ã€‚
      *
-     * @return ²Ù×÷Ô±×éÓ³Éä±í¡£
+     * @return æ“ä½œå‘˜ç»„æ˜ å°„è¡¨ã€‚
      */
     Map<Integer, String> loadMembers() throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÁĞ±í¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åˆ—è¡¨ã€‚
      *
-     * @param operatorGroupFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorGroupFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Collection<OperatorGroupBase> pick(@Parameter(name = "operatorGroupFilter") OperatorGroupFilter operatorGroupFilter) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param operatorGroupFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorGroupFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<OperatorGroup> query(@Parameter(name = "operatorGroupFilter") OperatorGroupFilter operatorGroupFilter) throws ServiceException;
 
     /**
-     * ±£´æÊµÌåÊı¾İ¡£
+     * ä¿å­˜å®ä½“æ•°æ®ã€‚
      *
-     * @param operatorGroup ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param operatorGroup å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     OperatorGroup save(@Parameter(name = "operatorGroup") OperatorGroup operatorGroup) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÁĞ±í¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åˆ—è¡¨ã€‚
      *
-     * @param operatorGroupFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorGroupFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Map<Integer, String> select(@Parameter(name = "operatorGroupFilter") OperatorGroupFilter operatorGroupFilter) throws ServiceException;
 
     /**
-     * ²é¿´Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥çœ‹æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²é¿´½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥çœ‹ç»“æœã€‚
      */
     OperatorGroup view(@Parameter(name = "id") Integer id) throws ServiceException;
 }

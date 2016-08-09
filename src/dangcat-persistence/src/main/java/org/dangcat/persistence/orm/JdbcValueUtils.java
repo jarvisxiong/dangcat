@@ -8,11 +8,11 @@ import java.util.Date;
 
 public class JdbcValueUtils {
     /**
-     * ¸ù¾İÔªÊı¾İ¶¨Òå×Ö¶ÎÀàĞÍ¡£
+     * æ ¹æ®å…ƒæ•°æ®å®šä¹‰å­—æ®µç±»å‹ã€‚
      *
-     * @param resultSetMetaData ÔªÊı¾İ¶ÔÏó¡£
-     * @param columnIndex       À¸Î»Ë÷Òı¡£
-     * @return SQLÊı¾İÀàĞÍ¡£
+     * @param resultSetMetaData å…ƒæ•°æ®å¯¹è±¡ã€‚
+     * @param columnIndex       æ ä½ç´¢å¼•ã€‚
+     * @return SQLæ•°æ®ç±»å‹ã€‚
      * @throws SQLException
      */
     public static Class<?> getFieldType(ResultSetMetaData resultSetMetaData, int columnIndex) throws SQLException {
@@ -75,10 +75,10 @@ public class JdbcValueUtils {
     }
 
     /**
-     * ¸ù¾İÊı¾İÀàĞÍÈ¡µÃSQLÀàĞÍ¡£
+     * æ ¹æ®æ•°æ®ç±»å‹å–å¾—SQLç±»å‹ã€‚
      *
-     * @param fieldClass ×Ö¶ÎÀàĞÍ¡£
-     * @return SQLÊı¾İÀàĞÍ¡£
+     * @param fieldClass å­—æ®µç±»å‹ã€‚
+     * @return SQLæ•°æ®ç±»å‹ã€‚
      */
     public static int getSqlType(Class<?> fieldClass) {
         if (String.class.equals(fieldClass) || Character[].class.equals(fieldClass) || char[].class.equals(fieldClass))
@@ -105,11 +105,11 @@ public class JdbcValueUtils {
     }
 
     /**
-     * ÓÉÊı¾İ¼¯½âÎöÊı¾İĞĞ¡£
+     * ç”±æ•°æ®é›†è§£ææ•°æ®è¡Œã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @param resultSet Ô­Ê¼Êı¾İ¼¯ºÏ¡£
-     * @throws SQLException Òì³£¶ÔÏó¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @param resultSet åŸå§‹æ•°æ®é›†åˆã€‚
+     * @throws SQLException å¼‚å¸¸å¯¹è±¡ã€‚
      * @throws IOException
      */
     public static Object read(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
@@ -117,13 +117,13 @@ public class JdbcValueUtils {
     }
 
     /**
-     * Ğ´Èë±í´ïÊ½Öµ¡£
+     * å†™å…¥è¡¨è¾¾å¼å€¼ã€‚
      *
-     * @param preparedStatement ±í´ïÊ½¶ÔÏó¡£
-     * @param parameterIndex    ²ÎÊıĞòºÅ¡£
-     * @param value             Öµ¶ÔÏó¡£
-     * @param column            Êı¾İ¿âÀàĞÍ¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param preparedStatement è¡¨è¾¾å¼å¯¹è±¡ã€‚
+     * @param parameterIndex    å‚æ•°åºå·ã€‚
+     * @param value             å€¼å¯¹è±¡ã€‚
+     * @param column            æ•°æ®åº“ç±»å‹ã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static void write(PreparedStatement preparedStatement, int parameterIndex, Object value, Column column) throws SQLException {
         JdbcValueWriter.write(preparedStatement, parameterIndex, value, column);

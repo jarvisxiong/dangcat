@@ -12,16 +12,16 @@ import org.dangcat.net.jms.conf.JMSConfig;
 import java.net.URI;
 
 /**
- * DangCat Message Service¡£
+ * DangCat Message Serviceã€‚
  */
 public class JMSServer extends ServiceControlBase {
     public static final String SERVICE_NAME = "jmsservice";
     private BrokerService brokerService = null;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      */
     public JMSServer(ServiceProvider parent) {
         super(parent);
@@ -37,7 +37,7 @@ public class JMSServer extends ServiceControlBase {
     }
 
     /**
-     * Æô¶¯Ç¶ÈëÊ½JMS·şÎñ¡£
+     * å¯åŠ¨åµŒå…¥å¼JMSæœåŠ¡ã€‚
      */
     @Override
     public void start() {
@@ -47,7 +47,7 @@ public class JMSServer extends ServiceControlBase {
                 System.setProperty("activemq.conf", ApplicationContext.getInstance().getContextPath().getConf());
 
                 String brokerURI = "xbean:" + JMSConfig.getInstance().getConfigFile();
-                // Æô¶¯Ç¶Èë·şÎñ¡£
+                // å¯åŠ¨åµŒå…¥æœåŠ¡ã€‚
                 this.brokerService = BrokerFactory.createBroker(new URI(brokerURI));
                 this.brokerService.start();
             } catch (Exception e) {
@@ -58,7 +58,7 @@ public class JMSServer extends ServiceControlBase {
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     @Override
     public void stop() {

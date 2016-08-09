@@ -10,33 +10,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÊµÌåÊı¾İÄ£ÄâÆ÷¡£
+ * å®ä½“æ•°æ®æ¨¡æ‹Ÿå™¨ã€‚
  *
  * @author dangcat
  */
 public abstract class DataSimulator {
     /**
-     * Ëæ»ú²úÉúÊı¾İ¡£
+     * éšæœºäº§ç”Ÿæ•°æ®ã€‚
      **/
     public static final int MODE_RANDOM = 1;
     /**
-     * °´ÕÕĞòÁĞ²úÉúÊı¾İ¡£
+     * æŒ‰ç…§åºåˆ—äº§ç”Ÿæ•°æ®ã€‚
      **/
     public static final int MODE_SEQUENCE = 0;
     /**
-     * ¹ØÁªÄ£ÄâÊı¾İ¿â¡£
+     * å…³è”æ¨¡æ‹Ÿæ•°æ®åº“ã€‚
      **/
     private DatabaseSimulator databaseSimulator = null;
     /**
-     * ×Ö¶ÎÓ³Éä±í¡£
+     * å­—æ®µæ˜ å°„è¡¨ã€‚
      **/
     private Map<String, ValueSimulator> fieldSimulatorMap = new HashMap<String, ValueSimulator>();
     /**
-     * Êı¾İ²úÉúÄ£Ê½ ¡£
+     * æ•°æ®äº§ç”Ÿæ¨¡å¼ ã€‚
      **/
     private int simulateMode = 0;
     /**
-     * Ä£ÄâÊı¾İÊıÁ¿¡£
+     * æ¨¡æ‹Ÿæ•°æ®æ•°é‡ã€‚
      **/
     private int size = 0;
 

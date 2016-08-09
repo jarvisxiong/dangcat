@@ -11,7 +11,7 @@
     <artifactId>dangcat-jmsservice</artifactId>
 
     <properties>
-        <project.build.sourceEncoding>GBK</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <assembly.os>windows</assembly.os>
         <assembly.arch>x86</assembly.arch>
         <jdk.version>7u51</jdk.version>

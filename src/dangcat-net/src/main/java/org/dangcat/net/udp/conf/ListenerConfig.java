@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * ÕìÌı¶Ë¿ÚÅäÖÃ¡£
+ * ä¾¦å¬ç«¯å£é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -25,31 +25,31 @@ public abstract class ListenerConfig extends ServiceConfig {
     public static final String TryTimes = "TryTimes";
 
     /**
-     * »º³å³Ø´óĞ¡£¨×Ö½Ú£©¡£
+     * ç¼“å†²æ± å¤§å°ï¼ˆå­—èŠ‚ï¼‰ã€‚
      */
     private int bufferSize = 90000;
     /**
-     * ÆôÓÃ±êÊ¶¸ú×Ù¡£
+     * å¯ç”¨æ ‡è¯†è·Ÿè¸ªã€‚
      */
     private boolean identifierEnabled = true;
     /**
-     * ×î´ó²¢·¢ÊıÁ¿¡£
+     * æœ€å¤§å¹¶å‘æ•°é‡ã€‚
      */
     private int maxConcurrentSize = 10;
     /**
-     * ×î´ó¶ÓÁĞÈİÁ¿¡£
+     * æœ€å¤§é˜Ÿåˆ—å®¹é‡ã€‚
      */
     private int maxQueueCapacity = 10000;
     /**
-     * ¸ú×ÙÊÂ¼şÏûºÄµÄãĞÖµ¡£
+     * è·Ÿè¸ªäº‹ä»¶æ¶ˆè€—çš„é˜ˆå€¼ã€‚
      */
     private long timeCostThreshold = 0;
     /**
-     * ×èÈû³¬Ê±£¨ºÁÃë£©¡£
+     * é˜»å¡è¶…æ—¶ï¼ˆæ¯«ç§’ï¼‰ã€‚
      */
     private int timeout = 1000;
     /**
-     * ³¢ÊÔµÈ´ı»ØÓ¦±¨ÎÄ´ÎÊı¡£
+     * å°è¯•ç­‰å¾…å›åº”æŠ¥æ–‡æ¬¡æ•°ã€‚
      */
     private int tryTimes = 3;
 

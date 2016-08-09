@@ -4,7 +4,7 @@ import org.dangcat.framework.exception.ServiceException;
 import org.dangcat.net.rfc.attribute.AttributeData;
 
 /**
- * ±¨ÎÄÑéÖ¤Òì³£¡£
+ * æŠ¥æ–‡éªŒè¯å¼‚å¸¸ã€‚
  *
  * @author dangcat
  */
@@ -21,11 +21,11 @@ public class ProtocolValidateException extends ServiceException {
     public static final Integer RULE_ZEROORONEPRESENT = 8;
     private static final long serialVersionUID = 1L;
     /**
-     * ¼ìÑéµÄ×Ö¶Î¶ÔÏó¡£
+     * æ£€éªŒçš„å­—æ®µå¯¹è±¡ã€‚
      */
     private AttributeData attributeData = null;
     /**
-     * ¼ìÑéµÄ×Ö¶ÎÃû¡£
+     * æ£€éªŒçš„å­—æ®µåã€‚
      */
     private String fieldName = null;
 

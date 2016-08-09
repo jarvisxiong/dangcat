@@ -3,7 +3,7 @@ package org.dangcat.boot.config;
 import org.dangcat.boot.ApplicationContext;
 
 /**
- * »º´æÅäÖÃ¡£
+ * ç¼“å­˜é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -14,15 +14,15 @@ public class EntityCacheConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "EntityCache";
     private static EntityCacheConfig instance = new EntityCacheConfig();
     /**
-     * »º´æÅäÖÃÎÄ¼ş¡£
+     * ç¼“å­˜é…ç½®æ–‡ä»¶ã€‚
      */
     private String configFile = ApplicationContext.getInstance().getName() + ".cache.xml";
     /**
-     * ¼à¿ØÖÜÆÚ¡£
+     * ç›‘æ§å‘¨æœŸã€‚
      */
     private String cronExpression = "0 0 0/2 * * ?";
     /**
-     * Í¬²½ÏûÏ¢Ö÷Ìâ¡£
+     * åŒæ­¥æ¶ˆæ¯ä¸»é¢˜ã€‚
      */
     private String messageName = null;
 
@@ -37,7 +37,7 @@ public class EntityCacheConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static EntityCacheConfig getInstance() {
         return instance;

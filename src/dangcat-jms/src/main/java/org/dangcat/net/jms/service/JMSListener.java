@@ -13,7 +13,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
 /**
- * ÏûÏ¢ÕìÌı·şÎñ¡£
+ * æ¶ˆæ¯ä¾¦å¬æœåŠ¡ã€‚
  */
 public class JMSListener extends JMSBase implements MessageListener, EventListener {
     protected static final Logger logger = Logger.getLogger(JMSListener.class);
@@ -21,10 +21,10 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
     private JMSConsumer jmsConsumer = null;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô·şÎñ¡£
-     * @param name   ÏûÏ¢Ãû³Æ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
+     * @param name   æ¶ˆæ¯åç§°ã€‚
      */
     public JMSListener(String name, EventReceiveListener eventReceiveListener) {
         super(name);
@@ -43,7 +43,7 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
     }
 
     /**
-     * ½ÓÊÕ´¦ÀíÏûÏ¢¡£
+     * æ¥æ”¶å¤„ç†æ¶ˆæ¯ã€‚
      */
     @Override
     public void onMessage(Message message) {
@@ -62,10 +62,10 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
     }
 
     /**
-     * ½âÎöÏûÏ¢ÖĞµÄÊÂ¼ş¡£
+     * è§£ææ¶ˆæ¯ä¸­çš„äº‹ä»¶ã€‚
      *
-     * @param message ÏûÏ¢¶ÔÏó¡£
-     * @return ½âÎöºóµÄÓĞĞ§ÊÂ¼ş¶ÔÏó¡£
+     * @param message æ¶ˆæ¯å¯¹è±¡ã€‚
+     * @return è§£æåçš„æœ‰æ•ˆäº‹ä»¶å¯¹è±¡ã€‚
      * @throws JMSException
      */
     private Event resolveEvent(Message message) throws JMSException {
@@ -79,7 +79,7 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     @Override
     public void start() {
@@ -93,7 +93,7 @@ public class JMSListener extends JMSBase implements MessageListener, EventListen
     }
 
     /**
-     * ÊÍ·Å×ÊÔ´¡£
+     * é‡Šæ”¾èµ„æºã€‚
      */
     @Override
     public void stop() {

@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class CombinedChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "×éºÏÍ³¼ÆÍ¼";
+    private static final String TITLE = "ç»„åˆç»Ÿè®¡å›¾";
     private static Date[] dates = SimulateTimeData.today();
 
     public CombinedChartDemo() {
@@ -83,7 +83,7 @@ public class CombinedChartDemo extends ChartDemoBase {
         dataModule.getDataReader().setFilterExpress(filterExpress);
         dataModule.setTransRateMap(transRateMap);
         DiffLineChart diffLineChart = new DiffLineChart();
-        diffLineChart.setRangeTitle("Á÷Á¿");
+        diffLineChart.setRangeTitle("æµé‡");
         diffLineChart.setDataModule(dataModule);
         return diffLineChart;
     }

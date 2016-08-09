@@ -1,7 +1,7 @@
 package org.dangcat.commons.archive;
 
 /**
- * ¹éµµĞÅÏ¢¡£
+ * å½’æ¡£ä¿¡æ¯ã€‚
  *
  * @author dangcat
  */
@@ -17,7 +17,7 @@ class ArchiveInfo {
     }
 
     /**
-     * ²úÉú¹éµµ¶ÔÏó¡£
+     * äº§ç”Ÿå½’æ¡£å¯¹è±¡ã€‚
      */
     protected Archiver createArchiver() {
         if (ArchiveType.zip.equalsIgnoreCase(this.archiverType))

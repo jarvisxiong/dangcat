@@ -22,7 +22,7 @@ public class EntityUtils {
             if (entity instanceof DataStatus)
                 dataState = ((DataStatus) entity).getDataState();
             else {
-                // ×ÔÔöÖ÷¼ü×Ö¶ÎÅĞ¶ÏÖ÷¼üÊÇ·ñ´æÔÚ¡£
+                // è‡ªå¢ä¸»é”®å­—æ®µåˆ¤æ–­ä¸»é”®æ˜¯å¦å­˜åœ¨ã€‚
                 EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
                 EntityField entityField = entityMetaData.getAutoIncrement();
                 if (entityField != null) {
@@ -174,7 +174,7 @@ public class EntityUtils {
     }
 
     /**
-     * ÖÃ¿Õ×ÔÔö×Ö¶ÎÊıÖµ¡£
+     * ç½®ç©ºè‡ªå¢å­—æ®µæ•°å€¼ã€‚
      */
     public static void resetAutoIncrement(Collection<?> entityCollection) {
         try {

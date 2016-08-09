@@ -3,7 +3,7 @@ package org.dangcat.net.rfc.template.xml;
 import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
- * ÊôĞÔ¹æÔò½âÎöÆ÷¡£
+ * å±æ€§è§„åˆ™è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -12,7 +12,7 @@ public class RulesXmlResolver extends XmlResolver {
     private Rules rules = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public RulesXmlResolver() {
         super(RESOLVER_NAME);
@@ -20,10 +20,10 @@ public class RulesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         Rule rule = (Rule) child;
@@ -32,7 +32,7 @@ public class RulesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

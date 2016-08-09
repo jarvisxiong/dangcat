@@ -3,7 +3,7 @@ package org.dangcat.persistence.entity;
 import org.dangcat.persistence.filter.FilterExpress;
 
 /**
- * É¾³ıÊµÌåÉÏÏÂÎÄ¡£
+ * åˆ é™¤å®ä½“ä¸Šä¸‹æ–‡ã€‚
  *
  * @author dangcat
  */
@@ -14,11 +14,11 @@ public class DeleteEntityContext extends SaveEntityContext {
     private Object[] values;
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼şÉ¾³ıÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶åˆ é™¤æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public DeleteEntityContext(Class<?> entityClass, FilterExpress filterExpress) {
         this.entityClass = entityClass;
@@ -26,23 +26,23 @@ public class DeleteEntityContext extends SaveEntityContext {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param entityManager    ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass      ÊµÌåÀàĞÍ¡£
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
+     * @param entityManager    å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass      å®ä½“ç±»å‹ã€‚
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
      */
     public DeleteEntityContext(Class<?> entityClass, Object... primaryKeyValues) {
         this(entityClass, null, primaryKeyValues);
     }
 
     /**
-     * É¾³ıÖ¸¶¨ÊôĞÔµÄµÄÊµÌå¡£
+     * åˆ é™¤æŒ‡å®šå±æ€§çš„çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param fieldNames    ×Ö¶ÎÃûÁĞ±í¡£
-     * @param values        ÊôĞÔÖµ¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param fieldNames    å­—æ®µååˆ—è¡¨ã€‚
+     * @param values        å±æ€§å€¼ã€‚
      */
     public DeleteEntityContext(Class<?> entityClass, String[] fieldNames, Object... values) {
         this.entityClass = entityClass;

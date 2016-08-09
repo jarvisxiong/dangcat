@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ÊµÌå°ïÖú¹¤¾ß¡£
+ * å®ä½“å¸®åŠ©å·¥å…·ã€‚
  *
  * @author dangcat
  */
@@ -42,9 +42,9 @@ public class EntityHelper {
     }
 
     /**
-     * ²úÉúÊµÌåÊÂ¼ş¡£
+     * äº§ç”Ÿå®ä½“äº‹ä»¶ã€‚
      *
-     * @param entityMetaData ÊµÌåÔªÊı¾İ¡£
+     * @param entityMetaData å®ä½“å…ƒæ•°æ®ã€‚
      */
     protected static void createEntityEvent(EntityMetaData entityMetaData) {
         for (Method method : entityMetaData.getEntityClass().getDeclaredMethods()) {
@@ -120,9 +120,9 @@ public class EntityHelper {
     }
 
     /**
-     * ²úÉúÊµÌåÔªÊı¾İĞÅÏ¢¡£
+     * äº§ç”Ÿå®ä½“å…ƒæ•°æ®ä¿¡æ¯ã€‚
      *
-     * @param entityMetaData ÔªÊı¾İ¶ÔÏó¡£
+     * @param entityMetaData å…ƒæ•°æ®å¯¹è±¡ã€‚
      */
     public static void createEntityMetaData(EntityMetaData entityMetaData) {
         find(entityMetaData, entityMetaData.getEntityClass());
@@ -191,7 +191,7 @@ public class EntityHelper {
                 sqls.add(new Sql(qryAnnotation));
         }
 
-        // ¶ÁÈ¡XMLÅäÖÃµÄ²éÑ¯Óï¾ä¡£
+        // è¯»å–XMLé…ç½®çš„æŸ¥è¯¢è¯­å¥ã€‚
         org.dangcat.persistence.annotation.SqlXml sqlXmlAnnotation = classType.getAnnotation(org.dangcat.persistence.annotation.SqlXml.class);
         if (sqlXmlAnnotation != null)
             sqls.read(entityMetaData.getEntityClass(), sqlXmlAnnotation.value());
@@ -209,38 +209,38 @@ public class EntityHelper {
     }
 
     /**
-     * Ñ°ÕÒÊµÌå×¢ÊÍĞÅÏ¢¡£
+     * å¯»æ‰¾å®ä½“æ³¨é‡Šä¿¡æ¯ã€‚
      *
-     * @param entityMetaData ÔªÊı¾İ¶ÔÏó¡£
-     * @param classType      ÀàĞÍ¡£
+     * @param entityMetaData å…ƒæ•°æ®å¯¹è±¡ã€‚
+     * @param classType      ç±»å‹ã€‚
      */
     private static void find(EntityMetaData entityMetaData, Class<?> classType) {
         if (Object.class.equals(classType))
             return;
 
-        // ´Ó¸¸Àà¿ªÊ¼Ñ°ÕÒ¡£
+        // ä»çˆ¶ç±»å¼€å§‹å¯»æ‰¾ã€‚
         find(entityMetaData, classType.getSuperclass());
-        // ±íÃû
+        // è¡¨å
         createTableName(entityMetaData, classType);
-        // Ë÷Òı
+        // ç´¢å¼•
         createIndexes(entityMetaData, classType);
-        // ÅÅĞò·½Ê½¡£
+        // æ’åºæ–¹å¼ã€‚
         createOrderBy(entityMetaData, classType);
-        // Á¬½Ó±í¡£
+        // è¿æ¥è¡¨ã€‚
         createJoinTables(entityMetaData, classType);
-        // ²éÑ¯Óï¾ä¡£
+        // æŸ¥è¯¢è¯­å¥ã€‚
         createSqls(entityMetaData, classType);
-        // ½âÎö×Ö¶Î¡£
+        // è§£æå­—æ®µã€‚
         createEntityField(entityMetaData, classType);
-        // ¼ÆËãÆ÷¡£
+        // è®¡ç®—å™¨ã€‚
         createCalculators(entityMetaData, classType);
     }
 
     /**
-     * ¸ù¾İÊµÌåÀàĞÍ¶ÁÈ¡ÔªÊı¾İ¡£
+     * æ ¹æ®å®ä½“ç±»å‹è¯»å–å…ƒæ•°æ®ã€‚
      *
-     * @param classType ÊµÌåÀàĞÍ
-     * @return ÊµÌåÔªÊı¾İ¡£
+     * @param classType å®ä½“ç±»å‹
+     * @return å®ä½“å…ƒæ•°æ®ã€‚
      * @throws EntityException
      */
     public static EntityMetaData getEntityMetaData(Class<?> classType) throws EntityException {
@@ -260,10 +260,10 @@ public class EntityHelper {
     }
 
     /**
-     * ¸ù¾İÊµÌå¶ÔÏó¶ÁÈ¡ÔªÊı¾İ¡£
+     * æ ¹æ®å®ä½“å¯¹è±¡è¯»å–å…ƒæ•°æ®ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó
-     * @return ÊµÌåÔªÊı¾İ¡£
+     * @param entity å®ä½“å¯¹è±¡
+     * @return å®ä½“å…ƒæ•°æ®ã€‚
      */
     public static EntityMetaData getEntityMetaData(Object entity) {
         EntityMetaData entityMetaData = null;

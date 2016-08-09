@@ -52,9 +52,9 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient {
     protected void enterInit() throws FTPSessionException {
         try {
             this.initialize();
-            // ÎÄ¼ş´«Êä²ÉÓÃ¶ş½øÖÆ£¬´«ÊäÍ¼Æ¬
+            // æ–‡ä»¶ä¼ è¾“é‡‡ç”¨äºŒè¿›åˆ¶ï¼Œä¼ è¾“å›¾ç‰‡
             this.setFileType(this.ftpClientPool.getFileType());
-            // ÉèÖÃÁ¬½ÓÄ£Ê½
+            // è®¾ç½®è¿æ¥æ¨¡å¼
             if (this.ftpClientPool.getConnectMode() == FTPClient.PASSIVE_REMOTE_DATA_CONNECTION_MODE)
                 this.enterRemotePassiveMode();
 
@@ -87,7 +87,7 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient {
 
     private void initialize() {
         this.lastReplyCode = 0;
-        // ÉèÖÃÁ¬½ÓÄ£Ê½
+        // è®¾ç½®è¿æ¥æ¨¡å¼
         switch (this.ftpClientPool.getConnectMode()) {
             case FTPClient.ACTIVE_LOCAL_DATA_CONNECTION_MODE:
                 this.enterLocalActiveMode();
@@ -96,13 +96,13 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient {
                 this.enterLocalPassiveMode();
                 break;
         }
-        // ÉèÖÃÊı¾İ´«Êä³¬Ê±
+        // è®¾ç½®æ•°æ®ä¼ è¾“è¶…æ—¶
         this.setDataTimeout(this.ftpClientPool.getDataTimeout());
-        // ÉèÖÃÁ¬½Ó³¬Ê±
+        // è®¾ç½®è¿æ¥è¶…æ—¶
         this.setDefaultTimeout(this.ftpClientPool.getDefaultTimeout());
-        // ÉèÖÃÁ¬½Ó³¬Ê±
+        // è®¾ç½®è¿æ¥è¶…æ—¶
         this.setConnectTimeout(this.ftpClientPool.getConnectTimeout());
-        // ÉèÖÃ×Ö·û¼¯
+        // è®¾ç½®å­—ç¬¦é›†
         this.setControlEncoding(this.ftpClientPool.getControlEncoding());
     }
 
@@ -148,7 +148,7 @@ public class FTPClient extends org.apache.commons.net.ftp.FTPClient {
             if (!FTPReply.isPositiveCompletion(replyCode))
                 logger.error("FTP server refused connection from " + ftpUrl);
             else {
-                // Á¬½Ó³É¹¦£¬Éí·İÑéÖ¤
+                // è¿æ¥æˆåŠŸï¼Œèº«ä»½éªŒè¯
                 if (!this.login(this.ftpClientPool.getUserName(), this.ftpClientPool.getPassword())) {
                     this.printReplyMessage();
                     logger.error("The username " + this.ftpClientPool.getUserName() + " validate failure");

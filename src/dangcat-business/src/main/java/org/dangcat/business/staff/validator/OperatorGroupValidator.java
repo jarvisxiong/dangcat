@@ -15,13 +15,13 @@ import java.util.Map;
 public class OperatorGroupValidator extends BusinessValidator<OperatorGroup> {
     @Override
     public void beforeDelete(OperatorGroup operatorGroup) throws ServiceException {
-        // ÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ×é²»ÄÜÉ¾³ı¡£
+        // å·²ç»ç»‘å®šæ“ä½œå‘˜çš„ç»„ä¸èƒ½åˆ é™¤ã€‚
         if (this.exists(OperatorInfo.class, OperatorInfo.GroupId, operatorGroup.getId()))
             throw new OperatorGroupException(OperatorGroupException.CHILE_OPERATOR_EXISTS);
-        // ²»ÄÜÉ¾³ı¸¸²Ù×÷Ô±×é¡£
+        // ä¸èƒ½åˆ é™¤çˆ¶æ“ä½œå‘˜ç»„ã€‚
         if (this.isParent(operatorGroup.getId()))
             throw new OperatorGroupException(OperatorGroupException.DELETE_DENY_FOR_ISPARENT);
-        // Ö»ÄÜÉ¾³ı×Ó³ÉÔ±×é¡£
+        // åªèƒ½åˆ é™¤å­æˆå‘˜ç»„ã€‚
         if (!this.isMembers(operatorGroup.getId()))
             throw new OperatorGroupException(OperatorGroupException.DELETE_DENY_FOR_NOTMEMBER);
     }
@@ -58,7 +58,7 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup> {
 
     private void validateExists(OperatorGroup operatorGroup) {
         if (operatorGroup.getId() != null) {
-            // ²Ù×÷Ô±×é²»´æÔÚ¡£
+            // æ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
             if (!this.exists(OperatorGroup.class, OperatorGroup.Id, operatorGroup.getId()))
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.Name, OperatorGroupException.DATA_NOTEXISTS));
         }
@@ -73,7 +73,7 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup> {
 
     private void validateName(OperatorGroup operatorGroup) {
         if (!ValueUtils.isEmpty(operatorGroup.getName())) {
-            // ²Ù×÷Ô±×éµÄÃû³Æ²»ÄÜÖØ¸´¡£
+            // æ“ä½œå‘˜ç»„çš„åç§°ä¸èƒ½é‡å¤ã€‚
             if (this.checkRepeat(OperatorGroup.class, operatorGroup, OperatorGroup.Name, operatorGroup.getName()))
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.Name, OperatorGroupException.DATA_REPEAT));
         }
@@ -81,12 +81,12 @@ public class OperatorGroupValidator extends BusinessValidator<OperatorGroup> {
 
     private void validateParent(OperatorGroup operatorGroup) {
         if (operatorGroup.getParentId() != null) {
-            // ËùÊô²Ù×÷Ô±×é²»´æÔÚ¡£
+            // æ‰€å±æ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
             OperatorGroup parentGroup = this.getEntityManager().load(OperatorGroup.class, operatorGroup.getParentId());
             if (parentGroup == null)
                 operatorGroup.addServiceException(new OperatorGroupException(OperatorGroup.ParentId, OperatorGroupException.DATA_NOTEXISTS));
             else if (operatorGroup.getId() != null) {
-                // ËùÊô²Ù×÷Ô±×é²»ÄÜÑ­»·°ó¶¨¡£
+                // æ‰€å±æ“ä½œå‘˜ç»„ä¸èƒ½å¾ªç¯ç»‘å®šã€‚
                 Collection<OperatorGroup> operatorGroupCollection = new HashSet<OperatorGroup>();
                 while (parentGroup != null) {
                     if (operatorGroupCollection.contains(parentGroup))

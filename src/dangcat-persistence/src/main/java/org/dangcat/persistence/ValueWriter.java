@@ -1,17 +1,17 @@
 package org.dangcat.persistence;
 
 /**
- * ÊıÖµĞ´ÈëÆ÷¡£
+ * æ•°å€¼å†™å…¥å™¨ã€‚
  *
  * @author dangcat
  */
 public interface ValueWriter {
     /**
-     * Ğ´ÈëÖ¸¶¨×Ö¶ÎµÄÊıÖµ¡£
+     * å†™å…¥æŒ‡å®šå­—æ®µçš„æ•°å€¼ã€‚
      *
-     * @param <T>   ÊıÖµÀàĞÍ¡£
-     * @param name  ×Ö¶ÎÃû³Æ¡£
-     * @param value ×Ö¶ÎÊıÖµ¡£
+     * @param <T>   æ•°å€¼ç±»å‹ã€‚
+     * @param name  å­—æ®µåç§°ã€‚
+     * @param value å­—æ®µæ•°å€¼ã€‚
      */
     void setValue(String name, Object value);
 }

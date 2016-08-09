@@ -1,7 +1,7 @@
 package org.dangcat.persistence.syntax;
 
 /**
- * ±í´ïÊ½¹¹½¨Æ÷¡£
+ * è¡¨è¾¾å¼æ„å»ºå™¨ã€‚
  *
  * @author dangcat
  */

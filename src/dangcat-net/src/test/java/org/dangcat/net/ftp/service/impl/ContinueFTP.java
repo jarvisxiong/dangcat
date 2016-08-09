@@ -44,7 +44,7 @@ public class ContinueFTP implements Runnable {
 
     private FTPSession getFTPSession() {
         FTPClientSession ftpClientSession = new FTPClientSession();
-        ftpClientSession.setServer("10.46.60.135");
+        ftpClientSession.setServer("127.0.0.1");
         ftpClientSession.setUserName("dangcat");
         ftpClientSession.setPassword("dangcat2014");
         ftpClientSession.setInitPath("download");

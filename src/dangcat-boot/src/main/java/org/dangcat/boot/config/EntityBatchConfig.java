@@ -3,7 +3,7 @@ package org.dangcat.boot.config;
 import org.dangcat.commons.utils.Environment;
 
 /**
- * ÊµÌåÅúÁ¿²Ù×÷ÅäÖÃ¡£
+ * å®ä½“æ‰¹é‡æ“ä½œé…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -14,15 +14,15 @@ public class EntityBatchConfig extends ServiceConfig {
     private static final String MaxInterval = "MaxInterval";
     private static EntityBatchConfig instance = new EntityBatchConfig();
     /**
-     * ÅúÁ¿²Ù×÷µÄ´óĞ¡¡£
+     * æ‰¹é‡æ“ä½œçš„å¤§å°ã€‚
      */
     private int batchSize = 5000;
     /**
-     * ¼à¿ØÖÜÆÚ¡£
+     * ç›‘æ§å‘¨æœŸã€‚
      */
     private String cronExpression = "0/10 * * * * ?";
     /**
-     * ×î´óÖ´ĞĞÖÜÆÚ¡£
+     * æœ€å¤§æ‰§è¡Œå‘¨æœŸã€‚
      */
     private int maxInterval = 30;
 
@@ -37,7 +37,7 @@ public class EntityBatchConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static EntityBatchConfig getInstance() {
         return instance;

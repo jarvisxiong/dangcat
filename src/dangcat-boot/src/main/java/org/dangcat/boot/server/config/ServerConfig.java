@@ -4,7 +4,7 @@ import org.dangcat.boot.config.ServiceConfig;
 import org.dangcat.commons.utils.Environment;
 
 /**
- * ÏµÍ³¼à¿ØÅäÖÃ¡£
+ * ç³»ç»Ÿç›‘æ§é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -17,23 +17,23 @@ public class ServerConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "ServerConfig";
     private static ServerConfig instance = new ServerConfig();
     /**
-     * ¼à¿ØÖÜÆÚ£¨Ãë£©¡£
+     * ç›‘æ§å‘¨æœŸï¼ˆç§’ï¼‰ã€‚
      */
     private String cronExpression = "0 0/5 * * * ?";
     /**
-     * ¼à¿ØÂ·¾¶¡£
+     * ç›‘æ§è·¯å¾„ã€‚
      */
     private Integer diskPath = null;
     /**
-     * ×´Ì¬ÈÕÖ¾×î´ó±£ÁôÊ±¼ä£¨Ìì£©¡£
+     * çŠ¶æ€æ—¥å¿—æœ€å¤§ä¿ç•™æ—¶é—´ï¼ˆå¤©ï¼‰ã€‚
      */
     private Integer logMaxKeepLength = 7;
     /**
-     * Í¬²½ÏûÏ¢Ö÷Ìâ¡£
+     * åŒæ­¥æ¶ˆæ¯ä¸»é¢˜ã€‚
      */
     private String messageName = null;
     /**
-     * ·şÎñÆ÷ÀàĞÍ¡£
+     * æœåŠ¡å™¨ç±»å‹ã€‚
      */
     private Integer type = null;
 
@@ -50,7 +50,7 @@ public class ServerConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static ServerConfig getInstance() {
         return instance;

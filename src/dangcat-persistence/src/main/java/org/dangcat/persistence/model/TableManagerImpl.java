@@ -13,17 +13,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * ±í¹ÜÀíÆ÷¡£
+ * è¡¨ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
 public class TableManagerImpl extends TableManagerBase implements TableManager {
     /**
-     * ÔÚµ±Ç°µÄÊı¾İÔ´ÖĞ¹¹½¨Êı¾İ±í¡£
+     * åœ¨å½“å‰çš„æ•°æ®æºä¸­æ„å»ºæ•°æ®è¡¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return ½¨±í½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return å»ºè¡¨ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int create(Table table) throws TableException {
         int result = 0;
@@ -34,24 +34,24 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             if (logger.isDebugEnabled())
                 logger.debug("Begin create :");
 
-            // ´¥·¢½¨±íÇ°ÊÂ¼ş¡£
+            // è§¦å‘å»ºè¡¨å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeCreate(table))
                     return result;
             }
 
-            // ¹¹½¨±í¡£
+            // æ„å»ºè¡¨ã€‚
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.getDatabaseName(table));
             sqlBuilder = tableSqlBuilder.buildCreateStatement();
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             session.beginTransaction();
             result = this.executeBatch(session, table, sqlBuilder.getBatchSqlList());
             session.commit();
             result = 1;
 
-            // ´¥·¢ÊÂ¼ş¡£
+            // è§¦å‘äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterCreate(table);
 
@@ -77,11 +77,11 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨±íµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return É¾³ıÊıÁ¿¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return åˆ é™¤æ•°é‡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int delete(Table table) throws TableException {
         int result = 0;
@@ -92,7 +92,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             if (logger.isDebugEnabled())
                 logger.debug("Begin delete table: " + table.getTableName().getName());
 
-            // É¾³ıÇ°ÊÂ¼ş¡£
+            // åˆ é™¤å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeDelete(table))
                     return result;
@@ -101,13 +101,13 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.getDatabaseName(table));
             sqlBuilder = tableSqlBuilder.buildDeleteStatement();
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             session.beginTransaction();
             result = this.executeBatch(session, table, sqlBuilder.getBatchSqlList());
             session.commit();
 
-            // É¾³ıºóÊÂ¼ş¡£
+            // åˆ é™¤åäº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterDelete(table);
 
@@ -132,22 +132,22 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄ±í¡£
+     * åˆ é™¤æŒ‡å®šçš„è¡¨ã€‚
      *
-     * @param tableName ±íÃû¡£
-     * @return É¾³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param tableName è¡¨åã€‚
+     * @return åˆ é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int drop(String tableName) throws TableException {
         return this.drop(new Table(tableName));
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄ±í¡£
+     * åˆ é™¤æŒ‡å®šçš„è¡¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return É¾³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return åˆ é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int drop(Table table) throws TableException {
         int result = 0;
@@ -158,7 +158,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             if (logger.isDebugEnabled())
                 logger.debug("Begin drop :");
 
-            // É¾±íºóÊÂ¼ş¡£
+            // åˆ è¡¨åäº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeDrop(table))
                     return result;
@@ -167,11 +167,11 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.getDatabaseName(table));
             sqlBuilder = tableSqlBuilder.buildDropStatement();
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             result = this.executeBatch(session, table, sqlBuilder.getBatchSqlList());
 
-            // É¾±íÇ°ÊÂ¼ş¡£
+            // åˆ è¡¨å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterDrop(table);
 
@@ -194,12 +194,12 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * Ö´ĞĞ±íµÄSQLÓï¾ä¡£
+     * æ‰§è¡Œè¡¨çš„SQLè¯­å¥ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @param name  SQLÃüÃû¡£
-     * @return Ö´ĞĞ½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @param name  SQLå‘½åã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int execute(Table table) throws TableException {
         int result = 0;
@@ -216,19 +216,19 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             if (logger.isDebugEnabled())
                 logger.debug("Begin execute :");
 
-            // Ö´ĞĞÇ°ÊÂ¼ş¡£
+            // æ‰§è¡Œå‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeExecute(table))
                     return result;
             }
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             session.beginTransaction();
             this.executeBatch(session, table, sqlBatchList);
             session.commit();
 
-            // Ö´ĞĞºóÊÂ¼ş¡£
+            // æ‰§è¡Œåäº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterExecute(table);
 
@@ -267,26 +267,26 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨ã€‚
      *
-     * @param tableName ±íÃû¡£
-     * @return ÊÇ·ñ´æÔÚ¡£
+     * @param tableName è¡¨åã€‚
+     * @return æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(String tableName) {
         return this.exists(new Table(tableName));
     }
 
     /**
-     * ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return ÊÇ·ñ´æÔÚ¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(Table table) {
         boolean result = true;
         Session session = null;
         try {
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             result = TableUtils.exists(table, session);
         } catch (Exception e) {
@@ -299,14 +299,14 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * Êı¾İ¿âÃû³Æ¡£
+     * æ•°æ®åº“åç§°ã€‚
      */
     protected String getDatabaseName() {
         return null;
     }
 
     /**
-     * Êı¾İ¿âÃû³Æ¡£
+     * æ•°æ®åº“åç§°ã€‚
      */
     private String getDatabaseName(Table table) {
         String databaseName = this.getDatabaseName();
@@ -314,10 +314,10 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * ÔØÈëÖ¸¶¨±íµÄÊı¾İ¡£
+     * è½½å…¥æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void load(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
@@ -326,10 +326,10 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * ÔØÈëÔªÊı¾İÄÚÈİ¡£
+     * è½½å…¥å…ƒæ•°æ®å†…å®¹ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void loadMetaData(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
@@ -338,10 +338,10 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * ´æ´¢Ö¸¶¨±íµÄÊı¾İ¡£
+     * å­˜å‚¨æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void save(Table table) throws TableException {
         String databaseName = this.getDatabaseName(table);
@@ -350,22 +350,22 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
     }
 
     /**
-     * Çå³ıÖ¸¶¨±íÊı¾İ¡£
+     * æ¸…é™¤æŒ‡å®šè¡¨æ•°æ®ã€‚
      *
-     * @param tableName ±íÃû³Æ¡£
-     * @return Çå³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param tableName è¡¨åç§°ã€‚
+     * @return æ¸…é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int truncate(String tableName) throws TableException {
         return this.truncate(new Table(tableName));
     }
 
     /**
-     * Çå³ıÖ¸¶¨±íÊı¾İ¡£
+     * æ¸…é™¤æŒ‡å®šè¡¨æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return Çå³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ¸…é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int truncate(Table table) throws TableException {
         int result = 0;
@@ -376,7 +376,7 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             if (logger.isDebugEnabled())
                 logger.debug("Begin truncate table: " + table.getTableName().getName());
 
-            // Çå³ıÇ°ÊÂ¼ş¡£
+            // æ¸…é™¤å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeTruncate(table))
                     return result;
@@ -385,11 +385,11 @@ public class TableManagerImpl extends TableManagerBase implements TableManager {
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.getDatabaseName(table));
             sqlBuilder = tableSqlBuilder.buildTruncateStatement();
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.getDatabaseName(table));
             result = session.executeBatch(sqlBuilder.getBatchSqlList());
 
-            // Çå³ıºóÊÂ¼ş¡£
+            // æ¸…é™¤åäº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterTruncate(table);
 

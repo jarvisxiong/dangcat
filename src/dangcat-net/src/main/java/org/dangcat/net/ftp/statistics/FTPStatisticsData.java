@@ -4,11 +4,11 @@ import org.dangcat.boot.statistics.StatisticsData;
 
 public class FTPStatisticsData extends StatisticsData {
     /**
-     * ÎÄ¼ş´óĞ¡¡£
+     * æ–‡ä»¶å¤§å°ã€‚
      */
     public static final String Size = "Size";
     /**
-     * ÎÄ¼ş´óĞ¡ËÙÂÊ¡£
+     * æ–‡ä»¶å¤§å°é€Ÿç‡ã€‚
      */
     public static final String SizeVelocity = "SizeVelocity";
 

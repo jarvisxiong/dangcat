@@ -7,7 +7,7 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 import org.dangcat.persistence.validator.impl.NotNullValidator;
 
 /**
- * TableÊı¾İ»ù±¾Ğ£Ñé¡£
+ * Tableæ•°æ®åŸºæœ¬æ ¡éªŒã€‚
  *
  * @author dangcat
  */

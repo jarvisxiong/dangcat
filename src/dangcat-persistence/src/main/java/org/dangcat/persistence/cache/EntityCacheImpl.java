@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * ÊµÌå»º´æ¡£
+ * å®žä½“ç¼“å­˜ã€‚
  *
  * @author dangcat
  */
@@ -35,7 +35,7 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * É¾³ýÖ¸¶¨Ìõ¼þµÄ»º´æÊý¾ÝºÍÊý¾Ý¿âÊý¾Ý¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„ç¼“å­˜æ•°æ®å’Œæ•°æ®åº“æ•°æ®ã€‚
      */
     @Override
     public void delete(FilterExpress filterExpress) {
@@ -44,7 +44,7 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * É¾³ý»º´æÊý¾ÝºÍÊý¾Ý¿âÊý¾Ý¡£
+     * åˆ é™¤ç¼“å­˜æ•°æ®å’Œæ•°æ®åº“æ•°æ®ã€‚
      */
     @Override
     public void delete(T data) {
@@ -91,10 +91,10 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄÌõ¼þÔÚÊý¾Ý¿â²éÕÒÊý¾ÝºóÌí¼Óµ½»º´æ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„æ¡ä»¶åœ¨æ•°æ®åº“æŸ¥æ‰¾æ•°æ®åŽæ·»åŠ åˆ°ç¼“å­˜ã€‚
      *
-     * @param filterExpress Ë÷ÒýÌõ¼þ¡£
-     * @return Êý¾Ý¼¯ºÏ¡£
+     * @param filterExpress ç´¢å¼•æ¡ä»¶ã€‚
+     * @return æ•°æ®é›†åˆã€‚
      */
     @Override
     public Collection<T> load(FilterExpress filterExpress) {
@@ -109,10 +109,10 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * ¸ù¾ÝÖ÷¼üÖµÕÒµ½¼ÇÂ¼ÐÐ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊýÖµ¡£
-     * @return ÕÒµ½µÄÊý¾ÝÐÐ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     @Override
     public T load(Object... params) {
@@ -127,11 +127,11 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ×Ö¶ÎÖµ²éÕÒÊý¾Ý¡£
+     * æŒ‰ç…§æŒ‡å®šçš„å­—æ®µå€¼æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param values     ×Ö¶ÎÊýÖµ£¬±ØÐëÓë×Ö¶Î¶ÔÓ¦¡£
-     * @return ÕÒµ½µÄ¼ÇÂ¼ÐÐ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param values     å­—æ®µæ•°å€¼ï¼Œå¿…é¡»ä¸Žå­—æ®µå¯¹åº”ã€‚
+     * @return æ‰¾åˆ°çš„è®°å½•è¡Œã€‚
      */
     @Override
     public Collection<T> load(String[] fieldNames, Object... values) {
@@ -162,10 +162,10 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * Ë¢ÐÂÄÚ´æÊý¾Ý¡£
+     * åˆ·æ–°å†…å­˜æ•°æ®ã€‚
      *
-     * @param data Ä¿±êÊý¾Ý¡£
-     * @return Ë¢ÐÂºóÊý¾Ý¡£
+     * @param data ç›®æ ‡æ•°æ®ã€‚
+     * @return åˆ·æ–°åŽæ•°æ®ã€‚
      */
     @Override
     public T refresh(T data) {
@@ -180,10 +180,10 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * Ë¢ÐÂÖ¸¶¨Ö÷¼üµÄÄÚ´æÊý¾Ý¡£
+     * åˆ·æ–°æŒ‡å®šä¸»é”®çš„å†…å­˜æ•°æ®ã€‚
      *
-     * @param primaryKeys Ä¿±êÖ÷¼üÊý¾Ý¡£
-     * @return Ë¢ÐÂºóÊý¾Ý¡£
+     * @param primaryKeys ç›®æ ‡ä¸»é”®æ•°æ®ã€‚
+     * @return åˆ·æ–°åŽæ•°æ®ã€‚
      */
     @Override
     public T refreshEntity(Object... primaryKeys) {
@@ -201,7 +201,7 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * É¾³ýÖ¸¶¨Ìõ¼þµÄ»º´æÊý¾Ý¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„ç¼“å­˜æ•°æ®ã€‚
      */
     @Override
     public Collection<T> remove(FilterExpress filterExpress) {
@@ -217,7 +217,7 @@ public class EntityCacheImpl<T> extends MemCacheImpl<T> implements EntityCache<T
     }
 
     /**
-     * Ìí¼Ó»º´æÊý¾Ý¡£
+     * æ·»åŠ ç¼“å­˜æ•°æ®ã€‚
      */
     @Override
     public void save(T data) {

@@ -11,7 +11,7 @@ import java.net.SocketException;
 import java.util.Arrays;
 
 /**
- * UDP±¨ÎÄ·¢ËÍÆ÷¡£
+ * UDPæŠ¥æ–‡å‘é€å™¨ã€‚
  *
  * @author fanst174766
  */
@@ -45,7 +45,7 @@ public class UDPSender extends NetSender implements UDPSendService {
                 else
                     this.datagramSocket = new DatagramSocket(this.getLocalPort());
             } catch (SocketException e) {
-                // ¹Ø±ÕÌ×½Ó¿Ú
+                // å…³é—­å¥—æ¥å£
                 if (this.datagramSocket != null)
                     this.datagramSocket.close();
                 throw e;
@@ -91,7 +91,7 @@ public class UDPSender extends NetSender implements UDPSendService {
     }
 
     /**
-     * ÏòÖ¸¶¨µØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ¡£
+     * å‘æŒ‡å®šåœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ã€‚
      *
      * @throws IOException
      */
@@ -103,7 +103,7 @@ public class UDPSender extends NetSender implements UDPSendService {
     }
 
     /**
-     * µÈ´ı½ÓÊÕ»ØÓ¦±¨ÎÄ¡£
+     * ç­‰å¾…æ¥æ”¶å›åº”æŠ¥æ–‡ã€‚
      *
      * @throws IOException
      */

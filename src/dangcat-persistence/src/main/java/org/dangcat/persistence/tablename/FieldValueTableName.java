@@ -5,7 +5,7 @@ import org.dangcat.persistence.filter.FilterUtils;
 import java.text.MessageFormat;
 
 /**
- * °´Ê±¼ä·Ö±íÃû¶ÔÏó¡£
+ * æŒ‰æ—¶é—´åˆ†è¡¨åå¯¹è±¡ã€‚
  *
  * @author dangcat
  */

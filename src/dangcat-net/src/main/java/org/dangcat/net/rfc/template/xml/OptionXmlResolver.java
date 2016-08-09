@@ -3,7 +3,7 @@ package org.dangcat.net.rfc.template.xml;
 import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
- * Ñ¡Ïî¶ÔÏó½âÎöÆ÷¡£
+ * é€‰é¡¹å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -11,21 +11,21 @@ public class OptionXmlResolver extends XmlResolver {
     private Option option = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public OptionXmlResolver() {
         this(Option.class.getSimpleName());
     }
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public OptionXmlResolver(String name) {
         super(name);
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

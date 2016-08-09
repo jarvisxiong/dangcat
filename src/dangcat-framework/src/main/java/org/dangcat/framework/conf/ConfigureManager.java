@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * ×ÊÔ´ÅäÖÃ¹ÜÀíÆ÷¡£
+ * èµ„æºé…ç½®ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
@@ -33,9 +33,9 @@ public class ConfigureManager {
     }
 
     /**
-     * Í¨¹ıÎÄ¼şÅäÖÃÊı¾İÔ´¡£
+     * é€šè¿‡æ–‡ä»¶é…ç½®æ•°æ®æºã€‚
      *
-     * @param configFile ÅäÖÃÎÄ¼ş¡£
+     * @param configFile é…ç½®æ–‡ä»¶ã€‚
      */
     public boolean configure(File configFile) {
         if (configFile == null || !configFile.exists()) {
@@ -64,9 +64,9 @@ public class ConfigureManager {
     }
 
     /**
-     * ·ÖÎöÅäÖÃÉè¶¨¡£
+     * åˆ†æé…ç½®è®¾å®šã€‚
      *
-     * @param properties ÅäÖÃÄÚÈİ¡£
+     * @param properties é…ç½®å†…å®¹ã€‚
      */
     public void configure(Properties properties) {
         for (Object keyObject : properties.keySet()) {
@@ -84,10 +84,10 @@ public class ConfigureManager {
     }
 
     /**
-     * ¸ù¾İ×ÊÔ´ÀàĞÍµÃµ½×ÊÔ´ÅäÖÃ¼¯ºÏ¡£
+     * æ ¹æ®èµ„æºç±»å‹å¾—åˆ°èµ„æºé…ç½®é›†åˆã€‚
      *
-     * @param type ×ÊÔ´ÀàĞÍÃû¡£
-     * @return ÅäÖÃ¼¯ºÏ¡£
+     * @param type èµ„æºç±»å‹åã€‚
+     * @return é…ç½®é›†åˆã€‚
      */
     public ConfigureCollection getConfigureCollection(String type) {
         return this.configureCollectionMap.get(type.toLowerCase());

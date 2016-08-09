@@ -24,8 +24,8 @@ public class AreaChartDemo extends ChartDemoBase {
         DataModule columnDataModule = SimulateTimeData.createMultiColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));
         AreaChart areaChart1 = new AreaChart();
-        areaChart1.setTitle("ÇøÓòÍ³¼ÆÍ¼");
-        areaChart1.setRangeTitle("Á÷Á¿");
+        areaChart1.setTitle("åŒºåŸŸç»Ÿè®¡å›¾");
+        areaChart1.setRangeTitle("æµé‡");
         areaChart1.setDataModule(columnDataModule);
         this.initTimeChart(areaChart1, dates[0], dates[1]);
         areaChart1.initialize();
@@ -36,8 +36,8 @@ public class AreaChartDemo extends ChartDemoBase {
         rowDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 8"));
         AreaChart areaChart2 = new AreaChart();
         areaChart2.setLegendVisible(true);
-        areaChart2.setTitle("ÇøÓòÍ³¼ÆÍ¼");
-        areaChart2.setRangeTitle("Á÷Á¿");
+        areaChart2.setTitle("åŒºåŸŸç»Ÿè®¡å›¾");
+        areaChart2.setRangeTitle("æµé‡");
         areaChart2.setDataModule(rowDataModule);
         this.initTimeChart(areaChart2, dates[0], dates[1]);
         areaChart2.initialize();

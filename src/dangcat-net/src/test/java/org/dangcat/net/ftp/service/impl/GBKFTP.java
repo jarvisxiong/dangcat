@@ -9,8 +9,8 @@ import java.io.File;
 
 public class GBKFTP {
     private static String DOWNLOAD_DIR = "./log/data";
-    private static String REMOTE_DIR = "双机";
-    private static String REMOTE_FILE = "ZXISAM(Wireline)本地双机安装配置指南_CGSL_Oracle_VCS.zip";
+    private static String REMOTE_DIR = "鍙屾満";
+    private static String REMOTE_FILE = "鏈湴鍙屾満瀹夎閰嶇疆鎸囧崡.zip";
     private static String UPLOAD_DIR = "E:/Share/" + REMOTE_DIR;
     private File downloadFile = new File(DOWNLOAD_DIR + "/" + REMOTE_FILE);
     private File downloadPath = new File(DOWNLOAD_DIR);
@@ -35,7 +35,7 @@ public class GBKFTP {
 
     private FTPSession getFTPSession() {
         FTPClientSession ftpClientSession = new FTPClientSession();
-        ftpClientSession.setServer("10.46.60.135");
+        ftpClientSession.setServer("127.0.0.1");
         ftpClientSession.setUserName("dangcat");
         ftpClientSession.setPassword("dangcat2014");
         ftpClientSession.setInitPath("download");

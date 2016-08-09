@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.dangcat.framework.pool.SessionException;
 
 /**
- * FTPÏÂÔØ»á»°¡£
+ * FTPä¸‹è½½ä¼šè¯ã€‚
  *
  * @author dangcat
  */

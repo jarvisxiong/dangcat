@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ¹ıÂË×é±ğ×ª»»¹¤¾ß¡£
+ * è¿‡æ»¤ç»„åˆ«è½¬æ¢å·¥å…·ã€‚
  *
  * @author dangcat
  */
 public class FilterHelper {
     /**
-     * ¼ì²éÊı¾İĞĞÊôÓÚÄÄ¸ö¹ıÂË×é±ğ¡£
+     * æ£€æŸ¥æ•°æ®è¡Œå±äºå“ªä¸ªè¿‡æ»¤ç»„åˆ«ã€‚
      *
-     * @param row            Êı¾İĞĞ¶ÔÏó¡£
-     * @param srcFilterGroup À´Ô´¹ıÂË×é±ğ¡£
-     * @return Èç¹û´æÔÚËùÊô¹ıÂË×é±ğÔò·µ»Ø×é±ğÃû×Ö£¬·ñÔò·µ»Ønull¡£
+     * @param row            æ•°æ®è¡Œå¯¹è±¡ã€‚
+     * @param srcFilterGroup æ¥æºè¿‡æ»¤ç»„åˆ«ã€‚
+     * @return å¦‚æœå­˜åœ¨æ‰€å±è¿‡æ»¤ç»„åˆ«åˆ™è¿”å›ç»„åˆ«åå­—ï¼Œå¦åˆ™è¿”å›nullã€‚
      */
     public static Object checkGroup(Row row, FilterGroup srcFilterGroup) {
         if (srcFilterGroup != null && srcFilterGroup.getFilterExpressList().size() > 0) {
@@ -31,9 +31,9 @@ public class FilterHelper {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ×ª³ÉCASE±í´ïÓï¾ä¡£
+     * åˆ¤æ–­æ˜¯å¦å¯ä»¥è½¬æˆCASEè¡¨è¾¾è¯­å¥ã€‚
      *
-     * @param srcFilterGroup À´Ô´¹ıÂË×é±ğ¡£
+     * @param srcFilterGroup æ¥æºè¿‡æ»¤ç»„åˆ«ã€‚
      */
     private static boolean couldToCaseExpress(FilterGroup srcFilterGroup) {
         boolean result = false;
@@ -41,7 +41,7 @@ public class FilterHelper {
             List<FilterExpress> filterExpressList = srcFilterGroup.getFilterExpressList();
             if (filterExpressList != null && filterExpressList.size() > 0) {
                 result = true;
-                // ±ØĞëÊÇÈ«²¿Îª¶ÔÏó×é²Å¿ÉÒÔ×ª³É CASE±í´ïÊ½
+                // å¿…é¡»æ˜¯å…¨éƒ¨ä¸ºå¯¹è±¡ç»„æ‰å¯ä»¥è½¬æˆ CASEè¡¨è¾¾å¼
                 for (FilterExpress filterExpress : filterExpressList) {
                     if (!(filterExpress instanceof FilterGroup)) {
                         result = false;
@@ -54,14 +54,14 @@ public class FilterHelper {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ×ª³ÉCASEµÄELSE±í´ïÓï¾ä¡£
+     * åˆ¤æ–­æ˜¯å¦å¯ä»¥è½¬æˆCASEçš„ELSEè¡¨è¾¾è¯­å¥ã€‚
      *
-     * @param filterGroup ¹ıÂË×é±ğ¡£
+     * @param filterGroup è¿‡æ»¤ç»„åˆ«ã€‚
      */
     private static boolean isElseGroup(FilterGroup filterGroup) {
         List<FilterExpress> filterExpressList = filterGroup.getFilterExpressList();
         if (filterExpressList != null && filterExpressList.size() > 0) {
-            // ±ØĞëÊÇÈ«²¿ÎªºöÂÔµÄ²Å¿ÉÒÔ×ª³É ELSE
+            // å¿…é¡»æ˜¯å…¨éƒ¨ä¸ºå¿½ç•¥çš„æ‰å¯ä»¥è½¬æˆ ELSE
             for (FilterExpress filterExpress : filterGroup.getFilterExpressList()) {
                 if (filterExpress instanceof FilterUnit) {
                     FilterUnit filterUnit = (FilterUnit) filterExpress;
@@ -77,9 +77,9 @@ public class FilterHelper {
     }
 
     /**
-     * ÌáÈ¡¹ıÂËÖĞ°üº¬µÄ×Ö¶ÎÄÚÈİ¡£
+     * æå–è¿‡æ»¤ä¸­åŒ…å«çš„å­—æ®µå†…å®¹ã€‚
      *
-     * @param filterExpress ¹ıÂËµ¥Ôª¡£
+     * @param filterExpress è¿‡æ»¤å•å…ƒã€‚
      */
     public static void pickMap(FilterExpress filterExpress, Map<String, Object> params) {
         if (filterExpress instanceof FilterUnit) {
@@ -93,9 +93,9 @@ public class FilterHelper {
     }
 
     /**
-     * ×ª³ÉCASE±í´ïÓï¾ä¡£
+     * è½¬æˆCASEè¡¨è¾¾è¯­å¥ã€‚
      *
-     * @param srcFilterGroup À´Ô´¹ıÂË×é±ğ¡£
+     * @param srcFilterGroup æ¥æºè¿‡æ»¤ç»„åˆ«ã€‚
      */
     public static String toCaseExpress(FilterGroup srcFilterGroup) {
         StringBuilder caseBuilder = new StringBuilder();
@@ -103,7 +103,7 @@ public class FilterHelper {
             FilterGroup elseFilterGroup = null;
             for (FilterExpress filterExpress : srcFilterGroup.getFilterExpressList()) {
                 FilterGroup filterGroup = (FilterGroup) filterExpress;
-                // Èç¹û·ûºÏELSE±í´ïÔò¼ÇÂ¼ÏÂÀ´×÷Îª×îºó¼ÓÈë¡£
+                // å¦‚æœç¬¦åˆELSEè¡¨è¾¾åˆ™è®°å½•ä¸‹æ¥ä½œä¸ºæœ€ååŠ å…¥ã€‚
                 if (isElseGroup(filterGroup))
                     elseFilterGroup = filterGroup;
                 else {

@@ -1,29 +1,29 @@
 package org.dangcat.framework.service;
 
 /**
- * ·şÎñ×´Ì¬¡£
+ * æœåŠ¡çŠ¶æ€ã€‚
  *
  * @author dangcat
  */
 public enum ServiceStatus {
     /**
-     * ÔİÍ£¡£
+     * æš‚åœã€‚
      */
     Pause(4),
     /**
-     * ÒÑ¾­Æô¶¯¡£
+     * å·²ç»å¯åŠ¨ã€‚
      */
     Started(2),
     /**
-     * ÕıÔÚÆô¶¯¡£
+     * æ­£åœ¨å¯åŠ¨ã€‚
      */
     Starting(1),
     /**
-     * ÒÑ¾­Í£Ö¹¡£
+     * å·²ç»åœæ­¢ã€‚
      */
     Stopped(0),
     /**
-     * ÕıÔÚÍ£Ö¹¡£
+     * æ­£åœ¨åœæ­¢ã€‚
      */
     Stopping(3);
 

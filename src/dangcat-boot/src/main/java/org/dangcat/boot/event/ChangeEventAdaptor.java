@@ -3,24 +3,24 @@ package org.dangcat.boot.event;
 import org.dangcat.framework.event.Event;
 
 /**
- * ÊôĞÔ¸Ä±äÕìÌı½Ó¿Ú¡£
+ * å±æ€§æ”¹å˜ä¾¦å¬æ¥å£ã€‚
  *
  * @author dangcat
  */
 public abstract class ChangeEventAdaptor {
     /**
-     * ±ä»¯ºóÊÂ¼ş¡£
+     * å˜åŒ–åäº‹ä»¶ã€‚
      *
-     * @param event ÊÂ¼ş¶ÔÏó¡£
+     * @param event äº‹ä»¶å¯¹è±¡ã€‚
      */
     public void afterChanged(Object sender, Event event) {
 
     }
 
     /**
-     * ±ä»¯Ç°ÊÂ¼ş¡£
+     * å˜åŒ–å‰äº‹ä»¶ã€‚
      *
-     * @param event ÊÂ¼ş¶ÔÏó¡£
+     * @param event äº‹ä»¶å¯¹è±¡ã€‚
      */
     public void beforeChange(Object sender, Event event) {
 

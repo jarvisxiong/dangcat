@@ -24,7 +24,7 @@ public class TestEntityFilter extends TestEntityBase {
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         this.getEntityManager().save(entityDataList.toArray());
     }
 
@@ -37,9 +37,9 @@ public class TestEntityFilter extends TestEntityBase {
         Table table = EntityDataUtils.getTable();
         if (table.exists())
             table.drop();
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
-        // ²úÉúÊı¾İ
+        // äº§ç”Ÿæ•°æ®
         this.createEntityData();
 
         this.testEntityFilter1();
@@ -52,71 +52,71 @@ public class TestEntityFilter extends TestEntityBase {
 
     private void testEntityFilter1() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         List<EntityData> entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         EntityData entityData = entityDataList.get(0);
         Assert.assertEquals("A-00000000000000000000000000000000000006", entityData.getFieldA());
         Assert.assertTrue(filterGroup.isValid(entityData));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 2, 9));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, 3 * 3.14, 9 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(7, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.between, (long) 4 * 100000000, (long) 9 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(6, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.DAY, DateUtils.add(DateUtils.DAY, DateUtils.now(), 5));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 9);
         filterGroup.add(new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(5, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
@@ -124,12 +124,12 @@ public class TestEntityFilter extends TestEntityBase {
 
     private void testEntityFilter2() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006", null, "A-00000000000000000000000000000000000009"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         List<EntityData> entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         EntityData entityData = entityDataList.get(0);
         Assert.assertEquals("A-00000000000000000000000000000000000006", entityData.getFieldA());
@@ -138,76 +138,76 @@ public class TestEntityFilter extends TestEntityBase {
         Assert.assertEquals("A-00000000000000000000000000000000000009", entityData.getFieldA());
         Assert.assertTrue(filterGroup.isValid(entityData));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         FilterUnit filterUnit = new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009");
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.lt, "A-00000000000000000000000000000000000002"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 1, null));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.clear();
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, null, 7 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.eq, (long) 4 * 100000000, (long) 5 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.SECOND, DateUtils.add(DateUtils.DAY, DateUtils.now(), 6));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 8);
         filterUnit = new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay);
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = entityManager.load(EntityData.class, filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(10, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));

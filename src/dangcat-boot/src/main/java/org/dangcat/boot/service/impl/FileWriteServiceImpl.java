@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * ÎÄ¼şĞ´Èë·şÎñ¡£
+ * æ–‡ä»¶å†™å…¥æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -20,7 +20,7 @@ public class FileWriteServiceImpl extends ServiceBase implements Runnable, FileW
     private Collection<FileWriter> fileWriters = new HashSet<FileWriter>();
 
     /**
-     * ËùÊô¸¸·şÎñ¡£
+     * æ‰€å±çˆ¶æœåŠ¡ã€‚
      *
      * @param parent
      */
@@ -29,9 +29,9 @@ public class FileWriteServiceImpl extends ServiceBase implements Runnable, FileW
     }
 
     /**
-     * Ìí¼ÓÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * æ·»åŠ æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      *
-     * @param fileWriter ÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * @param fileWriter æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      */
     public void addFileWriter(FileWriter fileWriter) {
         this.fileWriters.add(fileWriter);
@@ -56,16 +56,16 @@ public class FileWriteServiceImpl extends ServiceBase implements Runnable, FileW
     }
 
     /**
-     * É¾³ıÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * åˆ é™¤æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      *
-     * @param fileWriter ÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * @param fileWriter æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      */
     public void removeFileWriter(FileWriter fileWriter) {
         this.fileWriters.remove(fileWriter);
     }
 
     /**
-     * ¶¨Ê±ÇåÀí¹ıÆÚµÄ»º´æÊı¾İ¡£
+     * å®šæ—¶æ¸…ç†è¿‡æœŸçš„ç¼“å­˜æ•°æ®ã€‚
      */
     @Override
     public void run() {

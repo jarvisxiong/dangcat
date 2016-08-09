@@ -3,23 +3,23 @@ package org.dangcat.boot.event.service;
 import org.dangcat.framework.event.Event;
 
 /**
- * ÏûÏ¢·¢ËÍ·şÎñ¡£
+ * æ¶ˆæ¯å‘é€æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface EventSendService {
     /**
-     * ·¢ËÍÏûÏ¢¶ÔÏó¡£
+     * å‘é€æ¶ˆæ¯å¯¹è±¡ã€‚
      *
-     * @param event ÏûÏ¢¶ÔÏó¡£
+     * @param event æ¶ˆæ¯å¯¹è±¡ã€‚
      */
     void send(Event event);
 
     /**
-     * ·¢ËÍÏûÏ¢¶ÔÏó¡£
+     * å‘é€æ¶ˆæ¯å¯¹è±¡ã€‚
      *
-     * @param name  ÏûÏ¢Ô´Ãû³Æ¡£
-     * @param event ÏûÏ¢¶ÔÏó¡£
+     * @param name  æ¶ˆæ¯æºåç§°ã€‚
+     * @param event æ¶ˆæ¯å¯¹è±¡ã€‚
      */
     void send(String name, Event event);
 }

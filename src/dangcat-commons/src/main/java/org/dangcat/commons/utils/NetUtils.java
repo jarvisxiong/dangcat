@@ -20,21 +20,21 @@ public class NetUtils {
     }
 
     /**
-     * ÅĞ¶Ï±¾µØ¶Ë¿ÚÊÇ·ñÓĞĞ§¡£
+     * åˆ¤æ–­æœ¬åœ°ç«¯å£æ˜¯å¦æœ‰æ•ˆã€‚
      *
-     * @param port ¶Ë¿ÚºÅ¡£
-     * @return ¶Ë¿ÚÊÇ·ñÓĞĞ§¡£
+     * @param port ç«¯å£å·ã€‚
+     * @return ç«¯å£æ˜¯å¦æœ‰æ•ˆã€‚
      */
     public static boolean isPortValid(Integer port) {
         return isPortValid("127.0.0.1", port) && isPortValid("0.0.0.0", port);
     }
 
     /**
-     * ÅĞ¶ÏÔ¶³Ì¶Ë¿ÚÊÇ·ñÓĞĞ§¡£
+     * åˆ¤æ–­è¿œç¨‹ç«¯å£æ˜¯å¦æœ‰æ•ˆã€‚
      *
-     * @param ip   Ô¶³ÌµØÖ·¡£
-     * @param port ¶Ë¿ÚºÅ¡£
-     * @return ¶Ë¿ÚÊÇ·ñÓĞĞ§¡£
+     * @param ip   è¿œç¨‹åœ°å€ã€‚
+     * @param port ç«¯å£å·ã€‚
+     * @return ç«¯å£æ˜¯å¦æœ‰æ•ˆã€‚
      */
     public static boolean isPortValid(String ip, Integer port) {
         boolean result = false;
@@ -49,10 +49,10 @@ public class NetUtils {
     }
 
     /**
-     * ½âÎöµØÖ·¡£
+     * è§£æåœ°å€ã€‚
      *
-     * @param ip µØÖ·¡£
-     * @return µØÖ·¶ÔÏó¡£
+     * @param ip åœ°å€ã€‚
+     * @return åœ°å€å¯¹è±¡ã€‚
      */
     public static InetAddress toInetAddress(String ip) throws UnknownHostException {
         return InetAddressUtils.toInetAddress(ip);

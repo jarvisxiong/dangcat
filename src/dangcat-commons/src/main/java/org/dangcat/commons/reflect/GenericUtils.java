@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ·ºĞÍ¹¤¾ß¡£
+ * æ³›å‹å·¥å…·ã€‚
  */
 public class GenericUtils {
     /**
-     * ¶ÁÈ¡·ºĞÍÀàµÄ³ÉÔ±ÀàĞÍ¡£
+     * è¯»å–æ³›å‹ç±»çš„æˆå‘˜ç±»å‹ã€‚
      *
-     * @param classType ·ºĞÍÀà¡£
-     * @return ³ÉÔ±ÀàĞÍÓ³Éä±í
+     * @param classType æ³›å‹ç±»ã€‚
+     * @return æˆå‘˜ç±»å‹æ˜ å°„è¡¨
      */
     public static Map<String, Class<?>> getClassGenericInfo(Class<?> classType) {
         Map<String, Class<?>> genericMap = new HashMap<String, Class<?>>();
@@ -125,10 +125,10 @@ public class GenericUtils {
     }
 
     /**
-     * ¶ÁÈ¡ËùÓĞ²ÎÊıµÄÃû³ÆºÍÀàĞÍÁĞ±í¡£
+     * è¯»å–æ‰€æœ‰å‚æ•°çš„åç§°å’Œç±»å‹åˆ—è¡¨ã€‚
      *
-     * @param classType ÀàĞÍ¡£
-     * @return ·½·¨Ó³Éä±í¡£
+     * @param classType ç±»å‹ã€‚
+     * @return æ–¹æ³•æ˜ å°„è¡¨ã€‚
      */
     public static Map<String, MethodInfo> getMethodInfoMap(Class<?> classType) {
         Map<String, Class<?>> genericClassMap = getClassGenericInfo(classType);

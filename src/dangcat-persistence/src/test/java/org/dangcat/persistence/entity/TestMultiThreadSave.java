@@ -54,7 +54,7 @@ public class TestMultiThreadSave extends TestEntityBase {
         Table table = EntityDataUtils.getTable();
         if (table.exists())
             table.drop();
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
     }
 

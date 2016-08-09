@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Ö÷»úĞÅÏ¢¡£
+ * ä¸»æœºä¿¡æ¯ã€‚
  *
  * @author dangcat
  */
@@ -113,7 +113,7 @@ public class ServerManager extends ServiceBase {
 
     @Override
     public Object handle(Event event) {
-        // ÔÚ¹ÜÀíÖĞĞÄ×¢²á³É¹¦¡£
+        // åœ¨ç®¡ç†ä¸­å¿ƒæ³¨å†ŒæˆåŠŸã€‚
         if (event instanceof ServerEvent && ServerEvent.Register.equalsIgnoreCase(event.getId())) {
             ServerEvent serverEvent = (ServerEvent) event;
             ServerInfo serverInfo = serverEvent.getServerInfo();

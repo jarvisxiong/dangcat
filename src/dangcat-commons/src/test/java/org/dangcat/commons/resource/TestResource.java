@@ -11,7 +11,7 @@ public class TestResource {
     public void testResourceBundle() {
         ResourceHelper chinaResourceHelper = new ResourceHelper(TestResource.class, Locale.SIMPLIFIED_CHINESE, "MyResource");
         for (int i = 0; i < 5; i++)
-            Assert.assertEquals("我的祖国" + i, chinaResourceHelper.getText("dangcat.title" + i));
+            Assert.assertEquals("鎴戠殑绁栧浗" + i, chinaResourceHelper.getText("dangcat.title" + i));
         Assert.assertEquals(Color.RED, chinaResourceHelper.getObject("backgroundColor"));
         double[] values = (double[]) chinaResourceHelper.getObject("defaultPagerSize");
         Assert.assertEquals(2, values.length);
@@ -32,7 +32,7 @@ public class TestResource {
     public void testResourceHelper() {
         ResourceHelper chinaResourceHelper = new ResourceHelper(TestResource.class, Locale.SIMPLIFIED_CHINESE);
         for (int i = 0; i < 6; i++)
-            Assert.assertEquals("我的祖国" + i, chinaResourceHelper.getText("dangcat.title" + i));
+            Assert.assertEquals("鎴戠殑绁栧浗" + i, chinaResourceHelper.getText("dangcat.title" + i));
 
         ResourceHelper usResourceHelper = new ResourceHelper(TestResource.class, Locale.US);
         for (int i = 0; i < 6; i++)

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Collection;
 
 /**
- * RESTFull Web Service Ö´ĞĞÈë¿Ú¡£
+ * RESTFull Web Service æ‰§è¡Œå…¥å£ã€‚
  *
  * @author dangcat
  */
@@ -53,7 +53,7 @@ public class RESTServiceServlet extends ServiceServletBase {
     }
 
     private void executeMethod(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception {
-        // ÕÒµ½Ö´ĞĞµÄ·½·¨¡£
+        // æ‰¾åˆ°æ‰§è¡Œçš„æ–¹æ³•ã€‚
         MethodInfo methodInfo = serviceInfo.getServiceMethodInfo().getMethodInfo(serviceCaller.getMethod());
         if (methodInfo == null)
             throw new Exception("The request " + serviceCaller + " can't find destination.");
@@ -61,18 +61,18 @@ public class RESTServiceServlet extends ServiceServletBase {
         this.createInvokeProcess(methodInfo);
 
         Object result = this.invoke(serviceCaller, serviceInfo, methodInfo);
-        // ·´À¡Ö´ĞĞ½á¹û¡£
+        // åé¦ˆæ‰§è¡Œç»“æœã€‚
         if (result != null)
             ResponseUtils.responseResult(response, result);
     }
 
     /**
-     * ²éÑ¯·şÎñ½Ó¿Ú¡£
+     * æŸ¥è¯¢æœåŠ¡æ¥å£ã€‚
      *
-     * @param request       ÇëÇó¶ÔÏó¡£
-     * @param response      ÏìÓ¦¶ÔÏó¡£
-     * @param serviceCaller ·şÎñµ÷ÓÃ¶ÔÏó¡£
-     * @throws Exception Ö´ĞĞÒì³£¡£
+     * @param request       è¯·æ±‚å¯¹è±¡ã€‚
+     * @param response      å“åº”å¯¹è±¡ã€‚
+     * @param serviceCaller æœåŠ¡è°ƒç”¨å¯¹è±¡ã€‚
+     * @throws Exception æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     private void executeQuery(HttpServletRequest request, HttpServletResponse response, ServiceCaller serviceCaller, ServiceInfo serviceInfo) throws Exception {
         Collection<MethodInfo> methodInfoCollection = serviceInfo.getServiceMethodInfo().getMethodInfos();
@@ -110,14 +110,14 @@ public class RESTServiceServlet extends ServiceServletBase {
         if (ValueUtils.isEmpty(serviceCaller.getJndiName()) || ValueUtils.isEmpty(serviceCaller.getMethod()))
             super.executeService(request, response);
 
-        // ¶¨Î»Ä¿±ê·şÎñ¡£
+        // å®šä½ç›®æ ‡æœåŠ¡ã€‚
         ServiceInfo serviceInfo = this.locateServiceInfo(request, serviceCaller);
-        if (RequestParser.isQueryRequest(request)) // Ö´ĞĞ²éÑ¯·şÎñ½Ó¿Ú¡£
+        if (RequestParser.isQueryRequest(request)) // æ‰§è¡ŒæŸ¥è¯¢æœåŠ¡æ¥å£ã€‚
             this.executeQuery(request, response, serviceCaller, serviceInfo);
-        else if (RequestParser.isFormRequest(request)) // Ö´ĞĞÔØÈëÒ³Ãæ²Ù×÷¡£
+        else if (RequestParser.isFormRequest(request)) // æ‰§è¡Œè½½å…¥é¡µé¢æ“ä½œã€‚
             this.executeForm(request, response, serviceCaller, serviceInfo);
         else
-            this.executeMethod(request, response, serviceCaller, serviceInfo); // µ÷ÓÃ·şÎñ·½·¨¡£
+            this.executeMethod(request, response, serviceCaller, serviceInfo); // è°ƒç”¨æœåŠ¡æ–¹æ³•ã€‚
     }
 
     protected Object invoke(ServiceCaller serviceCaller, ServiceInfo serviceInfo, MethodInfo methodInfo) throws Exception {
@@ -125,7 +125,7 @@ public class RESTServiceServlet extends ServiceServletBase {
     }
 
     private ServiceInfo locateServiceInfo(HttpServletRequest request, ServiceCaller serviceCaller) throws Exception {
-        // ¶¨Î»Ä¿±ê·şÎñ¡£
+        // å®šä½ç›®æ ‡æœåŠ¡ã€‚
         ServiceInfo serviceInfo = this.locateServiceInfo(serviceCaller);
         if (serviceInfo == null || serviceInfo.getInstance() == null)
             throw new Exception("The request " + request.getRequestURI() + " and method " + request.getMethod() + " can't find serviceInfo.");

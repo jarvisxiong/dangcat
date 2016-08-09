@@ -34,7 +34,7 @@ public class TestCompressor {
     @Test
     public void testCompress() throws IOException {
         for (String archiveType : ArchiveType.getAllArchiveTypes()) {
-            // Ñ¹Ëõ±¾µØÄ¿Â¼µ½Ö¸¶¨ÎÄ¼þ
+            // åŽ‹ç¼©æœ¬åœ°ç›®å½•åˆ°æŒ‡å®šæ–‡ä»¶
             File compressFile = this.getCompressFile(archiveType);
             Compressor compressor = new Compressor();
             compressor.addArchiveEntry(this.getLocalDirectory());
@@ -43,7 +43,7 @@ public class TestCompressor {
             logger.info(archiveType + " File Compress TotalSize: " + compressor.getTotalSize() + ", Compress size: " + compressor.getCompressSize() + ", Compress rate = "
                     + String.format("%1$d%%", compressor.getCompressRate()));
 
-            // ²âÊÔ½âÑ¹Ëõ
+            // æµ‹è¯•è§£åŽ‹ç¼©
             File upcompressDir = this.getUpcompressDirectory();
             compressor.decompress(compressFile, upcompressDir);
             File destDir = new File(upcompressDir.getAbsolutePath() + File.separator + "dangcat");

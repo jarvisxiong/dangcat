@@ -10,52 +10,52 @@ import org.dangcat.framework.service.annotation.JndiName;
 import java.util.Date;
 
 /**
- * ·şÎñÆ÷¹ÜÀí¡£
+ * æœåŠ¡å™¨ç®¡ç†ã€‚
  *
  * @author
  */
 @JndiName(module = "Device", name = "ServerInfo")
 public interface ServerInfoService {
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param Id ·şÎñÆ÷ºÅ¡£
-     * @return É¾³ı½á¹û¡£
+     * @param Id æœåŠ¡å™¨å·ã€‚
+     * @return åˆ é™¤ç»“æœã€‚
      */
     boolean delete(@Parameter(name = "id") Integer id) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨·şÎñÆ÷µÄ×ÜÄÚ´æ´óĞ¡¡£
+     * æŸ¥è¯¢æŒ‡å®šæœåŠ¡å™¨çš„æ€»å†…å­˜å¤§å°ã€‚
      *
-     * @param Id ·şÎñÆ÷ºÅ¡£
-     * @return ÏµÍ³×ÜÄÚ´æ¡£
+     * @param Id æœåŠ¡å™¨å·ã€‚
+     * @return ç³»ç»Ÿæ€»å†…å­˜ã€‚
      */
     long getTotalPhysicalMemory(@Parameter(name = "id") Integer id);
 
     /**
-     * ÔØÈë·şÎñÆ÷×ÊÔ´×´Ì¬Êı¾İ¡£
+     * è½½å…¥æœåŠ¡å™¨èµ„æºçŠ¶æ€æ•°æ®ã€‚
      *
-     * @param id        ·şÎñÆ÷ºÅ¡£
-     * @param timeRange Ê±¼ä·¶Î§¡£
-     * @param baseTime  »ù×¼Ê±¼ä¡£
-     * @param lastTime  ×îºóÊı¾İÆğÊ¼Ê±¼ä¡£
-     * @return ·şÎñ×ÊÆ÷Ô´×´Ì¬Êı¾İ¡£
+     * @param id        æœåŠ¡å™¨å·ã€‚
+     * @param timeRange æ—¶é—´èŒƒå›´ã€‚
+     * @param baseTime  åŸºå‡†æ—¶é—´ã€‚
+     * @param lastTime  æœ€åæ•°æ®èµ·å§‹æ—¶é—´ã€‚
+     * @return æœåŠ¡èµ„å™¨æºçŠ¶æ€æ•°æ®ã€‚
      */
     TimeData<ServerResourceLog> loadServerResourceLogs(@Parameter(name = "id") Integer id, @Parameter(name = "timeRange") TimeRange timeRange, @Parameter(name = "lastTime") Date lastTime);
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param serverInfoFilter ²éÑ¯·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param serverInfoFilter æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<ServerInfoQuery> query(@Parameter(name = "serverInfoFilter") ServerInfoFilter serverInfoFilter) throws ServiceException;
 
     /**
-     * ²é¿´·şÎñÆ÷ĞÅÏ¢¡£
+     * æŸ¥çœ‹æœåŠ¡å™¨ä¿¡æ¯ã€‚
      *
-     * @param Id ·şÎñÆ÷ºÅ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param Id æœåŠ¡å™¨å·ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     ServerInfoQuery view(@Parameter(name = "id") Integer id) throws ServiceException;
 }

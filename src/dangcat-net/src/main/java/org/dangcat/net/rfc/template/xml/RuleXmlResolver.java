@@ -3,7 +3,7 @@ package org.dangcat.net.rfc.template.xml;
 import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
- * ÊôĞÔ¹æÔò½âÎöÆ÷¡£
+ * å±æ€§è§„åˆ™è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -11,21 +11,21 @@ public class RuleXmlResolver extends XmlResolver {
     private Rule rule = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public RuleXmlResolver() {
         this(Rule.class.getSimpleName());
     }
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public RuleXmlResolver(String name) {
         super(name);
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

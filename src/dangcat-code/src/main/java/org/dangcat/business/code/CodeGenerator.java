@@ -15,12 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CodeGenerator {
-    private static final String GBK = "gbk";
+    private static final String DEFAULT_ENCODING = "utf-8";
     private static final String PACKAGE_NAME = "packageName";
     protected Logger logger = Logger.getLogger(this.getClass());
     private Class<?> classType = null;
     private String codePath = null;
-    private String encoding = GBK;
+    private String encoding = DEFAULT_ENCODING;
     private String outputDir = null;
     private String outputFile = null;
     private Map<String, Object> params = new HashMap<String, Object>();
@@ -41,7 +41,7 @@ public class CodeGenerator {
     }
 
     public CodeGenerator(String template, String outputFile, boolean useCopy) {
-        this(template, outputFile, useCopy, GBK);
+        this(template, outputFile, useCopy, DEFAULT_ENCODING);
     }
 
     public CodeGenerator(String template, String outputFile, boolean useCopy, String encoding) {

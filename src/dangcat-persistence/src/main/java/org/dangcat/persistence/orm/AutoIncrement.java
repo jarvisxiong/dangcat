@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * ×Ô¶¯Ö÷¼üÉú³ÉÆ÷¡£
+ * è‡ªåŠ¨ä¸»é”®ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */
@@ -24,10 +24,10 @@ class AutoIncrement {
     }
 
     /**
-     * ³õÊ¼»¯ÊıÁĞºÃ¡£
+     * åˆå§‹åŒ–æ•°åˆ—å¥½ã€‚
      *
-     * @param connection Êı¾İ¿âÁ¬½Ó¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param connection æ•°æ®åº“è¿æ¥ã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected void initialize(Connection connection) throws SQLException {
         if (this.tableGenerator != null) {
@@ -50,10 +50,10 @@ class AutoIncrement {
     }
 
     /**
-     * ¶ÁÈ¡ÏÂÒ»¸öĞòÁĞºÅ¡£
+     * è¯»å–ä¸‹ä¸€ä¸ªåºåˆ—å·ã€‚
      *
-     * @param classType Êı¾İÀàĞÍ¡£
-     * @return ĞòÁĞºÅ¡£
+     * @param classType æ•°æ®ç±»å‹ã€‚
+     * @return åºåˆ—å·ã€‚
      */
     protected synchronized Object nextSequence(Class<?> classType) {
         this.currentValue++;
@@ -64,10 +64,10 @@ class AutoIncrement {
     }
 
     /**
-     * ¸üĞÂĞòºÅ²ßÂÔ±íµÄÖµ¡£
+     * æ›´æ–°åºå·ç­–ç•¥è¡¨çš„å€¼ã€‚
      *
-     * @param connection Êı¾İ¿âÁ¬½Ó¡£
-     * @throws SQLException Ö´ĞĞÒì³£¡£
+     * @param connection æ•°æ®åº“è¿æ¥ã€‚
+     * @throws SQLException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected void update(Connection connection) throws SQLException {
         if (this.tableGenerator != null && this.count > 0)

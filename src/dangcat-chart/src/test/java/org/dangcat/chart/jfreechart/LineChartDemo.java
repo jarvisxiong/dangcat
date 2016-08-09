@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class LineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "线性统计图";
+    private static final String TITLE = "绾挎�х粺璁″浘";
 
     public LineChartDemo() {
         super(LineChart.class.getSimpleName());
@@ -26,7 +26,7 @@ public class LineChartDemo extends ChartDemoBase {
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 2"));
         LineChart lineChart1 = new LineChart();
         lineChart1.setTitle(TITLE);
-        lineChart1.setRangeTitle("流量");
+        lineChart1.setRangeTitle("娴侀噺");
         lineChart1.setDataModule(columnDataModule);
         this.initTimeChart(lineChart1, dates[0], dates[1]);
         lineChart1.initialize();
@@ -38,7 +38,7 @@ public class LineChartDemo extends ChartDemoBase {
         LineChart lineChart2 = new LineChart();
         lineChart2.setLegendVisible(true);
         lineChart2.setTitle(TITLE);
-        lineChart2.setRangeTitle("流量");
+        lineChart2.setRangeTitle("娴侀噺");
         lineChart2.setDataModule(rowDataModule);
         this.initTimeChart(lineChart2, dates[0], dates[1]);
         lineChart2.initialize();

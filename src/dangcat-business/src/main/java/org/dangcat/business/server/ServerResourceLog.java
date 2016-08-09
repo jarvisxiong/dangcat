@@ -23,17 +23,17 @@ public class ServerResourceLog {
     private Integer id = null;
 
     /**
-     * ÆäËü½ø³ÌÊ¹ÓÃµÄÎïÀíÄÚ´æ¡£
+     * å…¶å®ƒè¿›ç¨‹ä½¿ç”¨çš„ç‰©ç†å†…å­˜ã€‚
      */
     @Column(index = 3, logic = "octets")
     private long otherUsageMemory;
     /**
-     * CPUÀûÓÃÂÊ¡£
+     * CPUåˆ©ç”¨ç‡ã€‚
      */
     @Column(index = 4, logic = "percent")
     private double processCpuRatio;
     /**
-     * ½ø³ÌÕ¼ÓÃµÄÄÚ´æ¡£
+     * è¿›ç¨‹å ç”¨çš„å†…å­˜ã€‚
      */
     @Column(index = 2, logic = "octets")
     private long processUsageMemory;
@@ -41,7 +41,7 @@ public class ServerResourceLog {
     private Integer serverId = null;
 
     /**
-     * ÏµÍ³µÄCPUÕ¼ÓÃÂÊ¡£
+     * ç³»ç»Ÿçš„CPUå ç”¨ç‡ã€‚
      */
     @Column(index = 5, logic = "percent")
     private double totalCpuRatio;

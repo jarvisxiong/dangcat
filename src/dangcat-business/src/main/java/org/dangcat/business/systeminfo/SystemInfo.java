@@ -5,7 +5,7 @@ import org.dangcat.framework.service.ServicePrincipal;
 import java.util.Map;
 
 /**
- * ϵͳ��Ϣ��
+ * 系统信息。
  *
  * @author Administrator
  */

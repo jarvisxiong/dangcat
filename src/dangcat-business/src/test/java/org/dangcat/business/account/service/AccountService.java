@@ -11,74 +11,74 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * ÕË»§¹ÜÀí·şÎñ½Ó¿Ú¡£
+ * è´¦æˆ·ç®¡ç†æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */
 @JndiName(module = "Account", name = "AccountInfo")
 public interface AccountService {
     /**
-     * ĞÂÔöÊµÌåÊı¾İ¡£
+     * æ–°å¢å®ä½“æ•°æ®ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     AccountInfo create(@Parameter(name = "accountInfo") AccountInfo accountInfo) throws ServiceException;
 
     /**
-     * ²âÊÔ¶à¸ö»ù±¾²ÎÊı½Ó¿Ú¡£
+     * æµ‹è¯•å¤šä¸ªåŸºæœ¬å‚æ•°æ¥å£ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Person createPerson(@Parameter(name = "name") String name, @Parameter(name = "age") int age, @Parameter(name = "balance") double balance, @Parameter(name = "borthDay") Date borthDay)
             throws ServiceException;
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼ü¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param id ä¸»é”®ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean delete(@Parameter(name = "id") Integer id) throws ServiceException;
 
     /**
-     * ²âÊÔ¶à¸ö»ù±¾²ÎÊı½Ó¿Ú¡£
+     * æµ‹è¯•å¤šä¸ªåŸºæœ¬å‚æ•°æ¥å£ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     String printPerson(@Parameter(name = "person") Person person) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param dataFilter ²éÑ¯·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param dataFilter æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<AccountBasic> query(@Parameter(name = "accountFilter") AccountFilter accountFilter) throws ServiceException;
 
     /**
-     * ±£´æÊµÌåÊı¾İ¡£
+     * ä¿å­˜å®ä½“æ•°æ®ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     AccountInfo save(@Parameter(name = "accountInfo") AccountInfo accountInfo) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÁĞ±í¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åˆ—è¡¨ã€‚
      *
-     * @param dataFilter ²éÑ¯·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param dataFilter æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Map<Integer, String> select(@Parameter(name = "accountFilter") AccountFilter accountFilter) throws ServiceException;
 
     /**
-     * ²é¿´Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥çœ‹æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     AccountInfo view(@Parameter(name = "id") Integer id) throws ServiceException;
 }

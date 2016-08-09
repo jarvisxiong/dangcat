@@ -1,7 +1,7 @@
 package org.dangcat.business.service.impl;
 
 /**
- * й╣лЕ╡ывВиообнд║ё
+ * Е╝·Д╫⌠Ф⌠█Д╫°Д╦┼Д╦▀Ф√┤Ц─┌
  *
  * @param <T>
  * @author dangcat

@@ -3,7 +3,7 @@ package org.dangcat.commons.serialize.json;
 import com.google.gson.stream.JsonReader;
 
 /**
- * ·´ĞòÁĞ»¯½Ó¿Ú¡£
+ * ååºåˆ—åŒ–æ¥å£ã€‚
  */
 public interface JsonDeserialize {
     Object deserialize(JsonReader jsonReader, Class<?> classType, Object instance) throws Exception;

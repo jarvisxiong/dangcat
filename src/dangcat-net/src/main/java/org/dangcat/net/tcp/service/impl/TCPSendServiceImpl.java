@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 /**
- * UDP±¨ÎÄ·¢ËÍ·şÎñ¡£
+ * UDPæŠ¥æ–‡å‘é€æœåŠ¡ã€‚
  *
  * @author fanst174766
  */
@@ -24,12 +24,12 @@ public class TCPSendServiceImpl extends ObjectPool<TCPSender> implements TCPSend
     }
 
     /**
-     * ÏòÖ¸¶¨µÄµØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ¡£
+     * å‘æŒ‡å®šçš„åœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ã€‚
      *
-     * @param remoteAddress Ä¿±êµØÖ·¡£
-     * @param remotePort    Ä¿±ê¶Ë¿Ú¡£
-     * @param dataBuffer    ·¢ËÍÊı¾İ¡£
-     * @return ÊÇ·ñ³É¹¦¡£
+     * @param remoteAddress ç›®æ ‡åœ°å€ã€‚
+     * @param remotePort    ç›®æ ‡ç«¯å£ã€‚
+     * @param dataBuffer    å‘é€æ•°æ®ã€‚
+     * @return æ˜¯å¦æˆåŠŸã€‚
      * @throws IOException
      */
     public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer) throws IOException {
@@ -37,13 +37,13 @@ public class TCPSendServiceImpl extends ObjectPool<TCPSender> implements TCPSend
     }
 
     /**
-     * ÏòÖ¸¶¨µÄµØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ£¬²¢½ÓÊÕ»ØÓ¦±¨ÎÄ¡£
+     * å‘æŒ‡å®šçš„åœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ï¼Œå¹¶æ¥æ”¶å›åº”æŠ¥æ–‡ã€‚
      *
-     * @param remoteAddress Ä¿±êµØÖ·¡£
-     * @param remotePort    Ä¿±ê¶Ë¿Ú¡£
-     * @param dataBuffer    ·¢ËÍÊı¾İ¡£
-     * @param tryTimes      ³¢ÊÔ½ÓÊÕ»ØÓ¦´ÎÊı¡£
-     * @return ÊÇ·ñ³É¹¦¡£
+     * @param remoteAddress ç›®æ ‡åœ°å€ã€‚
+     * @param remotePort    ç›®æ ‡ç«¯å£ã€‚
+     * @param dataBuffer    å‘é€æ•°æ®ã€‚
+     * @param tryTimes      å°è¯•æ¥æ”¶å›åº”æ¬¡æ•°ã€‚
+     * @return æ˜¯å¦æˆåŠŸã€‚
      * @throws IOException
      */
     public void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer, int tryTimes) throws IOException {

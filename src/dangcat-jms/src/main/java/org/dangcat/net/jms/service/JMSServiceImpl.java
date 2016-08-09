@@ -8,20 +8,20 @@ import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.net.jms.activemq.JMSConnectionFactory;
 
 /**
- * ÏûÏ¢·şÎñ¡£
+ * æ¶ˆæ¯æœåŠ¡ã€‚
  */
 public class JMSServiceImpl extends ServiceBase {
     /**
-     * ¹¹½¨·şÎñ¶ÔÏó¡£
+     * æ„å»ºæœåŠ¡å¯¹è±¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public JMSServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      */
     @Override
     public void initialize() {
@@ -30,14 +30,14 @@ public class JMSServiceImpl extends ServiceBase {
         EventListenService eventListenService = this.getService(EventListenService.class);
         EventSendServiceImpl eventSendService = (EventSendServiceImpl) this.getService(EventSendService.class);
 
-        // ¸ù¾İ×ÊÔ´ÅäÖÃ³õÊ¼»¯ÏûÏ¢×é¼ş¡£
+        // æ ¹æ®èµ„æºé…ç½®åˆå§‹åŒ–æ¶ˆæ¯ç»„ä»¶ã€‚
         for (String name : JMSConnectionFactory.getInstance().getResourceNames()) {
-            // ÏûÏ¢·¢ËÍ·şÎñ¡£
+            // æ¶ˆæ¯å‘é€æœåŠ¡ã€‚
             JMSSender jmsSender = new JMSSender(name);
             jmsSender.initialize();
             eventSendService.addEventSender(jmsSender);
 
-            // ÏûÏ¢ÕìÌı·şÎñ¡£
+            // æ¶ˆæ¯ä¾¦å¬æœåŠ¡ã€‚
             JMSListener jmsListener = new JMSListener(name, eventListenService);
             jmsListener.initialize();
             eventListenService.addEventListener(jmsListener);

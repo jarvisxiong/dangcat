@@ -17,28 +17,28 @@ import org.dangcat.framework.service.annotation.JndiName;
 @JndiName(module = "Staff", name = "OperateLog")
 public interface OperateLogService {
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param operatorOptLogFilter ²éÑ¯Ìõ¼ş¡£
-     * @param month                ²éÑ¯ÔÂ·İ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorOptLogFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @param month                æŸ¥è¯¢æœˆä»½ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<OperatorOptLog> load(@Parameter(name = "operatorOptLogFilter") OperatorOptLogFilter operatorOptLogFilter) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param operateLogFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operateLogFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<OperateStat> query(@Parameter(name = "operateLogFilter") OperateLogFilter operateLogFilter) throws ServiceException;
 
     /**
-     * ²é¿´Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥çœ‹æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      *
-     * @param id    Ö÷¼üÖµ¡£
-     * @param month ²éÑ¯ÔÂ·İ¡£
-     * @return ²é¿´½á¹û¡£
+     * @param id    ä¸»é”®å€¼ã€‚
+     * @param month æŸ¥è¯¢æœˆä»½ã€‚
+     * @return æŸ¥çœ‹ç»“æœã€‚
      */
     OperateStat view(@Parameter(name = "id") Integer id, @Parameter(name = "month") Integer month) throws ServiceException;
 }

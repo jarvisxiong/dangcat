@@ -13,7 +13,7 @@ import org.dangcat.framework.service.ServiceProvider;
 import java.util.Date;
 
 /**
- * ÕË»§¹ÜÀí·şÎñ½Ó¿Ú¡£
+ * è´¦æˆ·ç®¡ç†æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */
@@ -35,7 +35,7 @@ public class AccountServiceImpl extends BusinessServiceBase<AccountBasic, Accoun
     @Override
     protected void onCreate(AccountInfo accountInfo) {
         accountInfo.setName("Monkey hou");
-        accountInfo.setAddress("ÖĞ¹úÉîÛÚ");
+        accountInfo.setAddress("ä¸­å›½æ·±åœ³");
         accountInfo.setEmail("houxx@h3c.com.cn");
         accountInfo.setBalance(100.0);
         accountInfo.setGroupId(0);

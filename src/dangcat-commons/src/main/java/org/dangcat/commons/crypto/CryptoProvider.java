@@ -1,26 +1,26 @@
 package org.dangcat.commons.crypto;
 
 /**
- * ¼ÓÃÜºÍ½âÃÜËã·¨¡£
+ * åŠ å¯†å’Œè§£å¯†ç®—æ³•ã€‚
  *
  * @author dangcat
  */
 public interface CryptoProvider {
     /**
-     * ½âÃÜËã·¨¡£
+     * è§£å¯†ç®—æ³•ã€‚
      *
-     * @param sourceText  Ô´ÎÄ×Ö¡£
-     * @param charsetName ×Ö·û¼¯¡£
-     * @return ½âÃÜÎÄ×Ö¡£
+     * @param sourceText  æºæ–‡å­—ã€‚
+     * @param charsetName å­—ç¬¦é›†ã€‚
+     * @return è§£å¯†æ–‡å­—ã€‚
      */
     String decrypt(String sourceText, String charsetName);
 
     /**
-     * ¼ÓÃÜËã·¨¡£
+     * åŠ å¯†ç®—æ³•ã€‚
      *
-     * @param sourceText  Ô´ÎÄ×Ö¡£
-     * @param charsetName ×Ö·û¼¯¡£
-     * @return ¼ÓÃÜÎÄ×Ö¡£
+     * @param sourceText  æºæ–‡å­—ã€‚
+     * @param charsetName å­—ç¬¦é›†ã€‚
+     * @return åŠ å¯†æ–‡å­—ã€‚
      */
     String encrypt(String sourceText, String charsetName);
 }

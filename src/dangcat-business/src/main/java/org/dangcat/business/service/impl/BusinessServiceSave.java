@@ -14,9 +14,9 @@ class BusinessServiceSave<Q extends EntityBase, V extends EntityBase, F extends 
     }
 
     /**
-     * ´¥·¢´æ´¢ºóÊÂ¼þ¡£
+     * è§¦å‘å­˜å‚¨åŽäº‹ä»¶ã€‚
      *
-     * @param saveContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param saveContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void afterSave(SaveContext<V> saveContext) {
         if (this.isExtendEventEnabled()) {

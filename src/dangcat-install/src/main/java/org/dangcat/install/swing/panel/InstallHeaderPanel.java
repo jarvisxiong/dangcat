@@ -11,7 +11,7 @@ public class InstallHeaderPanel extends JImagePanel {
     private static final long serialVersionUID = 1L;
     private Image backgroundImage = null;
     private String backgroundName = "Background.png";
-    private Font headerFont = new Font("ËÎÌå", Font.BOLD, 22);
+    private Font headerFont = new Font("å®‹ä½“", Font.BOLD, 22);
     private String title = null;
 
     public Image getBackgroundImage() {

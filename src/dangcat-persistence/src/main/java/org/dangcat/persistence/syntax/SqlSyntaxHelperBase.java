@@ -19,7 +19,7 @@ public abstract class SqlSyntaxHelperBase implements SqlSyntaxHelper {
     @Override
     public void buildCreateStatement(SqlBuilder sqlBuilder, SqlBuilderBase sqlBuilderBase) {
         Columns columns = sqlBuilderBase.getTable().getColumns();
-        // ¹¹½¨±íÓï¾ä¡£
+        // æ„å»ºè¡¨è¯­å¥ã€‚
         sqlBuilder.append(this.createCreateStatement(sqlBuilderBase.getName()));
         sqlBuilder.append(SqlBuilderBase.SEPERATE_LINE);
         sqlBuilder.append("( ");
@@ -43,7 +43,7 @@ public abstract class SqlSyntaxHelperBase implements SqlSyntaxHelper {
         }
         sqlBuilder.append(sqlFields.toString());
 
-        // ¹¹½¨Ö÷¼üË÷ÒıÓï¾ä¡£
+        // æ„å»ºä¸»é”®ç´¢å¼•è¯­å¥ã€‚
         Column[] keyColumns = columns.getPrimaryKeys();
         if (keyColumns.length != 0) {
             sqlBuilder.append(", ");
@@ -62,7 +62,7 @@ public abstract class SqlSyntaxHelperBase implements SqlSyntaxHelper {
         }
         sqlBuilder.append(SqlBuilderBase.SEPERATE_LINE);
         sqlBuilder.append(")");
-        // ¹¹½¨Ë÷Òı¡£
+        // æ„å»ºç´¢å¼•ã€‚
         int seq = 1;
         for (OrderBy orderBy : sqlBuilderBase.getTable().getIndexes()) {
             String sqlIndex = sqlBuilderBase.buildIndexStatement(seq++, orderBy);
@@ -85,7 +85,7 @@ public abstract class SqlSyntaxHelperBase implements SqlSyntaxHelper {
     }
 
     /**
-     * ²úÉúÄ¬ÈÏµÄ²ÎÊıÅäÖÃ¡£
+     * äº§ç”Ÿé»˜è®¤çš„å‚æ•°é…ç½®ã€‚
      */
     public void createDefaultParams(Map<String, String> params) {
         for (Entry<String, String> entry : this.defaultParams.entrySet()) {

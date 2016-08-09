@@ -4,7 +4,7 @@ import org.dangcat.framework.service.ServiceHelper;
 import org.dangcat.persistence.inject.DatabaseInjectProvider;
 
 /**
- * »á»°¹¤³§¡£
+ * ä¼šè¯å·¥å‚ã€‚
  *
  * @author dangcat
  */

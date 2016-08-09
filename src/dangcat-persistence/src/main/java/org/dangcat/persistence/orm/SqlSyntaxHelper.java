@@ -7,47 +7,47 @@ import org.dangcat.persistence.model.Range;
 import java.util.Map;
 
 /**
- * ±ê×¼±í´ïÊ½¹¹½¨Æ÷¡£
+ * æ ‡å‡†è¡¨è¾¾å¼æ„å»ºå™¨ã€‚
  *
  * @author dangcat
  */
 public interface SqlSyntaxHelper {
     /**
-     * ¹¹½¨½¨±í±í´ïÊ½¡£
+     * æ„å»ºå»ºè¡¨è¡¨è¾¾å¼ã€‚
      *
-     * @param sqlBuilder     Êı¾İ¿âÃû¡£
-     * @param sqlBuilderBase ±íÃû¡£
+     * @param sqlBuilder     æ•°æ®åº“åã€‚
+     * @param sqlBuilderBase è¡¨åã€‚
      */
     void buildCreateStatement(SqlBuilder sqlBuilder, SqlBuilderBase sqlBuilderBase);
 
     /**
-     * ¹¹½¨±í´æÔÚ±í´ïÊ½¡£
+     * æ„å»ºè¡¨å­˜åœ¨è¡¨è¾¾å¼ã€‚
      *
-     * @param databaseName Êı¾İ¿âÃû¡£
-     * @param tableName    ±íÃû¡£
-     * @return ²éÑ¯Óï¾ä¡£
+     * @param databaseName æ•°æ®åº“åã€‚
+     * @param tableName    è¡¨åã€‚
+     * @return æŸ¥è¯¢è¯­å¥ã€‚
      */
     String buildExistsStatement(String databaseName, String tableName);
 
     /**
-     * ¹¹½¨º¬ÓĞ·¶Î§ÔØÈëµÄÓï¾ä±í´ïÊ½¡£
+     * æ„å»ºå«æœ‰èŒƒå›´è½½å…¥çš„è¯­å¥è¡¨è¾¾å¼ã€‚
      *
-     * @param sql   ²éÑ¯Óï¾ä¡£
-     * @param range ²éÑ¯·¶Î§¡£
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @param sql   æŸ¥è¯¢è¯­å¥ã€‚
+     * @param range æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     String buildRangeLoadStatement(String sql, Range range);
 
     /**
-     * ²úÉúÄ¬ÈÏµÄ²ÎÊıÅäÖÃ¡£
+     * äº§ç”Ÿé»˜è®¤çš„å‚æ•°é…ç½®ã€‚
      */
     void createDefaultParams(Map<String, String> params);
 
     /**
-     * ×ª»»SQLÀ¸Î»Êı¾İÀàĞÍ¡£
+     * è½¬æ¢SQLæ ä½æ•°æ®ç±»å‹ã€‚
      *
-     * @param column À¸Î»¶ÔÏó¡£
-     * @return SQLÊı¾İÀàĞÍ¡£
+     * @param column æ ä½å¯¹è±¡ã€‚
+     * @return SQLæ•°æ®ç±»å‹ã€‚
      */
     String getSqlType(Column column);
 }

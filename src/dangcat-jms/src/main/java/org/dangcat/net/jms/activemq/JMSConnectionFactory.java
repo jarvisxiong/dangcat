@@ -6,14 +6,14 @@ import org.dangcat.framework.pool.SessionException;
 import java.util.Map;
 
 /**
- * JMSÁ¬½Ó¹¤³§¡£
+ * JMSè¿æ¥å·¥å‚ã€‚
  */
 public class JMSConnectionFactory extends ConnectionFactory<JMSConnectionPool, JMSSession> {
     public static final String RESOURCETYPE = "jms";
     private static JMSConnectionFactory instance = null;
 
     /**
-     * Ë½ÓĞ¹¹Ôìº¯Êı¡£
+     * ç§æœ‰æ„é€ å‡½æ•°ã€‚
      */
     private JMSConnectionFactory() {
     }

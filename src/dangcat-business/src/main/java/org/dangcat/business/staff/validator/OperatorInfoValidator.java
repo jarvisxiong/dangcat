@@ -17,11 +17,11 @@ import java.util.Map;
 public class OperatorInfoValidator extends BusinessValidator<OperatorInfo> {
     @Override
     public void beforeDelete(OperatorInfo operatorInfo) throws ServiceException {
-        // ²Ù×÷Ô±²»ÄÜÉ¾³ı×Ô¼ºµÄÕËºÅ¡£
+        // æ“ä½œå‘˜ä¸èƒ½åˆ é™¤è‡ªå·±çš„è´¦å·ã€‚
         if (this.validateOperatorInfo(operatorInfo))
             throw new OperatorInfoException(OperatorInfoException.KILL_HIMSELFUL);
 
-        // Ö»ÄÜÉ¾³ı±¾×éºÍ×Ó×é³ÉÔ±ÕËºÅ¡£
+        // åªèƒ½åˆ é™¤æœ¬ç»„å’Œå­ç»„æˆå‘˜è´¦å·ã€‚
         if (!this.validateOperatorGroup(operatorInfo))
             throw new OperatorInfoException(OperatorInfoException.KILL_VALIDATEGROUP);
     }
@@ -35,13 +35,13 @@ public class OperatorInfoValidator extends BusinessValidator<OperatorInfo> {
         this.validateExists(operatorInfo);
 
         if (operatorInfo.getId() == null) {
-            // Ö»ÄÜĞÂÔö±¾×éºÍ×Ó×é³ÉÔ±ĞÅÏ¢¡£
+            // åªèƒ½æ–°å¢æœ¬ç»„å’Œå­ç»„æˆå‘˜ä¿¡æ¯ã€‚
             if (!this.validateOperatorGroup(operatorInfo))
                 operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.GroupId, OperatorInfoException.INSERT_VALIDATEGROUP));
             this.validatePassword(operatorInfo);
         } else {
             this.validateAdvenedModify(operatorInfo, oldOperatorInfo);
-            // Ö»ÄÜĞŞ¸Ä±¾×éºÍ×Ó×é³ÉÔ±ĞÅÏ¢¡£
+            // åªèƒ½ä¿®æ”¹æœ¬ç»„å’Œå­ç»„æˆå‘˜ä¿¡æ¯ã€‚
             if (!this.validateOperatorGroup(oldOperatorInfo))
                 operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.GroupId, OperatorInfoException.MODIFY_VALIDATEGROUP));
         }
@@ -61,11 +61,11 @@ public class OperatorInfoValidator extends BusinessValidator<OperatorInfo> {
     }
 
     /**
-     * ÌØÊâÈ¨ÏŞ²ÅÄÜĞŞ¸ÄµÄÀ¸Î»¡£
+     * ç‰¹æ®Šæƒé™æ‰èƒ½ä¿®æ”¹çš„æ ä½ã€‚
      */
     private void validateAdvenedModify(OperatorInfo operatorInfo, OperatorInfo oldOperatorInfo) {
         if (!this.hasPermission(OperatorInfoPermissionProvider.ADVANCEDMODIFY)) {
-            // ²Ù×÷Ô±×é¡¢½ÇÉ«¡¢¿ÉÓÃ·ñ¡¢¹ıÆÚÊ±¼ä±ØĞëÓĞÌØÊâÈ¨²Å¿ÉÒÔĞŞ¸Ä¡£
+            // æ“ä½œå‘˜ç»„ã€è§’è‰²ã€å¯ç”¨å¦ã€è¿‡æœŸæ—¶é—´å¿…é¡»æœ‰ç‰¹æ®Šæƒæ‰å¯ä»¥ä¿®æ”¹ã€‚
             if (!operatorInfo.getGroupId().equals(oldOperatorInfo.getGroupId()))
                 operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.GroupId, OperatorInfoException.ADVANCED_MODIFY));
             if (!operatorInfo.getRoleId().equals(oldOperatorInfo.getRoleId()))
@@ -78,21 +78,21 @@ public class OperatorInfoValidator extends BusinessValidator<OperatorInfo> {
     }
 
     private void validateExists(OperatorInfo operatorInfo) {
-        // ²Ù×÷Ô±×é²»´æÔÚ¡£
+        // æ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
         if (!this.exists(OperatorGroup.class, OperatorGroup.Id, operatorInfo.getGroupId()))
             operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.GroupId, OperatorInfoException.FIELD_NOTEXISTS));
-        // ½ÇÉ«²»´æÔÚ¡£
+        // è§’è‰²ä¸å­˜åœ¨ã€‚
         if (!this.exists(RoleInfo.class, RoleInfo.Id, operatorInfo.getRoleId()))
             operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.RoleId, OperatorInfoException.FIELD_NOTEXISTS));
     }
 
     private void validateNo(OperatorInfo operatorInfo, OperatorInfo oldOperatorInfo) {
         if (oldOperatorInfo == null) {
-            // ²Ù×÷Ô±µÄÕËºÅ²»ÄÜÖØ¸´¡£
+            // æ“ä½œå‘˜çš„è´¦å·ä¸èƒ½é‡å¤ã€‚
             if (this.checkRepeat(OperatorInfo.class, operatorInfo, OperatorInfo.No, operatorInfo.getNo()))
                 operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.No, OperatorInfoException.DATA_REPEAT));
         } else {
-            // ²»ÄÜĞŞ¸Ä²Ù×÷Ô±ÕËºÅ¡£
+            // ä¸èƒ½ä¿®æ”¹æ“ä½œå‘˜è´¦å·ã€‚
             if (!oldOperatorInfo.getNo().equals(operatorInfo.getNo()))
                 operatorInfo.addServiceException(new OperatorInfoException(OperatorInfo.No, OperatorInfoException.MODIFY_NO_DENY));
         }

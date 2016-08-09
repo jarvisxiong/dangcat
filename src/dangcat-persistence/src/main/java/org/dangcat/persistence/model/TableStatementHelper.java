@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Êı¾İ±í¸¨Öú¹¤¾ß¡£
+ * æ•°æ®è¡¨è¾…åŠ©å·¥å…·ã€‚
  *
  * @author dangcat
  */
@@ -26,32 +26,32 @@ public class TableStatementHelper {
     private static final String NULL = "NULL";
 
     /**
-     * ²úÉú»ã¾ÛÓï¾ä¡£
+     * äº§ç”Ÿæ±‡èšè¯­å¥ã€‚
      *
-     * @param table     Êı¾İ±í¶ÔÏó¡£
-     * @param filter    ¹ıÂËÌõ¼ş¡£
-     * @param tableName ÁÙÊ±±í±íÃû
-     * @return »ã¾ÛÓï¾ä¡£
+     * @param table     æ•°æ®è¡¨å¯¹è±¡ã€‚
+     * @param filter    è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param tableName ä¸´æ—¶è¡¨è¡¨å
+     * @return æ±‡èšè¯­å¥ã€‚
      */
     public static String createAggregationSql(Table table, FilterExpress filter, String tableName) {
         return createAggregationSql(table, filter, tableName, false, false);
     }
 
     /**
-     * ²úÉú»ã¾ÛÓï¾ä¡£
+     * äº§ç”Ÿæ±‡èšè¯­å¥ã€‚
      *
-     * @param table          Êı¾İ±í¶ÔÏó¡£
-     * @param filter         ¹ıÂËÌõ¼ş¡£
-     * @param tableName      ÁÙÊ±±í±íÃû
-     * @param includeOrderby ÁÙÊ±±í±íÃû
-     * @param includeTopN    ÁÙÊ±±í±íÃû
-     * @return »ã¾ÛÓï¾ä¡£
+     * @param table          æ•°æ®è¡¨å¯¹è±¡ã€‚
+     * @param filter         è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param tableName      ä¸´æ—¶è¡¨è¡¨å
+     * @param includeOrderby ä¸´æ—¶è¡¨è¡¨å
+     * @param includeTopN    ä¸´æ—¶è¡¨è¡¨å
+     * @return æ±‡èšè¯­å¥ã€‚
      */
     public static String createAggregationSql(Table table, FilterExpress filter, String tableName, boolean includeOrderby, boolean includeTopN) {
         StringBuilder sql = new StringBuilder();
         Column[] primaryKeys = table.getColumns().getPrimaryKeys();
 
-        // Ö÷¼ü
+        // ä¸»é”®
         for (Column column : primaryKeys) {
             if (sql.length() == 0)
                 sql.append("SELECT ");
@@ -64,12 +64,12 @@ public class TableStatementHelper {
             }
         }
 
-        // ¼ÆËãÀ¸Î»
+        // è®¡ç®—æ ä½
         for (Column column : table.getColumns()) {
             if (!column.isPrimaryKey()) {
                 sql.append(", ");
                 String fieldName = column.getFieldName();
-                // Í³¼Æ×Ö¶Î
+                // ç»Ÿè®¡å­—æ®µ
                 if (fieldName.substring(0, 3).equalsIgnoreCase("max"))
                     sql.append("MAX(" + fieldName + ")");
                 else if (fieldName.substring(0, 3).equalsIgnoreCase("min"))
@@ -98,13 +98,13 @@ public class TableStatementHelper {
                 hasCreateGroupBy = true;
             }
 
-            // ÅÅĞò×Ó¾ä
+            // æ’åºå­å¥
             if (includeOrderby) {
                 OrderBy orderBy = table.getOrderBy();
                 sql.append(Environment.LINE_SEPARATOR + orderBy.toString());
             }
 
-            // ²éÑ¯Ö÷±í£¬ĞèÒª»Ö¸´TOPN
+            // æŸ¥è¯¢ä¸»è¡¨ï¼Œéœ€è¦æ¢å¤TOPN
             if (includeTopN) {
                 Range range = table.getRange();
                 if (range != null) {
@@ -119,27 +119,27 @@ public class TableStatementHelper {
     }
 
     /**
-     * ¸ù¾İÖ÷±íÊı¾İĞĞ£¬ÕÒµ½¶ÔÓ¦µÄÃ÷Ï¸Êı¾İĞĞ¡£
+     * æ ¹æ®ä¸»è¡¨æ•°æ®è¡Œï¼Œæ‰¾åˆ°å¯¹åº”çš„æ˜ç»†æ•°æ®è¡Œã€‚
      *
-     * @param masterRow   Ö÷±íÊı¾İĞĞ¡£
-     * @param detailTable Ã÷Ï¸±í¶ÔÏó¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¼¯ºÏ¡£
+     * @param masterRow   ä¸»è¡¨æ•°æ®è¡Œã€‚
+     * @param detailTable æ˜ç»†è¡¨å¯¹è±¡ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œé›†åˆã€‚
      */
     public static Collection<Row> find(Row masterRow, Table detailTable) {
         Table masterTable = masterRow.getParent();
         if (masterTable == null)
             return null;
-        // µ±Ç°±íµÄÀ¸Î»¼¯ºÏ¡£
+        // å½“å‰è¡¨çš„æ ä½é›†åˆã€‚
         Columns columns = detailTable.getColumns();
-        // ¹¹½¨Ö÷¼üÃû³Æ¡£
+        // æ„å»ºä¸»é”®åç§°ã€‚
         List<String> primaryKeys = new ArrayList<String>();
-        // Ö÷¼üÖµ¡£
+        // ä¸»é”®å€¼ã€‚
         List<Object> params = new ArrayList<Object>();
         for (Column column : masterTable.getColumns().getPrimaryKeys()) {
-            // Èç¹ûµ±Ç°±í²»°üº¬´ËÁĞÃûÔòÌø¹ı¡£
+            // å¦‚æœå½“å‰è¡¨ä¸åŒ…å«æ­¤åˆ—ååˆ™è·³è¿‡ã€‚
             if (columns.find(column.getName()) == null)
                 continue;
-            // Ìí¼ÓÖ÷¼üºÍ¶ÔÓ¦Öµ¡£
+            // æ·»åŠ ä¸»é”®å’Œå¯¹åº”å€¼ã€‚
             Field field = masterRow.getField(column.getName());
             primaryKeys.add(column.getName());
             params.add(field.getObject());
@@ -148,18 +148,18 @@ public class TableStatementHelper {
     }
 
     /**
-     * ¶Ô×Ö·ûÀàĞÍÈ¡×î´ó³¤¶È¡£
+     * å¯¹å­—ç¬¦ç±»å‹å–æœ€å¤§é•¿åº¦ã€‚
      *
-     * @param value     ×ª»»Öµ¡£
-     * @param maxLength ×î´ó³¤¶È¡£
-     * @return ±í´ïÊ½¡£
+     * @param value     è½¬æ¢å€¼ã€‚
+     * @param maxLength æœ€å¤§é•¿åº¦ã€‚
+     * @return è¡¨è¾¾å¼ã€‚
      */
     public static Object subString(Object value, int maxLength) {
         if (value != null && maxLength > 0) {
             Class<?> classType = value.getClass();
             if (classType.equals(String.class) || classType.equals(Character.class) || classType.equals(byte.class) || classType.equals(byte[].class)) {
                 String strValue = value.toString();
-                // È¡×î´ó³¤¶È¡£
+                // å–æœ€å¤§é•¿åº¦ã€‚
                 if (strValue.length() > maxLength)
                     value = strValue.substring(0, maxLength - 1);
             }
@@ -168,10 +168,10 @@ public class TableStatementHelper {
     }
 
     /**
-     * °Ñµ±Ç°Öµ×ª³ÉSQL±í´ïÊ½¡£
+     * æŠŠå½“å‰å€¼è½¬æˆSQLè¡¨è¾¾å¼ã€‚
      *
-     * @param value ×ª»»Öµ¡£
-     * @return ±í´ïÊ½¡£
+     * @param value è½¬æ¢å€¼ã€‚
+     * @return è¡¨è¾¾å¼ã€‚
      */
     public static String toSqlString(Object value) {
         if (value != null) {

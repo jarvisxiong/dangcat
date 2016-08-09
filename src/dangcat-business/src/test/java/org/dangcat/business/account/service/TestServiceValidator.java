@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ÕË»§¹ÜÀí·şÎñ²âÊÔ¡£
+ * è´¦æˆ·ç®¡ç†æœåŠ¡æµ‹è¯•ã€‚
  *
  * @author dangcat
  */
@@ -19,7 +19,7 @@ public class TestServiceValidator extends BusinessServiceTestBase<AccountService
     @Before
     @Override
     public void initialize() {
-        // Ìí¼ÓÒª²âÊÔµÄ·şÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(AccountService.class, AccountServiceImpl.class);
         super.initialize();
     }

@@ -16,43 +16,43 @@ public class WebServiceConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "WebService";
     private static WebServiceConfig instance = new WebServiceConfig();
     /**
-     * ÅäÖÃÎÄ¼ş¡£
+     * é…ç½®æ–‡ä»¶ã€‚
      */
     private String configFile = "./webapp";
     /**
-     * ¸ùÂ·¾¶
+     * æ ¹è·¯å¾„
      */
     private String contextRoot = "";
     /**
-     * ÃØÂë¹ÜÀí¿ÚÁî¡£
+     * ç§˜ç ç®¡ç†å£ä»¤ã€‚
      */
     private String keyManagerPassword = null;
     /**
-     * ÃÜÂë¿â¡£
+     * å¯†ç åº“ã€‚
      */
     private String keyStore = null;
     /**
-     * ÃÜÂë¿â¿ÚÁî¡£
+     * å¯†ç åº“å£ä»¤ã€‚
      */
     private String keyStorePassword = null;
     /**
-     * ¿ªÆô¶Ë¿Ú¡£
+     * å¼€å¯ç«¯å£ã€‚
      */
     private Integer port = 8080;
     /**
-     * ×ÊÔ´¼¯ºÏ¡£
+     * èµ„æºé›†åˆã€‚
      */
     private String resources = null;
     /**
-     * SSL¶Ë¿Ú¡£
+     * SSLç«¯å£ã€‚
      */
     private Integer sslPort = 8443;
     /**
-     * Ïß³Ì³Ø´óĞ¡¡£
+     * çº¿ç¨‹æ± å¤§å°ã€‚
      */
     private Integer threadPoolSize = 20;
     /**
-     * ÃÜÂë¿â¡£
+     * å¯†ç åº“ã€‚
      */
     private String webApp = "./webapp";
 
@@ -74,7 +74,7 @@ public class WebServiceConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static WebServiceConfig getInstance() {
         return instance;

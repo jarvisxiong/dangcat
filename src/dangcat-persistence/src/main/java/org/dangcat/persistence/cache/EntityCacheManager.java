@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * ÄÚ´æÊı¾İ»º´æ¹ÜÀí¡£
+ * å†…å­˜æ•°æ®ç¼“å­˜ç®¡ç†ã€‚
  *
  * @author dangcat
  */
@@ -68,7 +68,7 @@ public class EntityCacheManager {
 
     @SuppressWarnings("unchecked")
     private <T> EntityCacheImpl<T> createEntityCache(Class<T> classType, Cache cache) {
-        // ²úÉúÖ÷¼üË÷Òı¡£
+        // äº§ç”Ÿä¸»é”®ç´¢å¼•ã€‚
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(classType);
         if (entityMetaData == null)
             throw new RuntimeException(classType + " is not a entity type.");
@@ -81,7 +81,7 @@ public class EntityCacheManager {
         if (primaryKeyNames != null && primaryKeyNames.length > 0)
             entityCacheImpl.appendIndex(ValueUtils.join(primaryKeyNames), true);
 
-        // ²úÉú¸½¼ÓË÷Òı¡£
+        // äº§ç”Ÿé™„åŠ ç´¢å¼•ã€‚
         ReflectUtils.copyProperties(cache, entityCacheImpl);
         for (String indexName : cache.getIndexList())
             entityCacheImpl.appendIndex(indexName, false);
@@ -117,7 +117,7 @@ public class EntityCacheManager {
     }
 
     /**
-     * ÓÉ×ÊÔ´ÎÄ¼şÔØÈë»º´æÅäÖÃ¡£
+     * ç”±èµ„æºæ–‡ä»¶è½½å…¥ç¼“å­˜é…ç½®ã€‚
      */
     public void load(Class<?> classType, String cacheFile) {
         if (classType == null || ValueUtils.isEmpty(cacheFile)) {
@@ -137,9 +137,9 @@ public class EntityCacheManager {
     }
 
     /**
-     * ÓÉÅäÖÃÎÄ¼şÔØÈë»º´æÅäÖÃ¡£
+     * ç”±é…ç½®æ–‡ä»¶è½½å…¥ç¼“å­˜é…ç½®ã€‚
      *
-     * @param cacheFile ÅäÖÃÎÄ¼ş¡£
+     * @param cacheFile é…ç½®æ–‡ä»¶ã€‚
      */
     public void load(File cacheFile) {
         if (cacheFile == null || !cacheFile.exists() || !cacheFile.isFile()) {
@@ -159,9 +159,9 @@ public class EntityCacheManager {
     }
 
     /**
-     * ÓÉÅäÖÃÎÄ¼şÔØÈë»º´æÅäÖÃ¡£
+     * ç”±é…ç½®æ–‡ä»¶è½½å…¥ç¼“å­˜é…ç½®ã€‚
      *
-     * @param cacheFile ÅäÖÃÎÄ¼ş¡£
+     * @param cacheFile é…ç½®æ–‡ä»¶ã€‚
      * @throws DocumentException
      */
     private void load(InputStream inputStream) throws DocumentException {
@@ -199,10 +199,10 @@ public class EntityCacheManager {
     }
 
     /**
-     * µ±±í·¢Éú±ä»¯Ê±£¬Ë¢ĞÂÄÚ´æÖĞµÄÊı¾İ¡£
+     * å½“è¡¨å‘ç”Ÿå˜åŒ–æ—¶ï¼Œåˆ·æ–°å†…å­˜ä¸­çš„æ•°æ®ã€‚
      *
-     * @param tableName     ±íÃû¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
+     * @param tableName     è¡¨åã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public void remove(String tableName, FilterExpress filterExpress) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
@@ -213,10 +213,10 @@ public class EntityCacheManager {
     }
 
     /**
-     * µ±±í·¢Éú±ä»¯Ê±£¬Ë¢ĞÂÄÚ´æÖĞµÄÊı¾İ¡£
+     * å½“è¡¨å‘ç”Ÿå˜åŒ–æ—¶ï¼Œåˆ·æ–°å†…å­˜ä¸­çš„æ•°æ®ã€‚
      *
-     * @param tableName   ±íÃû¡£
-     * @param primaryKeys ¼ÇÂ¼Ë÷Òı¡£
+     * @param tableName   è¡¨åã€‚
+     * @param primaryKeys è®°å½•ç´¢å¼•ã€‚
      */
     public void remove(String tableName, Object... primaryKeys) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
@@ -274,10 +274,10 @@ public class EntityCacheManager {
     }
 
     /**
-     * µ±±í·¢Éú±ä»¯Ê±£¬Ë¢ĞÂÄÚ´æÖĞµÄÊı¾İ¡£
+     * å½“è¡¨å‘ç”Ÿå˜åŒ–æ—¶ï¼Œåˆ·æ–°å†…å­˜ä¸­çš„æ•°æ®ã€‚
      *
-     * @param tableName     ±íÃû¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
+     * @param tableName     è¡¨åã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public void update(String tableName, FilterExpress filterExpress) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);
@@ -290,10 +290,10 @@ public class EntityCacheManager {
     }
 
     /**
-     * µ±±í·¢Éú±ä»¯Ê±£¬Ë¢ĞÂÄÚ´æÖĞµÄÊı¾İ¡£
+     * å½“è¡¨å‘ç”Ÿå˜åŒ–æ—¶ï¼Œåˆ·æ–°å†…å­˜ä¸­çš„æ•°æ®ã€‚
      *
-     * @param tableName   ±íÃû¡£
-     * @param primaryKeys ¼ÇÂ¼Ë÷Òı¡£
+     * @param tableName   è¡¨åã€‚
+     * @param primaryKeys è®°å½•ç´¢å¼•ã€‚
      */
     public void update(String tableName, Object... primaryKeys) {
         Collection<EntityCacheImpl<?>> entityCaches = this.getEntityCaches(tableName);

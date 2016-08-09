@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class StackedBarChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "¶ÑÕ»Öù×´Í³¼ÆÍ¼";
+    private static final String TITLE = "å †æ ˆæŸ±çŠ¶ç»Ÿè®¡å›¾";
 
     public StackedBarChartDemo() {
         super(StackedBarChart.class.getSimpleName());

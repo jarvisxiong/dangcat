@@ -5,7 +5,7 @@ import org.dangcat.commons.io.FileUtils;
 import java.io.File;
 
 /**
- * ÎÄ¼þÉ¾³ý½ø³Ì¡£
+ * æ–‡ä»¶åˆ é™¤è¿›ç¨‹ã€‚
  */
 public class FileDeleteProcess extends FileProcess {
     @Override

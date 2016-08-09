@@ -7,7 +7,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.io.File;
 
 /**
- * Ç¶ÈëÊ½JMS·şÎñ¡£
+ * åµŒå…¥å¼JMSæœåŠ¡ã€‚
  */
 public class JMSEmbeddedService {
     protected static final Logger logger = Logger.getLogger(JMSEmbeddedService.class);
@@ -82,7 +82,7 @@ public class JMSEmbeddedService {
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     public synchronized void start() {
         if (!this.isRunning()) {
@@ -106,7 +106,7 @@ public class JMSEmbeddedService {
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     public synchronized void stop() {
         if (this.isRunning()) {

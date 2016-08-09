@@ -61,10 +61,10 @@ public class TestModelTable extends TestEntityBase {
         if (table1.exists())
             table1.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table1.create();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         Table table2 = TableDataUtils.getTable();
         Assert.assertTrue(table2.exists());
 
@@ -80,37 +80,37 @@ public class TestModelTable extends TestEntityBase {
         Assert.assertEquals(DataState.Browse, table1.getDataState());
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
 
-        // É¾³ıµÚËÄĞĞÊı¾İ¡£
+        // åˆ é™¤ç¬¬å››è¡Œæ•°æ®ã€‚
         Row deletedRow = rows1.remove(4);
         Assert.assertEquals(DataState.Modified, table1.getDataState());
         Assert.assertEquals(TEST_COUNT - 1, table1.getRows().size());
         Assert.assertEquals(1, table1.getRows().getDeletedRows().size());
 
-        // É¾³ıµÚÎåĞĞÊı¾İ¡£
+        // åˆ é™¤ç¬¬äº”è¡Œæ•°æ®ã€‚
         rows1.remove(5);
         Assert.assertEquals(DataState.Modified, table1.getDataState());
         Assert.assertEquals(TEST_COUNT - 2, table1.getRows().size());
         Assert.assertEquals(2, table1.getRows().getDeletedRows().size());
 
-        // É¾³ıµÚÊ®ĞĞÊı¾İ¡£
+        // åˆ é™¤ç¬¬åè¡Œæ•°æ®ã€‚
         Assert.assertFalse(rows1.remove(deletedRow));
         Assert.assertEquals(DataState.Modified, table1.getDataState());
         Assert.assertEquals(TEST_COUNT - 2, table1.getRows().size());
         Assert.assertEquals(2, table1.getRows().getDeletedRows().size());
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.save();
         Assert.assertEquals(DataState.Browse, table1.getDataState());
         Assert.assertEquals(TEST_COUNT - 2, table1.getRows().size());
         Assert.assertEquals(0, table1.getRows().getDeletedRows().size());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(DataState.Browse, table2.getDataState());
         Assert.assertEquals(TEST_COUNT - 2, table2.getRows().size());
         Assert.assertEquals(0, table2.getRows().getDeletedRows().size());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table3 = TableDataUtils.getTable();
         table3.setRange(new Range(2));
         table3.setOrderBy(new OrderBy(new OrderByUnit("FieldC", OrderByType.Desc), new OrderByUnit("FieldD")));
@@ -132,9 +132,9 @@ public class TestModelTable extends TestEntityBase {
         Assert.assertEquals(DataState.Modified, table1.getDataState());
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.save();
-        // ¼ì²é×´Ì¬
+        // æ£€æŸ¥çŠ¶æ€
         Assert.assertEquals(DataState.Browse, table1.getDataState());
         for (int i = 0; i < TEST_COUNT; i++) {
             Row row = rows1.get(i);
@@ -144,7 +144,7 @@ public class TestModelTable extends TestEntityBase {
             }
         }
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table1.getRows().size(), table2.getRows().size());
@@ -162,10 +162,10 @@ public class TestModelTable extends TestEntityBase {
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
         Assert.assertEquals(TEST_COUNT, table1.getRows().getModifiedRows().size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.save();
 
-        // ¼ì²é×´Ì¬
+        // æ£€æŸ¥çŠ¶æ€
         Assert.assertEquals(DataState.Browse, table1.getDataState());
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
         Assert.assertEquals(0, table1.getRows().getModifiedRows().size());
@@ -178,13 +178,13 @@ public class TestModelTable extends TestEntityBase {
             }
         }
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table2.getRows().size(), table1.getRows().size());
         Assert.assertTrue(TableUtils.equalsContent(table1, table2));
 
-        // ²âÊÔÈ«²¿É¾³ı¹¦ÄÜ¡£
+        // æµ‹è¯•å…¨éƒ¨åˆ é™¤åŠŸèƒ½ã€‚
         Table table3 = TableDataUtils.getTable();
         table3.load();
         table3.getRows().removeAll();
@@ -193,7 +193,7 @@ public class TestModelTable extends TestEntityBase {
         table4.load();
         Assert.assertEquals(0, table4.getRows().size());
 
-        // ²âÊÔĞŞ¸Ä±íÎª²åÈë×´Ì¬£¬ÖØĞÂ²åÈëµÄ¹¦ÄÜ¡£
+        // æµ‹è¯•ä¿®æ”¹è¡¨ä¸ºæ’å…¥çŠ¶æ€ï¼Œé‡æ–°æ’å…¥çš„åŠŸèƒ½ã€‚
         table2.setTableState(TableState.Insert);
         for (int i = 0; i < TEST_COUNT; i++) {
             Row row = table2.getRows().get(i);
@@ -204,7 +204,7 @@ public class TestModelTable extends TestEntityBase {
         }
         table2.save();
 
-        // ÅĞ¶ÏÖØĞÂ²åÈë³É¹¦·ñ¡£
+        // åˆ¤æ–­é‡æ–°æ’å…¥æˆåŠŸå¦ã€‚
         Table table5 = TableDataUtils.getTable();
         table5.load();
         Assert.assertEquals(table1.getRows().size(), table5.getRows().size());

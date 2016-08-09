@@ -11,59 +11,59 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * ÎÄ¼ş¶¨ÖÆĞ´ÈëÆ÷¡£
+ * æ–‡ä»¶å®šåˆ¶å†™å…¥å™¨ã€‚
  *
  * @author dangcat
  */
 public class FileWriter {
     protected static final Logger logger = Logger.getLogger(FileWriter.class);
     /**
-     * ÆğÊ¼Ê±¼ä¡£
+     * èµ·å§‹æ—¶é—´ã€‚
      */
     private long beginTime = 0l;
     /**
-     * µ±Ç°Ğ´ÈëµÄ¼ÇÂ¼Êı¡£
+     * å½“å‰å†™å…¥çš„è®°å½•æ•°ã€‚
      */
     private long count = 0;
     /**
-     * µ±Ç°ÎÄ¼ş¡£
+     * å½“å‰æ–‡ä»¶ã€‚
      */
     private File currentFile = null;
     /**
-     * ÈÕÆÚ¸ñÊ½»¯¡£
+     * æ—¥æœŸæ ¼å¼åŒ–ã€‚
      */
     private DateFormat dateFormat = null;
     /**
-     * ×îĞ¡ÖÜÆÚ£¬µ¥Î»Ãë£¬Ä¬ÈÏ30Ãë¡£
+     * æœ€å°å‘¨æœŸï¼Œå•ä½ç§’ï¼Œé»˜è®¤30ç§’ã€‚
      */
     private long interval = 30l;
     /**
-     * ×î´ó¼ÇÂ¼Êı£¬Ä¬ÈÏ10000¡£
+     * æœ€å¤§è®°å½•æ•°ï¼Œé»˜è®¤10000ã€‚
      */
     private long maxLength = 10000l;
     /**
-     * Êä³öÁ÷¡£
+     * è¾“å‡ºæµã€‚
      */
     private OutputStream outputStream = null;
     /**
-     * ÎÄ¼şÃûµÄÈÕÆÚÄ£°å¡£
+     * æ–‡ä»¶åçš„æ—¥æœŸæ¨¡æ¿ã€‚
      */
     private String pattern = "yyyy_MM_dd_HH_mm_ss_SSS";
     /**
-     * ÎÄ¼şÇ°×º¡£
+     * æ–‡ä»¶å‰ç¼€ã€‚
      */
     private String preFix = null;
     /**
-     * Ğ´ÈëÂ·¾¶¡£
+     * å†™å…¥è·¯å¾„ã€‚
      */
     private String storePath;
     /**
-     * ÎÄ¼şºó×º£¬Ä¬ÈÏtxt¡£
+     * æ–‡ä»¶åç¼€ï¼Œé»˜è®¤txtã€‚
      */
     private String suffix = ".txt";
 
     /**
-     * ¹Ø±ÕÎÄ¼ş¡£
+     * å…³é—­æ–‡ä»¶ã€‚
      *
      * @throws IOException
      */
@@ -101,7 +101,7 @@ public class FileWriter {
     }
 
     /**
-     * ¼ÆËãÎÄ¼şÃû¡£
+     * è®¡ç®—æ–‡ä»¶åã€‚
      *
      * @return
      */
@@ -142,7 +142,7 @@ public class FileWriter {
     }
 
     /**
-     * »ñµÃÊä³öÁ÷¶ÔÏó¡£
+     * è·å¾—è¾“å‡ºæµå¯¹è±¡ã€‚
      *
      * @return
      * @throws FileNotFoundException
@@ -199,7 +199,7 @@ public class FileWriter {
     }
 
     /**
-     * ¼ì²éÎÄ¼şÊÇ·ñ·ûºÏ¹Ø±ÕÒªÇó¡£
+     * æ£€æŸ¥æ–‡ä»¶æ˜¯å¦ç¬¦åˆå…³é—­è¦æ±‚ã€‚
      */
     public boolean isTimeOut() {
         boolean isTimeOut = false;
@@ -215,7 +215,7 @@ public class FileWriter {
     }
 
     /**
-     * °´ÕÕÒªÇóÇĞ»»ÎÄ¼ş¡£
+     * æŒ‰ç…§è¦æ±‚åˆ‡æ¢æ–‡ä»¶ã€‚
      */
     public boolean switchFile() {
         boolean reault = false;
@@ -227,7 +227,7 @@ public class FileWriter {
     }
 
     /**
-     * Ğ´ÈëÊı¾İµ½ÎÄ¼ş¡£
+     * å†™å…¥æ•°æ®åˆ°æ–‡ä»¶ã€‚
      *
      * @throws IOException
      */

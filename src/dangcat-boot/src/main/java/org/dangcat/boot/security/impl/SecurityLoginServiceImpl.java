@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * °²È«·şÎñ¡£
+ * å®‰å…¨æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -47,7 +47,7 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
 
         Object mainService = ApplicationContext.getInstance().getMainService();
         if (mainService != null) {
-            // À©Õ¹ÑéÖ¤¡£
+            // æ‰©å±•éªŒè¯ã€‚
             ExtendSecurity extendSecurity = mainService.getClass().getAnnotation(ExtendSecurity.class);
             if (extendSecurity != null)
                 this.loadExtendSecurity(extendSecurity.value());
@@ -57,7 +57,7 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
                     this.loadExtendSecurity(classType);
             }
 
-            // ±¾µØÑéÖ¤¡£
+            // æœ¬åœ°éªŒè¯ã€‚
             LocalSecurity localSecurity = mainService.getClass().getAnnotation(LocalSecurity.class);
             if (localSecurity != null) {
                 String configName = localSecurity.value();
@@ -77,12 +77,12 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
     }
 
     /**
-     * ÒÔÖ¸¶¨ÓÃ»§ºÍÃÜÂëµÇÂ½¡£
+     * ä»¥æŒ‡å®šç”¨æˆ·å’Œå¯†ç ç™»é™†ã€‚
      *
-     * @param no       ÕË»§Ãû¡£
-     * @param password ÃÜÂë¡£
-     * @return µÇÂ½ĞÅÏ¢¡£
-     * @throws SecurityLoginException µÇÂ½Òì³£¡£
+     * @param no       è´¦æˆ·åã€‚
+     * @param password å¯†ç ã€‚
+     * @return ç™»é™†ä¿¡æ¯ã€‚
+     * @throws SecurityLoginException ç™»é™†å¼‚å¸¸ã€‚
      */
     public ServicePrincipal login(String no, String password) throws SecurityLoginException {
         if (ValueUtils.isEmpty(no))
@@ -91,7 +91,7 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
         if (ValueUtils.isEmpty(password))
             throw new SecurityLoginException(SecurityLoginException.FIELDNAME_PASSWORD, SecurityLoginException.PASSWORD_EMPTY);
 
-        // ÕËºÅÊÇ·ñ´æÔÚ
+        // è´¦å·æ˜¯å¦å­˜åœ¨
         LoginServiceBase loginService = null;
         LoginUser loginUser = null;
         for (LoginServiceBase loginServiceBase : this.loginServiceCollection) {
@@ -105,11 +105,11 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
             throw new SecurityLoginException(SecurityLoginException.FIELDNAME_NO, SecurityLoginException.NO_NOT_EXISTS);
 
         try {
-            // ½ÇÉ«ÊÇ·ñ´æÔÚ
+            // è§’è‰²æ˜¯å¦å­˜åœ¨
             if (loginUser.getRole() == null)
                 throw new SecurityLoginException(SecurityLoginException.INVALID_ROLE);
 
-            // ÃÜÂëÊÇ·ñÕıÈ·
+            // å¯†ç æ˜¯å¦æ­£ç¡®
             if (!loginUser.checkPassword(password))
                 throw new SecurityLoginException(SecurityLoginException.FIELDNAME_PASSWORD, SecurityLoginException.INVALID_PASSWORD);
         } catch (SecurityLoginException e) {
@@ -120,11 +120,11 @@ public class SecurityLoginServiceImpl extends ServiceBase implements SecurityLog
     }
 
     /**
-     * µÇ³öÖ¸¶¨ÓÃ»§¡£
+     * ç™»å‡ºæŒ‡å®šç”¨æˆ·ã€‚
      *
-     * @param servicePrincipal ÓÃ»§ĞÅÏ¢¡£
-     * @return µÇ³ö½á¹û¡£
-     * @throws SecurityLoginException µÇÂ½Òì³£¡£
+     * @param servicePrincipal ç”¨æˆ·ä¿¡æ¯ã€‚
+     * @return ç™»å‡ºç»“æœã€‚
+     * @throws SecurityLoginException ç™»é™†å¼‚å¸¸ã€‚
      */
     public boolean logout(ServicePrincipal servicePrincipal) throws SecurityLoginException {
         for (LoginServiceBase loginServiceBase : this.loginServiceCollection) {

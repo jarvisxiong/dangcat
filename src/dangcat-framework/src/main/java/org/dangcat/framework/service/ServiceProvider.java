@@ -1,16 +1,16 @@
 package org.dangcat.framework.service;
 
 /**
- * ·şÎñÌá¹©Õß¡£
+ * æœåŠ¡æä¾›è€…ã€‚
  *
  * @author dangcat
  */
 public interface ServiceProvider {
     /**
-     * ¸ù¾İÀàĞÍ»ñÈ¡·şÎñ¶ÔÏó¡£
+     * æ ¹æ®ç±»å‹è·å–æœåŠ¡å¯¹è±¡ã€‚
      *
-     * @param classType ·şÎñÀàĞÍ¡£
-     * @return ·şÎñ¶ÔÏó¡£
+     * @param classType æœåŠ¡ç±»å‹ã€‚
+     * @return æœåŠ¡å¯¹è±¡ã€‚
      */
     <T> T getService(Class<T> classType);
 }

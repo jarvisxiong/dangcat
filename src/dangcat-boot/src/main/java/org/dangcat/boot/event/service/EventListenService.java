@@ -3,29 +3,29 @@ package org.dangcat.boot.event.service;
 import org.dangcat.framework.event.Event;
 
 /**
- * ÏûÏ¢ÕìÌı·şÎñ¡£
+ * æ¶ˆæ¯ä¾¦å¬æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface EventListenService extends EventReceiveListener {
     /**
-     * Ìí¼ÓÏûÏ¢ÕìÌıÆ÷¡£
+     * æ·»åŠ æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
      *
-     * @param eventListener ÏûÏ¢ÕìÌıÆ÷¡£
+     * @param eventListener æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
      */
     void addEventListener(EventListener eventListener);
 
     /**
-     * ´¦ÀíÊÂ¼şÏûÏ¢¡£
+     * å¤„ç†äº‹ä»¶æ¶ˆæ¯ã€‚
      *
-     * @param event ÏûÏ¢¶ÔÏó¡£
+     * @param event æ¶ˆæ¯å¯¹è±¡ã€‚
      */
     void handleEvent(Event event);
 
     /**
-     * É¾³ıÏûÏ¢ÕìÌıÆ÷¡£
+     * åˆ é™¤æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
      *
-     * @param eventListener ÏûÏ¢ÕìÌıÆ÷¡£
+     * @param eventListener æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
      */
     void removeEventListener(EventListener eventListener);
 }

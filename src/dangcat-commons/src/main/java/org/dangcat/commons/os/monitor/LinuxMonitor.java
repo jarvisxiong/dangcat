@@ -10,21 +10,21 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 
 /**
- * LinuxÏµÍ³×ÊÔ´¼à¿Ø¡£
+ * Linuxç³»ç»Ÿèµ„æºç›‘æ§ã€‚
  *
  * @author dangcat
  */
 class LinuxMonitor extends OSMonitor {
     /**
-     * ½ø³ÌµÄCPUÕ¼ÓÃÂÊ¡£½ø³ÌÕ¼ÓÃµÄÄÚ´æ¡£
+     * è¿›ç¨‹çš„CPUå ç”¨ç‡ã€‚è¿›ç¨‹å ç”¨çš„å†…å­˜ã€‚
      */
     private static final String MONITOR_PROCESS_CMD = "ps -eo pid,rss,pcpu | grep '' *{0}''";
     /**
-     * ×ÜµÄCPUÀûÓÃÂÊ¡£
+     * æ€»çš„CPUåˆ©ç”¨ç‡ã€‚
      */
     private static final String MONITOR_TOTALCPU_CMD = "top -b -n 1 | grep ^Cpu | awk '{print $5}' | sed -e 's/%.*'//g";
     /**
-     * ×ÜÎïÀíÄÚ´æ¡£ ÒÑ¾­Ê¹ÓÃµÄÎïÀíÄÚ´æ¡£
+     * æ€»ç‰©ç†å†…å­˜ã€‚ å·²ç»ä½¿ç”¨çš„ç‰©ç†å†…å­˜ã€‚
      */
     private static final String MONITOR_TOTALMEM_CMD = "free | grep ^Mem: | awk '{print $2 \"\\t\" $3 \"\\t\" $6 \"\\t\" $7}'";
 
@@ -50,7 +50,7 @@ class LinuxMonitor extends OSMonitor {
     }
 
     /**
-     * ¼à¿ØCPU¡£
+     * ç›‘æ§CPUã€‚
      */
     @Override
     protected void monitorCPU(MonitorInfo monitorInfo) {
@@ -59,7 +59,7 @@ class LinuxMonitor extends OSMonitor {
     }
 
     /**
-     * ¼à¿ØÄÚ´æ¡£
+     * ç›‘æ§å†…å­˜ã€‚
      */
     @Override
     protected void monitorMemory(MonitorInfo monitorInfo) {
@@ -73,26 +73,26 @@ class LinuxMonitor extends OSMonitor {
     }
 
     /**
-     * ¼à¿Ø½ø³ÌµÄCPUÀûÓÃºÍÄÚ´æÕ¼ÓÃÂÊ¡£
+     * ç›‘æ§è¿›ç¨‹çš„CPUåˆ©ç”¨å’Œå†…å­˜å ç”¨ç‡ã€‚
      */
     private void monitorProcessCPU(MonitorInfo monitorInfo) {
         Integer currentPID = Environment.getCurrentPID();
         String command = MessageFormat.format(MONITOR_PROCESS_CMD, currentPID.toString());
         String[] processValues = this.calculate(command);
-        // ½ø³ÌÄÚ´æÕ¼ÓÃÊı¡£
+        // è¿›ç¨‹å†…å­˜å ç”¨æ•°ã€‚
         long processUsageMemory = ValueUtils.parseLong(processValues[1]);
         monitorInfo.setValue(MonitorInfo.ProcessUsageMemory, processUsageMemory);
-        // ½ø³ÌCPUÕ¼ÓÃÂÊ
+        // è¿›ç¨‹CPUå ç”¨ç‡
         double processCpuRatio = ValueUtils.parseDouble(processValues[2]);
         monitorInfo.setValue(MonitorInfo.ProcessCpuRatio, processCpuRatio);
     }
 
     /**
-     * ¼à¿Ø×ÜµÄCPUÀûÓÃÂÊ¡£
+     * ç›‘æ§æ€»çš„CPUåˆ©ç”¨ç‡ã€‚
      */
     private void monitorTotalCPU(MonitorInfo monitorInfo) {
         String[] totalCpuValues = this.calculate(MONITOR_TOTALCPU_CMD);
-        // CPUÏĞÖÃÂÊ
+        // CPUé—²ç½®ç‡
         double idleCpuRatio = ValueUtils.parseDouble(totalCpuValues[0]);
         monitorInfo.setValue(MonitorInfo.TotalCpuRatio, 100 - idleCpuRatio);
     }

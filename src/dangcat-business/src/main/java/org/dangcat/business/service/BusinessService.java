@@ -6,7 +6,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import java.util.Map;
 
 /**
- * ÒµÎñ·şÎñ½Ó¿Ú¡£
+ * ä¸šåŠ¡æœåŠ¡æ¥å£ã€‚
  *
  * @param <V>
  * @author dangcat
@@ -16,63 +16,63 @@ public interface BusinessService<Q extends EntityBase, V extends EntityBase, F e
     String VIEW_TABLENAME = "V";
 
     /**
-     * ±£´æ²ÎÊıÅäÖÃ¡£
+     * ä¿å­˜å‚æ•°é…ç½®ã€‚
      */
     EntityBase config(EntityBase config) throws ServiceException;
 
     /**
-     * ĞÂÔöÊµÌåÊı¾İ¡£
+     * æ–°å¢å®ä½“æ•°æ®ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     V create(V entity) throws ServiceException;
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼ü¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param id ä¸»é”®ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean delete(Integer id) throws ServiceException;
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÓĞÈ¨ÏŞ¡£
+     * åˆ¤æ–­æ˜¯å¦æœ‰æƒé™ã€‚
      *
-     * @param permissionId È¨ÏŞÂë¡£
-     * @return ÊÇ·ñÓĞÖ¸¶¨È¨ÏŞ¡£
+     * @param permissionId æƒé™ç ã€‚
+     * @return æ˜¯å¦æœ‰æŒ‡å®šæƒé™ã€‚
      */
     boolean hasPermission(Integer permissionId);
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param dataFilter ²éÑ¯·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param dataFilter æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<Q> query(F dataFilter) throws ServiceException;
 
     /**
-     * ±£´æÊµÌåÊı¾İ¡£
+     * ä¿å­˜å®ä½“æ•°æ®ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     V save(V entity) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÁĞ±í¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åˆ—è¡¨ã€‚
      *
-     * @param dataFilter ²éÑ¯·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param dataFilter æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Map<Number, String> selectMap(F dataFilter) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     V view(Integer id) throws ServiceException;
 }

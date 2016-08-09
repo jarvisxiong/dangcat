@@ -8,29 +8,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ³§ÉÌÊôĞÔÄ£°å¹ÜÀí¡£
+ * å‚å•†å±æ€§æ¨¡æ¿ç®¡ç†ã€‚
  *
  * @author dangcat
  */
 public class VendorAttributeTemplateManager {
     /**
-     * ÊôĞÔÄ£°å×Ü¹ÜÀí¡£
+     * å±æ€§æ¨¡æ¿æ€»ç®¡ç†ã€‚
      */
     private AttributeTemplateManager attributeTemplateManager = null;
     /**
-     * ÊôĞÔºÅÓëÄ£°åµÄÓ³ÉäÁĞ±í¡£
+     * å±æ€§å·ä¸æ¨¡æ¿çš„æ˜ å°„åˆ—è¡¨ã€‚
      */
     private Map<Integer, AttributeTemplate> attributeTemplateMap = new HashMap<Integer, AttributeTemplate>();
     /**
-     * ÊôĞÔÃûÓëÄ£°åµÄÓ³ÉäÁĞ±í¡£
+     * å±æ€§åä¸æ¨¡æ¿çš„æ˜ å°„åˆ—è¡¨ã€‚
      */
     private Map<String, AttributeTemplate> attributeTemplateNameMap = null;
     /**
-     * °üÀàĞÍµÄĞ£Ñé±í¡£
+     * åŒ…ç±»å‹çš„æ ¡éªŒè¡¨ã€‚
      */
     private Map<String, PacketRuleValidator> packetRuleValidatorMap = new HashMap<String, PacketRuleValidator>();
     /**
-     * ³§ÉÌºÅ¡£
+     * å‚å•†å·ã€‚
      */
     private Integer vendorId = null;
 
@@ -56,20 +56,20 @@ public class VendorAttributeTemplateManager {
     }
 
     /**
-     * Í¨¹ıÊôĞÔÀàĞÍºÅ¶ÁÈ¡ÊôĞÔÄ£°å¡£
+     * é€šè¿‡å±æ€§ç±»å‹å·è¯»å–å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param type ÊôĞÔºÅ¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param type å±æ€§å·ã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate(Integer type) {
         return this.attributeTemplateMap.get(type);
     }
 
     /**
-     * Í¨¹ı³§ÉÌ¡¢ÊôĞÔÀàĞÍºÅ¶ÁÈ¡ÊôĞÔÄ£°å¡£
+     * é€šè¿‡å‚å•†ã€å±æ€§ç±»å‹å·è¯»å–å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param name ÊôĞÔÃû¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param name å±æ€§åã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate(String name) {
         if (this.attributeTemplateNameMap == null) {
@@ -102,10 +102,10 @@ public class VendorAttributeTemplateManager {
     }
 
     /**
-     * Ö¸¶¨°üÀàĞÍ¶ÁÈ¡Ğ£Ñé¹æÔò¡£
+     * æŒ‡å®šåŒ…ç±»å‹è¯»å–æ ¡éªŒè§„åˆ™ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @return Ğ£Ñé¹æÔò¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return æ ¡éªŒè§„åˆ™ã€‚
      */
     public PacketRuleValidator getPacketRuleValidator(String packetType) {
         return this.packetRuleValidatorMap.get(packetType);

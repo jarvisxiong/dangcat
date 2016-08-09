@@ -12,21 +12,21 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.TextAnchor;
 
 /**
- * ¶ÑÕ»Öù×´Í³¼ÆÍ¼¡£
+ * å †æ ˆæŸ±çŠ¶ç»Ÿè®¡å›¾ã€‚
  *
  * @author dangcat
  */
 public class StackedBarChart extends CategoryChart {
     @Override
     protected JFreeChart createChart() {
-        // ½¨Á¢Í³¼Æ¶ÔÏó¡£
-        JFreeChart chart = ChartFactory.createStackedBarChart(this.getTitle(), // ±êÌâ
-                this.getDomainTitle(), // ºá×ø±ê±êÌâ¡£
-                this.getRangeTitle(), // ×İ×ø±ê±êÌâ¡£
-                new DefaultCategoryDataset(), // Êı¾İÀ´Ô´¡£
-                this.getOrientation(), // ×ø±ê·½Ïò
+        // å»ºç«‹ç»Ÿè®¡å¯¹è±¡ã€‚
+        JFreeChart chart = ChartFactory.createStackedBarChart(this.getTitle(), // æ ‡é¢˜
+                this.getDomainTitle(), // æ¨ªåæ ‡æ ‡é¢˜ã€‚
+                this.getRangeTitle(), // çºµåæ ‡æ ‡é¢˜ã€‚
+                new DefaultCategoryDataset(), // æ•°æ®æ¥æºã€‚
+                this.getOrientation(), // åæ ‡æ–¹å‘
                 true, // include legend
-                true, // ÊÇ·ñÌáÊ¾¡£
+                true, // æ˜¯å¦æç¤ºã€‚
                 false);
         return chart;
     }

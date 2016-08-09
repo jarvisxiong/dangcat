@@ -31,9 +31,9 @@ public class TestEntityTransaction extends TestEntityBase {
         for (Table table : tableList) {
             if (table.exists())
                 table.drop();
-            // ²úÉúĞÂµÄÊı¾İ±í
+            // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
             table.create();
-            // ´æ´¢Êı¾İ±í¡£
+            // å­˜å‚¨æ•°æ®è¡¨ã€‚
             table.save();
         }
 

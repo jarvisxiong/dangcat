@@ -4,7 +4,7 @@ import org.dangcat.persistence.DataReader;
 import org.dangcat.persistence.model.Column;
 
 /**
- * ExcelÎÄµµ²Ù×÷¡£
+ * Excelæ–‡æ¡£æ“ä½œã€‚
  *
  * @author dangcat
  */
@@ -49,10 +49,10 @@ public class ExcelDocumentWriter extends ExcelWriter {
     }
 
     /**
-     * Ğ´ÈëÊı¾İ¡£
+     * å†™å…¥æ•°æ®ã€‚
      *
-     * @param sheet      Ò³±ê¶ÔÏó¡£
-     * @param dataReader Êı¾İÀ´Ô´¡£
+     * @param sheet      é¡µæ ‡å¯¹è±¡ã€‚
+     * @param dataReader æ•°æ®æ¥æºã€‚
      */
     private void writeBody() {
         for (int index = 0; index < this.dataReader.size(); index++) {
@@ -71,10 +71,10 @@ public class ExcelDocumentWriter extends ExcelWriter {
     }
 
     /**
-     * ²úÉú±êÌâ¡£
+     * äº§ç”Ÿæ ‡é¢˜ã€‚
      *
-     * @param sheet      Ò³±ê¶ÔÏó¡£
-     * @param dataReader Êı¾İÀ´Ô´¡£
+     * @param sheet      é¡µæ ‡å¯¹è±¡ã€‚
+     * @param dataReader æ•°æ®æ¥æºã€‚
      */
     private void writeHeader() {
         int index = 0;

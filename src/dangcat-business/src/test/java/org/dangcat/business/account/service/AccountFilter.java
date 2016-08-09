@@ -11,7 +11,7 @@ import org.dangcat.persistence.filter.FilterType;
 import org.dangcat.persistence.filter.FilterUnit;
 
 /**
- * ÕË»§²éÑ¯Ìõ¼ş¡£
+ * è´¦æˆ·æŸ¥è¯¢æ¡ä»¶ã€‚
  *
  * @author dangcat
  */

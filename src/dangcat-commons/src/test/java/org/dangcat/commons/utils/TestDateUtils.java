@@ -21,12 +21,12 @@ public class TestDateUtils {
         Assert.assertEquals(60 * 60, DateUtils.diff(DateUtils.SECOND, beginDate, endDate));
         Assert.assertEquals(60 * 60 * 1000, DateUtils.diff(DateUtils.MILLISECOND, beginDate, endDate));
 
-        // ²âÊÔÈ¡Ò»¸öÔÂµÄ×îºóÒ»Ìì
+        // æµ‹è¯•å–ä¸€ä¸ªæœˆçš„æœ€åä¸€å¤©
         Date srcDateTime = DateUtils.getLastDayOfMonth(ValueUtils.parseDate("2012-02-15 10:20:23.999"));
         Date dstDateTime = ValueUtils.parseDate("2012-02-29 23:59:59.999");
         Assert.assertEquals(0, DateUtils.diff(DateUtils.SECOND, srcDateTime, dstDateTime));
 
-        // ²âÊÔÈòÄê
+        // æµ‹è¯•é—°å¹´
         Date leapYearDate = ValueUtils.parseDate("2012-02-29 23:59:59");
         Assert.assertTrue(DateUtils.isLeapYear(leapYearDate));
         Date notLeapYearDate = ValueUtils.parseDate("2013-02-29 23:59:59");

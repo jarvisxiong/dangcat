@@ -5,27 +5,27 @@ import org.dangcat.net.ftp.service.impl.FTPContext;
 import java.io.File;
 
 /**
- * ÏÂÔØ»Øµ÷½Ó¿Ú¡£
+ * ä¸‹è½½å›è°ƒæ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface FTPCallBack {
     /**
-     * ÏÂÔØÊ§°Ü¡£
+     * ä¸‹è½½å¤±è´¥ã€‚
      *
-     * @param ftpContext FTP»á»°¡£
-     * @param localPath  ±¾µØÂ·¾¶¡£
-     * @param remotePath Ô¶¶ËÂ·¾¶¡£
-     * @param exception  ´íÎóÒì³£¡£
+     * @param ftpContext FTPä¼šè¯ã€‚
+     * @param localPath  æœ¬åœ°è·¯å¾„ã€‚
+     * @param remotePath è¿œç«¯è·¯å¾„ã€‚
+     * @param exception  é”™è¯¯å¼‚å¸¸ã€‚
      */
     void onFailure(FTPContext ftpContext, File localPath, String remotePath, Exception exception);
 
     /**
-     * ÏÂÔØ³É¹¦¡£
+     * ä¸‹è½½æˆåŠŸã€‚
      *
-     * @param ftpContext FTP»á»°¡£
-     * @param localPath  ±¾µØÂ·¾¶¡£
-     * @param remotePath Ô¶¶ËÂ·¾¶¡£
+     * @param ftpContext FTPä¼šè¯ã€‚
+     * @param localPath  æœ¬åœ°è·¯å¾„ã€‚
+     * @param remotePath è¿œç«¯è·¯å¾„ã€‚
      */
     void onSucess(FTPContext ftpContext, File localPath, String remotePath);
 }

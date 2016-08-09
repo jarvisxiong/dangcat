@@ -13,19 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Csv¹¤¾ßÀà¡£
+ * Csvå·¥å…·ç±»ã€‚
  *
  * @author dangcat
  */
 public class CsvUtils {
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param reader      Êı¾İ»º³åÁ÷¡£
-     * @param classType   ÊµÌåÀàĞÍ¡£
-     * @param firstHeader ÊÇ·ñµÚÒ»ĞĞÎª±íÍ·¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException     Òì³£¡£
+     * @param reader      æ•°æ®ç¼“å†²æµã€‚
+     * @param classType   å®ä½“ç±»å‹ã€‚
+     * @param firstHeader æ˜¯å¦ç¬¬ä¸€è¡Œä¸ºè¡¨å¤´ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException     å¼‚å¸¸ã€‚
      * @throws EntityException
      */
     public static <T> List<T> read(BufferedReader reader, Class<T> classType, boolean firstHeader) throws IOException, EntityException {
@@ -39,13 +39,13 @@ public class CsvUtils {
     }
 
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param reader      Êı¾İ»º³åÁ÷¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñµÚÒ»ĞĞÎª±íÍ·¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param reader      æ•°æ®ç¼“å†²æµã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦ç¬¬ä¸€è¡Œä¸ºè¡¨å¤´ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static int read(BufferedReader reader, Table table, boolean firstHeader) throws IOException {
         CsvDocument csvDocument = new CsvDocument();
@@ -54,13 +54,13 @@ public class CsvUtils {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file        Ä¿±êÎÄ¼ş¡£
-     * @param classType   ÊµÌåÀàĞÍ¡£
-     * @param firstHeader ÊÇ·ñµÚÒ»ĞĞÎª±íÍ·¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param file        ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param classType   å®ä½“ç±»å‹ã€‚
+     * @param firstHeader æ˜¯å¦ç¬¬ä¸€è¡Œä¸ºè¡¨å¤´ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static <T> List<T> read(File file, Class<T> classType, boolean firstHeader) {
         List<T> entityList = new ArrayList<T>();
@@ -73,13 +73,13 @@ public class CsvUtils {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file        Ä¿±êÎÄ¼ş¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñµÚÒ»ĞĞÎª±íÍ·¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param file        ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦ç¬¬ä¸€è¡Œä¸ºè¡¨å¤´ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static int read(File file, Table table, boolean firstHeader) {
         CsvDocument csvDocument = new CsvDocument();
@@ -88,23 +88,23 @@ public class CsvUtils {
     }
 
     /**
-     * °ÑÊµÌå¶ÔÏóÊä³ö³ÉÒ»ĞĞÎÄ±¾¡£
+     * æŠŠå®ä½“å¯¹è±¡è¾“å‡ºæˆä¸€è¡Œæ–‡æœ¬ã€‚
      *
-     * @param entity     ÊµÌå¶ÔÏó¡£
-     * @param fieldNames ×Ö¶ÎÃûÊı×é¡£
-     * @return ¸ñÊ½»¯ºóÄÚÈİ¡£
+     * @param entity     å®ä½“å¯¹è±¡ã€‚
+     * @param fieldNames å­—æ®µåæ•°ç»„ã€‚
+     * @return æ ¼å¼åŒ–åå†…å®¹ã€‚
      */
     public static String toCSV(Object entity, String... fieldNames) {
         return toText(entity, null, fieldNames);
     }
 
     /**
-     * °ÑÊµÌå¶ÔÏóÊä³ö³ÉÒ»ĞĞÎÄ±¾¡£
+     * æŠŠå®ä½“å¯¹è±¡è¾“å‡ºæˆä¸€è¡Œæ–‡æœ¬ã€‚
      *
-     * @param entity     ÊµÌå¶ÔÏó¡£
-     * @param fieldText  ÎÄ±¾×Ö¶Î¡£
-     * @param fieldNames ×Ö¶ÎÃûÊı×é¡£
-     * @return ¸ñÊ½»¯ºóÄÚÈİ¡£
+     * @param entity     å®ä½“å¯¹è±¡ã€‚
+     * @param fieldText  æ–‡æœ¬å­—æ®µã€‚
+     * @param fieldNames å­—æ®µåæ•°ç»„ã€‚
+     * @return æ ¼å¼åŒ–åå†…å®¹ã€‚
      */
     public static String toText(Object entity, WriteUserSettings userSettings, String... fieldNames) {
         String text = null;
@@ -136,11 +136,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
-     * @param firstHeader  ÊÇ·ñÊä³öÍ·¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader  æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static <T> void write(File file, List<T> entityList, boolean firstHeader) {
         CsvDocument csvDocument = new CsvDocument();
@@ -149,11 +149,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
-     * @param firstHeader  ÊÇ·ñÊä³öÍ·¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader  æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static <T> void write(File file, List<T> entityList, boolean firstHeader, WriteUserSettings writeuserSettings) {
         CsvDocument csvDocument = new CsvDocument();
@@ -163,11 +163,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
-     * @param firstHeader  ÊÇ·ñÊä³öÍ·¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader  æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static void write(File file, Table table, boolean firstHeader) {
         CsvDocument csvDocument = new CsvDocument();
@@ -176,11 +176,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
-     * @param firstHeader  ÊÇ·ñÊä³öÍ·¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader  æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static void write(File file, Table table, boolean firstHeader, WriteUserSettings writeuserSettings) {
         CsvDocument csvDocument = new CsvDocument();
@@ -190,11 +190,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param printStream Êä³öÁ÷¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñÊä³öÍ·¡£
+     * @param printStream è¾“å‡ºæµã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static <T> void write(PrintStream printStream, List<T> entityList, boolean firstHeader) {
         CsvDocument csvDocument = new CsvDocument();
@@ -204,11 +204,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param printStream Êä³öÁ÷¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñÊä³öÍ·¡£
+     * @param printStream è¾“å‡ºæµã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static <T> void write(PrintStream printStream, List<T> entityList, boolean firstHeader, WriteUserSettings writeuserSettings) {
         CsvDocument csvDocument = new CsvDocument();
@@ -219,11 +219,11 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param printStream Êä³öÁ÷¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñÊä³öÍ·¡£
+     * @param printStream è¾“å‡ºæµã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public static void write(PrintStream printStream, Table table, boolean firstHeader) {
         CsvDocument csvDocument = new CsvDocument();
@@ -233,12 +233,12 @@ public class CsvUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param printStream Êä³öÁ÷¡£
-     * @param table       ±í¶ÔÏó¡£
-     * @param firstHeader ÊÇ·ñÊä³öÍ·¡£
-     * @param fieldText   ×Ö·û±êÊ¶¡£
+     * @param printStream è¾“å‡ºæµã€‚
+     * @param table       è¡¨å¯¹è±¡ã€‚
+     * @param firstHeader æ˜¯å¦è¾“å‡ºå¤´ã€‚
+     * @param fieldText   å­—ç¬¦æ ‡è¯†ã€‚
      */
     public static void write(PrintStream printStream, Table table, boolean firstHeader, WriteUserSettings writeuserSettings) {
         CsvDocument csvDocument = new CsvDocument();

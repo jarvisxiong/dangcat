@@ -3,42 +3,42 @@ package org.dangcat.boot.service;
 import java.util.concurrent.RejectedExecutionHandler;
 
 /**
- * Ïß³Ì³Ø·şÎñ¡£
+ * çº¿ç¨‹æ± æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface ThreadPoolService {
     /**
-     * Ìí¼Ó¾Ü¾ø´¦ÀíÕìÌıÆ÷¡£
+     * æ·»åŠ æ‹’ç»å¤„ç†ä¾¦å¬å™¨ã€‚
      *
-     * @param rejectedExecutionHandler ´¦ÀíÆ÷¡£
+     * @param rejectedExecutionHandler å¤„ç†å™¨ã€‚
      */
     void addRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler);
 
     /**
-     * Ö´ĞĞ¶àÏß³ÌÈÎÎñ¡£
+     * æ‰§è¡Œå¤šçº¿ç¨‹ä»»åŠ¡ã€‚
      */
     void execute(Runnable runnable);
 
     /**
-     * µ±Ç°ÕıÔÚÖ´ĞĞµÄÈÎÎñÊı¡£
+     * å½“å‰æ­£åœ¨æ‰§è¡Œçš„ä»»åŠ¡æ•°ã€‚
      */
     int getActiveCount();
 
     /**
-     * µ±Ç°´¦ÓÚ×èÈûµÄÈÎÎñÊı¡£
+     * å½“å‰å¤„äºé˜»å¡çš„ä»»åŠ¡æ•°ã€‚
      */
     int getBlockCount();
 
     /**
-     * ÊÇ·ñÒÑ¾­Í£Ö¹¡£
+     * æ˜¯å¦å·²ç»åœæ­¢ã€‚
      */
     boolean isShutdown();
 
     /**
-     * É¾³ı¾Ü¾ø´¦ÀíÕìÌıÆ÷¡£
+     * åˆ é™¤æ‹’ç»å¤„ç†ä¾¦å¬å™¨ã€‚
      *
-     * @param rejectedExecutionHandler ´¦ÀíÆ÷¡£
+     * @param rejectedExecutionHandler å¤„ç†å™¨ã€‚
      */
     void removeRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler);
 }

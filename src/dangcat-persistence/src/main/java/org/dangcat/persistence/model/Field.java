@@ -7,55 +7,55 @@ import java.sql.Time;
 import java.util.Date;
 
 /**
- * »ù±¾Êı¾İ¶ÔÏó¡£
+ * åŸºæœ¬æ•°æ®å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Field implements java.io.Serializable, Comparable<Field> {
     private static final long serialVersionUID = 1L;
     /**
-     * Êı¾İ¶ÔÏóµÄ×´Ì¬£ºĞÂÔö¡¢ĞŞ¸Ä¡£
+     * æ•°æ®å¯¹è±¡çš„çŠ¶æ€ï¼šæ–°å¢ã€ä¿®æ”¹ã€‚
      */
     private DataState dataState = DataState.Browse;
     /**
-     * ¾ÉµÄÊı¾İÖµ¡£
+     * æ—§çš„æ•°æ®å€¼ã€‚
      */
     private Object oldValue;
     /**
-     * ËùÊôÊı¾İĞĞ¡£
+     * æ‰€å±æ•°æ®è¡Œã€‚
      */
     private Row parent;
     /**
-     * µ±Ç°Êı¾İÖµ¡£
+     * å½“å‰æ•°æ®å€¼ã€‚
      */
     private Object value;
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      */
     public Field() {
     }
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      *
-     * @param value µ±Ç°Êı¾İÖµ¡£
+     * @param value å½“å‰æ•°æ®å€¼ã€‚
      */
     public Field(Object value) {
         this.value = value;
     }
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      *
-     * @param parent ¸¸Êı¾İĞĞ¶ÔÏó¡£
+     * @param parent çˆ¶æ•°æ®è¡Œå¯¹è±¡ã€‚
      */
     public Field(Row parent) {
         this.parent = parent;
     }
 
     /**
-     * ½¨Á¢ĞÂµÄÊµÀı¡£
+     * å»ºç«‹æ–°çš„å®ä¾‹ã€‚
      *
      * @return
      */
@@ -64,9 +64,9 @@ public class Field implements java.io.Serializable, Comparable<Field> {
     }
 
     /**
-     * ¸Ä±äµ±Ç°Öµ¡£
+     * æ”¹å˜å½“å‰å€¼ã€‚
      *
-     * @param newValue ĞÂµÄÖµ¶ÔÏó¡£
+     * @param newValue æ–°çš„å€¼å¯¹è±¡ã€‚
      */
     private void changeValue(Object newValue) {
         if (this.oldValue == null)
@@ -81,7 +81,7 @@ public class Field implements java.io.Serializable, Comparable<Field> {
     }
 
     /**
-     * ×Ö¶Î±È½Ï£ºÏàµÈ·µ»Ø0£¬´óÓÚ·µ»Ø´óÓÚ0µÄÊı£¬Ğ¡ÓÚ·µ»ØĞ¡ÓÚ0µÄÊı¡£
+     * å­—æ®µæ¯”è¾ƒï¼šç›¸ç­‰è¿”å›0ï¼Œå¤§äºè¿”å›å¤§äº0çš„æ•°ï¼Œå°äºè¿”å›å°äº0çš„æ•°ã€‚
      */
 
     public int compareTo(Field destField) {
@@ -121,9 +121,9 @@ public class Field implements java.io.Serializable, Comparable<Field> {
     }
 
     /**
-     * ÉèÖÃÊı¾İ×´Ì¬¡£
+     * è®¾ç½®æ•°æ®çŠ¶æ€ã€‚
      *
-     * @param dataState Êı¾İ×´Ì¬¡£
+     * @param dataState æ•°æ®çŠ¶æ€ã€‚
      */
     public void setDataState(DataState dataState) {
         this.dataState = dataState;
@@ -177,9 +177,9 @@ public class Field implements java.io.Serializable, Comparable<Field> {
     }
 
     /**
-     * È¡µÃ¾ÉµÄÊı¾İÖµ¡£
+     * å–å¾—æ—§çš„æ•°æ®å€¼ã€‚
      *
-     * @return ¾ÉµÄÖµ¶ÔÏó¡£
+     * @return æ—§çš„å€¼å¯¹è±¡ã€‚
      */
     public Object getOldValue() {
         return this.oldValue;
@@ -220,17 +220,17 @@ public class Field implements java.io.Serializable, Comparable<Field> {
     }
 
     /**
-     * °Ñµ±Ç°Öµ×ª³ÉSQL±í´ïÊ½¡£
+     * æŠŠå½“å‰å€¼è½¬æˆSQLè¡¨è¾¾å¼ã€‚
      *
-     * @param transOldValue ÊÇ·ñ×ª»»¾ÉÖµ¡£
-     * @return ±í´ïÊ½¡£
+     * @param transOldValue æ˜¯å¦è½¬æ¢æ—§å€¼ã€‚
+     * @return è¡¨è¾¾å¼ã€‚
      */
     public String toSqlString(boolean transOldValue) {
         return TableStatementHelper.toSqlString(transOldValue ? this.oldValue : this.value);
     }
 
     /**
-     * Êä³öÊı¾İÄÚÈİ¡£
+     * è¾“å‡ºæ•°æ®å†…å®¹ã€‚
      */
     public String toString() {
         if (this.value instanceof Date)

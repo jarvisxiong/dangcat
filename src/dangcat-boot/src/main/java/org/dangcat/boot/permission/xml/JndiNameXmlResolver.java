@@ -4,7 +4,7 @@ import org.dangcat.boot.permission.JndiName;
 import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
- * JndiName¶ÔÏó½âÎöÆ÷¡£
+ * JndiNameå¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -12,14 +12,14 @@ public class JndiNameXmlResolver extends XmlResolver {
     private JndiName jndiName = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public JndiNameXmlResolver() {
         super(JndiName.class.getSimpleName());
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

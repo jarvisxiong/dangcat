@@ -1,17 +1,17 @@
 package org.dangcat.persistence;
 
 /**
- * ÊıÖµ¶ÁÈ¡Æ÷¡£
+ * æ•°å€¼è¯»å–å™¨ã€‚
  *
  * @author dangcat
  */
 public interface ValueReader {
     /**
-     * ¶ÁÈ¡Ö¸¶¨×Ö¶ÎµÄÊıÖµ¡£
+     * è¯»å–æŒ‡å®šå­—æ®µçš„æ•°å€¼ã€‚
      *
-     * @param <T>  ÊıÖµÀàĞÍ¡£
-     * @param name ×Ö¶ÎÃû³Æ¡£
-     * @return ¶ÁÈ¡µÄÊıÖµ¡£
+     * @param <T>  æ•°å€¼ç±»å‹ã€‚
+     * @param name å­—æ®µåç§°ã€‚
+     * @return è¯»å–çš„æ•°å€¼ã€‚
      */
     <T> T getValue(String name);
 }

@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 /**
- * ×Ö¶ÎĞÅÏ¢¡£
+ * å­—æ®µä¿¡æ¯ã€‚
  *
  * @author dangcat
  */

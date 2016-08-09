@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
- * »á»°¹¤³§¡£
+ * ä¼šè¯å·¥å‚ã€‚
  *
  * @author dangcat
  */
@@ -18,13 +18,13 @@ public class SessionFactory extends ConnectionFactory<DatabaseConnectionPool, Se
     private static SessionFactory instance = null;
 
     /**
-     * Ë½ÓĞ¹¹Ôìº¯Êı¡£
+     * ç§æœ‰æ„é€ å‡½æ•°ã€‚
      */
     private SessionFactory() {
     }
 
     /**
-     * ²ÉÓÃµ¥×ÓÄ£Ê½»ñÈ¡»á»°¹¤³§ÊµÀı¡£
+     * é‡‡ç”¨å•å­æ¨¡å¼è·å–ä¼šè¯å·¥å‚å®ä¾‹ã€‚
      */
     public static SessionFactory getInstance() {
         if (instance == null) {
@@ -42,30 +42,30 @@ public class SessionFactory extends ConnectionFactory<DatabaseConnectionPool, Se
     }
 
     /**
-     * Ìí¼ÓÄ¬ÈÏµÄÊı¾İÔ´¡£
+     * æ·»åŠ é»˜è®¤çš„æ•°æ®æºã€‚
      *
-     * @param dataSource Êı¾İÔ´¶ÔÏó¡£
+     * @param dataSource æ•°æ®æºå¯¹è±¡ã€‚
      */
     public void addDataSource(DataSource dataSource) {
         this.addDataSource(DEFAULT, dataSource, null);
     }
 
     /**
-     * Ìí¼ÓĞÂµÄÊı¾İÔ´¡£
+     * æ·»åŠ æ–°çš„æ•°æ®æºã€‚
      *
-     * @param databaseName Êı¾İ¿â±ğÃû¡£
-     * @param dataSource   Êı¾İÔ´¶ÔÏó¡£
+     * @param databaseName æ•°æ®åº“åˆ«åã€‚
+     * @param dataSource   æ•°æ®æºå¯¹è±¡ã€‚
      */
     public void addDataSource(String databaseName, DataSource dataSource) {
         this.addDataSource(databaseName, dataSource, null);
     }
 
     /**
-     * Ìí¼ÓĞÂµÄÊı¾İÔ´¡£
+     * æ·»åŠ æ–°çš„æ•°æ®æºã€‚
      *
-     * @param databaseName   Êı¾İ¿â±ğÃû¡£
-     * @param dataSource     Êı¾İÔ´¶ÔÏó¡£
-     * @param databaseConfig Êı¾İ¿âÉèÖÃ¡£
+     * @param databaseName   æ•°æ®åº“åˆ«åã€‚
+     * @param dataSource     æ•°æ®æºå¯¹è±¡ã€‚
+     * @param databaseConfig æ•°æ®åº“è®¾ç½®ã€‚
      */
     public void addDataSource(String databaseName, DataSource dataSource, Map<String, String> databaseParams) {
         if (dataSource != null && !ValueUtils.isEmpty(databaseName)) {
@@ -99,10 +99,10 @@ public class SessionFactory extends ConnectionFactory<DatabaseConnectionPool, Se
     }
 
     /**
-     * µÃµ½Ö¸¶¨Êı¾İÔ´µÄÇı¶¯ÀàĞÍ¡£
+     * å¾—åˆ°æŒ‡å®šæ•°æ®æºçš„é©±åŠ¨ç±»å‹ã€‚
      *
-     * @param databaseName Êı¾İ¿âÃû³Æ¡£
-     * @return Çı¶¯ÀàĞÍ¡£
+     * @param databaseName æ•°æ®åº“åç§°ã€‚
+     * @return é©±åŠ¨ç±»å‹ã€‚
      */
     public DatabaseType getDatabaseType(String databaseName) {
         return this.get(databaseName).getDatabaseType();
@@ -118,9 +118,9 @@ public class SessionFactory extends ConnectionFactory<DatabaseConnectionPool, Se
     }
 
     /**
-     * ¶ÁÈ¡Óï·¨¸¨Öú¹¤¾ß¡£
+     * è¯»å–è¯­æ³•è¾…åŠ©å·¥å…·ã€‚
      *
-     * @param databaseName Êı¾İ¿â¡£
+     * @param databaseName æ•°æ®åº“ã€‚
      * @return
      */
     public SqlSyntaxHelper getSqlSyntaxHelper(String databaseName) {

@@ -24,14 +24,14 @@ public class CombinedChart extends TimeChart {
 
     @Override
     protected JFreeChart createChart() {
-        // ºá×ø±ê±êÌâ¡£
+        // æ¨ªåæ ‡æ ‡é¢˜ã€‚
         DateAxis domainAxis = new DateAxis(this.getDomainTitle());
-        // »æÍ¼¶ÔÏó
+        // ç»˜å›¾å¯¹è±¡
         CombinedDomainXYPlot combinedDomainXYPlot = new CombinedDomainXYPlot(domainAxis);
-        // ¸÷Í¼ĞÎ¼ä¾à¡£
+        // å„å›¾å½¢é—´è·ã€‚
         combinedDomainXYPlot.setGap(10.0);
 
-        // ¹¹½¨¾ßÌåÁªºÏÍ¼ĞÎ¡£
+        // æ„å»ºå…·ä½“è”åˆå›¾å½¢ã€‚
         for (CombinedUnit combinedUnit : this.combinedUnits) {
             combinedUnit.setDomainAxis(domainAxis);
             combinedDomainXYPlot.add(combinedUnit.getXYPlot(), combinedUnit.getWeight());

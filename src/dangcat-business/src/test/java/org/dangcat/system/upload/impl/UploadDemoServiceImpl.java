@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * ÎÄ¼şÉÏ´«¡£
+ * æ–‡ä»¶ä¸Šä¼ ã€‚
  *
  * @author Administrator
  */
@@ -43,7 +43,7 @@ public class UploadDemoServiceImpl implements UploadDemoService {
     }
 
     /**
-     * ÉÏ´«×Ö½ÚÊı×é¡£
+     * ä¸Šä¼ å­—èŠ‚æ•°ç»„ã€‚
      */
     public ServiceInformation uploadBytes(byte[] bytes) {
         this.executeProcess();
@@ -53,7 +53,7 @@ public class UploadDemoServiceImpl implements UploadDemoService {
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş¡£
+     * ä¸Šä¼ æ–‡ä»¶ã€‚
      */
     public ServiceInformation uploadFile(File file) {
         this.executeProcess();
@@ -63,7 +63,7 @@ public class UploadDemoServiceImpl implements UploadDemoService {
     }
 
     /**
-     * ÉÏ´«Êı¾İÁ÷¡£
+     * ä¸Šä¼ æ•°æ®æµã€‚
      */
     public ServiceInformation uploadInputStream(InputStream inputStream) {
         this.executeProcess();

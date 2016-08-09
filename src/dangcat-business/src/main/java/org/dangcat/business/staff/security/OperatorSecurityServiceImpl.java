@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * ²Ù×÷Ô±ÒµÎñ°²È«·şÎñ¡£
+ * æ“ä½œå‘˜ä¸šåŠ¡å®‰å…¨æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -37,9 +37,9 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase {
     }
 
     /**
-     * ½¨Á¢Ä¬ÈÏµÄ½ÇÉ«¶ÔÏó¡£
+     * å»ºç«‹é»˜è®¤çš„è§’è‰²å¯¹è±¡ã€‚
      *
-     * @param name ½ÇÉ«Ãû³Æ¡£
+     * @param name è§’è‰²åç§°ã€‚
      */
     private void createDefaultRole(String name) {
         if (!EntityUtils.exists(RoleInfo.class))
@@ -101,7 +101,7 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase {
     }
 
     /**
-     * ÔØÈëÖ¸¶¨ÕËºÅµÄµÇÂ¼ÓÃ»§¡£
+     * è½½å…¥æŒ‡å®šè´¦å·çš„ç™»å½•ç”¨æˆ·ã€‚
      *
      * @throws SecurityLoginException
      */
@@ -158,9 +158,9 @@ public class OperatorSecurityServiceImpl extends LoginServiceBase {
     }
 
     /**
-     * »Ø¸´Ä¬ÈÏµÄ½ÇÉ«È¨ÏŞ¡£
+     * å›å¤é»˜è®¤çš„è§’è‰²æƒé™ã€‚
      *
-     * @param roleInfo ½ÇÉ«¶ÔÏó¡£
+     * @param roleInfo è§’è‰²å¯¹è±¡ã€‚
      * @return
      */
     private int restoreDefaultPermissions(RoleInfo roleInfo) {

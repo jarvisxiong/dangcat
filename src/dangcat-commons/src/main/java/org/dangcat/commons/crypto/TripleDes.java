@@ -5,20 +5,20 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * TripleDes¼ÓÃÜ¹¤¾ßµÄ·â×°Àà
+ * TripleDesåŠ å¯†å·¥å…·çš„å°è£…ç±»
  */
 class TripleDes {
     /**
-     * ¼ÓÃÜËã·¨µÄÃû³Æ
+     * åŠ å¯†ç®—æ³•çš„åç§°
      */
     private static final String ALGORITHM = "DESede";
 
     /**
-     * ³£Êı²»¼ì²é
+     * å¸¸æ•°ä¸æ£€æŸ¥
      */
     private static final int BLOCK_SIZE = 8;
 
-    // ÃÜÔ¿£¬³¤¶ÈÎª24×Ö½Ú
+    // å¯†é’¥ï¼Œé•¿åº¦ä¸º24å­—èŠ‚
     // private static final byte[] KEYBYTES = { (byte) 0x43, (byte) 0x29,
     // (byte) 0x7F, (byte) 0xAD, (byte) 0x38, (byte) 0xE3, (byte) 0x73,
     // (byte) 0xFE, (byte) 0x1F, (byte) 0x08, (byte) 0x26, (byte) 0x0D,
@@ -29,48 +29,48 @@ class TripleDes {
             (byte) 0xB6, (byte) 0xB6, (byte) 0x05, (byte) 0xF6, (byte) 0xB9, (byte) 0x66, (byte) 0x09, (byte) 0x86, (byte) 0x6A, (byte) 0x3D, (byte) 0x7B, (byte) 0x3F, (byte) 0x4B};
 
     /**
-     * ×ª»»£º°üÀ¨¼ÓÃÜËã·¨µÄÃû³Æ£¨ÀıÈç£¬DES£©£¬ºóÃæ¿ÉÄÜ¸úÓĞÒ»¸ö·´À¡Ä£Ê½ºÍÌî³ä·½°¸¡£ DESede/ECB/NoPadding
+     * è½¬æ¢ï¼šåŒ…æ‹¬åŠ å¯†ç®—æ³•çš„åç§°ï¼ˆä¾‹å¦‚ï¼ŒDESï¼‰ï¼Œåé¢å¯èƒ½è·Ÿæœ‰ä¸€ä¸ªåé¦ˆæ¨¡å¼å’Œå¡«å……æ–¹æ¡ˆã€‚ DESede/ECB/NoPadding
      */
     private static final String TRANSFORMATION = ALGORITHM + "/ECB/NoPadding";
 
     /**
-     * ½âÃÜ
+     * è§£å¯†
      *
-     * @param sourceBytes ÃÜÎÄ
-     * @return Ô­ÎÄ£¬³ö´í·µ»Ønull
+     * @param sourceBytes å¯†æ–‡
+     * @return åŸæ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     protected static byte[] decrypt(byte[] sourceBytes) {
         return decrypt(KEYBYTES, sourceBytes);
     }
 
     /**
-     * ½âÃÜ
+     * è§£å¯†
      *
-     * @param keys        ÃÜÔ¿
-     * @param sourceBytes ÃÜÎÄ
-     * @return Ô­ÎÄ£¬³ö´í·µ»Ønull
+     * @param keys        å¯†é’¥
+     * @param sourceBytes å¯†æ–‡
+     * @return åŸæ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     private static byte[] decrypt(byte[] keys, byte[] sourceBytes) {
         if (keys == null || keys.length != 24)
             return null;
 
-        // ÊäÈë³¤¶È±ØĞëÊÇ8µÄÕûÊı±¶
+        // è¾“å…¥é•¿åº¦å¿…é¡»æ˜¯8çš„æ•´æ•°å€
         if (sourceBytes == null || sourceBytes.length % 8 != 0)
             return null;
 
         try {
-            // Éú³ÉÃÜÔ¿
+            // ç”Ÿæˆå¯†é’¥
             SecretKey deskey = new SecretKeySpec(keys, ALGORITHM);
 
-            // ´´½¨¼ÓÃÜ¶ÔÏó
+            // åˆ›å»ºåŠ å¯†å¯¹è±¡
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
 
-            // ½âÃÜ
-            cipher.init(Cipher.DECRYPT_MODE, deskey); // ½âÃÜÄ£Ê½
+            // è§£å¯†
+            cipher.init(Cipher.DECRYPT_MODE, deskey); // è§£å¯†æ¨¡å¼
 
             byte[] decryptBytes = cipher.doFinal(sourceBytes);
 
-            // Ìî³ä¡®\0¡¯£¬Ôì³É½âÃÜºóµÄ´®´ø¡®\0¡¯,trim '\0'
+            // å¡«å……â€˜\0â€™ï¼Œé€ æˆè§£å¯†åçš„ä¸²å¸¦â€˜\0â€™,trim '\0'
             int index = findLastNotof(decryptBytes, (byte) 0);
 
             if (index == -1)
@@ -89,21 +89,21 @@ class TripleDes {
     }
 
     /**
-     * ¼ÓÃÜ
+     * åŠ å¯†
      *
-     * @param sourceBytes Ô­ÎÄ
-     * @return ÃÜÎÄ£¬³ö´í·µ»Ønull
+     * @param sourceBytes åŸæ–‡
+     * @return å¯†æ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     protected static byte[] encrypt(byte[] sourceBytes) {
         return encrypt(KEYBYTES, sourceBytes);
     }
 
     /**
-     * ¼ÓÃÜ
+     * åŠ å¯†
      *
-     * @param keys        ÃÜÔ¿
-     * @param sourceBytes Ô­ÎÄ
-     * @return ÃÜÎÄ£¬³ö´í·µ»Ønull
+     * @param keys        å¯†é’¥
+     * @param sourceBytes åŸæ–‡
+     * @return å¯†æ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     private static byte[] encrypt(byte[] keys, byte[] sourceBytes) {
         if (keys == null || keys.length != 24)
@@ -113,24 +113,24 @@ class TripleDes {
             return null;
 
         try {
-            // Éú³ÉÃÜÔ¿
+            // ç”Ÿæˆå¯†é’¥
             SecretKey deskey = new SecretKeySpec(keys, ALGORITHM);
 
-            // ´´½¨¼ÓÃÜ¶ÔÏó
+            // åˆ›å»ºåŠ å¯†å¯¹è±¡
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
 
-            // ¼ÓÃÜ
-            cipher.init(Cipher.ENCRYPT_MODE, deskey); // ¼ÓÃÜÄ£Ê½
+            // åŠ å¯†
+            cipher.init(Cipher.ENCRYPT_MODE, deskey); // åŠ å¯†æ¨¡å¼
 
-            // Èç¹û²»ÊÇBLOCK_SIZEµÄÕûÊı±¶£¬Ä©Î²Ìî³ä¡®\0¡¯
+            // å¦‚æœä¸æ˜¯BLOCK_SIZEçš„æ•´æ•°å€ï¼Œæœ«å°¾å¡«å……â€˜\0â€™
             int mod = sourceBytes.length % BLOCK_SIZE;
             if (mod == 0)
                 return cipher.doFinal(sourceBytes);
 
             int lenngth = sourceBytes.length - mod + BLOCK_SIZE;
-            byte[] srcPadded = new byte[lenngth]; // ³õÊ¼ÎªÈ«0
+            byte[] srcPadded = new byte[lenngth]; // åˆå§‹ä¸ºå…¨0
             System.arraycopy(sourceBytes, 0, srcPadded, 0, sourceBytes.length);
-            // Ìî³ä¡®\0¡¯Ôì³É½âÃÜºóµÄ´®´ø¡®\0¡¯
+            // å¡«å……â€˜\0â€™é€ æˆè§£å¯†åçš„ä¸²å¸¦â€˜\0â€™
             return cipher.doFinal(srcPadded);
 
         } catch (Exception e) {
@@ -142,11 +142,11 @@ class TripleDes {
     }
 
     /**
-     * ÕÒ³ö×îºóÒ»¸ö²»ÎªÖ¸¶¨×Ö·ûµÄÎ»ÖÃ
+     * æ‰¾å‡ºæœ€åä¸€ä¸ªä¸ä¸ºæŒ‡å®šå­—ç¬¦çš„ä½ç½®
      *
-     * @param bytes     ´®
-     * @param byteValue Ö¸¶¨×Ö·û
-     * @return Ë÷Òı, ÕÒ²»µ½·µ»Ø-1
+     * @param bytes     ä¸²
+     * @param byteValue æŒ‡å®šå­—ç¬¦
+     * @return ç´¢å¼•, æ‰¾ä¸åˆ°è¿”å›-1
      */
     private static int findLastNotof(byte[] bytes, byte byteValue) {
         for (int index = bytes.length - 1; index >= 0; --index) {

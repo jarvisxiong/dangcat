@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * UDP±¨ÎÄ·¢ËÍÆ÷¡£
+ * UDPæŠ¥æ–‡å‘é€å™¨ã€‚
  *
  * @author fanst174766
  */

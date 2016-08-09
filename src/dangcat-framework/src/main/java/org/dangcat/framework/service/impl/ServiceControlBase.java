@@ -8,7 +8,7 @@ import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.framework.service.ServiceStatus;
 
 /**
- * ·şÎñ¿ØÖÆ»ùÀà
+ * æœåŠ¡æ§åˆ¶åŸºç±»
  *
  * @author dangcat
  */
@@ -16,24 +16,24 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     private String name;
 
     /**
-     * ·şÎñ×´Ì¬¡£
+     * æœåŠ¡çŠ¶æ€ã€‚
      */
     private ServiceStatus serviceStatus = ServiceStatus.Stopped;
 
     /**
-     * ¹¹Ôì·şÎñ¶ÔÏó¡£
+     * æ„é€ æœåŠ¡å¯¹è±¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public ServiceControlBase(ServiceProvider parent) {
         super(parent);
     }
 
     /**
-     * ¹¹Ôì·şÎñ¶ÔÏó¡£
+     * æ„é€ æœåŠ¡å¯¹è±¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
-     * @param name   ·şÎñÃû³Æ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
+     * @param name   æœåŠ¡åç§°ã€‚
      */
     public ServiceControlBase(ServiceProvider parent, String name) {
         super(parent);
@@ -41,7 +41,7 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     }
 
     /**
-     * ·şÎñÃû³Æ¡£
+     * æœåŠ¡åç§°ã€‚
      */
     public String getServiceName() {
         if (!ValueUtils.isEmpty(this.name))
@@ -54,7 +54,7 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     }
 
     /**
-     * ·şÎñ×´Ì¬¡£
+     * æœåŠ¡çŠ¶æ€ã€‚
      */
     @Override
     public ServiceStatus getServiceStatus() {
@@ -62,14 +62,14 @@ public abstract class ServiceControlBase extends ServiceBase implements ServiceC
     }
 
     /**
-     * ÉèÖÃ·şÎñ×´Ì¬¡£
+     * è®¾ç½®æœåŠ¡çŠ¶æ€ã€‚
      */
     protected void setServiceStatus(ServiceStatus serviceStatus) {
         this.serviceStatus = serviceStatus;
     }
 
     /**
-     * ÊÇ·ñÕıÔÚÔËĞĞ¡£
+     * æ˜¯å¦æ­£åœ¨è¿è¡Œã€‚
      */
     protected boolean isRunning() {
         return this.getServiceStatus().equals(ServiceStatus.Started);

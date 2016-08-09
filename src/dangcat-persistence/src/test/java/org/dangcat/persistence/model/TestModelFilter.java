@@ -27,10 +27,10 @@ public class TestModelFilter extends TestEntityBase {
         Table table = TableDataUtils.getTable();
         if (table.exists())
             table.drop();
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
         TableDataUtils.createTableData(table, TEST_COUNT);
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table.save();
 
         this.testTableFilter1();
@@ -44,78 +44,78 @@ public class TestModelFilter extends TestEntityBase {
 
     private void testTableFilter1() throws TableException {
         Table table = TableDataUtils.getTable();
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006"));
         table.setFilter(filterGroup);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, table.getRows().size());
         Row row1 = table.getRows().get(0);
         Assert.assertEquals("A-00000000000000000000000000000000000006", row1.getField(EntityData.FieldA).getString());
         Assert.assertTrue(filterGroup.isValid(row1));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
         table.setFilter(filterGroup);
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 2, 9));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, 3 * 3.14, 9 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(7, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.between, (long) 4 * 100000000, (long) 9 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(6, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.DAY, DateUtils.add(DateUtils.DAY, DateUtils.now(), 5));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 9);
         filterGroup.add(new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay));
-        // Êä³öÔØÈëÓï¾ä
+        // è¾“å‡ºè½½å…¥è¯­å¥
         TableSqlBuilder sql = new TableSqlBuilder(table, table.getDatabaseName());
         logger.info(sql.buildLoadStatement());
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(5, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // Êä³öÔØÈëÓï¾ä
+        // è¾“å‡ºè½½å…¥è¯­å¥
         logger.info(sql.buildLoadStatement());
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
@@ -123,13 +123,13 @@ public class TestModelFilter extends TestEntityBase {
 
     private void testTableFilter2() throws TableException {
         Table table = TableDataUtils.getTable();
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006", null, "A-00000000000000000000000000000000000009"));
         table.setFilter(filterGroup);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, table.getRows().size());
         Row row1 = table.getRows().get(0);
         Assert.assertEquals("A-00000000000000000000000000000000000006", row1.getField(EntityData.FieldA).getString());
@@ -138,83 +138,83 @@ public class TestModelFilter extends TestEntityBase {
         Assert.assertEquals("A-00000000000000000000000000000000000009", row1.getField(EntityData.FieldA).getString());
         Assert.assertTrue(filterGroup.isValid(row1));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
         table.setFilter(filterGroup);
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         FilterUnit filterUnit = new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009");
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
         table.setFilter(filterGroup);
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.lt, "A-00000000000000000000000000000000000002"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 1, null));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.clear();
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, null, 7 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.eq, (long) 4 * 100000000, (long) 5 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.DAY, DateUtils.add(DateUtils.DAY, DateUtils.now(), 6));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 8);
         filterUnit = new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay);
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // Êä³öÔØÈëÓï¾ä
+        // è¾“å‡ºè½½å…¥è¯­å¥
         TableSqlBuilder sql = new TableSqlBuilder(table, table.getDatabaseName());
         logger.info(sql.buildLoadStatement());
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // Êä³öÔØÈëÓï¾ä
+        // è¾“å‡ºè½½å…¥è¯­å¥
         logger.info(sql.buildLoadStatement());
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         table.load();
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(10, table.getRows().size());
         for (Row row : table.getRows())
             Assert.assertTrue(filterGroup.isValid(row));

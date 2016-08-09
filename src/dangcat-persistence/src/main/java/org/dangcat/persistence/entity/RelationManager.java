@@ -10,13 +10,13 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * ÊµÌå¹ØÏµÊÂ¼ş¹ÜÀí¡£
+ * å®ä½“å…³ç³»äº‹ä»¶ç®¡ç†ã€‚
  *
  * @author dangcat
  */
 class RelationManager {
     /**
-     * É¾³ıÖ÷±íµÄ¹ØÁª×Ó±í¡£
+     * åˆ é™¤ä¸»è¡¨çš„å…³è”å­è¡¨ã€‚
      */
     protected static void delete(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         if (entity != null) {
@@ -32,7 +32,7 @@ class RelationManager {
                 FilterExpress filterExpress = relation.getChildFilterExpress(entity);
                 if (filterExpress != null) {
                     List<?> entityList = load(saveEntityContext, relation.getMemberType(), filterExpress);
-                    // É¾³ıÒÑ¾­±»Çå³ıµÄÊµÌå¶ÔÏó¡£
+                    // åˆ é™¤å·²ç»è¢«æ¸…é™¤çš„å®ä½“å¯¹è±¡ã€‚
                     if (entityList != null) {
                         for (Object childEntity : entityList)
                             delete(saveEntityContext, childEntity);
@@ -43,7 +43,7 @@ class RelationManager {
     }
 
     /**
-     * Ö÷±í²åÈëºó²åÈë¹ØÁª±í¡£
+     * ä¸»è¡¨æ’å…¥åæ’å…¥å…³è”è¡¨ã€‚
      */
     protected static void insert(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         if (entity != null) {
@@ -78,7 +78,7 @@ class RelationManager {
     }
 
     /**
-     * Ö÷±íÔØÈëºóÔØÈë¹ØÁª±í¡£
+     * ä¸»è¡¨è½½å…¥åè½½å…¥å…³è”è¡¨ã€‚
      */
     protected static void load(LoadEntityContext loadEntityContext, Object entity) throws EntityException {
         if (entity != null) {
@@ -123,7 +123,7 @@ class RelationManager {
     }
 
     /**
-     * Ö÷±í´æ´¢Ö®ºóÍ¬Ê±´æ´¢¹ØÁª±í¡£
+     * ä¸»è¡¨å­˜å‚¨ä¹‹ååŒæ—¶å­˜å‚¨å…³è”è¡¨ã€‚
      */
     protected static void modify(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         if (entity != null) {
@@ -137,14 +137,14 @@ class RelationManager {
                 if (relation.isAssociateDelete())
                     entityList = loadMembers(saveEntityContext, relation, entity);
 
-                // É¾³ıÒÑ¾­´¦ÀíµÄÊµÌå¶ÔÏó¡£
+                // åˆ é™¤å·²ç»å¤„ç†çš„å®ä½“å¯¹è±¡ã€‚
                 if (relation.isAssociateSave()) {
                     Collection<Object> members = relation.getMembers(entity);
                     if (members != null)
                         saveMembers(saveEntityContext, relation, entityList, members);
                 }
 
-                // É¾³ıÒÑ¾­±»Çå³ıµÄÊµÌå¶ÔÏó¡£
+                // åˆ é™¤å·²ç»è¢«æ¸…é™¤çš„å®ä½“å¯¹è±¡ã€‚
                 if (relation.isAssociateDelete() && entityList != null) {
                     for (Object childEntity : entityList)
                         delete(saveEntityContext, childEntity);
@@ -198,11 +198,11 @@ class RelationManager {
     }
 
     /**
-     * Ö÷±í²åÈëºó¸üĞÂ¹ØÁª×Ö¶Î¡£
+     * ä¸»è¡¨æ’å…¥åæ›´æ–°å…³è”å­—æ®µã€‚
      */
     protected static void update(Object entity) throws EntityException {
         if (entity != null) {
-            // Í¬²½Ã÷Ï¸±íµÄ¹ØÁª×Ö¶Î¡£
+            // åŒæ­¥æ˜ç»†è¡¨çš„å…³è”å­—æ®µã€‚
             EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
             for (Relation relation : entityMetaData.getRelations()) {
                 if (!relation.isAssociateSave())

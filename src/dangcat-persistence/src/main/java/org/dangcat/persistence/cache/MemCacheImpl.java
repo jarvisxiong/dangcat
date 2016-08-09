@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * ÄÚ´æÊı¾İ»º´æ¡£
+ * å†…å­˜æ•°æ®ç¼“å­˜ã€‚
  *
  * @author dangcat
  */
@@ -31,7 +31,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * Ìí¼Ó»º´æÊı¾İ¡£
+     * æ·»åŠ ç¼“å­˜æ•°æ®ã€‚
      */
     public void add(T entity) {
         this.indexManager.add(entity);
@@ -60,17 +60,17 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * Ìí¼ÓË÷Òı¡£
+     * æ·»åŠ ç´¢å¼•ã€‚
      *
-     * @param indexName    Ë÷ÒıÃû¡£
-     * @param isPrimaryKey ÊÇ·ñÊÇÖ÷¼üË÷Òı¡£
+     * @param indexName    ç´¢å¼•åã€‚
+     * @param isPrimaryKey æ˜¯å¦æ˜¯ä¸»é”®ç´¢å¼•ã€‚
      */
     public void appendIndex(String indexName, boolean isPrimaryKey) {
         this.indexManager.appendIndex(indexName, isPrimaryKey);
     }
 
     /**
-     * Çå³ı»º´æ¡£
+     * æ¸…é™¤ç¼“å­˜ã€‚
      */
     public void clear(boolean force) {
         if (force || this.isTimeOut()) {
@@ -85,10 +85,10 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄÌõ¼şÔÚÄÚ´æ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„æ¡ä»¶åœ¨å†…å­˜æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param filterExpress Ë÷ÒıÌõ¼ş¡£
-     * @return Êı¾İ¼¯ºÏ¡£
+     * @param filterExpress ç´¢å¼•æ¡ä»¶ã€‚
+     * @return æ•°æ®é›†åˆã€‚
      */
     public Collection<T> find(FilterExpress filterExpress) {
         Collection<T> dataCollection = this.indexManager.find(filterExpress);
@@ -97,11 +97,11 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ×Ö¶ÎÖµ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„å­—æ®µå€¼æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param values     ×Ö¶ÎÊıÖµ£¬±ØĞëÓë×Ö¶Î¶ÔÓ¦¡£
-     * @return ÕÒµ½µÄ¼ÇÂ¼ĞĞ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param values     å­—æ®µæ•°å€¼ï¼Œå¿…é¡»ä¸å­—æ®µå¯¹åº”ã€‚
+     * @return æ‰¾åˆ°çš„è®°å½•è¡Œã€‚
      */
     public Collection<T> find(String[] fieldNames, Object... values) {
         Collection<T> dataCollection = this.indexManager.find(fieldNames, values);
@@ -118,7 +118,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * ²úÉúµÄË÷ÒıµÄÊıÁ¿¡£
+     * äº§ç”Ÿçš„ç´¢å¼•çš„æ•°é‡ã€‚
      */
     public int getIndexSize() {
         return this.indexManager.getIndexNameSet().size();
@@ -155,10 +155,10 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * ¸ù¾İÖ÷¼üÖµÕÒµ½¼ÇÂ¼ĞĞ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     public T locate(Object... params) {
         T data = this.indexManager.find(params);
@@ -167,9 +167,9 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * Êı¾İ±ä»¯Í¨ÖªĞŞ¸ÄË÷Òı¡£
+     * æ•°æ®å˜åŒ–é€šçŸ¥ä¿®æ”¹ç´¢å¼•ã€‚
      *
-     * @param entities ±»ĞŞ¸ÄµÄ¼ÇÂ¼¶ÔÏñ¡£
+     * @param entities è¢«ä¿®æ”¹çš„è®°å½•å¯¹åƒã€‚
      */
     @SuppressWarnings("unchecked")
     public void modifyEntities(Object... entities) {
@@ -184,7 +184,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄ»º´æÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„ç¼“å­˜æ•°æ®ã€‚
      */
     public Collection<T> remove(FilterExpress filterExpress) {
         Collection<T> dataCollection = null;
@@ -199,7 +199,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * É¾³ı»º´æÊı¾İ¡£
+     * åˆ é™¤ç¼“å­˜æ•°æ®ã€‚
      */
     public boolean remove(T data) {
         boolean result = this.indexManager.remove(data);
@@ -230,7 +230,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄ»º´æÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„ç¼“å­˜æ•°æ®ã€‚
      */
     public T removeEntity(Object... primaryKeyValues) {
         T result = null;
@@ -251,7 +251,7 @@ public class MemCacheImpl<T> implements MemCache<T> {
     }
 
     /**
-     * °üº¬µÄÊı¾İÊıÁ¿¡£
+     * åŒ…å«çš„æ•°æ®æ•°é‡ã€‚
      */
     public int size() {
         return this.indexManager.getDataCollection().size();

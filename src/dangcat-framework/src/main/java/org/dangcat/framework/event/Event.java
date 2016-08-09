@@ -7,30 +7,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÏûÏ¢¶ÔÏó¡£
+ * æ¶ˆæ¯å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Event implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * ÊÇ·ñÈ¡ÏûÊÂ¼şÂ·ÓÉ¡£
+     * æ˜¯å¦å–æ¶ˆäº‹ä»¶è·¯ç”±ã€‚
      */
     private boolean cancel = false;
     /**
-     * ÊÂ¼şÒÑ¾­´¦Àí¡£
+     * äº‹ä»¶å·²ç»å¤„ç†ã€‚
      */
     private boolean handled = false;
     /**
-     * ÏûÏ¢Âë¡£
+     * æ¶ˆæ¯ç ã€‚
      */
     private String id;
     /**
-     * ²ÎÊı±í¡£
+     * å‚æ•°è¡¨ã€‚
      */
     private Map<String, Object> params = new HashMap<String, Object>();
     /**
-     * ÊÂ¼şÊ±¼ä
+     * äº‹ä»¶æ—¶é—´
      */
     private Date timeStamp;
 

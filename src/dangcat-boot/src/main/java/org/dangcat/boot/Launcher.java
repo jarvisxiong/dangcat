@@ -9,7 +9,7 @@ import org.dangcat.framework.service.ServiceStatus;
 import java.io.IOException;
 
 /**
- * ·şÎñÆô¶¯Àà¡£
+ * æœåŠ¡å¯åŠ¨ç±»ã€‚
  *
  * @author dangcat
  */
@@ -21,7 +21,7 @@ public class Launcher {
     private static ApplicationContext applicationContext = null;
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      *
      * @throws IOException
      * @throws ClassNotFoundException
@@ -31,7 +31,7 @@ public class Launcher {
             return;
 
         applicationContext = ApplicationContext.getInstance();
-        // ÉèÖÃHOMEÂ·¾¶¡£
+        // è®¾ç½®HOMEè·¯å¾„ã€‚
         if (ValueUtils.isEmpty(System.getProperty(DANGCAT_HOME)))
             System.setProperty(DANGCAT_HOME, FileUtils.getCanonicalPath("."));
 
@@ -58,7 +58,7 @@ public class Launcher {
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     public static void start() {
         if (applicationContext.getServiceStatus().equals(ServiceStatus.Stopped)) {
@@ -68,7 +68,7 @@ public class Launcher {
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     public static ServiceBase start(Class<?> mainClassType, String serviceName, boolean isTestMode) {
         if (isTestMode)
@@ -79,7 +79,7 @@ public class Launcher {
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     public static void stop() {
         if (applicationContext.getServiceStatus().equals(ServiceStatus.Started))

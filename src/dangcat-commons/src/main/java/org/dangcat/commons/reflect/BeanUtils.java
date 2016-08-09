@@ -20,10 +20,10 @@ public class BeanUtils {
     protected static final Logger logger = Logger.getLogger(BeanUtils.class);
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄ×¢ÊÍ¶ÔÏó¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ³¨é‡Šå¯¹è±¡ã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static <T extends Annotation> T findAnnotation(Class<?> classType, Class<T> annotationType) {
         if (Object.class.equals(classType) || classType == null)
@@ -36,11 +36,11 @@ public class BeanUtils {
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄËùÓĞ×¢ÊÍ¶ÔÏó¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ‰€æœ‰æ³¨é‡Šå¯¹è±¡ã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
-     * @param annotationList ×¢ÊÍÁĞ±í¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
+     * @param annotationList æ³¨é‡Šåˆ—è¡¨ã€‚
      */
     public static void findAnnotations(Class<?> classType, Class<? extends Annotation> annotationType, List<Annotation> annotationList) {
         if (Object.class.equals(classType) || classType == null)
@@ -54,10 +54,10 @@ public class BeanUtils {
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄ×Ö¶Î¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„å­—æ®µã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static Field findField(Class<?> classType, Class<? extends Annotation> annotationType) {
         if (Object.class.equals(classType) || classType == null)
@@ -79,10 +79,10 @@ public class BeanUtils {
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨Ãû×ÖµÄ×Ö¶Î¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šåå­—çš„å­—æ®µã€‚
      *
-     * @param classType Ö¸¶¨ÀàĞÍ¡£
-     * @param fieldName ×Ö¶ÎÃû¡£
+     * @param classType æŒ‡å®šç±»å‹ã€‚
+     * @param fieldName å­—æ®µåã€‚
      */
     public static Field findField(Class<?> classType, String fieldName) {
         return findField(classType, fieldName, true);
@@ -108,11 +108,11 @@ public class BeanUtils {
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄËùÓĞ×Ö¶Î¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ‰€æœ‰å­—æ®µã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
-     * @param fieldList      ×Ö¶ÎÁĞ±í¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
+     * @param fieldList      å­—æ®µåˆ—è¡¨ã€‚
      */
     public static void findFields(Class<?> classType, Class<? extends Annotation> annotationType, List<Field> fieldList) {
         if (Object.class.equals(classType) || classType == null)
@@ -165,10 +165,10 @@ public class BeanUtils {
     }
 
     /**
-     * Í¨¹ı·´Éä¶ÁÈ¡¶ÔÏó×Ö¶ÎµÄÖµ¡£
+     * é€šè¿‡åå°„è¯»å–å¯¹è±¡å­—æ®µçš„å€¼ã€‚
      *
-     * @param instance  ¶ÔÏóÊµÀı¡£
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
+     * @param instance  å¯¹è±¡å®ä¾‹ã€‚
+     * @param fieldName å­—æ®µåç§°ã€‚
      */
     public static Object getFieldValue(Object instance, String fieldName) {
         Object result = null;
@@ -195,10 +195,10 @@ public class BeanUtils {
     }
 
     /**
-     * ¶ÁÈ¡¶ÔÏóÊôĞÔ¡£
+     * è¯»å–å¯¹è±¡å±æ€§ã€‚
      *
-     * @param instance     ¶ÔÏóÊµÀı¡£
-     * @param propertyName ÊôĞÔÃû¡£
+     * @param instance     å¯¹è±¡å®ä¾‹ã€‚
+     * @param propertyName å±æ€§åã€‚
      */
     public static Object getProperty(Object instance, String propertyName) {
         if (instance != null) {
@@ -277,7 +277,7 @@ public class BeanUtils {
         if (Class.class.equals(classType))
             classType = (Class<?>) instance;
 
-        if (params != null && params.length > 0) // ÓĞ²ÎÊıµÄµ÷ÓÃ·½Ê½¡£
+        if (params != null && params.length > 0) // æœ‰å‚æ•°çš„è°ƒç”¨æ–¹å¼ã€‚
         {
             Class<?>[] classes = new Class<?>[params.length];
             for (int i = 0; i < params.length; i++) {
@@ -288,7 +288,7 @@ public class BeanUtils {
             if (method != null)
                 result = method.invoke(instance, params);
         } else
-        // ÎŞ²ÎÊıµÄµ÷ÓÃ·½Ê½¡£
+        // æ— å‚æ•°çš„è°ƒç”¨æ–¹å¼ã€‚
         {
             Method method = classType.getMethod(methodName);
             if (method != null)
@@ -298,10 +298,10 @@ public class BeanUtils {
     }
 
     /**
-     * Í¨¹ı·´Éä¶ÁÈ¡¶ÔÏó×Ö¶ÎµÄÖµ¡£
+     * é€šè¿‡åå°„è¯»å–å¯¹è±¡å­—æ®µçš„å€¼ã€‚
      *
-     * @param instance  ¶ÔÏóÊµÀı¡£
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
+     * @param instance  å¯¹è±¡å®ä¾‹ã€‚
+     * @param fieldName å­—æ®µåç§°ã€‚
      */
     public static void setFieldValue(Object instance, String fieldName, Object value) {
         if (instance != null) {
@@ -318,11 +318,11 @@ public class BeanUtils {
     }
 
     /**
-     * ÉèÖÃ¶ÔÏóÊôĞÔ¡£
+     * è®¾ç½®å¯¹è±¡å±æ€§ã€‚
      *
-     * @param instance     ¶ÔÏóÊµÀı¡£
-     * @param propertyName ÊôĞÔÃû¡£
-     * @param value        ÊôĞÔÖµ¡£
+     * @param instance     å¯¹è±¡å®ä¾‹ã€‚
+     * @param propertyName å±æ€§åã€‚
+     * @param value        å±æ€§å€¼ã€‚
      */
     public static void setProperty(Object instance, String propertyName, Object value) {
         if (instance == null)

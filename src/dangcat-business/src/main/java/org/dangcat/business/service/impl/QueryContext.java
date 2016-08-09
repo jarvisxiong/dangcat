@@ -5,7 +5,7 @@ import org.dangcat.business.service.DataFilter;
 import java.util.Collection;
 
 /**
- * ÔØÈëÉÏÏÂÎÄ¡£
+ * è½½å…¥ä¸Šä¸‹æ–‡ã€‚
  *
  * @param <T>
  * @author dangcat

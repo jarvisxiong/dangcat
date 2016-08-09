@@ -16,86 +16,86 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 import java.util.*;
 
 /**
- * Êı¾İ±í¶ÔÏó¡£
+ * æ•°æ®è¡¨å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Table implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * ¼ÆËãÆ÷ÅäÖÃ¡£
+     * è®¡ç®—å™¨é…ç½®ã€‚
      */
     private CalculatorImpl calculators = new CalculatorImpl();
     /**
-     * À¸Î»¼¯ºÏ¡£
+     * æ ä½é›†åˆã€‚
      */
     private Columns columns;
     /**
-     * ËùÊôÊı¾İ¿â¡£
+     * æ‰€å±æ•°æ®åº“ã€‚
      */
     private String databaseName;
     /**
-     * ¹ıÂË±í´ïÊ½¡£
+     * è¿‡æ»¤è¡¨è¾¾å¼ã€‚
      */
     private FilterExpress filter;
     /**
-     * ¹Ì¶¨¹ıÂË±í´ïÊ½¡£
+     * å›ºå®šè¿‡æ»¤è¡¨è¾¾å¼ã€‚
      */
     private FilterExpress fixFilter;
     /**
-     * Ë÷ÒıÁĞ±í¡£
+     * ç´¢å¼•åˆ—è¡¨ã€‚
      */
     private Collection<OrderBy> indexes = new HashSet<OrderBy>();
     /**
-     * Êı¾İ±í¶ÔÏóÃû¡£
+     * æ•°æ®è¡¨å¯¹è±¡åã€‚
      */
     private String name;
     /**
-     * ÅÅĞò×Ö¶Î£¬¶à¸ö×Ö¶ÎÒÔ·ÖºÅ·Ö¸ô¡£
+     * æ’åºå­—æ®µï¼Œå¤šä¸ªå­—æ®µä»¥åˆ†å·åˆ†éš”ã€‚
      */
     private OrderBy orderBy;
     /**
-     * ²ÎÊıÁĞ±í¡£
+     * å‚æ•°åˆ—è¡¨ã€‚
      */
     private Map<String, Object> params = new HashMap<String, Object>();
     /**
-     * ÔØÈëÊı¾İ·¶Î§¡£
+     * è½½å…¥æ•°æ®èŒƒå›´ã€‚
      */
     private Range range;
     /**
-     * ×ÊÁÏĞĞ¡£
+     * èµ„æ–™è¡Œã€‚
      */
     private Rows rows;
     /**
-     * ²éÑ¯±í´ïÊ½¡£
+     * æŸ¥è¯¢è¡¨è¾¾å¼ã€‚
      */
     private SqlBuilder sqlBuilder;
     /**
-     * µ±Ç°SQL½Å±¾Ãû¡£
+     * å½“å‰SQLè„šæœ¬åã€‚
      */
     private String sqlName;
     /**
-     * ²éÑ¯Óï¾äÅäÖÃ¼¯ºÏ¡£
+     * æŸ¥è¯¢è¯­å¥é…ç½®é›†åˆã€‚
      */
     private Sqls sqls = new Sqls();
     /**
-     * ÊÂ¼şÊÊÅä¼¯ºÏ¡£
+     * äº‹ä»¶é€‚é…é›†åˆã€‚
      */
     private List<TableEventAdapter> tableEventAdapterList = new LinkedList<TableEventAdapter>();
     /**
-     * ±í¹ÜÀíÆ÷¡£
+     * è¡¨ç®¡ç†å™¨ã€‚
      */
     private TableManager tableManager = new TableManagerImpl();
     /**
-     * Êı¾İ±íÃû¡£
+     * æ•°æ®è¡¨åã€‚
      */
     private TableName tableName;
     /**
-     * Êı¾İ±í×´Ì¬¡£
+     * æ•°æ®è¡¨çŠ¶æ€ã€‚
      */
     private TableState tableState = TableState.Normal;
     /**
-     * Êı¾İ¼Ó×ÜĞĞ¡£
+     * æ•°æ®åŠ æ€»è¡Œã€‚
      */
     private Row total;
 
@@ -149,7 +149,7 @@ public class Table implements java.io.Serializable {
     }
 
     /**
-     * ÔÚµ±Ç°µÄÊı¾İÔ´ÖĞ¹¹½¨Êı¾İ±í¡£
+     * åœ¨å½“å‰çš„æ•°æ®æºä¸­æ„å»ºæ•°æ®è¡¨ã€‚
      */
     public int create() throws TableException {
         return this.tableManager.create(this);
@@ -206,13 +206,13 @@ public class Table implements java.io.Serializable {
     }
 
     public String getFilterSql() {
-        // ¹ıÂËÌõ¼ş¡£
+        // è¿‡æ»¤æ¡ä»¶ã€‚
         StringBuilder sqlFilter = new StringBuilder();
         if (this.getFilter() != null) {
             sqlFilter.append(" AND ");
             sqlFilter.append(this.getFilter());
         }
-        // ¹Ì¶¨¹ıÂËÌõ¼ş¡£
+        // å›ºå®šè¿‡æ»¤æ¡ä»¶ã€‚
         if (this.getFixFilter() != null) {
             sqlFilter.append(" AND ");
             sqlFilter.append(this.getFixFilter());
@@ -317,7 +317,7 @@ public class Table implements java.io.Serializable {
     }
 
     public void setTableState(TableState tableState) {
-        if (tableState == TableState.Insert) // ÉèÖÃÈ«±íÎªĞÂÔö×´Ì¬¡£
+        if (tableState == TableState.Insert) // è®¾ç½®å…¨è¡¨ä¸ºæ–°å¢çŠ¶æ€ã€‚
             this.getRows().setDataState(DataState.Insert);
         else
             this.tableState = tableState;
@@ -358,13 +358,13 @@ public class Table implements java.io.Serializable {
 
     @Override
     public String toString() {
-        // ´òÓ¡Table±í¼°Êı¾İ
+        // æ‰“å°Tableè¡¨åŠæ•°æ®
         StringBuffer info = new StringBuffer();
         info.append("Name : " + this.getName() + " \n");
-        // Êä³öÀ¸Î»ĞÅÏ¢¡£
+        // è¾“å‡ºæ ä½ä¿¡æ¯ã€‚
         if (this.getRows().size() == 0)
             info.append(this.getColumns());
-        // Êä³öÊı¾İĞĞĞÅÏ¢¡£
+        // è¾“å‡ºæ•°æ®è¡Œä¿¡æ¯ã€‚
         info.append(this.getRows());
         return info.toString();
     }

@@ -1,15 +1,15 @@
 package org.dangcat.commons.formator;
 
 /**
- * Ê±¼ä¸ñÊ½»¯¡£
+ * æ—¶é—´æ ¼å¼åŒ–ã€‚
  */
 public class TimeLengthFormator extends ValueFormator {
     /**
-     * ×ª»»³£Á¿¡£
+     * è½¬æ¢å¸¸é‡ã€‚
      */
     private final static int[] UNIT_TRANSCONSTS = new int[]{1, 1000, 60, 60};
     /**
-     * Á÷Á¿µ¥Î»¡£
+     * æµé‡å•ä½ã€‚
      */
     private final static String[] UNITS = new String[]{"ms", "Sec", "Min", "Hour"};
 

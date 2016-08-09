@@ -3,28 +3,28 @@ package org.dangcat.persistence.orderby;
 import java.io.Serializable;
 
 /**
- * ÅÅĞòµ¥Ôª¡£
+ * æ’åºå•å…ƒã€‚
  *
  * @author dangcat
  */
 public class OrderByUnit implements Serializable, Comparable<OrderByUnit> {
     private static final long serialVersionUID = 1L;
     /**
-     * ×Ö¶ÎÃû³Æ¡£
+     * å­—æ®µåç§°ã€‚
      */
     private String fieldName;
     /**
-     * ÅÅĞò¹«Ê½¡£
+     * æ’åºå…¬å¼ã€‚
      */
     private String formula;
 
     /**
-     * Ë÷ÒıË³Ğò¡£
+     * ç´¢å¼•é¡ºåºã€‚
      */
     private int index = 0;
 
     /**
-     * ÅÅĞò·½Ê½¡£
+     * æ’åºæ–¹å¼ã€‚
      */
     private OrderByType orderByType = OrderByType.Asc;
 
@@ -88,7 +88,7 @@ public class OrderByUnit implements Serializable, Comparable<OrderByUnit> {
     }
 
     /**
-     * ×ª»»ÅÅĞòÓï¾ä¡£
+     * è½¬æ¢æ’åºè¯­å¥ã€‚
      */
     public String toString() {
         String formula = this.getFormula();

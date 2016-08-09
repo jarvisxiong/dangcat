@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Í³¼ÆÍ¼ĞÎ»ùÀà¡£
+ * ç»Ÿè®¡å›¾å½¢åŸºç±»ã€‚
  *
  * @author dangcat
  */
@@ -32,55 +32,55 @@ public abstract class ChartBase {
     }
 
     /**
-     * Í³¼Æ¶ÔÏó¡£
+     * ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     private JFreeChart chart;
     /**
-     * ¿Ø¼ş×ÖÌå¡£
+     * æ§ä»¶å­—ä½“ã€‚
      */
     private Font chartFont;
     /**
-     * Êı¾İ×ª»»Æ÷¡£
+     * æ•°æ®è½¬æ¢å™¨ã€‚
      */
     private List<DataConverter> dataConverters = new LinkedList<DataConverter>();
     /**
-     * Êı¾İÀ´Ô´¡£
+     * æ•°æ®æ¥æºã€‚
      */
     private DataModule dataModule = null;
     /**
-     * Í³¼ÆÍ¼Æ¬µÄ¸ß¶È¡£
+     * ç»Ÿè®¡å›¾ç‰‡çš„é«˜åº¦ã€‚
      */
     private int height = 360;
     /**
-     * ²úÉúÍ¼Æ¬ÈÈµãĞÅÏ¢¡£
+     * äº§ç”Ÿå›¾ç‰‡çƒ­ç‚¹ä¿¡æ¯ã€‚
      */
     private String imageMap = null;
     /**
-     * Í¼Æ¬ÈÈµã¡£
+     * å›¾ç‰‡çƒ­ç‚¹ã€‚
      */
     private String imageMapId = null;
     /**
-     * ÌáÊ¾±êÇ©ÊÇ·ñ¿É¼û¡£
+     * æç¤ºæ ‡ç­¾æ˜¯å¦å¯è§ã€‚
      */
     private boolean legendVisible = false;
     /**
-     * ÊÇ·ñÏÔÊ¾±êÇ©¡£
+     * æ˜¯å¦æ˜¾ç¤ºæ ‡ç­¾ã€‚
      */
     private boolean showItemLabel = true;
     /**
-     * ±êÌâÎÄ×Ö¡£
+     * æ ‡é¢˜æ–‡å­—ã€‚
      */
     private String title;
     /**
-     * ±êÌâ×ÖÌå¡£
+     * æ ‡é¢˜å­—ä½“ã€‚
      */
     private Font titleFont;
     /**
-     * ±êÌâÊÇ·ñ¿É¼û£¬
+     * æ ‡é¢˜æ˜¯å¦å¯è§ï¼Œ
      */
     private boolean titleVisible = true;
     /**
-     * Í³¼ÆÍ¼Æ¬µÄ¿í¶È¡£
+     * ç»Ÿè®¡å›¾ç‰‡çš„å®½åº¦ã€‚
      */
     private int width = 600;
 
@@ -105,7 +105,7 @@ public abstract class ChartBase {
     }
 
     private void createImageMap(ChartRenderingInfo chartRenderingInfo) {
-        // ²úÉúÈÈµãÇøÓò¡£
+        // äº§ç”Ÿçƒ­ç‚¹åŒºåŸŸã€‚
         if (!ValueUtils.isEmpty(this.imageMapId)) {
             CustomURLTagFragmentGenerator customURLTagFragmentGenerator = new CustomURLTagFragmentGenerator();
             this.imageMap = ChartUtilities.getImageMap(this.imageMapId, chartRenderingInfo, customURLTagFragmentGenerator, customURLTagFragmentGenerator);
@@ -196,16 +196,16 @@ public abstract class ChartBase {
     }
 
     private void initChart(JFreeChart chart) {
-        // ÌáÊ¾±êÇ©À¸ÊÇ·ñ¿É¼û¡£
+        // æç¤ºæ ‡ç­¾æ æ˜¯å¦å¯è§ã€‚
         if (chart.getLegend() != null) {
             chart.getLegend().setVisible(this.isLegendVisible());
             Font chartFont = this.getChartFont();
             if (chartFont != null)
                 chart.getLegend().setItemFont(this.getChartFont());
-            // ÉèÖÃ±ê×¢ÎŞ±ß¿ò
+            // è®¾ç½®æ ‡æ³¨æ— è¾¹æ¡†
             chart.getLegend().setFrame(new BlockBorder(Color.WHITE));
         }
-        // ÅäÖÃ±êÌâ¡£
+        // é…ç½®æ ‡é¢˜ã€‚
         if (this.isTitleVisible()) {
             TextTitle textTitle = new TextTitle();
             Font titleFont = this.getTitleFont();
@@ -221,7 +221,7 @@ public abstract class ChartBase {
     }
 
     /**
-     * ³õÊ¼»¯Í³¼Æ¶ÔÏó¡£
+     * åˆå§‹åŒ–ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     public void initialize() {
         DataModule dataModule = this.getDataModule();
@@ -234,9 +234,9 @@ public abstract class ChartBase {
     }
 
     protected void initPlot(Plot plot) {
-        // ±³¾°É«¡£
+        // èƒŒæ™¯è‰²ã€‚
         plot.setBackgroundPaint(Color.WHITE);
-        // ÉèÖÃ°ëÍ¸Ã÷
+        // è®¾ç½®åŠé€æ˜
         // plot.setForegroundAlpha(0.7f);
         Font chartFont = this.getChartFont();
         if (chartFont != null)
@@ -280,9 +280,9 @@ public abstract class ChartBase {
     }
 
     /**
-     * ²úÉúÍ³¼ÆÍ¼Æ¬¡£
+     * äº§ç”Ÿç»Ÿè®¡å›¾ç‰‡ã€‚
      *
-     * @throws IOException Êä³öÒì³£¡£
+     * @throws IOException è¾“å‡ºå¼‚å¸¸ã€‚
      */
     public void render(File file) throws IOException {
         this.initialize();
@@ -293,9 +293,9 @@ public abstract class ChartBase {
     }
 
     /**
-     * ²úÉúÍ³¼ÆÍ¼Æ¬¡£
+     * äº§ç”Ÿç»Ÿè®¡å›¾ç‰‡ã€‚
      *
-     * @throws IOException Êä³öÒì³£¡£
+     * @throws IOException è¾“å‡ºå¼‚å¸¸ã€‚
      */
     public void render(OutputStream outStream) throws IOException {
         this.initialize();

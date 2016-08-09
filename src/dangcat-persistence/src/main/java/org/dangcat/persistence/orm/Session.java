@@ -12,55 +12,55 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * »á»°¶ÔÏó¡£
+ * ä¼šè¯å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Session {
     /**
-     * ÅúÁ¿´¦ÀíµÄÊıÁ¿¡£
+     * æ‰¹é‡å¤„ç†çš„æ•°é‡ã€‚
      */
     protected int batchCount = 0;
     /**
-     * ²éÑ¯½á¹û
+     * æŸ¥è¯¢ç»“æœ
      */
     protected ResultSet resultSet = null;
     /**
-     * ²éÑ¯±í´ïÊ½¡£
+     * æŸ¥è¯¢è¡¨è¾¾å¼ã€‚
      */
     protected Statement statement = null;
     /**
-     * Á¬½Ó¶ÔÏó¡£
+     * è¿æ¥å¯¹è±¡ã€‚
      */
     private Connection connection = null;
     /**
-     * Êı¾İ¿âÁ¬½Ó¶ÔÏó¡£
+     * æ•°æ®åº“è¿æ¥å¯¹è±¡ã€‚
      */
     private DatabaseConnectionPool databaseConnectionPool;
     /**
-     * Ö´ĞĞÆ÷
+     * æ‰§è¡Œå™¨
      */
     private SessionExecutor sessionExecutor = new SessionExecutor(this);
     /**
-     * SQL¸ú×ÙÆ÷¡£
+     * SQLè·Ÿè¸ªå™¨ã€‚
      */
     private SqlProfile sqlProfile = new SqlProfile();
     /**
-     * Ê¹ÓÃÊÂÎñ¡£
+     * ä½¿ç”¨äº‹åŠ¡ã€‚
      */
     private boolean useTransaction = false;
 
     /**
-     * ¹¹Ôì»á»°¶ÔÏó¡£
+     * æ„é€ ä¼šè¯å¯¹è±¡ã€‚
      *
-     * @param connection Á¬½Ó¶ÔÏó¡£
+     * @param connection è¿æ¥å¯¹è±¡ã€‚
      */
     public Session(DatabaseConnectionPool connectionPool) {
         this.databaseConnectionPool = connectionPool;
     }
 
     /**
-     * ¿ªÆôÊÂÎñ¡£
+     * å¼€å¯äº‹åŠ¡ã€‚
      *
      * @throws SQLException
      */
@@ -71,7 +71,7 @@ public class Session {
     }
 
     /**
-     * Ìá½»ÊÂÎñ¡£
+     * æäº¤äº‹åŠ¡ã€‚
      *
      * @throws SQLException
      */
@@ -91,9 +91,9 @@ public class Session {
     }
 
     /**
-     * Ö´ĞĞÃüÁî¡£
+     * æ‰§è¡Œå‘½ä»¤ã€‚
      *
-     * @param sql ±í´ïÓï¾ä¡£
+     * @param sql è¡¨è¾¾è¯­å¥ã€‚
      * @throws SQLException
      */
     public int execute(String sql) throws SQLException {
@@ -111,11 +111,11 @@ public class Session {
     }
 
     /**
-     * ÒÔÊı¾İÔ´Îª²ÎÊıÅúÁ¿Ö´ĞĞSQLÃüÁî¡£
+     * ä»¥æ•°æ®æºä¸ºå‚æ•°æ‰¹é‡æ‰§è¡ŒSQLå‘½ä»¤ã€‚
      *
-     * @param dataReader   Êı¾İÀ´Ô´¡£
-     * @param sqlBatchList ÅúÁ¿Óï¾ä¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param dataReader   æ•°æ®æ¥æºã€‚
+     * @param sqlBatchList æ‰¹é‡è¯­å¥ã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public int executeBatch(DataReader dataReader, List<String> sqlBatchList) throws SQLException {
         if (!this.useTransaction) {
@@ -151,9 +151,9 @@ public class Session {
     }
 
     /**
-     * ÅúÁ¿Ö´ĞĞ´æ´¢ÃüÁî¡£
+     * æ‰¹é‡æ‰§è¡Œå­˜å‚¨å‘½ä»¤ã€‚
      *
-     * @param rows Êı¾İĞĞ¶ÔÏó¡£
+     * @param rows æ•°æ®è¡Œå¯¹è±¡ã€‚
      * @throws SQLException
      */
     public int executeBatch(List<String> sqlBatchList) throws SQLException {
@@ -168,9 +168,9 @@ public class Session {
     }
 
     /**
-     * Ö´ĞĞ¸üĞÂÃüÁî¡£
+     * æ‰§è¡Œæ›´æ–°å‘½ä»¤ã€‚
      *
-     * @param values ²ÎÊı¶ÔÏó¡£
+     * @param values å‚æ•°å¯¹è±¡ã€‚
      * @throws SQLException
      */
     public int executeBatchUpdate(boolean submit) throws SQLException {
@@ -181,10 +181,10 @@ public class Session {
     }
 
     /**
-     * Ö´ĞĞ²éÑ¯ÃüÁî
+     * æ‰§è¡ŒæŸ¥è¯¢å‘½ä»¤
      *
      * @param sql
-     * @return ResultSet ²éÑ¯½á¹û
+     * @return ResultSet æŸ¥è¯¢ç»“æœ
      * @throws SQLException
      */
     public ResultSet executeQuery(String sql) throws SQLException {
@@ -199,9 +199,9 @@ public class Session {
     }
 
     /**
-     * Ö´ĞĞ¸üĞÂÃüÁî¡£
+     * æ‰§è¡Œæ›´æ–°å‘½ä»¤ã€‚
      *
-     * @param values ²ÎÊı¶ÔÏó¡£
+     * @param values å‚æ•°å¯¹è±¡ã€‚
      * @throws SQLException
      */
     public void executeUpdate() throws SQLException {
@@ -223,7 +223,7 @@ public class Session {
     }
 
     /**
-     * ·µ»Ø²úÉúµÄÖ÷¼üÖµ¡£¡£
+     * è¿”å›äº§ç”Ÿçš„ä¸»é”®å€¼ã€‚ã€‚
      *
      * @throws SQLException
      */
@@ -251,21 +251,21 @@ public class Session {
     }
 
     /**
-     * ÔÚÖ¸¶¨½á¹û¼¯ÖĞ»¹Ô­ÔªÊı¾İ¡£
+     * åœ¨æŒ‡å®šç»“æœé›†ä¸­è¿˜åŸå…ƒæ•°æ®ã€‚
      *
-     * @param table     Êı¾İ±í¶ÔÏó¡£
-     * @param resultSet ½á¹û¼¯¡£
-     * @throws SQLException Ö´ĞĞÒì³£¡£
+     * @param table     æ•°æ®è¡¨å¯¹è±¡ã€‚
+     * @param resultSet ç»“æœé›†ã€‚
+     * @throws SQLException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     public void loadMetaData(Table table, ResultSet resultSet) throws SQLException {
         ResultSet metaDataResultSet = this.getResultSet(table, resultSet);
         if (metaDataResultSet == null)
             return;
-        // »ñÈ¡Ö÷¼üĞÅÏ¢¡£
+        // è·å–ä¸»é”®ä¿¡æ¯ã€‚
         Collection<String> primayKeys = this.loadPrimayKeyMetaData(table.getTableName().getName());
-        // »ñÈ¡ÔªÊı¾İ¡£
+        // è·å–å…ƒæ•°æ®ã€‚
         ResultSetMetaData resultSetMetaData = metaDataResultSet.getMetaData();
-        // »¹Ô­À¸Î»µÄĞÅÏ¢¡£
+        // è¿˜åŸæ ä½çš„ä¿¡æ¯ã€‚
         Columns columns = table.getColumns();
         int columnCount = resultSetMetaData.getColumnCount();
         for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
@@ -290,9 +290,9 @@ public class Session {
     }
 
     /**
-     * ÔØÈëÖ÷¼üÔªÊı¾İ¡£
+     * è½½å…¥ä¸»é”®å…ƒæ•°æ®ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
      */
     private Collection<String> loadPrimayKeyMetaData(String tableName) {
         Collection<String> primayKeys = new HashSet<String>();
@@ -308,13 +308,13 @@ public class Session {
     }
 
     /**
-     * ¸ù¾İ±íÃû×Ö¶ÎÃû¶ÁÈ¡ÏÂÒ»¸öÖ÷¼üĞòÁĞ¡£
+     * æ ¹æ®è¡¨åå­—æ®µåè¯»å–ä¸‹ä¸€ä¸ªä¸»é”®åºåˆ—ã€‚
      *
-     * @param tableName      ±íÃû¡£
-     * @param fieldName      ×Ö¶ÎÃû¡£
-     * @param classType      ×Ö¶ÎÀàĞÍ¡£
-     * @param tableGenerator ĞòºÅ²ßÂÔ¡£
-     * @return Ö÷¼üĞòÁĞ¡£
+     * @param tableName      è¡¨åã€‚
+     * @param fieldName      å­—æ®µåã€‚
+     * @param classType      å­—æ®µç±»å‹ã€‚
+     * @param tableGenerator åºå·ç­–ç•¥ã€‚
+     * @return ä¸»é”®åºåˆ—ã€‚
      * @throws SQLException
      */
     public Object nextSequence(String tableName, String fieldName, Class<?> classType, TableGenerator tableGenerator) throws SQLException {
@@ -322,10 +322,10 @@ public class Session {
     }
 
     /**
-     * Ô¤²éÑ¯¡£
+     * é¢„æŸ¥è¯¢ã€‚
      *
-     * @param sql        ²éÑ¯Óï¾ä¡£
-     * @param fieldNames ·µ»Ø×Ö¶ÎÃû¡£
+     * @param sql        æŸ¥è¯¢è¯­å¥ã€‚
+     * @param fieldNames è¿”å›å­—æ®µåã€‚
      * @throws SQLException
      */
     public void prepare(String sql, String... fieldNames) throws SQLException {
@@ -341,7 +341,7 @@ public class Session {
     }
 
     /**
-     * ÊÍ·Å»á»°¶ÔÏó¡£
+     * é‡Šæ”¾ä¼šè¯å¯¹è±¡ã€‚
      */
     public void release() {
         this.releaseStatement();
@@ -352,7 +352,7 @@ public class Session {
     }
 
     /**
-     * ÊÍ·Å²éÑ¯¶ÔÏó¶ÔÏó¡£
+     * é‡Šæ”¾æŸ¥è¯¢å¯¹è±¡å¯¹è±¡ã€‚
      */
     private void releaseStatement() {
         try {
@@ -373,7 +373,7 @@ public class Session {
     }
 
     /**
-     * »Ø¹öÊÂÎñ¡£
+     * å›æ»šäº‹åŠ¡ã€‚
      */
     public void rollback() {
         this.sqlProfile.end();
@@ -387,11 +387,11 @@ public class Session {
     }
 
     /**
-     * ÉèÖÃ²ÎÊı¡£
+     * è®¾ç½®å‚æ•°ã€‚
      *
-     * @param parameterIndex ²ÎÊıË÷ÒıÎ»ÖÃ¡£
-     * @param value          ²ÎÊıÖµ¡£
-     * @param column         Êı¾İ¿âÀàĞÍ¡£
+     * @param parameterIndex å‚æ•°ç´¢å¼•ä½ç½®ã€‚
+     * @param value          å‚æ•°å€¼ã€‚
+     * @param column         æ•°æ®åº“ç±»å‹ã€‚
      * @throws SQLException
      */
     public void setParam(int parameterIndex, Object value, Column column) throws SQLException {

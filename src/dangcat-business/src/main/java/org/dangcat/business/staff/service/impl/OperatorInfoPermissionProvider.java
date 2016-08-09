@@ -6,7 +6,7 @@ import org.dangcat.commons.reflect.Permission;
 import java.util.Collection;
 
 /**
- * ²Ù×÷Ô±È¨ÏŞ¿ØÖÆ¡£
+ * æ“ä½œå‘˜æƒé™æ§åˆ¶ã€‚
  *
  * @author dangcat
  */

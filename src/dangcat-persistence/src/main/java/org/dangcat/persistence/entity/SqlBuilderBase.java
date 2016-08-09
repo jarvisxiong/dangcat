@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Óï¾ä¹¹½¨»ù´¡¡£
+ * è¯­å¥æ„å»ºåŸºç¡€ã€‚
  *
  * @author dangcat
  */
@@ -29,10 +29,10 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨½¨Á¢Êı¾İ±íµÄ±í´ïÊ½¡£
+     * æ„å»ºå»ºç«‹æ•°æ®è¡¨çš„è¡¨è¾¾å¼ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildCreateStatement() {
         SqlBuilder sqlBuilder = this.getSql(Sql.CREATE);
@@ -49,9 +49,9 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨É¾³ı±íµÄ±í´ïÊ½¡£
+     * æ„å»ºåˆ é™¤è¡¨çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ´æ´¢µÄ±í´ïÓï¾ä¡£
+     * @return å­˜å‚¨çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildDeleteStatement() {
         SqlBuilder sqlBuilder = this.getSql(Sql.DELETE);
@@ -73,12 +73,12 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Êı¾İĞĞµÄÉ¾³ıµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡Œçš„åˆ é™¤çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ´æ´¢µÄ±í´ïÓï¾ä¡£
+     * @return å­˜å‚¨çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public String buildDeleteStatement(List<String> fieldNameList) {
-        // Ö÷¼üÊı×é
+        // ä¸»é”®æ•°ç»„
         Column[] keyColumns = this.getTable().getColumns().getPrimaryKeys();
         if (keyColumns == null || keyColumns.length == 0)
             return null;
@@ -100,10 +100,10 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨É¾³ıÊı¾İ±íµÄ±í´ïÊ½¡£
+     * æ„å»ºåˆ é™¤æ•°æ®è¡¨çš„è¡¨è¾¾å¼ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
-     * @return É¾³ıµÄ±í´ïÓï¾ä¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
+     * @return åˆ é™¤çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildDropStatement() {
         SqlBuilder sqlBuilder = this.getSql(Sql.DROP);
@@ -116,9 +116,9 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Ö´ĞĞµÄ±í´ïÊ½¡£
+     * æ„å»ºæ‰§è¡Œçš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ±í´ïÓï¾ä¡£
+     * @return è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildExecuteStatement() {
         SqlBuilder sqlBuilder = this.getSql(Sql.EXECUTE);
@@ -128,7 +128,7 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨±í´æÔÚ²éÑ¯±í´ïÓï¾ä¡£
+     * æ„å»ºè¡¨å­˜åœ¨æŸ¥è¯¢è¡¨è¾¾è¯­å¥ã€‚
      *
      * @return
      */
@@ -140,12 +140,12 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Ë÷Òı±í´ïÊ½¡£
+     * æ„å»ºç´¢å¼•è¡¨è¾¾å¼ã€‚
      *
-     * @param tableName Êı¾İ±íÃû¡£
-     * @param seq       Ë÷ÒıĞòºÅ¡£
-     * @param orderBy   ÅÅĞò·½Ê½¡£
-     * @return ¹¹½¨Óï¾ä¡£
+     * @param tableName æ•°æ®è¡¨åã€‚
+     * @param seq       ç´¢å¼•åºå·ã€‚
+     * @param orderBy   æ’åºæ–¹å¼ã€‚
+     * @return æ„å»ºè¯­å¥ã€‚
      */
     public String buildIndexStatement(Integer seq, OrderBy orderBy) {
         String index = orderBy.toIndex();
@@ -166,18 +166,18 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Êı¾İĞĞµÄ²åÈëµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡Œçš„æ’å…¥çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ´æ´¢µÄ±í´ïÓï¾ä¡£
+     * @return å­˜å‚¨çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public String buildInsertStatement(List<String> fieldNameList) {
         fieldNameList.clear();
-        // ×Ö¶ÎÄÚÈİ¡£
+        // å­—æ®µå†…å®¹ã€‚
         StringBuilder sqlFields = new StringBuilder();
-        // ÖµÄÚÈİ¡£
+        // å€¼å†…å®¹ã€‚
         StringBuilder sqlValues = new StringBuilder();
         for (Column column : this.getTable().getColumns()) {
-            // ×Ô¶¯ĞÂÔöµÄ²»ĞèÒª²åÈë¡£
+            // è‡ªåŠ¨æ–°å¢çš„ä¸éœ€è¦æ’å…¥ã€‚
             if (column.isIndentityGeneration() || column.isCalculate())
                 continue;
 
@@ -190,7 +190,7 @@ public abstract class SqlBuilderBase {
             sqlValues.append("?");
             fieldNameList.add(column.getName());
         }
-        // ¹¹½¨ĞÂÔö½Å±¾¡£
+        // æ„å»ºæ–°å¢è„šæœ¬ã€‚
         StringBuilder sqlBuilder = new StringBuilder();
         if (sqlFields.length() > 0) {
             sqlBuilder.append("INSERT INTO ");
@@ -207,16 +207,16 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Êı¾İ±íÔØÈëµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡¨è½½å…¥çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public abstract SqlBuilder buildLoadStatement();
 
     /**
-     * ¹¹½¨Êı¾İ±íÔØÈëµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡¨è½½å…¥çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     protected SqlBuilder buildLoadStatement(SqlBuilder sqlBuilder, Range range) {
         String sqlExpress = sqlBuilder.toString();
@@ -230,12 +230,12 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨²éÑ¯Êı¾İ±í¼ÇÂ¼ÊıµÄ±í´ïÊ½¡£
+     * æ„å»ºæŸ¥è¯¢æ•°æ®è¡¨è®°å½•æ•°çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ¼ÆËãµÄ±í´ïÓï¾ä¡£
+     * @return è®¡ç®—çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildTotalSizeStatement() {
-        // ²éÑ¯·¶Î§
+        // æŸ¥è¯¢èŒƒå›´
         SqlBuilder sqlBuilder = this.getSql(Sql.TOTALSIZE);
         if (sqlBuilder != null)
             return this.replaceTableName(sqlBuilder);
@@ -271,9 +271,9 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Çå³ı±íµÄ±í´ïÊ½¡£
+     * æ„å»ºæ¸…é™¤è¡¨çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ´æ´¢µÄ±í´ïÓï¾ä¡£
+     * @return å­˜å‚¨çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public SqlBuilder buildTruncateStatement() {
         SqlBuilder sqlBuilder = new SqlBuilder();
@@ -283,12 +283,12 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Êı¾İĞĞµÄĞŞ¸ÄµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡Œçš„ä¿®æ”¹çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ´æ´¢µÄ±í´ïÓï¾ä¡£
+     * @return å­˜å‚¨çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public String buildUpdateStatement(Row row, List<String> fieldNameList, List<String> primaryKeyList) {
-        // Ö÷¼üÊı×é
+        // ä¸»é”®æ•°ç»„
         Table table = this.getTable();
         Column[] keyColumns = table.getColumns().getPrimaryKeys();
         if (keyColumns == null || keyColumns.length == 0)
@@ -297,7 +297,7 @@ public abstract class SqlBuilderBase {
         fieldNameList.clear();
         primaryKeyList.clear();
 
-        // ±»ĞŞ¸ÄµÄ×Ö¶ÎÖµ¡£
+        // è¢«ä¿®æ”¹çš„å­—æ®µå€¼ã€‚
         StringBuilder sqlBuilder = new StringBuilder();
         for (Column column : table.getColumns()) {
             if (column.isCalculate())
@@ -316,7 +316,7 @@ public abstract class SqlBuilderBase {
                 fieldNameList.add(column.getName());
             }
         }
-        // Ö÷¼üÌõ¼ş¡£
+        // ä¸»é”®æ¡ä»¶ã€‚
         if (sqlBuilder.length() > 0) {
             for (Column column : keyColumns) {
                 if (primaryKeyList.size() == 0)
@@ -336,7 +336,7 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ¿âÃû¡£
+     * æ•°æ®åº“åã€‚
      */
     protected String getDatabaseName() {
         return this.databaseName;
@@ -347,7 +347,7 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * ¹ıÂËÌõ¼ş¡£
+     * è¿‡æ»¤æ¡ä»¶ã€‚
      */
     protected abstract String getFilterSql();
 
@@ -361,7 +361,7 @@ public abstract class SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ±íÃû¶ÔÏó¡£
+     * æ•°æ®è¡¨åå¯¹è±¡ã€‚
      */
     public String getName() {
         return DynamicTableUtils.getTableName(this.getTableName());
@@ -374,7 +374,7 @@ public abstract class SqlBuilderBase {
     protected SqlBuilder getSql(String name) {
         SqlBuilder sqlBuilder = null;
         Table table = this.getTable();
-        // ÒÔµ±Ç°ÃüÃûÎªÊ×Ñ¡¡£
+        // ä»¥å½“å‰å‘½åä¸ºé¦–é€‰ã€‚
         if (!ValueUtils.isEmpty(this.getSqlName()))
             sqlBuilder = table.getSql(this.getDatabaseType(), this.getSqlName());
         if (sqlBuilder == null)
@@ -385,12 +385,12 @@ public abstract class SqlBuilderBase {
     protected abstract String getSqlName();
 
     /**
-     * Êı¾İ±í¶¨Òå¡£
+     * æ•°æ®è¡¨å®šä¹‰ã€‚
      */
     public abstract Table getTable();
 
     /**
-     * Êı¾İ±íÃû¶ÔÏó¡£
+     * æ•°æ®è¡¨åå¯¹è±¡ã€‚
      */
     protected abstract TableName getTableName();
 

@@ -13,7 +13,7 @@ import java.net.URLClassLoader;
 import java.util.*;
 
 /**
- * À©Õ¹Ä¿Â¼ÔØÈë°ü¡£
+ * æ‰©å±•ç›®å½•è½½å…¥åŒ…ã€‚
  *
  * @author dangcat
  */
@@ -32,7 +32,7 @@ public class ExtensionClassLoader {
     }
 
     /**
-     * Ìí¼ÓÂ·¾¶Ä¿Â¼¡£
+     * æ·»åŠ è·¯å¾„ç›®å½•ã€‚
      */
     public void addClassPath(File file) {
         if (file != null && file.exists() && !this.classPathList.contains(file))
@@ -40,7 +40,7 @@ public class ExtensionClassLoader {
     }
 
     /**
-     * Ìí¼ÓÂ·¾¶¡£
+     * æ·»åŠ è·¯å¾„ã€‚
      */
     public void addClassPath(String classPath) {
         if (classPath != null && classPath.length() > 0) {
@@ -55,10 +55,10 @@ public class ExtensionClassLoader {
     }
 
     /**
-     * ÔØÈëÀ©Õ¹°ü¡£
+     * è½½å…¥æ‰©å±•åŒ…ã€‚
      *
-     * @param parent ËùÊô¸¸¼ÓÔØÆ÷¡£
-     * @return Àà¼ÓÔØÆ÷¡£
+     * @param parent æ‰€å±çˆ¶åŠ è½½å™¨ã€‚
+     * @return ç±»åŠ è½½å™¨ã€‚
      */
     public ClassLoader load(ClassLoader parent) {
         if (this.classLoader == null) {
@@ -144,7 +144,7 @@ public class ExtensionClassLoader {
     }
 
     /**
-     * ´òÓ¡¼ÓÔØ½á¹¹¡£
+     * æ‰“å°åŠ è½½ç»“æ„ã€‚
      */
     @Override
     public String toString() {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ¹éµµÑ¹Ëõ¡£
+ * å½’æ¡£å‹ç¼©ã€‚
  *
  * @author dangcat
  */
@@ -91,11 +91,11 @@ abstract class Archiver {
     }
 
     /**
-     * ¹éµµ´ò°ü¡£
+     * å½’æ¡£æ‰“åŒ…ã€‚
      *
-     * @param compressor  Ñ¹Ëõ¶ÔÏó¡£
-     * @param archiveFile ¹éµµÎÄ¼ş¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param compressor  å‹ç¼©å¯¹è±¡ã€‚
+     * @param archiveFile å½’æ¡£æ–‡ä»¶ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected void pack(Compressor compressor, File archiveFile) throws IOException {
         this.compressor = compressor;
@@ -162,12 +162,12 @@ abstract class Archiver {
     }
 
     /**
-     * ½â¿ªÑ¹Ëõ°ü¡£
+     * è§£å¼€å‹ç¼©åŒ…ã€‚
      *
-     * @param compressor  ´ò°ü¶ÔÏó¡£
-     * @param archiveFile Ñ¹ËõÎÄ¼ş¡£
-     * @param destPath    Ä¿±êÂ·¾¶¡£
-     * @throws IOException ½âÑ¹Òì³£¡£
+     * @param compressor  æ‰“åŒ…å¯¹è±¡ã€‚
+     * @param archiveFile å‹ç¼©æ–‡ä»¶ã€‚
+     * @param destPath    ç›®æ ‡è·¯å¾„ã€‚
+     * @throws IOException è§£å‹å¼‚å¸¸ã€‚
      */
     protected void unpack(Compressor compressor, File archiveFile, File destPath) throws IOException {
         this.compressor = compressor;

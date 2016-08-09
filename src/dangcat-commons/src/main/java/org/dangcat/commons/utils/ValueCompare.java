@@ -13,14 +13,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * ÊıÖµ±È½Ï¹¤¾ß¡£
+ * æ•°å€¼æ¯”è¾ƒå·¥å…·ã€‚
  */
 class ValueCompare {
     /**
-     * ±È½ÏÁ½¸ö¶ÔÏóµÄ´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡çš„å¤§å°ã€‚
      *
-     * @param from À´Ô´¶ÔÏó¡£
-     * @param to   Ä¿±ê¶ÔÏó¡£
+     * @param from æ¥æºå¯¹è±¡ã€‚
+     * @param to   ç›®æ ‡å¯¹è±¡ã€‚
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -34,7 +34,7 @@ class ValueCompare {
         else if (from == to)
             return 0;
 
-        // ÀàĞÍÏàÍ¬±È½Ï¡£
+        // ç±»å‹ç›¸åŒæ¯”è¾ƒã€‚
         if (from instanceof Collection && to instanceof Collection)
             return compareCollection((Collection) from, (Collection) to);
         else if (from instanceof Map && to instanceof Map)
@@ -61,7 +61,7 @@ class ValueCompare {
             else
                 return from.toString().compareTo(to.toString());
         }
-        // µ±ÀàĞÍ²»ÏàÍ¬µÄÊ±ºò£¬¶øÇÒÒ²Ã»ÓĞ½øĞĞÀàĞÍ×ª»»Ê±£¬²»·µ»Ø0£¬¶øÊÇÖ±½Ó·µ»ØÒ»¸ö1£¬±íÊ¾Á½¸ö±È½ÏÖµÊÇ²»ÏàµÈµÄ£¬¿ÉÒÔÊ¾ÎªÇ°Õß¸ü´ó¡£
+        // å½“ç±»å‹ä¸ç›¸åŒçš„æ—¶å€™ï¼Œè€Œä¸”ä¹Ÿæ²¡æœ‰è¿›è¡Œç±»å‹è½¬æ¢æ—¶ï¼Œä¸è¿”å›0ï¼Œè€Œæ˜¯ç›´æ¥è¿”å›ä¸€ä¸ª1ï¼Œè¡¨ç¤ºä¸¤ä¸ªæ¯”è¾ƒå€¼æ˜¯ä¸ç›¸ç­‰çš„ï¼Œå¯ä»¥ç¤ºä¸ºå‰è€…æ›´å¤§ã€‚
         return 1;
     }
 

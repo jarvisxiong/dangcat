@@ -1,7 +1,7 @@
 package org.dangcat.boot.config;
 
 /**
- * Í³¼ÆÅäÖÃ¡£
+ * ç»Ÿè®¡é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -11,11 +11,11 @@ public class StatisticsConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "Statistics";
     private static StatisticsConfig instance = new StatisticsConfig();
     /**
-     * Êä³öÍ³¼ÆĞÅÏ¢ÖÜÆÚ£¨Ãë£©¡£
+     * è¾“å‡ºç»Ÿè®¡ä¿¡æ¯å‘¨æœŸï¼ˆç§’ï¼‰ã€‚
      */
     private long logInterval = 60;
     /**
-     * Í³¼ÆÖÜÆÚ£¨Ãë£©¡£
+     * ç»Ÿè®¡å‘¨æœŸï¼ˆç§’ï¼‰ã€‚
      */
     private long statisticsInterval = 24 * 60 * 60;
 
@@ -29,19 +29,19 @@ public class StatisticsConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static StatisticsConfig getInstance() {
         return instance;
     }
 
     public long getLogInterval() {
-        // ×îĞ¡30Ãë¡£
+        // æœ€å°30ç§’ã€‚
         return Math.max(this.getLongValue(LogInterval), 30);
     }
 
     public long getStatisticsInterval() {
-        // ×îĞ¡Ò»Ğ¡Ê±¡£
+        // æœ€å°ä¸€å°æ—¶ã€‚
         return Math.max(this.getLongValue(StatisticsInterval), 60 * 60);
     }
 }

@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * ±¨ÎÄ´¦Àí·şÎñ»ù´¡Àà¡£
+ * æŠ¥æ–‡å¤„ç†æœåŠ¡åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
@@ -24,7 +24,7 @@ public class SessionProcessServiceBase<T extends SessionBase> extends ServiceBas
     private Collection<ErrorDataProcess<T>> errorDataProcesses = new LinkedList<ErrorDataProcess<T>>();
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
      * @param parent
      */
@@ -37,28 +37,28 @@ public class SessionProcessServiceBase<T extends SessionBase> extends ServiceBas
     public void addService(Class<?> classType, Object service) {
         super.addService(classType, service);
 
-        // Ô¤´¦ÀíÊÂ¼ş½Ó¿Ú¡£
+        // é¢„å¤„ç†äº‹ä»¶æ¥å£ã€‚
         if (service instanceof BeforeDataProcess) {
             BeforeDataProcess<T> beforeDataProcessService = (BeforeDataProcess<T>) service;
             if (beforeDataProcessService != null)
                 this.beforeDataProcesses.add(beforeDataProcessService);
         }
 
-        // ´¦ÀíÊÂ¼ş½Ó¿Ú¡£
+        // å¤„ç†äº‹ä»¶æ¥å£ã€‚
         if (service instanceof DataProcessService) {
             DataProcessService<T> dataProcessService = (DataProcessService<T>) service;
             if (dataProcessService != null)
                 this.dataProcessServices.add(dataProcessService);
         }
 
-        // ´¦ÀíºóÊÂ¼ş½Ó¿Ú¡£
+        // å¤„ç†åäº‹ä»¶æ¥å£ã€‚
         if (service instanceof AfterDataProcess) {
             AfterDataProcess<T> afterDataProcessService = (AfterDataProcess<T>) service;
             if (afterDataProcessService != null)
                 this.afterDataProcesses.add(afterDataProcessService);
         }
 
-        // ´¦Àí´íÎó½Ó¿Ú¡£
+        // å¤„ç†é”™è¯¯æ¥å£ã€‚
         if (service instanceof ErrorDataProcess) {
             ErrorDataProcess<T> errorDataProcessService = (ErrorDataProcess<T>) service;
             if (errorDataProcessService != null)

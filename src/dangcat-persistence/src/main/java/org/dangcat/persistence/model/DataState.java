@@ -1,25 +1,25 @@
 package org.dangcat.persistence.model;
 
 /**
- * Êı¾İ×´Ì¬¡£
+ * æ•°æ®çŠ¶æ€ã€‚
  *
  * @author dangcat
  */
 public enum DataState {
     /**
-     * ä¯ÀÀ¡£
+     * æµè§ˆã€‚
      */
     Browse,
     /**
-     * ÒÑÉ¾³ı¡£
+     * å·²åˆ é™¤ã€‚
      */
     Deleted,
     /**
-     * ²åÈë¡£
+     * æ’å…¥ã€‚
      */
     Insert,
     /**
-     * ÒÑĞŞ¸Ä¡£
+     * å·²ä¿®æ”¹ã€‚
      */
     Modified,
 }

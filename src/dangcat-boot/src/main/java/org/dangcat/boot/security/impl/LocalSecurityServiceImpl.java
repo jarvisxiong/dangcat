@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * ±¾µØ°²È«·şÎñ¡£
+ * æœ¬åœ°å®‰å…¨æœåŠ¡ã€‚
  *
  * @author dangcat
  */

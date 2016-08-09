@@ -1,18 +1,18 @@
 package org.dangcat.boot.event.service;
 
 /**
- * ÏûÏ¢ÕìÌıÆ÷¡£
+ * æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
  *
  * @author dangcat
  */
 public interface EventListener {
     /**
-     * Æô¶¯ÕìÌıÆ÷¡£
+     * å¯åŠ¨ä¾¦å¬å™¨ã€‚
      */
     void start();
 
     /**
-     * Í£Ö¹ÕìÌı¡£
+     * åœæ­¢ä¾¦å¬ã€‚
      */
     void stop();
 }

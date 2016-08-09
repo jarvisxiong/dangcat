@@ -1,14 +1,14 @@
 package org.dangcat.boot.service.impl;
 
 /**
- * ╤сапж╢пп╫с©з║ё
+ * И≤÷Е┬≈Ф┴╖Х║▄Ф▌╔Е▐ёЦ─┌
  *
  * @param <T>
  * @author dangcat
  */
 public interface QueueExecuteor<T> {
     /**
-     * ╤сапоъЁлж╢пп╫с©з║ё
+     * И≤÷Е┬≈Г╨©Г╗▀Ф┴╖Х║▄Ф▌╔Е▐ёЦ─┌
      */
     void execute(T data);
 

@@ -1,18 +1,18 @@
 package org.dangcat.commons.serialize.xml;
 
 /**
- * ÊôĞÔ¶ÔÏó
+ * å±æ€§å¯¹è±¡
  *
  * @author dangcat
  */
 public class Property implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * ÊôĞÔÃû¡£
+     * å±æ€§åã€‚
      */
     private String name;
     /**
-     * ÊôĞÔÖµ¡£
+     * å±æ€§å€¼ã€‚
      */
     private String value;
 

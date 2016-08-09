@@ -1,13 +1,13 @@
 package org.dangcat.business.systeminfo;
 
 /**
- * Ìá¹©À©Õ¹ÏµÍ³ĞÅÏ¢¡£
+ * æä¾›æ‰©å±•ç³»ç»Ÿä¿¡æ¯ã€‚
  */
 public interface SystemInfoProvider {
     /**
-     * ²úÉúÀ©Õ¹ÏµÍ³ĞÅÏ¢¡£
+     * äº§ç”Ÿæ‰©å±•ç³»ç»Ÿä¿¡æ¯ã€‚
      *
-     * @param systemInfo ÏµÍ³ĞÅÏ¢¶ÔÏó¡£
+     * @param systemInfo ç³»ç»Ÿä¿¡æ¯å¯¹è±¡ã€‚
      */
     void createExtendInfos(SystemInfo systemInfo);
 }

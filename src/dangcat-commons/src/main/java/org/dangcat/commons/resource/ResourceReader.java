@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * ×ÊÔ´¶ÁÈ¡½Ó¿Ú¡£
+ * èµ„æºè¯»å–æ¥å£ã€‚
  *
  * @author dangcat
  */
@@ -20,57 +20,57 @@ public abstract class ResourceReader {
     }
 
     /**
-     * ¶ÁÈ¡¶ÔÏó¡£
+     * è¯»å–å¯¹è±¡ã€‚
      *
-     * @param locale µØÇø¶ÔÏó¡£
-     * @param key    ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´¶ÔÏó¡£
+     * @param locale åœ°åŒºå¯¹è±¡ã€‚
+     * @param key    å…³é”®å­—ã€‚
+     * @return èµ„æºå¯¹è±¡ã€‚
      */
     public abstract Object getObject(Locale locale, String key);
 
     /**
-     * ¶ÁÈ¡¶ÔÏó¡£
+     * è¯»å–å¯¹è±¡ã€‚
      *
-     * @param key ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´¶ÔÏó¡£
+     * @param key å…³é”®å­—ã€‚
+     * @return èµ„æºå¯¹è±¡ã€‚
      */
     public Object getObject(String key) {
         return this.getObject(Environment.getCurrentLocale(), key);
     }
 
     /**
-     * ¶ÁÈ¡ÎÄ±¾¡£
+     * è¯»å–æ–‡æœ¬ã€‚
      *
-     * @param locale µØÇø¶ÔÏó¡£
-     * @param key    ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´ÎÄ±¾¡£
+     * @param locale åœ°åŒºå¯¹è±¡ã€‚
+     * @param key    å…³é”®å­—ã€‚
+     * @return èµ„æºæ–‡æœ¬ã€‚
      */
     public abstract String getText(Locale locale, String key, Object... params);
 
     /**
-     * ¶ÁÈ¡ÎÄ±¾¡£
+     * è¯»å–æ–‡æœ¬ã€‚
      *
-     * @param key ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´ÎÄ±¾¡£
+     * @param key å…³é”®å­—ã€‚
+     * @return èµ„æºæ–‡æœ¬ã€‚
      */
     public String getText(String key, Object... params) {
         return this.getText(Environment.getCurrentLocale(), key, params);
     }
 
     /**
-     * ¶ÁÈ¡Ó³Éä±í¡£
+     * è¯»å–æ˜ å°„è¡¨ã€‚
      *
-     * @param locale µØÇø¶ÔÏó¡£
-     * @param key    ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´Ó³Éä±í¡£
+     * @param locale åœ°åŒºå¯¹è±¡ã€‚
+     * @param key    å…³é”®å­—ã€‚
+     * @return èµ„æºæ˜ å°„è¡¨ã€‚
      */
     public abstract Map<Integer, String> getValueMap(Locale locale, String key);
 
     /**
-     * ¶ÁÈ¡Ó³Éä±í¡£
+     * è¯»å–æ˜ å°„è¡¨ã€‚
      *
-     * @param key ¹Ø¼ü×Ö¡£
-     * @return ×ÊÔ´Ó³Éä±í¡£
+     * @param key å…³é”®å­—ã€‚
+     * @return èµ„æºæ˜ å°„è¡¨ã€‚
      */
     public Map<Integer, String> getValueMap(String key) {
         return this.getValueMap(Environment.getCurrentLocale(), key);

@@ -1,24 +1,24 @@
 package org.dangcat.boot.security.impl;
 
 /**
- * Ç©Ãû½âÎö½Ó¿Ú¡£
+ * ç­¾åè§£ææ¥å£ã€‚
  */
 public interface SignResolveProvider {
     /**
-     * µÇÂ¼ĞÅÏ¢×ª»¯³ÉÇ©Ãû×Ö´®¡£
+     * ç™»å½•ä¿¡æ¯è½¬åŒ–æˆç­¾åå­—ä¸²ã€‚
      *
-     * @param loginUser µÇÂ¼ĞÅÏ¢¡£
-     * @param clientIp  ¿Í»§¶ËµØÖ·¡£
-     * @return Ç©Ãû×Ö´®¡£
+     * @param loginUser ç™»å½•ä¿¡æ¯ã€‚
+     * @param clientIp  å®¢æˆ·ç«¯åœ°å€ã€‚
+     * @return ç­¾åå­—ä¸²ã€‚
      */
     String createSignId(LoginUser loginUser);
 
     /**
-     * Ç©Ãû×Ö´®×ª»»³ÉµÇÂ¼ĞÅÏ¢¡£
+     * ç­¾åå­—ä¸²è½¬æ¢æˆç™»å½•ä¿¡æ¯ã€‚
      *
-     * @param signId   Ç©Ãû×Ö´®¡£
-     * @param clientIp ¿Í»§¶ËµØÖ·¡£
-     * @return µÇÂ¼ĞÅÏ¢¡£
+     * @param signId   ç­¾åå­—ä¸²ã€‚
+     * @param clientIp å®¢æˆ·ç«¯åœ°å€ã€‚
+     * @return ç™»å½•ä¿¡æ¯ã€‚
      */
     LoginUser parseLoginUser(String signId);
 }

@@ -3,7 +3,7 @@ package org.dangcat.net.jms.conf;
 import org.dangcat.boot.config.ServiceConfig;
 
 /**
- * Í³¼ÆÅäÖÃ¡£
+ * ç»Ÿè®¡é…ç½®ã€‚
  */
 public class JMSConfig extends ServiceConfig {
     public static final String ConfigFile = "ConfigFile";
@@ -11,11 +11,11 @@ public class JMSConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "JMS";
     private static JMSConfig instance = new JMSConfig();
     /**
-     * ActiveMQµÄÅäÖÃÎÄ¼ş¡£
+     * ActiveMQçš„é…ç½®æ–‡ä»¶ã€‚
      */
     private String configFile = "conf/jmsservice.activemq.xml";
     /**
-     * ÕìÌı²¢·¢´¦ÀíÏß³ÌÊı¡£
+     * ä¾¦å¬å¹¶å‘å¤„ç†çº¿ç¨‹æ•°ã€‚
      */
     private int listenProcessSize = 20;
 
@@ -29,7 +29,7 @@ public class JMSConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static JMSConfig getInstance() {
         return instance;

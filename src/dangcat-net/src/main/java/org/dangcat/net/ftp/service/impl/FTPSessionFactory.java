@@ -10,13 +10,13 @@ public class FTPSessionFactory extends ConnectionFactory<FTPClientPool, FTPSessi
     private static FTPSessionFactory instance = null;
 
     /**
-     * Ë½ÓÐ¹¹Ôìº¯Êý¡£
+     * ç§æœ‰æž„é€ å‡½æ•°ã€‚
      */
     private FTPSessionFactory() {
     }
 
     /**
-     * ²ÉÓÃµ¥×ÓÄ£Ê½»ñÈ¡»á»°¹¤³§ÊµÀý¡£
+     * é‡‡ç”¨å•å­æ¨¡å¼èŽ·å–ä¼šè¯å·¥åŽ‚å®žä¾‹ã€‚
      */
     public static FTPSessionFactory getInstance() {
         if (instance == null) {

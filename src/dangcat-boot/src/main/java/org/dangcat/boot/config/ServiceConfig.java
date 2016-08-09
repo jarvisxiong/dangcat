@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * ÅäÖÃ»ùÀà¡£
+ * é…ç½®åŸºç±»ã€‚
  *
  * @author dangcat
  */
@@ -37,9 +37,9 @@ public abstract class ServiceConfig extends ConfigBase {
     }
 
     /**
-     * Ìí¼ÓÅäÖÃĞŞ¸ÄÕìÌı¡£
+     * æ·»åŠ é…ç½®ä¿®æ”¹ä¾¦å¬ã€‚
      *
-     * @param changedListener ĞŞ¸ÄÕìÌı¶ÔÏó¡£
+     * @param changedListener ä¿®æ”¹ä¾¦å¬å¯¹è±¡ã€‚
      */
     public void addChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && !this.changeEventAdaptorList.contains(changeEventAdaptor))
@@ -59,10 +59,10 @@ public abstract class ServiceConfig extends ConfigBase {
     }
 
     /**
-     * ´¥·¢ĞŞ¸ÄÊÂ¼ş¡£
+     * è§¦å‘ä¿®æ”¹äº‹ä»¶ã€‚
      *
-     * @param name  ÅäÖÃÃû³Æ¡£
-     * @param value ĞŞ¸ÄÖµ¡£
+     * @param name  é…ç½®åç§°ã€‚
+     * @param value ä¿®æ”¹å€¼ã€‚
      */
     private void fireAfterChanged(Map<String, String> changedConfigMap) {
         Event event = new Event(this.getName());
@@ -86,10 +86,10 @@ public abstract class ServiceConfig extends ConfigBase {
     }
 
     /**
-     * ´¥·¢ĞŞ¸ÄÊÂ¼ş¡£
+     * è§¦å‘ä¿®æ”¹äº‹ä»¶ã€‚
      *
-     * @param name  ÅäÖÃÃû³Æ¡£
-     * @param value ĞŞ¸ÄÖµ¡£
+     * @param name  é…ç½®åç§°ã€‚
+     * @param value ä¿®æ”¹å€¼ã€‚
      */
     private void fireBeforeChanged(Map<String, String> changedConfigMap) {
         Event event = new Event(this.getName());
@@ -108,14 +108,14 @@ public abstract class ServiceConfig extends ConfigBase {
     }
 
     /**
-     * ¶ÁÈ¡È«¾ÖÉÏÏÂÎÄ¡£
+     * è¯»å–å…¨å±€ä¸Šä¸‹æ–‡ã€‚
      */
     protected ApplicationContext getApplicationContext() {
         return ApplicationContext.getInstance();
     }
 
     /**
-     * ÊÇ·ñ¿ÉÓÃ¡£
+     * æ˜¯å¦å¯ç”¨ã€‚
      */
     protected boolean getDefaultEnabled() {
         return true;
@@ -138,7 +138,7 @@ public abstract class ServiceConfig extends ConfigBase {
     }
 
     /**
-     * ´¥·¢ÅäÖÃĞŞ¸ÄÊÂ¼ş¡£
+     * è§¦å‘é…ç½®ä¿®æ”¹äº‹ä»¶ã€‚
      */
     private void onConfigChanged() {
         Map<String, String> configChangedMap = new HashMap<String, String>();

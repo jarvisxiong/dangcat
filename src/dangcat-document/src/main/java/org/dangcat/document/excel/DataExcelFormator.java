@@ -36,29 +36,29 @@ public class DataExcelFormator implements ExcelFormator {
     }
 
     /**
-     * ¸ñÊ½»¯ÎÄµµ¡£
+     * æ ¼å¼åŒ–æ–‡æ¡£ã€‚
      *
-     * @param sheetIndex Ò³±êÎ»ÖÃ¡£
-     * @param rectangle  ¸ñÊ½»¯·¶Î§¡£
+     * @param sheetIndex é¡µæ ‡ä½ç½®ã€‚
+     * @param rectangle  æ ¼å¼åŒ–èŒƒå›´ã€‚
      */
     @Override
     public void format(Workbook workbook, Sheet sheet) {
         this.workbook = workbook;
         this.sheet = sheet;
 
-        // ÉèÖÃ±êÌâÀ¸¡£
+        // è®¾ç½®æ ‡é¢˜æ ã€‚
         this.formatHeader();
-        // ÉèÖÃ±¨±íÉí¡£
+        // è®¾ç½®æŠ¥è¡¨èº«ã€‚
         this.formatBody();
-        // ÉèÖÃ×ÜºÏ¼Æ¡£
+        // è®¾ç½®æ€»åˆè®¡ã€‚
         if (this.hasTail())
             this.formatTail();
-        // ÉèÖÃÀ¸Î»¿í¶È¡£
+        // è®¾ç½®æ ä½å®½åº¦ã€‚
         this.formatColumnWidth();
     }
 
     /**
-     * ÉèÖÃ±¨±íÉí¡£
+     * è®¾ç½®æŠ¥è¡¨èº«ã€‚
      */
     private void formatBody() {
         for (Row row : this.sheet) {
@@ -80,7 +80,7 @@ public class DataExcelFormator implements ExcelFormator {
     }
 
     /**
-     * ÉèÖÃÀ¸Î»¿í¶È¡£
+     * è®¾ç½®æ ä½å®½åº¦ã€‚
      */
     private void formatColumnWidth() {
         int columnIndex = 0;
@@ -100,7 +100,7 @@ public class DataExcelFormator implements ExcelFormator {
     }
 
     /**
-     * ÉèÖÃ±êÌâÀ¸¡£
+     * è®¾ç½®æ ‡é¢˜æ ã€‚
      */
     private void formatHeader() {
         int columnIndex = 0;
@@ -114,7 +114,7 @@ public class DataExcelFormator implements ExcelFormator {
     }
 
     /**
-     * ÉèÖÃ×ÜºÏ¼Æ¡£
+     * è®¾ç½®æ€»åˆè®¡ã€‚
      */
     private void formatTail() {
         int columnIndex = 0;

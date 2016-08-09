@@ -7,7 +7,7 @@ import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
 
 /**
- * Öù×´Í¼±êÇ©Éú³ÉÆ÷¡£
+ * æŸ±çŠ¶å›¾æ ‡ç­¾ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */

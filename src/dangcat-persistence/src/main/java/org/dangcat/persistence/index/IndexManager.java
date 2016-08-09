@@ -6,7 +6,7 @@ import org.dangcat.persistence.filter.*;
 import java.util.*;
 
 /**
- * Ë÷Òı¹ÜÀíÆ÷¡£
+ * ç´¢å¼•ç®¡ç†å™¨ã€‚
  *
  * @param <T>
  * @author dangcat
@@ -18,9 +18,9 @@ public class IndexManager<T> {
     private Indexer primaryIndexer = null;
 
     /**
-     * ¹¹½¨Ë÷Òı¹ÜÀíÆ÷¡£
+     * æ„å»ºç´¢å¼•ç®¡ç†å™¨ã€‚
      *
-     * @param dataList Êı¾İ¼¯ºÏÁĞ±í¡£
+     * @param dataList æ•°æ®é›†åˆåˆ—è¡¨ã€‚
      */
     public IndexManager() {
         this.dataCollection = Collections.synchronizedCollection(new HashSet<T>());
@@ -28,16 +28,16 @@ public class IndexManager<T> {
     }
 
     /**
-     * ¹¹½¨Ë÷Òı¹ÜÀíÆ÷¡£
+     * æ„å»ºç´¢å¼•ç®¡ç†å™¨ã€‚
      *
-     * @param dataList Êı¾İ¼¯ºÏÁĞ±í¡£
+     * @param dataList æ•°æ®é›†åˆåˆ—è¡¨ã€‚
      */
     public IndexManager(Collection<T> dataCollectoin) {
         this.dataCollection = Collections.synchronizedCollection(dataCollectoin);
     }
 
     /**
-     * Ìí¼ÓÊı¾İ¡£
+     * æ·»åŠ æ•°æ®ã€‚
      *
      * @param data
      */
@@ -61,19 +61,19 @@ public class IndexManager<T> {
     }
 
     /**
-     * Ìí¼ÓË÷Òı¡£
+     * æ·»åŠ ç´¢å¼•ã€‚
      *
-     * @param indexName Ë÷ÒıÃû¡£
+     * @param indexName ç´¢å¼•åã€‚
      */
     public void appendIndex(String indexName) {
         this.appendIndex(indexName, false);
     }
 
     /**
-     * Ìí¼ÓË÷Òı¡£
+     * æ·»åŠ ç´¢å¼•ã€‚
      *
-     * @param indexName    Ë÷ÒıÃû¡£
-     * @param isPrimaryKey ÊÇ·ñÊÇÖ÷¼üË÷Òı¡£
+     * @param indexName    ç´¢å¼•åã€‚
+     * @param isPrimaryKey æ˜¯å¦æ˜¯ä¸»é”®ç´¢å¼•ã€‚
      */
     public void appendIndex(String indexName, boolean isPrimaryKey) {
         Map<String, Indexer> indexerMap = this.indexerMap;
@@ -87,7 +87,7 @@ public class IndexManager<T> {
     }
 
     /**
-     * Çå³ıË÷Òı¡£
+     * æ¸…é™¤ç´¢å¼•ã€‚
      */
     public void clear() {
         this.indexerMap = Collections.synchronizedMap(new HashMap<String, Indexer>());
@@ -102,11 +102,11 @@ public class IndexManager<T> {
     }
 
     /**
-     * ½«Ö¸¶¨µÄ×Ö¶ÎÃûºÍÊıÖµ²úÉú¹ıÂËÌõ¼ş¡£
+     * å°†æŒ‡å®šçš„å­—æ®µåå’Œæ•°å€¼äº§ç”Ÿè¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû¡£
-     * @param values     ÊıÖµ¡£
-     * @return ¹ıÂËÌõ¼ş¡£
+     * @param fieldNames å­—æ®µåã€‚
+     * @param values     æ•°å€¼ã€‚
+     * @return è¿‡æ»¤æ¡ä»¶ã€‚
      */
     private FilterExpress createFilterExpress(String[] fieldNames, Object... values) {
         FilterExpress filterExpress = null;
@@ -122,10 +122,10 @@ public class IndexManager<T> {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄÌõ¼şÔÚË÷ÒıÉÏ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„æ¡ä»¶åœ¨ç´¢å¼•ä¸ŠæŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param filterExpress Ë÷ÒıÌõ¼ş¡£
-     * @return Êı¾İ¼¯ºÏ¡£
+     * @param filterExpress ç´¢å¼•æ¡ä»¶ã€‚
+     * @return æ•°æ®é›†åˆã€‚
      */
     public Collection<T> find(FilterExpress filterExpress) {
         Collection<T> dataCollection = this.getDataCollection();
@@ -151,10 +151,10 @@ public class IndexManager<T> {
     }
 
     /**
-     * ¸ù¾İÖ÷¼üÖµÕÒµ½¼ÇÂ¼ĞĞ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     public T find(Object... params) {
         T data = null;
@@ -167,11 +167,11 @@ public class IndexManager<T> {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ×Ö¶ÎÖµ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„å­—æ®µå€¼æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param values     ×Ö¶ÎÊıÖµ£¬±ØĞëÓë×Ö¶Î¶ÔÓ¦¡£
-     * @return ÕÒµ½µÄ¼ÇÂ¼ĞĞ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param values     å­—æ®µæ•°å€¼ï¼Œå¿…é¡»ä¸å­—æ®µå¯¹åº”ã€‚
+     * @return æ‰¾åˆ°çš„è®°å½•è¡Œã€‚
      */
     public Collection<T> find(String[] fieldNames, Object... values) {
         Collection<T> findCollection = null;
@@ -184,7 +184,7 @@ public class IndexManager<T> {
     }
 
     /**
-     * ²âÊÔ¹ıÂËÑ¡ÔñË÷ÒıÓÃ¡£
+     * æµ‹è¯•è¿‡æ»¤é€‰æ‹©ç´¢å¼•ç”¨ã€‚
      */
     protected Indexer findIndexer(FilterExpress filterExpress) {
         Map<String, FilterComparable> indexFilterMap = this.create(filterExpress);
@@ -230,7 +230,7 @@ public class IndexManager<T> {
     }
 
     /**
-     * ÖØ½¨Ë÷Òı¡£
+     * é‡å»ºç´¢å¼•ã€‚
      */
     public void rebuild() {
         Map<String, Indexer> indexerMap = this.indexerMap;
@@ -239,7 +239,7 @@ public class IndexManager<T> {
     }
 
     /**
-     * ÖØ½¨Ö¸¶¨µÄË÷Òı¡£
+     * é‡å»ºæŒ‡å®šçš„ç´¢å¼•ã€‚
      */
     public void rebuild(String indexName) {
         Map<String, Indexer> indexerMap = this.indexerMap;
@@ -257,9 +257,9 @@ public class IndexManager<T> {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄ¼ÇÂ¼Êı¡£
+     * åˆ é™¤æŒ‡å®šçš„è®°å½•æ•°ã€‚
      *
-     * @param data ¼ÇÂ¼¶ÔÏó¡£
+     * @param data è®°å½•å¯¹è±¡ã€‚
      */
     public boolean remove(T data) {
         boolean result = false;
@@ -274,10 +274,10 @@ public class IndexManager<T> {
     }
 
     /**
-     * Êı¾İ±ä»¯Í¨ÖªĞŞ¸ÄË÷Òı¡£
+     * æ•°æ®å˜åŒ–é€šçŸ¥ä¿®æ”¹ç´¢å¼•ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @param data      ±»ĞŞ¸ÄµÄ¼ÇÂ¼¶ÔÏñ¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @param data      è¢«ä¿®æ”¹çš„è®°å½•å¯¹åƒã€‚
      */
     public void update(String fieldName, T data) {
         if (data != null) {

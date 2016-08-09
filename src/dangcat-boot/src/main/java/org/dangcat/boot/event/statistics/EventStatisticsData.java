@@ -4,15 +4,15 @@ import org.dangcat.boot.statistics.StatisticsData;
 
 public class EventStatisticsData extends StatisticsData {
     /**
-     * ´¦Àí×ÜÊı¡£
+     * å¤„ç†æ€»æ•°ã€‚
      */
     public static final String HandleCount = "HandleCount";
     /**
-     * ´¦ÀíºÄÊ±¡£
+     * å¤„ç†è€—æ—¶ã€‚
      */
     public static final String HandleTimeCost = "HandleTimeCost";
     /**
-     * ´¦ÀíËÙÂÊ¡£
+     * å¤„ç†é€Ÿç‡ã€‚
      */
     public static final String HandleVelocity = "HandleVelocity";
 

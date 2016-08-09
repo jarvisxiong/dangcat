@@ -13,7 +13,7 @@ public class AreaChart extends TimeXYChart {
     @Override
     protected void initPlot(Plot plot) {
         super.initPlot(plot);
-        // ÉèÖÃ°ëÍ¸Ã÷
+        // è®¾ç½®åŠé€æ˜
         plot.setForegroundAlpha(0.7f);
     }
 

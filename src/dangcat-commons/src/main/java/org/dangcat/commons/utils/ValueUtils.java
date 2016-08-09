@@ -7,22 +7,22 @@ import java.lang.reflect.Array;
 import java.util.Date;
 
 /**
- * Öµ×ª»»¹¤¾ß¡£
+ * å€¼è½¬æ¢å·¥å…·ã€‚
  */
 public class ValueUtils {
     /**
-     * ±È½ÏÁ½¸ö¶ÔÏóµÄ´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡çš„å¤§å°ã€‚
      *
-     * @param from À´Ô´¶ÔÏó¡£
-     * @param to   Ä¿±ê¶ÔÏó¡£
-     * @return ±È½Ï´óĞ¡¡£
+     * @param from æ¥æºå¯¹è±¡ã€‚
+     * @param to   ç›®æ ‡å¯¹è±¡ã€‚
+     * @return æ¯”è¾ƒå¤§å°ã€‚
      */
     public static int compare(Object from, Object to) {
         return ValueCompare.compare(from, to);
     }
 
     /**
-     * ÊÇ·ñÊÇ²¼¶ûÀàĞÍ¡£
+     * æ˜¯å¦æ˜¯å¸ƒå°”ç±»å‹ã€‚
      */
     public static boolean isBoolean(Class<?> classType) {
         if (classType == null)
@@ -31,10 +31,10 @@ public class ValueUtils {
     }
 
     /**
-     * ÅĞ¶ÏÊıÖµÊÇ·ñÎª¿Õ¡£
+     * åˆ¤æ–­æ•°å€¼æ˜¯å¦ä¸ºç©ºã€‚
      *
-     * @param value ÊıÖµ¶ÔÏó¡£
-     * @return ÅĞ¶Ï½á¹û¡£
+     * @param value æ•°å€¼å¯¹è±¡ã€‚
+     * @return åˆ¤æ–­ç»“æœã€‚
      */
     public static boolean isEmpty(Object value) {
         if (value == null)
@@ -49,7 +49,7 @@ public class ValueUtils {
     }
 
     /**
-     * ÊÇ·ñÊÇÊı×ÖÀàĞÍ¡£
+     * æ˜¯å¦æ˜¯æ•°å­—ç±»å‹ã€‚
      */
     public static boolean isNumber(Class<?> classType) {
         if (classType == null)
@@ -58,7 +58,7 @@ public class ValueUtils {
     }
 
     /**
-     * ÊÇ·ñÊÇ×Ö´®ÀàĞÍ¡£
+     * æ˜¯å¦æ˜¯å­—ä¸²ç±»å‹ã€‚
      */
     public static boolean isText(Class<?> classType) {
         if (classType == null)
@@ -67,31 +67,31 @@ public class ValueUtils {
     }
 
     /**
-     * ÅĞ¶Ï¸¡µãÊıÊÇ·ñÎª0¡£
+     * åˆ¤æ–­æµ®ç‚¹æ•°æ˜¯å¦ä¸º0ã€‚
      *
-     * @param value ¸¡µãÖµ¡£
-     * @return ÅĞ¶Ï½á¹û¡£
+     * @param value æµ®ç‚¹å€¼ã€‚
+     * @return åˆ¤æ–­ç»“æœã€‚
      */
     public static boolean isZero(double value) {
         return value == 0.0 || Math.abs(value) < 0.00001;
     }
 
     /**
-     * Á¬½Ó×Ö·û´®Êı×é¡£
+     * è¿æ¥å­—ç¬¦ä¸²æ•°ç»„ã€‚
      *
-     * @param values ×Ö·û´®Êı×é¡£
-     * @return Á¬½ÓºóµÄ×Ö´®¡£
+     * @param values å­—ç¬¦ä¸²æ•°ç»„ã€‚
+     * @return è¿æ¥åçš„å­—ä¸²ã€‚
      */
     public static String join(String... values) {
         return join(values, ";");
     }
 
     /**
-     * Á¬½Ó×Ö·û´®Êı×é¡£
+     * è¿æ¥å­—ç¬¦ä¸²æ•°ç»„ã€‚
      *
-     * @param values   ×Ö·û´®Êı×é¡£
-     * @param joinText Á¬½Ó×Ö·û¡£
-     * @return Á¬½ÓºóµÄ×Ö´®¡£
+     * @param values   å­—ç¬¦ä¸²æ•°ç»„ã€‚
+     * @param joinText è¿æ¥å­—ç¬¦ã€‚
+     * @return è¿æ¥åçš„å­—ä¸²ã€‚
      */
     public static String join(String[] values, String joinText) {
         String result = null;
@@ -108,75 +108,75 @@ public class ValueUtils {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö²¼¶û¡£
+     * ç”±å­—ä¸²è§£æå¸ƒå°”ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Boolean parseBoolean(String text) {
         return parseBoolean(text, false);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö²¼¶û¡£
+     * ç”±å­—ä¸²è§£æå¸ƒå°”ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Boolean parseBoolean(String text, Boolean defaultValue) {
         return TextParser.parseBoolean(text, defaultValue);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÈÕÆÚ¡£
+     * ç”±å­—ä¸²è§£ææ—¥æœŸã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Date parseDate(String text) {
         return parseDate(text, null);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÈÕÆÚ¡£
+     * ç”±å­—ä¸²è§£ææ—¥æœŸã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Date parseDate(String text, Date defaultValue) {
         return DateUtils.parse(text, defaultValue);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¸¡µãÊı¡£
+     * ç”±å­—ä¸²è§£ææµ®ç‚¹æ•°ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Double parseDouble(String text) {
         return parseDouble(text, null);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¸¡µãÊı¡£
+     * ç”±å­—ä¸²è§£ææµ®ç‚¹æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Double parseDouble(String text, Double defaultValue) {
         return TextParser.parseDouble(text, defaultValue);
     }
 
     /**
-     * ½âÎöÃ¶¾ÙÀàĞÍ¡£
+     * è§£ææšä¸¾ç±»å‹ã€‚
      *
      * @param <T>
-     * @param classType Ã¶¾ÙÀàĞÍ¡£
-     * @param text      ×Ö´®¡£
-     * @return ½âÎöºóµÄ¶ÔÏó¡£
+     * @param classType æšä¸¾ç±»å‹ã€‚
+     * @param text      å­—ä¸²ã€‚
+     * @return è§£æåçš„å¯¹è±¡ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T parseEnum(Class<?> classType, String text) {
@@ -184,12 +184,12 @@ public class ValueUtils {
     }
 
     /**
-     * ÓÉÃ¶¾ÙÖµ½âÎöÃ¶¾ÙÀàĞÍ¡£
+     * ç”±æšä¸¾å€¼è§£ææšä¸¾ç±»å‹ã€‚
      *
      * @param <T>
-     * @param classType Ã¶¾ÙÀàĞÍ¡£
-     * @param value     Ã¶¾ÙÖµ¡£
-     * @return ½âÎöºóµÄ¶ÔÏó¡£
+     * @param classType æšä¸¾ç±»å‹ã€‚
+     * @param value     æšä¸¾å€¼ã€‚
+     * @return è§£æåçš„å¯¹è±¡ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T parseEnum(Class<T> classType, int value) {
@@ -197,77 +197,77 @@ public class ValueUtils {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÕûÊı¡£
+     * ç”±å­—ä¸²è§£ææ•´æ•°ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Integer parseInt(String text) {
         return parseInt(text, null);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÕûÊı¡£
+     * ç”±å­—ä¸²è§£ææ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Integer parseInt(String text, Integer defaultValue) {
         return TextParser.parseInt(text, defaultValue);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö³¤ÕûÊı¡£
+     * ç”±å­—ä¸²è§£æé•¿æ•´æ•°ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Long parseLong(String text) {
         return parseLong(text, null);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö³¤ÕûÊı¡£
+     * ç”±å­—ä¸²è§£æé•¿æ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Long parseLong(String text, Long defaultValue) {
         return TextParser.parseLong(text, defaultValue);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¶ÌÕûÊı¡£
+     * ç”±å­—ä¸²è§£æçŸ­æ•´æ•°ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Short parseShort(String text) {
         return parseShort(text, null);
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¶ÌÕûÊı¡£
+     * ç”±å­—ä¸²è§£æçŸ­æ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Short parseShort(String text, Short defaultValue) {
         return TextParser.parseShort(text, defaultValue);
     }
 
     /**
-     * ÎÄ×ÖÖµ×ª»»³ÉÊµ¼ÊÖµ¶ÔÏó¡£
+     * æ–‡å­—å€¼è½¬æ¢æˆå®é™…å€¼å¯¹è±¡ã€‚
      */
     public static Object parseValue(Class<?> classType, String value) {
         return TextParser.parseValue(classType, value);
     }
 
     /**
-     * ÊıÖµ×ª»»³É×Ö´®Öµ×ª¡£
+     * æ•°å€¼è½¬æ¢æˆå­—ä¸²å€¼è½¬ã€‚
      */
     public static String toString(Object value) {
         String text = null;

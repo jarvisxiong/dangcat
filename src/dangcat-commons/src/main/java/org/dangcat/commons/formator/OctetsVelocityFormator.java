@@ -1,11 +1,11 @@
 package org.dangcat.commons.formator;
 
 /**
- * Á÷ËÙ¸ñÊ½»¯¡£
+ * æµé€Ÿæ ¼å¼åŒ–ã€‚
  */
 public class OctetsVelocityFormator extends ValueFormator {
     /**
-     * ×ª»»³£Á¿¡£
+     * è½¬æ¢å¸¸é‡ã€‚
      */
     private final static int[] UNIT_TRANSCONSTS = new int[]{1, 1024, 1024, 1024, 1024, 1024};
     /**

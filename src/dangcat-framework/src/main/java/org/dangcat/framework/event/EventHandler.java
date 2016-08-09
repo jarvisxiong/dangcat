@@ -1,7 +1,7 @@
 package org.dangcat.framework.event;
 
 /**
- * ÊÂ¼ş´¦Àí½Ó¿Ú¡£
+ * äº‹ä»¶å¤„ç†æ¥å£ã€‚
  *
  * @author dangcat
  */

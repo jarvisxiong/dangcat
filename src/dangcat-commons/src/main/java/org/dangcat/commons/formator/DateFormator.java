@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Ê±¼ä¸ñÊ½»¯¹¤¾ß¡£
+ * æ—¶é—´æ ¼å¼åŒ–å·¥å…·ã€‚
  */
 public class DateFormator implements DataFormator {
     /**
@@ -65,10 +65,10 @@ public class DateFormator implements DataFormator {
     }
 
     /**
-     * ¶ÁÈ¡×îÊÊºÏµÄ½âÎö¹¤¾ß¡£
+     * è¯»å–æœ€é€‚åˆçš„è§£æå·¥å…·ã€‚
      *
-     * @param text ×Ö´®ÎÄ×Ö¡£
-     * @return ¸ñÊ½»¯¹¤¾ß¡£
+     * @param text å­—ä¸²æ–‡å­—ã€‚
+     * @return æ ¼å¼åŒ–å·¥å…·ã€‚
      */
     public static DateFormator getDateFormator(String text) {
         DateFormator dateFormator = null;
@@ -105,9 +105,9 @@ public class DateFormator implements DataFormator {
     }
 
     /**
-     * ¸ñÊ½»¯ÈÕÆÚ¡£
+     * æ ¼å¼åŒ–æ—¥æœŸã€‚
      *
-     * @param date ÈÕÆÚ¶ÔÏó¡£
+     * @param date æ—¥æœŸå¯¹è±¡ã€‚
      * @return
      */
     @Override
@@ -128,11 +128,11 @@ public class DateFormator implements DataFormator {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÈÕÆÚ¡£
+     * ç”±å­—ä¸²è§£ææ—¥æœŸã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public Date parse(String text, Date defaultValue) {
         Date date = defaultValue;

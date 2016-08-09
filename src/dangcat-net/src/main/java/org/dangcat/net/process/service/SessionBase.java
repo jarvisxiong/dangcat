@@ -11,35 +11,35 @@ import java.util.Map;
 
 public abstract class SessionBase {
     /**
-     * ÆğÊ¼Ê±¼ä¡£
+     * èµ·å§‹æ—¶é—´ã€‚
      */
     private long beginTime = DateUtils.currentTimeMillis();
     /**
-     * ÊÇ·ñÈ¡Ïû´¦ÀíÁ÷³Ì¡£
+     * æ˜¯å¦å–æ¶ˆå¤„ç†æµç¨‹ã€‚
      */
     private boolean cancel = false;
     /**
-     * ²úÉúÊ±¼ä¡£
+     * äº§ç”Ÿæ—¶é—´ã€‚
      */
     private Date createTime = DateUtils.now();
     /**
-     * ÊÇ·ñÒÑ¾­Íê³É´¦ÀíÁ÷³Ì¡£
+     * æ˜¯å¦å·²ç»å®Œæˆå¤„ç†æµç¨‹ã€‚
      */
     private boolean handle = false;
     /**
-     * Ä¿±êÈÕÖ¾¡£
+     * ç›®æ ‡æ—¥å¿—ã€‚
      */
     private Logger logger = null;
     /**
-     * ²ÎÊı±í¡£
+     * å‚æ•°è¡¨ã€‚
      */
     private Map<String, Object> params = new HashMap<String, Object>();
     /**
-     * ºÄÊ±Í³¼Æ±í¡£
+     * è€—æ—¶ç»Ÿè®¡è¡¨ã€‚
      */
     private Map<String, Long> timCostMap = new LinkedHashMap<String, Long>();
     /**
-     * ºÄÊ±¡£
+     * è€—æ—¶ã€‚
      */
     private long totalTimeCost = 0;
 
@@ -112,9 +112,9 @@ public abstract class SessionBase {
     }
 
     /**
-     * ÑéÖ¤±¨ÎÄµÄºÏ·¨ĞÔ¡£
+     * éªŒè¯æŠ¥æ–‡çš„åˆæ³•æ€§ã€‚
      *
-     * @param datagramPacket ±¨ÎÄ¶ÔÏó¡£
+     * @param datagramPacket æŠ¥æ–‡å¯¹è±¡ã€‚
      * @return
      */
     public abstract void validate() throws ProtocolValidateException;

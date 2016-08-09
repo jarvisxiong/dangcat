@@ -13,22 +13,22 @@ import org.jfree.util.Rotation;
 import java.awt.*;
 
 /**
- * ±ı×´Í³¼ÆÍ¼¡£
+ * é¥¼çŠ¶ç»Ÿè®¡å›¾ã€‚
  *
  * @author dangcat
  */
 public class PieChart extends ChartBase {
     @Override
     protected JFreeChart createChart() {
-        // ½¨Á¢Í³¼Æ¶ÔÏó¡£
-        JFreeChart chart = ChartFactory.createPieChart(this.getTitle(), // ±êÌâ
-                new DefaultPieDataset(), // Êı¾İÀ´Ô´¡£
+        // å»ºç«‹ç»Ÿè®¡å¯¹è±¡ã€‚
+        JFreeChart chart = ChartFactory.createPieChart(this.getTitle(), // æ ‡é¢˜
+                new DefaultPieDataset(), // æ•°æ®æ¥æºã€‚
                 true, // include legend
-                true, // ÊÇ·ñÌáÊ¾¡£
+                true, // æ˜¯å¦æç¤ºã€‚
                 true);
 
         chart.setTextAntiAlias(false);
-        // ÉèÖÃLegendµÄÎ»ÖÃ¡£
+        // è®¾ç½®Legendçš„ä½ç½®ã€‚
         chart.getLegend().setPosition(RectangleEdge.RIGHT);
         return chart;
     }
@@ -36,47 +36,47 @@ public class PieChart extends ChartBase {
     @Override
     protected void initPlot(Plot plot) {
         super.initPlot(plot);
-        // »ñµÃ3DµÄË®¾§±ıÍ¼¶ÔÏó
+        // è·å¾—3Dçš„æ°´æ™¶é¥¼å›¾å¯¹è±¡
         PiePlot piePlot = (PiePlot) plot;
-        // ¹Ì¶¨Ô²ĞÎ¡£
+        // å›ºå®šåœ†å½¢ã€‚
         piePlot.setCircular(true);
-        // Íâ¿ò²»¿É¼û¡£
+        // å¤–æ¡†ä¸å¯è§ã€‚
         piePlot.setOutlineVisible(false);
-        // ÉèÖÃ¿ªÊ¼½Ç¶È
+        // è®¾ç½®å¼€å§‹è§’åº¦
         piePlot.setStartAngle(150D);
-        // ÉèÖÃ·½ÏòÎªË³Ê±Õë·½Ïò
+        // è®¾ç½®æ–¹å‘ä¸ºé¡ºæ—¶é’ˆæ–¹å‘
         piePlot.setDirection(Rotation.CLOCKWISE);
-        // ÉèÖÃÍ¸Ã÷¶È£¬0.5FÎª°ëÍ¸Ã÷£¬1Îª²»Í¸Ã÷£¬0ÎªÈ«Í¸Ã÷
+        // è®¾ç½®é€æ˜åº¦ï¼Œ0.5Fä¸ºåŠé€æ˜ï¼Œ1ä¸ºä¸é€æ˜ï¼Œ0ä¸ºå…¨é€æ˜
         // piePlot.setBackgroundAlpha(0);
         // piePlot.setForegroundAlpha(0.7F);
-        // ÉèÖÃÉÈÇø±ß¿ò²»¿É¼û
+        // è®¾ç½®æ‰‡åŒºè¾¹æ¡†ä¸å¯è§
         piePlot.setSectionOutlinesVisible(false);
-        // ÉèÖÃ±êÇ©×ÖÌå¡£
+        // è®¾ç½®æ ‡ç­¾å­—ä½“ã€‚
         Font chartFont = this.getChartFont();
         if (chartFont != null)
             piePlot.setLabelFont(chartFont);
-        // ÉèÖÃÉÈÇø±êÇ©ÏÔÊ¾¸ñÊ½£º¹Ø¼ü×Ö£ºÖµ(°Ù·Ö±È)
+        // è®¾ç½®æ‰‡åŒºæ ‡ç­¾æ˜¾ç¤ºæ ¼å¼ï¼šå…³é”®å­—ï¼šå€¼(ç™¾åˆ†æ¯”)
         CustomPieItemLabelGenerator customPieItemLabelGenerator = new CustomPieItemLabelGenerator(this);
         if (this.isShowItemLabel())
             piePlot.setLabelGenerator(customPieItemLabelGenerator);
-        // ÉèÖÃÉÈÇøÌáÊ¾
+        // è®¾ç½®æ‰‡åŒºæç¤º
         piePlot.setToolTipGenerator(customPieItemLabelGenerator);
-        // ²úÉúÈÈµãÇøÓò¡£
+        // äº§ç”Ÿçƒ­ç‚¹åŒºåŸŸã€‚
         piePlot.setURLGenerator(customPieItemLabelGenerator);
         piePlot.setLegendLabelGenerator(customPieItemLabelGenerator);
-        // È¥µô±³¾°É«
+        // å»æ‰èƒŒæ™¯è‰²
         piePlot.setLabelBackgroundPaint(null);
-        // È¥µôÒõÓ°
+        // å»æ‰é˜´å½±
         piePlot.setLabelShadowPaint(null);
-        // È¥µô±ß¿ò
+        // å»æ‰è¾¹æ¡†
         piePlot.setLabelOutlinePaint(null);
         piePlot.setShadowPaint(null);
-        // Í¼ÀıĞÎ×´
+        // å›¾ä¾‹å½¢çŠ¶
         piePlot.setLegendItemShape(new Rectangle(10, 10));
     }
 
     private void initSectionPaint() {
-        // ÉèÖÃ¹Ì¶¨ÑÕÉ«·¶Î§¡£
+        // è®¾ç½®å›ºå®šé¢œè‰²èŒƒå›´ã€‚
         PiePlot piePlot = (PiePlot) this.getChart().getPlot();
         DataModule dataModule = this.getDataModule();
         String[] labels = dataModule.getRowKeys().toArray(new String[0]);

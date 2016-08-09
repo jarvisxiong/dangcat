@@ -3,19 +3,19 @@ package org.dangcat.commons.serialize.xml;
 import java.util.List;
 
 /**
- * ÊôĞÔÁĞ±í¶ÔÏó½âÎöÆ÷¡£
+ * å±æ€§åˆ—è¡¨å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class PropertiesXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Properties";
     /**
-     * ÊôĞÔÁĞ±í¡£
+     * å±æ€§åˆ—è¡¨ã€‚
      */
     private List<Property> propertyList;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public PropertiesXmlResolver() {
         super(RESOLVER_NAME);
@@ -23,10 +23,10 @@ public class PropertiesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         Property property = (Property) child;

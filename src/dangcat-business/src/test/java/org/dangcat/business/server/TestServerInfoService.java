@@ -28,7 +28,7 @@ public class TestServerInfoService extends BusinessServiceTestBase<ServerInfoSer
     @Before
     @Override
     public void initialize() {
-        // Ìí¼ÓÒª²âÊÔµÄ·þÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(ServerInfoService.class, ServerInfoServiceImpl.class);
         super.initialize();
     }

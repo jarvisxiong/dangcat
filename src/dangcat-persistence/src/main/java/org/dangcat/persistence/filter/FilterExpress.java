@@ -1,16 +1,16 @@
 package org.dangcat.persistence.filter;
 
 /**
- * ¹ıÂË±í´ïÊ½¡£
+ * è¿‡æ»¤è¡¨è¾¾å¼ã€‚
  *
  * @author dangcat
  */
 public interface FilterExpress extends java.io.Serializable {
     /**
-     * ÅĞ¶ÏÊı¾İĞĞÊÇ·ñÂú×ãÒªÇó¡£
+     * åˆ¤æ–­æ•°æ®è¡Œæ˜¯å¦æ»¡è¶³è¦æ±‚ã€‚
      *
-     * @param value Êı¾İ¶ÔÏó¡£
-     * @return Âú×ãÔòÎªtrue£¬·ñÔòÎªfalse¡£
+     * @param value æ•°æ®å¯¹è±¡ã€‚
+     * @return æ»¡è¶³åˆ™ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
      */
     boolean isValid(Object value);
 }

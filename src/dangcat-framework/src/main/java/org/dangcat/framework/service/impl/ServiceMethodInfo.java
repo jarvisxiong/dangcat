@@ -11,19 +11,19 @@ import java.util.*;
 
 public class ServiceMethodInfo {
     /**
-     * ·şÎñ·ÃÎÊÀàĞÍ¡£
+     * æœåŠ¡è®¿é—®ç±»å‹ã€‚
      */
     private Class<?> accessClassType = null;
     /**
-     * ·½·¨ĞÅÏ¢¡£
+     * æ–¹æ³•ä¿¡æ¯ã€‚
      */
     private Map<String, MethodInfo> methodInfoMap = null;
     /**
-     * ·½·¨ĞÅÏ¢¡£
+     * æ–¹æ³•ä¿¡æ¯ã€‚
      */
     private Map<Integer, MethodInfo> methodInfoValueMap = null;
     /**
-     * ·şÎñÊµÀıÀàĞÍ¡£
+     * æœåŠ¡å®ä¾‹ç±»å‹ã€‚
      */
     private Class<?> serviceClassType = null;
 

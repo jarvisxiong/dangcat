@@ -4,17 +4,17 @@ import org.dangcat.net.jms.activemq.JMSConnectionFactory;
 import org.dangcat.net.jms.activemq.JMSSession;
 
 /**
- * JMSÏûÏ¢·şÎñ¡£
+ * JMSæ¶ˆæ¯æœåŠ¡ã€‚
  */
 public abstract class JMSBase {
     private JMSSession jmsSession = null;
     private String name;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô·şÎñ¡£
-     * @param name   ÏûÏ¢Ãû³Æ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
+     * @param name   æ¶ˆæ¯åç§°ã€‚
      */
     public JMSBase(String name) {
         this.name = name;
@@ -44,7 +44,7 @@ public abstract class JMSBase {
     }
 
     /**
-     * ÕìÌıÃû³Æ¡£
+     * ä¾¦å¬åç§°ã€‚
      */
     public String getName() {
         return name;
@@ -62,7 +62,7 @@ public abstract class JMSBase {
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     public void stop() {
         if (this.jmsSession == null) {

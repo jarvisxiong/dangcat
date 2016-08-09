@@ -6,7 +6,7 @@ import org.dangcat.commons.utils.Environment;
 import java.util.*;
 
 /**
- * ×ÊÔ´¼ÓÔØÆ÷¡£
+ * èµ„æºåŠ è½½å™¨ã€‚
  *
  * @author dangcat
  */
@@ -24,10 +24,10 @@ class ResourceLoader {
     }
 
     /**
-     * ·Ö½âÎ»ÖÃÃû¡£
+     * åˆ†è§£ä½ç½®åã€‚
      *
-     * @param baseName Î»ÖÃÃû³Æ¡£
-     * @return Î»ÖÃ¼¯ºÏ¡£
+     * @param baseName ä½ç½®åç§°ã€‚
+     * @return ä½ç½®é›†åˆã€‚
      */
     private String[] getBaseNames(String baseName) {
         List<String> resourceNameList = new ArrayList<String>();
@@ -40,11 +40,11 @@ class ResourceLoader {
     }
 
     /**
-     * ¼ÓÔØ×ÊÔ´°ü¡£
+     * åŠ è½½èµ„æºåŒ…ã€‚
      *
-     * @param baseName     Î»ÖÃÃû³Æ¡£
-     * @param resourceName ×ÊÔ´Ãû³Æ¡£
-     * @return ×ÊÔ´°ü¡£
+     * @param baseName     ä½ç½®åç§°ã€‚
+     * @param resourceName èµ„æºåç§°ã€‚
+     * @return èµ„æºåŒ…ã€‚
      */
     private ResourceBundle getResourceBundle(String baseName, String resourceName) {
         ResourceBundle resourceBundle = null;
@@ -61,11 +61,11 @@ class ResourceLoader {
     }
 
     /**
-     * ¸ù¾İÎ»ÖÃÃû³ÆºÍ×ÊÔ´Ãû³ÆµÃµ½Î»ÖÃ¼¯ºÏ¡£
+     * æ ¹æ®ä½ç½®åç§°å’Œèµ„æºåç§°å¾—åˆ°ä½ç½®é›†åˆã€‚
      *
-     * @param baseName     Î»ÖÃÃû³Æ¡£
-     * @param resourceName ×ÊÔ´Ãû³Æ¡£
-     * @return ×ÊÔ´°ü¼¯ºÏ¡£
+     * @param baseName     ä½ç½®åç§°ã€‚
+     * @param resourceName èµ„æºåç§°ã€‚
+     * @return èµ„æºåŒ…é›†åˆã€‚
      */
     protected List<ResourceBundle> getResourceBundleList(String baseName, String resourceName) {
         String rootName = baseName + "." + resourceName;
@@ -88,22 +88,22 @@ class ResourceLoader {
     }
 
     /**
-     * ÔØÈë×ÊÔ´°ü¡£
+     * è½½å…¥èµ„æºåŒ…ã€‚
      *
-     * @param baseName     Î»ÖÃÃû¡£
-     * @param resourceName ×ÊÔ´Ãû¡£
+     * @param baseName     ä½ç½®åã€‚
+     * @param resourceName èµ„æºåã€‚
      */
     private void loadResourceBundle(String baseName, String resourceName) {
         ResourceBundle resourceBundle = this.getResourceBundle(baseName, resourceName);
         Map<String, ResourceBundle> resourceLoaderMap = new HashMap<String, ResourceBundle>();
         resourceLoaderMap.put(baseName + "." + resourceName, resourceBundle);
-        // °ü×ÊÔ´
+        // åŒ…èµ„æº
         for (String packageBaseName : this.getBaseNames(baseName)) {
             resourceBundle = this.getResourceBundle(packageBaseName, RESOURCE_PACKAGE);
             resourceLoaderMap.put(packageBaseName, resourceBundle);
         }
         resourceLoaderMap.putAll(this.resourceLoaderMap);
-        // È«¾Ö×ÊÔ´¡£
+        // å…¨å±€èµ„æºã€‚
         if (!resourceLoaderMap.containsKey(RESOURCE_GLOBAL)) {
             resourceBundle = this.getResourceBundle(null, RESOURCE_GLOBAL);
             resourceLoaderMap.put(RESOURCE_GLOBAL, resourceBundle);

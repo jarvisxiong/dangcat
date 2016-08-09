@@ -4,27 +4,27 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dangcat.persistence.sql.Sql;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class SqlXmlResolver extends XmlResolver {
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private Sql sql = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public SqlXmlResolver() {
         super(Sql.class.getSimpleName());
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     @Override
     protected void resolveElementText(String value) {
@@ -32,7 +32,7 @@ public class SqlXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

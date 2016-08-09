@@ -8,10 +8,10 @@ public abstract class DataAccessBase {
     private Columns columns = new Columns();
 
     /**
-     * Ìí¼ÓÖ¸¶¨ÊäÈëÊä³öÀ¸Î»¡£
+     * æ·»åŠ æŒ‡å®šè¾“å…¥è¾“å‡ºæ ä½ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @return À¸Î»¶ÔÏó¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @return æ ä½å¯¹è±¡ã€‚
      */
     public Column addColumn(String fieldName) {
         Column column = this.getTable().getColumns().find(fieldName);
@@ -32,10 +32,10 @@ public abstract class DataAccessBase {
     protected abstract Table getTable();
 
     /**
-     * ¶ÁÈ¡×Ö¶Î±êÌâ¡£
+     * è¯»å–å­—æ®µæ ‡é¢˜ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
-     * @return ×Ö¶Î±êÌâ¡£
+     * @param fieldName å­—æ®µåç§°ã€‚
+     * @return å­—æ®µæ ‡é¢˜ã€‚
      */
     public String getTitle(String fieldName) {
         String title = null;

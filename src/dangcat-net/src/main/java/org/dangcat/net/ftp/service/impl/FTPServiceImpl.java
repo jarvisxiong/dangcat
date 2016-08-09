@@ -16,7 +16,7 @@ import org.dangcat.net.ftp.statistics.FTPStatistics;
 import java.io.File;
 
 /**
- * FTP·şÎñ¡£
+ * FTPæœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -28,58 +28,58 @@ public class FTPServiceImpl extends ThreadService implements FTPCallBack, FTPSer
     private static final String MODE_UPLOAD = "UPLOAD-";
     private static final String SERVICE_NAME = "FTP-";
     /**
-     * ´¦Àíºó´ëÊ©£º0¡¢É¾³ı£»1¡¢ĞŞ¸ÄÀ©Õ¹Ãû£»3¡¢ÒÆ¶¯Â·¾¶¡£
+     * å¤„ç†åæªæ–½ï¼š0ã€åˆ é™¤ï¼›1ã€ä¿®æ”¹æ‰©å±•åï¼›3ã€ç§»åŠ¨è·¯å¾„ã€‚
      */
     private int afterHandle = 0;
     /**
-     * FTPÉÏÏÂÎÄ¡£
+     * FTPä¸Šä¸‹æ–‡ã€‚
      */
     private FTPContext ftpContext = null;
     /**
-     * FTPÍ³¼Æ¡£
+     * FTPç»Ÿè®¡ã€‚
      */
     private FTPStatistics ftpStatistics = null;
     /**
-     * ´¦ÀíºóÒÆ¶¯Â·¾¶¡£
+     * å¤„ç†åç§»åŠ¨è·¯å¾„ã€‚
      */
     private String handledPath = null;
     /**
-     * ´¦ÀíºóĞŞ¸ÄÀ©Õ¹Ãû¡£
+     * å¤„ç†åä¿®æ”¹æ‰©å±•åã€‚
      */
     private String handledSuffix = null;
     /**
-     * FTPÁ¬½Ó´íÎó¡£
+     * FTPè¿æ¥é”™è¯¯ã€‚
      */
     private boolean isFtpFailure = false;
     /**
-     * ±¾µØÂ·¾¶¡£
+     * æœ¬åœ°è·¯å¾„ã€‚
      */
     private String localPath = null;
     /**
-     * Ä£Ê½£º0¡¢ÏÂÔØ£»ÆäËü£ºÉÏ´«¡£
+     * æ¨¡å¼ï¼š0ã€ä¸‹è½½ï¼›å…¶å®ƒï¼šä¸Šä¼ ã€‚
      */
     private int mode = 0;
     /**
-     * FTP×ÊÔ´Ãû³Æ¡£
+     * FTPèµ„æºåç§°ã€‚
      */
     private String name = null;
     /**
-     * ´¦ÀíµÄÎÄ¼şÃûÇ°×º¡£
+     * å¤„ç†çš„æ–‡ä»¶åå‰ç¼€ã€‚
      */
     private String prefix = null;
     /**
-     * Ô¶³ÌÂ·¾¶¡£
+     * è¿œç¨‹è·¯å¾„ã€‚
      */
     private String remotePath = null;
     /**
-     * ´¦ÀíµÄÎÄ¼şÀ©Õ¹Ãû¡£
+     * å¤„ç†çš„æ–‡ä»¶æ‰©å±•åã€‚
      */
     private String suffix = null;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public FTPServiceImpl(ServiceProvider parent) {
         super(parent);
@@ -187,12 +187,12 @@ public class FTPServiceImpl extends ThreadService implements FTPCallBack, FTPSer
     public void initialize() {
         super.initialize();
 
-        // ×¢²áÍ³¼Æ¶ÔÏó¡£
+        // æ³¨å†Œç»Ÿè®¡å¯¹è±¡ã€‚
         StatisticsService statisticsService = this.getService(StatisticsService.class);
         if (statisticsService != null)
             statisticsService.addStatistics(this.getFTPStatistics());
 
-        // ×¢²á¶¨Ê±Æ÷¡£
+        // æ³¨å†Œå®šæ—¶å™¨ã€‚
         this.setAlarmClock(new IntervalAlarmClock(this) {
             @Override
             public long getInterval() {
@@ -254,7 +254,7 @@ public class FTPServiceImpl extends ThreadService implements FTPCallBack, FTPSer
             ftpStatistics.increaseSuccess();
             ftpStatistics.increaseSize(FileUtils.getTotalSize(file));
 
-            // ´¦Àíºó´ëÊ©£º0¡¢É¾³ı£»1¡¢ĞŞ¸ÄÀ©Õ¹Ãû£»3¡¢ÒÆ¶¯Â·¾¶¡£
+            // å¤„ç†åæªæ–½ï¼š0ã€åˆ é™¤ï¼›1ã€ä¿®æ”¹æ‰©å±•åï¼›3ã€ç§»åŠ¨è·¯å¾„ã€‚
             if (this.isDownloadMode()) {
                 if (this.getAfterHandle() == HANDLE_DELETE)
                     ftpContext.getFtpSession().delete(remotePath);

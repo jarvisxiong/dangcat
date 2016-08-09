@@ -14,118 +14,118 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Êı¾İÀ¸Î»ÊôĞÔ¶ÔÏó¡£
+ * æ•°æ®æ ä½å±æ€§å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Column implements java.io.Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     /**
-     * Êı¾İ¸ñÊ½»¯¡£
+     * æ•°æ®æ ¼å¼åŒ–ã€‚
      */
     private DataFormator dataFormator = null;
     /**
-     * ÈÕÆÚÀàĞÍ¡£
+     * æ—¥æœŸç±»å‹ã€‚
      */
     private DateType dateType = null;
     /**
-     * ×Ö¶Î³¤¶È¡£
+     * å­—æ®µé•¿åº¦ã€‚
      */
     private int displaySize;
     /**
-     * ×Ö¶ÎÀàĞÍ¡£
+     * å­—æ®µç±»å‹ã€‚
      */
     private Class<?> fieldClass;
     /**
-     * ×Ö¶ÎÃû¡£
+     * å­—æ®µåã€‚
      */
     private String fieldName;
     /**
-     * ¸ñÊ½»¯×Ö´®¡£
+     * æ ¼å¼åŒ–å­—ä¸²ã€‚
      */
     private String format;
     /**
-     * ¸ñÊ½Ìá¹©¶ÔÏó¡£
+     * æ ¼å¼æä¾›å¯¹è±¡ã€‚
      */
     private FormatProvider formatProvider = null;
     /**
-     * ×ÔÔö×Ö¶Î²úÉú²ßÂÔ¡£
+     * è‡ªå¢å­—æ®µäº§ç”Ÿç­–ç•¥ã€‚
      */
     private GenerationType generationType = GenerationType.SEQUENCE;
     /**
-     * À¸Î»Î»ÖÃ¡£
+     * æ ä½ä½ç½®ã€‚
      */
     private int index = -1;
     /**
-     * ÊÇ·ñÎª¹ØÁª×Ö¶Î¡£
+     * æ˜¯å¦ä¸ºå…³è”å­—æ®µã€‚
      */
     private boolean isAssociate = false;
     /**
-     * ÊÇ·ñ¿ÉÒÔÎª×ÔÔö×Ö¶Î¡£
+     * æ˜¯å¦å¯ä»¥ä¸ºè‡ªå¢å­—æ®µã€‚
      */
     private boolean isAutoIncrement = false;
     /**
-     * ÊÇ·ñÊÇ¼ÆËã×Ö¶Î¡£
+     * æ˜¯å¦æ˜¯è®¡ç®—å­—æ®µã€‚
      */
     private boolean isCalculate = false;
     /**
-     * ÊÇ·ñÎªÍâ¼ü¡£
+     * æ˜¯å¦ä¸ºå¤–é”®ã€‚
      */
     private boolean isForeignKey = false;
     /**
-     * ÊÇ·ñ¿ÉÒÔÎªnull¡£
+     * æ˜¯å¦å¯ä»¥ä¸ºnullã€‚
      */
     private boolean isNullable = true;
     /**
-     * ÊÇ·ñÎªÖ÷¼ü¡£
+     * æ˜¯å¦ä¸ºä¸»é”®ã€‚
      */
     private boolean isPrimaryKey = false;
     /**
-     * ÊÇ·ñÎªÖ»¶Á¡£
+     * æ˜¯å¦ä¸ºåªè¯»ã€‚
      */
     private boolean isReadOnly = false;
     /**
-     * ÊÇ·ñÎªÎŞ·ûºÅ¡£
+     * æ˜¯å¦ä¸ºæ— ç¬¦å·ã€‚
      */
     private boolean isUnsigned = false;
     /**
-     * Âß¼­ÀàĞÍ¡£
+     * é€»è¾‘ç±»å‹ã€‚
      */
     private String logic = null;
     /**
-     * À¸Î»Ãû¡£
+     * æ ä½åã€‚
      */
     private String name;
     /**
-     * ²ÎÊıÁĞ±í¡£
+     * å‚æ•°åˆ—è¡¨ã€‚
      */
     private Map<String, Object> params = new HashMap<String, Object>();
     /**
-     * ÊÇ·ñÊÇĞòºÅÀ¸Î»¡£
+     * æ˜¯å¦æ˜¯åºå·æ ä½ã€‚
      */
     private boolean rowNum = false;
     /**
-     * ¾«ÃÜ¶È¡£
+     * ç²¾å¯†åº¦ã€‚
      */
     private int scale = 0;
     /**
-     * Êı¾İ¿âÊı¾İÀàĞÍ¡£
+     * æ•°æ®åº“æ•°æ®ç±»å‹ã€‚
      */
     private int sqlType = 0;
     /**
-     * ×Ö¶Î±íÃ÷¡£
+     * å­—æ®µè¡¨æ˜ã€‚
      */
     private TableName tableName;
     /**
-     * ×Ö¶Î±êÌâ¡£
+     * å­—æ®µæ ‡é¢˜ã€‚
      */
     private String title = null;
     /**
-     * Êı¾İ»ù±¾Ğ£ÑéÆ÷¡£
+     * æ•°æ®åŸºæœ¬æ ¡éªŒå™¨ã€‚
      */
     private List<DataValidator> validatorList = null;
     /**
-     * ÊÇ·ñ¿ÉÒÔÔÚ½çÃæÉÏÏÔÊ¾¡£
+     * æ˜¯å¦å¯ä»¥åœ¨ç•Œé¢ä¸Šæ˜¾ç¤ºã€‚
      */
     private boolean visible = true;
 

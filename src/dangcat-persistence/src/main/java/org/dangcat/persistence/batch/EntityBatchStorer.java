@@ -8,7 +8,7 @@ import org.dangcat.persistence.entity.SaveEntityContext;
 import org.dangcat.persistence.event.EntityEventAdapter;
 
 /**
- * Êı¾İÅúÁ¿¹ÜÀí¡£
+ * æ•°æ®æ‰¹é‡ç®¡ç†ã€‚
  *
  * @author dangcat
  */

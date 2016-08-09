@@ -68,7 +68,7 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K> {
     public abstract String getResourceType();
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      *
      * @throws SessionException
      */
@@ -89,18 +89,18 @@ public abstract class ConnectionFactory<T extends ConnectionPool<?>, K> {
     }
 
     /**
-     * ¿ªÆôÒ»¸ö»á»°¶ÔÏó¡£
+     * å¼€å¯ä¸€ä¸ªä¼šè¯å¯¹è±¡ã€‚
      *
-     * @throws SessionException »á»°Òì³£¡£
+     * @throws SessionException ä¼šè¯å¼‚å¸¸ã€‚
      */
     public K openSession() {
         return this.openSession(DEFAULT);
     }
 
     /**
-     * ¿ªÆôÒ»¸ö»á»°¶ÔÏó¡£
+     * å¼€å¯ä¸€ä¸ªä¼šè¯å¯¹è±¡ã€‚
      *
-     * @throws SessionException »á»°Òì³£¡£
+     * @throws SessionException ä¼šè¯å¼‚å¸¸ã€‚
      */
     public K openSession(String name) {
         return this.createSession(this.get(name));

@@ -6,7 +6,7 @@ import org.dangcat.persistence.orm.Session;
 import org.dangcat.persistence.orm.SessionFactory;
 
 /**
- * ±í¹ÜÀíÆ÷¡£
+ * è¡¨ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */

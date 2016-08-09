@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * ¶ş½øÖÆÀàĞÍÊôĞÔÄ£°å¡£
+ * äºŒè¿›åˆ¶ç±»å‹å±æ€§æ¨¡æ¿ã€‚
  *
  * @author dangcat
  */
@@ -19,10 +19,10 @@ public class VendorAttributeTemplate extends AttributeTemplate {
     private static final int VENDORID_MAXLENGTH = 4;
 
     /**
-     * ÔÚ±¾»ùÏßÄ£°åÉÏ½¨Á¢ĞÂµÄÊôĞÔ¶ÔÏó¡£
+     * åœ¨æœ¬åŸºçº¿æ¨¡æ¿ä¸Šå»ºç«‹æ–°çš„å±æ€§å¯¹è±¡ã€‚
      *
-     * @param value ÊôĞÔÖµ¡£
-     * @return ÊôĞÔ¶ÔÏó¡£
+     * @param value å±æ€§å€¼ã€‚
+     * @return å±æ€§å¯¹è±¡ã€‚
      */
     @Override
     public AttributeData createAttribute(Object value) {
@@ -30,7 +30,7 @@ public class VendorAttributeTemplate extends AttributeTemplate {
     }
 
     /**
-     * ÊôĞÔÀàĞÍ¡£
+     * å±æ€§ç±»å‹ã€‚
      */
     @Override
     public AttributeDataType getDataType() {
@@ -38,11 +38,11 @@ public class VendorAttributeTemplate extends AttributeTemplate {
     }
 
     /**
-     * ×ª»»³É×Ö½ÚÊı×é¡£
+     * è½¬æ¢æˆå­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param outputStream  Êä³öÁ÷¶ÔÏó¡£
-     * @param attributeData ÊôĞÔÖµ¡£
-     * @return ×ª»»ºóµÄ×Ö½Ú¡£
+     * @param outputStream  è¾“å‡ºæµå¯¹è±¡ã€‚
+     * @param attributeData å±æ€§å€¼ã€‚
+     * @return è½¬æ¢åçš„å­—èŠ‚ã€‚
      * @throws IOException
      */
     protected void outputValue(ByteArrayOutputStream outputStream, AttributeData attributeData) throws IOException {
@@ -54,7 +54,7 @@ public class VendorAttributeTemplate extends AttributeTemplate {
     }
 
     /**
-     * ÓÉ±¨ÎÄ½âÎöÊôĞÔ¶ÔÏó¡£
+     * ç”±æŠ¥æ–‡è§£æå±æ€§å¯¹è±¡ã€‚
      *
      * @throws ProtocolParseException
      */

@@ -8,39 +8,39 @@ public class SecurityLoginException extends ServiceException {
     public static final String FIELDNAME_PASSWORD = "password";
 
     /**
-     * ÇëÏÈµÇÂ¼ÏµÍ³¡£
+     * è¯·å…ˆç™»å½•ç³»ç»Ÿã€‚
      */
     public static final Integer INVALID_LOGIN = 405;
     /**
-     * ÃÜÂë²»ÕıÈ·¡£
+     * å¯†ç ä¸æ­£ç¡®ã€‚
      */
     public static final Integer INVALID_PASSWORD = 402;
     /**
-     * µÇÂ½½ÇÉ«²»´æÔÚ¡£
+     * ç™»é™†è§’è‰²ä¸å­˜åœ¨ã€‚
      */
     public static final Integer INVALID_ROLE = 403;
     /**
-     * licenseÎ´ÊÚÈ¨»òÒÑ¹ıÆÚ
+     * licenseæœªæˆæƒæˆ–å·²è¿‡æœŸ
      */
     public static final Integer LICENSE_INVALIDATE = 408;
     /**
-     * ÓÃ»§²»ÄÜÎª¿Õ¡£
+     * ç”¨æˆ·ä¸èƒ½ä¸ºç©ºã€‚
      */
     public static final Integer NO_EMPTY = 401;
     /**
-     * ÕË»§ÒÑ¹ıÆÚ¡£
+     * è´¦æˆ·å·²è¿‡æœŸã€‚
      */
     public static final Integer NO_EXPIRYTIME = 407;
     /**
-     * ÕË»§²»´æÔÚ¡£
+     * è´¦æˆ·ä¸å­˜åœ¨ã€‚
      */
     public static final Integer NO_NOT_EXISTS = 404;
     /**
-     * ÕË»§ÒÑÍ£ÓÃ¡£
+     * è´¦æˆ·å·²åœç”¨ã€‚
      */
     public static final Integer NO_USEABLE_FALSE = 406;
     /**
-     * ÃÜÂë²»ÄÜÎª¿Õ¡£
+     * å¯†ç ä¸èƒ½ä¸ºç©ºã€‚
      */
     public static final Integer PASSWORD_EMPTY = 400;
     private static final long serialVersionUID = 1L;

@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * JSON¸ñÊ½ĞòÁĞ»¯¡£
+ * JSONæ ¼å¼åºåˆ—åŒ–ã€‚
  */
 public class JsonSerializer {
     protected static final Logger logger = Logger.getLogger(JsonSerializer.class);
@@ -74,10 +74,10 @@ public class JsonSerializer {
     }
 
     /**
-     * ĞòÁĞ»¯¶ÔÏóÒÔJSON¸ñÊ½Êä³ö¡£
+     * åºåˆ—åŒ–å¯¹è±¡ä»¥JSONæ ¼å¼è¾“å‡ºã€‚
      *
-     * @param instance ¶ÔÏóÊµÀı¡£
-     * @param writer   Êä³öÁ÷¡£
+     * @param instance å¯¹è±¡å®ä¾‹ã€‚
+     * @param writer   è¾“å‡ºæµã€‚
      */
     public static void serialize(Object instance, Writer writer) {
         serialize(instance, writer, null);
@@ -117,11 +117,11 @@ public class JsonSerializer {
     }
 
     /**
-     * ĞòÁĞ»¯Êı×é¡£
+     * åºåˆ—åŒ–æ•°ç»„ã€‚
      *
-     * @param jsonWriter JSON¸ñÊ½Ğ´ÈëÆ÷¡£
-     * @param instance   Êı×éÊµÀı¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param jsonWriter JSONæ ¼å¼å†™å…¥å™¨ã€‚
+     * @param instance   æ•°ç»„å®ä¾‹ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static void serializeArray(JsonWriter jsonWriter, String name, Object instance) throws IOException {
         if (instance != null && instance.getClass().isArray()) {

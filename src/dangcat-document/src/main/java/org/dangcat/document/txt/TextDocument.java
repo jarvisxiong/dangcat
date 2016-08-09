@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * TXTÎÄµµÊäÈëÊä³ö¡£
+ * TXTæ–‡æ¡£è¾“å…¥è¾“å‡ºã€‚
  *
  * @author dangcat
  */
@@ -60,10 +60,10 @@ public class TextDocument extends TextDocumentBase {
     }
 
     /**
-     * ¸ñÊ½»¯×Ö¶ÎÄÚÈİ¡£
+     * æ ¼å¼åŒ–å­—æ®µå†…å®¹ã€‚
      *
-     * @param value ÊıÖµ¶ÔÏó¡£
-     * @return ¸ñÊ½»¯ºóÄÚÈİ¡£
+     * @param value æ•°å€¼å¯¹è±¡ã€‚
+     * @return æ ¼å¼åŒ–åå†…å®¹ã€‚
      */
     private String format(int width, String text) {
         if (width > 0 && text != null)
@@ -88,10 +88,10 @@ public class TextDocument extends TextDocumentBase {
     }
 
     /**
-     * ÓÉĞĞÊı¾İ½âÎö³ÉÊı×é¡£
+     * ç”±è¡Œæ•°æ®è§£ææˆæ•°ç»„ã€‚
      *
-     * @param line   Êı¾İĞĞ¡£
-     * @param length ³¤¶È¡£
+     * @param line   æ•°æ®è¡Œã€‚
+     * @param length é•¿åº¦ã€‚
      * @return
      */
     public String[] parseTextArray(String line) {
@@ -119,12 +119,12 @@ public class TextDocument extends TextDocumentBase {
     }
 
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param reader     Êı¾İ»º³åÁ÷¡£
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param reader     æ•°æ®ç¼“å†²æµã€‚
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     @Override
     public int read(Reader reader, DataWriter dataWriter) throws IOException {
@@ -179,10 +179,10 @@ public class TextDocument extends TextDocumentBase {
     }
 
     /**
-     * µ¼³öÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºæ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param dataReader Êı¾İÀ´Ô´¡£
-     * @param Êä³öÊıÁ¿¡£
+     * @param dataReader æ•°æ®æ¥æºã€‚
+     * @param è¾“å‡ºæ•°é‡ã€‚
      */
     @Override
     public int write(DataReader dataReader) {
@@ -197,7 +197,7 @@ public class TextDocument extends TextDocumentBase {
         PrintWriter writer = this.getPrintWriter();
         if (this.isFirstHeader())
             this.writeHeader(writer, columns);
-        // Êä³öÊı¾İÄÚÈİ¡£
+        // è¾“å‡ºæ•°æ®å†…å®¹ã€‚
         for (int i = 0; i < dataReader.size(); i++) {
             if (this.lineCount > 0 || this.isFirstHeader())
                 writer.append(Environment.LINE_SEPARATOR);
@@ -216,7 +216,7 @@ public class TextDocument extends TextDocumentBase {
     }
 
     /**
-     * Êä³ö±êÌâ¡£
+     * è¾“å‡ºæ ‡é¢˜ã€‚
      */
     private void writeHeader(PrintWriter writer, Columns columns) {
         int index = 0;

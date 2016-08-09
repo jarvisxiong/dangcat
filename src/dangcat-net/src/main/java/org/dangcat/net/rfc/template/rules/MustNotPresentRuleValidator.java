@@ -5,7 +5,7 @@ import org.dangcat.net.rfc.exceptions.ProtocolValidateException;
 import java.util.Map;
 
 /**
- * 0 This attribute MUST NOT be present¡£
+ * 0 This attribute MUST NOT be presentã€‚
  *
  * @author dangcat
  */

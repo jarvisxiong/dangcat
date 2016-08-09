@@ -10,7 +10,7 @@ import org.dangcat.business.staff.domain.RoleInfo;
  */
 public class RoleInfoException extends BusinessException {
     /**
-     * ÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ½ÇÉ«²»ÄÜÉ¾³ı¡£
+     * å·²ç»ç»‘å®šæ“ä½œå‘˜çš„è§’è‰²ä¸èƒ½åˆ é™¤ã€‚
      */
     public static final Integer CHILE_OPERATOR_EXISTS = 100;
     private static final long serialVersionUID = 1L;

@@ -6,7 +6,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.util.Collection;
 
 /**
- * SQL¸ú×Ù
+ * SQLè·Ÿè¸ª
  *
  * @author dangcat
  */

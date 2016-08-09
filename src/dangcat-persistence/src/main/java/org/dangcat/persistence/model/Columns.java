@@ -8,7 +8,7 @@ import org.dangcat.persistence.validator.impl.NotNullValidator;
 import java.util.*;
 
 /**
- * À¸Î»¶ÔÏó¼¯ºÏ¡£
+ * æ ä½å¯¹è±¡é›†åˆã€‚
  *
  * @author dangcat
  */
@@ -89,7 +89,7 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable {
     public void createDataValidators(Class<?> classType) {
         Collection<DataValidator> dataValidators = new LinkedList<DataValidator>();
         for (Column column : this) {
-            // ²»¿ÉÎª¿ÕĞ£Ñé
+            // ä¸å¯ä¸ºç©ºæ ¡éªŒ
             if (!column.isNullable() && (!column.isAutoIncrement() || !column.getGenerationType().equals(GenerationType.IDENTITY))) {
                 NotNullValidator notNullValidator = new NotNullValidator(classType, column);
                 dataValidators.add(notNullValidator);
@@ -99,7 +99,7 @@ public class Columns extends ArrayList<Column> implements java.io.Serializable {
             if (column.isCalculate())
                 continue;
 
-            // ×î´ó³¤¶ÈĞ£Ñé
+            // æœ€å¤§é•¿åº¦æ ¡éªŒ
             if (ValueUtils.isText(column.getFieldClass()) && column.getDisplaySize() > 0) {
                 MaxLengthValidator maxLengthValidator = new MaxLengthValidator(classType, column);
                 dataValidators.add(maxLengthValidator);

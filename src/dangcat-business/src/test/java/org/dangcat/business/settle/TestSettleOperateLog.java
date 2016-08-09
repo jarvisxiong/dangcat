@@ -97,7 +97,7 @@ public class TestSettleOperateLog extends TestWebServerBase {
     }
 
     /**
-     * ²âÊÔµ±ÈÕ½áËãµÄ»ù±¾¹¦ÄÜ¡£
+     * æµ‹è¯•å½“æ—¥ç»“ç®—çš„åŸºæœ¬åŠŸèƒ½ã€‚
      */
     @Test
     public void testSettleCurrent() {
@@ -109,7 +109,7 @@ public class TestSettleOperateLog extends TestWebServerBase {
     }
 
     /**
-     * ²âÊÔ¿çÔÂ½áËãµÄ¹¦ÄÜ¡£
+     * æµ‹è¯•è·¨æœˆç»“ç®—çš„åŠŸèƒ½ã€‚
      */
     @Test
     public void testSettleDiffMonth() {

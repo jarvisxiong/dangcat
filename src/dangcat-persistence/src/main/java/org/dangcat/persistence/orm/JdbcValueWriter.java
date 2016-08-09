@@ -12,13 +12,13 @@ import java.util.Date;
 class JdbcValueWriter {
 
     /**
-     * Ğ´Èë±í´ïÊ½Öµ¡£
+     * å†™å…¥è¡¨è¾¾å¼å€¼ã€‚
      *
-     * @param preparedStatement ±í´ïÊ½¶ÔÏó¡£
-     * @param parameterIndex    ²ÎÊıĞòºÅ¡£
-     * @param value             Öµ¶ÔÏó¡£
-     * @param column            Êı¾İ¿âÀàĞÍ¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param preparedStatement è¡¨è¾¾å¼å¯¹è±¡ã€‚
+     * @param parameterIndex    å‚æ•°åºå·ã€‚
+     * @param value             å€¼å¯¹è±¡ã€‚
+     * @param column            æ•°æ®åº“ç±»å‹ã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected static void write(PreparedStatement preparedStatement, int parameterIndex, Object value, Column column) throws SQLException {
         int sqlType = column.getSqlType();
@@ -69,13 +69,13 @@ class JdbcValueWriter {
     }
 
     /**
-     * Ğ´Èë×Ö½ÚÁ÷Êı¾İ¡£
+     * å†™å…¥å­—èŠ‚æµæ•°æ®ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static boolean writeBlob(PreparedStatement preparedStatement, int parameterIndex, Object value) throws SQLException {
         if (value instanceof byte[]) {
@@ -88,13 +88,13 @@ class JdbcValueWriter {
     }
 
     /**
-     * Ğ´Èë×Ö·ûÁ÷Êı¾İ¡£
+     * å†™å…¥å­—ç¬¦æµæ•°æ®ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static boolean writeClob(PreparedStatement preparedStatement, int parameterIndex, Object value) throws SQLException {
         if (value instanceof char[]) {
@@ -107,13 +107,13 @@ class JdbcValueWriter {
     }
 
     /**
-     * Ğ´Èë×Ö´®ÀàĞÍ¡£
+     * å†™å…¥å­—ä¸²ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static boolean writeClob(PreparedStatement preparedStatement, int parameterIndex, Object value, int sqlType) throws SQLException {
         Reader reader = null;
@@ -138,16 +138,16 @@ class JdbcValueWriter {
     }
 
     /**
-     * Ğ´Èë×Ö·ûÁ÷Êı¾İ¡£
+     * å†™å…¥å­—ç¬¦æµæ•°æ®ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static boolean writeDateTime(PreparedStatement preparedStatement, int parameterIndex, Column column, Object value) throws SQLException {
-        if (value instanceof Date) // Sql Server²»Ö§³Öjava.util.Date
+        if (value instanceof Date) // Sql Serverä¸æ”¯æŒjava.util.Date
         {
             Date date = DateUtils.clear(column.getDateType(), (Date) value);
             preparedStatement.setTimestamp(parameterIndex, new java.sql.Timestamp(date.getTime()));

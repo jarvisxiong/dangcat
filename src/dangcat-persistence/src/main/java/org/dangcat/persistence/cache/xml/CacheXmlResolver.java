@@ -5,28 +5,28 @@ import org.dangcat.commons.utils.ValueUtils;
 import org.dom4j.Element;
 
 /**
- * »º´æÅäÖÃ½âÎöÆ÷¡£
+ * ç¼“å­˜é…ç½®è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class CacheXmlResolver extends XmlResolver {
     private static final String TEXT_INDEX = "Index";
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private Cache cache = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public CacheXmlResolver() {
         super(Cache.class.getSimpleName());
     }
 
     /**
-     * ¿ªÊ¼½âÎö×ÓÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå­å…ƒç´ æ ‡ç­¾ã€‚
      *
-     * @param element ×ÓÔªËØÃû³Æ¡£
+     * @param element å­å…ƒç´ åç§°ã€‚
      */
     protected void resolveChildElement(Element element) {
         if (element.getName().equalsIgnoreCase(TEXT_INDEX)) {
@@ -39,7 +39,7 @@ public class CacheXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

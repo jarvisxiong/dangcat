@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 import java.util.*;
 
 /**
- * ·şÎñ¹¤¾ß¡£
+ * æœåŠ¡å·¥å…·ã€‚
  *
  * @author dangcat
  */
@@ -24,7 +24,7 @@ public final class ServiceHelper {
     }
 
     /**
-     * °´ÕÕ·şÎñÀàĞÍÏòÏÂÕÒ×Ó·şÎñ¡£
+     * æŒ‰ç…§æœåŠ¡ç±»å‹å‘ä¸‹æ‰¾å­æœåŠ¡ã€‚
      */
     @SuppressWarnings("unchecked")
     private static <T> void findChildren(List<T> findList, Object parent, Class<T> classType) {
@@ -51,11 +51,11 @@ public final class ServiceHelper {
     }
 
     /**
-     * °´ÕÕ·şÎñÀàĞÍÏòÏÂÕÒ×Ó·şÎñ¡£
+     * æŒ‰ç…§æœåŠ¡ç±»å‹å‘ä¸‹æ‰¾å­æœåŠ¡ã€‚
      *
-     * @param parent    ¸¸·şÎñ¡£
-     * @param classType ÒªÕÒµÄ×Ó·şÎñÀàĞÍ¡£
-     * @return ÕÒµ½µÄ×Ó·şÎñ¡£
+     * @param parent    çˆ¶æœåŠ¡ã€‚
+     * @param classType è¦æ‰¾çš„å­æœåŠ¡ç±»å‹ã€‚
+     * @return æ‰¾åˆ°çš„å­æœåŠ¡ã€‚
      */
     public static <T> List<T> findChildren(Object parent, Class<T> classType) {
         List<T> findList = new ArrayList<T>();
@@ -65,10 +65,10 @@ public final class ServiceHelper {
     }
 
     /**
-     * Ïò·şÎñÊµÀıÖĞ×¢Èë¶ÔÏó¡£
+     * å‘æœåŠ¡å®ä¾‹ä¸­æ³¨å…¥å¯¹è±¡ã€‚
      *
-     * @param serviceProvider ·şÎñÌá¹©Õß¡£
-     * @param serviceInstance ·şÎñÊµÀı¡£
+     * @param serviceProvider æœåŠ¡æä¾›è€…ã€‚
+     * @param serviceInstance æœåŠ¡å®ä¾‹ã€‚
      */
     public static void inject(ServiceProvider serviceProvider, Object serviceInstance) {
         for (InjectProvider injectProvider : injectProviders)
@@ -76,9 +76,9 @@ public final class ServiceHelper {
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param serviceBase ·şÎñÊµÀı¡£
+     * @param serviceBase æœåŠ¡å®ä¾‹ã€‚
      */
     public static void loadFromServiceXml(ServiceBase serviceBase) {
         Class<?> serviceType = serviceBase.getClass();
@@ -94,9 +94,9 @@ public final class ServiceHelper {
     }
 
     /**
-     * ÖØÆô·şÎñºÍËùÓĞ×Ó·şÎñ¡£
+     * é‡å¯æœåŠ¡å’Œæ‰€æœ‰å­æœåŠ¡ã€‚
      *
-     * @param serviceBase ·şÎñ¡£
+     * @param serviceBase æœåŠ¡ã€‚
      */
     public static void restart(ServiceBase serviceBase) {
         stop(serviceBase);
@@ -104,9 +104,9 @@ public final class ServiceHelper {
     }
 
     /**
-     * Æô¶¯·şÎñºÍËùÓĞ×Ó·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡å’Œæ‰€æœ‰å­æœåŠ¡ã€‚
      *
-     * @param serviceBase ·şÎñ¡£
+     * @param serviceBase æœåŠ¡ã€‚
      */
     public static void start(ServiceBase serviceBase) {
         if (serviceBase instanceof ServiceControl) {
@@ -121,9 +121,9 @@ public final class ServiceHelper {
     }
 
     /**
-     * Í£Ö¹·şÎñºÍËùÓĞ×Ó·şÎñ¡£
+     * åœæ­¢æœåŠ¡å’Œæ‰€æœ‰å­æœåŠ¡ã€‚
      *
-     * @param serviceBase ·şÎñ¡£
+     * @param serviceBase æœåŠ¡ã€‚
      */
     public static void stop(ServiceBase serviceBase) {
         if (serviceBase instanceof ServiceControl) {

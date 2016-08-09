@@ -5,7 +5,7 @@ import org.dangcat.persistence.entity.EntityBase;
 import org.dangcat.persistence.model.DataStatus;
 
 /**
- * ½áËã»ùÀà¡£
+ * ç»“ç®—åŸºç±»ã€‚
  *
  * @author dangcat
  */

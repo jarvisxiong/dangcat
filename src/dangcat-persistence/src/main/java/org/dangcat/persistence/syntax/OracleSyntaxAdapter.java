@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ±í´ïÊ½¹¹½¨Æ÷¡£
+ * è¡¨è¾¾å¼æ„å»ºå™¨ã€‚
  *
  * @author dangcat
  */
@@ -27,11 +27,11 @@ public class OracleSyntaxAdapter extends SqlSyntaxHelperBase {
     protected Map<String, String> defaultParams = new HashMap<String, String>();
 
     /**
-     * ¹¹½¨±í´æÔÚ±í´ïÊ½¡£
+     * æ„å»ºè¡¨å­˜åœ¨è¡¨è¾¾å¼ã€‚
      *
-     * @param databaseName Êı¾İ¿âÃû¡£
-     * @param tableName    ±íÃû¡£
-     * @return ²éÑ¯Óï¾ä¡£
+     * @param databaseName æ•°æ®åº“åã€‚
+     * @param tableName    è¡¨åã€‚
+     * @return æŸ¥è¯¢è¯­å¥ã€‚
      */
     @Override
     public String buildExistsStatement(String databaseName, String tableName) {
@@ -45,11 +45,11 @@ public class OracleSyntaxAdapter extends SqlSyntaxHelperBase {
     }
 
     /**
-     * ¹¹½¨º¬ÓĞ·¶Î§ÔØÈëµÄÓï¾ä±í´ïÊ½¡£
+     * æ„å»ºå«æœ‰èŒƒå›´è½½å…¥çš„è¯­å¥è¡¨è¾¾å¼ã€‚
      *
-     * @param sql   ²éÑ¯Óï¾ä¡£
-     * @param range ²éÑ¯·¶Î§¡£
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @param sql   æŸ¥è¯¢è¯­å¥ã€‚
+     * @param range æŸ¥è¯¢èŒƒå›´ã€‚
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public String buildRangeLoadStatement(String sql, Range range) {
@@ -72,10 +72,10 @@ public class OracleSyntaxAdapter extends SqlSyntaxHelperBase {
     }
 
     /**
-     * ×ª»»SQLÀ¸Î»Êı¾İÀàĞÍ¡£
+     * è½¬æ¢SQLæ ä½æ•°æ®ç±»å‹ã€‚
      *
-     * @param column À¸Î»¶ÔÏó¡£
-     * @return SQLÊı¾İÀàĞÍ¡£
+     * @param column æ ä½å¯¹è±¡ã€‚
+     * @return SQLæ•°æ®ç±»å‹ã€‚
      */
     @Override
     public String getSqlType(Column column) {

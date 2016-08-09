@@ -4,9 +4,9 @@ import org.dangcat.commons.reflect.ReflectUtils;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * Æ½Ì¨µÄ¼ÓÃÜ½âÃÜ¹¤¾ß http://zh.wikipedia.org/wiki/Base64
- * base64Ê¹ÓÃµÄ×Ö·û°üÀ¨´óĞ¡Ğ´×ÖÄ¸¸÷26¸ö£¬¼ÓÉÏ10¸öÊı×Ö£¬ºÍ¼ÓºÅ¡¸+¡¹£¬Ğ±¸Ü¡¸/¡¹£¬ Ò»¹²64¸ö×Ö·û£¬µÈºÅ¡¸=¡¹ÓÃÀ´×÷Îªºó×ºÓÃÍ¾¡£
- * ÍêÕûµÄbase64¶¨Òå¿É¼û RFC 1421ºÍ RFC 2045¡£±àÂëºóµÄÊı¾İ±ÈÔ­Ê¼Êı¾İÂÔ³¤£¬ÎªÔ­À´µÄ4/3
+ * å¹³å°çš„åŠ å¯†è§£å¯†å·¥å…· http://zh.wikipedia.org/wiki/Base64
+ * base64ä½¿ç”¨çš„å­—ç¬¦åŒ…æ‹¬å¤§å°å†™å­—æ¯å„26ä¸ªï¼ŒåŠ ä¸Š10ä¸ªæ•°å­—ï¼Œå’ŒåŠ å·ã€Œ+ã€ï¼Œæ–œæ ã€Œ/ã€ï¼Œ ä¸€å…±64ä¸ªå­—ç¬¦ï¼Œç­‰å·ã€Œ=ã€ç”¨æ¥ä½œä¸ºåç¼€ç”¨é€”ã€‚
+ * å®Œæ•´çš„base64å®šä¹‰å¯è§ RFC 1421å’Œ RFC 2045ã€‚ç¼–ç åçš„æ•°æ®æ¯”åŸå§‹æ•°æ®ç•¥é•¿ï¼Œä¸ºåŸæ¥çš„4/3
  */
 public class CryptoUtils {
     private static final String DANGCAT_CRYPTO_PROVIDER = "dangcat.Crypto.Provider";
@@ -14,40 +14,40 @@ public class CryptoUtils {
     private static CryptoProvider cryptoProvider = null;
 
     /**
-     * ½âÃÜ
+     * è§£å¯†
      *
-     * @param src ÃÜÎÄ
-     * @return Ô­ÎÄ£¬³ö´í·µ»Ønull
+     * @param src å¯†æ–‡
+     * @return åŸæ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     public static String decrypt(String sourceText) {
         return decrypt(sourceText, DEFAULT_CHARSETNAME);
     }
 
     /**
-     * ½âÃÜ
+     * è§£å¯†
      *
-     * @param src ÃÜÎÄ
-     * @return Ô­ÎÄ£¬³ö´í·µ»Ønull
+     * @param src å¯†æ–‡
+     * @return åŸæ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     public static String decrypt(String sourceText, String charsetName) {
         return getCryptoProvider().decrypt(sourceText, charsetName);
     }
 
     /**
-     * ¼ÓÃÜ,²»Ö§³Ö'\0'½áÎ²µÄ´®
+     * åŠ å¯†,ä¸æ”¯æŒ'\0'ç»“å°¾çš„ä¸²
      *
-     * @param text Ô­ÎÄ
-     * @return ÃÜÎÄ£¬³ö´í·µ»Ønull
+     * @param text åŸæ–‡
+     * @return å¯†æ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     public static String encrypt(String sourceText) {
         return encrypt(sourceText, DEFAULT_CHARSETNAME);
     }
 
     /**
-     * ¼ÓÃÜ,²»Ö§³Ö'\0'½áÎ²µÄ´®
+     * åŠ å¯†,ä¸æ”¯æŒ'\0'ç»“å°¾çš„ä¸²
      *
-     * @param text Ô­ÎÄ
-     * @return ÃÜÎÄ£¬³ö´í·µ»Ønull
+     * @param text åŸæ–‡
+     * @return å¯†æ–‡ï¼Œå‡ºé”™è¿”å›null
      */
     public static String encrypt(String sourceText, String charsetName) {
         return getCryptoProvider().encrypt(sourceText, charsetName);

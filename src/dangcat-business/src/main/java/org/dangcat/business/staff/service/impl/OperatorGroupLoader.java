@@ -40,7 +40,7 @@ public class OperatorGroupLoader {
     }
 
     /**
-     * µ±Ç°ÓÃ»§µÄËùÓĞ×Ó×éÁĞ±í¡£
+     * å½“å‰ç”¨æˆ·çš„æ‰€æœ‰å­ç»„åˆ—è¡¨ã€‚
      */
     public Integer[] loadMemberIds() {
         Integer[] groupIds = null;

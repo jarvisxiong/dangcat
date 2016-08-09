@@ -20,83 +20,83 @@ import java.util.List;
 
 public class TestMemCache extends TestCacheBase {
     private void testCacheFilter1(MemCache<EntityData> memCache) {
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         Collection<EntityData> entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         EntityData entityData = entityDataList.iterator().next();
         Assert.assertEquals("A-00000000000000000000000000000000000006", entityData.getFieldA());
         Assert.assertTrue(filterGroup.isValid(entityData));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 2, 9));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, 3 * 3.14, 9 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(7, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.between, (long) 4 * 100000000, (long) 9 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(6, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.DAY, DateUtils.add(DateUtils.DAY, DateUtils.now(), 5));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 9);
         filterGroup.add(new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(5, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(9, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
     }
 
     private void testCacheFilter2(MemCache<EntityData> memCache) {
-        // ¹¹½¨×î¼òµ¥µÄ¹ıÂËÌõ¼ş
+        // æ„å»ºæœ€ç®€å•çš„è¿‡æ»¤æ¡ä»¶
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.eq, "A-00000000000000000000000000000000000006", null, "A-00000000000000000000000000000000000009"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         Collection<EntityData> entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData : entityDataList) {
             if (entityData.getFieldB() == 6)
@@ -108,76 +108,76 @@ public class TestMemCache extends TestCacheBase {
             Assert.assertTrue(filterGroup.isValid(entityData));
         }
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         FilterUnit filterUnit = new FilterUnit(EntityData.FieldA, FilterType.between, "A-00000000000000000000000000000000000001", "A-00000000000000000000000000000000000009");
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔBETWEEN
+        // æµ‹è¯•BETWEEN
         filterGroup.clear();
-        // ¼ÓÈë×Ö¶ÎFieldAµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldAçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldA, FilterType.lt, "A-00000000000000000000000000000000000002"));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldBµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldBçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldB, FilterType.between, 1, null));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(1, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldCµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldCçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.clear();
         filterGroup.add(new FilterUnit(EntityData.FieldC, FilterType.between, null, 7 * 3.14 + 0.01));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(8, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldDµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldDçš„è¿‡æ»¤æ¡ä»¶
         filterGroup.add(new FilterUnit(EntityData.FieldD, FilterType.eq, (long) 4 * 100000000, (long) 5 * 100000000));
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ¼ÓÈë×Ö¶ÎFieldEµÄ¹ıÂËÌõ¼ş
+        // åŠ å…¥å­—æ®µFieldEçš„è¿‡æ»¤æ¡ä»¶
         Date fromDay = DateUtils.clear(DateUtils.SECOND, DateUtils.add(DateUtils.DAY, DateUtils.now(), 6));
         Date toDay = DateUtils.add(DateUtils.DAY, DateUtils.now(), 8);
         filterUnit = new FilterUnit(EntityData.FieldE, FilterType.between, fromDay, toDay);
         filterUnit.setNot(true);
         filterGroup.add(filterUnit);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(2, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
 
-        // ²âÊÔ»òµÄÔËËã¡£
+        // æµ‹è¯•æˆ–çš„è¿ç®—ã€‚
         filterGroup.setGroupType(FilterGroupType.or);
-        // ÔØÈëÊı¾İ
+        // è½½å…¥æ•°æ®
         entityDataList = memCache.find(filterGroup);
-        // ÅĞ¶Ï¹ıÂËÄÚÈİ
+        // åˆ¤æ–­è¿‡æ»¤å†…å®¹
         Assert.assertEquals(10, entityDataList.size());
         for (EntityData entityData1 : entityDataList)
             Assert.assertTrue(filterGroup.isValid(entityData1));
@@ -185,17 +185,17 @@ public class TestMemCache extends TestCacheBase {
 
     private void testCacheFilter3(MemCache<EntityData> memCache) {
         EntityData srcEntityData = EntityDataUtils.createEntityData(6);
-        // ²âÊÔ¶¨Î»Êı¾İ¡£
+        // æµ‹è¯•å®šä½æ•°æ®ã€‚
         Collection<EntityData> entityDataList = memCache.find(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertEquals(1, entityDataList.size());
         Assert.assertTrue(SimulateUtils.compareData(srcEntityData, entityDataList.iterator().next()));
 
-        // ²âÊÔÉ¾³ıÊı¾İ¡£
+        // æµ‹è¯•åˆ é™¤æ•°æ®ã€‚
         memCache.remove(entityDataList.iterator().next());
         Collection<EntityData> entityDataList2 = memCache.find(new String[]{EntityData.FieldA}, srcEntityData.getFieldA());
         Assert.assertNull(entityDataList2);
 
-        // ²âÊÔÇå³ı»º´æÊı¾İ¡£
+        // æµ‹è¯•æ¸…é™¤ç¼“å­˜æ•°æ®ã€‚
         memCache.clear(true);
         Assert.assertEquals(0, memCache.size());
     }
@@ -211,7 +211,7 @@ public class TestMemCache extends TestCacheBase {
         MemCache<EntityData> memCache = entityCacheManager.getMemCache(EntityData.class);
         Assert.assertNotNull(memCache);
 
-        // ²âÊÔÌí¼ÓÄÚ´æÊı¾İ¡£
+        // æµ‹è¯•æ·»åŠ å†…å­˜æ•°æ®ã€‚
         List<EntityData> entityList = new ArrayList<EntityData>();
         EntityDataUtils.createEntityDataList(entityList, TEST_COUNT);
         for (EntityData entityData : entityList)

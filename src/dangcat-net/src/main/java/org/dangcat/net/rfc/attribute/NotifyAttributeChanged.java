@@ -1,7 +1,7 @@
 package org.dangcat.net.rfc.attribute;
 
 /**
- * ���Ա仯֪ͨ��
+ * 属性变化通知。
  *
  * @author dangcat
  */

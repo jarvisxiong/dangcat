@@ -4,7 +4,7 @@ import org.dangcat.commons.database.DatabaseType;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * SQLµ¥Ôª¡£
+ * SQLå•å…ƒã€‚
  *
  * @author dangcat
  */

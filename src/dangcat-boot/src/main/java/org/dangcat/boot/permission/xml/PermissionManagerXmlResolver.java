@@ -7,19 +7,19 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import java.util.Collection;
 
 /**
- * È¨ÏŞ¹ÜÀí½âÎöÆ÷¡£
+ * æƒé™ç®¡ç†è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class PermissionManagerXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Permissions";
     /**
-     * È¨ÏŞ¹ÜÀí¡£
+     * æƒé™ç®¡ç†ã€‚
      */
     private PermissionManager permissionManager;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public PermissionManagerXmlResolver(PermissionManager permissionManager) {
         super(RESOLVER_NAME);
@@ -29,10 +29,10 @@ public class PermissionManagerXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @SuppressWarnings("unchecked")
     protected void afterChildCreate(String elementName, Object child) {

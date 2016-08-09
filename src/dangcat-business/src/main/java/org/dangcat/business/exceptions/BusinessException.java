@@ -3,57 +3,57 @@ package org.dangcat.business.exceptions;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * ÒµÎñ·şÎñÒì³£¡£
+ * ä¸šåŠ¡æœåŠ¡å¼‚å¸¸ã€‚
  *
  * @author dangcat
  */
 public class BusinessException extends DataValidateException {
     /**
-     * ÓĞÌØÊâÈ¨ÏŞ²ÅÄÜĞŞ¸Ä¡£
+     * æœ‰ç‰¹æ®Šæƒé™æ‰èƒ½ä¿®æ”¹ã€‚
      */
     public static final Integer ADVANCED_MODIFY = 59;
     /**
-     * ĞÂÔöÊı¾İÊ§°Ü¡£
+     * æ–°å¢æ•°æ®å¤±è´¥ã€‚
      */
     public static final Integer CREATE_ERROR = 53;
     /**
-     * Êı¾İ²»´æÔÚ¡£
+     * æ•°æ®ä¸å­˜åœ¨ã€‚
      */
     public static final Integer DATA_NOTEXISTS = 56;
     /**
-     * Ã»ÓĞÕÒµ½·ûºÏÌõ¼şµÄ½á¹û¡£
+     * æ²¡æœ‰æ‰¾åˆ°ç¬¦åˆæ¡ä»¶çš„ç»“æœã€‚
      */
     public static final Integer DATA_NOTFOUND = 54;
     /**
-     * Êı¾İÖØ¸´¡£
+     * æ•°æ®é‡å¤ã€‚
      */
     public static final Integer DATA_REPEAT = 55;
     /**
-     * Êı¾İ×´Ì¬²»ÕıÈ·¡£
+     * æ•°æ®çŠ¶æ€ä¸æ­£ç¡®ã€‚
      */
     public static final Integer DATASTATE_INCORRECT = 60;
     /**
-     * É¾³ıÊı¾İ´íÎó¡£
+     * åˆ é™¤æ•°æ®é”™è¯¯ã€‚
      */
     public static final Integer DELETE_ERROR = 50;
     /**
-     * ×Ö¶Î²»´æÔÚ¡£
+     * å­—æ®µä¸å­˜åœ¨ã€‚
      */
     public static final Integer FIELD_NOTEXISTS = 58;
     /**
-     * Ö´ĞĞ´íÎó£¬Çë²é¿´ºóÌ¨ÈÕÖ¾¡£
+     * æ‰§è¡Œé”™è¯¯ï¼Œè¯·æŸ¥çœ‹åå°æ—¥å¿—ã€‚
      */
     public static final Integer INVOKE_ERROR = 60;
     /**
-     * ¼ÓÔØÊı¾İ´íÎó¡£
+     * åŠ è½½æ•°æ®é”™è¯¯ã€‚
      */
     public static final Integer LOAD_ERROR = 51;
     /**
-     * Ã»ÓĞÖ´ĞĞÈ¨ÏŞ¡£
+     * æ²¡æœ‰æ‰§è¡Œæƒé™ã€‚
      */
     public static final Integer PERMISSION_DENY = 57;
     /**
-     * ±£´æÊı¾İÊ§°Ü¡£
+     * ä¿å­˜æ•°æ®å¤±è´¥ã€‚
      */
     public static final Integer SAVE_ERROR = 52;
     private static final long serialVersionUID = 1L;

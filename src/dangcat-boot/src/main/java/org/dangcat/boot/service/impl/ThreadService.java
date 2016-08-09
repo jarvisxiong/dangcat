@@ -7,7 +7,7 @@ import org.dangcat.framework.service.ServiceStatus;
 import org.dangcat.framework.service.impl.ServiceControlBase;
 
 /**
- * ¶ÓÁĞ¶àÏß³Ì·şÎñ»ù´¡Àà¡£
+ * é˜Ÿåˆ—å¤šçº¿ç¨‹æœåŠ¡åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
@@ -19,30 +19,30 @@ public class ThreadService extends ServiceControlBase {
     private Thread thread;
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public ThreadService(ServiceProvider parent) {
         super(parent);
     }
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
-     * @param name   ·şÎñÃû³Æ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
+     * @param name   æœåŠ¡åç§°ã€‚
      */
     public ThreadService(ServiceProvider parent, String name) {
         super(parent, name);
     }
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent   ËùÊô·şÎñ¡£
-     * @param name     ·şÎñÃû³Æ¡£
-     * @param runnable Ïß³ÌÖ´ĞĞ½Ó¿Ú¡£
+     * @param parent   æ‰€å±æœåŠ¡ã€‚
+     * @param name     æœåŠ¡åç§°ã€‚
+     * @param runnable çº¿ç¨‹æ‰§è¡Œæ¥å£ã€‚
      */
     public ThreadService(ServiceProvider parent, String name, Runnable runnable) {
         super(parent, name);
@@ -67,7 +67,7 @@ public class ThreadService extends ServiceControlBase {
     }
 
     /**
-     * Ïß³ÌÓÅÏÈ¼¶¡£
+     * çº¿ç¨‹ä¼˜å…ˆçº§ã€‚
      */
     public int getPriority() {
         return this.priority;
@@ -92,7 +92,7 @@ public class ThreadService extends ServiceControlBase {
     }
 
     /**
-     * »½ĞÑÖ´ĞĞ¡£
+     * å”¤é†’æ‰§è¡Œã€‚
      */
     public final void resume() {
         if (this.isEnabled()) {
@@ -104,7 +104,7 @@ public class ThreadService extends ServiceControlBase {
     }
 
     /**
-     * Æô¶¯ÊØ»¤Ïß³Ì¡£
+     * å¯åŠ¨å®ˆæŠ¤çº¿ç¨‹ã€‚
      */
     @Override
     public void start() {
@@ -112,7 +112,7 @@ public class ThreadService extends ServiceControlBase {
             synchronized (this) {
                 this.setServiceStatus(ServiceStatus.Starting);
 
-                // ×¢²á¶¨Ê±Æ÷¡£
+                // æ³¨å†Œå®šæ—¶å™¨ã€‚
                 if (this.alarmClock != null)
                     TimerServiceImpl.getInstance().createTimer(this.alarmClock);
 
@@ -141,7 +141,7 @@ public class ThreadService extends ServiceControlBase {
     }
 
     /**
-     * Í£Ö¹¶¨Ê±Æ÷
+     * åœæ­¢å®šæ—¶å™¨
      */
     @Override
     public void stop() {
@@ -149,7 +149,7 @@ public class ThreadService extends ServiceControlBase {
             synchronized (this) {
                 this.setServiceStatus(ServiceStatus.Stopping);
 
-                // ×¢²á¶¨Ê±Æ÷¡£
+                // æ³¨å†Œå®šæ—¶å™¨ã€‚
                 if (this.alarmClock != null)
                     TimerServiceImpl.getInstance().cancelTimer(this.alarmClock);
 
@@ -168,14 +168,14 @@ public class ThreadService extends ServiceControlBase {
     }
 
     /**
-     * Í£Ö¹Ïß³ÌÔËĞĞ¡£
+     * åœæ­¢çº¿ç¨‹è¿è¡Œã€‚
      */
     protected void stopping() {
         this.wakeup();
     }
 
     /**
-     * ½øÈëµÈ´ı¡£¡£
+     * è¿›å…¥ç­‰å¾…ã€‚ã€‚
      *
      * @throws InterruptedException
      */

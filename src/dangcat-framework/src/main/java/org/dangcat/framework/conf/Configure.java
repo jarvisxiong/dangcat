@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * ×ÊÔ´ÅäÖÃ¡£
+ * èµ„æºé…ç½®ã€‚
  *
  * @author dangcat
  */

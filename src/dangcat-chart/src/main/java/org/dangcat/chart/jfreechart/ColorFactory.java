@@ -5,17 +5,17 @@ import org.dangcat.chart.jfreechart.theme.CustomChartTheme;
 import java.awt.*;
 
 /**
- * ÑÕÉ«¹¤³§¡£
+ * é¢œè‰²å·¥å‚ã€‚
  *
  * @author dangcat
  */
 public class ColorFactory {
     /**
-     * ×î´óÍ¼±í±íÏÖµÄÄÚÈİ¡£
+     * æœ€å¤§å›¾è¡¨è¡¨ç°çš„å†…å®¹ã€‚
      */
     public static final int MAX_ITEM = 10;
     /**
-     * ¹Ì¶¨ÑÕÉ«ÁĞ±í¡£
+     * å›ºå®šé¢œè‰²åˆ—è¡¨ã€‚
      */
     private static final Color[] colors = CustomChartTheme.COLORS;
     private static Paint[] paints = CustomChartTheme.COLORS;
@@ -25,7 +25,7 @@ public class ColorFactory {
     }
 
     /**
-     * ¶ÁÈ¡ÑÕÉ«µÄ±í´ïÊ½¡£
+     * è¯»å–é¢œè‰²çš„è¡¨è¾¾å¼ã€‚
      */
     public static String getColorStyle(Color color) {
         String style = null;
@@ -48,9 +48,9 @@ public class ColorFactory {
     }
 
     /**
-     * °´ÕÕĞòºÅÈ¡ÑÕÉ«¡£
+     * æŒ‰ç…§åºå·å–é¢œè‰²ã€‚
      *
-     * @param index ĞòºÅÎ»ÖÃ¡£
+     * @param index åºå·ä½ç½®ã€‚
      */
     public static Color sequence(int index) {
         if (index < 0)

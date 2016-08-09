@@ -75,7 +75,7 @@ public class ChartDemo {
         ChartDemoUtils.createValueColumns(chart3);
         chart3.setLogic("octets");
         chart3.setInverted(true);
-        chart3.setTitle("³¬¼¶ÎŞµĞ¸£Àû²ÊÆ±»ñÀû±È½ÏÍ¼");
+        chart3.setTitle("è¶…çº§æ— æ•Œç¦åˆ©å½©ç¥¨è·åˆ©æ¯”è¾ƒå›¾");
         chart3.setSubtitle("The horizontal alignment of the subtitle");
         ChartDemoUtils.createYAxisProperties(chart3);
         ChartDemoUtils.createCategoryColumnData(chart3);

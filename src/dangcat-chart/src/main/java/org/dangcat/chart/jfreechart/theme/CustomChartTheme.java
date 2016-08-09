@@ -13,7 +13,7 @@ public class CustomChartTheme extends StandardChartTheme {
     private static final long serialVersionUID = 1L;
     public static Color[] COLORS = {new Color(31, 129, 188), new Color(92, 92, 97), new Color(144, 237, 125), new Color(255, 188, 117), new Color(153, 158, 255), new Color(255, 117, 153),
             new Color(253, 236, 109), new Color(128, 133, 232), new Color(158, 90, 102), new Color(255, 204, 102)};
-    private Font defaultFont = new Font("ËÎÌå", Font.PLAIN, 12);
+    private Font defaultFont = new Font("å®‹ä½“", Font.PLAIN, 12);
 
     private Paint[] outLinePaintSequence = new Paint[]{Color.WHITE};
 
@@ -36,48 +36,48 @@ public class CustomChartTheme extends StandardChartTheme {
     }
 
     public void initialize() {
-        // ÉèÖÃ±êÌâ×ÖÌå
+        // è®¾ç½®æ ‡é¢˜å­—ä½“
         this.setExtraLargeFont(this.getDefaultFont());
-        // ÉèÖÃÍ¼ÀıµÄ×ÖÌå
+        // è®¾ç½®å›¾ä¾‹çš„å­—ä½“
         this.setRegularFont(this.getDefaultFont());
-        // ÉèÖÃÖáÏòµÄ×ÖÌå
+        // è®¾ç½®è½´å‘çš„å­—ä½“
         this.setLargeFont(this.getDefaultFont());
         this.setSmallFont(this.getDefaultFont());
         this.setTitlePaint(new Color(51, 51, 51));
         this.setSubtitlePaint(new Color(85, 85, 85));
 
-        // ÉèÖÃ±ê×¢
+        // è®¾ç½®æ ‡æ³¨
         this.setLegendBackgroundPaint(Color.WHITE);
         this.setLegendItemPaint(Color.BLACK);//
         this.setChartBackgroundPaint(Color.WHITE);
 
         this.setDrawingSupplier(this.getDefaultDrawingSupplier());
-        // »æÖÆÇøÓò
+        // ç»˜åˆ¶åŒºåŸŸ
         this.setPlotBackgroundPaint(Color.WHITE);
-        // »æÖÆÇøÓòÍâ±ß¿ò
+        // ç»˜åˆ¶åŒºåŸŸå¤–è¾¹æ¡†
         // this.setPlotOutlinePaint(Color.WHITE);
-        // Á´½Ó±êÇ©ÑÕÉ«
+        // é“¾æ¥æ ‡ç­¾é¢œè‰²
         this.setLabelLinkPaint(new Color(8, 55, 114));
         this.setLabelLinkStyle(PieLabelLinkStyle.CUBIC_CURVE);
 
         this.setAxisOffset(new RectangleInsets(5, 12, 5, 12));
-        // X×ø±êÖá´¹Ö±Íø¸ñÑÕÉ«
+        // Xåæ ‡è½´å‚ç›´ç½‘æ ¼é¢œè‰²
         this.setDomainGridlinePaint(new Color(192, 208, 224));
-        // Y×ø±êÖáË®Æ½Íø¸ñÑÕÉ«
+        // Yåæ ‡è½´æ°´å¹³ç½‘æ ¼é¢œè‰²
         this.setRangeGridlinePaint(new Color(192, 192, 192));
 
         this.setBaselinePaint(Color.WHITE);
         this.setCrosshairPaint(Color.BLUE);
-        // ×ø±êÖá±êÌâÎÄ×ÖÑÕÉ«
+        // åæ ‡è½´æ ‡é¢˜æ–‡å­—é¢œè‰²
         this.setAxisLabelPaint(new Color(51, 51, 51));
-        // ¿Ì¶ÈÊı×Ö
+        // åˆ»åº¦æ•°å­—
         this.setTickLabelPaint(new Color(67, 67, 72));
-        // ÉèÖÃÖù×´Í¼äÖÈ¾
+        // è®¾ç½®æŸ±çŠ¶å›¾æ¸²æŸ“
         this.setBarPainter(new StandardBarPainter());
-        // XYBar äÖÈ¾
+        // XYBar æ¸²æŸ“
         this.setXYBarPainter(new StandardXYBarPainter());
         this.setItemLabelPaint(Color.black);
-        // ÎÂ¶È¼Æ
+        // æ¸©åº¦è®¡
         this.setThermometerPaint(Color.white);
     }
 }

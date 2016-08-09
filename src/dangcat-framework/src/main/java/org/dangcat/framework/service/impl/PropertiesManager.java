@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * ÊôĞÔ¹¤¾ß¡£
+ * å±æ€§å·¥å…·ã€‚
  *
  * @author dangcat
  */
@@ -62,9 +62,9 @@ public class PropertiesManager {
     }
 
     /**
-     * Ìæ»»ÊôĞÔÖµÀïµÄÏµÍ³»·¾³±äÁ¿¡£
+     * æ›¿æ¢å±æ€§å€¼é‡Œçš„ç³»ç»Ÿç¯å¢ƒå˜é‡ã€‚
      *
-     * @param value ÊôĞÔÖµ¡£
+     * @param value å±æ€§å€¼ã€‚
      * @return
      */
     public String getValue(String value) {
@@ -113,9 +113,9 @@ public class PropertiesManager {
     }
 
     /**
-     * ½âÎöÏµÍ³ÊôĞÔ¡£
+     * è§£æç³»ç»Ÿå±æ€§ã€‚
      *
-     * @param properties ÊôĞÔÅäÖÃ¡£
+     * @param properties å±æ€§é…ç½®ã€‚
      */
     public void loadSystemProperties(String value) {
         if (ValueUtils.isEmpty(value))

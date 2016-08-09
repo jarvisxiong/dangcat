@@ -31,7 +31,7 @@ public class TestEntityIndexManager {
     @Test
     public void testFilterIndex() {
         IndexManager<UserInfo> indexManager = this.getIndexManager();
-        // 注册时间+年龄定位
+        // 娉ㄥ唽鏃堕棿+骞撮緞瀹氫綅
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Age);
         indexManager.appendIndex(indexName);
 
@@ -61,7 +61,7 @@ public class TestEntityIndexManager {
     @Test
     public void testMultiNameIndex() {
         IndexManager<UserInfo> indexManager = this.getIndexManager();
-        // 地址+名称定位
+        // 鍦板潃+鍚嶇О瀹氫綅
         String indexName = ValueUtils.join(UserInfo.Address, UserInfo.Name);
         indexManager.appendIndex(indexName);
         String[] indexNames = {UserInfo.Address, UserInfo.Name};
@@ -81,7 +81,7 @@ public class TestEntityIndexManager {
     @Test
     public void testNameIndex() {
         IndexManager<UserInfo> indexManager = this.getIndexManager();
-        // 名称定位
+        // 鍚嶇О瀹氫綅
         indexManager.appendIndex(UserInfo.Name);
 
         long indexCostTime = 0;
@@ -99,7 +99,7 @@ public class TestEntityIndexManager {
     @Test
     public void testPrimaryKeyIndex() {
         IndexManager<UserInfo> indexManager = this.getIndexManager();
-        // 主键定位
+        // 涓婚敭瀹氫綅
         indexManager.appendIndex(UserInfo.Id, true);
 
         long indexCostTime = 0;
@@ -118,7 +118,7 @@ public class TestEntityIndexManager {
     public void testRangeFilterIndex() {
         IndexManager<UserInfo> indexManager = this.getIndexManager();
         indexManager.clear();
-        // 注册时间+年龄定位
+        // 娉ㄥ唽鏃堕棿+骞撮緞瀹氫綅
         String indexName = ValueUtils.join(UserInfo.RegisterTime, UserInfo.Address, UserInfo.Name);
         indexManager.appendIndex(indexName);
 

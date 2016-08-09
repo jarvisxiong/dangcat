@@ -12,7 +12,7 @@ import org.dangcat.persistence.validator.impl.ValueMapValidator;
 import java.util.Map;
 
 /**
- * TableÊı¾İ»ù±¾Ğ£Ñé¡£
+ * Tableæ•°æ®åŸºæœ¬æ ¡éªŒã€‚
  *
  * @author dangcat
  */
@@ -29,11 +29,11 @@ public class EntityDataValidatorCreater {
         columns.createDataValidators(entityClass);
 
         for (EntityField entityField : this.entityMetaData.getEntityFieldCollection()) {
-            // ·¶Î§Ğ£ÑéÆ÷¡£
+            // èŒƒå›´æ ¡éªŒå™¨ã€‚
             this.createRangeValidator(entityClass, columns, entityField);
-            // ÊıÖµÓ³ÉäĞ£ÑéÆ÷¡£
+            // æ•°å€¼æ˜ å°„æ ¡éªŒå™¨ã€‚
             this.createValueMapValidator(entityClass, columns, entityField);
-            // Âß¼­ÀàĞÍĞ£ÑéÆ÷¡£
+            // é€»è¾‘ç±»å‹æ ¡éªŒå™¨ã€‚
             this.createLogicValidators(entityClass, columns, entityField);
         }
     }

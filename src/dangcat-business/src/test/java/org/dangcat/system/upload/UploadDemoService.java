@@ -10,26 +10,26 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * ÎÄ¼şÉÏ´«¡£
+ * æ–‡ä»¶ä¸Šä¼ ã€‚
  *
  * @author Administrator
  */
 @JndiName(module = "System", name = "UploadDemo")
 public interface UploadDemoService {
     /**
-     * ÉÏ´«×Ö½ÚÊı×é¡£
+     * ä¸Šä¼ å­—èŠ‚æ•°ç»„ã€‚
      */
     @InvokeProcess(UploadProcess.class)
     ServiceInformation uploadBytes(@Parameter(name = "bytes") byte[] bytes);
 
     /**
-     * ÉÏ´«ÎÄ¼ş¡£
+     * ä¸Šä¼ æ–‡ä»¶ã€‚
      */
     @InvokeProcess(UploadProcess.class)
     ServiceInformation uploadFile(@Parameter(name = "file") File file);
 
     /**
-     * ÉÏ´«Êı¾İÁ÷¡£
+     * ä¸Šä¼ æ•°æ®æµã€‚
      */
     @InvokeProcess(UploadProcess.class)
     ServiceInformation uploadInputStream(@Parameter(name = "inputStream") InputStream inputStream);

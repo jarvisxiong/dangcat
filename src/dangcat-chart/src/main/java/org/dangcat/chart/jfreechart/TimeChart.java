@@ -21,40 +21,40 @@ import java.util.Map;
 public abstract class TimeChart extends AxisChart {
     protected static final Double ZREO = new Double(0);
     /**
-     * ÆğÊ¼ÑÕÉ«¡£
+     * èµ·å§‹é¢œè‰²ã€‚
      */
     private int beginColorIndex = 0;
     /**
-     * ÆğÊ¼Ê±¼ä¡£
+     * èµ·å§‹æ—¶é—´ã€‚
      */
     private Date beginTime = null;
     /**
-     * ½ØÖ¹Ê±¼ä¡£
+     * æˆªæ­¢æ—¶é—´ã€‚
      */
     private Date endTime = null;
     /**
-     * ¼ÆËã·ÖÖÓ²½³¤¡£
+     * è®¡ç®—åˆ†é’Ÿæ­¥é•¿ã€‚
      */
     private int timeStep = 0;
     /**
-     * ÏÔÊ¾Ãæ°å¡£
+     * æ˜¾ç¤ºé¢æ¿ã€‚
      */
     private XYPlot xyPlot = null;
 
     /**
-     * ³õÊ¼»¯Í³¼Æ¶ÔÏó¡£
+     * åˆå§‹åŒ–ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     @Override
     protected JFreeChart createChart() {
-        // »æÍ¼¶ÔÏó
+        // ç»˜å›¾å¯¹è±¡
         XYPlot xyPlot = new XYPlot();
-        // ºá×ø±ê±êÌâ¡£
+        // æ¨ªåæ ‡æ ‡é¢˜ã€‚
         xyPlot.setDomainAxis(new DateAxis(this.getDomainTitle()));
-        // ×İ×ø±ê±êÌâ¡£
+        // çºµåæ ‡æ ‡é¢˜ã€‚
         xyPlot.setRangeAxis(new NumberAxis(this.getRangeTitle()));
-        // ÇøÓòÍ¼µÄ±íÏÖÄ£¿é¡£
+        // åŒºåŸŸå›¾çš„è¡¨ç°æ¨¡å—ã€‚
         xyPlot.setRenderer(this.createXYItemRenderer());
-        // ¹¹½¨Í³¼ÆÍ¼¶ÔÏó¡£
+        // æ„å»ºç»Ÿè®¡å›¾å¯¹è±¡ã€‚
         return new JFreeChart(xyPlot);
     }
 
@@ -87,19 +87,19 @@ public abstract class TimeChart extends AxisChart {
     }
 
     /**
-     * Ê±¼ä·¶Î§µÄÌìÊı¡£
+     * æ—¶é—´èŒƒå›´çš„å¤©æ•°ã€‚
      */
     private long getDateLength() {
         return this.getDateRange() / 60 / 60 / 24;
     }
 
     /**
-     * ÈÕÆÚ¸ñÊ½Ä£°æ¡£
+     * æ—¥æœŸæ ¼å¼æ¨¡ç‰ˆã€‚
      */
     private String getDatePattern() {
-        // Ê±¼ä·¶Î§µÄÌìÊı¡£
+        // æ—¶é—´èŒƒå›´çš„å¤©æ•°ã€‚
         long days = this.getDateLength();
-        // ¼ÆËãÊ±¼äÄ£Ê½¡£
+        // è®¡ç®—æ—¶é—´æ¨¡å¼ã€‚
         if (days >= 365)
             return "yy/MM";
         else if (days >= 28)
@@ -112,7 +112,7 @@ public abstract class TimeChart extends AxisChart {
     }
 
     /**
-     * ÆğÊ¼ºÍ½ØÖ¹Ê±¼ä³¤¶È£¬µ¥Î»Ãë¡£
+     * èµ·å§‹å’Œæˆªæ­¢æ—¶é—´é•¿åº¦ï¼Œå•ä½ç§’ã€‚
      */
     private long getDateRange() {
         Long beginTime = this.getBeginTime().getTime();
@@ -121,19 +121,19 @@ public abstract class TimeChart extends AxisChart {
     }
 
     /**
-     * »ñµÃ¿Ì¶Èµ¥Ôª¡£
+     * è·å¾—åˆ»åº¦å•å…ƒã€‚
      *
      * @return
      */
     private DateTickUnit getDateTickUnit() {
         DateTickUnit dateTickUnit = null;
-        // Ê±¼ä·¶Î§µÄÌìÊı¡£
+        // æ—¶é—´èŒƒå›´çš„å¤©æ•°ã€‚
         long days = this.getDateLength();
         if (days >= 365)
             dateTickUnit = new DateTickUnit(DateTickUnitType.MONTH, 1);
         else {
             int domainAxisStep = (int) this.getDomainAxisStep();
-            // ¼ÆËãºá×ø±ê±êÇ©¸öÊı¡£
+            // è®¡ç®—æ¨ªåæ ‡æ ‡ç­¾ä¸ªæ•°ã€‚
             int muniteStep = domainAxisStep / 60;
             if (muniteStep == 0)
                 dateTickUnit = new DateTickUnit(DateTickUnitType.SECOND, domainAxisStep);
@@ -144,17 +144,17 @@ public abstract class TimeChart extends AxisChart {
     }
 
     /**
-     * ¼ÆËãºá×ø±ê²½³¤£¬µ¥Î»Ãë¡£
+     * è®¡ç®—æ¨ªåæ ‡æ­¥é•¿ï¼Œå•ä½ç§’ã€‚
      *
-     * @return ×ø±ê²½³¤¡£
+     * @return åæ ‡æ­¥é•¿ã€‚
      */
     private long getDomainAxisStep() {
-        // Ê±¼ä·¶Î§µÄÌìÊı¡£
+        // æ—¶é—´èŒƒå›´çš„å¤©æ•°ã€‚
         long days = this.getDateLength();
-        // ¼ÆËãÊ±¼äÄ£Ê½¡£
+        // è®¡ç®—æ—¶é—´æ¨¡å¼ã€‚
         if (days == 7)
             this.setDomainAxiaCount(7);
-        // ¼ÆËãºá×ø±ê±êÇ©¸öÊı¡£
+        // è®¡ç®—æ¨ªåæ ‡æ ‡ç­¾ä¸ªæ•°ã€‚
         long domainAxisStep = this.getDateRange() / this.getDomainAxiaCount();
         if (domainAxisStep % 60 != 0)
             domainAxisStep = (domainAxisStep / 60 + 1) * 60;
@@ -204,24 +204,24 @@ public abstract class TimeChart extends AxisChart {
 
     protected void iniItemRenderer(XYItemRenderer xyItemRenderer, int i) {
         CustomXYItemLabelGenerator customXYItemLabelGenerator = new CustomXYItemLabelGenerator(this, i);
-        // ²úÉúÌáÊ¾¡£
+        // äº§ç”Ÿæç¤ºã€‚
         xyItemRenderer.setBaseToolTipGenerator(customXYItemLabelGenerator);
-        // ²úÉúÈÈµãÇøÓò¡£
+        // äº§ç”Ÿçƒ­ç‚¹åŒºåŸŸã€‚
         xyItemRenderer.setURLGenerator(customXYItemLabelGenerator);
     }
 
     /**
-     * ÉèÖÃ¹Ì¶¨ÑÕÉ«·¶Î§¡£
+     * è®¾ç½®å›ºå®šé¢œè‰²èŒƒå›´ã€‚
      */
     protected void initAxis(XYPlot xyPlot) {
         for (int i = 0; i < xyPlot.getDomainAxisCount(); i++) {
             DateAxis domainAxis = (DateAxis) xyPlot.getDomainAxis(i);
             this.initDomainAxis(domainAxis);
-            // ÆğÊ¼Ê±¼ä¡£
+            // èµ·å§‹æ—¶é—´ã€‚
             domainAxis.setMinimumDate(DateUtils.add(DateUtils.SECOND, this.getBeginTime(), -1));
-            // ½ØÖ¹Ê±¼ä¡£
+            // æˆªæ­¢æ—¶é—´ã€‚
             domainAxis.setMaximumDate(DateUtils.add(DateUtils.SECOND, this.getEndTime(), 1));
-            // ºá×ø±ê±êÌâ¡£
+            // æ¨ªåæ ‡æ ‡é¢˜ã€‚
             domainAxis.setLabel(this.getDomainTitle(i));
         }
 
@@ -229,29 +229,29 @@ public abstract class TimeChart extends AxisChart {
             NumberAxis rangeAxis = (NumberAxis) xyPlot.getRangeAxis(i);
             if (rangeAxis != null) {
                 this.initRangeAxis(rangeAxis);
-                // ÉèÖÃYÖáµÄ×î´óÖµ
+                // è®¾ç½®Yè½´çš„æœ€å¤§å€¼
                 rangeAxis.setUpperBound(this.getMaxValue(i));
-                // ÉèÖÃYÖáµÄ×îĞ¡Öµ
+                // è®¾ç½®Yè½´çš„æœ€å°å€¼
                 rangeAxis.setLowerBound(this.getMinValue(i));
-                // ×İ×ø±ê±êÌâ¡£
+                // çºµåæ ‡æ ‡é¢˜ã€‚
                 rangeAxis.setLabel(this.getRangeTitle(i));
             }
         }
     }
 
     /**
-     * ³õÊ¼»¯ºá×ø±ê¡£
+     * åˆå§‹åŒ–æ¨ªåæ ‡ã€‚
      *
      * @param domainAxis
      */
     protected void initDomainAxis(DateAxis domainAxis) {
         this.initAxis(domainAxis);
-        // Éè¶¨ÈÕÆÚ¸ñÊ½¡£
+        // è®¾å®šæ—¥æœŸæ ¼å¼ã€‚
         domainAxis.setDateFormatOverride(this.getDateFormat());
-        // ÉèÖÃ¿Ì¶Èµ¥Ôª¡£
+        // è®¾ç½®åˆ»åº¦å•å…ƒã€‚
         domainAxis.setTickUnit(this.getDateTickUnit());
         domainAxis.setTickMarkPosition(DateTickMarkPosition.START);
-        // ÊÇ·ñ×Ô¶¯Ñ¡Ôñ¿Ì¶È¡£
+        // æ˜¯å¦è‡ªåŠ¨é€‰æ‹©åˆ»åº¦ã€‚
         domainAxis.setAutoTickUnitSelection(false);
     }
 
@@ -259,34 +259,34 @@ public abstract class TimeChart extends AxisChart {
     protected void initPlot(Plot plot) {
         super.initPlot(plot);
         XYPlot xyPlot = (XYPlot) plot;
-        // ±í¸ñÏßÑÕÉ«¡£
+        // è¡¨æ ¼çº¿é¢œè‰²ã€‚
         xyPlot.setDomainGridlinePaint(Color.BLACK);
-        // ±í¸ñÏß¿É¼û¡£
+        // è¡¨æ ¼çº¿å¯è§ã€‚
         xyPlot.setDomainGridlinesVisible(true);
-        // ×İ×ø±êÏßÑÕÉ«¡£
+        // çºµåæ ‡çº¿é¢œè‰²ã€‚
         xyPlot.setRangeGridlinePaint(Color.BLACK);
         xyPlot.setRangeCrosshairVisible(true);
-        // ×ø±êÆ«ÒÆ¾àÀë¡£
+        // åæ ‡åç§»è·ç¦»ã€‚
         xyPlot.setAxisOffset(new RectangleInsets(2.0, 2.0, 2.0, 2.0));
-        // ÉèÖÃ¹Ì¶¨ÑÕÉ«·¶Î§¡£
+        // è®¾ç½®å›ºå®šé¢œè‰²èŒƒå›´ã€‚
         this.initAxis(xyPlot);
 
         this.initSeriesPaint();
     }
 
     /**
-     * ³õÊ¼»¯×İ×ø±ê¡£
+     * åˆå§‹åŒ–çºµåæ ‡ã€‚
      *
      * @param rangeAxis
      */
     protected void initRangeAxis(NumberAxis rangeAxis) {
         this.initAxis(rangeAxis);
-        // ÉèÖÃ×î¸ßµÄÒ»¸ö Item ÓëÍ¼Æ¬¶¥¶ËµÄ¾àÀë
+        // è®¾ç½®æœ€é«˜çš„ä¸€ä¸ª Item ä¸å›¾ç‰‡é¡¶ç«¯çš„è·ç¦»
         rangeAxis.setUpperMargin(0.15);
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        // Éè¶¨×İ×ø±êÏÔÊ¾¸ñÊ½¡£
+        // è®¾å®šçºµåæ ‡æ˜¾ç¤ºæ ¼å¼ã€‚
         rangeAxis.setNumberFormatOverride(new DecimalFormat("#.###"));
-        // ÉèÖÃ×î¸ßµÄÒ»¸ö Item ÓëÍ¼Æ¬¶¥¶ËµÄ¾àÀë
+        // è®¾ç½®æœ€é«˜çš„ä¸€ä¸ª Item ä¸å›¾ç‰‡é¡¶ç«¯çš„è·ç¦»
         rangeAxis.setUpperMargin(0.15);
     }
 

@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class BarChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "Öù×´Í³¼ÆÍ¼";
+    private static final String TITLE = "æŸ±çŠ¶ç»Ÿè®¡å›¾";
 
     public BarChartDemo() {
         super(BarChart.class.getSimpleName());
@@ -26,7 +26,7 @@ public class BarChartDemo extends ChartDemoBase {
         barChart1.setTitle(TITLE);
         barChart1.setDataModule(dataModule1);
         barChart1.initialize();
-        tabbedPane.add("ÁĞÊı¾İÀ¸Î»Ö÷¼ü", this.createChartPanel(barChart1.getChart()));
+        tabbedPane.add("åˆ—æ•°æ®æ ä½ä¸»é”®", this.createChartPanel(barChart1.getChart()));
         this.renderFile(barChart1, "BarChart1");
 
         DataModule dataModule2 = SimulateCategoryData.createPieColumnDataModule();
@@ -37,7 +37,7 @@ public class BarChartDemo extends ChartDemoBase {
         barChart2.setTitle(TITLE);
         barChart2.setDataModule(dataModule2);
         barChart2.initialize();
-        tabbedPane.add("ĞĞÊı¾İÀ¸Î»Ö÷¼ü", this.createChartPanel(barChart2.getChart()));
+        tabbedPane.add("è¡Œæ•°æ®æ ä½ä¸»é”®", this.createChartPanel(barChart2.getChart()));
         this.renderFile(barChart2, "BarChart2");
     }
 }

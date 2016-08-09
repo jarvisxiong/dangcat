@@ -11,30 +11,30 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * ½áËã·şÎñ¡£
+ * ç»“ç®—æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public class SettleServiceImpl extends ThreadService implements SettleService {
     private static final String SERVICE_NAME = "SETTLE";
     /**
-     * ½áËã¶ÔÏóÁĞ±í¡£
+     * ç»“ç®—å¯¹è±¡åˆ—è¡¨ã€‚
      */
     private Map<SettleUnit, SettleExecutor> settleUnitMap = new LinkedHashMap<SettleUnit, SettleExecutor>();
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public SettleServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
     /**
-     * Ìí¼Ó½áËã¶ÔÏó¡£
+     * æ·»åŠ ç»“ç®—å¯¹è±¡ã€‚
      *
-     * @param SettleUnit ½áËã¶ÔÏó¡£
+     * @param SettleUnit ç»“ç®—å¯¹è±¡ã€‚
      */
     public void addSettleUnit(SettleUnit settleUnit) {
         if (settleUnit != null && !this.settleUnitMap.containsKey(settleUnit))
@@ -42,7 +42,7 @@ public class SettleServiceImpl extends ThreadService implements SettleService {
     }
 
     /**
-     * Ö´ĞĞ½áËã¡£
+     * æ‰§è¡Œç»“ç®—ã€‚
      */
     @Override
     public void execute() {
@@ -69,7 +69,7 @@ public class SettleServiceImpl extends ThreadService implements SettleService {
     }
 
     /**
-     * ¶¨Ê±Ö´ĞĞ½áËã¡£
+     * å®šæ—¶æ‰§è¡Œç»“ç®—ã€‚
      */
     @Override
     protected void innerExecute() {
@@ -80,9 +80,9 @@ public class SettleServiceImpl extends ThreadService implements SettleService {
     }
 
     /**
-     * É¾³ı½áËã¶ÔÏó¡£
+     * åˆ é™¤ç»“ç®—å¯¹è±¡ã€‚
      *
-     * @param settleUnit ½áËã¶ÔÏó¡£
+     * @param settleUnit ç»“ç®—å¯¹è±¡ã€‚
      */
     public void removeSettleUnit(SettleUnit settleUnit) {
         if (settleUnit != null && this.settleUnitMap.containsKey(settleUnit))

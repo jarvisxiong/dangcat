@@ -5,7 +5,7 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dangcat.framework.service.impl.ServiceInfo;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -13,12 +13,12 @@ class ServiceXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Service";
 
     /**
-     * ·şÎñĞÅÏ¢¡£
+     * æœåŠ¡ä¿¡æ¯ã€‚
      */
     private ServiceInfo serviceInfo = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     ServiceXmlResolver() {
         super(RESOLVER_NAME);
@@ -27,7 +27,7 @@ class ServiceXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

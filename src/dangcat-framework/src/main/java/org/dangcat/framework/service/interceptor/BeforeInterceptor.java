@@ -5,19 +5,19 @@ import org.dangcat.framework.exception.ServiceException;
 import org.dangcat.framework.service.ServiceContext;
 
 /**
- * Ö´ĞĞÇ°À¹½ØÆ÷¡£
+ * æ‰§è¡Œå‰æ‹¦æˆªå™¨ã€‚
  *
  * @author dangcat
  */
 public interface BeforeInterceptor {
     /**
-     * ·şÎñÖ´ĞĞ·½·¨Ç°À¹½ØÆ÷¡£
+     * æœåŠ¡æ‰§è¡Œæ–¹æ³•å‰æ‹¦æˆªå™¨ã€‚
      *
-     * @param service        ·şÎñ¶ÔÏó¡£
-     * @param serviceContext ÉÏÏÂÎÄ¡£
-     * @param methodInfo     Ö´ĞĞ·½·¨¡£
-     * @param args           Ö´ĞĞ²ÎÊı¡£
-     * @throws ServiceException Ö´ĞĞÒì³£¡£
+     * @param service        æœåŠ¡å¯¹è±¡ã€‚
+     * @param serviceContext ä¸Šä¸‹æ–‡ã€‚
+     * @param methodInfo     æ‰§è¡Œæ–¹æ³•ã€‚
+     * @param args           æ‰§è¡Œå‚æ•°ã€‚
+     * @throws ServiceException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     void beforeInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args) throws ServiceException;
 }

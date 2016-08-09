@@ -6,7 +6,7 @@ import org.dangcat.persistence.model.Row;
 import org.dangcat.persistence.model.Table;
 
 /**
- * ±íÊÂ¼şÊÊÅäÆ÷¡£
+ * è¡¨äº‹ä»¶é€‚é…å™¨ã€‚
  *
  * @author dangcat
  */

@@ -10,34 +10,34 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 /**
- * ½ÓÊÕÊÂ¼ş¡£
+ * æ¥æ”¶äº‹ä»¶ã€‚
  *
  * @author dangcat
  */
 public class DatagramEvent extends Event {
     private static final long serialVersionUID = 1L;
     /**
-     * ÊÕµ½µÄÊı¾İÄÚÈİ¡£
+     * æ”¶åˆ°çš„æ•°æ®å†…å®¹ã€‚
      */
     private byte[] dataBuffer;
     /**
-     * »ØÓ¦Socket¡£
+     * å›åº”Socketã€‚
      */
     private DatagramSocket datagramSocket = null;
     /**
-     * ±¾µØµØÖ·¡£
+     * æœ¬åœ°åœ°å€ã€‚
      */
     private InetAddress localAddress;
     /**
-     * ±¾µØ¶Ë¿Ú¡£
+     * æœ¬åœ°ç«¯å£ã€‚
      */
     private Integer localPort = null;
     /**
-     * À´Ô´µØÖ·¡£
+     * æ¥æºåœ°å€ã€‚
      */
     private InetAddress remoteAddress;
     /**
-     * À´Ô´¶Ë¿Ú¡£
+     * æ¥æºç«¯å£ã€‚
      */
     private Integer remotePort = null;
 

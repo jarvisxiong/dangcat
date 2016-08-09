@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * ¶¨Ê±·şÎñ½Ó¿Ú¡£
+ * å®šæ—¶æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */
@@ -27,18 +27,18 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     private Timer timer;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public TimerServiceImpl(ServiceProvider parent) {
         super(parent);
     }
 
     /**
-     * ½¨Á¢·şÎñÊµÀı¡£
+     * å»ºç«‹æœåŠ¡å®ä¾‹ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      * @return
      */
     public static synchronized TimerService createInstance(ServiceProvider parent) {
@@ -50,7 +50,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     }
 
     /**
-     * ¶ÁÈ¡·şÎñÊµÀı¡£
+     * è¯»å–æœåŠ¡å®ä¾‹ã€‚
      *
      * @return
      */
@@ -59,18 +59,18 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     }
 
     /**
-     * È¡Ïû¶¨Ê±Æ÷£¬
+     * å–æ¶ˆå®šæ—¶å™¨ï¼Œ
      *
-     * @param alarmClock ¶¨Ê±Æ÷¶ÔÏó¡£
+     * @param alarmClock å®šæ—¶å™¨å¯¹è±¡ã€‚
      */
     public synchronized void cancelTimer(AlarmClock alarmClock) {
         this.removeTimer(alarmClock);
     }
 
     /**
-     * ×¢²á¶¨Ê±Æ÷£¬
+     * æ³¨å†Œå®šæ—¶å™¨ï¼Œ
      *
-     * @param alarmClock ¶¨Ê±Æ÷¶ÔÏó¡£
+     * @param alarmClock å®šæ—¶å™¨å¯¹è±¡ã€‚
      */
     public synchronized void createTimer(AlarmClock alarmClock) {
         if (alarmClock != null) {
@@ -83,7 +83,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     private void execute(AlarmClock alarmClock) {
         try {
             Object target = alarmClock.getTarget();
-            // ¶ÀÁ¢Ïß³ÌÄ£Ê½¡£
+            // ç‹¬ç«‹çº¿ç¨‹æ¨¡å¼ã€‚
             if (target instanceof ThreadService) {
                 ThreadService threadService = (ThreadService) target;
                 if (threadService.isEnabled()) {
@@ -91,7 +91,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
                     return;
                 }
             }
-            // ÊµÏÖÁËÏß³Ì½Ó¿Ú¡£
+            // å®ç°äº†çº¿ç¨‹æ¥å£ã€‚
             Runnable runnable = alarmClock.getRunnable();
             if (runnable != null) {
                 if (alarmClock.couldRun())
@@ -103,7 +103,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     }
 
     /**
-     * ¶¨Ê±Ö´ĞĞ½Ó¿Ú¡£
+     * å®šæ—¶æ‰§è¡Œæ¥å£ã€‚
      */
     public synchronized void intervalExec() {
         Calendar calendar = Calendar.getInstance();
@@ -116,7 +116,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
             if (Environment.isTestEnabled() || alarmClock.isTimeout(calendar))
                 this.execute(alarmClock);
 
-            // ¼ÆËã×îĞ¡µÈ´ıÊ±¼ä¡£
+            // è®¡ç®—æœ€å°ç­‰å¾…æ—¶é—´ã€‚
             if (alarmClock.getNextAlramTime() != null) {
                 long distanceTime = alarmClock.getNextAlramTime().getTime() - calendar.getTimeInMillis();
                 if (distanceTime > 0)
@@ -146,7 +146,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     }
 
     /**
-     * Æô¶¯¶¨Ê±Æ÷
+     * å¯åŠ¨å®šæ—¶å™¨
      */
     @Override
     public void start() {
@@ -154,7 +154,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
             this.setServiceStatus(ServiceStatus.Starting);
             synchronized (this) {
                 if (!Environment.isTestEnabled() && this.timer == null) {
-                    // ¼à¿Ø¶¨Ê±Æ÷¡£
+                    // ç›‘æ§å®šæ—¶å™¨ã€‚
                     this.timer = new Timer(TimerService.class.getSimpleName(), new Runnable() {
                         @Override
                         public void run() {
@@ -169,7 +169,7 @@ public class TimerServiceImpl extends ServiceControlBase implements TimerService
     }
 
     /**
-     * Í£Ö¹¶¨Ê±Æ÷
+     * åœæ­¢å®šæ—¶å™¨
      */
     @Override
     public void stop() {

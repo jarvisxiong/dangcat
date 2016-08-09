@@ -7,14 +7,14 @@ import java.net.InetAddress;
 
 public interface TCPSendService extends NetSendService {
     /**
-     * ÏòÖ¸¶¨µÄµØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ¡£
+     * å‘æŒ‡å®šçš„åœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ã€‚
      *
-     * @param remoteAddress Ä¿±êµØÖ·¡£
-     * @param remotePort    Ä¿±ê¶Ë¿Ú¡£
-     * @param dataBuffer    ·¢ËÍÊı¾İ¡£
-     * @param tryTimes      ³¢ÊÔ½ÓÊÕ»ØÓ¦´ÎÊı¡£
-     * @param timeout       »ØÓ¦µÈ´ıÊ±¼ä¡£
-     * @return ÊÇ·ñ³É¹¦¡£
+     * @param remoteAddress ç›®æ ‡åœ°å€ã€‚
+     * @param remotePort    ç›®æ ‡ç«¯å£ã€‚
+     * @param dataBuffer    å‘é€æ•°æ®ã€‚
+     * @param tryTimes      å°è¯•æ¥æ”¶å›åº”æ¬¡æ•°ã€‚
+     * @param timeout       å›åº”ç­‰å¾…æ—¶é—´ã€‚
+     * @return æ˜¯å¦æˆåŠŸã€‚
      * @throws IOException
      */
     void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer, int tryTimes) throws IOException;

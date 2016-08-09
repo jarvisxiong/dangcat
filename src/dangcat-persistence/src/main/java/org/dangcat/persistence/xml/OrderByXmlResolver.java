@@ -4,27 +4,27 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dangcat.persistence.orderby.OrderBy;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class OrderByXmlResolver extends XmlResolver {
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private OrderBy orderBy = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public OrderByXmlResolver() {
         super(OrderBy.class.getSimpleName());
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     @Override
     protected void resolveElementText(String value) {
@@ -33,7 +33,7 @@ public class OrderByXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

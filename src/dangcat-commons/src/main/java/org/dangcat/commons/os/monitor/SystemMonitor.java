@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ÏµÍ³×ÊÔ´¼à¿Ø¡£
+ * ç³»ç»Ÿèµ„æºç›‘æ§ã€‚
  *
  * @author dangcat
  */
@@ -27,9 +27,9 @@ public class SystemMonitor {
     }
 
     /**
-     * Ìí¼Ó´ÅÅÌ×ÊÔ´¼à¿ØÂ·¾¶¡£
+     * æ·»åŠ ç£ç›˜èµ„æºç›‘æ§è·¯å¾„ã€‚
      *
-     * @param path Â·¾¶¶ÔÏó¡£
+     * @param path è·¯å¾„å¯¹è±¡ã€‚
      */
     public void addDiskPath(File path) {
         if (path != null && path.exists()) {
@@ -52,7 +52,7 @@ public class SystemMonitor {
     }
 
     /**
-     * ¼à¿Ø×ÊÔ´ĞÅÏ¢¡£
+     * ç›‘æ§èµ„æºä¿¡æ¯ã€‚
      */
     public void monitor(MonitorInfo monitorInfo) {
         if (osMonitor == null) {

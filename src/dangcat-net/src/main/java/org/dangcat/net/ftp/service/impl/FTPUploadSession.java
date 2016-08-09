@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * FTPÏÂÔØ»á»°¡£
+ * FTPä¸‹è½½ä¼šè¯ã€‚
  *
  * @author dangcat
  */
@@ -77,7 +77,7 @@ class FTPUploadSession extends FTPSessionExecutor {
             for (FTPFileInfo ftpFileInfo : ftpFileInfos)
                 this.upload(ftpFileInfo);
 
-            // ×ªÖÁÉÏÒ»²ãÄ¿Â¼
+            // è½¬è‡³ä¸Šä¸€å±‚ç›®å½•
             ftpClient.changeWorkingDirectory(currentDirectory);
         }
     }
@@ -87,10 +87,10 @@ class FTPUploadSession extends FTPSessionExecutor {
     }
 
     /**
-     * ÁĞ³ö±¾µØÉÏµÄÎÄ¼ş¡£
+     * åˆ—å‡ºæœ¬åœ°ä¸Šçš„æ–‡ä»¶ã€‚
      *
-     * @param ftpFileInfos ±¾µØÎÄ¼şĞÅÏ¢¡£
-     * @param localFile    ±¾µØÂ·¾¶¡£
+     * @param ftpFileInfos æœ¬åœ°æ–‡ä»¶ä¿¡æ¯ã€‚
+     * @param localFile    æœ¬åœ°è·¯å¾„ã€‚
      */
     private Collection<FTPFileInfo> loadFileInfos(FTPFileInfo parent, File localFile) {
         FTPContext ftpContext = this.getFtpContext();
@@ -150,11 +150,11 @@ class FTPUploadSession extends FTPSessionExecutor {
     }
 
     /**
-     * ½¨Á¢Ô¶¶ËÄ¿Â¼¡£
+     * å»ºç«‹è¿œç«¯ç›®å½•ã€‚
      *
-     * @param ftpClient  FTP¿Í»§¶Ë¶ÔÏó¡£
-     * @param remotePath Ô¶¶ËÂ·¾¶¡£
-     * @return µ±Ç°Â·¾¶¡£
+     * @param ftpClient  FTPå®¢æˆ·ç«¯å¯¹è±¡ã€‚
+     * @param remotePath è¿œç«¯è·¯å¾„ã€‚
+     * @return å½“å‰è·¯å¾„ã€‚
      * @throws IOException
      * @throws FTPSessionException
      */
@@ -175,10 +175,10 @@ class FTPUploadSession extends FTPSessionExecutor {
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş»òÕßÄ¿Â¼¡£
+     * ä¸Šä¼ æ–‡ä»¶æˆ–è€…ç›®å½•ã€‚
      *
-     * @param ftpFileInfo ±¾µØÂ·¾¶¡£
-     * @throws IOException         ÔËĞĞÒì³£¡£
+     * @param ftpFileInfo æœ¬åœ°è·¯å¾„ã€‚
+     * @throws IOException         è¿è¡Œå¼‚å¸¸ã€‚
      * @throws FTPSessionException
      */
     private void upload(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException {
@@ -196,7 +196,7 @@ class FTPUploadSession extends FTPSessionExecutor {
                     this.upload(childFTPFileInfo);
                 }
             }
-            // ×ªÖÁÉÏÒ»²ãÄ¿Â¼
+            // è½¬è‡³ä¸Šä¸€å±‚ç›®å½•
             ftpClient.changeWorkingDirectory(currentDirectory);
         } else
             this.uploadFile(ftpFileInfo);
@@ -204,11 +204,11 @@ class FTPUploadSession extends FTPSessionExecutor {
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş»òÕßÄ¿Â¼¡£
+     * ä¸Šä¼ æ–‡ä»¶æˆ–è€…ç›®å½•ã€‚
      *
-     * @param localPath  ±¾µØÂ·¾¶¡£
-     * @param remotePath Ô¶³ÌÂ·¾¶¡£
-     * @throws IOException         ÔËĞĞÒì³£¡£
+     * @param localPath  æœ¬åœ°è·¯å¾„ã€‚
+     * @param remotePath è¿œç¨‹è·¯å¾„ã€‚
+     * @throws IOException         è¿è¡Œå¼‚å¸¸ã€‚
      * @throws FTPSessionException
      */
     private void uploadFile(FTPFileInfo ftpFileInfo) throws IOException, FTPSessionException {

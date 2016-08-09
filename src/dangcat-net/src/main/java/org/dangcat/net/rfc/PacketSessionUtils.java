@@ -6,7 +6,7 @@ import org.dangcat.commons.utils.Environment;
 import java.util.Map.Entry;
 
 /**
- * Packet иообнд║ё
+ * Packet Д╦┼Д╦▀Ф√┤Ц─┌
  *
  * @author dangcat
  */

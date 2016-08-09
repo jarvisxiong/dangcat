@@ -13,7 +13,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
- * ±í¹ÜÀíÆ÷¡£
+ * è¡¨ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
@@ -25,10 +25,10 @@ class TableLoadManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ÔØÈëÖ¸¶¨±íµÄÊı¾İ¡£
+     * è½½å…¥æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected void load(Table table) throws TableException {
         SqlBuilder sqlBuilder = null;
@@ -38,20 +38,20 @@ class TableLoadManagerImpl extends TableManagerBase {
             if (logger.isDebugEnabled())
                 logger.debug("Begin load the table: " + table.getTableName().getName());
 
-            // ÔØÈëÇ°ÊÂ¼ş¡£
+            // è½½å…¥å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeLoad(table))
                     return;
             }
 
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.databaseName);
-            // ¼ÆËã¼ÇÂ¼×ÜÊı¡£
+            // è®¡ç®—è®°å½•æ€»æ•°ã€‚
             Range range = table.getRange();
             if (range != null && range.isCalculateTotalSize()) {
                 int totalSize = 0;
                 sqlBuilder = tableSqlBuilder.buildTotalSizeStatement();
                 if (sqlBuilder.length() > 0) {
-                    // »ñÈ¡»á»°¶ÔÏó¡£
+                    // è·å–ä¼šè¯å¯¹è±¡ã€‚
                     session = this.openSession(this.databaseName);
                     ResultSet resultSet = session.executeQuery(sqlBuilder.toString());
                     while (resultSet.next())
@@ -63,26 +63,26 @@ class TableLoadManagerImpl extends TableManagerBase {
                     return;
                 }
             }
-            // ÔØÈëÊı¾İ¡£
+            // è½½å…¥æ•°æ®ã€‚
             sqlBuilder = tableSqlBuilder.buildLoadStatement();
             if (sqlBuilder.length() > 0) {
-                // »ñÈ¡»á»°¶ÔÏó¡£
+                // è·å–ä¼šè¯å¯¹è±¡ã€‚
                 if (session == null)
                     session = this.openSession(this.databaseName);
                 ResultSet resultSet = session.executeQuery(sqlBuilder.toString());
 
-                // ĞŞ¸ÄÔØÈë×´Ì¬¡£
+                // ä¿®æ”¹è½½å…¥çŠ¶æ€ã€‚
                 table.setTableState(TableState.Loading);
 
-                // Èç¹ûÀ¸Î»Ã»ÓĞ¹¹½¨ĞèÒª×Ô¶¯Éú³É¡£
+                // å¦‚æœæ ä½æ²¡æœ‰æ„å»ºéœ€è¦è‡ªåŠ¨ç”Ÿæˆã€‚
                 if (table.getColumns().size() == 0)
                     session.loadMetaData(table, resultSet);
 
-                // ½âÎöÊı¾İ½á¹û¡£
+                // è§£ææ•°æ®ç»“æœã€‚
                 this.parseData(table, resultSet);
             }
 
-            // ÔØÈëºóÊÂ¼ş¡£
+            // è½½å…¥åäº‹ä»¶ã€‚
             table.calculate();
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterLoad(table);
@@ -106,10 +106,10 @@ class TableLoadManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ÔØÈëÔªÊı¾İÄÚÈİ¡£
+     * è½½å…¥å…ƒæ•°æ®å†…å®¹ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected void loadMetaData(Table table) throws TableException {
         Session session = null;
@@ -118,11 +118,11 @@ class TableLoadManagerImpl extends TableManagerBase {
             if (logger.isDebugEnabled())
                 logger.debug("Begin loadMetaData: " + table.getTableName().getName());
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.databaseName);
             session.loadMetaData(table, null);
 
-            // ÔØÈëÔªÊı¾İÊÂ¼ş¡£
+            // è½½å…¥å…ƒæ•°æ®äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.onLoadMetaData(table);
 
@@ -137,10 +137,10 @@ class TableLoadManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ½âÎöÊı¾İ½á¹û¡£
+     * è§£ææ•°æ®ç»“æœã€‚
      *
-     * @param row       Êı¾İĞĞ¶ÔÏó¡£
-     * @param resultSet ²éÑ¯½á¹û¡£
+     * @param row       æ•°æ®è¡Œå¯¹è±¡ã€‚
+     * @param resultSet æŸ¥è¯¢ç»“æœã€‚
      * @throws SQLException
      * @throws TableException
      * @throws TableException
@@ -151,7 +151,7 @@ class TableLoadManagerImpl extends TableManagerBase {
         rows.clear();
         int position = 0;
         Range range = table.getRange();
-        // »ñÈ¡ÔªÊı¾İ¡£
+        // è·å–å…ƒæ•°æ®ã€‚
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
         while (resultSet.next()) {

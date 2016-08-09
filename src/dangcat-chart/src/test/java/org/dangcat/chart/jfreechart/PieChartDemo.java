@@ -22,7 +22,7 @@ public class PieChartDemo extends ChartDemoBase {
         DataModule columnDataModule = SimulateCategoryData.createPieColumnDataModule();
         columnDataModule.getDataReader().setFilterExpress(new FilterUnit(SimulateCategoryData.Name, FilterType.eq, "Name 1"));
         PieChart pieChart1 = new PieChart();
-        pieChart1.setTitle("��״ͳ��ͼ");
+        pieChart1.setTitle("饼状统计图");
         pieChart1.setDataModule(columnDataModule);
         pieChart1.initialize();
         tabbedPane.add("Column Module Data", this.createChartPanel(pieChart1.getChart()));
@@ -33,7 +33,7 @@ public class PieChartDemo extends ChartDemoBase {
         PieChart pieChart2 = new PieChart();
         pieChart2.setShowItemLabel(false);
         pieChart2.setLegendVisible(true);
-        pieChart2.setTitle("��״ͳ��ͼ");
+        pieChart2.setTitle("饼状统计图");
         pieChart2.setDataModule(rowDataModule);
         pieChart2.initialize();
         tabbedPane.add("Row Module Data", this.createChartPanel(pieChart2.getChart()));

@@ -3,7 +3,7 @@ package org.dangcat.net.process.statistics;
 import org.dangcat.boot.statistics.ProcessStatistics;
 
 /**
- * Êı¾İ´¦ÀíÍ³¼Æ¡£
+ * æ•°æ®å¤„ç†ç»Ÿè®¡ã€‚
  *
  * @author dangcat
  */
@@ -22,21 +22,21 @@ public class PacketProcessStatistics extends ProcessStatistics<PacketProcessStat
     }
 
     /**
-     * ½âÎö´íÎó¡£
+     * è§£æé”™è¯¯ã€‚
      */
     public long increaseParseError() {
         return this.increase(PacketProcessStatisticsData.ParseError);
     }
 
     /**
-     * ½ÓÊÕÊı¾İ´óĞ¡¡£
+     * æ¥æ”¶æ•°æ®å¤§å°ã€‚
      */
     public long increaseReceive() {
         return this.increase(PacketProcessStatisticsData.Receive);
     }
 
     /**
-     * Ğ£Ñé´íÎó¡£
+     * æ ¡éªŒé”™è¯¯ã€‚
      */
     public long increaseValidError() {
         return this.increase(PacketProcessStatisticsData.ValidError);

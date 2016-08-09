@@ -3,15 +3,15 @@ package org.dangcat.persistence.cache;
 import java.util.Collection;
 
 /**
- * Êı¾İ¸üĞÂÍ¨Öª¡£
+ * æ•°æ®æ›´æ–°é€šçŸ¥ã€‚
  */
 public interface EntityUpdateNotifier {
     /**
-     * Í¨Öª¸üĞÂÊı¾İ¡£
+     * é€šçŸ¥æ›´æ–°æ•°æ®ã€‚
      *
-     * @param tableName          ±íÃû¡£
-     * @param deletedPrimaryKeys ±»É¾³ıµÄÖ÷¼ü¼¯ºÏ¡£
-     * @param updateEntities     ¸üĞÂµÄÊı¾İ¡£
+     * @param tableName          è¡¨åã€‚
+     * @param deletedPrimaryKeys è¢«åˆ é™¤çš„ä¸»é”®é›†åˆã€‚
+     * @param updateEntities     æ›´æ–°çš„æ•°æ®ã€‚
      */
     void notifyUpdate(String tableName, Collection<Object> deletedPrimaryKeys, Collection<Object> updateEntities);
 }

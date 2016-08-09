@@ -7,7 +7,7 @@ import org.dangcat.business.staff.domain.OperateStat;
 import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
- * ²Ù×÷ÈÕÖ¾½áËã¡£
+ * æ“ä½œæ—¥å¿—ç»“ç®—ã€‚
  *
  * @author fanst174766
  */

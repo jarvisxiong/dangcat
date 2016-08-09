@@ -19,81 +19,81 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * ÊµÌåÔªÊı¾İ¡£
+ * å®ä½“å…ƒæ•°æ®ã€‚
  *
  * @author dangcat
  */
 public class EntityMetaData {
     /**
-     * Ìá½»ºóÊÂ¼ş·½·¨¡£
+     * æäº¤åäº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> afterCommitCollection = new HashSet<Method>();
     /**
-     * É¾³ıºóÊÂ¼ş·½·¨¡£
+     * åˆ é™¤åäº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> afterDeleteCollection = new HashSet<Method>();
     /**
-     * ĞÂÔöºóÊÂ¼ş·½·¨¡£
+     * æ–°å¢åäº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> afterInsertCollection = new HashSet<Method>();
     /**
-     * ÔØÈëÊÂ¼şÅäÖÃ¡£
+     * è½½å…¥äº‹ä»¶é…ç½®ã€‚
      */
     private Collection<Method> afterLoadCollection = new HashSet<Method>();
     /**
-     * ±£´æºóÊÂ¼ş·½·¨¡£
+     * ä¿å­˜åäº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> afterSaveCollection = new HashSet<Method>();
     /**
-     * ×ÔÔöÖ÷¼ü×Ö¶Î¡£
+     * è‡ªå¢ä¸»é”®å­—æ®µã€‚
      */
     private EntityField autoIncrement = null;
     /**
-     * É¾³ıÇ°ÊÂ¼ş·½·¨¡£
+     * åˆ é™¤å‰äº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> beforeDeleteCollection = new HashSet<Method>();
     /**
-     * ±£´æÇ°Ç°ÊÂ¼ş·½·¨¡£
+     * ä¿å­˜å‰å‰äº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> beforeInsertCollection = new HashSet<Method>();
     /**
-     * ±£´æÇ°ÊÂ¼ş·½·¨¡£
+     * ä¿å­˜å‰äº‹ä»¶æ–¹æ³•ã€‚
      */
     private Collection<Method> beforeSaveCollection = new HashSet<Method>();
     /**
-     * ÊµÌåÀà¡£
+     * å®ä½“ç±»ã€‚
      */
     private Class<?> entityClass = null;
     /**
-     * ÊôĞÔÃûÓ³Éä±í¡£
+     * å±æ€§åæ˜ å°„è¡¨ã€‚
      */
     private Map<String, EntityField> entityFieldMap = new HashMap<String, EntityField>();
     /**
-     * Êı¾İ¿âÏà¹ØµÄ±í´ïÓï¾ä¡£
+     * æ•°æ®åº“ç›¸å…³çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     private Map<String, EntityStatement> entityStatementMap = new HashMap<String, EntityStatement>();
     /**
-     * Á¬½Ó±íÅäÖÃ¡£
+     * è¿æ¥è¡¨é…ç½®ã€‚
      */
     private Collection<JoinTable> joinTableCollection = new HashSet<JoinTable>();
     /**
-     * Ö÷¼ü×Ö¶Î¡£
+     * ä¸»é”®å­—æ®µã€‚
      */
     private Collection<EntityField> primaryKeyFieldCollection = null;
     /**
-     * Ö÷¼ü×Ö¶ÎÃû¡£
+     * ä¸»é”®å­—æ®µåã€‚
      */
     private Collection<String> primaryKeyNameCollection = null;
     /**
-     * ¹ØÁª±íÅäÖÃ¡£
+     * å…³è”è¡¨é…ç½®ã€‚
      */
     private Collection<Relation> relations = new HashSet<Relation>();
     /**
-     * ×ÊÔ´¶ÁÈ¡Æ÷
+     * èµ„æºè¯»å–å™¨
      */
     private ResourceReader resourceReader = null;
     /**
-     * ±í¶ÔÏó¡£
+     * è¡¨å¯¹è±¡ã€‚
      */
     private Table table = new Table();
 
@@ -111,10 +111,10 @@ public class EntityMetaData {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊµÌå´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¤§å°ã€‚
      *
-     * @param srcEntity À´Ô´ÊµÌå¶ÔÏó¡£
-     * @param dstEntity Ä¿±êÊµÌå¶ÔÏó¡£
+     * @param srcEntity æ¥æºå®ä½“å¯¹è±¡ã€‚
+     * @param dstEntity ç›®æ ‡å®ä½“å¯¹è±¡ã€‚
      * @return
      */
     public int compare(Object srcEntity, Object dstEntity) {
@@ -122,10 +122,10 @@ public class EntityMetaData {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊµÌå´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¤§å°ã€‚
      *
-     * @param srcEntity À´Ô´ÊµÌå¶ÔÏó¡£
-     * @param dstEntity Ä¿±êÊµÌå¶ÔÏó¡£
+     * @param srcEntity æ¥æºå®ä½“å¯¹è±¡ã€‚
+     * @param dstEntity ç›®æ ‡å®ä½“å¯¹è±¡ã€‚
      * @return
      */
     public int compareByPrimaryKey(Object srcEntity, Object dstEntity) {
@@ -133,12 +133,12 @@ public class EntityMetaData {
     }
 
     /**
-     * Í¨¹ıÊôĞÔÄÚÈİ²úÉú¹ıÂËÌõ¼ş¡£
+     * é€šè¿‡å±æ€§å†…å®¹äº§ç”Ÿè¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param entityMetaData ÊµÌåÔªÊı¾İ¡£
-     * @param fieldNames     ×Ö¶ÎÃû¡£
-     * @param values         ÊıÖµ¡£
-     * @return ¹ıÂËÌõ¼ş¡£
+     * @param entityMetaData å®ä½“å…ƒæ•°æ®ã€‚
+     * @param fieldNames     å­—æ®µåã€‚
+     * @param values         æ•°å€¼ã€‚
+     * @return è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public FilterExpress createFilterExpress(String[] fieldNames, Object[] values) {
         FilterExpress filterExpress = null;
@@ -226,7 +226,7 @@ public class EntityMetaData {
     }
 
     /**
-     * ¶ÁÈ¡Ö¸¶¨Êı¾İ¿âµÄ±í´ïÊ½¡£
+     * è¯»å–æŒ‡å®šæ•°æ®åº“çš„è¡¨è¾¾å¼ã€‚
      *
      * @param databaseName
      * @return
@@ -311,16 +311,16 @@ public class EntityMetaData {
     }
 
     protected void initialize() {
-        // ²úÉúĞ£ÑéÆ÷
+        // äº§ç”Ÿæ ¡éªŒå™¨
         new EntityDataValidatorCreater(this).create();
-        // ÊÂ¼ş¡£
+        // äº‹ä»¶ã€‚
         EntityHelper.createEntityEvent(this);
     }
 
     /**
-     * Ö÷¼üÖµÊÇ·ñÓĞĞ§¡£
+     * ä¸»é”®å€¼æ˜¯å¦æœ‰æ•ˆã€‚
      *
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
      * @return
      */
     public boolean isPrimaryKeyValueValid(Object[] primaryKeyValues) {
@@ -334,7 +334,7 @@ public class EntityMetaData {
     }
 
     /**
-     * ÅÅĞòÀ¸Î»Ë³Ğò¡£
+     * æ’åºæ ä½é¡ºåºã€‚
      */
     public void sort() {
         this.entityFieldMap = EntityMetaUtils.sort(this);

@@ -7,27 +7,27 @@ import java.io.*;
 import java.net.URLDecoder;
 
 /**
- * ÎÄ¼ş¹¤¾ßÀà
+ * æ–‡ä»¶å·¥å…·ç±»
  */
 public class FileUtils {
     public static final String ENCODING_UTF_8 = "UTF-8";
     private static final Logger logger = Logger.getLogger(FileUtils.class);
 
     /**
-     * ¹Ø±ÕÊäÈëÁ÷¡£
+     * å…³é—­è¾“å…¥æµã€‚
      *
-     * @param inputStream ÊäÈëÁ÷¡£
-     * @return ¹Ø±ÕºóµÄ½á¹û¡£
+     * @param inputStream è¾“å…¥æµã€‚
+     * @return å…³é—­åçš„ç»“æœã€‚
      */
     public static InputStream close(InputStream inputStream) {
         return FileCloser.close(inputStream);
     }
 
     /**
-     * ¹Ø±ÕÊä³öÁ÷¡£
+     * å…³é—­è¾“å‡ºæµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @return ¹Ø±ÕºóµÄ½á¹û¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @return å…³é—­åçš„ç»“æœã€‚
      */
     public static OutputStream close(OutputStream outputStream) {
         return FileCloser.close(outputStream);
@@ -42,10 +42,10 @@ public class FileUtils {
     }
 
     /**
-     * °ÑÎÄ¼ş»òÕß¿½±´ÖÁÄ¿±êÎÄ¼ş
+     * æŠŠæ–‡ä»¶æˆ–è€…æ‹·è´è‡³ç›®æ ‡æ–‡ä»¶
      *
-     * @param srcFile À´Ô´ÎÄ¼ş»òÄ¿Â¼¡£
-     * @param dstFile Ä¿±êÎÄ¼ş»òÄ¿Â¼¡£
+     * @param srcFile æ¥æºæ–‡ä»¶æˆ–ç›®å½•ã€‚
+     * @param dstFile ç›®æ ‡æ–‡ä»¶æˆ–ç›®å½•ã€‚
      * @return
      */
     public static File copy(File srcFile, File dstFile) {
@@ -65,10 +65,10 @@ public class FileUtils {
     }
 
     /**
-     * ¶ÔÂ·¾¶½øĞĞ±àÂë×ª»»¡£
+     * å¯¹è·¯å¾„è¿›è¡Œç¼–ç è½¬æ¢ã€‚
      *
-     * @param path Â·¾¶¡£
-     * @return ±àÂëºóµÄÂ·¾¶¡£
+     * @param path è·¯å¾„ã€‚
+     * @return ç¼–ç åçš„è·¯å¾„ã€‚
      */
     public static String decodePath(String path) {
         String directory = null;
@@ -81,9 +81,9 @@ public class FileUtils {
     }
 
     /**
-     * Ç¿ÖÆÉ¾³ıÖ¸¶¨ÎÄ¼ş»òÄ¿Â¼¡£
+     * å¼ºåˆ¶åˆ é™¤æŒ‡å®šæ–‡ä»¶æˆ–ç›®å½•ã€‚
      *
-     * @param file Ö¸¶¨ÎÄ¼ş»òÄ¿Â¼¡£
+     * @param file æŒ‡å®šæ–‡ä»¶æˆ–ç›®å½•ã€‚
      */
     public static void delete(File file) {
         try {
@@ -95,10 +95,10 @@ public class FileUtils {
     }
 
     /**
-     * Çå³ıÖ¸¶¨Â·¾¶ÏÂÖ¸¶¨À©Õ¹ÃûµÄÎÄ¼ş¡£
+     * æ¸…é™¤æŒ‡å®šè·¯å¾„ä¸‹æŒ‡å®šæ‰©å±•åçš„æ–‡ä»¶ã€‚
      *
-     * @param path    Â·¾¶¡£
-     * @param postFix ºó×ºÃû¡£
+     * @param path    è·¯å¾„ã€‚
+     * @param postFix åç¼€åã€‚
      */
     public static void deleteFiles(String path, final String postFix) {
         File filePath = new File(path);
@@ -113,10 +113,10 @@ public class FileUtils {
     }
 
     /**
-     * ¶ÁÈ¡¹æ·¶Â·¾¶¡£
+     * è¯»å–è§„èŒƒè·¯å¾„ã€‚
      *
-     * @param path Â·¾¶¡£
-     * @return ¹æ·¶±ê×¼Â·¾¶¡£
+     * @param path è·¯å¾„ã€‚
+     * @return è§„èŒƒæ ‡å‡†è·¯å¾„ã€‚
      */
     public static String getCanonicalPath(String path) {
         File filePath = new File(path);
@@ -130,10 +130,10 @@ public class FileUtils {
     }
 
     /**
-     * ¶ÁÈ¡ÎÄ¼şµÄÀ©Õ¹Ãû¡£
+     * è¯»å–æ–‡ä»¶çš„æ‰©å±•åã€‚
      *
-     * @param fileName ÎÄ¼şÃû¡£
-     * @return À©Õ¹Ãû¡£
+     * @param fileName æ–‡ä»¶åã€‚
+     * @return æ‰©å±•åã€‚
      */
     public static String getExtension(String fileName) {
         String extension = null;
@@ -146,11 +146,11 @@ public class FileUtils {
     }
 
     /**
-     * µÃµ½Ö¸¶¨ÀàĞÍµÄ×ÊÔ´Â·¾¶£¬²¢×ª»»³ÉÎÄ¼ş¶ÔÏó¡£
+     * å¾—åˆ°æŒ‡å®šç±»å‹çš„èµ„æºè·¯å¾„ï¼Œå¹¶è½¬æ¢æˆæ–‡ä»¶å¯¹è±¡ã€‚
      *
-     * @param classType ÀàĞÍ¡£
-     * @param path      Â·¾¶¡£
-     * @return Ä¿Â¼¶ÔÏó¡£
+     * @param classType ç±»å‹ã€‚
+     * @param path      è·¯å¾„ã€‚
+     * @return ç›®å½•å¯¹è±¡ã€‚
      */
     public static String getResourcePath(Class<?> classType, String path) {
         String directory = classType.getProtectionDomain().getCodeSource().getLocation().getFile();
@@ -163,10 +163,10 @@ public class FileUtils {
     }
 
     /**
-     * µÃµ½ÎÄ¼ş»òÕßÄ¿Â¼µÄ´óĞ¡¡£
+     * å¾—åˆ°æ–‡ä»¶æˆ–è€…ç›®å½•çš„å¤§å°ã€‚
      *
-     * @param file ÎÄ¼ş»òÕßÄ¿Â¼¡£
-     * @return Õ¼ÓÃ¿Õ¼ä´óĞ¡£¨byte£©¡£
+     * @param file æ–‡ä»¶æˆ–è€…ç›®å½•ã€‚
+     * @return å ç”¨ç©ºé—´å¤§å°ï¼ˆbyteï¼‰ã€‚
      */
     public static long getTotalSize(File file) {
         long totalSize = 0;
@@ -189,10 +189,10 @@ public class FileUtils {
     }
 
     /**
-     * ½¨Á¢Ö¸¶¨Â·¾¶¡£
+     * å»ºç«‹æŒ‡å®šè·¯å¾„ã€‚
      *
-     * @param path Â·¾¶¡£
-     * @return ÊÇ·ñ³É¹¦¡£
+     * @param path è·¯å¾„ã€‚
+     * @return æ˜¯å¦æˆåŠŸã€‚
      */
     public static boolean mkdir(String path) {
         File directory = new File(path);
@@ -206,12 +206,12 @@ public class FileUtils {
     }
 
     /**
-     * ÒÆ¶¯ÎÄ¼ş¡£
+     * ç§»åŠ¨æ–‡ä»¶ã€‚
      *
-     * @param srcFile      À´Ô´ÎÄ¼ş¡£
-     * @param dstFile      Ä¿±êÎÄ¼ş¡£
-     * @param deleteExists Èç¹ûÄ¿±êÎÄ¼ş´æÔÚÔòÏÈÉ¾³ı¡£
-     * @return ÊÇ·ñ³É¹¦¡£
+     * @param srcFile      æ¥æºæ–‡ä»¶ã€‚
+     * @param dstFile      ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param deleteExists å¦‚æœç›®æ ‡æ–‡ä»¶å­˜åœ¨åˆ™å…ˆåˆ é™¤ã€‚
+     * @return æ˜¯å¦æˆåŠŸã€‚
      * @throws IOException
      */
     public static boolean move(File srcFile, File dstFile, boolean deleteExists) {
@@ -219,9 +219,9 @@ public class FileUtils {
     }
 
     /**
-     * ´ò¿ªÎÄ¼şÊä³öÁ÷£¬Èç¹ûÎÄ¼şÂ·¾¶²»´æÔÚÔò×Ô¶¯½¨Á¢¡£
+     * æ‰“å¼€æ–‡ä»¶è¾“å‡ºæµï¼Œå¦‚æœæ–‡ä»¶è·¯å¾„ä¸å­˜åœ¨åˆ™è‡ªåŠ¨å»ºç«‹ã€‚
      *
-     * @param file ÎÄ¼ş¶ÔÏó¡£
+     * @param file æ–‡ä»¶å¯¹è±¡ã€‚
      * @return
      * @throws IOException
      */
@@ -230,10 +230,10 @@ public class FileUtils {
     }
 
     /**
-     * ¶ÁÈ¡ÎÄ¼şµÄÄÚÈİ¡£
+     * è¯»å–æ–‡ä»¶çš„å†…å®¹ã€‚
      *
-     * @param file ÎÄ¼ş¶ÔÏó¡£
-     * @return ÎÄ¼şÄÚÈİ¡£
+     * @param file æ–‡ä»¶å¯¹è±¡ã€‚
+     * @return æ–‡ä»¶å†…å®¹ã€‚
      * @throws IOException
      */
     public static byte[] readFileToBytes(File file) throws IOException {
@@ -241,10 +241,10 @@ public class FileUtils {
     }
 
     /**
-     * ¶ÁÈ¡ÎÄ¼şµÄÄÚÈİ¡£
+     * è¯»å–æ–‡ä»¶çš„å†…å®¹ã€‚
      *
-     * @param file ÎÄ¼ş¶ÔÏó¡£
-     * @return ÎÄ¼şÄÚÈİ¡£
+     * @param file æ–‡ä»¶å¯¹è±¡ã€‚
+     * @return æ–‡ä»¶å†…å®¹ã€‚
      * @throws IOException
      */
     public static String readFileToString(File file, String encoding) throws IOException {
@@ -252,11 +252,11 @@ public class FileUtils {
     }
 
     /**
-     * ½«ÎÄ¼şµÄÀ©Õ¹Ãû¡£
+     * å°†æ–‡ä»¶çš„æ‰©å±•åã€‚
      *
-     * @param oldExtension ¾ÉµÄÎÄ¼şÃû¡£
-     * @param newExtension ĞÂµÄÎÄ¼şÀ©Õ¹Ãû¡£
-     * @return ĞŞ¸ÄºóÎÄ¼ş¡£
+     * @param oldExtension æ—§çš„æ–‡ä»¶åã€‚
+     * @param newExtension æ–°çš„æ–‡ä»¶æ‰©å±•åã€‚
+     * @return ä¿®æ”¹åæ–‡ä»¶ã€‚
      */
     public static File renameFileExtName(File file, String oldExtension, String newExtension) {
         return FileOperator.renameFileExtName(file, oldExtension, newExtension);

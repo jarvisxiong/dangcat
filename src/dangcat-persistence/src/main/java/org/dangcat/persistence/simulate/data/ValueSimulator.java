@@ -9,7 +9,7 @@ import org.dangcat.persistence.simulate.table.SimulateData;
 import java.util.Random;
 
 /**
- * Êý¾ÝÄ£Äâ½Ó¿Ú¡£
+ * æ•°æ®æ¨¡æ‹ŸæŽ¥å£ã€‚
  *
  * @author dangcat
  */
@@ -82,10 +82,10 @@ public abstract class ValueSimulator {
     }
 
     /**
-     * ¶ÁÈ¡Ö¸¶¨Î»ÖÃÊý¾Ý¡£
+     * è¯»å–æŒ‡å®šä½ç½®æ•°æ®ã€‚
      *
-     * @param index Î»ÖÃË÷Òý¡£
-     * @return ²úÉúµÄÄ£ÄâÊý¾Ý¡£
+     * @param index ä½ç½®ç´¢å¼•ã€‚
+     * @return äº§ç”Ÿçš„æ¨¡æ‹Ÿæ•°æ®ã€‚
      */
     public Object getValue(int index) {
         Object[] values = this.getValues();
@@ -111,18 +111,18 @@ public abstract class ValueSimulator {
     }
 
     /**
-     * ¶ÁÈ¡ÏÂÒ»¸öËæ»úÄ£ÄâÊý¾Ý¡£
+     * è¯»å–ä¸‹ä¸€ä¸ªéšæœºæ¨¡æ‹Ÿæ•°æ®ã€‚
      *
-     * @return ²úÉúµÄÄ£ÄâÊý¾Ý¡£
+     * @return äº§ç”Ÿçš„æ¨¡æ‹Ÿæ•°æ®ã€‚
      */
     public Object nextRandom() {
         return this.getValue(this.getRandomIndex());
     }
 
     /**
-     * ¶ÁÈ¡ÏÂÒ»¸öË³ÐòÄ£ÄâÊý¾Ý¡£
+     * è¯»å–ä¸‹ä¸€ä¸ªé¡ºåºæ¨¡æ‹Ÿæ•°æ®ã€‚
      *
-     * @return ²úÉúµÄÄ£ÄâÊý¾Ý¡£
+     * @return äº§ç”Ÿçš„æ¨¡æ‹Ÿæ•°æ®ã€‚
      */
     public Object nextSequence() {
         if (this.position >= this.size)

@@ -3,23 +3,23 @@ package org.dangcat.commons.io.process;
 import java.io.File;
 
 /**
- * ÎÄ¼ş¿½±´»Øµ÷½Ó¿Ú¡£
+ * æ–‡ä»¶æ‹·è´å›è°ƒæ¥å£ã€‚
  */
 public interface FileCopyCallback {
     /**
-     * ¿½±´ºó»Øµ÷½Ó¿Ú¡£
+     * æ‹·è´åå›è°ƒæ¥å£ã€‚
      *
-     * @param source À´Ô´ÎÄ¼ş¡£
-     * @param dest   Ä¿±êÎÄ¼ş¡£
+     * @param source æ¥æºæ–‡ä»¶ã€‚
+     * @param dest   ç›®æ ‡æ–‡ä»¶ã€‚
      */
     void afterCopy(File source, File dest);
 
     /**
-     * ¿½±´Ç°»Øµ÷½Ó¿Ú¡£
+     * æ‹·è´å‰å›è°ƒæ¥å£ã€‚
      *
-     * @param source À´Ô´ÎÄ¼ş¡£
-     * @param dest   Ä¿±êÎÄ¼ş¡£
-     * @return Èç¹ûÈ¡Ïû·µ»Øfalse£¬·ñÔò·µ»Øtrue¡£
+     * @param source æ¥æºæ–‡ä»¶ã€‚
+     * @param dest   ç›®æ ‡æ–‡ä»¶ã€‚
+     * @return å¦‚æœå–æ¶ˆè¿”å›falseï¼Œå¦åˆ™è¿”å›trueã€‚
      */
     boolean beforeCopy(File source, File dest);
 }

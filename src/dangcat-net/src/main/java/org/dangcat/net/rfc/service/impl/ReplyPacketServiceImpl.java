@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 /**
- * »ØÓ¦±¨ÎÄ·şÎñ¡£
+ * å›åº”æŠ¥æ–‡æœåŠ¡ã€‚
  *
  * @param <T>
  * @author dangcat
@@ -45,9 +45,9 @@ public class ReplyPacketServiceImpl extends ServiceBase implements DataProcessSe
     }
 
     /**
-     * ·¢ËÍ»ØÓ¦±¨ÎÄ¡£
+     * å‘é€å›åº”æŠ¥æ–‡ã€‚
      *
-     * @param datagramEvent ±¨ÎÄ¶ÔÏó¡£
+     * @param datagramEvent æŠ¥æ–‡å¯¹è±¡ã€‚
      * @throws ServiceException
      */
     private DatagramEvent send(DatagramEvent datagramEvent, PacketSession<?> packetSession) throws ServiceException {

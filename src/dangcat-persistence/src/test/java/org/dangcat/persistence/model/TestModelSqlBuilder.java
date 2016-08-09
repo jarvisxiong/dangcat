@@ -17,7 +17,7 @@ public class TestModelSqlBuilder {
     public void testParams() throws TableException {
         String sqlExpress1 = "SELECT FieldA, FieldB, FieldC, FieldD, FieldF \nFROM TestTable \nWHERE FieldA=:FieldA AND FieldB>:FieldA OR FieldB<:FieldC\n";
         Table table = new Table("TestTable");
-        // ²âÊÔ¶¯Ì¬²éÑ¯²ÎÊý¡£
+        // æµ‹è¯•åŠ¨æ€æŸ¥è¯¢å‚æ•°ã€‚
         SqlBuilder sqlBuilder = table.getSql();
         sqlBuilder.append(sqlExpress1);
         table.getParams().put("FieldA", 75);
@@ -32,7 +32,7 @@ public class TestModelSqlBuilder {
         // System.out.println(sqlBuilder.toString());
         Assert.assertEquals(sqlExpress3, sqlBuilder.toString());
 
-        // ²âÊÔ¶¯Ì¬Ìæ»»¹ýÂËÄÚÈÝ¡£
+        // æµ‹è¯•åŠ¨æ€æ›¿æ¢è¿‡æ»¤å†…å®¹ã€‚
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit("FieldA", FilterType.between, "AAAAAA", "ZZZZZ"));
         filterGroup.add(new FilterUnit("FieldB", FilterType.between, 12.56, 1695));
@@ -56,7 +56,7 @@ public class TestModelSqlBuilder {
     public void testTextMarker() throws TableException {
         String sqlExpress1 = "SELECT FieldA, FieldB, FieldC, FieldD, FieldF \nFROM TestTable \nWHERE FieldA=${FieldA} AND FieldB>${FieldA} OR FieldB<${FieldC}\n";
         Table table = new Table("TestTable");
-        // ²âÊÔ¶¯Ì¬²éÑ¯²ÎÊý¡£
+        // æµ‹è¯•åŠ¨æ€æŸ¥è¯¢å‚æ•°ã€‚
         SqlBuilder sqlBuilder = table.getSql();
         sqlBuilder.append(sqlExpress1);
         table.getParams().put("FieldA", 75);
@@ -71,7 +71,7 @@ public class TestModelSqlBuilder {
         // System.out.println(sqlBuilder.toString());
         Assert.assertEquals(sqlExpress3, sqlBuilder.toString());
 
-        // ²âÊÔ¶¯Ì¬Ìæ»»¹ýÂËÄÚÈÝ¡£
+        // æµ‹è¯•åŠ¨æ€æ›¿æ¢è¿‡æ»¤å†…å®¹ã€‚
         FilterGroup filterGroup = new FilterGroup();
         filterGroup.add(new FilterUnit("FieldA", FilterType.between, "AAAAAA", "ZZZZZ"));
         filterGroup.add(new FilterUnit("FieldB", FilterType.between, 12.56, 1695));

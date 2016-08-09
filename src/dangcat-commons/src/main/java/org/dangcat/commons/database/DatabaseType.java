@@ -3,7 +3,7 @@ package org.dangcat.commons.database;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * Êı¾İ¿âÀàĞÍ¡£
+ * æ•°æ®åº“ç±»å‹ã€‚
  *
  * @author dangcat
  */

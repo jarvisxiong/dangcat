@@ -12,34 +12,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Í³¼Æ·şÎñ¡£
+ * ç»Ÿè®¡æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public class StatisticsServiceImpl extends ThreadService implements StatisticsService {
     private static final String SERVICE_NAME = "STATISTICS";
     /**
-     * Í³¼ÆÆğÊ¼Ê±¼ä¡£
+     * ç»Ÿè®¡èµ·å§‹æ—¶é—´ã€‚
      */
     private long beginTime = DateUtils.currentTimeMillis();
     /**
-     * Í³¼Æ¶ÔÏóÁĞ±í¡£
+     * ç»Ÿè®¡å¯¹è±¡åˆ—è¡¨ã€‚
      */
     private List<StatisticsAble> statisticsList = new ArrayList<StatisticsAble>();
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public StatisticsServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
     }
 
     /**
-     * Ìí¼ÓÍ³¼Æ¶ÔÏó¡£
+     * æ·»åŠ ç»Ÿè®¡å¯¹è±¡ã€‚
      *
-     * @param statisticsAble Í³¼Æ¶ÔÏó¡£
+     * @param statisticsAble ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     public void addStatistics(StatisticsAble statisticsAble) {
         if (statisticsAble != null && !this.statisticsList.contains(statisticsAble))
@@ -64,7 +64,7 @@ public class StatisticsServiceImpl extends ThreadService implements StatisticsSe
     }
 
     /**
-     * ¶¨Ê±Êä³öÍ³¼ÆĞÅÏ¢¡£
+     * å®šæ—¶è¾“å‡ºç»Ÿè®¡ä¿¡æ¯ã€‚
      */
     @Override
     protected void innerExecute() {
@@ -86,9 +86,9 @@ public class StatisticsServiceImpl extends ThreadService implements StatisticsSe
     }
 
     /**
-     * É¾³ıÍ³¼Æ¶ÔÏó¡£
+     * åˆ é™¤ç»Ÿè®¡å¯¹è±¡ã€‚
      *
-     * @param statisticsAble Í³¼Æ¶ÔÏó¡£
+     * @param statisticsAble ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     public void removeStatistics(StatisticsAble statisticsAble) {
         if (statisticsAble != null && this.statisticsList.contains(statisticsAble))
@@ -96,7 +96,7 @@ public class StatisticsServiceImpl extends ThreadService implements StatisticsSe
     }
 
     /**
-     * ÖØÖÃÍ³¼ÆÖµ¡£
+     * é‡ç½®ç»Ÿè®¡å€¼ã€‚
      */
     private void reset() {
         if (DateUtils.currentTimeMillis() - this.beginTime > StatisticsConfig.getInstance().getStatisticsInterval() * 1000) {

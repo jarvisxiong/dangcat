@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ×ÔÔö×Ö¶Î¹ÜÀí¡£
+ * è‡ªå¢å­—æ®µç®¡ç†ã€‚
  *
  * @author dangcat
  */
 public class AutoIncrementManager {
     /**
-     * ×ÔÔö×Ö¶ÎÓ³Éä±í¡£
+     * è‡ªå¢å­—æ®µæ˜ å°„è¡¨ã€‚
      */
     private static Map<String, Map<String, AutoIncrement>> databaseAutoIncrementMap = new HashMap<String, Map<String, AutoIncrement>>();
     private String databaseName = null;
@@ -58,13 +58,13 @@ public class AutoIncrementManager {
     }
 
     /**
-     * ¸ù¾İ±íÃû×Ö¶ÎÃû¶ÁÈ¡ÏÂÒ»¸öÖ÷¼üĞòÁĞ¡£
+     * æ ¹æ®è¡¨åå­—æ®µåè¯»å–ä¸‹ä¸€ä¸ªä¸»é”®åºåˆ—ã€‚
      *
-     * @param tableName      ±íÃû¡£
-     * @param fieldName      ×Ö¶ÎÃû¡£
-     * @param classType      ×Ö¶ÎÀàĞÍ¡£
-     * @param tableGenerator ĞòºÅ²ßÂÔ¡£
-     * @return Ö÷¼üĞòÁĞ¡£
+     * @param tableName      è¡¨åã€‚
+     * @param fieldName      å­—æ®µåã€‚
+     * @param classType      å­—æ®µç±»å‹ã€‚
+     * @param tableGenerator åºå·ç­–ç•¥ã€‚
+     * @return ä¸»é”®åºåˆ—ã€‚
      * @throws SQLException
      */
     protected Object nextSequence(Connection connection, String tableName, String fieldName, Class<?> classType, TableGenerator tableGenerator) throws SQLException {

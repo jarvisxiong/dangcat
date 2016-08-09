@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Êı¾İÅúÁ¿²Ù×÷·şÎñ¡£
+ * æ•°æ®æ‰¹é‡æ“ä½œæœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -28,7 +28,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     private long lastStoreTime = DateUtils.currentTimeMillis();
 
     /**
-     * ËùÊô¸¸·şÎñ¡£
+     * æ‰€å±çˆ¶æœåŠ¡ã€‚
      *
      * @param parent
      */
@@ -49,7 +49,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     }
 
     /**
-     * Çå³ıËùÓĞ´ı´¦ÀíÊı¾İ¡£
+     * æ¸…é™¤æ‰€æœ‰å¾…å¤„ç†æ•°æ®ã€‚
      */
     public void clear() {
         Map<String, EntityBatchStorer> entityBatchStorerMap = this.getEntityBatchStorerMap();
@@ -77,15 +77,15 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
             }
         };
 
-        // ×¢²á¶¨Ê±Æ÷¡£
+        // æ³¨å†Œå®šæ—¶å™¨ã€‚
         if (cronAlarmClock.isValidExpression())
             TimerServiceImpl.getInstance().createTimer(cronAlarmClock);
     }
 
     /**
-     * µÃµ½Ö¸¶¨Êı¾İ¿âµÄÅúÁ¿´æ´¢¡£
+     * å¾—åˆ°æŒ‡å®šæ•°æ®åº“çš„æ‰¹é‡å­˜å‚¨ã€‚
      *
-     * @return ÅúÁ¿²Ù×÷¶ÔÏó¡£
+     * @return æ‰¹é‡æ“ä½œå¯¹è±¡ã€‚
      */
     @Override
     public EntityBatchStorer getEntityBatchStorer() {
@@ -93,10 +93,10 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     }
 
     /**
-     * µÃµ½Ö¸¶¨Êı¾İ¿âµÄÅúÁ¿´æ´¢¡£
+     * å¾—åˆ°æŒ‡å®šæ•°æ®åº“çš„æ‰¹é‡å­˜å‚¨ã€‚
      *
-     * @param databaseName Êı¾İ¿âÃû¡£
-     * @return ÅúÁ¿²Ù×÷¶ÔÏó¡£
+     * @param databaseName æ•°æ®åº“åã€‚
+     * @return æ‰¹é‡æ“ä½œå¯¹è±¡ã€‚
      */
     @Override
     public EntityBatchStorer getEntityBatchStorer(String databaseName) {
@@ -155,7 +155,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     }
 
     /**
-     * ¶¨Ê±ÇåÀí¹ıÆÚµÄ»º´æÊı¾İ¡£
+     * å®šæ—¶æ¸…ç†è¿‡æœŸçš„ç¼“å­˜æ•°æ®ã€‚
      */
     @Override
     public void run() {
@@ -165,7 +165,7 @@ public class EntityBatchServiceImpl extends ServiceControlBase implements Entity
     }
 
     /**
-     * µ÷ÓÃÅúÁ¿´æ´¢²Ù×÷¡£
+     * è°ƒç”¨æ‰¹é‡å­˜å‚¨æ“ä½œã€‚
      */
     public void save() {
         int totalSize = this.getTotalSize();

@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * ¹¹½¨Table¶ÔÏó¡£
+ * æ„å»ºTableå¯¹è±¡ã€‚
  *
  * @author dangcat
  */
@@ -34,11 +34,11 @@ public class TableUtils {
     protected static final Logger logger = Logger.getLogger(TableUtils.class);
 
     /**
-     * Ö¸¶¨×ÊÔ´ÅäÖÃÎÄ¼şÃû³Æ¹¹½¨±í¶ÔÏó¡£
+     * æŒ‡å®šèµ„æºé…ç½®æ–‡ä»¶åç§°æ„å»ºè¡¨å¯¹è±¡ã€‚
      *
-     * @param sourceClassType À´Ô´¶ÔÏó¡£
-     * @param name            ×ÊÔ´ÅäÖÃÎÄ¼şÃû³Æ¡£
-     * @return ¹¹½¨µÄ±í¶ÔÏó¡£
+     * @param sourceClassType æ¥æºå¯¹è±¡ã€‚
+     * @param name            èµ„æºé…ç½®æ–‡ä»¶åç§°ã€‚
+     * @return æ„å»ºçš„è¡¨å¯¹è±¡ã€‚
      */
     public static Table build(Class<?> sourceClassType, String name) {
         Class<?> classType = sourceClassType == null ? TableUtils.class : sourceClassType;
@@ -96,7 +96,7 @@ public class TableUtils {
     }
 
     /**
-     * ¼ÆËãÊı¾İĞĞ¼Ó×Ü¡£
+     * è®¡ç®—æ•°æ®è¡ŒåŠ æ€»ã€‚
      */
     public static void calculateTotal(Table table) {
         boolean existsNumberField = false;
@@ -115,11 +115,11 @@ public class TableUtils {
     }
 
     /**
-     * ±È½ÏÁ½¸ö±íµÄÄÚÈİÊÇ·ñÏàÍ¬¡£
+     * æ¯”è¾ƒä¸¤ä¸ªè¡¨çš„å†…å®¹æ˜¯å¦ç›¸åŒã€‚
      *
-     * @param srcTable À´Ô´±í¡£
-     * @param dstTable Ä¿±ê±í¡£
-     * @return ±È½Ï½á¹û¡£
+     * @param srcTable æ¥æºè¡¨ã€‚
+     * @param dstTable ç›®æ ‡è¡¨ã€‚
+     * @return æ¯”è¾ƒç»“æœã€‚
      */
     public static boolean equalsContent(Table srcTable, Table dstTable) {
         if (srcTable.getRows().size() != dstTable.getRows().size())
@@ -142,10 +142,10 @@ public class TableUtils {
     }
 
     /**
-     * ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return ÊÇ·ñ´æÔÚ¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ˜¯å¦å­˜åœ¨ã€‚
      */
     public static boolean exists(Table table, Session session) {
         boolean result = true;
@@ -158,7 +158,7 @@ public class TableUtils {
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, session.getName());
             sql = tableSqlBuilder.buildExistsStatement();
 
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             ResultSet resultSet = session.executeQuery(sql);
             if (!resultSet.next())
                 result = false;
@@ -183,9 +183,9 @@ public class TableUtils {
     }
 
     /**
-     * È¡µÃÅÅĞò¶ÔÏó¡£
+     * å–å¾—æ’åºå¯¹è±¡ã€‚
      *
-     * @return ÅÅĞò¶ÔÏó
+     * @return æ’åºå¯¹è±¡
      */
     public static OrderBy getOrderBy(Table table) {
         OrderBy orderBy = null;

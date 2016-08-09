@@ -13,15 +13,15 @@ import java.util.List;
 class InstanceBuilder {
     protected static final Logger logger = Logger.getLogger(InstanceBuilder.class);
     /**
-     * Àà¼ÓÔØÆ÷¡£
+     * ç±»åŠ è½½å™¨ã€‚
      */
     private static List<ClassLoader> classLoaderList = new ArrayList<ClassLoader>();
     private static List<Class<?>> constClassList = new ArrayList<Class<?>>();
 
     /**
-     * Ôö¼ÓÀà¼ÓÔØÆ÷¡£
+     * å¢åŠ ç±»åŠ è½½å™¨ã€‚
      *
-     * @param classLoader Àà¼ÓÔØÆ÷¡£
+     * @param classLoader ç±»åŠ è½½å™¨ã€‚
      */
     protected static void addClassLoader(ClassLoader classLoader) {
         if (classLoader != null && !classLoaderList.contains(classLoader))
@@ -55,7 +55,7 @@ class InstanceBuilder {
     }
 
     /**
-     * ¸ù¾İÃû³ÆÀàĞÍ¡£
+     * æ ¹æ®åç§°ç±»å‹ã€‚
      */
     protected static Class<?> loadClass(String className) {
         Class<?> classType = null;
@@ -84,7 +84,7 @@ class InstanceBuilder {
     }
 
     /**
-     * ¸ù¾İÃû³Æ²úÉúÊµÀı¡£
+     * æ ¹æ®åç§°äº§ç”Ÿå®ä¾‹ã€‚
      */
     protected static Object newInstance(Class<?> classType) {
         Object result = null;
@@ -102,12 +102,12 @@ class InstanceBuilder {
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨ÀàĞÍ¡¢²ÎÊıÀàĞÍºÍ²ÎÊı¹¹½¨¶ÔÏóÊµÀı¡£
+     * æ ¹æ®æŒ‡å®šç±»å‹ã€å‚æ•°ç±»å‹å’Œå‚æ•°æ„å»ºå¯¹è±¡å®ä¾‹ã€‚
      *
-     * @param classType      ÀàĞÍ¡£
-     * @param parameterTypes ²ÎÊıÀàĞÍ¡£
-     * @param parameters     ¹¹½¨²ÎÊı¡£
-     * @return ¹¹½¨µÄ¶ÔÏóÊµÀı¡£
+     * @param classType      ç±»å‹ã€‚
+     * @param parameterTypes å‚æ•°ç±»å‹ã€‚
+     * @param parameters     æ„å»ºå‚æ•°ã€‚
+     * @return æ„å»ºçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     protected static Object newInstance(Class<?> classType, Class<?>[] parameterTypes, Object[] parameters) {
         Object result = null;
@@ -146,7 +146,7 @@ class InstanceBuilder {
     }
 
     /**
-     * ¸ù¾İÃû³Æ²úÉúÊµÀı¡£
+     * æ ¹æ®åç§°äº§ç”Ÿå®ä¾‹ã€‚
      */
     protected static Object newInstance(String className) {
         Object result = null;
@@ -157,12 +157,12 @@ class InstanceBuilder {
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨ÀàÃû¡¢²ÎÊıÀàĞÍºÍ²ÎÊı¹¹½¨¶ÔÏóÊµÀı¡£
+     * æ ¹æ®æŒ‡å®šç±»åã€å‚æ•°ç±»å‹å’Œå‚æ•°æ„å»ºå¯¹è±¡å®ä¾‹ã€‚
      *
-     * @param className      ÀàĞÍÃû³Æ¡£
-     * @param parameterTypes ²ÎÊıÀàĞÍ¡£
-     * @param parameters     ¹¹½¨²ÎÊı¡£
-     * @return ¹¹½¨µÄ¶ÔÏóÊµÀı¡£
+     * @param className      ç±»å‹åç§°ã€‚
+     * @param parameterTypes å‚æ•°ç±»å‹ã€‚
+     * @param parameters     æ„å»ºå‚æ•°ã€‚
+     * @return æ„å»ºçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     protected static Object newInstance(String className, Class<?>[] parameterTypes, Object[] parameters) {
         Object result = null;

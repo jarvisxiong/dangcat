@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Text¹¤¾ßÀà¡£
+ * Textå·¥å…·ç±»ã€‚
  *
  * @author dangcat
  */
 public class TextUtils {
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param reader    Êı¾İ»º³åÁ÷¡£
-     * @param classType ÊµÌåÀàĞÍ¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException     Òì³£¡£TextDocument
+     * @param reader    æ•°æ®ç¼“å†²æµã€‚
+     * @param classType å®ä½“ç±»å‹ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException     å¼‚å¸¸ã€‚TextDocument
      * @throws EntityException
      */
     public static <T> List<T> read(BufferedReader reader, Class<T> classType) throws IOException, EntityException {
@@ -40,12 +40,12 @@ public class TextUtils {
     }
 
     /**
-     * ´Ó»º³åÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»ç¼“å†²æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param reader Êı¾İ»º³åÁ÷¡£
-     * @param table  ±í¶ÔÏó¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param reader æ•°æ®ç¼“å†²æµã€‚
+     * @param table  è¡¨å¯¹è±¡ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static int read(BufferedReader reader, Table table) throws IOException {
         TextDocument textDocument = new TextDocument();
@@ -53,12 +53,12 @@ public class TextUtils {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file      Ä¿±êÎÄ¼ş¡£
-     * @param classType ÊµÌåÀàĞÍ¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param file      ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param classType å®ä½“ç±»å‹ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static <T> List<T> read(File file, Class<T> classType) {
         List<T> entityList = new ArrayList<T>();
@@ -70,12 +70,12 @@ public class TextUtils {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file  Ä¿±êÎÄ¼ş¡£
-     * @param table ±í¶ÔÏó¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
-     * @throws IOException Òì³£¡£
+     * @param file  ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
+     * @throws IOException å¼‚å¸¸ã€‚
      */
     public static int read(File file, Table table) {
         TextDocument textDocument = new TextDocument();
@@ -83,10 +83,10 @@ public class TextUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
      */
     public static <T> void write(File file, List<T> entityList) {
         TextDocument textDocument = new TextDocument();
@@ -94,10 +94,10 @@ public class TextUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
      */
     public static void write(File file, Table table) {
         TextDocument textDocument = new TextDocument();
@@ -105,10 +105,10 @@ public class TextUtils {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
      */
     public static <T> void write(OutputStream outputStream, List<T> entityList) {
         TextDocument textDocument = new TextDocument();
@@ -117,10 +117,10 @@ public class TextUtils {
     }
 
     /**
-     * µ¼³öTable¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºTableå¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param table        ±í¶ÔÏó¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param table        è¡¨å¯¹è±¡ã€‚
      */
     public static void write(OutputStream outputStream, Table table) {
         TextDocument textDocument = new TextDocument();

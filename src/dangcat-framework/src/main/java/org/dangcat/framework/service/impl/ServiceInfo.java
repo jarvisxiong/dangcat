@@ -23,7 +23,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * ·şÎñĞÅÏ¢¡£
+ * æœåŠ¡ä¿¡æ¯ã€‚
  *
  * @author dangcat
  */
@@ -34,83 +34,83 @@ public class ServiceInfo extends ServiceParams {
     private static final String SERVICE_TITLE = "service.title";
 
     /**
-     * ·şÎñ·ÃÎÊÀàĞÍ¡£
+     * æœåŠ¡è®¿é—®ç±»å‹ã€‚
      */
     private Class<?> accessClassType = null;
     /**
-     * ·şÎñ·ÃÎÊÀàÃû¡£
+     * æœåŠ¡è®¿é—®ç±»åã€‚
      */
     private String accessType = null;
     /**
-     * ÊÂºóÀ¹½ØÆ÷Ó³Éä±í¡£
+     * äº‹åæ‹¦æˆªå™¨æ˜ å°„è¡¨ã€‚
      */
     private Map<Class<?>, AfterInterceptor> afterInvokeMap = new LinkedHashMap<Class<?>, AfterInterceptor>();
     /**
-     * ÊÂÇ°À¹½ØÆ÷Ó³Éä±í¡£
+     * äº‹å‰æ‹¦æˆªå™¨æ˜ å°„è¡¨ã€‚
      */
     private Map<Class<?>, BeforeInterceptor> beforeInvokeMap = new LinkedHashMap<Class<?>, BeforeInterceptor>();
     /**
-     * ÉèÖÃÖµ¡£
+     * è®¾ç½®å€¼ã€‚
      */
     private ConfigProvider configProvider = null;
     /**
-     * Òì³£ĞÅÏ¢¶ÁÈ¡Æ÷¡£
+     * å¼‚å¸¸ä¿¡æ¯è¯»å–å™¨ã€‚
      */
     private ExceptionReader exceptionReader = null;
     /**
-     * Ä£¿é±àºÅ¡£
+     * æ¨¡å—ç¼–å·ã€‚
      */
     private Integer id = null;
     /**
-     * ·şÎñÊµÀı¡£
+     * æœåŠ¡å®ä¾‹ã€‚
      */
     private Object instance = null;
     /**
-     * À¹½ØÆ÷ÅäÖÃ±í¡£
+     * æ‹¦æˆªå™¨é…ç½®è¡¨ã€‚
      */
     private Collection<Class<?>> interceptors = new LinkedHashSet<Class<?>>();
     /**
-     * ·şÎñÊÇ·ñ³Ø»¯¡£
+     * æœåŠ¡æ˜¯å¦æ± åŒ–ã€‚
      */
     private boolean isPool = false;
     /**
-     * ·şÎñÊÇ·ñÊ¹ÓÃ´úÀí¡£
+     * æœåŠ¡æ˜¯å¦ä½¿ç”¨ä»£ç†ã€‚
      */
     private boolean isProxy = false;
     /**
-     * ÃüÃû°ó¶¨¡£
+     * å‘½åç»‘å®šã€‚
      */
     private String jndiName = null;
     /**
-     * Ä£¿éÃüÃû¡£
+     * æ¨¡å—å‘½åã€‚
      */
     private String moduleName = null;
     /**
-     * ·şÎñÃüÃû¡£
+     * æœåŠ¡å‘½åã€‚
      */
     private String name = null;
     /**
-     * È¨ÏŞÅäÖÃ¡£
+     * æƒé™é…ç½®ã€‚
      */
     private PermissionProvider permissionProvider = null;
     /**
-     * ÅäÖÃÊôĞÔ¡£
+     * é…ç½®å±æ€§ã€‚
      */
     private List<Property> properties = new ArrayList<Property>();
     /**
-     * ×ÊÔ´¶ÁÈ¡Æ÷¡£
+     * èµ„æºè¯»å–å™¨ã€‚
      */
     private ResourceReader resourceReader = null;
     /**
-     * ·şÎñÊµÀıÀàĞÍ¡£
+     * æœåŠ¡å®ä¾‹ç±»å‹ã€‚
      */
     private Class<?> serviceClassType = null;
     /**
-     * ·½·¨ĞÅÏ¢¡£
+     * æ–¹æ³•ä¿¡æ¯ã€‚
      */
     private ServiceMethodInfo serviceMethodInfo = null;
     /**
-     * ·şÎñÊµÀıÀàÃû¡£
+     * æœåŠ¡å®ä¾‹ç±»åã€‚
      */
     private String serviceType = null;
 

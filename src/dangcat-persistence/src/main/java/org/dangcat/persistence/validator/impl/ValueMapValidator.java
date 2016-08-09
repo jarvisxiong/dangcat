@@ -8,7 +8,7 @@ import org.dangcat.persistence.validator.exception.DataValidateException;
 import java.util.Map;
 
 /**
- * ��ֵ��ΧУ�顣
+ * 数值范围校验。
  *
  * @author dangcat
  */

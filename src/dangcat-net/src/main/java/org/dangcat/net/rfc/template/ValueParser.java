@@ -4,48 +4,48 @@ import org.dangcat.net.rfc.exceptions.ProtocolParseException;
 import org.dangcat.net.rfc.exceptions.ProtocolValidateException;
 
 /**
- * Êı¾İ½âÎö½Ó¿Ú¡£
+ * æ•°æ®è§£ææ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface ValueParser {
     /**
-     * ±È½ÏÁ½¸öÖµÊÇ·ñÏàÍ¬¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå€¼æ˜¯å¦ç›¸åŒã€‚
      *
-     * @param value Ä¿±êÖµ¡£
+     * @param value ç›®æ ‡å€¼ã€‚
      * @return
      */
     int compareTo(Object value);
 
     /**
-     * ÓÉÔ­Ê¼×Ö½ÚÊı×é½âÎö³É¶ÔÏó¡£
+     * ç”±åŸå§‹å­—èŠ‚æ•°ç»„è§£ææˆå¯¹è±¡ã€‚
      *
-     * @param bytes      ×Ö½ÚÊı×é¡£
-     * @param beginIndex ÆğÊ¼Î»ÖÃ¡£
-     * @param length     ³¤¶È¡£
-     * @return ½âÎöºóµÄ¶ÔÏó¡£
-     * @throws ProtocolParseException ½âÎöÒì³£¡£
+     * @param bytes      å­—èŠ‚æ•°ç»„ã€‚
+     * @param beginIndex èµ·å§‹ä½ç½®ã€‚
+     * @param length     é•¿åº¦ã€‚
+     * @return è§£æåçš„å¯¹è±¡ã€‚
+     * @throws ProtocolParseException è§£æå¼‚å¸¸ã€‚
      */
     void parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException;
 
     /**
-     * ÓÉ×Ö´®½âÎöÊôĞÔ¡£
+     * ç”±å­—ä¸²è§£æå±æ€§ã€‚
      *
-     * @param text ×Ö½ÚÊı×é¡£
+     * @param text å­—èŠ‚æ•°ç»„ã€‚
      */
     void parse(String text) throws ProtocolParseException;
 
     /**
-     * ¶ÔÏó×ª»»³ÉĞ­ÒéÊı¾İ¡£
+     * å¯¹è±¡è½¬æ¢æˆåè®®æ•°æ®ã€‚
      *
-     * @return ×ª»»ºóµÄ×Ö½ÚÊı×é¡£
+     * @return è½¬æ¢åçš„å­—èŠ‚æ•°ç»„ã€‚
      */
     byte[] toBytes();
 
     /**
-     * Ğ£ÑéÊı¾İÊÇ·ñºÏ·¨¡£
+     * æ ¡éªŒæ•°æ®æ˜¯å¦åˆæ³•ã€‚
      *
-     * @throws ProtocolValidateException Ğ£ÑéÒì³£¡£
+     * @throws ProtocolValidateException æ ¡éªŒå¼‚å¸¸ã€‚
      */
     void validate() throws ProtocolValidateException;
 }

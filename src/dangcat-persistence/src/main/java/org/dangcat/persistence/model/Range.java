@@ -1,7 +1,7 @@
 package org.dangcat.persistence.model;
 
 /**
- * Êı¾İ·¶Î§¡£
+ * æ•°æ®èŒƒå›´ã€‚
  *
  * @author dangcat
  */
@@ -14,7 +14,7 @@ public class Range implements java.io.Serializable, Cloneable {
     private boolean calculateTotalSize = false;
     private int from = 1;
     /**
-     * ÊµÏÖ·½Ê½£º0£ºÍ¨¹ıResultSetÊµÏÖ·­Ò³²éÑ¯£»1£ºÍ¨¹ıÓï¾äÊµÏÖ·­Ò³²éÑ¯¡£
+     * å®ç°æ–¹å¼ï¼š0ï¼šé€šè¿‡ResultSetå®ç°ç¿»é¡µæŸ¥è¯¢ï¼›1ï¼šé€šè¿‡è¯­å¥å®ç°ç¿»é¡µæŸ¥è¯¢ã€‚
      */
     private int mode = BY_RESULTSET;
     private int pageNum = 0;

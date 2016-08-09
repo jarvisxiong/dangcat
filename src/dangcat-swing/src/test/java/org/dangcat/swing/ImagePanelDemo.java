@@ -25,12 +25,12 @@ public class ImagePanelDemo extends JFrameExt {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        Font font = new Font("ËÎÌå", Font.BOLD, 20);
+        Font font = new Font("å®‹ä½“", Font.BOLD, 20);
         File imageFile = new File("target//test-classes//error.png");
         JImagePanel imagePanel1 = new JImagePanel();
         imagePanel1.setBorder(new EtchedBorder());
         imagePanel1.setImageFile(imageFile);
-        JLabel textLabel1 = new JLabel("ÕâÊÇÒ»¸ö²âÊÔµÄÎÄ×Ö¡£", JLabel.RIGHT);
+        JLabel textLabel1 = new JLabel("è¿™æ˜¯ä¸€ä¸ªæµ‹è¯•çš„æ–‡å­—ã€‚", JLabel.RIGHT);
         textLabel1.setForeground(Color.RED);
         textLabel1.setFont(font);
         imagePanel1.add(textLabel1);
@@ -40,7 +40,7 @@ public class ImagePanelDemo extends JFrameExt {
         imagePanel2.setBorder(new EtchedBorder());
         imagePanel2.setImageFile(imageFile);
         imagePanel2.setImageStretch(false);
-        JLabel textLabel2 = new JLabel("ÕâÊÇÒ»¸ö²âÊÔµÄÎÄ×Ö¡£", JLabel.RIGHT);
+        JLabel textLabel2 = new JLabel("è¿™æ˜¯ä¸€ä¸ªæµ‹è¯•çš„æ–‡å­—ã€‚", JLabel.RIGHT);
         textLabel2.setForeground(Color.BLUE);
         textLabel2.setFont(font);
         imagePanel2.add(textLabel2);

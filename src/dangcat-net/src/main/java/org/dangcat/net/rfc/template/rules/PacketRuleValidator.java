@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * °ü¹æÔò¼ìÑéÆ÷¡£
+ * åŒ…è§„åˆ™æ£€éªŒå™¨ã€‚
  *
  * @author dangcat
  */
@@ -26,10 +26,10 @@ public class PacketRuleValidator extends ArrayList<RuleValidator> {
     }
 
     /**
-     * Ìí¼Ó±¾Êı¾İ°üµÄ¼ìÑéÆ÷¡£
+     * æ·»åŠ æœ¬æ•°æ®åŒ…çš„æ£€éªŒå™¨ã€‚
      *
-     * @param vendorAttributeTemplateManager ³§ÉÌÊôĞÔ¹ÜÀí¡£
-     * @param rules                          ¹æÔò¼¯ºÏ¡£
+     * @param vendorAttributeTemplateManager å‚å•†å±æ€§ç®¡ç†ã€‚
+     * @param rules                          è§„åˆ™é›†åˆã€‚
      */
     public void addRules(Rules rules) {
         for (Rule rule : rules) {
@@ -54,10 +54,10 @@ public class PacketRuleValidator extends ArrayList<RuleValidator> {
     }
 
     /**
-     * ¶ÔÊôĞÔ¼¯ºÏ½øĞĞ¹æÔòÑéÖ¤¡£
+     * å¯¹å±æ€§é›†åˆè¿›è¡Œè§„åˆ™éªŒè¯ã€‚
      *
-     * @param attributeDataList ÊôĞÔ¼¯ºÏ¡£
-     * @throws ProtocolValidateException ÑéÖ¤Òì³£¡£
+     * @param attributeDataList å±æ€§é›†åˆã€‚
+     * @throws ProtocolValidateException éªŒè¯å¼‚å¸¸ã€‚
      */
     public void validate(List<AttributeData> attributeDataList) throws ProtocolValidateException {
         if (attributeDataList.size() > 0) {

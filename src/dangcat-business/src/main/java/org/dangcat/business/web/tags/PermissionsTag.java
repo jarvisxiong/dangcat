@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * È¨ÏŞÊä³ö¡£
+ * æƒé™è¾“å‡ºã€‚
  *
  * @author dangcat
  */

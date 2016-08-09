@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * ÊµÌå¶ÔÏó´úÂë²úÉú¹¤¾ß¡£
+ * å®ä½“å¯¹è±¡ä»£ç äº§ç”Ÿå·¥å…·ã€‚
  *
  * @author dangcat
  */

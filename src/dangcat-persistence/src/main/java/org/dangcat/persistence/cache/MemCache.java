@@ -5,91 +5,91 @@ import org.dangcat.persistence.filter.FilterExpress;
 import java.util.Collection;
 
 /**
- * ÄÚ´æÊı¾İ»º´æ¡£
+ * å†…å­˜æ•°æ®ç¼“å­˜ã€‚
  *
  * @param <T>
  * @author dangcat
  */
 public interface MemCache<T> {
     /**
-     * Ìí¼Ó»º´æÊı¾İ¡£
+     * æ·»åŠ ç¼“å­˜æ•°æ®ã€‚
      */
     void add(T entity);
 
     /**
-     * Ìí¼Ó»º´æÊı¾İ¡£
+     * æ·»åŠ ç¼“å­˜æ•°æ®ã€‚
      */
     void addEntities(Object... entities);
 
     /**
-     * Çå³ı»º´æ¡£
+     * æ¸…é™¤ç¼“å­˜ã€‚
      */
     void clear(boolean force);
 
     /**
-     * °´ÕÕÖ¸¶¨µÄÌõ¼şÔÚË÷ÒıÉÏ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„æ¡ä»¶åœ¨ç´¢å¼•ä¸ŠæŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param filterExpress Ë÷ÒıÌõ¼ş¡£
-     * @return Êı¾İ¼¯ºÏ¡£
+     * @param filterExpress ç´¢å¼•æ¡ä»¶ã€‚
+     * @return æ•°æ®é›†åˆã€‚
      */
     Collection<T> find(FilterExpress filterExpress);
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ×Ö¶ÎÖµ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„å­—æ®µå€¼æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param values     ×Ö¶ÎÊıÖµ£¬±ØĞëÓë×Ö¶Î¶ÔÓ¦¡£
-     * @return ÕÒµ½µÄ¼ÇÂ¼ĞĞ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param values     å­—æ®µæ•°å€¼ï¼Œå¿…é¡»ä¸å­—æ®µå¯¹åº”ã€‚
+     * @return æ‰¾åˆ°çš„è®°å½•è¡Œã€‚
      */
     Collection<T> find(String[] fieldNames, Object... values);
 
     /**
-     * ¶ÁÈ¡ËùÓĞ»º´æÊı¾İ¡£
+     * è¯»å–æ‰€æœ‰ç¼“å­˜æ•°æ®ã€‚
      */
     Collection<T> getDataCollection();
 
     /**
-     * ²úÉúµÄË÷ÒıµÄÊıÁ¿¡£
+     * äº§ç”Ÿçš„ç´¢å¼•çš„æ•°é‡ã€‚
      */
     int getIndexSize();
 
     /**
-     * ¸ù¾İÖ÷¼üÖµÕÒµ½¼ÇÂ¼ĞĞ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     T locate(Object... params);
 
     /**
-     * Êı¾İ±ä»¯Í¨ÖªĞŞ¸ÄË÷Òı¡£
+     * æ•°æ®å˜åŒ–é€šçŸ¥ä¿®æ”¹ç´¢å¼•ã€‚
      *
-     * @param entities ±»ĞŞ¸ÄµÄ¼ÇÂ¼¶ÔÏñ¡£
+     * @param entities è¢«ä¿®æ”¹çš„è®°å½•å¯¹åƒã€‚
      */
     void modifyEntities(Object... entities);
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄ»º´æÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„ç¼“å­˜æ•°æ®ã€‚
      */
     Collection<T> remove(FilterExpress filterExpress);
 
     /**
-     * É¾³ı»º´æÊı¾İ¡£
+     * åˆ é™¤ç¼“å­˜æ•°æ®ã€‚
      */
     boolean remove(T data);
 
     /**
-     * É¾³ı»º´æÊı¾İ¡£
+     * åˆ é™¤ç¼“å­˜æ•°æ®ã€‚
      */
     int removeEntities(Object... entities);
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄ»º´æÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„ç¼“å­˜æ•°æ®ã€‚
      */
     T removeEntity(Object... primaryKeys);
 
     /**
-     * °üº¬µÄÊı¾İÊıÁ¿¡£
+     * åŒ…å«çš„æ•°æ®æ•°é‡ã€‚
      */
     int size();
 }

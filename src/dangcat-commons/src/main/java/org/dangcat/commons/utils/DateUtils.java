@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * ÈÕÆÚĞ­Öú¹¤¾ß¡£
+ * æ—¥æœŸååŠ©å·¥å…·ã€‚
  */
 public class DateUtils {
     public final static int DAY = Calendar.DAY_OF_YEAR;
@@ -26,9 +26,9 @@ public class DateUtils {
     private static Date currentDate = null;
 
     /**
-     * µ÷ÕûÊ±¼ä¡£
+     * è°ƒæ•´æ—¶é—´ã€‚
      *
-     * @return µ÷ÕûºóµÄÊ±¼ä¡£
+     * @return è°ƒæ•´åçš„æ—¶é—´ã€‚
      */
     public static Date add(int field, Date date, int value) {
         Calendar calendar = Calendar.getInstance();
@@ -50,9 +50,9 @@ public class DateUtils {
     }
 
     /**
-     * Çå³ıÖ¸¶¨Ê±¼ä²¿·Ö¡£
+     * æ¸…é™¤æŒ‡å®šæ—¶é—´éƒ¨åˆ†ã€‚
      *
-     * @return ĞÂ×ª»»µÄÊ±¼ä¡£
+     * @return æ–°è½¬æ¢çš„æ—¶é—´ã€‚
      */
     public static Date clear(int field, Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -69,9 +69,9 @@ public class DateUtils {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊ±¼ä´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªæ—¶é—´å¤§å°ã€‚
      *
-     * @return Ïà²îµÄºÁÃëÊı¡£
+     * @return ç›¸å·®çš„æ¯«ç§’æ•°ã€‚
      */
     public static int compare(Date beginDate, Date endDate) {
         long beginTime = 0l;
@@ -88,16 +88,16 @@ public class DateUtils {
     }
 
     /**
-     * ¶ÁÈ¡µ±Ç°Ê±¼äµÄºÁÃëÊı¡£
+     * è¯»å–å½“å‰æ—¶é—´çš„æ¯«ç§’æ•°ã€‚
      */
     public static long currentTimeMillis() {
         return currentDate == null ? System.currentTimeMillis() : currentDate.getTime();
     }
 
     /**
-     * ¼ÆËãÁ½¸öÊ±¼ä²î¾à¡£
+     * è®¡ç®—ä¸¤ä¸ªæ—¶é—´å·®è·ã€‚
      *
-     * @return Ö¸¶¨Ê±¼äµ¥Î»µÄÊıÁ¿¡£
+     * @return æŒ‡å®šæ—¶é—´å•ä½çš„æ•°é‡ã€‚
      */
     public static int diff(int field, Date beginDate, Date endDate) {
         Calendar beginCalendar = Calendar.getInstance();
@@ -139,9 +139,9 @@ public class DateUtils {
     }
 
     /**
-     * ¸ñÊ½»¯ÈÕÆÚ¡£
+     * æ ¼å¼åŒ–æ—¥æœŸã€‚
      *
-     * @param date ÈÕÆÚ¶ÔÏó¡£
+     * @param date æ—¥æœŸå¯¹è±¡ã€‚
      * @return
      */
     public static String format(Date date) {
@@ -149,10 +149,10 @@ public class DateUtils {
     }
 
     /**
-     * ¸ñÊ½»¯ÈÕÆÚ¡£
+     * æ ¼å¼åŒ–æ—¥æœŸã€‚
      *
-     * @param date      ÈÕÆÚ¶ÔÏó¡£
-     * @param dateStyle ÈÕÆÚÀàĞÍ¡£
+     * @param date      æ—¥æœŸå¯¹è±¡ã€‚
+     * @param dateStyle æ—¥æœŸç±»å‹ã€‚
      * @return
      */
     public static String format(Date date, DateType dateType) {
@@ -162,10 +162,10 @@ public class DateUtils {
     }
 
     /**
-     * ¸ñÊ½»¯Ê±¼ä¸ñÊ½¡£
+     * æ ¼å¼åŒ–æ—¶é—´æ ¼å¼ã€‚
      *
-     * @param pattern  ¸ñÊ½»¯Ä£°å¡£
-     * @param dateTime Ä¿±êÊ±¼ä¡£
+     * @param pattern  æ ¼å¼åŒ–æ¨¡æ¿ã€‚
+     * @param dateTime ç›®æ ‡æ—¶é—´ã€‚
      */
     public static String format(String pattern, Date dateTime) {
         String text = pattern;
@@ -187,40 +187,40 @@ public class DateUtils {
     }
 
     /**
-     * È¡ÔÂ·İµÄµÚÒ»ÌìÈÕÆÚ¡£
+     * å–æœˆä»½çš„ç¬¬ä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getFirstDayOfMonth(Date dateTime) {
         return getFirstDay(dateTime, Calendar.DAY_OF_MONTH);
     }
 
     /**
-     * È¡Ò»ÖÜµÄµÚÒ»ÌìÈÕÆÚ¡£
+     * å–ä¸€å‘¨çš„ç¬¬ä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getFirstDayOfWeek(Date dateTime) {
         return getFirstDay(dateTime, Calendar.DAY_OF_WEEK);
     }
 
     /**
-     * È¡Ò»ÄêµÄµÚÒ»ÌìÈÕÆÚ¡£
+     * å–ä¸€å¹´çš„ç¬¬ä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getFirstDayOfYear(Date dateTime) {
         return getFirstDay(dateTime, Calendar.DAY_OF_YEAR);
     }
 
     /**
-     * È¡Ò»ÌìµÄ¿ªÊ¼Ê±¼ä¡£
+     * å–ä¸€å¤©çš„å¼€å§‹æ—¶é—´ã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getFirstTimeOfDay(Date dateTime) {
         return DateUtils.clear(DateUtils.HOUR, dateTime);
@@ -234,40 +234,40 @@ public class DateUtils {
     }
 
     /**
-     * È¡ÔÂ·İµÄ×îºóÒ»ÌìÈÕÆÚ¡£
+     * å–æœˆä»½çš„æœ€åä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getLastDayOfMonth(Date dateTime) {
         return getLastDay(dateTime, Calendar.DAY_OF_MONTH);
     }
 
     /**
-     * È¡Ò»ÖÜµÄ×îºóÒ»ÌìÈÕÆÚ¡£
+     * å–ä¸€å‘¨çš„æœ€åä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getLastDayOfWeek(Date dateTime) {
         return getLastDay(dateTime, Calendar.DAY_OF_WEEK);
     }
 
     /**
-     * È¡Ò»ÄêµÄ×îºóÒ»ÌìÈÕÆÚ¡£
+     * å–ä¸€å¹´çš„æœ€åä¸€å¤©æ—¥æœŸã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getLastDayOfYear(Date dateTime) {
         return getLastDay(dateTime, Calendar.DAY_OF_YEAR);
     }
 
     /**
-     * È¡Ò»ÌìµÄ×îºóÊ±¼ä¡£
+     * å–ä¸€å¤©çš„æœ€åæ—¶é—´ã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
-     * @return µÃµ½µÄÊ±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
+     * @return å¾—åˆ°çš„æ—¶é—´ã€‚
      */
     public static Date getLastTimeOfDay(Date dateTime) {
         Calendar calendar = new GregorianCalendar();
@@ -280,9 +280,9 @@ public class DateUtils {
     }
 
     /**
-     * ÊÇ·ñÊÇÈòÄê¡£
+     * æ˜¯å¦æ˜¯é—°å¹´ã€‚
      *
-     * @param dateTime µ±Ç°Ê±¼ä¡£
+     * @param dateTime å½“å‰æ—¶é—´ã€‚
      * @return
      */
     public static boolean isLeapYear(Date dateTime) {
@@ -292,7 +292,7 @@ public class DateUtils {
     }
 
     /**
-     * µ±Ç°Ê±¼ä¡£
+     * å½“å‰æ—¶é—´ã€‚
      *
      * @return
      */
@@ -310,11 +310,11 @@ public class DateUtils {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÈÕÆÚ¡£
+     * ç”±å­—ä¸²è§£ææ—¥æœŸã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     public static Date parse(String text, Date defaultValue) {
         Date value = defaultValue;
@@ -349,7 +349,7 @@ public class DateUtils {
     }
 
     /**
-     * ÉèÖÃµ±Ç°Ê±¼ä¡£
+     * è®¾ç½®å½“å‰æ—¶é—´ã€‚
      */
     public static void setCurrentDate(Date date) {
         if (Environment.isTestEnabled())

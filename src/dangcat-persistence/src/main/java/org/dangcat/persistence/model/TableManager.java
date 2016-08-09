@@ -3,111 +3,111 @@ package org.dangcat.persistence.model;
 import org.dangcat.persistence.exception.TableException;
 
 /**
- * ±í¹ÜÀíÆ÷¡£
+ * è¡¨ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
 public interface TableManager {
     /**
-     * ÔÚµ±Ç°µÄÊı¾İÔ´ÖĞ¹¹½¨Êı¾İ±í¡£
+     * åœ¨å½“å‰çš„æ•°æ®æºä¸­æ„å»ºæ•°æ®è¡¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return ½¨±í½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return å»ºè¡¨ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int create(Table table) throws TableException;
 
     /**
-     * É¾³ıÖ¸¶¨±íµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return É¾³ıÊıÁ¿¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return åˆ é™¤æ•°é‡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int delete(Table table) throws TableException;
 
     /**
-     * É¾³ıÖ¸¶¨µÄ±í¡£
+     * åˆ é™¤æŒ‡å®šçš„è¡¨ã€‚
      *
-     * @param tableName ±íÃû¡£
-     * @return É¾³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param tableName è¡¨åã€‚
+     * @return åˆ é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int drop(String tableName) throws TableException;
 
     /**
-     * É¾³ıÖ¸¶¨µÄ±í¡£
+     * åˆ é™¤æŒ‡å®šçš„è¡¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return É¾³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return åˆ é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int drop(Table table) throws TableException;
 
     /**
-     * Ö´ĞĞ±íµÄSQLÓï¾ä¡£
+     * æ‰§è¡Œè¡¨çš„SQLè¯­å¥ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return Ö´ĞĞ½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int execute(Table table) throws TableException;
 
     /**
-     * ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨ã€‚
      *
-     * @param tableName ±íÃû¡£
-     * @return ÊÇ·ñ´æÔÚ¡£
+     * @param tableName è¡¨åã€‚
+     * @return æ˜¯å¦å­˜åœ¨ã€‚
      */
     boolean exists(String tableName);
 
     /**
-     * ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return ÊÇ·ñ´æÔÚ¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ˜¯å¦å­˜åœ¨ã€‚
      */
     boolean exists(Table table);
 
     /**
-     * ÔØÈëÖ¸¶¨±íµÄÊı¾İ¡£
+     * è½½å…¥æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     void load(Table table) throws TableException;
 
     /**
-     * ÔØÈëÔªÊı¾İÄÚÈİ¡£
+     * è½½å…¥å…ƒæ•°æ®å†…å®¹ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     void loadMetaData(Table table) throws TableException;
 
     /**
-     * ´æ´¢Ö¸¶¨±íµÄÊı¾İ¡£
+     * å­˜å‚¨æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     void save(Table table) throws TableException;
 
     /**
-     * Çå³ıÖ¸¶¨±íÊı¾İ¡£
+     * æ¸…é™¤æŒ‡å®šè¡¨æ•°æ®ã€‚
      *
-     * @param tableName ±íÃû³Æ¡£
-     * @return Çå³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param tableName è¡¨åç§°ã€‚
+     * @return æ¸…é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int truncate(String tableName) throws TableException;
 
     /**
-     * Çå³ıÖ¸¶¨±íÊı¾İ¡£
+     * æ¸…é™¤æŒ‡å®šè¡¨æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @return Çå³ı½á¹û¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @return æ¸…é™¤ç»“æœã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     int truncate(Table table) throws TableException;
 

@@ -8,36 +8,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ¹ıÂË×éºÏ¡£
+ * è¿‡æ»¤ç»„åˆã€‚
  *
  * @author dangcat
  */
 public class FilterGroup implements FilterExpress, ValueObject, CloneAble<FilterExpress> {
     private static final long serialVersionUID = 1L;
     /**
-     * ±í´ï×éºÏ¡£
+     * è¡¨è¾¾ç»„åˆã€‚
      */
     private List<FilterExpress> filterExpressList = new ArrayList<FilterExpress>();
     /**
-     * ×éºÏÀàĞÍ¡£
+     * ç»„åˆç±»å‹ã€‚
      */
     private FilterGroupType groupType = FilterGroupType.and;
     /**
-     * ¹ıÂËÃû³Æ¡£
+     * è¿‡æ»¤åç§°ã€‚
      */
     private Object value;
 
     /**
-     * ¹¹Ôì¹ıÂË×éºÏ£¬Ä¬ÈÏ¹ØÏµÊÇAND¡£
+     * æ„é€ è¿‡æ»¤ç»„åˆï¼Œé»˜è®¤å…³ç³»æ˜¯ANDã€‚
      */
     public FilterGroup() {
     }
 
     /**
-     * Í¨¹ı×éºÏ¹ØÏµºÍ±í´ïÊ½¹¹Ôì¹ıÂË×éºÏ¡£
+     * é€šè¿‡ç»„åˆå…³ç³»å’Œè¡¨è¾¾å¼æ„é€ è¿‡æ»¤ç»„åˆã€‚
      *
-     * @param groupType       ×éºÏ¹ØÏµ¡£
-     * @param filterExpresses ±í´ïÊ½Êı×é¡£
+     * @param groupType       ç»„åˆå…³ç³»ã€‚
+     * @param filterExpresses è¡¨è¾¾å¼æ•°ç»„ã€‚
      */
     public FilterGroup(FilterGroupType groupType, FilterExpress... filterExpresses) {
         this.groupType = groupType;
@@ -45,10 +45,10 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * ¹¹Ôì¹ıÂË×éºÏ£¬Ä¬ÈÏ¹ØÏµÊÇAND¡£
+     * æ„é€ è¿‡æ»¤ç»„åˆï¼Œé»˜è®¤å…³ç³»æ˜¯ANDã€‚
      *
-     * @param name      ¹ıÂË×éÃû¡£
-     * @param groupType ×éºÏ¹ØÏµ¡£
+     * @param name      è¿‡æ»¤ç»„åã€‚
+     * @param groupType ç»„åˆå…³ç³»ã€‚
      */
     public FilterGroup(Object value, FilterGroupType groupType) {
         this.value = value;
@@ -56,9 +56,9 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * Ìí¼Ó±í´ïÊ½¡£
+     * æ·»åŠ è¡¨è¾¾å¼ã€‚
      *
-     * @param filterExpresses ±í´ïÊ½Êı×é¡£
+     * @param filterExpresses è¡¨è¾¾å¼æ•°ç»„ã€‚
      */
     public void add(FilterExpress... filterExpresses) {
         if (filterExpresses != null && filterExpresses.length > 0) {
@@ -68,11 +68,11 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * Ìí¼Ó±í´ïÊ½¡£
+     * æ·»åŠ è¡¨è¾¾å¼ã€‚
      *
-     * @param fieldName  ×Ö¶ÎÃû¡£
-     * @param filterType ¹ıÂËÀàĞÍ¡£
-     * @param params     ¹ıÂË²ÎÊı¡£
+     * @param fieldName  å­—æ®µåã€‚
+     * @param filterType è¿‡æ»¤ç±»å‹ã€‚
+     * @param params     è¿‡æ»¤å‚æ•°ã€‚
      */
     public FilterUnit add(String fieldName, FilterType filterType, Object... params) {
         FilterUnit filterUnit = null;
@@ -84,7 +84,7 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * Çå³ıËùÓĞ±í´ïÊ½¡£
+     * æ¸…é™¤æ‰€æœ‰è¡¨è¾¾å¼ã€‚
      */
     public void clear() {
         this.filterExpressList.clear();
@@ -102,9 +102,9 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * ÅĞ¶Ï¹ıÂË×é±ğÖĞÊÇ·ñ°üº¬¹ıÂË¶ÔÏó¡£
+     * åˆ¤æ–­è¿‡æ»¤ç»„åˆ«ä¸­æ˜¯å¦åŒ…å«è¿‡æ»¤å¯¹è±¡ã€‚
      *
-     * @param filterExpress ¹ıÂË¶ÔÏó¡£
+     * @param filterExpress è¿‡æ»¤å¯¹è±¡ã€‚
      */
     public boolean contains(FilterExpress filterExpress) {
         return this.filterExpressList.contains(filterExpress);
@@ -132,10 +132,10 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * ÅĞ¶ÏÊı¾İÊÇ·ñÂú×ãÒªÇó¡£
+     * åˆ¤æ–­æ•°æ®æ˜¯å¦æ»¡è¶³è¦æ±‚ã€‚
      *
-     * @param value Êı¾İ¶ÔÏó¡£
-     * @return Âú×ãÔòÎªtrue£¬·ñÔòÎªfalse¡£
+     * @param value æ•°æ®å¯¹è±¡ã€‚
+     * @return æ»¡è¶³åˆ™ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
      */
     public boolean isValid(Object value) {
         boolean isValid = true;
@@ -154,14 +154,14 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
     }
 
     /**
-     * ×ª³ÉCASE±í´ïÓï¾ä¡£
+     * è½¬æˆCASEè¡¨è¾¾è¯­å¥ã€‚
      */
     public String toCaseExpress() {
         return FilterHelper.toCaseExpress(this);
     }
 
     /**
-     * ×ª³ÉSQL±í´ïÓï¾ä¡£
+     * è½¬æˆSQLè¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public String toString() {
@@ -170,7 +170,7 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
         for (FilterExpress filterExpress : this.getFilterExpressList()) {
             String sql = filterExpress.toString();
             if (!ValueUtils.isEmpty(sql)) {
-                // ÎªÁË·ÀÖ¹Óï¾äÌ«³¤£¬Ã¿20¸ö»»Ò»´ÎĞĞ¡£
+                // ä¸ºäº†é˜²æ­¢è¯­å¥å¤ªé•¿ï¼Œæ¯20ä¸ªæ¢ä¸€æ¬¡è¡Œã€‚
                 if (count > 20) {
                     info.append(Environment.LINE_SEPARATOR);
                     count = 0;
@@ -181,20 +181,20 @@ public class FilterGroup implements FilterExpress, ValueObject, CloneAble<Filter
                     info.append(this.groupType.name().toUpperCase());
                     info.append(" ");
                 }
-                // Èç¹ûÊÇ»òÔËËã£¬ĞèÒª¶Ô×Ó¹ıÂË×é½øĞĞ±£»¤¡£
+                // å¦‚æœæ˜¯æˆ–è¿ç®—ï¼Œéœ€è¦å¯¹å­è¿‡æ»¤ç»„è¿›è¡Œä¿æŠ¤ã€‚
                 if (this.getGroupType() == FilterGroupType.or && filterExpress instanceof FilterGroup)
                     info.append("(");
 
                 info.append(filterExpress);
 
-                // Èç¹ûÊÇ»òÔËËã£¬ĞèÒª¶Ô×Ó¹ıÂË×é½øĞĞ±£»¤¡£
+                // å¦‚æœæ˜¯æˆ–è¿ç®—ï¼Œéœ€è¦å¯¹å­è¿‡æ»¤ç»„è¿›è¡Œä¿æŠ¤ã€‚
                 if (this.getGroupType() == FilterGroupType.or && filterExpress instanceof FilterGroup)
                     info.append(")");
 
                 count++;
             }
         }
-        // Ö»ÓĞÔÚ»ò¹ØÏµ¶øÇÒ±í´ïÊ½¶àÓÚÒ»¸öµÄÇé¿öÏÂ²Å¼ÓÀ¨ºÅ±£»¤¡£
+        // åªæœ‰åœ¨æˆ–å…³ç³»è€Œä¸”è¡¨è¾¾å¼å¤šäºä¸€ä¸ªçš„æƒ…å†µä¸‹æ‰åŠ æ‹¬å·ä¿æŠ¤ã€‚
         if (info.length() > 0 && this.getFilterExpressList().size() > 1 && this.getGroupType() == FilterGroupType.or) {
             info.insert(0, "(");
             info.append(")");

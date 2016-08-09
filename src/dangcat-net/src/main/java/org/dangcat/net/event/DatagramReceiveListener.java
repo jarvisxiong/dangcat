@@ -1,15 +1,15 @@
 package org.dangcat.net.event;
 
 /**
- * ½ÓÊÕÊı¾İÕìÌı½Ó¿Ú¡£
+ * æ¥æ”¶æ•°æ®ä¾¦å¬æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface DatagramReceiveListener {
     /**
-     * ½ÓÊÕÊı¾İ¡£
+     * æ¥æ”¶æ•°æ®ã€‚
      *
-     * @param datagramEvent ½ÓÊÕÊÂ¼ş¡£
+     * @param datagramEvent æ¥æ”¶äº‹ä»¶ã€‚
      */
     void onReceive(DatagramEvent datagramEvent);
 }

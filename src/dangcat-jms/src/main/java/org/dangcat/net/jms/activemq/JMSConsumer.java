@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JMSÏû·Ñ¶ÔÏó¡£
+ * JMSæ¶ˆè´¹å¯¹è±¡ã€‚
  */
 public class JMSConsumer implements MessageListener {
     protected final Logger logger = Logger.getLogger(this.getClass());
@@ -25,9 +25,9 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * Ìí¼ÓÏûÏ¢ÕìÌı¶ÔÏó¡£
+     * æ·»åŠ æ¶ˆæ¯ä¾¦å¬å¯¹è±¡ã€‚
      *
-     * @param messageListener ÏûÏ¢ÕìÌıÆ÷¡£
+     * @param messageListener æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
      */
     public void addMessageListener(MessageListener messageListener) {
         if (messageListener != null && !this.messageListenerList.contains(messageListener))
@@ -54,7 +54,7 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * ³õÊ¼»¯Ïû·Ñ¶ÔÏó¡£
+     * åˆå§‹åŒ–æ¶ˆè´¹å¯¹è±¡ã€‚
      */
     protected void initialize() throws JMSException {
         JMSConnectionPool jmsConnectionPool = this.jmsSession.getJMSConnectionPool();
@@ -83,17 +83,17 @@ public class JMSConsumer implements MessageListener {
         this.messagesReceived++;
         try {
             Session session = this.jmsSession.getSession();
-            // ĞèÒª»Ø¸´ÏûÏ¢¡£
+            // éœ€è¦å›å¤æ¶ˆæ¯ã€‚
             if (message.getJMSReplyTo() != null) {
                 TextMessage textMessage = session.createTextMessage("Reply: " + message.getJMSMessageID());
                 this.replyProducer.send(message.getJMSReplyTo(), textMessage);
             }
 
-            // ´«µİÏûÏ¢¡£
+            // ä¼ é€’æ¶ˆæ¯ã€‚
             for (MessageListener messageListener : this.messageListenerList)
                 messageListener.onMessage(message);
 
-            // ÅúÁ¿´¦ÀíÊÂÎñ
+            // æ‰¹é‡å¤„ç†äº‹åŠ¡
             JMSConnectionPool jmsConnectionPool = this.jmsSession.getJMSConnectionPool();
             long batch = jmsConnectionPool.getBatch();
             if ((this.messagesReceived % batch) == 0) {
@@ -113,7 +113,7 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * Æô¶¯ÕìÌı½ÓÊÕÏûÏ¢¡£
+     * å¯åŠ¨ä¾¦å¬æ¥æ”¶æ¶ˆæ¯ã€‚
      */
     public void receive() throws JMSException {
         if (this.messageListenerList.size() > 0)
@@ -121,10 +121,10 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * Æô¶¯ÕìÌı½ÓÊÕÏûÏ¢¡£
+     * å¯åŠ¨ä¾¦å¬æ¥æ”¶æ¶ˆæ¯ã€‚
      *
-     * @param maxiumMessages ×î´ó½ÓÊÕÊıÁ¿¡£
-     * @throws JMSException ÔËĞĞÒì³£¡£
+     * @param maxiumMessages æœ€å¤§æ¥æ”¶æ•°é‡ã€‚
+     * @throws JMSException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void receive(long maxiumMessages) throws JMSException {
         if (maxiumMessages > 0) {
@@ -138,7 +138,7 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * ÊÍ·Å»á»°¶ÔÏó¡£
+     * é‡Šæ”¾ä¼šè¯å¯¹è±¡ã€‚
      */
     public void release() {
         this.close();
@@ -146,9 +146,9 @@ public class JMSConsumer implements MessageListener {
     }
 
     /**
-     * É¾³ıÏûÏ¢ÕìÌı¶ÔÏó¡£
+     * åˆ é™¤æ¶ˆæ¯ä¾¦å¬å¯¹è±¡ã€‚
      *
-     * @param messageListener ÏûÏ¢ÕìÌı¶ÔÏó¡£
+     * @param messageListener æ¶ˆæ¯ä¾¦å¬å¯¹è±¡ã€‚
      */
     public void removeMessageListener(MessageListener messageListener) {
         if (messageListener != null && this.messageListenerList.contains(messageListener))

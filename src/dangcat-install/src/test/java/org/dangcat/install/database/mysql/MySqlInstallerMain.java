@@ -11,9 +11,9 @@ public class MySqlInstallerMain {
         mySqlInstaller.setDatabaseName("testdb");
         mySqlInstaller.setUser("admin");
         mySqlInstaller.setPassword("admin123");
-        mySqlInstaller.setCharacterSet("gbk");
-        mySqlInstaller.getScripts().add("D:/Work/Database/Mysql 5.1/½Å±¾/create.sql");
-        mySqlInstaller.getScripts().add("D:/Work/Database/Mysql 5.1/½Å±¾/init.sql");
+        mySqlInstaller.setCharacterSet("utf-8");
+        mySqlInstaller.getScripts().add("D:/Work/Database/Mysql 5.1/è„šæœ¬/create.sql");
+        mySqlInstaller.getScripts().add("D:/Work/Database/Mysql 5.1/è„šæœ¬/init.sql");
         mySqlInstaller.config();
         mySqlInstaller.install();
         mySqlInstaller.start();

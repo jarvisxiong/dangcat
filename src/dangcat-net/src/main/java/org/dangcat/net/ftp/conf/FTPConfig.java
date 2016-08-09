@@ -7,7 +7,7 @@ public class FTPConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "FTPConfig";
     private static FTPConfig instance = new FTPConfig();
     /**
-     * ¶ÁÈ¡ÖÜÆÚ£¨Ãë£©¡£
+     * è¯»å–å‘¨æœŸï¼ˆç§’ï¼‰ã€‚
      */
     private long interval = 30;
 
@@ -20,7 +20,7 @@ public class FTPConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static FTPConfig getInstance() {
         return instance;

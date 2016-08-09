@@ -6,7 +6,7 @@ import org.dangcat.persistence.sql.Sql;
 import org.dangcat.persistence.sql.Sqls;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -15,7 +15,7 @@ public class SqlsXmlResolver extends XmlResolver {
     private Sqls sqls = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public SqlsXmlResolver() {
         super(Sqls.class.getSimpleName());
@@ -23,10 +23,10 @@ public class SqlsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @Override
     protected void afterChildCreate(String elementName, Object child) {

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * °´ÕÕÎÄ¼şÇ°×º¡¢ºó×º½øĞĞ¹ıÂË¡£
+ * æŒ‰ç…§æ–‡ä»¶å‰ç¼€ã€åç¼€è¿›è¡Œè¿‡æ»¤ã€‚
  */
 public class FileNameFilter implements FilenameFilter, FileFilter {
     private List<AbstractFileFilter> abstractFileFilterList = new ArrayList<AbstractFileFilter>();
@@ -23,19 +23,19 @@ public class FileNameFilter implements FilenameFilter, FileFilter {
     }
 
     /**
-     * ÒÔÎÄ¼şºó×º¹¹½¨¹ıÂË¡£
+     * ä»¥æ–‡ä»¶åç¼€æ„å»ºè¿‡æ»¤ã€‚
      *
-     * @param suffix ºó×ºÃû¡£
+     * @param suffix åç¼€åã€‚
      */
     public FileNameFilter(String suffix) {
         this.addSuffixFilter(suffix);
     }
 
     /**
-     * ÒÔÎÄ¼şÇ°×º+ºó×º¹¹½¨¹ıÂË¡£
+     * ä»¥æ–‡ä»¶å‰ç¼€+åç¼€æ„å»ºè¿‡æ»¤ã€‚
      *
-     * @param prefix Ç°×ºÃû¡£
-     * @param suffix ºó×ºÃû¡£
+     * @param prefix å‰ç¼€åã€‚
+     * @param suffix åç¼€åã€‚
      */
     public FileNameFilter(String prefix, String suffix) {
         this.addFilter(prefix, suffix);
@@ -92,10 +92,10 @@ public class FileNameFilter implements FilenameFilter, FileFilter {
     }
 
     /**
-     * Ìí¼ÓÇ°×º+ºó×º¹ıÂË±êÖ¾¡£
+     * æ·»åŠ å‰ç¼€+åç¼€è¿‡æ»¤æ ‡å¿—ã€‚
      *
-     * @param prefix Ç°×º¡£
-     * @param suffix ºó×º¡£
+     * @param prefix å‰ç¼€ã€‚
+     * @param suffix åç¼€ã€‚
      */
     public void addFilter(String prefix, String suffix) {
         if (!ValueUtils.isEmpty(prefix) && !ValueUtils.isEmpty(suffix))
@@ -107,9 +107,9 @@ public class FileNameFilter implements FilenameFilter, FileFilter {
     }
 
     /**
-     * Ìí¼ÓÇ°×º¹ıÂË¡£
+     * æ·»åŠ å‰ç¼€è¿‡æ»¤ã€‚
      *
-     * @param prefix Ç°×ºÃû¡£
+     * @param prefix å‰ç¼€åã€‚
      */
     public void addPrefixFilter(String prefix) {
         if (!ValueUtils.isEmpty(prefix))
@@ -117,9 +117,9 @@ public class FileNameFilter implements FilenameFilter, FileFilter {
     }
 
     /**
-     * Ìí¼Óºó×º¹ıÂË¡£
+     * æ·»åŠ åç¼€è¿‡æ»¤ã€‚
      *
-     * @param suffix ºó×º¡£
+     * @param suffix åç¼€ã€‚
      */
     public void addSuffixFilter(String suffix) {
         if (!ValueUtils.isEmpty(suffix))

@@ -15,24 +15,24 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
 /**
- * Öù×´Í³¼ÆÍ¼¡£
+ * æŸ±çŠ¶ç»Ÿè®¡å›¾ã€‚
  *
  * @author dangcat
  */
 public class BarChart extends CategoryChart {
     @Override
     protected JFreeChart createChart() {
-        // ½¨Á¢Í³¼Æ¶ÔÏó¡£
-        JFreeChart chart = ChartFactory.createBarChart(this.getTitle(), // ±êÌâ
-                this.getDomainTitle(), // ºá×ø±ê±êÌâ¡£
-                this.getRangeTitle(), // ×İ×ø±ê±êÌâ¡£
-                new DefaultCategoryDataset(), // Êı¾İÀ´Ô´¡£
-                PlotOrientation.VERTICAL, // ×ø±ê·½Ïò
+        // å»ºç«‹ç»Ÿè®¡å¯¹è±¡ã€‚
+        JFreeChart chart = ChartFactory.createBarChart(this.getTitle(), // æ ‡é¢˜
+                this.getDomainTitle(), // æ¨ªåæ ‡æ ‡é¢˜ã€‚
+                this.getRangeTitle(), // çºµåæ ‡æ ‡é¢˜ã€‚
+                new DefaultCategoryDataset(), // æ•°æ®æ¥æºã€‚
+                PlotOrientation.VERTICAL, // åæ ‡æ–¹å‘
                 true, // include legend
-                true, // ÊÇ·ñÌáÊ¾¡£
+                true, // æ˜¯å¦æç¤ºã€‚
                 false);
 
-        // ÉèÖÃLegendµÄÎ»ÖÃ¡£
+        // è®¾ç½®Legendçš„ä½ç½®ã€‚
         chart.getLegend().setPosition(RectangleEdge.RIGHT);
         this.setShowItemLabel(false);
         this.setDomainAxisVisible(true);
@@ -47,7 +47,7 @@ public class BarChart extends CategoryChart {
         super.iniItemRenderer(categoryItemRenderer, i);
 
         BarRenderer barRenderer = (BarRenderer) categoryItemRenderer;
-        // ÉèÖÃÍâ²¿Ïß¿É¼û
+        // è®¾ç½®å¤–éƒ¨çº¿å¯è§
         barRenderer.setDrawBarOutline(false);
         barRenderer.setItemLabelAnchorOffset(10D);
         barRenderer.setMaximumBarWidth(0.1);

@@ -10,10 +10,10 @@ import java.util.Map;
 
 public abstract class ConnectionPool<T> extends ObjectPool<T> {
     public static final String Password = "password";
-    private static final String[] COMMUNICATION_ERRORS = {"communication", "connection", "socket", "Ì×½Ó×Ö", "Á¬½Ó", "server has gone away"};
+    private static final String[] COMMUNICATION_ERRORS = {"communication", "connection", "socket", "å¥—æ¥å­—", "è¿æ¥", "server has gone away"};
     private String name;
     /**
-     * Á¬½Ó²ÎÊı¡£
+     * è¿æ¥å‚æ•°ã€‚
      */
     private Map<String, String> params = new HashMap<String, String>();
 
@@ -61,7 +61,7 @@ public abstract class ConnectionPool<T> extends ObjectPool<T> {
     }
 
     /**
-     * ³õÊ¼»¯Á¬½Ó³Ø¡£
+     * åˆå§‹åŒ–è¿æ¥æ± ã€‚
      *
      * @throws SessionException
      */
@@ -76,22 +76,22 @@ public abstract class ConnectionPool<T> extends ObjectPool<T> {
     }
 
     /**
-     * ³õÊ¼»¯Á¬½Ó³Ø¡£
+     * åˆå§‹åŒ–è¿æ¥æ± ã€‚
      *
      * @throws SessionException
      */
     protected void initialize(Object instance) throws SessionException {
         for (String propertyName : this.getParams().keySet()) {
             String propertyValue = this.getProperty(propertyName);
-            // ½¨Á¢Çı¶¯³ÌĞò
-            if (propertyName.equalsIgnoreCase(Password)) // ÉèÖÃ¿ÚÁî
+            // å»ºç«‹é©±åŠ¨ç¨‹åº
+            if (propertyName.equalsIgnoreCase(Password)) // è®¾ç½®å£ä»¤
                 propertyValue = decryptPassWord(propertyValue);
             ReflectUtils.setProperty(instance, propertyName, propertyValue);
         }
     }
 
     /**
-     * ÊÇ·ñÎªÍ¨Ñ¶Òì³£¡£
+     * æ˜¯å¦ä¸ºé€šè®¯å¼‚å¸¸ã€‚
      *
      * @param exception
      * @return

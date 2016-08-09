@@ -14,12 +14,12 @@ public class StockMainService extends MainServiceBase {
     public void initialize() {
         super.initialize();
 
-        // ÓÃ»§ĞÅÏ¢·şÎñ¡£
+        // ç”¨æˆ·ä¿¡æ¯æœåŠ¡ã€‚
         UserInfoServiceImpl userInfoService = new UserInfoServiceImpl(this);
         this.addService(UserInfoService.class, userInfoService);
         userInfoService.initialize();
 
-        // ¼ÇÕË·şÎñ
+        // è®°è´¦æœåŠ¡
         AccountingServiceImpl accountingService = new AccountingServiceImpl(this);
         this.addService(AccountingService.class, accountingService);
         accountingService.initialize();

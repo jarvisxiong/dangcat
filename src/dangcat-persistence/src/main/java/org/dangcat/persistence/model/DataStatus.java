@@ -1,20 +1,20 @@
 package org.dangcat.persistence.model;
 
 /**
- * ÊµÌåÊı¾İ×´Ì¬¡£
+ * å®ä½“æ•°æ®çŠ¶æ€ã€‚
  *
  * @author dangcat
  */
 public interface DataStatus {
     /**
-     * ¶ÁÈ¡×´Ì¬¡£
+     * è¯»å–çŠ¶æ€ã€‚
      *
      * @return
      */
     DataState getDataState();
 
     /**
-     * ÉèÖÃ×´Ì¬¡£
+     * è®¾ç½®çŠ¶æ€ã€‚
      *
      * @param dataState
      */

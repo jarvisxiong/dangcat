@@ -1,17 +1,17 @@
 package org.dangcat.persistence;
 
 /**
- * Êı¾İĞ´Èë½Ó¿Ú¡£
+ * æ•°æ®å†™å…¥æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface DataWriter extends DataAccess {
     /**
-     * Ğ´ÈëÖ¸¶¨Î»ÖÃµÄÀ¸Î»Êı¾İ¡£
+     * å†™å…¥æŒ‡å®šä½ç½®çš„æ ä½æ•°æ®ã€‚
      *
-     * @param index     ĞĞÊı¡£
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @return ÊıÖµ¶ÔÏó¡£
+     * @param index     è¡Œæ•°ã€‚
+     * @param fieldName å­—æ®µåã€‚
+     * @return æ•°å€¼å¯¹è±¡ã€‚
      */
     void setValue(int index, String fieldName, Object value);
 }

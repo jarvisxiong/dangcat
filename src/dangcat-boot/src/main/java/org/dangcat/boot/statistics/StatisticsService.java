@@ -1,22 +1,22 @@
 package org.dangcat.boot.statistics;
 
 /**
- * Í³¼Æ·şÎñ¡£
+ * ç»Ÿè®¡æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface StatisticsService {
     /**
-     * Ìí¼ÓÍ³¼Æ¶ÔÏó¡£
+     * æ·»åŠ ç»Ÿè®¡å¯¹è±¡ã€‚
      *
-     * @param statisticsAble Í³¼Æ¶ÔÏó¡£
+     * @param statisticsAble ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     void addStatistics(StatisticsAble statisticsAble);
 
     /**
-     * É¾³ıÍ³¼Æ¶ÔÏó¡£
+     * åˆ é™¤ç»Ÿè®¡å¯¹è±¡ã€‚
      *
-     * @param statisticsAble Í³¼Æ¶ÔÏó¡£
+     * @param statisticsAble ç»Ÿè®¡å¯¹è±¡ã€‚
      */
     void removeStatistics(StatisticsAble statisticsAble);
 }

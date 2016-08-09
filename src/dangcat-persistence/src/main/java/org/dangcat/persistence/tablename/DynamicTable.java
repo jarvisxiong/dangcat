@@ -1,16 +1,16 @@
 package org.dangcat.persistence.tablename;
 
 /**
- * ¶¯Ì¬±í¡£
+ * åŠ¨æ€è¡¨ã€‚
  *
  * @author dangcat
  */
 public interface DynamicTable extends Cloneable {
     /**
-     * ¸ù¾İÊı¾İ¾ö¶¨±íµÄÎ»ÖÃ¡£
+     * æ ¹æ®æ•°æ®å†³å®šè¡¨çš„ä½ç½®ã€‚
      *
-     * @param value Êı¾İ¡£
-     * @return ±íÃû¡£
+     * @param value æ•°æ®ã€‚
+     * @return è¡¨åã€‚
      */
     String getName(Object value);
 }

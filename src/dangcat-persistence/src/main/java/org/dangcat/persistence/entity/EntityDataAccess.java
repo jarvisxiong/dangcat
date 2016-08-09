@@ -6,7 +6,7 @@ import org.dangcat.persistence.model.Table;
 import java.util.List;
 
 /**
- * Entity¶ÔÏóÊı¾İ¶ÁÈ¡Æ÷¡£
+ * Entityå¯¹è±¡æ•°æ®è¯»å–å™¨ã€‚
  *
  * @author dangcat
  */

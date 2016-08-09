@@ -8,7 +8,7 @@ import org.dangcat.persistence.model.DataStatus;
 import java.util.*;
 
 /**
- * ÊµÌå»á»°¡£
+ * å®ä½“ä¼šè¯ã€‚
  *
  * @author dangcat
  */
@@ -64,10 +64,10 @@ public class SaveEntityContext extends EntityContext {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>    ÊµÌåÀàĞÍ¡£
-     * @param entity ÊµÌå¶ÔÏó¡£
+     * @param <T>    å®ä½“ç±»å‹ã€‚
+     * @param entity å®ä½“å¯¹è±¡ã€‚
      * @throws EntityException
      */
     public void delete(Object entity) throws EntityException {
@@ -83,10 +83,10 @@ public class SaveEntityContext extends EntityContext {
     }
 
     /**
-     * ÊµÌåÀàĞÍµÄ»º³å¡£
+     * å®ä½“ç±»å‹çš„ç¼“å†²ã€‚
      *
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @return »º³å¶ÔÏó¡£
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @return ç¼“å†²å¯¹è±¡ã€‚
      */
     public EntityPending getEntityPending(Class<?> entityClass) {
         EntityPending entityPending = this.entityPendingMap.get(entityClass);
@@ -142,11 +142,11 @@ public class SaveEntityContext extends EntityContext {
     }
 
     /**
-     * ±£´æÖ¸¶¨ÊµÌå¶ÔÏó¡£
+     * ä¿å­˜æŒ‡å®šå®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>    ÊµÌåÀàĞÍ¡£
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ±£´æ½á¹û¡£
+     * @param <T>    å®ä½“ç±»å‹ã€‚
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return ä¿å­˜ç»“æœã€‚
      * @throws EntityException
      */
     public void save(Object entity) throws EntityException {
@@ -164,9 +164,9 @@ public class SaveEntityContext extends EntityContext {
     }
 
     /**
-     * Òª²Ù×÷µÄÊµÌåÊıÁ¿¡£
+     * è¦æ“ä½œçš„å®ä½“æ•°é‡ã€‚
      *
-     * @return ×ÜÊıÁ¿¡£
+     * @return æ€»æ•°é‡ã€‚
      */
     public int size() {
         int size = 0;

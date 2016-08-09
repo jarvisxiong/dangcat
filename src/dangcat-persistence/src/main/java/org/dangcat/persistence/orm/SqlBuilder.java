@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ¶¯Ì¬²éÑ¯Óï¾ä¡£
+ * åŠ¨æ€æŸ¥è¯¢è¯­å¥ã€‚
  *
  * @author dangcat
  */
@@ -31,23 +31,23 @@ public class SqlBuilder implements java.io.Serializable {
     public static final String TABLENAME_FLAG = "${" + TABLENAME + "}";
 
     /**
-     * Óï¾ä½ØÖ¹·û¡£
+     * è¯­å¥æˆªæ­¢ç¬¦ã€‚
      */
     private String delimiter = DEFAULT_DELIMITER;
     /**
-     * ¸½¼Ó¹ıÂËÌõ¼ş¡£
+     * é™„åŠ è¿‡æ»¤æ¡ä»¶ã€‚
      */
     private String filter = null;
     /**
-     * ²ÎÊıÓ³Éä±í¡£
+     * å‚æ•°æ˜ å°„è¡¨ã€‚
      */
     private Map<String, Object> params = null;
     /**
-     * ²éÑ¯Óï¾ä×éºÏ¶ÔÏó¡£
+     * æŸ¥è¯¢è¯­å¥ç»„åˆå¯¹è±¡ã€‚
      */
     private StringBuilder sqlBuilder = new StringBuilder();
     /**
-     * ±íÃû¡£
+     * è¡¨åã€‚
      */
     private String tableName = null;
 
@@ -59,14 +59,14 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * Ìí¼ÓÅúÁ¿Óï¾ä¡£
+     * æ·»åŠ æ‰¹é‡è¯­å¥ã€‚
      */
     public void addBatch() {
         this.sqlBuilder.append(this.getDelimiter());
     }
 
     /**
-     * Ìí¼ÓÅúÁ¿Óï¾ä£¬È¥µô¿ÕÓï¾ä¡£
+     * æ·»åŠ æ‰¹é‡è¯­å¥ï¼Œå»æ‰ç©ºè¯­å¥ã€‚
      */
     private void addBatch(List<String> batchSqlList, String sql) {
         if (sql != null) {
@@ -81,9 +81,9 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * Ìí¼ÓÅúÁ¿Óï¾ä¡£
+     * æ·»åŠ æ‰¹é‡è¯­å¥ã€‚
      *
-     * @param subSqlExpress ±í´ï×Ó¾ä¡£
+     * @param subSqlExpress è¡¨è¾¾å­å¥ã€‚
      */
     public void addBatch(String subSqlExpress) {
         this.sqlBuilder.append(subSqlExpress);
@@ -91,16 +91,16 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * Ìí¼Ó²éÑ¯Óï¾ä¡£
+     * æ·»åŠ æŸ¥è¯¢è¯­å¥ã€‚
      *
-     * @param subSqlExpress ±í´ï×Ó¾ä¡£
+     * @param subSqlExpress è¡¨è¾¾å­å¥ã€‚
      */
     public void append(String subSqlExpress) {
         this.sqlBuilder.append(subSqlExpress);
     }
 
     /**
-     * Çå³ıËùÓĞÓï¾ä¡£
+     * æ¸…é™¤æ‰€æœ‰è¯­å¥ã€‚
      */
     public void clear() {
         this.sqlBuilder = new StringBuilder();
@@ -152,11 +152,11 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * ÅĞ¶Ïµ±Ç°Î»ÖÃÊÇ·ñÊÇ·Ö¸î×Ö·û¡£
+     * åˆ¤æ–­å½“å‰ä½ç½®æ˜¯å¦æ˜¯åˆ†å‰²å­—ç¬¦ã€‚
      *
-     * @param sql        Ô­Ê¼Óï¾ä¡£
-     * @param beginIndex ÆğÊ¼Î»ÖÃ¡£
-     * @return ÊÇ·ñ·Ö¸î¡£
+     * @param sql        åŸå§‹è¯­å¥ã€‚
+     * @param beginIndex èµ·å§‹ä½ç½®ã€‚
+     * @return æ˜¯å¦åˆ†å‰²ã€‚
      */
     private boolean isDelimiter(String sql, int beginIndex) {
         String delimiter = this.getDelimiter();
@@ -171,7 +171,7 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * ·µ»ØÓï¾ä³¤¶È¡£
+     * è¿”å›è¯­å¥é•¿åº¦ã€‚
      */
     public int length() {
         return this.sqlBuilder.length();
@@ -182,7 +182,7 @@ public class SqlBuilder implements java.io.Serializable {
             try {
                 TextMarker textMarker = new TextMarker();
                 textMarker.setTemplate(sqlExpress);
-                // Ìæ»»²ÎÊıÄÚÈİ¡£
+                // æ›¿æ¢å‚æ•°å†…å®¹ã€‚
                 if (this.params != null && this.params.size() > 0) {
                     for (String paramName : this.params.keySet()) {
                         boolean replace = this.isReplace(paramName);
@@ -196,9 +196,9 @@ public class SqlBuilder implements java.io.Serializable {
                             textMarker.putData(paramName, replace ? value : TableStatementHelper.toSqlString(value));
                     }
                 }
-                // Ìæ»»Êı¾İ±íÃû¡£
+                // æ›¿æ¢æ•°æ®è¡¨åã€‚
                 textMarker.putData(TABLENAME, ValueUtils.isEmpty(this.tableName) ? EMPTY : this.tableName);
-                // Ìæ»»¹ıÂËÌõ¼ş¡£
+                // æ›¿æ¢è¿‡æ»¤æ¡ä»¶ã€‚
                 textMarker.putData(FILTER, ValueUtils.isEmpty(this.filter) ? EMPTY : this.filter);
                 sqlExpress = textMarker.process();
                 sqlExpress = this.replaceParams(sqlExpress);
@@ -232,10 +232,10 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * ·Ö¸îÅúÁ¿Óï¾ä¡£
+     * åˆ†å‰²æ‰¹é‡è¯­å¥ã€‚
      *
-     * @param sql Ô­Ê¼Óï¾ä¡£
-     * @return ·Ö¸îÓï¾ä×é¡£
+     * @param sql åŸå§‹è¯­å¥ã€‚
+     * @return åˆ†å‰²è¯­å¥ç»„ã€‚
      */
     private String[] split(String sql) {
         List<String> batchSqlList = new ArrayList<String>();
@@ -248,7 +248,7 @@ public class SqlBuilder implements java.io.Serializable {
             if (!isInText && this.isDelimiter(sql, index)) {
                 this.addBatch(batchSqlList, sqlCache.toString());
                 sqlCache = new StringBuilder();
-                // Èç¹û·Ö¸î·ûÊÇ¶à×Ö·ûĞèÒªÌø¹ı
+                // å¦‚æœåˆ†å‰²ç¬¦æ˜¯å¤šå­—ç¬¦éœ€è¦è·³è¿‡
                 if (this.getDelimiter().length() > 1)
                     index += this.getDelimiter().length() - 1;
             } else
@@ -259,7 +259,7 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * ·µ»ØÔ­Ê¼µÄ±í´ïÓï¾ä¡£
+     * è¿”å›åŸå§‹çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     public String toOrigString() {
         if (this.sqlBuilder != null)
@@ -268,7 +268,7 @@ public class SqlBuilder implements java.io.Serializable {
     }
 
     /**
-     * ·µ»ØºÏ³ÉºóµÄ±í´ïÓï¾ä¡£
+     * è¿”å›åˆæˆåçš„è¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public String toString() {

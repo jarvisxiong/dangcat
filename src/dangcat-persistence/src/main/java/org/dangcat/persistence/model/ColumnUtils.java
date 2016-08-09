@@ -55,7 +55,7 @@ class ColumnUtils {
     }
 
     /**
-     * Êä³ö×Ö¶ÎÄÚÈÝ¡£
+     * è¾“å‡ºå­—æ®µå†…å®¹ã€‚
      */
     protected static String toString(Column column) {
         StringBuffer info = new StringBuffer();

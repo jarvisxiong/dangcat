@@ -13,7 +13,7 @@ import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.framework.service.annotation.Service;
 
 /**
- * ÏµÍ³¼à¿Ø·şÎñ¡£
+ * ç³»ç»Ÿç›‘æ§æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -24,9 +24,9 @@ public class ServerMonitorServiceImpl extends ThreadService {
     private EventSendService eventSendService = null;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      */
     public ServerMonitorServiceImpl(ServiceProvider parent) {
         super(parent, SERVICE_NAME);
@@ -70,7 +70,7 @@ public class ServerMonitorServiceImpl extends ThreadService {
     }
 
     /**
-     * ¶ÀÁ¢Ïß³ÌÖ´ĞĞ½Ó¿Ú¡£
+     * ç‹¬ç«‹çº¿ç¨‹æ‰§è¡Œæ¥å£ã€‚
      */
     @Override
     protected void innerExecute() {

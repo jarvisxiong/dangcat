@@ -5,28 +5,28 @@ import org.dangcat.commons.reflect.Permission;
 import java.util.Map;
 
 /**
- * È¨ÏŞ¿ØÖÆ±í¡£
+ * æƒé™æ§åˆ¶è¡¨ã€‚
  *
  * @author dangcat
  */
 public interface PermissionProvider {
     /**
-     * ¶ÁÈ¡·½·¨µÄÈ¨ÏŞ¶ÔÏó¡£
+     * è¯»å–æ–¹æ³•çš„æƒé™å¯¹è±¡ã€‚
      *
-     * @param methodName ·½·¨Ãû¡£
-     * @return È¨ÏŞ¶ÔÏó¡£
+     * @param methodName æ–¹æ³•åã€‚
+     * @return æƒé™å¯¹è±¡ã€‚
      */
     Permission getMethodPermission(String methodName);
 
     /**
-     * Ìá¹©È¨ÏŞ¿ØÖÆÓ³Éä±í¡£
+     * æä¾›æƒé™æ§åˆ¶æ˜ å°„è¡¨ã€‚
      */
     Map<Integer, Permission> getPermissionMap();
 
     /**
-     * ¶ÁÈ¡¸ùÈ¨ÏŞ¶ÔÏó¡£
+     * è¯»å–æ ¹æƒé™å¯¹è±¡ã€‚
      *
-     * @return È¨ÏŞ¶ÔÏó¡£
+     * @return æƒé™å¯¹è±¡ã€‚
      */
     Permission getRootPermission();
 }

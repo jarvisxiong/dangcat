@@ -4,7 +4,7 @@ public class NoValidator extends RegexValidator {
     private static final String PATTERN = "[a-zA-Z0-9_]{";
 
     public NoValidator(int minLength, int maxLength) {
-        // 允许5-16字节，允许字母数字下划线
+        // 鍏佽5-16瀛楄妭锛屽厑璁稿瓧姣嶆暟瀛椾笅鍒掔嚎
         super(PATTERN + minLength + "," + maxLength + "}$", true);
     }
 }

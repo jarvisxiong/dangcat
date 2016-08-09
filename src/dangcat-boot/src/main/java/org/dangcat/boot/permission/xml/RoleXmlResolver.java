@@ -3,7 +3,7 @@ package org.dangcat.boot.permission.xml;
 import org.dangcat.commons.serialize.xml.XmlResolver;
 
 /**
- * ½ÇÉ«¶ÔÏó½âÎöÆ÷¡£
+ * è§’è‰²å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -11,12 +11,12 @@ public class RoleXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Role";
     private static final String ROLE_PERMISSION_NAME = "name";
     /**
-     * ½ÇÉ«È¨ÏŞ¡£
+     * è§’è‰²æƒé™ã€‚
      */
     private RolePermission rolePermission = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public RoleXmlResolver() {
         super(RESOLVER_NAME);

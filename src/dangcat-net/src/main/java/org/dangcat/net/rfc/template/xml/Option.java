@@ -1,17 +1,17 @@
 package org.dangcat.net.rfc.template.xml;
 
 /**
- * ²ÎÊı¶ÔÏó
+ * å‚æ•°å¯¹è±¡
  *
  * @author dangcat
  */
 public class Option {
     /**
-     * Ñ¡ÏîÖµ¡£
+     * é€‰é¡¹å€¼ã€‚
      */
     private Integer key;
     /**
-     * Ñ¡ÏîÃû¡£
+     * é€‰é¡¹åã€‚
      */
     private String value;
 

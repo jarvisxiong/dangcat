@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * ¶¨Ê±Ğ¡ÄÖÖÓ¡£
+ * å®šæ—¶å°é—¹é’Ÿã€‚
  *
  * @author dangcat
  */
@@ -87,7 +87,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock> {
     }
 
     /**
-     * ´¥·¢Ä¿±ê¡£
+     * è§¦å‘ç›®æ ‡ã€‚
      */
     public void setTarget(Object target) {
         this.target = target;
@@ -116,7 +116,7 @@ public abstract class AlarmClock implements Comparable<AlarmClock> {
     }
 
     /**
-     * ÊÇ·ñµ½´ïÊ±¼ä¡£
+     * æ˜¯å¦åˆ°è¾¾æ—¶é—´ã€‚
      */
     public abstract boolean isTimeout(Calendar calendar);
 

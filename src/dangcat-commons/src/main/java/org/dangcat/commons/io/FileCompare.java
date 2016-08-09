@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÎÄ¼þ±È½ÏÆ÷¡£
+ * æ–‡ä»¶æ¯”è¾ƒå™¨ã€‚
  */
 public class FileCompare {
     public static boolean compare(File srcFile, File destFile) {

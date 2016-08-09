@@ -6,7 +6,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.util.Collection;
 
 /**
- * È¨ÏŞ¶ÔÏó½âÎöÆ÷¡£
+ * æƒé™å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -14,7 +14,7 @@ public class PermissionsXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Permissions";
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public PermissionsXmlResolver() {
         super(RESOLVER_NAME);

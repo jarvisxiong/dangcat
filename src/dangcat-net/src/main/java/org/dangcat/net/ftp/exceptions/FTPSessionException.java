@@ -3,7 +3,7 @@ package org.dangcat.net.ftp.exceptions;
 import org.dangcat.framework.exception.ServiceException;
 
 /**
- * »á»°²úÉúµÄÒì³£¡£
+ * ä¼šè¯äº§ç”Ÿçš„å¼‚å¸¸ã€‚
  *
  * @author dangcat
  */

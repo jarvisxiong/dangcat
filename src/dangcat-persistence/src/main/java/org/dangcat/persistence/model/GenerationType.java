@@ -1,7 +1,7 @@
 package org.dangcat.persistence.model;
 
 /**
- * ×ÔÔö×Ö¶Î²úÉúÀàĞÍ¡£
+ * è‡ªå¢å­—æ®µäº§ç”Ÿç±»å‹ã€‚
  *
  * @author dangcat
  */

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÊôĞÔÄ£°å¡£
+ * å±æ€§æ¨¡æ¿ã€‚
  *
  * @author dangcat
  */
@@ -20,31 +20,31 @@ public abstract class AttributeTemplate {
     public static final int OFFSET = 2;
     protected static final Logger logger = Logger.getLogger(AttributeTemplate.class);
     /**
-     * ÊÇ·ñ¼ÓÃÜ¡£
+     * æ˜¯å¦åŠ å¯†ã€‚
      */
     private boolean encrypt = false;
     /**
-     * ÊôĞÔÃû³Æ¡£
+     * å±æ€§åç§°ã€‚
      */
     private String name;
     /**
-     * ²ÎÊıÁĞ±í¡£
+     * å‚æ•°åˆ—è¡¨ã€‚
      */
     private Map<String, Object> params = null;
     /**
-     * ÊôĞÔ±àºÅ¡£
+     * å±æ€§ç¼–å·ã€‚
      */
     private Integer type;
     /**
-     * ÊôĞÔÄ£°å¹ÜÀí¡£
+     * å±æ€§æ¨¡æ¿ç®¡ç†ã€‚
      */
     private VendorAttributeTemplateManager vendorAttributeTemplateManager = null;
 
     /**
-     * ²úÉúÊôĞÔÄ£°å¡£
+     * äº§ç”Ÿå±æ€§æ¨¡æ¿ã€‚
      *
-     * @param dataType Êı¾İÀàĞÍ¡£
-     * @return ²úÉúµÄÊôĞÔÄ£°å¡£
+     * @param dataType æ•°æ®ç±»å‹ã€‚
+     * @return äº§ç”Ÿçš„å±æ€§æ¨¡æ¿ã€‚
      */
     public static AttributeTemplate createInstance(AttributeDataType dataType) {
         AttributeTemplate attributeTemplate = null;
@@ -66,10 +66,10 @@ public abstract class AttributeTemplate {
     }
 
     /**
-     * ÔÚ±¾»ùÏßÄ£°åÉÏ½¨Á¢ĞÂµÄÊôĞÔ¶ÔÏó¡£
+     * åœ¨æœ¬åŸºçº¿æ¨¡æ¿ä¸Šå»ºç«‹æ–°çš„å±æ€§å¯¹è±¡ã€‚
      *
-     * @param value ÊôĞÔÖµ¡£
-     * @return ÊôĞÔ¶ÔÏó¡£
+     * @param value å±æ€§å€¼ã€‚
+     * @return å±æ€§å¯¹è±¡ã€‚
      * @throws ProtocolValidateException
      */
     public AttributeData createAttribute(Object value) throws ProtocolParseException {
@@ -79,26 +79,26 @@ public abstract class AttributeTemplate {
     }
 
     /**
-     * ÊôĞÔÀàĞÍ¡£
+     * å±æ€§ç±»å‹ã€‚
      */
     public abstract AttributeDataType getDataType();
 
     /**
-     * ÊôĞÔÈ«Ãû³Æ¡£
+     * å±æ€§å…¨åç§°ã€‚
      */
     public String getFullName() {
         return this.name + "(" + this.type + ")";
     }
 
     /**
-     * ÊôĞÔ×î´ó³¤¶È¡£
+     * å±æ€§æœ€å¤§é•¿åº¦ã€‚
      */
     public int getMaxLength() {
         return -1;
     }
 
     /**
-     * ÊôĞÔÃû³Æ¡£
+     * å±æ€§åç§°ã€‚
      */
     public String getName() {
         return this.name;
@@ -115,7 +115,7 @@ public abstract class AttributeTemplate {
     }
 
     /**
-     * ÊôĞÔ±àºÅ¡£
+     * å±æ€§ç¼–å·ã€‚
      */
     public Integer getType() {
         return this.type;
@@ -142,29 +142,29 @@ public abstract class AttributeTemplate {
     }
 
     /**
-     * ×ª»»³É×Ö½ÚÊı×é¡£
+     * è½¬æ¢æˆå­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param outputStream Êä³öÁ÷¶ÔÏó¡£
-     * @param attribute    ÊôĞÔÖµ¡£
-     * @return ×ª»»ºóµÄ×Ö½Ú¡£
+     * @param outputStream è¾“å‡ºæµå¯¹è±¡ã€‚
+     * @param attribute    å±æ€§å€¼ã€‚
+     * @return è½¬æ¢åçš„å­—èŠ‚ã€‚
      */
     protected abstract void outputValue(ByteArrayOutputStream outputStream, AttributeData attribute) throws IOException;
 
     /**
-     * ½âÎöÊôĞÔ¡£
+     * è§£æå±æ€§ã€‚
      *
-     * @param bytes      Ô­Ê¼Êı¾İ¡£
-     * @param beginIndex ÆğÊ¼Ë÷ÒıÎ»ÖÃ¡£
-     * @param length     ³¤¶È¡£
-     * @return ÊôĞÔ¶ÔÏó¡£
+     * @param bytes      åŸå§‹æ•°æ®ã€‚
+     * @param beginIndex èµ·å§‹ç´¢å¼•ä½ç½®ã€‚
+     * @param length     é•¿åº¦ã€‚
+     * @return å±æ€§å¯¹è±¡ã€‚
      */
     public abstract AttributeData parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException;
 
     /**
-     * ×ª»»³É×Ö½ÚÊı×é¡£
+     * è½¬æ¢æˆå­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param attributeData ÊôĞÔÖµ¡£
-     * @return ×ª»»ºóµÄ×Ö½Ú¡£
+     * @param attributeData å±æ€§å€¼ã€‚
+     * @return è½¬æ¢åçš„å­—èŠ‚ã€‚
      */
     public byte[] toBytes(AttributeData attributeData) {
         byte[] bytes = null;
@@ -187,7 +187,7 @@ public abstract class AttributeTemplate {
     }
 
     /**
-     * ÑéÖ¤ÊôĞÔÊÇ·ñÓĞĞ§¡£
+     * éªŒè¯å±æ€§æ˜¯å¦æœ‰æ•ˆã€‚
      */
     public void validate(Object value) throws ProtocolValidateException {
         if (value == null)

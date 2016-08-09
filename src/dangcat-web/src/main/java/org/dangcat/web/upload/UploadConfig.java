@@ -4,7 +4,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.dangcat.boot.config.ServiceConfig;
 
 /**
- * ÉÏ´«ÅäÖÃ¡£
+ * ä¸Šä¼ é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -15,15 +15,15 @@ public class UploadConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "Upload";
     private static UploadConfig instance = new UploadConfig();
     /**
-     * ×î´óÄÚ´æ¡£
+     * æœ€å¤§å†…å­˜ã€‚
      */
     private Integer maxMemorySize = DiskFileItemFactory.DEFAULT_SIZE_THRESHOLD;
     /**
-     * ×î´óÎÄ¼şÉÏ´«¡£
+     * æœ€å¤§æ–‡ä»¶ä¸Šä¼ ã€‚
      */
     private Integer maxRequestSize = null;
     /**
-     * ÁÙÊ±Ä¿Â¼Â·¾¶¡£
+     * ä¸´æ—¶ç›®å½•è·¯å¾„ã€‚
      */
     private String repository = System.getProperty("java.io.tmpdir");
 
@@ -38,7 +38,7 @@ public class UploadConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static UploadConfig getInstance() {
         return instance;

@@ -1,27 +1,27 @@
 package org.dangcat.commons.serialize.xml;
 
 /**
- * ÊôĞÔ¶ÔÏó½âÎöÆ÷¡£
+ * å±æ€§å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class PropertyXmlResolver extends XmlResolver {
     /**
-     * ÊôĞÔ¶ÔÏó¡£
+     * å±æ€§å¯¹è±¡ã€‚
      */
     private Property property = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public PropertyXmlResolver() {
         super(Property.class.getSimpleName());
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     @Override
     protected void resolveElementText(String valueText) {
@@ -29,7 +29,7 @@ public class PropertyXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

@@ -3,7 +3,7 @@ package org.dangcat.commons.resource;
 import java.util.*;
 
 /**
- * ×ÊÔ´¹ÜÀíÆ÷¡£
+ * èµ„æºç®¡ç†å™¨ã€‚
  */
 public class ResourceManager {
     private static ResourceManager instance = new ResourceManager();
@@ -23,11 +23,11 @@ public class ResourceManager {
     }
 
     /**
-     * ¸ù¾İÎ»ÖÃÃû³ÆºÍ×ÊÔ´Ãû³ÆµÃµ½Î»ÖÃ¼¯ºÏ¡£
+     * æ ¹æ®ä½ç½®åç§°å’Œèµ„æºåç§°å¾—åˆ°ä½ç½®é›†åˆã€‚
      *
-     * @param baseName     Î»ÖÃÃû³Æ¡£
-     * @param resourceName ×ÊÔ´Ãû³Æ¡£
-     * @return ×ÊÔ´°ü¼¯ºÏ¡£
+     * @param baseName     ä½ç½®åç§°ã€‚
+     * @param resourceName èµ„æºåç§°ã€‚
+     * @return èµ„æºåŒ…é›†åˆã€‚
      */
     protected List<ResourceBundle> getResourceBundleList(ClassLoader classLoader, String baseName, String resourceName, Locale locale) {
         ResourceLocaleLoader resourceLocaleLoader = this.getResourceLocaleLoader(classLoader);

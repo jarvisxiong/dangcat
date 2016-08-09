@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 class EntityManagerTransaction {
     /**
-     * ÊµÌå¹ÜÀíÆ÷¡£
+     * å®ä½“ç®¡ç†å™¨ã€‚
      */
     protected EntityManagerImpl entityManager = null;
     private SaveEntityContext saveEntityContext = null;
     /**
-     * Êı¾İ¿â»á»°¡£
+     * æ•°æ®åº“ä¼šè¯ã€‚
      */
     private Session session = null;
 

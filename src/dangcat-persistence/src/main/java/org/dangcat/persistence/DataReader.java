@@ -3,32 +3,32 @@ package org.dangcat.persistence;
 import org.dangcat.persistence.filter.FilterExpress;
 
 /**
- * Êı¾İ¶ÁÈ¡½Ó¿Ú¡£
+ * æ•°æ®è¯»å–æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface DataReader extends DataAccess {
     /**
-     * ¶ÁÈ¡¹ıÂËÌõ¼ş¡£
+     * è¯»å–è¿‡æ»¤æ¡ä»¶ã€‚
      */
     FilterExpress getFilterExpress();
 
     /**
-     * ÅäÖÃ¹ıÂËÌõ¼ş¡£
+     * é…ç½®è¿‡æ»¤æ¡ä»¶ã€‚
      */
     void setFilterExpress(FilterExpress filterExpress);
 
     /**
-     * Ö¸¶¨Î»ÖÃµÄÀ¸Î»Êı¾İ¡£
+     * æŒ‡å®šä½ç½®çš„æ ä½æ•°æ®ã€‚
      *
-     * @param index     ĞĞÊı¡£
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @return ÊıÖµ¶ÔÏó¡£
+     * @param index     è¡Œæ•°ã€‚
+     * @param fieldName å­—æ®µåã€‚
+     * @return æ•°å€¼å¯¹è±¡ã€‚
      */
     Object getValue(int index, String fieldName);
 
     /**
-     * Ë¢ĞÂÊı¾İ¡£
+     * åˆ·æ–°æ•°æ®ã€‚
      */
     void refresh();
 }

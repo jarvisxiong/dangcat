@@ -7,7 +7,7 @@ import org.dangcat.persistence.annotation.Table;
 import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
- * ²Ù×÷Í³¼Æ¡£
+ * æ“ä½œç»Ÿè®¡ã€‚
  *
  * @author dangcat
  */

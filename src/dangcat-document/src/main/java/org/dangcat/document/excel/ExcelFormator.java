@@ -4,14 +4,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
- * ¸ñÊ½»¯ÎÄµµ¡£
+ * æ ¼å¼åŒ–æ–‡æ¡£ã€‚
  */
 public interface ExcelFormator {
     /**
-     * ¸ñÊ½»¯ÎÄµµ¡£
+     * æ ¼å¼åŒ–æ–‡æ¡£ã€‚
      *
-     * @param workbook ¹¤×÷²¾¡£
-     * @param sheet    ±êÇ©Ò³¡£
+     * @param workbook å·¥ä½œç°¿ã€‚
+     * @param sheet    æ ‡ç­¾é¡µã€‚
      */
     void format(Workbook workbook, Sheet sheet);
 }

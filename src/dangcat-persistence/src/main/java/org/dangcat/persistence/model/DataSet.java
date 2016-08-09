@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Êı¾İ±í¼¯ºÏ¡£
+ * æ•°æ®è¡¨é›†åˆã€‚
  *
  * @author dangcat
  */
@@ -15,7 +15,7 @@ public class DataSet implements java.io.Serializable {
     private List<Table> tables = new ArrayList<Table>();
 
     /**
-     * Ôö¼ÓÊı¾İ±í¶ÔÏó¡£
+     * å¢åŠ æ•°æ®è¡¨å¯¹è±¡ã€‚
      */
     public void add(Table table) {
         if (!tables.contains(table))
@@ -23,14 +23,14 @@ public class DataSet implements java.io.Serializable {
     }
 
     /**
-     * Êı¾İ±í¼¯ºÏ¡£
+     * æ•°æ®è¡¨é›†åˆã€‚
      */
     public List<Table> getTables() {
         return this.tables;
     }
 
     /**
-     * ÔØÈëÊı¾İ¡£
+     * è½½å…¥æ•°æ®ã€‚
      */
     public void load() throws TableException {
         for (Table table : this.tables)
@@ -38,7 +38,7 @@ public class DataSet implements java.io.Serializable {
     }
 
     /**
-     * É¾³ıÊı¾İ±í¶ÔÏó¡£
+     * åˆ é™¤æ•°æ®è¡¨å¯¹è±¡ã€‚
      */
     public void remove(Table table) {
         if (tables.contains(table))
@@ -46,7 +46,7 @@ public class DataSet implements java.io.Serializable {
     }
 
     /**
-     * ´æ´¢Êı¾İ¡£
+     * å­˜å‚¨æ•°æ®ã€‚
      */
     public void save() throws TableException {
         for (Table table : this.tables)

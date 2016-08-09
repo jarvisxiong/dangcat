@@ -18,7 +18,7 @@ class OperatorInfoPasswordChanger {
     }
 
     protected OperatorInfo execute(String orgPassword, String newPassword) throws OperatorInfoException {
-        // Ô­Ê¼ÃÜÂë²»ÄÜÎª¿Õ
+        // åŸå§‹å¯†ç ä¸èƒ½ä¸ºç©º
         String password1 = SecurityUtils.decryptContent(orgPassword);
         if (ValueUtils.isEmpty(password1))
             throw new OperatorInfoException(OperatorInfoCreate.Password, OperatorInfoException.INVALIDATE_NOTNULL);
@@ -26,7 +26,7 @@ class OperatorInfoPasswordChanger {
         String no = ServiceContext.getInstance().getServicePrincipal().getNo();
         OperatorInfoCreate operatorInfo = this.load(SecurityUtils.encryptContent(no), newPassword);
 
-        // Ô­Ê¼ÃÜÂëÆ¥Åä
+        // åŸå§‹å¯†ç åŒ¹é…
         if (!SecurityUtils.isMatch(operatorInfo.getPassword(), password1))
             throw new OperatorInfoException(OperatorInfoCreate.Password, OperatorInfoException.PASSWORD_INVALID);
 
@@ -38,17 +38,17 @@ class OperatorInfoPasswordChanger {
     }
 
     private OperatorInfoCreate load(String no, String password) throws OperatorInfoException {
-        // ÕËºÅ²»ÄÜÎª¿Õ¡£
+        // è´¦å·ä¸èƒ½ä¸ºç©ºã€‚
         String operatorNo = SecurityUtils.decryptContent(no);
         if (ValueUtils.isEmpty(operatorNo))
             throw new OperatorInfoException(OperatorInfo.No, OperatorInfoException.INVALIDATE_NOTNULL);
 
-        // ĞÂÃÜÂë²»ÄÜÎª¿Õ
+        // æ–°å¯†ç ä¸èƒ½ä¸ºç©º
         String newPassword = SecurityUtils.decryptContent(password);
         if (ValueUtils.isEmpty(newPassword))
             throw new OperatorInfoException(OperatorInfoCreate.Password1, OperatorInfoException.INVALIDATE_NOTNULL);
 
-        // ÕËºÅ±ØĞë´æÔÚ
+        // è´¦å·å¿…é¡»å­˜åœ¨
         List<OperatorInfoCreate> operatorInfoList = this.entityManager.load(OperatorInfoCreate.class, new String[]{OperatorInfoCreate.No}, operatorNo);
         if (operatorInfoList == null || operatorInfoList.size() == 0)
             throw new OperatorInfoException(OperatorInfo.No, OperatorInfoException.DATA_NOTEXISTS);

@@ -13,13 +13,13 @@ public class DefaultCryptoProvider implements CryptoProvider {
             return "";
 
         try {
-            // Base64解密
+            // Base64瑙ｅ瘑
             byte[] decodeBytes = BASE64Coder.decode(sourceText);
 
-            // TripleDes解密
+            // TripleDes瑙ｅ瘑
             byte[] decryptBytes = TripleDes.decrypt(decodeBytes);
 
-            // 解密错误
+            // 瑙ｅ瘑閿欒
             if (decryptBytes == null)
                 return null;
 
@@ -39,12 +39,12 @@ public class DefaultCryptoProvider implements CryptoProvider {
             return "";
 
         try {
-            // TripleDES加密
+            // TripleDES鍔犲瘑
             byte[] encryptBytes = TripleDes.encrypt(sourceText.getBytes(charsetName));
-            // 加密错误
+            // 鍔犲瘑閿欒
             if (encryptBytes == null)
                 return null;
-            // Base64加密
+            // Base64鍔犲瘑
             return new String(BASE64Coder.encode(encryptBytes));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

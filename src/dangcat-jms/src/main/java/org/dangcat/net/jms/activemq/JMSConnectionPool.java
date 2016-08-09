@@ -11,7 +11,7 @@ import javax.jms.Session;
 import java.util.Map;
 
 /**
- * JMSÁ¬½Ó³Ø¡£
+ * JMSè¿žæŽ¥æ± ã€‚
  */
 public class JMSConnectionPool extends ConnectionPool<Connection> implements ExceptionListener {
     private int acknownledge = Session.AUTO_ACKNOWLEDGE;
@@ -59,7 +59,7 @@ public class JMSConnectionPool extends ConnectionPool<Connection> implements Exc
     }
 
     /**
-     * ²úÉúÁ¬½Ó¹¤³§¡£
+     * äº§ç”Ÿè¿žæŽ¥å·¥åŽ‚ã€‚
      */
     private ActiveMQConnectionFactory createConnectionFactory() {
         ActiveMQConnectionFactory connectionFactory = null;

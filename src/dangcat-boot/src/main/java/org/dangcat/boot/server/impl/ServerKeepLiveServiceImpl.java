@@ -26,7 +26,7 @@ import org.dangcat.persistence.model.Table;
 import java.util.Date;
 
 /**
- * ·şÎñÆ÷ĞÄÌø¼à¿Ø¡£
+ * æœåŠ¡å™¨å¿ƒè·³ç›‘æ§ã€‚
  *
  * @author dangcat
  */
@@ -35,9 +35,9 @@ public class ServerKeepLiveServiceImpl extends ServiceBase implements Runnable {
     private EventSendService eventSendService = null;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      */
     public ServerKeepLiveServiceImpl(ServiceProvider parent) {
         super(parent);
@@ -76,7 +76,7 @@ public class ServerKeepLiveServiceImpl extends ServiceBase implements Runnable {
 
     @Override
     public Object handle(Event event) {
-        // ÔÚ¹ÜÀíÖĞĞÄ×¢²á³É¹¦¡£
+        // åœ¨ç®¡ç†ä¸­å¿ƒæ³¨å†ŒæˆåŠŸã€‚
         if (event instanceof ServerEvent && ServerEvent.KeepLive.equalsIgnoreCase(event.getId())) {
             ServerEvent serverEvent = (ServerEvent) event;
             ServerInfo serverInfo = serverEvent.getServerInfo();
@@ -106,7 +106,7 @@ public class ServerKeepLiveServiceImpl extends ServiceBase implements Runnable {
     }
 
     /**
-     * ¶¨Ê±Çå³ı¹ıÆÚÊı¾İ¡£
+     * å®šæ—¶æ¸…é™¤è¿‡æœŸæ•°æ®ã€‚
      */
     @Override
     public void run() {
@@ -136,11 +136,11 @@ public class ServerKeepLiveServiceImpl extends ServiceBase implements Runnable {
             return;
         }
 
-        // ±£´æ·şÎñÆ÷ĞÅÏ¢¡£
+        // ä¿å­˜æœåŠ¡å™¨ä¿¡æ¯ã€‚
         EntityBatchStorer entityBatchStorer = this.getEntityBatchStorer();
         entityBatchStorer.save(serverInfo);
 
-        // ±£´æ×´Ì¬ÈÕÖ¾¡£
+        // ä¿å­˜çŠ¶æ€æ—¥å¿—ã€‚
         this.checkExists(ServerStatusLog.class);
         ServerStatusLog serverStatusLog = new ServerStatusLog();
         ReflectUtils.copyProperties(serverInfo, serverStatusLog);

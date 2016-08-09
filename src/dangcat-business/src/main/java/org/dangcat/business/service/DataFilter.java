@@ -4,7 +4,7 @@ import org.dangcat.persistence.filter.FilterExpress;
 import org.dangcat.persistence.filter.FilterGroup;
 
 /**
- * ²éÑ¯²ÎÊı¡£
+ * æŸ¥è¯¢å‚æ•°ã€‚
  *
  * @author dangcat
  */
@@ -12,15 +12,15 @@ public abstract class DataFilter {
     private static final int DEFAULT_PAGESIZE = 100;
     private static final int DEFAULT_STARTROW = 0;
     /**
-     * ÅÅĞò·½Ê½¡£
+     * æ’åºæ–¹å¼ã€‚
      */
     private String orderBy = null;
     /**
-     * Ã¿Ò³´óĞ¡¡£
+     * æ¯é¡µå¤§å°ã€‚
      */
     private Integer pageSize = null;
     /**
-     * ÆğÊ¼Î»ÖÃ¡£
+     * èµ·å§‹ä½ç½®ã€‚
      */
     private Integer startRow = null;
 

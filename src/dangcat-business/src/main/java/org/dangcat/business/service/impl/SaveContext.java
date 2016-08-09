@@ -7,7 +7,7 @@ import org.dangcat.persistence.entity.SaveEntityContext;
 import org.dangcat.persistence.model.DataState;
 
 /**
- * ÊµÌå²Ù×÷ÉÏÏÂÎÄ¡£
+ * å®ä½“æ“ä½œä¸Šä¸‹æ–‡ã€‚
  *
  * @param <T>
  * @author dangcat

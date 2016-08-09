@@ -11,7 +11,7 @@ import org.dangcat.persistence.model.Table;
 import java.util.*;
 
 /**
- * ÒµÎñÅäÖÃ·şÎñ¡£
+ * ä¸šåŠ¡é…ç½®æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -50,7 +50,7 @@ public class BusinessConfigManager {
     }
 
     /**
-     * ÔØÈëÅäÖÃ¡£
+     * è½½å…¥é…ç½®ã€‚
      */
     public void load() {
         Table systemConfigTable = EntityHelper.getEntityMetaData(BusinessSetup.class).getTable();
@@ -77,7 +77,7 @@ public class BusinessConfigManager {
     }
 
     /**
-     * ±£´æÒµÎñÅäÖÃ¡£
+     * ä¿å­˜ä¸šåŠ¡é…ç½®ã€‚
      *
      * @param businessConfig
      */

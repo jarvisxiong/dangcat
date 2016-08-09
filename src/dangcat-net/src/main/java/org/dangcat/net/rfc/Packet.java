@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Ğ­Òé±¨ÎÄ¡£
+ * åè®®æŠ¥æ–‡ã€‚
  *
  * @author dangcat
  */
@@ -23,16 +23,16 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     private static final long serialVersionUID = 1L;
 
     /**
-     * ½âÎöºóµÄ×Ö½ÚÊı×é¡£
+     * è§£æåçš„å­—èŠ‚æ•°ç»„ã€‚
      */
     private byte[] bytes = null;
 
     /**
-     * Ìí¼Ó³§ÉÌÊôĞÔ¡£
+     * æ·»åŠ å‚å•†å±æ€§ã€‚
      *
-     * @param vendorId ³§ÉÌºÅ¡£
-     * @param type     ÊôĞÔÀàĞÍ¡£
-     * @param value    ÊôĞÔÖµ¡£
+     * @param vendorId å‚å•†å·ã€‚
+     * @param type     å±æ€§ç±»å‹ã€‚
+     * @param value    å±æ€§å€¼ã€‚
      * @throws ProtocolParseException
      */
     public boolean addVendorAttribute(Integer vendorId, Integer type, Object value) throws ProtocolParseException {
@@ -50,7 +50,7 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * ±È½ÏÁ½¸öÊı¾İ°üÊÇ·ñÏàÍ¬¡£
+     * æ¯”è¾ƒä¸¤ä¸ªæ•°æ®åŒ…æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public int compareTo(Packet packet) {
@@ -72,10 +72,10 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * ²éÕÒÖ¸¶¨³§ÉÌÊôĞÔºÍÊôĞÔºÅµÄ¶ÔÏó¡£
+     * æŸ¥æ‰¾æŒ‡å®šå‚å•†å±æ€§å’Œå±æ€§å·çš„å¯¹è±¡ã€‚
      *
-     * @param vendorId ³§ÉÌ±àºÅ¡£
-     * @param type     ÊôĞÔÀàĞÍ¡£
+     * @param vendorId å‚å•†ç¼–å·ã€‚
+     * @param type     å±æ€§ç±»å‹ã€‚
      */
     public AttributeData findVendorAttribute(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
@@ -96,9 +96,9 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨µÄ³§ÉÌºÅÕÒµ½³§ÉÌÊôĞÔ¡£
+     * æ ¹æ®æŒ‡å®šçš„å‚å•†å·æ‰¾åˆ°å‚å•†å±æ€§ã€‚
      *
-     * @param vendorId ³§ÉÌ±àºÅ¡£
+     * @param vendorId å‚å•†ç¼–å·ã€‚
      */
     private List<VendorAttribute> findVendorAttributes(Integer vendorId) {
         List<VendorAttribute> vendorAttributeList = null;
@@ -116,10 +116,10 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * ²éÕÒ³§ÉÌÊôĞÔ¡£
+     * æŸ¥æ‰¾å‚å•†å±æ€§ã€‚
      *
-     * @param vendorId ³§ÉÌ±àºÅ¡£
-     * @param type     ÊôĞÔÀàĞÍ¡£
+     * @param vendorId å‚å•†ç¼–å·ã€‚
+     * @param type     å±æ€§ç±»å‹ã€‚
      */
     public List<AttributeData> findVendorAttributes(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
@@ -169,10 +169,10 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * ¶ÁÈ¡³§ÉÌÊôĞÔºÅ¡£
+     * è¯»å–å‚å•†å±æ€§å·ã€‚
      *
-     * @param radiusAttributeType ÊôĞÔÀàĞÍ¡£
-     * @param value               ÊôĞÔÖµ¡£
+     * @param radiusAttributeType å±æ€§ç±»å‹ã€‚
+     * @param value               å±æ€§å€¼ã€‚
      */
     public abstract Integer getVendorAttributeType();
 
@@ -183,10 +183,10 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     }
 
     /**
-     * É¾³ı³§ÉÌÊôĞÔ¡£
+     * åˆ é™¤å‚å•†å±æ€§ã€‚
      *
-     * @param vendorId ³§ÉÌºÅ¡£
-     * @param type     ÊôĞÔÀàĞÍ¡£
+     * @param vendorId å‚å•†å·ã€‚
+     * @param type     å±æ€§ç±»å‹ã€‚
      */
     public int removeVendorAttribute(Integer vendorId, Integer type) {
         if (vendorId == null || vendorId == AttributeTemplateManager.DEFAULT_VENDORID)
@@ -204,9 +204,9 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
     protected abstract byte[] toBytes() throws ProtocolParseException;
 
     /**
-     * ÑéÖ¤°üÊÇ·ñÕùÈ¡¡£
+     * éªŒè¯åŒ…æ˜¯å¦äº‰å–ã€‚
      *
-     * @throws ProtocolValidateException ÑéÖ¤Òì³£¡£
+     * @throws ProtocolValidateException éªŒè¯å¼‚å¸¸ã€‚
      */
     public void validate() throws ProtocolValidateException {
         this.validateAttributeData();
@@ -217,7 +217,7 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
         Map<Integer, List<AttributeData>> attributeDataMap = this.getAttributeDataMap();
         for (Integer vendorId : attributeDataMap.keySet()) {
             List<AttributeData> attributeDataList = attributeDataMap.get(vendorId);
-            // »ù±¾Ğ£Ñé¡£
+            // åŸºæœ¬æ ¡éªŒã€‚
             for (AttributeData attributeData : attributeDataList)
                 attributeData.validate();
         }
@@ -228,7 +228,7 @@ public abstract class Packet extends AttributeCollection implements Comparable<P
         Map<Integer, List<AttributeData>> attributeDataMap = this.getAttributeDataMap();
         for (Integer vendorId : attributeDataMap.keySet()) {
             List<AttributeData> attributeDataList = attributeDataMap.get(vendorId);
-            // ¹æÔòĞ£Ñé¡£
+            // è§„åˆ™æ ¡éªŒã€‚
             PacketRuleValidator packetRuleValidator = attributeTemplateManager.getPacketRuleValidator(vendorId, this.getPacketName());
             if (packetRuleValidator != null)
                 packetRuleValidator.validate(attributeDataList);

@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class CalculatorImpl implements Calculator {
     private Collection<Calculator> calculators = new ArrayList<Calculator>();
     /**
-     * ¼ÆËãÆ÷ÅäÖÃ¡£
+     * è®¡ç®—å™¨é…ç½®ã€‚
      */
     private Collection<Class<?>> calculatorTypes = new HashSet<Class<?>>();
 

@@ -3,22 +3,22 @@ package org.dangcat.boot.service;
 import org.dangcat.commons.io.FileWriter;
 
 /**
- * ÎÄ¼şĞ´Èë·şÎñ¡£
+ * æ–‡ä»¶å†™å…¥æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface FileWriteService {
     /**
-     * Ìí¼ÓÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * æ·»åŠ æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      *
-     * @param fileWriter ÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * @param fileWriter æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      */
     void addFileWriter(FileWriter fileWriter);
 
     /**
-     * É¾³ıÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * åˆ é™¤æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      *
-     * @param fileWriter ÎÄ¼şĞ´Èë¶ÔÏó¡£
+     * @param fileWriter æ–‡ä»¶å†™å…¥å¯¹è±¡ã€‚
      */
     void removeFileWriter(FileWriter fileWriter);
 }

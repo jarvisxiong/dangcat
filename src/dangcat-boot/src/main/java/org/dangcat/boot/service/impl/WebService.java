@@ -27,7 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
- * Web ·şÎñ¡£
+ * Web æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -36,9 +36,9 @@ public class WebService extends ServiceControlBase {
     private Server server = null;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      */
     public WebService(ServiceProvider parent) {
         super(parent);

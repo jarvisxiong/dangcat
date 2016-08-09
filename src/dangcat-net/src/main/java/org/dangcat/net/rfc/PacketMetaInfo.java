@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Ğ­Òé°üÔªÊı¾İ¡£
+ * åè®®åŒ…å…ƒæ•°æ®ã€‚
  *
  * @author dangcat
  */
@@ -27,7 +27,7 @@ public class PacketMetaInfo {
     }
 
     /**
-     * ¼ÓÔØÊôĞÔÄ£°å¡£
+     * åŠ è½½å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplateManager getAttributeTemplateManager() {
         if (attributeTemplateManager == null) {
@@ -57,14 +57,14 @@ public class PacketMetaInfo {
     }
 
     /**
-     * ¸ù¾İ°üµÄID¶ÁÈ¡Ãû×Ö¡£
+     * æ ¹æ®åŒ…çš„IDè¯»å–åå­—ã€‚
      */
     public String getPacketName(Integer type) {
         return this.getPacketTypeMap().get(type);
     }
 
     /**
-     * ¸ù¾İ°üµÄÃû×Ö¶ÁÈ¡ID¡£
+     * æ ¹æ®åŒ…çš„åå­—è¯»å–IDã€‚
      */
     public Integer getPacketType(String name) {
         Integer packTypeId = null;

@@ -21,7 +21,7 @@ public class TestCacheUpdate extends TestCacheBase {
 
         this.testTableCreate();
 
-        // ²âÊÔÏòÊı¾İ¿âÌí¼ÓÊı¾İÊ±×Ô¶¯Ôö¼Ó»º´æÊı¾İ¡£
+        // æµ‹è¯•å‘æ•°æ®åº“æ·»åŠ æ•°æ®æ—¶è‡ªåŠ¨å¢åŠ ç¼“å­˜æ•°æ®ã€‚
         List<EntityData> srcEntityList = new ArrayList<EntityData>();
         EntityDataUtils.createEntityDataList(srcEntityList, TEST_COUNT);
         this.getEntityManager().save(srcEntityList.toArray());
@@ -33,7 +33,7 @@ public class TestCacheUpdate extends TestCacheBase {
         Assert.assertEquals(srcEntityList.size(), memCache.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(srcEntityList, memCache.getDataCollection()));
 
-        // ²âÊÔÏòÊı¾İ¿âÉ¾³ıÊı¾İÊ±×Ô¶¯É¾³ı»º´æÊı¾İ¡£
+        // æµ‹è¯•å‘æ•°æ®åº“åˆ é™¤æ•°æ®æ—¶è‡ªåŠ¨åˆ é™¤ç¼“å­˜æ•°æ®ã€‚
         List<EntityData> deleteList = new ArrayList<EntityData>();
         for (int i = srcEntityList.size() - 1; i >= 0; i--) {
             if (i % 2 == 0) {

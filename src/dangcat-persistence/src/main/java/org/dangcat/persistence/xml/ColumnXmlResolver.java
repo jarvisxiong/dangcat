@@ -4,25 +4,25 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dangcat.persistence.model.Column;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class ColumnXmlResolver extends XmlResolver {
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private Column column = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ColumnXmlResolver() {
         super(Column.class.getSimpleName());
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

@@ -25,7 +25,7 @@ public class BarTimeChart extends TimeXYChart {
         boolean isStacked = this.getDataModule().getRowKeys().size() > 1;
         this.createDataConverter(isStacked);
 
-        // ÇøÓòÍ¼µÄ±íÏÖÄ£¿é¡£
+        // åŒºåŸŸå›¾çš„è¡¨ç°æ¨¡å—ã€‚
         XYBarRenderer xyBarRenderer = null;
         if (isStacked)
             xyBarRenderer = new StackedXYBarRenderer();

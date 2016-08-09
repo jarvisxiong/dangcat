@@ -7,7 +7,7 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dom4j.Element;
 
 /**
- * Ä£¿é¶ÔÏó½âÎöÆ÷¡£
+ * æ¨¡å—å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -16,7 +16,7 @@ public class SubmenuXmlResolver extends XmlResolver {
     private Submenu submenu = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public SubmenuXmlResolver() {
         super(Submenu.class.getSimpleName());
@@ -24,10 +24,10 @@ public class SubmenuXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         if (child instanceof MenuData)
@@ -35,9 +35,9 @@ public class SubmenuXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎö×ÓÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå­å…ƒç´ æ ‡ç­¾ã€‚
      *
-     * @param element ×ÓÔªËØÃû³Æ¡£
+     * @param element å­å…ƒç´ åç§°ã€‚
      */
     protected void resolveChildElement(Element element) {
         if (Separator.class.getSimpleName().equalsIgnoreCase(element.getName()))
@@ -58,7 +58,7 @@ public class SubmenuXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

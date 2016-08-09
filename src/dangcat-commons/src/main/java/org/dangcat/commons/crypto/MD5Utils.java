@@ -11,10 +11,10 @@ public class MD5Utils {
     private static final String MD5 = "MD5";
 
     /**
-     * ÓÃMD5Ëã·¨¼ÓÃÜ¡£
+     * ç”¨MD5ç®—æ³•åŠ å¯†ã€‚
      *
-     * @param messages ĞÅÏ¢¡£
-     * @return ¼ÓÃÜºóµÄ×Ö´®¡£
+     * @param messages ä¿¡æ¯ã€‚
+     * @return åŠ å¯†åçš„å­—ä¸²ã€‚
      */
     public static String encrypt(String... messages) {
         String result = null;
@@ -36,12 +36,12 @@ public class MD5Utils {
     }
 
     /**
-     * ÊÇ·ñ·ûºÏMD5¼ÓÃÜ¡£
+     * æ˜¯å¦ç¬¦åˆMD5åŠ å¯†ã€‚
      *
-     * @param password  ¿ÚÁî¡£
-     * @param message   ĞÅÏ¢¡£
-     * @param encrypted ¼ÓÃÜ×Ö´®¡£
-     * @return ÊÇ·ñÆ¥Åä¡£
+     * @param password  å£ä»¤ã€‚
+     * @param message   ä¿¡æ¯ã€‚
+     * @param encrypted åŠ å¯†å­—ä¸²ã€‚
+     * @return æ˜¯å¦åŒ¹é…ã€‚
      */
     public static boolean isMatch(String password, String message, String encrypted) {
         if (encrypted == null)

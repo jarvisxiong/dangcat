@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * °üÊôĞÔ¹ÜÀí¡£
+ * åŒ…å±æ€§ç®¡ç†ã€‚
  *
  * @author dangcat
  */
@@ -25,11 +25,11 @@ public class PacketAttributeManager {
     }
 
     /**
-     * ¸ù¾İ³§ÉÌºÅºÍ°üÀàĞÍÊÕ¼¯ÊôĞÔÄ£°å¡£
+     * æ ¹æ®å‚å•†å·å’ŒåŒ…ç±»å‹æ”¶é›†å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param vendorId   ³§ÉÌºÅ¡£
-     * @param packetType °üÀàĞÍ¡£
-     * @return ËùÓĞÓÃµ½µÄÊôĞÔ¼¯ºÏ¡£
+     * @param vendorId   å‚å•†å·ã€‚
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return æ‰€æœ‰ç”¨åˆ°çš„å±æ€§é›†åˆã€‚
      */
     public List<AttributeTemplate> getAttributeTemplates(Integer vendorId, String packetType) {
         List<AttributeTemplate> attributeTemplateList = null;
@@ -54,10 +54,10 @@ public class PacketAttributeManager {
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨µÄ°üÀàĞÍ¶ÁÈ¡ËùÓĞÊôĞÔÄ£°å¡£
+     * æ ¹æ®æŒ‡å®šçš„åŒ…ç±»å‹è¯»å–æ‰€æœ‰å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @return ³§ÉÌÊôĞÔ¼¯ºÏ¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return å‚å•†å±æ€§é›†åˆã€‚
      */
     public List<PacketVendorAttributeCollection> getVendorPacketAttributeMap(String packetType) {
         List<PacketVendorAttributeCollection> vendorPacketAttributeCollectionList = this.packetAttributeMap.get(packetType);

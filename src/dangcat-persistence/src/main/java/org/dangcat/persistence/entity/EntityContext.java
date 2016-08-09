@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÊµÌåÉÏÏÂÎÄ¡£
+ * å®ä½“ä¸Šä¸‹æ–‡ã€‚
  *
  * @author dangcat
  */
@@ -27,7 +27,7 @@ public class EntityContext {
     }
 
     /**
-     * ÊµÌå¹ÜÀíÆ÷¡£
+     * å®ä½“ç®¡ç†å™¨ã€‚
      *
      * @return
      */

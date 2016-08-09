@@ -27,7 +27,7 @@ public class TestModelBatch extends TestEntityBase {
         if (table1.exists())
             table1.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table1.create();
 
         table1.getSql().clear();
@@ -39,7 +39,7 @@ public class TestModelBatch extends TestEntityBase {
         table1.getSql().append("WHERE Id=:Id");
         table1.getSql().addBatch();
         table1.getSql().append("DELETE FROM " + table1.getTableName().getName() + " WHERE Id=:Id");
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.execute();
 
         Table table2 = TableDataUtils.getTable();
@@ -55,10 +55,10 @@ public class TestModelBatch extends TestEntityBase {
         if (table1.exists())
             table1.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table1.create();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         Table table2 = TableDataUtils.getTable();
         Assert.assertTrue(table2.exists());
 
@@ -77,7 +77,7 @@ public class TestModelBatch extends TestEntityBase {
         table1.getSql().append("DELETE FROM " + table1.getTableName().getName() + " WHERE Id=:Id");
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(DataState.Browse, table2.getDataState());
@@ -98,10 +98,10 @@ public class TestModelBatch extends TestEntityBase {
         table1.getSql().clear();
         table1.getSql().append("INSERT INTO " + table1.getTableName().getName() + "(Id, FieldA, FieldB, FieldC, FieldD, FieldE, FieldF, FieldG, FieldH)\r\n");
         table1.getSql().append("VALUES(:Id, :FieldA, :FieldB, :FieldC, :FieldD, :FieldE, :FieldF, :FieldG, :FieldH)");
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table1.getRows().size(), table2.getRows().size());
@@ -120,10 +120,10 @@ public class TestModelBatch extends TestEntityBase {
         table1.getSql().append("UPDATE " + table1.getTableName().getName() + " ");
         table1.getSql().append("SET FieldA=:FieldA, FieldB=:FieldB, FieldC=:FieldC, FieldD=:FieldD, FieldE=:FieldE, FieldF=:FieldF, FieldG=:FieldG, FieldH=:FieldH ");
         table1.getSql().append("WHERE Id=:Id");
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table2.getRows().size(), table1.getRows().size());

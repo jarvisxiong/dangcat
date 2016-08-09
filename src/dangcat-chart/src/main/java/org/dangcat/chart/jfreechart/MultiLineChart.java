@@ -20,21 +20,21 @@ public class MultiLineChart extends TimeSeriesChart {
     protected JFreeChart createChart() {
         this.initDataConverters();
 
-        // ÇøÓòÍ¼µÄ±íÏÖÄ£¿é¡£
+        // åŒºåŸŸå›¾çš„è¡¨ç°æ¨¡å—ã€‚
         XYPlot xyPlot = new XYPlot();
-        // ºá×ø±ê±êÌâ¡£
+        // æ¨ªåæ ‡æ ‡é¢˜ã€‚
         xyPlot.setDomainAxis(new DateAxis(this.getDomainTitle()));
 
         for (int i = 0; i < this.getDataConverters().size(); i++) {
             CategoryTableXYDataset categoryTableXYDataset = new CategoryTableXYDataset();
             xyPlot.setDataset(i, categoryTableXYDataset);
-            // ³õÊ¼»¯×İ×ø±ê¡£
+            // åˆå§‹åŒ–çºµåæ ‡ã€‚
             xyPlot.setRangeAxis(i, new NumberAxis());
             xyPlot.mapDatasetToRangeAxis(i, i);
 
             xyPlot.setRenderer(i, this.createXYItemRenderer());
         }
-        // ¹¹½¨Í³¼ÆÍ¼¶ÔÏó¡£
+        // æ„å»ºç»Ÿè®¡å›¾å¯¹è±¡ã€‚
         return new JFreeChart(xyPlot);
     }
 

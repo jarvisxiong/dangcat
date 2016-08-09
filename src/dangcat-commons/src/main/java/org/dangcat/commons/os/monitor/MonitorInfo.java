@@ -1,7 +1,7 @@
 package org.dangcat.commons.os.monitor;
 
 /**
- * ╪Ю©ь╣двйт╢пео╒║ё
+ * Г⌡▒Ф▌╖Г └Х╣└Ф╨░Д©║Ф│╞Ц─┌
  *
  * @author dangcat
  */

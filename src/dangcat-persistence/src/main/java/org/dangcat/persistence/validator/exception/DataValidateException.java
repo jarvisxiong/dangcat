@@ -5,44 +5,44 @@ import org.dangcat.framework.exception.ServiceException;
 import org.dangcat.persistence.entity.EntityUtils;
 
 /**
- * Êı¾İĞ£ÑéÒì³£¡£
+ * æ•°æ®æ ¡éªŒå¼‚å¸¸ã€‚
  *
  * @author dangcat
  */
 public class DataValidateException extends ServiceException {
     /**
-     * ×î´ó³¤¶ÈĞ£Ñé¡£
+     * æœ€å¤§é•¿åº¦æ ¡éªŒã€‚
      */
     public static final Integer INVALIDATE_MAXLENTH = 2;
     /**
-     * ´óÓÚ×î´óÖµ¡£
+     * å¤§äºæœ€å¤§å€¼ã€‚
      */
     public static final Integer INVALIDATE_MAXVALUE = 4;
     /**
-     * Ğ¡ÓÚ×îĞ¡Öµ¡£
+     * å°äºæœ€å°å€¼ã€‚
      */
     public static final Integer INVALIDATE_MINVALUE = 3;
     /**
-     * ²»¿ÉÎª¿Õ¡£
+     * ä¸å¯ä¸ºç©ºã€‚
      */
     public static final Integer INVALIDATE_NOTNULL = 1;
     /**
-     * ÎŞĞ§Ñ¡Ïî¡£
+     * æ— æ•ˆé€‰é¡¹ã€‚
      */
     public static final Integer INVALIDATE_OPTIONS = 6;
     /**
-     * Êı¾İ·¶Î§²»·ûºÏÒªÇó¡£
+     * æ•°æ®èŒƒå›´ä¸ç¬¦åˆè¦æ±‚ã€‚
      */
     public static final Integer INVALIDATE_RANGE = 5;
     private static final String EXCEPTION_ENTITYTITLE = "{entityTitle}";
     private static final String EXCEPTION_FIELDTITLE = "{fieldTitle}";
     private static final long serialVersionUID = 1L;
     /**
-     * ÊµÌåÀàĞÍ
+     * å®ä½“ç±»å‹
      */
     private Class<?> classType = null;
     /**
-     * ¼ìÑéµÄ×Ö¶ÎÃû¡£
+     * æ£€éªŒçš„å­—æ®µåã€‚
      */
     private String fieldName = null;
 

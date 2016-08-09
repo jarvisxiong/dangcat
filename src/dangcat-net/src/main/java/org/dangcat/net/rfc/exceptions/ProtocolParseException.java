@@ -3,7 +3,7 @@ package org.dangcat.net.rfc.exceptions;
 import org.dangcat.framework.exception.ServiceException;
 
 /**
- * ±¨ÎÄ½âÎöÒì³£¡£
+ * æŠ¥æ–‡è§£æå¼‚å¸¸ã€‚
  *
  * @author dangcat
  */
@@ -18,7 +18,7 @@ public class ProtocolParseException extends ServiceException {
     public static final Integer PACKET_INVALID_MINLENGTH = 4;
     private static final long serialVersionUID = 1L;
     /**
-     * ¼ìÑéµÄ×Ö¶ÎÃû¡£
+     * æ£€éªŒçš„å­—æ®µåã€‚
      */
     private String fieldName = null;
 

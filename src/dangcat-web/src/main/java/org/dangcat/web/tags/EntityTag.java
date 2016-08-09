@@ -13,7 +13,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * Êä³öÊµÌå¶¨Òå½á¹¹¡£
+ * è¾“å‡ºå®žä½“å®šä¹‰ç»“æž„ã€‚
  *
  * @author dangcat
  */

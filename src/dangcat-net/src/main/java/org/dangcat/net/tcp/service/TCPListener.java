@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 /**
- * UDP±¨ÎÄ¶Ë¿ÚÕìÌı¡£
+ * UDPæŠ¥æ–‡ç«¯å£ä¾¦å¬ã€‚
  *
  * @author fanst174766
  */
@@ -55,7 +55,7 @@ public class TCPListener extends NetListener {
     }
 
     /**
-     * Í£Ö¹ÕìÌıÏß³Ì¡£
+     * åœæ­¢ä¾¦å¬çº¿ç¨‹ã€‚
      */
     @Override
     protected void innerStopListener() {

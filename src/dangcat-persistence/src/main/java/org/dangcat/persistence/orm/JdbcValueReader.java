@@ -12,16 +12,16 @@ import java.util.Date;
 
 class JdbcValueReader {
     /**
-     * ÓÉÊı¾İ¼¯½âÎöÊı¾İĞĞ¡£
+     * ç”±æ•°æ®é›†è§£ææ•°æ®è¡Œã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @param resultSet Ô­Ê¼Êı¾İ¼¯ºÏ¡£
-     * @throws SQLException Òì³£¶ÔÏó¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @param resultSet åŸå§‹æ•°æ®é›†åˆã€‚
+     * @throws SQLException å¼‚å¸¸å¯¹è±¡ã€‚
      * @throws IOException
      */
     protected static Object read(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = null;
-        // Êı¾İ¿âÀàĞÍ
+        // æ•°æ®åº“ç±»å‹
         int columnIndex = resultSet.findColumn(fieldName);
         int sqlType = resultSet.getMetaData().getColumnType(columnIndex);
         switch (sqlType) {
@@ -72,13 +72,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»×Ö½ÚÀàĞÍ¡£
+     * è½¬æ¢å­—èŠ‚ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readBytes(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = null;
@@ -88,13 +88,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»×Ö½ÚÀàĞÍ¡£
+     * è½¬æ¢å­—èŠ‚ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readBytesStream(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = null;
@@ -114,13 +114,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»×Ö·ûÀàĞÍ¡£
+     * è½¬æ¢å­—ç¬¦ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readClobStream(int sqlType, String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = null;
@@ -147,13 +147,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»ÈÕÆÚÀàĞÍ¡£
+     * è½¬æ¢æ—¥æœŸç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readDateTime(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = null;
@@ -169,13 +169,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»Êı×ÖÀàĞÍ¡£
+     * è½¬æ¢æ•°å­—ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readNumber(String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         Object value = resultSet.getObject(fieldName);
@@ -210,13 +210,13 @@ class JdbcValueReader {
     }
 
     /**
-     * ×ª»»×Ö´®ÀàĞÍ¡£
+     * è½¬æ¢å­—ä¸²ç±»å‹ã€‚
      *
-     * @param fieldName   ×Ö¶ÎÃû¡£
-     * @param resultSet   ½á¹û¼¯ºÏ¡£
-     * @param targetClass Ä¿±êÀàĞÍ¡£
-     * @return ½âÎö½á¹û¡£
-     * @throws SQLException ÔËĞĞÒì³£¡£
+     * @param fieldName   å­—æ®µåã€‚
+     * @param resultSet   ç»“æœé›†åˆã€‚
+     * @param targetClass ç›®æ ‡ç±»å‹ã€‚
+     * @return è§£æç»“æœã€‚
+     * @throws SQLException è¿è¡Œå¼‚å¸¸ã€‚
      */
     private static Object readString(int sqlType, String fieldName, ResultSet resultSet, Class<?> targetClass) throws SQLException {
         String value = null;

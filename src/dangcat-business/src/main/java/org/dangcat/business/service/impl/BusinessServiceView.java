@@ -17,9 +17,9 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
     }
 
     /**
-     * ´¥·¢¼ÓÔØÊý¾ÝºóÊÂ¼þ¡£
+     * è§¦å‘åŠ è½½æ•°æ®åŽäº‹ä»¶ã€‚
      *
-     * @param loadContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param loadContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void afterLoad(LoadContext<V> loadContext) {
         if (this.isExtendEventEnabled())
@@ -27,9 +27,9 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
     }
 
     /**
-     * ´¥·¢¼ÓÔØÊý¾ÝÇ°ÊÂ¼þ¡£
+     * è§¦å‘åŠ è½½æ•°æ®å‰äº‹ä»¶ã€‚
      *
-     * @param loadContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param loadContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void beforeLoad(LoadContext<V> loadContext) throws ServiceException {
         if (this.isExtendEventEnabled())
@@ -37,7 +37,7 @@ class BusinessServiceView<Q extends EntityBase, V extends EntityBase, F extends 
     }
 
     /**
-     * ÐÂ½¨Êý¾Ý¡£
+     * æ–°å»ºæ•°æ®ã€‚
      */
     @SuppressWarnings("unchecked")
     private V createNew() throws ServiceException {

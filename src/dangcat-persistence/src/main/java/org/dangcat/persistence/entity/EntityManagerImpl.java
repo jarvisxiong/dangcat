@@ -16,14 +16,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ÊµÌå¹ÜÀíÆ÷¡£
+ * å®ä½“ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
 public class EntityManagerImpl implements EntityManager {
     protected static final Logger logger = Logger.getLogger(EntityManager.class);
     /**
-     * Êı¾İ¿âÃû¡£
+     * æ•°æ®åº“åã€‚
      */
     private String databaseName = null;
     private ThreadLocal<Collection<SaveEntityContext>> saveEntityContextesThreadLocal = new ThreadLocal<Collection<SaveEntityContext>>();
@@ -80,12 +80,12 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨¹ıÂËÌõ¼şµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šè¿‡æ»¤æ¡ä»¶çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     @Override
@@ -94,12 +94,12 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>              ÊµÌåÀàĞÍ¡£
-     * @param entityClass      ÊµÌåÀàĞÍ¡£
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>              å®ä½“ç±»å‹ã€‚
+     * @param entityClass      å®ä½“ç±»å‹ã€‚
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     @Override
@@ -108,13 +108,13 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨ÊôĞÔµÄµÄÊµÌå¡£
+     * åˆ é™¤æŒ‡å®šå±æ€§çš„çš„å®ä½“ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param fieldNames  ×Ö¶ÎÃûÁĞ±í¡£
-     * @param values      ÊôĞÔÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param fieldNames  å­—æ®µååˆ—è¡¨ã€‚
+     * @param values      å±æ€§å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     @Override
@@ -123,11 +123,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * °´ÕÕÉÏÏÂÎÄÉ¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * æŒ‰ç…§ä¸Šä¸‹æ–‡åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>                 ÊµÌåÀàĞÍ¡£
-     * @param deleteEntityContext É¾³ıÊµÌåÉÏÏÂÎÄ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>                 å®ä½“ç±»å‹ã€‚
+     * @param deleteEntityContext åˆ é™¤å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws TableException
      */
     @Override
@@ -136,11 +136,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>     ÊµÌåÀàĞÍ¡£
-     * @param entites É¾³ıÊµÌå¶ÔÏó¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>     å®ä½“ç±»å‹ã€‚
+     * @param entites åˆ é™¤å®ä½“å¯¹è±¡ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws TableException
      */
     @Override
@@ -149,7 +149,7 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * Êı¾İ¿âÃû³Æ¡£
+     * æ•°æ®åº“åç§°ã€‚
      */
     protected String getDatabaseName() {
         return this.databaseName;
@@ -168,11 +168,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¶ÔÏó¡£
+     * è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     @Override
     public <T> List<T> load(Class<T> entityClass) throws EntityException {
@@ -180,11 +180,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
      */
     @Override
     public <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress) throws EntityException {
@@ -192,39 +192,39 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     public <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress, Range range) throws EntityException {
         return this.load(new LoadEntityContext(entityClass, filterExpress, range));
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§¡¢ÅÅĞòÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´ã€æ’åºæ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @param orderBy       ÅÅĞòÌõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @param orderBy       æ’åºæ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     public <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress, Range range, OrderBy orderBy) throws EntityException {
         return this.load(new LoadEntityContext(entityClass, filterExpress, range, orderBy));
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param primaryKeys Ö÷¼ü²ÎÊı¡£
-     * @return ÕÒµ½µÄÊµÌå¶ÔÏó¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param primaryKeys ä¸»é”®å‚æ•°ã€‚
+     * @return æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚
      */
     @Override
     public <T> T load(Class<T> entityClass, Object... primaryKeyValues) throws EntityException {
@@ -233,13 +233,13 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨ÊôĞÔµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šå±æ€§çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param fieldNames  ×Ö¶ÎÃûÁĞ±í¡£
-     * @param values      ÊôĞÔÖµ¡£
-     * @return ÕÒµ½µÄÊµÌå¶ÔÏó¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param fieldNames  å­—æ®µååˆ—è¡¨ã€‚
+     * @param values      å±æ€§å€¼ã€‚
+     * @return æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚
      */
     @Override
     public <T> List<T> load(Class<T> entityClass, String[] fieldNames, Object... values) throws EntityException {
@@ -248,11 +248,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¶ÔÏó¡£
+     * è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>               ÊµÌåÀàĞÍ¡£
-     * @param loadEntityContext ÔØÈëÊµÌåÉÏÏÂÎÄ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>               å®ä½“ç±»å‹ã€‚
+     * @param loadEntityContext è½½å…¥å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     @Override
     public <T> List<T> load(LoadEntityContext loadEntityContext) throws EntityException {
@@ -261,21 +261,21 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ¿ªÆô»á»°¡£
+     * å¼€å¯ä¼šè¯ã€‚
      *
-     * @return »á»°¶ÔÏó¡£
-     * @throws SessionException Êı¾İ¿âÒì³£¡£
+     * @return ä¼šè¯å¯¹è±¡ã€‚
+     * @throws SessionException æ•°æ®åº“å¼‚å¸¸ã€‚
      */
     protected Session openSession() throws SessionException {
         return SessionFactory.getInstance().openSession(this.getDatabaseName());
     }
 
     /**
-     * ÓÉÊı¾İ¿âË¢ĞÂÊµÌåÊµÀıÄÚÈİ¡£
+     * ç”±æ•°æ®åº“åˆ·æ–°å®ä½“å®ä¾‹å†…å®¹ã€‚
      *
      * @param <T>
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @throws EntityException ²Ù×÷Òì³£¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ“ä½œå¼‚å¸¸ã€‚
      */
     public <T> T refresh(T entity) throws EntityException {
         EntityManagerLoadImpl<T> entityManagerLoad = new EntityManagerLoadImpl<T>(this);
@@ -302,11 +302,11 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ±£´æÖ¸¶¨ÊµÌå¶ÔÏó¡£
+     * ä¿å­˜æŒ‡å®šå®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>      ÊµÌåÀàĞÍ¡£
-     * @param entities ±£´æÊµÌå¶ÔÏó¡£
-     * @return ±£´æ½á¹û¡£
+     * @param <T>      å®ä½“ç±»å‹ã€‚
+     * @param entities ä¿å­˜å®ä½“å¯¹è±¡ã€‚
+     * @return ä¿å­˜ç»“æœã€‚
      */
     @Override
     public void save(Object... entities) throws EntityException {
@@ -314,12 +314,12 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     /**
-     * ±£´æÖ¸¶¨ÊµÌå¶ÔÏó¡£
+     * ä¿å­˜æŒ‡å®šå®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>               ÊµÌåÀàĞÍ¡£
-     * @param saveEntityContext ±£´æÊµÌåÉÏÏÂÎÄ¡£
-     * @param entities          ±£´æÊµÌå¶ÔÏó¡£
-     * @return ±£´æ½á¹û¡£
+     * @param <T>               å®ä½“ç±»å‹ã€‚
+     * @param saveEntityContext ä¿å­˜å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @param entities          ä¿å­˜å®ä½“å¯¹è±¡ã€‚
+     * @return ä¿å­˜ç»“æœã€‚
      */
     @Override
     public void save(SaveEntityContext saveEntityContext, Object... entities) throws EntityException {

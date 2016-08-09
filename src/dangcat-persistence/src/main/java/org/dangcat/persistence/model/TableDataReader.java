@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Table¶ÔÏóÊı¾İ¶ÁÈ¡Æ÷¡£
+ * Tableå¯¹è±¡æ•°æ®è¯»å–å™¨ã€‚
  *
  * @author dangcat
  */

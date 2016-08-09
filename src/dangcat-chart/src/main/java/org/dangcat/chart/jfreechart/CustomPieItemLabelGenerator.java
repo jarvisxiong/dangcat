@@ -10,7 +10,7 @@ import org.jfree.data.general.PieDataset;
 import java.text.AttributedString;
 
 /**
- * ±ı×´Í¼±êÇ©Éú³ÉÆ÷¡£
+ * é¥¼çŠ¶å›¾æ ‡ç­¾ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */

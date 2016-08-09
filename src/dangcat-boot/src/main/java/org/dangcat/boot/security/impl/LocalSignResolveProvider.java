@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * ±¾µØÈÏÖ¤Ç©Ãû¼ÆËãÆ÷¡£
+ * æœ¬åœ°è®¤è¯ç­¾åè®¡ç®—å™¨ã€‚
  */
 public class LocalSignResolveProvider implements SignResolveProvider {
     private static final String SECURITY_NAME = "LocalSecurity";

@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ÏµÍ³ÉÏÏÂÎÄ¡£
+ * ç³»ç»Ÿä¸Šä¸‹æ–‡ã€‚
  *
  * @author dangcat
  */
@@ -57,7 +57,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * Ìí¼ÓÕìÌı¶ÔÏó¡£
+     * æ·»åŠ ä¾¦å¬å¯¹è±¡ã€‚
      *
      * @param changedListener
      */
@@ -67,7 +67,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * Ôö¼ÓÅäÖÃÎÄ¼ş¼àÊÓ¡£
+     * å¢åŠ é…ç½®æ–‡ä»¶ç›‘è§†ã€‚
      */
     private void addConfigFileWatcher() {
         if (!this.configureReader.isValid())
@@ -108,7 +108,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      */
     @Override
     public void initialize() {
@@ -135,7 +135,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ÔØÈëÅäÖÃÄÚÈİ¡£
+     * è½½å…¥é…ç½®å†…å®¹ã€‚
      */
     private void loadConfig() {
         try {
@@ -151,10 +151,10 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ÔØÈëºËĞÄ·şÎñ¡£
+     * è½½å…¥æ ¸å¿ƒæœåŠ¡ã€‚
      */
     private void loadCoreServices() {
-        // ÅäÖÃÄ¿Â¼ÉèÎª×ÊÔ´À©Õ¹Â·¾¶
+        // é…ç½®ç›®å½•è®¾ä¸ºèµ„æºæ‰©å±•è·¯å¾„
         File confPath = new File(this.getContextPath().getConf());
         ResourceLoader.addExtendDirectory(confPath);
         File dataPath = new File(this.getContextPath().getData());
@@ -164,7 +164,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ÔØÈëÀ©Õ¹Ä¿Â¼¡£
+     * è½½å…¥æ‰©å±•ç›®å½•ã€‚
      */
     private void loadExtension() {
         this.getContextPath().initSystemProperties();
@@ -183,7 +183,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ³õÊ¼»¯ÈÕÖ¾ÅäÖÃ¡£
+     * åˆå§‹åŒ–æ—¥å¿—é…ç½®ã€‚
      */
     private void loadLogger() {
         String logConfigFileName = this.configureReader.getLogConfigFileName();
@@ -200,10 +200,10 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ÔØÈëÄ£¿éÖ÷·şÎñ¡£
+     * è½½å…¥æ¨¡å—ä¸»æœåŠ¡ã€‚
      */
     private void loadMainService() {
-        // Ö÷·şÎñ¡£
+        // ä¸»æœåŠ¡ã€‚
         String mainServiceClass = this.getConfigureReader().getXmlValue("MainService");
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ServiceBase mainService = (ServiceBase) ReflectUtils.newInstance(mainServiceClass, new Class<?>[]{ServiceProvider.class}, new Object[]{serviceFactory});
@@ -222,21 +222,21 @@ public class ApplicationContext extends ServiceControlBase {
         PermissionManager.getInstance().load();
         MenusManager.getInstance().load(mainService.getClass(), this.getConfigureReader().getModuleMenus());
 
-        // ³õÊ¼»¯°²È«·şÎñ¡£
+        // åˆå§‹åŒ–å®‰å…¨æœåŠ¡ã€‚
         ServiceBase securityService = (ServiceBase) ServiceFactory.getInstance().getService(SecurityLoginService.class);
         if (securityService != null)
             securityService.initialize();
     }
 
     /**
-     * ÔØÈëÊôĞÔÅäÖÃ¡£
+     * è½½å…¥å±æ€§é…ç½®ã€‚
      */
     private void loadProperties() {
         PropertiesManager propertiesManager = PropertiesManager.getInstance();
-        // ½âÎöÏµÍ³ÊôĞÔ¡£
+        // è§£æç³»ç»Ÿå±æ€§ã€‚
         String propertiesConfig = this.getConfigureReader().getXmlValue("Properties");
         propertiesManager.loadSystemProperties(propertiesConfig);
-        // Íâ½ÓÊôĞÔÅäÖÃ¡£
+        // å¤–æ¥å±æ€§é…ç½®ã€‚
         String propertiesFileConfig = this.getConfigureReader().getXmlValue("PropertiesFile");
         if (ValueUtils.isEmpty(propertiesFileConfig))
             propertiesFileConfig = this.getName() + ".server.properties";
@@ -244,7 +244,7 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * ³õÊ¼»¯Êı¾İ¿â¡£
+     * åˆå§‹åŒ–æ•°æ®åº“ã€‚
      */
     private void loadResource() {
         final String defaultResourceFileName = "resource.properties";
@@ -260,14 +260,14 @@ public class ApplicationContext extends ServiceControlBase {
         if (!resourceConfigFile.exists())
             this.logger.warn("The resource file is not exists : " + resourceConfigFile.getAbsolutePath());
         else {
-            // ¼ÓÔØ×ÊÔ´ÅäÖÃ
+            // åŠ è½½èµ„æºé…ç½®
             if (!ConfigureManager.getInstance().configure(resourceConfigFile))
                 System.exit(0);
         }
     }
 
     /**
-     * Êä³öÆô¶¯ÈÕÖ¾¡£
+     * è¾“å‡ºå¯åŠ¨æ—¥å¿—ã€‚
      */
     private void log() {
         FileUtils.mkdir(System.getProperty("java.io.tmpdir"));
@@ -278,9 +278,9 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * É¾³ıÕìÌı¶ÔÏó¡£
+     * åˆ é™¤ä¾¦å¬å¯¹è±¡ã€‚
      *
-     * @param changedListener ÕìÌı¶ÔÏó¡£
+     * @param changedListener ä¾¦å¬å¯¹è±¡ã€‚
      */
     public void removeChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && this.changeEventAdaptorList.contains(changeEventAdaptor))
@@ -288,22 +288,22 @@ public class ApplicationContext extends ServiceControlBase {
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     @Override
     public void start() {
         if (this.getServiceStatus().equals(ServiceStatus.Stopped)) {
             this.setServiceStatus(ServiceStatus.Starting);
-            // ·şÎñ×¢Èë¡£
+            // æœåŠ¡æ³¨å…¥ã€‚
             this.inject();
-            // Æô¶¯·şÎñ¡£
+            // å¯åŠ¨æœåŠ¡ã€‚
             ServiceHelper.start(this);
             super.start();
         }
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     @Override
     public void stop() {

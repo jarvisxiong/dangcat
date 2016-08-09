@@ -72,15 +72,15 @@ public class TestCompressUtils {
     private void testDataCompress(String name) throws IOException {
         byte[] dataBytes = this.getDataBytes();
 
-        // Ñ¹ËõÊı×é
+        // å‹ç¼©æ•°ç»„
         byte[] compressData = CompressUtils.compress(name, dataBytes);
         logger.info(CompressUtils.compressTypeMap.get(name) + " " + name + " Data Compress TotalSize: " + dataBytes.length + ", Compress size: " + compressData.length + ", Compress rate = "
                 + String.format("%1$d%%", this.getCompressRate(dataBytes.length, compressData.length)));
 
-        // ½âÑ¹ËõÊı×é
+        // è§£å‹ç¼©æ•°ç»„
         byte[] upcompressData = CompressUtils.decompress(name, compressData);
 
-        // ²âÊÔ½âÑ¹ËõºóÊı¾İÊÇ·ñÕıÈ·
+        // æµ‹è¯•è§£å‹ç¼©åæ•°æ®æ˜¯å¦æ­£ç¡®
         Assert.assertEquals(dataBytes.length, upcompressData.length);
         for (int i = 0; i < dataBytes.length; i++)
             Assert.assertEquals(dataBytes[i], upcompressData[i]);
@@ -89,16 +89,16 @@ public class TestCompressUtils {
     private void testFileCompress(String name) throws IOException {
         File sourceFile = this.getSourceFile();
 
-        // Ñ¹ËõÎÄ¼ş
+        // å‹ç¼©æ–‡ä»¶
         File compressFile = CompressUtils.compress(name, sourceFile);
         Assert.assertTrue(compressFile.exists());
 
-        // ½âÑ¹ËõÎÄ¼ş
+        // è§£å‹ç¼©æ–‡ä»¶
         File uncompressFile = CompressUtils.decompress(compressFile);
         logger.info(CompressUtils.compressTypeMap.get(name) + " " + name + " File Compress TotalSize: " + sourceFile.length() + ", Compress size: " + compressFile.length() + ", Compress rate = "
                 + String.format("%1$d%%", this.getCompressRate((int) sourceFile.length(), (int) compressFile.length())));
 
-        // ²âÊÔ½âÑ¹ËõÊı¾İÊÇ·ñÕıÈ·
+        // æµ‹è¯•è§£å‹ç¼©æ•°æ®æ˜¯å¦æ­£ç¡®
         byte[] sourceData = this.getDataBytes();
         byte[] uncompressData = new byte[(int) uncompressFile.length()];
         FileInputStream fileInputStream = new FileInputStream(uncompressFile);

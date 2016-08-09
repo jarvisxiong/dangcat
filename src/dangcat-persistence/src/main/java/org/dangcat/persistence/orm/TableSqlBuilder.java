@@ -10,7 +10,7 @@ import org.dangcat.persistence.sql.Sql;
 import org.dangcat.persistence.tablename.TableName;
 
 /**
- * ¶¯Ì¬±íÓï¾ä¹¹½¨Æ÷¡£
+ * åŠ¨æ€è¡¨è¯­å¥æ„å»ºå™¨ã€‚
  *
  * @author dangcat
  */
@@ -23,15 +23,15 @@ public class TableSqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨Êı¾İ±íÔØÈëµÄ±í´ïÊ½¡£
+     * æ„å»ºæ•°æ®è¡¨è½½å…¥çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ÔØÈëµÄ±í´ïÓï¾ä¡£
+     * @return è½½å…¥çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public SqlBuilder buildLoadStatement() {
-        // ²éÑ¯·¶Î§
+        // æŸ¥è¯¢èŒƒå›´
         Range range = this.table.getRange();
-        // ¼ÓÈëÅÅĞòÌõ¼ş¡£
+        // åŠ å…¥æ’åºæ¡ä»¶ã€‚
         OrderBy orderBy = this.table.getOrderBy();
         SqlBuilder sqlBuilder = this.getSql(Sql.QUERY);
         if (sqlBuilder == null)
@@ -66,7 +66,7 @@ public class TableSqlBuilder extends SqlBuilderBase {
             sqlBuilder.append(SEPERATE_LINE);
             sqlBuilder.append("WHERE 1=1 ");
             sqlBuilder.append(SqlBuilder.FILTER_FLAG);
-            // ¼ÓÈëÅÅĞòÌõ¼ş¡£
+            // åŠ å…¥æ’åºæ¡ä»¶ã€‚
             if (orderBy != null) {
                 sqlBuilder.append(SEPERATE_LINE);
                 sqlBuilder.append(orderBy.toString());
@@ -89,7 +89,7 @@ public class TableSqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ±í¶¨Òå¡£
+     * æ•°æ®è¡¨å®šä¹‰ã€‚
      */
     @Override
     public Table getTable() {
@@ -97,7 +97,7 @@ public class TableSqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ±íÃû¡£
+     * æ•°æ®è¡¨åã€‚
      */
     @Override
     protected TableName getTableName() {

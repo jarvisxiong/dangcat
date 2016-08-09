@@ -7,12 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 class ChartDemoUtils {
-    private static String[][] areas = {{"ÖĞÄÏº£1", "ÖĞÄÏº£2"}, {"°×ÏÂÇø", "½¨ÚşÇø", "ÇØ»´Çø", "Óê»¨Çø"}, {"»ÆÆÒÇø", "Â¬ÍåÇø", "ãÉĞĞÇø", "Ğì»ãÇø"}, {"×ìÆ¤×ÓÇø"}};
+    private static String[][] areas = {{"ä¸­å—æµ·1", "ä¸­å—æµ·2"}, {"ç™½ä¸‹åŒº", "å»ºé‚ºåŒº", "ç§¦æ·®åŒº", "é›¨èŠ±åŒº"}, {"é»„åŸ”åŒº", "å¢æ¹¾åŒº", "é—µè¡ŒåŒº", "å¾æ±‡åŒº"}, {"å˜´çš®å­åŒº"}};
     private static String[] categories = {"Firefox", "IE", "Chrome", "Safari", "Opera", "Tom", "Jerry", "Mike", "MH370", "Others"};
-    private static String[] categoryTitles = {"»ğºü", "IE", "¹È¸è", "Safari", "Opera", "Ğ¡Ã¨", "ÀÏÊó", "Mike", "MH370", "ÆäËü"};
-    private static String[] cities = {"±±¾©", "ÄÏ¾©", "ÉÏº£", "Ìì½ò"};
+    private static String[] categoryTitles = {"ç«ç‹", "IE", "è°·æ­Œ", "Safari", "Opera", "å°çŒ«", "è€é¼ ", "Mike", "MH370", "å…¶å®ƒ"};
+    private static String[] cities = {"åŒ—äº¬", "å—äº¬", "ä¸Šæµ·", "å¤©æ´¥"};
     private static String[] octetsValueColumns = {"userOnline", "downPackets", "upPackets", "downOctets", "upOctets"};
-    private static String[] octetsValueTitles = {"ÔÚÏßÈËÊı", "ÏÂĞĞ°üÊı", "ÉÏĞĞ°üÊı", "ÏÂĞĞÁ÷Á¿", "ÉÏĞĞÁ÷Á¿"};
+    private static String[] octetsValueTitles = {"åœ¨çº¿äººæ•°", "ä¸‹è¡ŒåŒ…æ•°", "ä¸Šè¡ŒåŒ…æ•°", "ä¸‹è¡Œæµé‡", "ä¸Šè¡Œæµé‡"};
 
     protected static void createCategoryColumnData(ChartOption chartOption) {
         Map<String, Long> data = new HashMap<String, Long>();
@@ -140,7 +140,7 @@ class ChartDemoUtils {
     }
 
     protected static void createValueColumn(ChartOption chartOption) {
-        chartOption.addValueColumn(new Column("value", "ÈõÖÇÖµ", "octets"));
+        chartOption.addValueColumn(new Column("value", "å¼±æ™ºå€¼", "octets"));
     }
 
     protected static void createValueColumns(ChartOption chartOption) {
@@ -149,37 +149,37 @@ class ChartDemoUtils {
     }
 
     protected static void createYAxisProperties(AxisChartOption axisChartOption) {
-        axisChartOption.addYAxis(new YAxis("ÕÇĞ½ÂÊ"));
+        axisChartOption.addYAxis(new YAxis("æ¶¨è–ªç‡"));
     }
 
     protected static void createYAxisPropertiesArray(AxisChartOption axisChartOption) {
-        axisChartOption.addYAxis(new YAxis("Á÷Á¿"));
-        axisChartOption.addYAxis(new YAxis("°üÊı"));
-        axisChartOption.addYAxis(new YAxis("ÔÚÏßÊı"));
+        axisChartOption.addYAxis(new YAxis("æµé‡"));
+        axisChartOption.addYAxis(new YAxis("åŒ…æ•°"));
+        axisChartOption.addYAxis(new YAxis("åœ¨çº¿æ•°"));
     }
 
     private static Collection<Column> getOctetsValueColumns() {
         Collection<Column> columns = new ArrayList<Column>();
-        Column userOnline = new Column("userOnline", "ÔÚÏßÈËÊı");
+        Column userOnline = new Column("userOnline", "åœ¨çº¿äººæ•°");
         userOnline.setYAxis(2);
         userOnline.setStack("userOnline");
         columns.add(userOnline);
 
-        Column downPackets = new Column("downPackets", "ÏÂĞĞ°üÊı");
+        Column downPackets = new Column("downPackets", "ä¸‹è¡ŒåŒ…æ•°");
         downPackets.setYAxis(1);
         downPackets.setStack("packets");
         columns.add(downPackets);
 
-        Column upPackets = new Column("upPackets", "ÉÏĞĞ°üÊı");
+        Column upPackets = new Column("upPackets", "ä¸Šè¡ŒåŒ…æ•°");
         upPackets.setYAxis(1);
         upPackets.setStack("packets");
         columns.add(upPackets);
 
-        Column downOctets = new Column("downOctets", "ÏÂĞĞÁ÷Á¿", "octets");
+        Column downOctets = new Column("downOctets", "ä¸‹è¡Œæµé‡", "octets");
         downOctets.setStack("octets");
         columns.add(downOctets);
 
-        Column upOctets = new Column("upOctets", "ÉÏĞĞÁ÷Á¿", "octets");
+        Column upOctets = new Column("upOctets", "ä¸Šè¡Œæµé‡", "octets");
         upOctets.setStack("octets");
         columns.add(upOctets);
         return columns;

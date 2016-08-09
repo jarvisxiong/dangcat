@@ -3,34 +3,34 @@ package org.dangcat.commons.serialize.xml;
 import org.dangcat.commons.reflect.ReflectUtils;
 
 /**
- * ²ÎÊı¶ÔÏó½âÎöÆ÷¡£
+ * å‚æ•°å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class ParamXmlResolver extends XmlResolver {
     /**
-     * ²ÎÊı¶ÔÏó¡£
+     * å‚æ•°å¯¹è±¡ã€‚
      */
     private Param param = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ParamXmlResolver() {
         this(Param.class.getSimpleName());
     }
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ParamXmlResolver(String name) {
         super(name == null ? Param.class.getSimpleName() : name);
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     @Override
     protected void resolveElementText(String value) {
@@ -38,7 +38,7 @@ public class ParamXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

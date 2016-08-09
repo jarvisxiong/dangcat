@@ -48,7 +48,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     @Override
     public void initialize() {
         System.setProperty(ConfigureReader.KEY_SYSTEM_ID, "10");
-        // Ìí¼ÓÒª²âÊÔµÄ·þÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(RoleInfoService.class, RoleInfoServiceImpl.class);
 
         super.initialize();
@@ -67,7 +67,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
 
     @Test
     public void testDeleteRoleWithOperator() throws ServiceException {
-        // ²âÊÔÉ¾³ýÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ²Ù×÷×é
+        // æµ‹è¯•åˆ é™¤å·²ç»ç»‘å®šæ“ä½œå‘˜çš„æ“ä½œç»„
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(roleInfo);
@@ -111,19 +111,19 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
 
     @Test
     public void testSaveRoleNameRepeat() throws ServiceException {
-        // ²Ù×÷Ô±×éµÄÃû³Æ²»ÄÜÖØ¸´¡£
+        // æ“ä½œå‘˜ç»„çš„åç§°ä¸èƒ½é‡å¤ã€‚
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo1 = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(roleInfo1);
 
-        // ÐÞ¸ÄÃû³ÆÖØ¸´
+        // ä¿®æ”¹åç§°é‡å¤
         RoleInfo roleInfo2 = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 2);
         this.getEntityManager().save(roleInfo2);
         roleInfo2.setName(roleInfo1.getName());
         this.getService().save(roleInfo2);
         Assert.assertNotNull(roleInfo2.findServiceException(RoleInfoException.DATA_REPEAT));
 
-        // ÐÂÔöÃû³ÆÖØ¸´
+        // æ–°å¢žåç§°é‡å¤
         RoleInfo roleInfo3 = new RoleInfo();
         roleInfo3.setName(roleInfo1.getName());
         this.getService().create(roleInfo3);
@@ -132,7 +132,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
 
     @Test
     public void testSaveRoleNotExists() throws ServiceException {
-        // ËùÊô²Ù×÷Ô±×é²»´æÔÚ¡£
+        // æ‰€å±žæ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
         roleInfo.setId(-1);
@@ -143,7 +143,7 @@ public class TestRoleInfoService extends BusinessServiceTestBase<RoleInfoService
     @Test
     public void testSaveRolePermissions() throws ServiceException {
         this.truncate(RoleInfo.class, RolePermission.class);
-        // ËùÊô²Ù×÷Ô±×é²»´æÔÚ¡£
+        // æ‰€å±žæ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
         EntitySimulator roleInfoSimulator = this.getEntitySimulator(RoleInfo.class);
         RoleInfo roleInfo = (RoleInfo) roleInfoSimulator.create(TEST_COUNT + 1);
         roleInfo.getPermissions().add(new PermissionInfo(1001));

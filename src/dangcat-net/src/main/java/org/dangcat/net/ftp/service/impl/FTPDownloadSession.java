@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * FTPобть╩А╩╟║ё
+ * FTPД╦▀Х╫╫Д╪ Х╞²Ц─┌
  *
  * @author dangcat
  */
@@ -144,7 +144,7 @@ class FTPDownloadSession extends FTPSessionExecutor {
     }
 
     /**
-     * обтьнд╪Ч║ё
+     * Д╦▀Х╫╫Ф√┤Д╩╤Ц─┌
      *
      * @throws FTPSessionException
      */
@@ -182,10 +182,10 @@ class FTPDownloadSession extends FTPSessionExecutor {
     }
 
     /**
-     * апЁЖт╤Ёл╣днд╪Ч║ё
+     * Е┬≈Е┤╨Х©°Г╗▀Г └Ф√┤Д╩╤Ц─┌
      *
-     * @param ftpFileInfos ╠╬╣ьнд╪Чпео╒║ё
-     * @param ftpFile      т╤Ёлнд╪Ч║ё
+     * @param ftpFileInfos Ф°╛Е°╟Ф√┤Д╩╤Д©║Ф│╞Ц─┌
+     * @param ftpFile      Х©°Г╗▀Ф√┤Д╩╤Ц─┌
      * @throws IOException
      */
     private Collection<FTPFileInfo> loadFileInfos(FTPFileInfo parent, String remotePath) throws IOException {

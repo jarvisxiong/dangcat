@@ -9,10 +9,10 @@ import java.util.Map;
 
 class EntityMetaUtils {
     /**
-     * ±È½ÏÁ½¸öÊµÌå´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¤§å°ã€‚
      *
-     * @param srcEntity À´Ô´ÊµÌå¶ÔÏó¡£
-     * @param dstEntity Ä¿±êÊµÌå¶ÔÏó¡£
+     * @param srcEntity æ¥æºå®ä½“å¯¹è±¡ã€‚
+     * @param dstEntity ç›®æ ‡å®ä½“å¯¹è±¡ã€‚
      * @return
      */
     protected static int compare(EntityMetaData entityMetaData, Object srcEntity, Object dstEntity) {
@@ -35,10 +35,10 @@ class EntityMetaUtils {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊµÌå´óĞ¡¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå®ä½“å¤§å°ã€‚
      *
-     * @param srcEntity À´Ô´ÊµÌå¶ÔÏó¡£
-     * @param dstEntity Ä¿±êÊµÌå¶ÔÏó¡£
+     * @param srcEntity æ¥æºå®ä½“å¯¹è±¡ã€‚
+     * @param dstEntity ç›®æ ‡å®ä½“å¯¹è±¡ã€‚
      * @return
      */
     protected static int compareByPrimaryKey(EntityMetaData entityMetaData, Object srcEntity, Object dstEntity) {
@@ -61,9 +61,9 @@ class EntityMetaUtils {
     }
 
     /**
-     * Ö÷¼üÖµÊÇ·ñÓĞĞ§¡£
+     * ä¸»é”®å€¼æ˜¯å¦æœ‰æ•ˆã€‚
      *
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
      * @return
      */
     protected static boolean isPrimaryKeyValueValid(Object[] primaryKeyValues) {
@@ -78,7 +78,7 @@ class EntityMetaUtils {
     }
 
     /**
-     * ÅÅĞòÀ¸Î»Ë³Ğò¡£
+     * æ’åºæ ä½é¡ºåºã€‚
      */
     protected static Map<String, EntityField> sort(EntityMetaData entityMetaData) {
         boolean isDefaultIndex = true;

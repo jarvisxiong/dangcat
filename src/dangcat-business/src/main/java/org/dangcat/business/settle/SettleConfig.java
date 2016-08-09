@@ -3,7 +3,7 @@ package org.dangcat.business.settle;
 import org.dangcat.boot.config.ServiceConfig;
 
 /**
- * Í³¼ÆÅäÖÃ¡£
+ * ç»Ÿè®¡é…ç½®ã€‚
  *
  * @author dangcat
  */
@@ -12,7 +12,7 @@ public class SettleConfig extends ServiceConfig {
     private static final String CONFIG_NAME = "Settle";
     private static SettleConfig instance = new SettleConfig();
     /**
-     * ¼à¿ØÖÜÆÚ£¨Ãë£©¡£
+     * ç›‘æ§å‘¨æœŸï¼ˆç§’ï¼‰ã€‚
      */
     private String cronExpression = "0 * * * * ?";
 
@@ -25,7 +25,7 @@ public class SettleConfig extends ServiceConfig {
     }
 
     /**
-     * »ñÈ¡ÅäÖÃÊµÀı
+     * è·å–é…ç½®å®ä¾‹
      */
     public static SettleConfig getInstance() {
         return instance;

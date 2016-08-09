@@ -8,7 +8,7 @@ import org.dangcat.persistence.DataWriter;
 import java.io.*;
 
 /**
- * ÎÄµµÊäÈëÊä³ö¡£
+ * æ–‡æ¡£è¾“å…¥è¾“å‡ºã€‚
  *
  * @author dangcat
  */
@@ -51,19 +51,19 @@ public abstract class DocumentBase {
     }
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
      */
     public abstract int read(DataWriter dataWriter);
 
     /**
-     * ´ÓÎÄ¼ş¼ÓÔØÊı¾İ¡£
+     * ä»æ–‡ä»¶åŠ è½½æ•°æ®ã€‚
      *
-     * @param file       Ä¿±êÎÄ¼ş¡£
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
+     * @param file       ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
      */
     public int read(File file, DataWriter dataWriter) {
         int result = 0;
@@ -79,20 +79,20 @@ public abstract class DocumentBase {
     }
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param dataReader   Êı¾İÀ´Ô´¡£
-     * @param Êä³öÊıÁ¿¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param dataReader   æ•°æ®æ¥æºã€‚
+     * @param è¾“å‡ºæ•°é‡ã€‚
      */
     public abstract int write(DataReader dataReader);
 
     /**
-     * µ¼³öÊµÌå¶ÔÏóÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºå®ä½“å¯¹è±¡æ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param file         Êä³öÎÄ¼ş¡£
-     * @param dataReader   À´Ô´Êı¾İ¡£
-     * @param exportHeader ÊÇ·ñÊä³öÍ·¡£
+     * @param file         è¾“å‡ºæ–‡ä»¶ã€‚
+     * @param dataReader   æ¥æºæ•°æ®ã€‚
+     * @param exportHeader æ˜¯å¦è¾“å‡ºå¤´ã€‚
      */
     public int write(File file, DataReader dataReader) {
         int result = 0;

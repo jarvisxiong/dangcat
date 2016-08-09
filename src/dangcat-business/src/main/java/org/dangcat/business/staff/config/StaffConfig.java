@@ -5,7 +5,7 @@ import org.dangcat.framework.exception.ServiceException;
 import org.dangcat.persistence.entity.EntityBase;
 
 /**
- * ²Ù×÷Ô±²ÎÊıÉèÖÃ¡£
+ * æ“ä½œå‘˜å‚æ•°è®¾ç½®ã€‚
  *
  * @author dangcat
  */

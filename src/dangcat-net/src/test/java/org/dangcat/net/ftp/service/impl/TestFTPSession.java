@@ -40,7 +40,7 @@ public abstract class TestFTPSession {
     public abstract void release();
 
     /**
-     * ²âÊÔFTPÄ¿Â¼¹¦ÄÜ¡£
+     * æµ‹è¯•FTPç›®å½•åŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */
@@ -62,7 +62,7 @@ public abstract class TestFTPSession {
     }
 
     /**
-     * ²âÊÔÖ¸¶¨FTPÎÄ¼ş¹¦ÄÜ¡£
+     * æµ‹è¯•æŒ‡å®šFTPæ–‡ä»¶åŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */
@@ -92,13 +92,13 @@ public abstract class TestFTPSession {
     }
 
     /**
-     * ²âÊÔFTP¹ıÂË¹¦ÄÜ¡£
+     * æµ‹è¯•FTPè¿‡æ»¤åŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */
     @Test
     public void testFTPFilter() throws FTPSessionException {
-        // ²âÊÔ¹ıÂËÉÏ´«
+        // æµ‹è¯•è¿‡æ»¤ä¸Šä¼ 
         final String remotePath = "data/dir3";
         final String directoryName = "filter";
         final String fileName = TestFTPPoolSession.class.getSimpleName() + ".class";
@@ -124,7 +124,7 @@ public abstract class TestFTPSession {
             logger.error("FileComparer error: ");
         Assert.assertTrue(result);
 
-        // ²âÊÔ¹ıÂËÏÂÔØ
+        // æµ‹è¯•è¿‡æ»¤ä¸‹è½½
         final String localPath2 = "data/dir4";
         this.deleteRemotePath(localPath2);
         FilenameFilter remoteFileFilter = new FileNameFilter("TestModel", null);
@@ -134,7 +134,7 @@ public abstract class TestFTPSession {
     }
 
     /**
-     * ²âÊÔFTPÖØÃüÃû¹¦ÄÜ¡£
+     * æµ‹è¯•FTPé‡å‘½ååŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */

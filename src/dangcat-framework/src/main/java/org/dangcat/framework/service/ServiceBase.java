@@ -7,7 +7,7 @@ import org.dangcat.framework.event.EventHandler;
 import java.util.*;
 
 /**
- * ·şÎñ»ùÀà
+ * æœåŠ¡åŸºç±»
  *
  * @author dangcat
  */
@@ -23,16 +23,16 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     private Map<Class<?>, Object> serviceContainer = new LinkedHashMap<Class<?>, Object>();
 
     /**
-     * ¹¹Ôì·şÎñ¶ÔÏó¡£
+     * æ„é€ æœåŠ¡å¯¹è±¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public ServiceBase(ServiceProvider parent) {
         this.parent = parent;
     }
 
     /**
-     * Ìí¼Ó·şÎñ¡£
+     * æ·»åŠ æœåŠ¡ã€‚
      */
     public void addService(Class<?> classType, Object service) {
         if (service != this) {
@@ -43,9 +43,9 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * ¶ÁÈ¡×Ó·şÎñÁĞ±í¡£
+     * è¯»å–å­æœåŠ¡åˆ—è¡¨ã€‚
      *
-     * @return ×Ó·şÎñ¼¯ºÏ¡£
+     * @return å­æœåŠ¡é›†åˆã€‚
      */
     public Collection<Object> getChildren() {
         return this.childrenList;
@@ -56,7 +56,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * ·ÃÎÊ¸¸·şÎñ¡£
+     * è®¿é—®çˆ¶æœåŠ¡ã€‚
      *
      * @return
      */
@@ -65,7 +65,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * »ñÈ¡Ö¸¶¨ÀàĞÍµÄ·şÎñ¡£
+     * è·å–æŒ‡å®šç±»å‹çš„æœåŠ¡ã€‚
      */
     @SuppressWarnings("unchecked")
     public <T> T getService(Class<T> classType) {
@@ -77,7 +77,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * ´¦ÀíÊÂ¼ş¡£
+     * å¤„ç†äº‹ä»¶ã€‚
      */
     public Object handle(Event event) {
         Object result = null;
@@ -96,19 +96,19 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      */
     public void initialize() {
-        // ÓÉÅäÖÃÎÄ¼şÔØÈë×Ó·şÎñ¡£
+        // ç”±é…ç½®æ–‡ä»¶è½½å…¥å­æœåŠ¡ã€‚
         ServiceHelper.loadFromServiceXml(this);
-        // ×¢Èë·şÎñ¡£
+        // æ³¨å…¥æœåŠ¡ã€‚
         this.inject();
     }
 
     protected void inject() {
-        // ×¢Èë·şÎñ¡£
+        // æ³¨å…¥æœåŠ¡ã€‚
         ServiceHelper.inject(this, this);
-        // ×¢Èë×Ó·şÎñÖĞµÄ
+        // æ³¨å…¥å­æœåŠ¡ä¸­çš„
         for (Object childService : this.getChildren()) {
             if (childService instanceof ServiceBase) {
                 ServiceBase serviceBase = (ServiceBase) childService;
@@ -119,7 +119,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * ·şÎñÊÇ·ñÆô¶¯¡£
+     * æœåŠ¡æ˜¯å¦å¯åŠ¨ã€‚
      */
     public boolean isEnabled() {
         return this.isEnabled;
@@ -130,7 +130,7 @@ public abstract class ServiceBase implements ServiceProvider, EventHandler {
     }
 
     /**
-     * É¾³ı·şÎñ¡£
+     * åˆ é™¤æœåŠ¡ã€‚
      */
     public void removeService(Object service) {
         Class<?> classType = null;

@@ -16,7 +16,7 @@ import org.dangcat.framework.service.impl.ServiceInfo;
 import java.util.*;
 
 /**
- * È¨ÏŞĞÅÏ¢¡£
+ * æƒé™ä¿¡æ¯ã€‚
  *
  * @author dangcat
  */

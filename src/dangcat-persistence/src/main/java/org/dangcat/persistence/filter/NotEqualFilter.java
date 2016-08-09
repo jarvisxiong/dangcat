@@ -8,11 +8,11 @@ import java.util.List;
 
 class NotEqualFilter implements Filter {
     /**
-     * Ğ£ÑéÊıÖµÊÇ·ñÓĞĞ§¡£
+     * æ ¡éªŒæ•°å€¼æ˜¯å¦æœ‰æ•ˆã€‚
      *
-     * @param values ÊıÖµÊı×é¡£
-     * @param value  ±È½Ï¶ÔÏó¡£
-     * @return ÊÇ·ñÓĞĞ§¡£
+     * @param values æ•°å€¼æ•°ç»„ã€‚
+     * @param value  æ¯”è¾ƒå¯¹è±¡ã€‚
+     * @return æ˜¯å¦æœ‰æ•ˆã€‚
      */
     @Override
     public boolean isValid(Object[] values, Object value) {
@@ -26,11 +26,11 @@ class NotEqualFilter implements Filter {
     }
 
     /**
-     * ×ª»»³ÉSQL±í´ïÊ½¡£
+     * è½¬æ¢æˆSQLè¡¨è¾¾å¼ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @param values    ÊıÖµÊı×é¡£
-     * @return ±í´ïÊ½¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @param values    æ•°å€¼æ•°ç»„ã€‚
+     * @return è¡¨è¾¾å¼ã€‚
      */
     @Override
     public String toSql(String fieldName, Object[] values) {

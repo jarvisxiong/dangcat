@@ -5,7 +5,7 @@ import org.dangcat.persistence.model.Column;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * Êı¾İĞ£Ñé½Ó¿Ú¡£
+ * æ•°æ®æ ¡éªŒæ¥å£ã€‚
  *
  * @author dangcat
  */

@@ -22,9 +22,9 @@ class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends
     }
 
     /**
-     * ´¥·¢¼ÓÔØºóÊÂ¼þ¡£
+     * è§¦å‘åŠ è½½åŽäº‹ä»¶ã€‚
      *
-     * @param queryContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param queryContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void afterQuery(QueryContext<Q> queryContext) {
         if (this.isExtendEventEnabled())
@@ -32,9 +32,9 @@ class BusinessServiceQuery<Q extends EntityBase, V extends EntityBase, F extends
     }
 
     /**
-     * ´¥·¢¼ÓÔØÇ°ÊÂ¼þ¡£
+     * è§¦å‘åŠ è½½å‰äº‹ä»¶ã€‚
      *
-     * @param queryContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param queryContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void beforeQuery(QueryContext<Q> queryContext) throws ServiceException {
         if (this.isExtendEventEnabled())

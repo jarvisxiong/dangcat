@@ -150,14 +150,14 @@ public class MenusLoader {
     private void removeSeparator(MenuDataCollection menuDataCollection) {
         if (menuDataCollection != null && menuDataCollection.getDataCollection() != null) {
             MenuData[] menuDataArray = menuDataCollection.getDataCollection().toArray(new MenuData[0]);
-            // 清除连续的Separator
+            // 娓呴櫎杩炵画鐨凷eparator
             for (int i = 0; i < menuDataArray.length; i++) {
                 if (i < menuDataArray.length - 1) {
                     if (menuDataArray[i] instanceof Separator && menuDataArray[i + 1] instanceof Separator)
                         menuDataArray[i] = null;
                 }
             }
-            // 清除开头和结尾的Separator
+            // 娓呴櫎寮�澶村拰缁撳熬鐨凷eparator
             if (menuDataArray.length > 0) {
                 if (menuDataArray[0] instanceof Separator)
                     menuDataArray[0] = null;

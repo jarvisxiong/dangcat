@@ -3,13 +3,13 @@ package org.dangcat.business.validator.exceptions;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * Âß¼­Ğ£ÑéÒì³£¡£
+ * é€»è¾‘æ ¡éªŒå¼‚å¸¸ã€‚
  *
  * @author dangcat
  */
 public class LogicValidatorException extends DataValidateException {
     /**
-     * ÓÊ¼şÊäÈë²»ÕıÈ·¡£
+     * é‚®ä»¶è¾“å…¥ä¸æ­£ç¡®ã€‚
      */
     public static final Integer INVALIDATE_EMAIL = 101;
     /**
@@ -21,15 +21,15 @@ public class LogicValidatorException extends DataValidateException {
      */
     public static final Integer INVALIDATE_IPV6 = 105;
     /**
-     * ÊÖ»úÊäÈë²»ÕıÈ·¡£
+     * æ‰‹æœºè¾“å…¥ä¸æ­£ç¡®ã€‚
      */
     public static final Integer INVALIDATE_MOBILE = 103;
     /**
-     * ÕËºÅÊäÈë²»ÕıÈ·¡£
+     * è´¦å·è¾“å…¥ä¸æ­£ç¡®ã€‚
      */
     public static final Integer INVALIDATE_NO = 100;
     /**
-     * µç»°ÊäÈë²»ÕıÈ·¡£
+     * ç”µè¯è¾“å…¥ä¸æ­£ç¡®ã€‚
      */
     public static final Integer INVALIDATE_TEL = 102;
     private static final long serialVersionUID = 1L;

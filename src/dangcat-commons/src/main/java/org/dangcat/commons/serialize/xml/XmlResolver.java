@@ -15,43 +15,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * XmlÎÄ¼ş½âÎöÆ÷¡£
+ * Xmlæ–‡ä»¶è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public abstract class XmlResolver {
     /**
-     * ¸ú×ÙÈÕÖ¾¡£
+     * è·Ÿè¸ªæ—¥å¿—ã€‚
      */
     protected static final Logger logger = Logger.getLogger(XmlResolver.class);
     /**
-     * ÔªËØ½âÎöÓ°Éä±í.
+     * å…ƒç´ è§£æå½±å°„è¡¨.
      */
     private Map<String, XmlResolver> childXmlResolverMap = new HashMap<String, XmlResolver>();
     /**
-     * XmlÎÄµµ¡£
+     * Xmlæ–‡æ¡£ã€‚
      */
     private Document document = null;
     /**
-     * ½âÎöÆ÷Ãû³Æ¡£
+     * è§£æå™¨åç§°ã€‚
      */
     private String name;
     /**
-     * ½âÎö¶ÔÏó¡£
+     * è§£æå¯¹è±¡ã€‚
      */
     private Object resolveObject = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public XmlResolver(String name) {
         this.name = name;
     }
 
     /**
-     * Ôö¼Ó×ÓÔªËØ½âÎöÆ÷¡£
+     * å¢åŠ å­å…ƒç´ è§£æå™¨ã€‚
      *
-     * @param xmlResolver ½âÎöÆ÷¡£
+     * @param xmlResolver è§£æå™¨ã€‚
      */
     protected void addChildXmlResolver(XmlResolver xmlResolver) {
         if (xmlResolver != null) {
@@ -63,37 +63,37 @@ public abstract class XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         ReflectUtils.setProperty(this.resolveObject, elementName, child);
     }
 
     /**
-     * ½âÎö×ÓÔªËØÖ®Ç°¡£
+     * è§£æå­å…ƒç´ ä¹‹å‰ã€‚
      *
-     * @param name        ÊôĞÔÃû³Æ¡£
-     * @param xmlResolver ½âÎöÆ÷¡£
+     * @param name        å±æ€§åç§°ã€‚
+     * @param xmlResolver è§£æå™¨ã€‚
      */
     protected void beforeChildResolve(String elementName, XmlResolver xmlResolver) {
     }
 
     /**
-     * ÊÇ·ñÒÑ¾­´æÔÚ½âÎöÆ÷¡£
+     * æ˜¯å¦å·²ç»å­˜åœ¨è§£æå™¨ã€‚
      *
-     * @param elementName ÔªËØÃû³Æ¡£
+     * @param elementName å…ƒç´ åç§°ã€‚
      */
     protected boolean containsChildXmlResolver(String elementName) {
         return childXmlResolverMap.containsKey(elementName);
     }
 
     /**
-     * ½âÎöÔªËØ±êÇ©½áÊø¡£
+     * è§£æå…ƒç´ æ ‡ç­¾ç»“æŸã€‚
      *
-     * @return ½âÎö¶ÔÏó¡£
+     * @return è§£æå¯¹è±¡ã€‚
      */
     protected Object endElement() {
         return this.getResolveObject();
@@ -112,11 +112,11 @@ public abstract class XmlResolver {
     }
 
     /**
-     * ·´Ïò½âÎö¶ÔÏó¡£
+     * åå‘è§£æå¯¹è±¡ã€‚
      *
-     * @param xmlFile XmlÎÄµµ¡£
-     * @return ½âÎö¶ÔÏó¡£
-     * @throws XMLStreamException ½âÎöÒì³£¡£
+     * @param xmlFile Xmlæ–‡æ¡£ã€‚
+     * @return è§£æå¯¹è±¡ã€‚
+     * @throws XMLStreamException è§£æå¼‚å¸¸ã€‚
      * @throws DocumentException
      */
     public void open(File xmlFile) throws DocumentException {
@@ -128,11 +128,11 @@ public abstract class XmlResolver {
     }
 
     /**
-     * ·´Ïò½âÎö¶ÔÏó¡£
+     * åå‘è§£æå¯¹è±¡ã€‚
      *
-     * @param inputStream ÊäÈëÁ÷¡£
-     * @return ½âÎö¶ÔÏó¡£
-     * @throws XMLStreamException ½âÎöÒì³£¡£
+     * @param inputStream è¾“å…¥æµã€‚
+     * @return è§£æå¯¹è±¡ã€‚
+     * @throws XMLStreamException è§£æå¼‚å¸¸ã€‚
      * @throws DocumentException
      */
     public void open(InputStream inputStream) throws DocumentException {
@@ -144,20 +144,20 @@ public abstract class XmlResolver {
     }
 
     /**
-     * ½âÎö¶ÔÏó¡£
+     * è§£æå¯¹è±¡ã€‚
      *
-     * @return ½âÎö¶ÔÏó¡£
-     * @throws XMLStreamException ½âÎöÒì³£¡£
+     * @return è§£æå¯¹è±¡ã€‚
+     * @throws XMLStreamException è§£æå¼‚å¸¸ã€‚
      */
     public Object resolve() {
         return this.resolve(this.document.getRootElement());
     }
 
     /**
-     * ½âÎöÔªËØ¡£
+     * è§£æå…ƒç´ ã€‚
      *
-     * @param parent ¸¸ÔªËØ¡£
-     * @return ½âÎö¶ÔÏó¡£
+     * @param parent çˆ¶å…ƒç´ ã€‚
+     * @return è§£æå¯¹è±¡ã€‚
      */
     public Object resolve(Element parent) {
         String elementName = parent.getName();
@@ -165,25 +165,25 @@ public abstract class XmlResolver {
         if (!this.getName().equals(elementName))
             return null;
 
-        // ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+        // å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
         logger.debug("StartElement: " + elementName);
         this.startElement();
 
-        // ½âÎöÊôĞÔ¡£
+        // è§£æå±æ€§ã€‚
         for (Object attributeObject : parent.attributes()) {
             DefaultAttribute chileElement = (DefaultAttribute) attributeObject;
             logger.debug("Attribute " + chileElement.getName() + ": " + chileElement.getValue());
             this.resolveAttribute(chileElement.getName(), chileElement.getValue());
         }
 
-        // ½âÎöÎÄ×Ö¡£
+        // è§£ææ–‡å­—ã€‚
         String text = parent.getTextTrim();
         if (text != null && !text.equals("")) {
             logger.debug("ElementText : " + text);
             this.resolveElementText(parent.getText());
         }
 
-        // ½âÎö×ÓÔªËØ¡£
+        // è§£æå­å…ƒç´ ã€‚
         for (Object elementObject : parent.elements()) {
             Element childElement = (Element) elementObject;
             String childElementName = childElement.getName();
@@ -191,25 +191,25 @@ public abstract class XmlResolver {
             this.resolveChildElement(childElement);
         }
 
-        // ·µ»Ø½âÎö¶ÔÏó¡£
+        // è¿”å›è§£æå¯¹è±¡ã€‚
         logger.debug("EndElement: " + elementName);
         return this.endElement();
     }
 
     /**
-     * ½âÎöÊôĞÔ¡£
+     * è§£æå±æ€§ã€‚
      *
-     * @param name  ÊôĞÔÃû³Æ¡£
-     * @param value ÊôĞÔÖµ¡£
+     * @param name  å±æ€§åç§°ã€‚
+     * @param value å±æ€§å€¼ã€‚
      */
     protected void resolveAttribute(String name, String value) {
         ReflectUtils.setProperty(this.resolveObject, name, value);
     }
 
     /**
-     * ¿ªÊ¼½âÎö×ÓÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå­å…ƒç´ æ ‡ç­¾ã€‚
      *
-     * @param element ×ÓÔªËØÃû³Æ¡£
+     * @param element å­å…ƒç´ åç§°ã€‚
      */
     protected void resolveChildElement(Element element) {
         String elementName = element.getName();
@@ -226,15 +226,15 @@ public abstract class XmlResolver {
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     protected void resolveElementText(String value) {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     protected void startElement() {
     }

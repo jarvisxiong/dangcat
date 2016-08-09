@@ -1,40 +1,40 @@
 package org.dangcat.framework.service;
 
 /**
- * ·şÎñ¿ØÖÆ¡£
+ * æœåŠ¡æ§åˆ¶ã€‚
  *
  * @author dangcat
  */
 public interface ServiceControl {
     /**
-     * ·şÎñÃû³Æ¡£
+     * æœåŠ¡åç§°ã€‚
      */
     String getServiceName();
 
     /**
-     * ·şÎñ×´Ì¬¡£
+     * æœåŠ¡çŠ¶æ€ã€‚
      *
      * @return
      */
     ServiceStatus getServiceStatus();
 
     /**
-     * ·şÎñÊÇ·ñÆô¶¯¡£
+     * æœåŠ¡æ˜¯å¦å¯åŠ¨ã€‚
      */
     boolean isEnabled();
 
     /**
-     * ÖØĞÂÆô¶¯¡£
+     * é‡æ–°å¯åŠ¨ã€‚
      */
     void restart();
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     void start();
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     void stop();
 }

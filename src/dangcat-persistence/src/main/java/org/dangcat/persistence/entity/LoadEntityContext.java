@@ -8,7 +8,7 @@ import org.dangcat.persistence.orderby.OrderBy;
 import java.util.Collection;
 
 /**
- * ÔØÈëÊµÌåÉÏÏÂÎÄ¡£
+ * è½½å…¥å®ä½“ä¸Šä¸‹æ–‡ã€‚
  *
  * @author dangcat
  */
@@ -19,46 +19,46 @@ public class LoadEntityContext extends DeleteEntityContext {
     private Range range;
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
      */
     public LoadEntityContext(Class<?> entityClass) {
         this(entityClass, null, null, null);
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, FilterExpress filterExpress) {
         this(entityClass, filterExpress, null, null);
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, FilterExpress filterExpress, Range range) {
         this(entityClass, filterExpress, range, null);
     }
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§¡¢ÅÅĞòÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´ã€æ’åºæ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @param orderBy       ÅÅĞòÌõ¼ş¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @param orderBy       æ’åºæ¡ä»¶ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, FilterExpress filterExpress, Range range, OrderBy orderBy) {
         super(entityClass, filterExpress);
@@ -67,56 +67,56 @@ public class LoadEntityContext extends DeleteEntityContext {
     }
 
     /**
-     * °´ÕÕÖ÷¼üÖµÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§ä¸»é”®å€¼è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager    ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass      ÊµÌåÀàĞÍ¡£
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
+     * @param entityManager    å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass      å®ä½“ç±»å‹ã€‚
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, Object... primaryKeyValues) {
         this(entityClass, null, primaryKeyValues);
     }
 
     /**
-     * °´ÕÕ·¶Î§ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§èŒƒå›´è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param range         ÔØÈë·¶Î§¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, Range range) {
         this(entityClass, null, range, null);
     }
 
     /**
-     * °´ÕÕ·¶Î§¡¢ÅÅĞòÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§èŒƒå›´ã€æ’åºæ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @param orderBy       ÅÅĞòÌõ¼ş¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @param orderBy       æ’åºæ¡ä»¶ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, Range range, OrderBy orderBy) {
         this(entityClass, null, range, null);
     }
 
     /**
-     * °´ÕÕÖ÷¼üÖµÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§ä¸»é”®å€¼è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param entityManager ÊµÌå¹ÜÀíÆ÷¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param fieldNames    ÊôĞÔÃû³Æ¡£
-     * @param values        ÊôĞÔÖµ¡£
+     * @param entityManager å®ä½“ç®¡ç†å™¨ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param fieldNames    å±æ€§åç§°ã€‚
+     * @param values        å±æ€§å€¼ã€‚
      */
     public LoadEntityContext(Class<?> entityClass, String[] fieldNames, Object... values) {
         super(entityClass, fieldNames, values);
     }
 
     /**
-     * Ë¢ĞÂÖ¸¶¨µÄÊµÌå¡£
+     * åˆ·æ–°æŒ‡å®šçš„å®ä½“ã€‚
      *
-     * @param entity      ÊµÌå¶ÔÏó¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
+     * @param entity      å®ä½“å¯¹è±¡ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
      */
     public LoadEntityContext(Object entity) {
         this(entity.getClass(), null, null, null);

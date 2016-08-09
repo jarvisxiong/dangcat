@@ -36,7 +36,7 @@ public class TestOperateLogService extends BusinessServiceTestBase<OperateLogSer
     @Before
     @Override
     public void initialize() {
-        // Ìí¼ÓÒª²âÊÔµÄ·þÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(OperatorGroupService.class, OperatorGroupServiceImpl.class);
         this.addService(OperatorInfoService.class, OperatorInfoServiceImpl.class);
         this.addService(OperateLogService.class, OperateLogServiceImpl.class);

@@ -17,16 +17,16 @@ class SessionExecutor {
     }
 
     /**
-     * Ö´ĞĞ²éÑ¯ÃüÁî
+     * æ‰§è¡ŒæŸ¥è¯¢å‘½ä»¤
      *
      * @param sql
-     * @return ResultSet ²éÑ¯½á¹û
+     * @return ResultSet æŸ¥è¯¢ç»“æœ
      * @throws SQLException
      */
     @SuppressWarnings("unchecked")
     protected int execute(int type, Object... params) throws SQLException {
         int result = 0;
-        // Ö´ĞĞ×´Ì¬£º0£ºÎ´Ö´ĞĞ£»1£ºÒÑÖ´ĞĞ£»-1£ºÒòÎªÁ¬½ÓÖ´ĞĞÊ§°Ü£»
+        // æ‰§è¡ŒçŠ¶æ€ï¼š0ï¼šæœªæ‰§è¡Œï¼›1ï¼šå·²æ‰§è¡Œï¼›-1ï¼šå› ä¸ºè¿æ¥æ‰§è¡Œå¤±è´¥ï¼›
         int status = 0;
         SQLException exception = null;
 
@@ -104,9 +104,9 @@ class SessionExecutor {
     }
 
     /**
-     * Ö´ĞĞÃüÁî¡£
+     * æ‰§è¡Œå‘½ä»¤ã€‚
      *
-     * @param sql ±í´ïÓï¾ä¡£
+     * @param sql è¡¨è¾¾è¯­å¥ã€‚
      * @throws SQLException
      */
     private int innerExecuteSql(String sql) throws SQLException {

@@ -10,7 +10,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * ×ÊÔ´¼ÓÔØÆ÷¡£
+ * èµ„æºåŠ è½½å™¨ã€‚
  *
  * @author dangcat
  */
@@ -80,7 +80,7 @@ public class ResourceLoader {
     }
 
     /**
-     * Ìí¼ÓÂ·¾¶¡£
+     * æ·»åŠ è·¯å¾„ã€‚
      */
     public void addPath(String path) {
         File directory = new File(path);
@@ -96,7 +96,7 @@ public class ResourceLoader {
     }
 
     /**
-     * ¹Ø±Õ¼ÓÔØµÄ×ÊÔ´¡£
+     * å…³é—­åŠ è½½çš„èµ„æºã€‚
      */
     public void close() {
         try {
@@ -150,9 +150,9 @@ public class ResourceLoader {
     }
 
     /**
-     * Èç¹û¶ÁÈ¡Ò»¸ö×ÊÔ´£¬¾Í¶ÁÈ¡ÓÅÏÈ¼¶×î¸ßµÄ¡£
+     * å¦‚æœè¯»å–ä¸€ä¸ªèµ„æºï¼Œå°±è¯»å–ä¼˜å…ˆçº§æœ€é«˜çš„ã€‚
      *
-     * @return ×ÊÔ´ÅäÖÃ¡£
+     * @return èµ„æºé…ç½®ã€‚
      */
     public Resource getResource() {
         return this.resources.size() > 0 ? this.resources.get(this.resources.size() - 1) : null;
@@ -176,15 +176,15 @@ public class ResourceLoader {
     }
 
     /**
-     * ¶ÁÈ¡×ÊÔ´ÎÄ¼ş¡£
+     * è¯»å–èµ„æºæ–‡ä»¶ã€‚
      */
     public void load() {
         List<Resource> resourceList = new LinkedList<Resource>();
-        // ¶ÁÈ¡Ààµ±Ç°Ä¿Â¼×ÊÔ´¡£
+        // è¯»å–ç±»å½“å‰ç›®å½•èµ„æºã€‚
         this.loadFromResource(resourceList);
-        // ¶ÁÈ¡JAR°üÄ¿Â¼¡£
+        // è¯»å–JARåŒ…ç›®å½•ã€‚
         this.loadFromJarFile(resourceList);
-        // ÓÅÏÈ¶ÁÈ¡À©Õ¹Ä¿Â¼¡£
+        // ä¼˜å…ˆè¯»å–æ‰©å±•ç›®å½•ã€‚
         this.loadFromPath(resourceList);
 
         this.resources.clear();
@@ -201,7 +201,7 @@ public class ResourceLoader {
     }
 
     /**
-     * ¶ÁÈ¡×ÊÔ´ÎÄ¼ş¡£
+     * è¯»å–èµ„æºæ–‡ä»¶ã€‚
      */
     private void loadFromJarFile(Collection<Resource> resources) {
         if (this.classType == null)
@@ -244,19 +244,19 @@ public class ResourceLoader {
     }
 
     /**
-     * ¶ÁÈ¡ÊôĞÔÎÄ¼ş¡£
+     * è¯»å–å±æ€§æ–‡ä»¶ã€‚
      */
     private void loadFromPath(Collection<Resource> resources) {
         String directory = this.classType.getPackage().getName().replace(".", "/");
         this.addPath(FileUtils.getResourcePath(this.classType, directory));
-        // Â·¾¶¿¼ÂÇÄ¿Â¼½á¹¹µÄMETA_INF
+        // è·¯å¾„è€ƒè™‘ç›®å½•ç»“æ„çš„META_INF
         this.addPath(FileUtils.getResourcePath(this.classType, META_INF));
 
         if (this.paths != null) {
             for (File directoryFile : this.paths)
                 this.loadFromPath(resources, directoryFile);
         }
-        // ÓÉÀ©Õ¹Ä¿Â¼¼ÓÔØ
+        // ç”±æ‰©å±•ç›®å½•åŠ è½½
         if (!extendDirectories.isEmpty()) {
             for (File extendDirectory : extendDirectories)
                 this.loadFromPath(resources, extendDirectory);
@@ -280,7 +280,7 @@ public class ResourceLoader {
     }
 
     /**
-     * ¶ÁÈ¡×ÊÔ´ÎÄ¼ş¡£
+     * è¯»å–èµ„æºæ–‡ä»¶ã€‚
      */
     private void loadFromResource(Collection<Resource> resources) {
         if (this.classType != null) {

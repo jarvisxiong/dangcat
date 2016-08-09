@@ -9,9 +9,9 @@ class ChartUtils {
     protected static final String NULL = "NULL";
 
     private static void fixFirstDate(TimeChart timeChart, Date firstDate, Map<Date, Double> valueMap) {
-        // Á½¶ËÊ±¼ä¼ä¸ô¡£
+        // ä¸¤ç«¯æ—¶é—´é—´éš”ã€‚
         int timeLength = (int) ((firstDate.getTime() - timeChart.getBeginTime().getTime()) / 1000);
-        if (timeLength > 2 * timeChart.getTimeStep())// ³¬¹ıÁ½¸öÖÜÆÚÃ»ÓĞÊı¾İÔòÖÃ¿Õ¡£
+        if (timeLength > 2 * timeChart.getTimeStep())// è¶…è¿‡ä¸¤ä¸ªå‘¨æœŸæ²¡æœ‰æ•°æ®åˆ™ç½®ç©ºã€‚
         {
             Date beforeFirstDate = DateUtils.add(DateUtils.SECOND, firstDate, -1);
             valueMap.put(beforeFirstDate, null);
@@ -19,9 +19,9 @@ class ChartUtils {
     }
 
     private static void fixLastDate(TimeChart timeChart, Date lastDate, Map<Date, Double> valueMap) {
-        // Á½¶ËÊ±¼ä¼ä¸ô¡£
+        // ä¸¤ç«¯æ—¶é—´é—´éš”ã€‚
         int timeLength = (int) ((timeChart.getEndTime().getTime() - lastDate.getTime()) / 1000);
-        if (timeLength > 2 * timeChart.getTimeStep())// ³¬¹ıÁ½¸öÖÜÆÚÃ»ÓĞÊı¾İÔòÖÃ¿Õ¡£
+        if (timeLength > 2 * timeChart.getTimeStep())// è¶…è¿‡ä¸¤ä¸ªå‘¨æœŸæ²¡æœ‰æ•°æ®åˆ™ç½®ç©ºã€‚
         {
             Date afterLastDate = DateUtils.add(DateUtils.SECOND, lastDate, 1);
             valueMap.put(afterLastDate, null);
@@ -33,15 +33,15 @@ class ChartUtils {
         dateList.addAll(valueMap.keySet());
         Collections.sort(dateList);
 
-        // ĞŞ¸´ÆğÊ¼¶ËµãµÄÈÕÆÚ¡£
+        // ä¿®å¤èµ·å§‹ç«¯ç‚¹çš„æ—¥æœŸã€‚
         fixFirstDate(timeChart, dateList.get(0), valueMap);
 
         for (int i = 1; i < dateList.size(); i++) {
             Date beginDate = dateList.get(i - 1);
             Date endDate = dateList.get(i);
-            // Á½¶ËÊ±¼ä¼ä¸ô¡£
+            // ä¸¤ç«¯æ—¶é—´é—´éš”ã€‚
             int timeLength = (int) ((endDate.getTime() - beginDate.getTime()) / 1000);
-            if (timeLength > 2 * timeChart.getTimeStep())// ³¬¹ıÁ½¸öÖÜÆÚÃ»ÓĞÊı¾İÔòÖÃ¿Õ¡£
+            if (timeLength > 2 * timeChart.getTimeStep())// è¶…è¿‡ä¸¤ä¸ªå‘¨æœŸæ²¡æœ‰æ•°æ®åˆ™ç½®ç©ºã€‚
             {
                 Date afterBeginDate = DateUtils.add(DateUtils.SECOND, beginDate, 1);
                 valueMap.put(afterBeginDate, null);
@@ -50,7 +50,7 @@ class ChartUtils {
             }
         }
 
-        // ĞŞ¸´½ØÖ¹¶ËµãµÄÈÕÆÚ¡£
+        // ä¿®å¤æˆªæ­¢ç«¯ç‚¹çš„æ—¥æœŸã€‚
         fixLastDate(timeChart, dateList.get(dateList.size() - 1), valueMap);
 
         List<Map.Entry<Date, Double>> sortedList = new ArrayList<Map.Entry<Date, Double>>();

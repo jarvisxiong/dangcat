@@ -3,7 +3,7 @@ package org.dangcat.framework.service;
 import org.dangcat.framework.service.impl.ServiceFactory;
 
 /**
- * Ö÷·şÎñ½Ó¿Ú¡£
+ * ä¸»æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */

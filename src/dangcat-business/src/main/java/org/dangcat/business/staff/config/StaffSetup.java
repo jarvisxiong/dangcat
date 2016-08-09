@@ -5,7 +5,7 @@ import org.dangcat.persistence.annotation.Table;
 import org.dangcat.persistence.entity.EntityBase;
 
 /**
- * ²Ù×÷Ô±²ÎÊıÉèÖÃ¡£
+ * æ“ä½œå‘˜å‚æ•°è®¾ç½®ã€‚
  *
  * @author dangcat
  */
@@ -16,17 +16,17 @@ public class StaffSetup extends EntityBase {
     public static final String ValidDays = "ValidDays";
     private static final long serialVersionUID = 1L;
     /**
-     * ĞÂ½¨ÕË»§Ä¬ÈÏ¿ªÆô·ñ¡£
+     * æ–°å»ºè´¦æˆ·é»˜è®¤å¼€å¯å¦ã€‚
      */
     @Column(isNullable = false)
     private Boolean defaultUseAble = null;
     /**
-     * ²Ù×÷ÈÕÖ¾±£ÁôÖÜÆÚ¡£
+     * æ“ä½œæ—¥å¿—ä¿ç•™å‘¨æœŸã€‚
      */
     @Column
     private Integer logKeepMonth = null;
     /**
-     * ÕË»§ÓĞĞ§ÌìÊı¡£
+     * è´¦æˆ·æœ‰æ•ˆå¤©æ•°ã€‚
      */
     @Column
     private Integer validDays = null;

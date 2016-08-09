@@ -51,7 +51,7 @@ class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor {
     }
 
     /**
-     * ÕıÔÚÖ´ĞĞµÄÈÎÎñÊı¡£
+     * æ­£åœ¨æ‰§è¡Œçš„ä»»åŠ¡æ•°ã€‚
      */
     protected int getExecutingCount() {
         return this.executingCount.get();

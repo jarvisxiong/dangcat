@@ -52,11 +52,11 @@ public class TestDivEntity extends TestEntityBase {
     }
 
     private void testDelete(List<OperatorLog> entityList, Map<String, Collection<OperatorLog>> operatorLogMap, DateTimeTableName dateTimeTableName) throws EntityException {
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.delete(entityList.toArray());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         for (Entry<String, Collection<OperatorLog>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             LoadEntityContext loadEntityContext = new LoadEntityContext(OperatorLog.class);
@@ -86,11 +86,11 @@ public class TestDivEntity extends TestEntityBase {
     }
 
     private void testInsert(List<OperatorLog> entityList, Map<String, Collection<OperatorLog>> operatorLogMap, DateTimeTableName dateTimeTableName) throws EntityException {
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.save(entityList.toArray());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         for (Entry<String, Collection<OperatorLog>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             LoadEntityContext loadEntityContext = new LoadEntityContext(OperatorLog.class);

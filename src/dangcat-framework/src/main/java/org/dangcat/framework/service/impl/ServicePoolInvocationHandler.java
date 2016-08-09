@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * ·şÎñ¶ÔÏó³Ø´úÀí¡£
+ * æœåŠ¡å¯¹è±¡æ± ä»£ç†ã€‚
  *
  * @author dangcat
  */

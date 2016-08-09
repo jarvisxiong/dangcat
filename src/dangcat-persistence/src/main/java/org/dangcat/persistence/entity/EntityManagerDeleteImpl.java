@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ÊµÌåÉ¾³ı¹ÜÀíÆ÷¡£
+ * å®ä½“åˆ é™¤ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
@@ -24,12 +24,12 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>              ÊµÌåÀàĞÍ¡£
-     * @param entityClass      ÊµÌåÀàĞÍ¡£
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>              å®ä½“ç±»å‹ã€‚
+     * @param entityClass      å®ä½“ç±»å‹ã€‚
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws TableException
      */
     protected int delete(Class<?> entityClass, Object[] primaryKeyValues) throws EntityException {
@@ -48,13 +48,13 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
     }
 
     /**
-     * É¾³ıÖ¸¶¨ÊôĞÔÌõ¼şµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šå±æ€§æ¡ä»¶çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param fieldNames  ×Ö¶ÎÃû³Æ¡£
-     * @param values      ÊôĞÔÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param fieldNames  å­—æ®µåç§°ã€‚
+     * @param values      å±æ€§å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws TableException
      */
     protected int delete(Class<?> entityClass, String[] fieldNames, Object[] values) throws EntityException {
@@ -70,12 +70,12 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
     }
 
     /**
-     * °´ÕÕÉÏÏÂÎÄÉ¾³ıÊµÌå¶ÔÏó¡£
+     * æŒ‰ç…§ä¸Šä¸‹æ–‡åˆ é™¤å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>                 ÊµÌåÀàĞÍ¡£
-     * @param deleteEntityContext É¾³ıÉÏÏÂÎÄ¶ÔÏó¡£
-     * @return É¾³ıµÄÊıÄ¿¡£
-     * @throws EntityException ÔËĞĞÒì³£¡£
+     * @param <T>                 å®ä½“ç±»å‹ã€‚
+     * @param deleteEntityContext åˆ é™¤ä¸Šä¸‹æ–‡å¯¹è±¡ã€‚
+     * @return åˆ é™¤çš„æ•°ç›®ã€‚
+     * @throws EntityException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected int delete(DeleteEntityContext deleteEntityContext) throws EntityException {
         this.prepare(deleteEntityContext);
@@ -88,7 +88,7 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
                 return 0;
 
             EntitySqlBuilder entitySqlBuilder = new EntitySqlBuilder(entityMetaData, this.getDatabaseName(), deleteEntityContext);
-            // ÔØÈëÊı¾İ¡£
+            // è½½å…¥æ•°æ®ã€‚
             sqlBuilder = entitySqlBuilder.buildDeleteStatement();
             if (sqlBuilder.length() > 0) {
                 long beginTime = DateUtils.currentTimeMillis();
@@ -96,7 +96,7 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
                     logger.debug("Begin delete the entity: " + entityClass.getClass().getName());
 
                 if (deleteEntityContext.beforeDelete()) {
-                    // »ñÈ¡»á»°¶ÔÏó¡£
+                    // è·å–ä¼šè¯å¯¹è±¡ã€‚
                     Session session = this.beginTransaction();
                     result = session.executeBatch(sqlBuilder.getBatchSqlList());
                     deleteEntityContext.afterDelete();
@@ -117,11 +117,11 @@ class EntityManagerDeleteImpl extends EntityManagerTransaction {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>    ÊµÌåÀàĞÍ¡£
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>    å®ä½“ç±»å‹ã€‚
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws TableException
      */
     protected int delete(Object... entities) throws EntityException {

@@ -5,7 +5,7 @@ import org.dangcat.business.code.server.conf.ConfCodeGenerator;
 import java.io.File;
 
 /**
- * ·şÎñ´úÂëÉú³ÉÆ÷¡£
+ * æœåŠ¡ä»£ç ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Ñ¹Ëõ»ù´¡Àà¡£
+ * åŽ‹ç¼©åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
@@ -26,19 +26,19 @@ public class Compressor {
     private long totalSize = 0;
 
     /**
-     * Ìí¼Ó¹éµµÎÄ¼þ»òÄ¿Â¼¡£
+     * æ·»åŠ å½’æ¡£æ–‡ä»¶æˆ–ç›®å½•ã€‚
      *
-     * @param file ¹éµµÎÄ¼þ¡£
+     * @param file å½’æ¡£æ–‡ä»¶ã€‚
      */
     public void addArchiveEntry(File file) {
         this.addArchiveEntry(file, null);
     }
 
     /**
-     * Ìí¼Ó¹éµµÎÄ¼þ»òÄ¿Â¼¡£
+     * æ·»åŠ å½’æ¡£æ–‡ä»¶æˆ–ç›®å½•ã€‚
      *
-     * @param file ¹éµµÎÄ¼þ¡£
-     * @param path Ñ¹ËõÂ·¾¶¡£
+     * @param file å½’æ¡£æ–‡ä»¶ã€‚
+     * @param path åŽ‹ç¼©è·¯å¾„ã€‚
      */
     public void addArchiveEntry(File file, String path) {
         if (this.fileNameFilter != null && !this.fileNameFilter.accept(file))
@@ -61,10 +61,10 @@ public class Compressor {
     }
 
     /**
-     * Ìí¼Ó¹éµµÎÄ¼þ¡£
+     * æ·»åŠ å½’æ¡£æ–‡ä»¶ã€‚
      *
-     * @param file ¹éµµÎÄ¼þ¡£
-     * @param path Ñ¹ËõÂ·¾¶¡£
+     * @param file å½’æ¡£æ–‡ä»¶ã€‚
+     * @param path åŽ‹ç¼©è·¯å¾„ã€‚
      */
     private void addFileArchiveEntry(File file, String path) {
         if (ValueUtils.isEmpty(path))
@@ -80,7 +80,7 @@ public class Compressor {
     }
 
     /**
-     * Ñ¹ËõÎÄ¼þ¡£
+     * åŽ‹ç¼©æ–‡ä»¶ã€‚
      *
      * @throws IOException
      */
@@ -93,13 +93,13 @@ public class Compressor {
             throw new IOException("This archive file is not support: " + compressFile);
 
         Archiver archiver = archiveInfo.createArchiver();
-        // Ñ¹ËõÎÄµµ¡£
+        // åŽ‹ç¼©æ–‡æ¡£ã€‚
         if (archiveInfo.getCompressType() != null) {
             File archiveFile = File.createTempFile("TMP", archiveInfo.getArchiverType());
             try {
-                // ²úÉú¹éµµ¡£
+                // äº§ç”Ÿå½’æ¡£ã€‚
                 archiver.pack(this, archiveFile);
-                // Ñ¹ËõÎÄµµ¡£
+                // åŽ‹ç¼©æ–‡æ¡£ã€‚
                 CompressUtils.compress(archiveInfo.getCompressType(), archiveFile, compressFile);
             } finally {
                 archiveFile.delete();
@@ -111,9 +111,9 @@ public class Compressor {
     }
 
     /**
-     * ½âÑ¹Ëõ¡£
+     * è§£åŽ‹ç¼©ã€‚
      *
-     * @param destPath Ä¿±êÂ·¾¶¡£
+     * @param destPath ç›®æ ‡è·¯å¾„ã€‚
      * @throws IOException
      */
     public void decompress(File compressFile, File destPath) throws IOException {
@@ -138,13 +138,13 @@ public class Compressor {
         if (archiver == null)
             throw new IOException("This archive type is not declare: " + compressFile);
 
-        // Ñ¹ËõÎÄµµ¡£
+        // åŽ‹ç¼©æ–‡æ¡£ã€‚
         if (archiveInfo.getCompressType() != null) {
             File archiveFile = File.createTempFile("TMP", archiveInfo.getArchiverType());
             try {
-                // ½âÑ¹ËõÎÄµµ¡£
+                // è§£åŽ‹ç¼©æ–‡æ¡£ã€‚
                 CompressUtils.decompressFile(archiveInfo.getCompressType(), compressFile, archiveFile);
-                // ²úÉú¹éµµ¡£
+                // äº§ç”Ÿå½’æ¡£ã€‚
                 archiver.unpack(this, archiveFile, destPath);
             } finally {
                 archiveFile.delete();

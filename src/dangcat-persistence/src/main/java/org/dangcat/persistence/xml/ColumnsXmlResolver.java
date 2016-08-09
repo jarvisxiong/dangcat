@@ -5,18 +5,18 @@ import org.dangcat.persistence.model.Column;
 import org.dangcat.persistence.model.Columns;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class ColumnsXmlResolver extends XmlResolver {
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private Columns columns = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ColumnsXmlResolver() {
         super(Columns.class.getSimpleName());
@@ -24,10 +24,10 @@ public class ColumnsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @Override
     protected void afterChildCreate(String elementName, Object child) {

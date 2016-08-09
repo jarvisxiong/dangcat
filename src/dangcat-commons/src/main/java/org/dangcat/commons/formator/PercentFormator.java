@@ -1,39 +1,39 @@
 package org.dangcat.commons.formator;
 
 /**
- * °Ù·ÖÊý¸ñÊ½»¯¡£
+ * ç™¾åˆ†æ•°æ ¼å¼åŒ–ã€‚
  */
 public class PercentFormator extends ValueFormator {
     /**
-     * Ä¬ÈÏÊý×Ö¸ñÊ½»¯Ä£°å
+     * é»˜è®¤æ•°å­—æ ¼å¼åŒ–æ¨¡æ¿
      */
     private static final String DEFAULT_NUMBER_FORMAT = "0.00";
     /**
-     * ×îÐ¡°Ù·ÖÊý
+     * æœ€å°ç™¾åˆ†æ•°
      */
     private static final double PERCENT_MINVALUE = 0.01;
     /**
-     * ÁãÊýÖµÊä³ö
+     * é›¶æ•°å€¼è¾“å‡º
      */
     private static final String PERCENT_NEGATIVE_ZERO = ">-0.01";
     /**
-     * ÁãÊýÖµÊä³ö
+     * é›¶æ•°å€¼è¾“å‡º
      */
     private static final String PERCENT_POSITIVE_ZERO = "<0.01";
     /**
-     * ×ª»»³£Á¿¡£
+     * è½¬æ¢å¸¸é‡ã€‚
      */
     private final static int[] UNIT_TRANSCONSTS = new int[]{1};
     /**
-     * Á÷Á¿µ¥Î»¡£
+     * æµé‡å•ä½ã€‚
      */
     private final static String[] UNITS = new String[]{"%"};
 
     /**
-     * ¸ñÊ½»¯Êý¾Ý¡£
+     * æ ¼å¼åŒ–æ•°æ®ã€‚
      *
-     * @param data ×ª»»Öµ¡£
-     * @return ×ª»»×î¼Ñµ¥Î»µÄ¸¡µãÊý¡£
+     * @param data è½¬æ¢å€¼ã€‚
+     * @return è½¬æ¢æœ€ä½³å•ä½çš„æµ®ç‚¹æ•°ã€‚
      */
     @Override
     public String format(Object data) {

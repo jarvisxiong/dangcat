@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ÊµÌåÔØÈë¹ÜÀíÆ÷¡£
+ * å®ä½“è½½å…¥ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
 class EntityManagerLoadImpl<T> {
     private static final Logger logger = Logger.getLogger(EntityManager.class);
     /**
-     * ÊµÌå¹ÜÀíÆ÷¡£
+     * å®ä½“ç®¡ç†å™¨ã€‚
      */
     private EntityManagerImpl entityManager = null;
 
@@ -41,12 +41,12 @@ class EntityManagerLoadImpl<T> {
 
     private void calculateTotalSize(LoadEntityContext loadEntityContext, EntitySqlBuilder entitySqlBuilder) throws EntityException {
         Range range = loadEntityContext.getRange();
-        // ¼ÆËã¼ÇÂ¼×ÜÊı¡£
+        // è®¡ç®—è®°å½•æ€»æ•°ã€‚
         if (range != null && range.isCalculateTotalSize()) {
             int totalSize = 0;
             SqlBuilder sqlBuilder = entitySqlBuilder.buildTotalSizeStatement();
             if (sqlBuilder.length() > 0) {
-                // »ñÈ¡»á»°¶ÔÏó¡£
+                // è·å–ä¼šè¯å¯¹è±¡ã€‚
                 Session session = null;
                 try {
                     session = this.entityManager.openSession();
@@ -68,12 +68,12 @@ class EntityManagerLoadImpl<T> {
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param primaryKeys Ö÷¼ü²ÎÊı¡£
-     * @return ÕÒµ½µÄÊµÌå¶ÔÏó¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param primaryKeys ä¸»é”®å‚æ•°ã€‚
+     * @return æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚
      */
     protected T load(Class<T> entityClass, Object... primaryKeyValues) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entityClass);
@@ -92,23 +92,23 @@ class EntityManagerLoadImpl<T> {
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨ÊôĞÔµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šå±æ€§çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param primaryKeys Ö÷¼ü²ÎÊı¡£
-     * @return ÕÒµ½µÄÊµÌå¶ÔÏó¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param primaryKeys ä¸»é”®å‚æ•°ã€‚
+     * @return æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚
      */
     protected List<T> load(Class<T> entityClass, String[] fieldNames, Object[] values) throws EntityException {
         return this.load(new LoadEntityContext(entityClass, fieldNames, values));
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨Ìõ¼ş¡¢·¶Î§ºÍÅÅĞòÒªÇó²éÕÒÊµÌå¶ÔÏó¡£
+     * æ ¹æ®æŒ‡å®šæ¡ä»¶ã€èŒƒå›´å’Œæ’åºè¦æ±‚æŸ¥æ‰¾å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>               ÊµÌåÀàĞÍ¡£
-     * @param loadEntityContext ÔØÈëÉÏÏÂÎÄ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>               å®ä½“ç±»å‹ã€‚
+     * @param loadEntityContext è½½å…¥ä¸Šä¸‹æ–‡ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     protected List<T> load(LoadEntityContext loadEntityContext) throws EntityException {
         loadEntityContext.setEntityManager(this.entityManager);
@@ -122,25 +122,25 @@ class EntityManagerLoadImpl<T> {
                 return entityList;
 
             EntitySqlBuilder entitySqlBuilder = new EntitySqlBuilder(entityMetaData, this.entityManager.getDatabaseName(), loadEntityContext);
-            // ÔØÈëÊı¾İ¡£
+            // è½½å…¥æ•°æ®ã€‚
             sqlBuilder = entitySqlBuilder.buildLoadStatement();
             if (sqlBuilder.length() > 0) {
                 long beginTime = DateUtils.currentTimeMillis();
                 if (logger.isDebugEnabled())
                     logger.debug("Begin load the entity " + loadEntityContext.getEntityClass().getName());
-                // ¼ÆËã¼ÇÂ¼×ÜÊı¡£
+                // è®¡ç®—è®°å½•æ€»æ•°ã€‚
                 this.calculateTotalSize(loadEntityContext, entitySqlBuilder);
                 if (loadEntityContext.beforeLoad()) {
-                    // »ñÈ¡»á»°¶ÔÏó¡£
+                    // è·å–ä¼šè¯å¯¹è±¡ã€‚
                     session = this.entityManager.openSession();
                     sqlBuilder = entitySqlBuilder.buildLoadStatement();
                     ResultSet resultSet = session.executeQuery(sqlBuilder.toString());
 
-                    // Èç¹ûÀ¸Î»Ã»ÓĞ¹¹½¨ĞèÒª×Ô¶¯Éú³É¡£
+                    // å¦‚æœæ ä½æ²¡æœ‰æ„å»ºéœ€è¦è‡ªåŠ¨ç”Ÿæˆã€‚
                     if (entityMetaData.getTable().getColumns().size() == 0)
                         session.loadMetaData(entityMetaData.getTable(), resultSet);
 
-                    // ½âÎöÊı¾İ½á¹û¡£
+                    // è§£ææ•°æ®ç»“æœã€‚
                     entityList = this.parse(entityMetaData, resultSet, loadEntityContext.getRange(), loadEntityContext.getEntity());
                     loadEntityContext.setEntityCollection(entityList);
                     this.calculateRowNum(entityList, loadEntityContext.getRange());
@@ -163,7 +163,7 @@ class EntityManagerLoadImpl<T> {
                 session.release();
         }
 
-        // ´¥·¢ÔØÈëÊÂ¼ş¡£
+        // è§¦å‘è½½å…¥äº‹ä»¶ã€‚
         if (entityList != null) {
             for (T entity : entityList)
                 RelationManager.load(loadEntityContext, entity);
@@ -172,11 +172,11 @@ class EntityManagerLoadImpl<T> {
     }
 
     /**
-     * ÓÉÊı¾İ¿âË¢ĞÂÊµÌåÊµÀıÄÚÈİ¡£
+     * ç”±æ•°æ®åº“åˆ·æ–°å®ä½“å®ä¾‹å†…å®¹ã€‚
      *
      * @param <T>
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @throws EntityException ²Ù×÷Òì³£¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ“ä½œå¼‚å¸¸ã€‚
      */
     protected T load(T entity) throws EntityException {
         T destEntity = null;
@@ -189,17 +189,17 @@ class EntityManagerLoadImpl<T> {
     }
 
     /**
-     * ½âÎöÊı¾İ½á¹û¡£
+     * è§£ææ•°æ®ç»“æœã€‚
      *
-     * @param row       Êı¾İĞĞ¶ÔÏó¡£
-     * @param resultSet ²éÑ¯½á¹û¡£
+     * @param row       æ•°æ®è¡Œå¯¹è±¡ã€‚
+     * @param resultSet æŸ¥è¯¢ç»“æœã€‚
      * @throws SQLException
      */
     @SuppressWarnings("unchecked")
     private List<T> parse(EntityMetaData entityMetaData, ResultSet resultSet, Range range, Object sourceEntity) throws SQLException {
         List<T> entityList = null;
         int position = 0;
-        // »ñÈ¡ÔªÊı¾İ¡£
+        // è·å–å…ƒæ•°æ®ã€‚
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
         while (resultSet.next()) {
@@ -228,7 +228,7 @@ class EntityManagerLoadImpl<T> {
                         entityField.setValue(entity, value);
                     }
                 }
-                // ÉèÖÃÊı¾İ×´Ì¬¡£
+                // è®¾ç½®æ•°æ®çŠ¶æ€ã€‚
                 if (entity instanceof DataStatus) {
                     DataStatus dataStatus = (DataStatus) entity;
                     dataStatus.setDataState(DataState.Browse);

@@ -14,13 +14,13 @@ import java.util.Map;
 
 public class FilterUtils {
     /**
-     * ÓÉÊı¾İ±í²úÉúÃ÷Ï¸±íµÄ¹ıÂËÌõ¼ş¡£
+     * ç”±æ•°æ®è¡¨äº§ç”Ÿæ˜ç»†è¡¨çš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param table      Êı¾İ±í¡£
-     * @param fieldNames À¸Î»Ãû³Æ¡£
-     * @param beginIndex ÆğÊ¼Î»ÖÃ¡£
-     * @param count      ĞèÒª½ØÈ¡µÄÊıÁ¿¡£
-     * @return ¹ıÂËÌõ¼ş¡£
+     * @param table      æ•°æ®è¡¨ã€‚
+     * @param fieldNames æ ä½åç§°ã€‚
+     * @param beginIndex èµ·å§‹ä½ç½®ã€‚
+     * @param count      éœ€è¦æˆªå–çš„æ•°é‡ã€‚
+     * @return è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public static FilterExpress createEqualsFilter(Table table, String[] fieldNames, Integer beginIndex, Integer count) {
         if (table.getRows().size() == 0)
@@ -58,12 +58,12 @@ public class FilterUtils {
     }
 
     /**
-     * ÓÉÊı¾İ±í²úÉúÃ÷Ï¸±íµÄ¹ıÂËÌõ¼ş¡£
+     * ç”±æ•°æ®è¡¨äº§ç”Ÿæ˜ç»†è¡¨çš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param table      Êı¾İ±í¡£
-     * @param beginIndex ÆğÊ¼Î»ÖÃ¡£
-     * @param count      ĞèÒª½ØÈ¡µÄÊıÁ¿¡£
-     * @return ¹ıÂËÌõ¼ş¡£
+     * @param table      æ•°æ®è¡¨ã€‚
+     * @param beginIndex èµ·å§‹ä½ç½®ã€‚
+     * @param count      éœ€è¦æˆªå–çš„æ•°é‡ã€‚
+     * @return è¿‡æ»¤æ¡ä»¶ã€‚
      */
     public static FilterExpress createPrimaryFilter(Table table, Integer beginIndex, Integer count) {
         String[] primaryFieldNames = findPrimaryFieldNames(table);
@@ -71,12 +71,12 @@ public class FilterUtils {
     }
 
     /**
-     * ²úÉú¹ØÓÚ·¶Î§µÄ¹ıÂËÌõ¼ş¡£
+     * äº§ç”Ÿå…³äºèŒƒå›´çš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû³Æ¡£
-     * @param values     ÊıÖµÊı×é¡£
-     * @param filterType ¹ıÂËÀàĞÍ¡£
-     * @return ²úÉúµÄ¹ıÂË¶ÔÏó¡£
+     * @param fieldNames å­—æ®µåç§°ã€‚
+     * @param values     æ•°å€¼æ•°ç»„ã€‚
+     * @param filterType è¿‡æ»¤ç±»å‹ã€‚
+     * @return äº§ç”Ÿçš„è¿‡æ»¤å¯¹è±¡ã€‚
      */
     public static FilterExpress createRangeFilter(String[] fieldNames, Object[] values, FilterType filterType) {
         if (fieldNames.length == 1)
@@ -110,7 +110,7 @@ public class FilterUtils {
     }
 
     /**
-     * ÕÒµ½ÅÅ³ı¼ÆËãÀ¸Î»µÄÖ÷¼üÀ¸Î»¡£
+     * æ‰¾åˆ°æ’é™¤è®¡ç®—æ ä½çš„ä¸»é”®æ ä½ã€‚
      *
      * @param table
      * @return
@@ -126,11 +126,11 @@ public class FilterUtils {
     }
 
     /**
-     * ¶ÁÈ¡¶ÔÏóµÄÖ¸¶¨×Ö¶ÎÖµ¡£
+     * è¯»å–å¯¹è±¡çš„æŒ‡å®šå­—æ®µå€¼ã€‚
      *
-     * @param data      Ö¸¶¨¶ÔÏó¡£
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @return ¶ÁÈ¡µÄÖµ¡£
+     * @param data      æŒ‡å®šå¯¹è±¡ã€‚
+     * @param fieldName å­—æ®µåã€‚
+     * @return è¯»å–çš„å€¼ã€‚
      */
     @SuppressWarnings("unchecked")
     public static Object getValue(Object instance, String fieldName) {
@@ -155,9 +155,9 @@ public class FilterUtils {
     }
 
     /**
-     * ¶ÁÈ¡Ïà·´µÄ¹ıÂËÌõ¼ş¡£
+     * è¯»å–ç›¸åçš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param filterUnit ¹ıÂË¶ÔÏó¡£
+     * @param filterUnit è¿‡æ»¤å¯¹è±¡ã€‚
      * @return
      */
     public static FilterType transFilterType(FilterUnit filterUnit) {

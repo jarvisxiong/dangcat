@@ -3,22 +3,22 @@ package org.dangcat.persistence.calculate;
 import java.util.Collection;
 
 /**
- * ¼ÆËãÆ÷½Ó¿Ú¡£
+ * è®¡ç®—å™¨æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface Calculator {
     /**
-     * ¼ÆËãÊµÌå¼¯ºÏ¡£
+     * è®¡ç®—å®ä½“é›†åˆã€‚
      *
-     * @param entityCollection ÊµÌå¶ÔÏó¼¯ºÏ¡£
+     * @param entityCollection å®ä½“å¯¹è±¡é›†åˆã€‚
      */
     void calculate(Collection<?> entityCollection);
 
     /**
-     * ¼ÆËãµ¥¸öÊµÌå¡£
+     * è®¡ç®—å•ä¸ªå®ä½“ã€‚
      *
-     * @param entity ÊµÌå¶ÔÏó¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
      */
     void calculate(Object entity);
 }

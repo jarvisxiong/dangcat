@@ -6,7 +6,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import org.dangcat.persistence.model.Column;
 
 /**
- * �߼�У��ӿڡ�
+ * 逻辑校验接口。
  *
  * @author dangcat
  */

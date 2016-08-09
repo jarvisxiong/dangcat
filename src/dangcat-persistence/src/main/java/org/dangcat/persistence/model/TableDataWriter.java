@@ -3,7 +3,7 @@ package org.dangcat.persistence.model;
 import org.dangcat.persistence.DataWriter;
 
 /**
- * Table¶ÔÏóÊı¾İ¶ÁÈ¡Æ÷¡£
+ * Tableå¯¹è±¡æ•°æ®è¯»å–å™¨ã€‚
  *
  * @author dangcat
  */

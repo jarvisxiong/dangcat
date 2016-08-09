@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * ÉÏ´«¹ÜÀí¡£
+ * ä¸Šä¼ ç®¡ç†ã€‚
  *
  * @author dangcat
  */
@@ -37,10 +37,10 @@ public class UploadManager {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇÉÏ´«ÎÄ¼şÇëÇó¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ä¸Šä¼ æ–‡ä»¶è¯·æ±‚ã€‚
      *
-     * @param request ÉÏ´«ÇëÇó¡£
-     * @return ½á¹û¡£
+     * @param request ä¸Šä¼ è¯·æ±‚ã€‚
+     * @return ç»“æœã€‚
      */
     public static boolean isMultipart(HttpServletRequest request) {
         return ServletFileUpload.isMultipartContent(request);
@@ -54,9 +54,9 @@ public class UploadManager {
     }
 
     /**
-     * ²úÉúÉÏ´«µÄÁÙÊ±ÎÄ¼ş¡£
+     * äº§ç”Ÿä¸Šä¼ çš„ä¸´æ—¶æ–‡ä»¶ã€‚
      *
-     * @return ÁÙÊ±ÎÄ¼ş¶ÔÏó¡£
+     * @return ä¸´æ—¶æ–‡ä»¶å¯¹è±¡ã€‚
      * @throws IOException
      */
     public File createTmpFile() {
@@ -90,7 +90,7 @@ public class UploadManager {
     }
 
     /**
-     * ÉÏ´«Ä¿Â¼¡£
+     * ä¸Šä¼ ç›®å½•ã€‚
      *
      * @return
      */
@@ -109,11 +109,11 @@ public class UploadManager {
     }
 
     /**
-     * ´¦ÀíÉÏ´«ÇëÇó£¬µÃµ½ÉÏ´«ÄÚÈİ¡£
+     * å¤„ç†ä¸Šä¼ è¯·æ±‚ï¼Œå¾—åˆ°ä¸Šä¼ å†…å®¹ã€‚
      *
-     * @param request ÇëÇó¶ÔÏó¡£
-     * @return ÉÏ´«ÄÚÈİ¡£
-     * @throws Exception ÉÏ´«Òì³£¡£
+     * @param request è¯·æ±‚å¯¹è±¡ã€‚
+     * @return ä¸Šä¼ å†…å®¹ã€‚
+     * @throws Exception ä¸Šä¼ å¼‚å¸¸ã€‚
      */
     public UploadContent upload(HttpServletRequest request) throws Exception {
         ServletFileUpload servletFileUpload = this.createServletFileUpload(request);

@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * ÈÕÆÚÄ£ÄâÆ÷¡£
+ * æ—¥æœŸæ¨¡æ‹Ÿå™¨ã€‚
  *
  * @author dangcat
  */

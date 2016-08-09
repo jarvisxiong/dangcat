@@ -3,29 +3,29 @@ package org.dangcat.net.process.statistics;
 import org.dangcat.boot.statistics.StatisticsData;
 
 /**
- * Êı¾İ´¦ÀíÍ³¼Æ
+ * æ•°æ®å¤„ç†ç»Ÿè®¡
  *
  * @author dangcat
  */
 public class PacketProcessStatisticsData extends StatisticsData {
     /**
-     * ĞÔÄÜ²»×ãºöÂÔµÄÊı¾İ¡£
+     * æ€§èƒ½ä¸è¶³å¿½ç•¥çš„æ•°æ®ã€‚
      */
     public static final String Ignore = "Ignore";
     /**
-     * ½âÎö´íÎóµÄÊı¾İ¡£
+     * è§£æé”™è¯¯çš„æ•°æ®ã€‚
      */
     public static final String ParseError = "ParseError";
     /**
-     * ½ÓÊÕµÄÊı¾İ¡£
+     * æ¥æ”¶çš„æ•°æ®ã€‚
      */
     public static final String Receive = "Receive";
     /**
-     * ½ÓÊÕµÄËÙÂÊ¡£
+     * æ¥æ”¶çš„é€Ÿç‡ã€‚
      */
     public static final String ReceiveVelocity = "ReceiveVelocity";
     /**
-     * ¼ìÑé´íÎóµÄÊı¾İ¡£
+     * æ£€éªŒé”™è¯¯çš„æ•°æ®ã€‚
      */
     public static final String ValidError = "ValidError";
 

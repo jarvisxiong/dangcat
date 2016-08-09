@@ -35,10 +35,10 @@ public abstract class ExcelReader {
     }
 
     /**
-     * ´ÓÖ¸¶¨µµ°¸¶ÁÈ¡Êı¾İ¡£
+     * ä»æŒ‡å®šæ¡£æ¡ˆè¯»å–æ•°æ®ã€‚
      *
-     * @param file ÎÄ¼ş¶ÔÏó¡£
-     * @throws IOException ÎÄ¼ş·ÃÎÊÒì³£¡£
+     * @param file æ–‡ä»¶å¯¹è±¡ã€‚
+     * @throws IOException æ–‡ä»¶è®¿é—®å¼‚å¸¸ã€‚
      */
     public void read(File file) throws IOException {
         FileInputStream fileInputStream = null;
@@ -51,11 +51,11 @@ public abstract class ExcelReader {
     }
 
     /**
-     * ´ÓÊı¾İÁ÷¶ÁÈ¡Êı¾İ¡£
+     * ä»æ•°æ®æµè¯»å–æ•°æ®ã€‚
      *
-     * @param InputStream ÎÄ¼şÊäÈëÁ÷¡£
-     * @throws IOException            ÎÄ¼ş·ÃÎÊÒì³£¡£
-     * @throws InvalidFormatException ¸ñÊ½Òì³£¡£
+     * @param InputStream æ–‡ä»¶è¾“å…¥æµã€‚
+     * @throws IOException            æ–‡ä»¶è®¿é—®å¼‚å¸¸ã€‚
+     * @throws InvalidFormatException æ ¼å¼å¼‚å¸¸ã€‚
      */
     public void read(InputStream InputStream) throws IOException {
         try {
@@ -78,9 +78,9 @@ public abstract class ExcelReader {
     }
 
     /**
-     * ´ÓÎÄµµ¶ÁÈ¡Êı¾İ¡£
+     * ä»æ–‡æ¡£è¯»å–æ•°æ®ã€‚
      *
-     * @param sheetIndex Ò³Ãæ±êÇ©¡£
+     * @param sheetIndex é¡µé¢æ ‡ç­¾ã€‚
      */
     protected void readSheet(int sheetIndex, Sheet sheet) {
         if (!this.beforeReadSheet(sheetIndex))

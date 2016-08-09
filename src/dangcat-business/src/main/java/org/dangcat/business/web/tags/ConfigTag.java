@@ -15,7 +15,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
- * ÅäÖÃ²ÎÊıÊä³ö¡£
+ * é…ç½®å‚æ•°è¾“å‡ºã€‚
  *
  * @author dangcat
  */

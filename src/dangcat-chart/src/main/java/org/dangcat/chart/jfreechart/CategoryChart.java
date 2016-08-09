@@ -23,25 +23,25 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 /**
- * Öù×´Í³¼ÆÍ¼¡£
+ * æŸ±çŠ¶ç»Ÿè®¡å›¾ã€‚
  *
  * @author dangcat
  */
 public abstract class CategoryChart extends AxisChart {
     /**
-     * ºá±êÇ©ÊÇ·ñ¿É¼û¡£
+     * æ¨ªæ ‡ç­¾æ˜¯å¦å¯è§ã€‚
      */
     private boolean domainAxisVisible = true;
     /**
-     * Í¼°å·½Ïò¡£
+     * å›¾æ¿æ–¹å‘ã€‚
      */
     private PlotOrientation orientation = PlotOrientation.VERTICAL;
     /**
-     * ×İ±êÇ©ÊÇ·ñ¿É¼û¡£
+     * çºµæ ‡ç­¾æ˜¯å¦å¯è§ã€‚
      */
     private boolean rangeAxisVisible = true;
     /**
-     * ÊÇ·ñÏÔÊ¾±êÇ©¡£
+     * æ˜¯å¦æ˜¾ç¤ºæ ‡ç­¾ã€‚
      */
     private boolean showItemLabel = true;
 
@@ -68,21 +68,21 @@ public abstract class CategoryChart extends AxisChart {
     }
 
     protected void iniItemRenderer(CategoryItemRenderer categoryItemRenderer, int i) {
-        // ÏÔÊ¾Ã¿¸öÖùµÄÊıÖµ£¬²¢ĞŞ¸Ä¸ÃÊıÖµµÄ×ÖÌåÊôĞÔ
+        // æ˜¾ç¤ºæ¯ä¸ªæŸ±çš„æ•°å€¼ï¼Œå¹¶ä¿®æ”¹è¯¥æ•°å€¼çš„å­—ä½“å±æ€§
         CustomCategoryItemLabelGenerator categoryItemLabelGenerator = new CustomCategoryItemLabelGenerator(this);
         categoryItemRenderer.setBaseItemLabelGenerator(categoryItemLabelGenerator);
         categoryItemRenderer.setBaseToolTipGenerator(categoryItemLabelGenerator);
         categoryItemRenderer.setBaseItemLabelsVisible(true);
         categoryItemRenderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE2, TextAnchor.TOP_LEFT));
-        // ²úÉúÈÈµãÇøÓò¡£
+        // äº§ç”Ÿçƒ­ç‚¹åŒºåŸŸã€‚
         categoryItemRenderer.setBaseItemURLGenerator(categoryItemLabelGenerator);
     }
 
     protected void initDomainAxis(CategoryAxis domainAxis) {
         this.initAxis(domainAxis);
-        // ºá×ø±êÊÇ·ñ¿É¼û¡£
+        // æ¨ªåæ ‡æ˜¯å¦å¯è§ã€‚
         domainAxis.setVisible(this.isDomainAxisVisible());
-        // ×İ×ø±ê±êÌâ¡£
+        // çºµåæ ‡æ ‡é¢˜ã€‚
         domainAxis.setLabel(this.getDomainTitle());
         domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
     }
@@ -92,23 +92,23 @@ public abstract class CategoryChart extends AxisChart {
         super.initPlot(plot);
 
         CategoryPlot categoryPlot = (CategoryPlot) plot;
-        // ±í¸ñÏßÑÕÉ«¡£
+        // è¡¨æ ¼çº¿é¢œè‰²ã€‚
         categoryPlot.setDomainGridlinePaint(Color.GRAY);
-        // ±í¸ñÏß¿É¼û¡£
+        // è¡¨æ ¼çº¿å¯è§ã€‚
         categoryPlot.setDomainGridlinesVisible(true);
-        // ×İ×ø±êÏßÑÕÉ«¡£
+        // çºµåæ ‡çº¿é¢œè‰²ã€‚
         categoryPlot.setRangeGridlinePaint(Color.GRAY);
-        // ×ø±êÆ«ÒÆ¾àÀë¡£
+        // åæ ‡åç§»è·ç¦»ã€‚
         categoryPlot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
-        // ÉèÖÃ×ø±êÎ»ÖÃ¡£
+        // è®¾ç½®åæ ‡ä½ç½®ã€‚
         categoryPlot.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
-        // ÉèÖÃ×ø±êÎ»ÖÃ¡£
+        // è®¾ç½®åæ ‡ä½ç½®ã€‚
         categoryPlot.setOrientation(this.getOrientation());
-        // Éè¶¨ºá×ø±ê¡£
+        // è®¾å®šæ¨ªåæ ‡ã€‚
         this.initDomainAxis(categoryPlot.getDomainAxis());
-        // Éè¶¨ºá×ø±ê¡£
+        // è®¾å®šæ¨ªåæ ‡ã€‚
         this.initRangeAxis((NumberAxis) categoryPlot.getRangeAxis());
-        // ÉèÖÃ¹Ì¶¨ÑÕÉ«·¶Î§¡£
+        // è®¾ç½®å›ºå®šé¢œè‰²èŒƒå›´ã€‚
         for (int i = 0; i < categoryPlot.getRendererCount(); i++) {
             CategoryItemRenderer categoryItemRenderer = categoryPlot.getRenderer(i);
             this.iniItemRenderer(categoryItemRenderer, i);
@@ -133,15 +133,15 @@ public abstract class CategoryChart extends AxisChart {
     private void initRangeAxis(NumberAxis rangeAxis) {
         this.initAxis(rangeAxis);
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        // ÉèÖÃ×î¸ßµÄÒ»¸ö´óÖù×ÓÓëÍ¼Æ¬¶¥¶ËµÄ¾àÀë¡£
+        // è®¾ç½®æœ€é«˜çš„ä¸€ä¸ªå¤§æŸ±å­ä¸å›¾ç‰‡é¡¶ç«¯çš„è·ç¦»ã€‚
         rangeAxis.setUpperMargin(0.15);
-        // Éè¶¨×İ×ø±êÏÔÊ¾¸ñÊ½¡£
+        // è®¾å®šçºµåæ ‡æ˜¾ç¤ºæ ¼å¼ã€‚
         rangeAxis.setNumberFormatOverride(new DecimalFormat("#.###"));
-        // ºá×ø±êÊÇ·ñ¿É¼û¡£
+        // æ¨ªåæ ‡æ˜¯å¦å¯è§ã€‚
         rangeAxis.setVisible(this.isRangeAxisVisible());
-        // ×İ×ø±ê±êÌâ¡£
+        // çºµåæ ‡æ ‡é¢˜ã€‚
         rangeAxis.setLabel(this.getRangeTitle());
-        // Éè¶¨±ß½çÖµ¡£
+        // è®¾å®šè¾¹ç•Œå€¼ã€‚
         rangeAxis.setUpperBound(this.getMaxValue());
     }
 

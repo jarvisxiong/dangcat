@@ -1,7 +1,7 @@
 package org.dangcat.commons.timer;
 
 /**
- * ¶¨Ê±Æ÷¡£
+ * å®šæ—¶å™¨ã€‚
  *
  * @author dangcat
  */
@@ -15,42 +15,42 @@ public class Timer {
     private Thread thread = null;
 
     /**
-     * ¹¹½¨¶¨Ê±Æ÷¡£
+     * æ„å»ºå®šæ—¶å™¨ã€‚
      *
-     * @param name ¶¨Ê±Æ÷Ãû³Æ¡£
+     * @param name å®šæ—¶å™¨åç§°ã€‚
      */
     public Timer(String name) {
         this(name, null, 0, 0);
     }
 
     /**
-     * ¹¹½¨¶¨Ê±Æ÷¡£
+     * æ„å»ºå®šæ—¶å™¨ã€‚
      *
-     * @param name     ¶¨Ê±Æ÷Ãû³Æ¡£
-     * @param runnable ÈÎÎñ½Ó¿Ú¡£
+     * @param name     å®šæ—¶å™¨åç§°ã€‚
+     * @param runnable ä»»åŠ¡æ¥å£ã€‚
      */
     public Timer(String name, Runnable runnable) {
         this(name, runnable, 0, 0);
     }
 
     /**
-     * ¹¹½¨¶¨Ê±Æ÷¡£
+     * æ„å»ºå®šæ—¶å™¨ã€‚
      *
-     * @param name     ¶¨Ê±Æ÷Ãû³Æ¡£
-     * @param runnable ÈÎÎñ½Ó¿Ú¡£
-     * @param period   ÔËĞĞÖÜÆÚ£¬µ¥Î»£¨ºÁÃë£©¡£
+     * @param name     å®šæ—¶å™¨åç§°ã€‚
+     * @param runnable ä»»åŠ¡æ¥å£ã€‚
+     * @param period   è¿è¡Œå‘¨æœŸï¼Œå•ä½ï¼ˆæ¯«ç§’ï¼‰ã€‚
      */
     public Timer(String name, Runnable runnable, long period) {
         this(name, runnable, 0, period);
     }
 
     /**
-     * ¹¹½¨¶¨Ê±Æ÷¡£
+     * æ„å»ºå®šæ—¶å™¨ã€‚
      *
-     * @param name     ¶¨Ê±Æ÷Ãû³Æ¡£
-     * @param runnable ÈÎÎñ½Ó¿Ú¡£
-     * @param delay    ÑÓÊ±³¤¶È£¬µ¥Î»£¨ºÁÃë£©¡£
-     * @param period   ÔËĞĞÖÜÆÚ£¬µ¥Î»£¨ºÁÃë£©¡£
+     * @param name     å®šæ—¶å™¨åç§°ã€‚
+     * @param runnable ä»»åŠ¡æ¥å£ã€‚
+     * @param delay    å»¶æ—¶é•¿åº¦ï¼Œå•ä½ï¼ˆæ¯«ç§’ï¼‰ã€‚
+     * @param period   è¿è¡Œå‘¨æœŸï¼Œå•ä½ï¼ˆæ¯«ç§’ï¼‰ã€‚
      */
     public Timer(String name, Runnable runnable, long delay, long period) {
         this.name = name;
@@ -102,7 +102,7 @@ public class Timer {
     }
 
     /**
-     * Æô¶¯¶¨Ê±Æ÷¡£
+     * å¯åŠ¨å®šæ—¶å™¨ã€‚
      */
     public synchronized void start() {
         if (this.getRunnable() != null && this.getPeriod() > 0) {
@@ -119,7 +119,7 @@ public class Timer {
     }
 
     /**
-     * Í£Ö¹¶¨Ê±Æ÷¡£
+     * åœæ­¢å®šæ—¶å™¨ã€‚
      */
     public synchronized void stop() {
         if (this.isRunning) {
@@ -130,9 +130,9 @@ public class Timer {
     }
 
     /**
-     * µÈ´ıÑÓÊ±¡£
+     * ç­‰å¾…å»¶æ—¶ã€‚
      *
-     * @param milliSecond ÑÓÊ±³¤¶È£¬µ¥Î»ºÁÃë¡£
+     * @param milliSecond å»¶æ—¶é•¿åº¦ï¼Œå•ä½æ¯«ç§’ã€‚
      */
     private synchronized void waiting(long milliSecond) {
         try {

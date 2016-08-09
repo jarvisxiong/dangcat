@@ -4,7 +4,7 @@ import org.dangcat.persistence.model.Column;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * �߼�У��ӿڡ�
+ * 逻辑校验接口。
  *
  * @author dangcat
  */

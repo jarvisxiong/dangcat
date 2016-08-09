@@ -3,7 +3,7 @@ package org.dangcat.framework.conf;
 import java.util.Map;
 
 /**
- * ÅäÖÃ¿ØÖÆ±í
+ * é…ç½®æ§åˆ¶è¡¨
  *
  * @author dangcat
  */

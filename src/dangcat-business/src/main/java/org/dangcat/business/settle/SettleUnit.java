@@ -3,26 +3,26 @@ package org.dangcat.business.settle;
 import org.dangcat.persistence.tablename.DateTimeTableName;
 
 /**
- * ½áËãµ¥Ôª¡£
+ * ç»“ç®—å•å…ƒã€‚
  *
  * @author dangcat
  */
 public interface SettleUnit {
     /**
-     * ½áËãÀàĞÍ¡£
+     * ç»“ç®—ç±»å‹ã€‚
      */
     Class<? extends SettleEntity> getClassType();
 
     /**
-     * À´Ô´±í¶¨Òå¡£
+     * æ¥æºè¡¨å®šä¹‰ã€‚
      */
     DateTimeTableName getSourceTableName();
 
     /**
-     * ºÏ²¢Êı¾İ¡£
+     * åˆå¹¶æ•°æ®ã€‚
      *
-     * @param srcEntity  À´Ô´Êı¾İ¡£
-     * @param destEntity Ä¿±êÊı¾İ¡£
+     * @param srcEntity  æ¥æºæ•°æ®ã€‚
+     * @param destEntity ç›®æ ‡æ•°æ®ã€‚
      */
     void merge(Object srcEntity, Object destEntity);
 }

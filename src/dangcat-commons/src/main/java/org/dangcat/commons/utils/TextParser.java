@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Öµ×ª»»¹¤¾ß¡£
+ * å€¼è½¬æ¢å·¥å…·ã€‚
  */
 class TextParser {
     private static final String TEXT_TRUE = "true";
@@ -27,11 +27,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö²¼¶û¡£
+     * ç”±å­—ä¸²è§£æå¸ƒå°”ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Boolean parseBoolean(String text, Boolean defaultValue) {
         Boolean value = defaultValue;
@@ -42,11 +42,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¸¡µãÊı¡£
+     * ç”±å­—ä¸²è§£ææµ®ç‚¹æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Double parseDouble(String text, Double defaultValue) {
         Double value = defaultValue;
@@ -61,12 +61,12 @@ class TextParser {
     }
 
     /**
-     * ÓÉÃ¶¾ÙÖµ½âÎöÃ¶¾ÙÀàĞÍ¡£
+     * ç”±æšä¸¾å€¼è§£ææšä¸¾ç±»å‹ã€‚
      *
      * @param <T>
-     * @param classType Ã¶¾ÙÀàĞÍ¡£
-     * @param value     Ã¶¾ÙÖµ¡£
-     * @return ½âÎöºóµÄ¶ÔÏó¡£
+     * @param classType æšä¸¾ç±»å‹ã€‚
+     * @param value     æšä¸¾å€¼ã€‚
+     * @return è§£æåçš„å¯¹è±¡ã€‚
      */
     protected static Object parseEnum(Class<?> classType, int value) {
         if (classType.isEnum()) {
@@ -96,12 +96,12 @@ class TextParser {
     }
 
     /**
-     * ½âÎöÃ¶¾ÙÀàĞÍ¡£
+     * è§£ææšä¸¾ç±»å‹ã€‚
      *
      * @param <T>
-     * @param classType Ã¶¾ÙÀàĞÍ¡£
-     * @param text      ×Ö´®¡£
-     * @return ½âÎöºóµÄ¶ÔÏó¡£
+     * @param classType æšä¸¾ç±»å‹ã€‚
+     * @param text      å­—ä¸²ã€‚
+     * @return è§£æåçš„å¯¹è±¡ã€‚
      */
     protected static Object parseEnum(Class<?> classType, String text) {
         if (classType.isEnum() && text != null) {
@@ -117,11 +117,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö³¤ÕûÊı¡£
+     * ç”±å­—ä¸²è§£æé•¿æ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Font parseFont(String text, Font defaultValue) {
         Font value = defaultValue;
@@ -131,9 +131,9 @@ class TextParser {
                 String[] values = text.split(",");
                 if (values != null && values.length >= 3) {
                     Map<TextAttribute, Object> fontProperties = new HashMap<TextAttribute, Object>();
-                    fontProperties.put(TextAttribute.FAMILY, values[0].trim()); // ¶¨Òå×ÖÌåÃû
-                    fontProperties.put(TextAttribute.WEIGHT, parseDouble(values[1], null)); // ¶¨Òå×ÖºÅ
-                    fontProperties.put(TextAttribute.SIZE, parseInt(values[2], null)); // ¶¨Òå×ÖºÅ
+                    fontProperties.put(TextAttribute.FAMILY, values[0].trim()); // å®šä¹‰å­—ä½“å
+                    fontProperties.put(TextAttribute.WEIGHT, parseDouble(values[1], null)); // å®šä¹‰å­—å·
+                    fontProperties.put(TextAttribute.SIZE, parseInt(values[2], null)); // å®šä¹‰å­—å·
                     if (values.length > 3)
                         fontProperties.put(TextAttribute.UNDERLINE, parseInt(values[3], null));
                     if (fontProperties.size() > 0)
@@ -146,11 +146,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎöÕûÊı¡£
+     * ç”±å­—ä¸²è§£ææ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Integer parseInt(String text, Integer defaultValue) {
         Integer value = defaultValue;
@@ -170,11 +170,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö³¤ÕûÊı¡£
+     * ç”±å­—ä¸²è§£æé•¿æ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Long parseLong(String text, Long defaultValue) {
         Long value = defaultValue;
@@ -189,11 +189,11 @@ class TextParser {
     }
 
     /**
-     * ÓÉ×Ö´®½âÎö¶ÌÕûÊı¡£
+     * ç”±å­—ä¸²è§£æçŸ­æ•´æ•°ã€‚
      *
-     * @param text         ×Ö´®ÎÄ×Ö¡£
-     * @param defaultValue Ä¬ÈÏÖµ¡£
-     * @return ·µ»ØÖµ¡£
+     * @param text         å­—ä¸²æ–‡å­—ã€‚
+     * @param defaultValue é»˜è®¤å€¼ã€‚
+     * @return è¿”å›å€¼ã€‚
      */
     protected static Short parseShort(String text, Short defaultValue) {
         Short value = defaultValue;
@@ -208,7 +208,7 @@ class TextParser {
     }
 
     /**
-     * ÎÄ×ÖÖµ×ª»»³ÉÊµ¼ÊÖµ¶ÔÏó¡£
+     * æ–‡å­—å€¼è½¬æ¢æˆå®é™…å€¼å¯¹è±¡ã€‚
      */
     protected static Object parseValue(Class<?> classType, String value) {
         Object result = null;

@@ -4,27 +4,27 @@ import org.dangcat.commons.timer.AlarmClock;
 import org.dangcat.framework.service.ServiceControl;
 
 /**
- * ¶¨Ê±·şÎñ½Ó¿Ú¡£
+ * å®šæ—¶æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface TimerService extends ServiceControl {
     /**
-     * È¡Ïû¶¨Ê±Æ÷£¬
+     * å–æ¶ˆå®šæ—¶å™¨ï¼Œ
      *
-     * @param alarmClock ¶¨Ê±Æ÷¶ÔÏó¡£
+     * @param alarmClock å®šæ—¶å™¨å¯¹è±¡ã€‚
      */
     void cancelTimer(AlarmClock alarmClock);
 
     /**
-     * ×¢²á¶¨Ê±Æ÷£¬
+     * æ³¨å†Œå®šæ—¶å™¨ï¼Œ
      *
-     * @param alarmClock ÄÖÖÓ¶¨Òå¡£
+     * @param alarmClock é—¹é’Ÿå®šä¹‰ã€‚
      */
     void createTimer(AlarmClock alarmClock);
 
     /**
-     * ¶¨Ê±Ö´ĞĞ½Ó¿Ú¡£
+     * å®šæ—¶æ‰§è¡Œæ¥å£ã€‚
      */
     void intervalExec();
 }

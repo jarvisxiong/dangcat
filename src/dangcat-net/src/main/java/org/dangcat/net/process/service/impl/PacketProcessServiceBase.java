@@ -19,7 +19,7 @@ import org.dangcat.net.udp.conf.ListenerConfig;
 import org.dangcat.net.udp.service.UDPListener;
 
 /**
- * UDP±¨ÎÄ´¦Àí·şÎñ»ù´¡Àà¡£
+ * UDPæŠ¥æ–‡å¤„ç†æœåŠ¡åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
@@ -29,24 +29,24 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
     private UDPListener udpListener = null;
 
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public PacketProcessServiceBase(ServiceProvider parent, String serviceName) {
         super(parent, serviceName);
     }
 
     /**
-     * ²úÉú»á»°¶ÔÏó¡£
+     * äº§ç”Ÿä¼šè¯å¯¹è±¡ã€‚
      *
-     * @param datagramEvent ½ÓÊÕµÄÊı¾İ±¨ÎÄ¡£
-     * @return °ü»á»°¶ÔÏó¡£
+     * @param datagramEvent æ¥æ”¶çš„æ•°æ®æŠ¥æ–‡ã€‚
+     * @return åŒ…ä¼šè¯å¯¹è±¡ã€‚
      */
     protected abstract PacketSession<T> createPacketSession(DatagramEvent datagramEvent) throws ServiceException;
 
     /**
-     * ¶àÏß³Ì²¢·¢´¦Àí½Ó¿Ú¡£
+     * å¤šçº¿ç¨‹å¹¶å‘å¤„ç†æ¥å£ã€‚
      */
     @Override
     protected void execute(DatagramEvent datagramEvent) {
@@ -54,7 +54,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
     }
 
     protected PacketSession<T> executeProcess(DatagramEvent datagramEvent) {
-        // ¼ÇÂ¼½ÓÊÕµÄÊı¾İÊı
+        // è®°å½•æ¥æ”¶çš„æ•°æ®æ•°
         PacketProcessStatistics packetProcessStatistics = this.getPacketProcessStatistics();
 
         T packet = null;
@@ -101,7 +101,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
     }
 
     /**
-     * ·¢ËÍÏìÓ¦Êı¾İ°ü·şÎñ¡£
+     * å‘é€å“åº”æ•°æ®åŒ…æœåŠ¡ã€‚
      *
      * @return
      */
@@ -115,7 +115,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
     public void initialize() {
         super.initialize();
 
-        // °ó¶¨¶Ë¿ÚĞŞ¸ÄÊÂ¼ş¡£
+        // ç»‘å®šç«¯å£ä¿®æ”¹äº‹ä»¶ã€‚
         this.getListenerConfig().addConfigChangeEventAdaptor(new ChangeEventAdaptor() {
             @Override
             public void afterChanged(Object sender, Event event) {
@@ -126,7 +126,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
             }
         });
         this.listenerConfigChanged();
-        // ×¢²áÍ³¼Æ¶ÔÏó¡£
+        // æ³¨å†Œç»Ÿè®¡å¯¹è±¡ã€‚
         StatisticsService statisticsService = this.getService(StatisticsService.class);
         if (statisticsService != null)
             statisticsService.addStatistics(this.getPacketProcessStatistics());
@@ -139,25 +139,25 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
 
     @Override
     protected void onIgnoreProcess(DatagramEvent data) {
-        // Í³¼ÆÒòÎªĞÔÄÜ²»×ã¿ªÊ¼ºöÂÔµÄÊı¾İ¡£
+        // ç»Ÿè®¡å› ä¸ºæ€§èƒ½ä¸è¶³å¼€å§‹å¿½ç•¥çš„æ•°æ®ã€‚
         this.getPacketProcessStatistics().increaseIgnore();
 
         super.onIgnoreProcess(data);
     }
 
     /**
-     * ½ÓÊÕÊı¾İ°ü¡£
+     * æ¥æ”¶æ•°æ®åŒ…ã€‚
      */
     @Override
     public void onReceive(DatagramEvent datagramEvent) {
-        // ¼ÇÂ¼½ÓÊÕµÄÊı¾İÊı
+        // è®°å½•æ¥æ”¶çš„æ•°æ®æ•°
         this.getPacketProcessStatistics().increaseReceive();
 
         this.addTask(datagramEvent);
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     @Override
     public void start() {
@@ -177,7 +177,7 @@ public abstract class PacketProcessServiceBase<T extends Packet> extends QueueTh
     }
 
     /**
-     * ½â³ı°ó¶¨¼Æ·Ñ¶Ë¿Ú¡£
+     * è§£é™¤ç»‘å®šè®¡è´¹ç«¯å£ã€‚
      */
     @Override
     public void stop() {

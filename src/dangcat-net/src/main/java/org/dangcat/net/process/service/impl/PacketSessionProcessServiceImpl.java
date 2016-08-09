@@ -4,13 +4,13 @@ import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.net.rfc.PacketSession;
 
 /**
- * ±¨ÎÄ´¦Àí·şÎñ»ù´¡Àà¡£
+ * æŠ¥æ–‡å¤„ç†æœåŠ¡åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
 public class PacketSessionProcessServiceImpl<T extends PacketSession<?>> extends SessionProcessServiceBase<T> {
     /**
-     * ¹¹½¨·şÎñ¡£
+     * æ„å»ºæœåŠ¡ã€‚
      *
      * @param parent
      */

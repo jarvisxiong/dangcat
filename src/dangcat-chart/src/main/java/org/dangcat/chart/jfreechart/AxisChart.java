@@ -7,15 +7,15 @@ import java.awt.*;
 
 abstract class AxisChart extends ChartBase {
     /**
-     * ºá×ø±ê±êÇ©¸öÊı¡£
+     * æ¨ªåæ ‡æ ‡ç­¾ä¸ªæ•°ã€‚
      */
     private int domainAxiaCount = 12;
     /**
-     * ºá×ø±ê±êÌâ¡£
+     * æ¨ªåæ ‡æ ‡é¢˜ã€‚
      */
     private String domainTitle;
     /**
-     * ×İ×ø±ê±êÌâ¡£
+     * çºµåæ ‡æ ‡é¢˜ã€‚
      */
     private String rangeTitle;
 
@@ -81,9 +81,9 @@ abstract class AxisChart extends ChartBase {
     protected void initAxis(Axis axis) {
         Font chartFont = this.getChartFont();
         if (chartFont != null) {
-            // ÉèÖÃYÖá×ø±êÉÏµÄÎÄ×Ö
+            // è®¾ç½®Yè½´åæ ‡ä¸Šçš„æ–‡å­—
             axis.setTickLabelFont(chartFont);
-            // ÉèÖÃYÖáµÄ±êÌâÎÄ×Ö
+            // è®¾ç½®Yè½´çš„æ ‡é¢˜æ–‡å­—
             axis.setLabelFont(chartFont);
         }
     }

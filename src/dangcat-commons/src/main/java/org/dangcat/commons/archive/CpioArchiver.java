@@ -5,7 +5,7 @@ import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.cpio.CpioArchiveEntry;
 
 /**
- * CpioÑ¹Ëõ¡£
+ * CpioåŽ‹ç¼©ã€‚
  *
  * @author dangcat
  */

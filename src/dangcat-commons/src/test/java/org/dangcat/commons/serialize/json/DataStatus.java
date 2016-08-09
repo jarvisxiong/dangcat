@@ -1,20 +1,20 @@
 package org.dangcat.commons.serialize.json;
 
 /**
- * ÊµÌåÊı¾İ×´Ì¬¡£
+ * å®ä½“æ•°æ®çŠ¶æ€ã€‚
  *
  * @author dangcat
  */
 interface DataStatus {
     /**
-     * ¶ÁÈ¡×´Ì¬¡£
+     * è¯»å–çŠ¶æ€ã€‚
      *
      * @return
      */
     DataState getDataState();
 
     /**
-     * ÉèÖÃ×´Ì¬¡£
+     * è®¾ç½®çŠ¶æ€ã€‚
      *
      * @param dataState
      */

@@ -1,11 +1,11 @@
 package org.dangcat.commons.formator;
 
 /**
- * ËÙÂÊ¸ñÊ½»¯¡£
+ * é€Ÿç‡æ ¼å¼åŒ–ã€‚
  */
 public class VelocityFormator extends ValueFormator {
     /**
-     * Á÷Á¿µ¥Î»¡£
+     * æµé‡å•ä½ã€‚
      */
     private final static String[] UNITS = new String[]{"/S", "K/S", "M/S", "G/S"};
 

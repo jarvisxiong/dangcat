@@ -15,29 +15,29 @@ import java.sql.SQLException;
 import java.util.Map;
 
 /**
- * Á¬½Ó³Ø¡£
+ * è¿æ¥æ± ã€‚
  *
  * @author dangcat
  */
 public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     /**
-     * ×ÔÔö×Ö¶Î¹ÜÀí¡£
+     * è‡ªå¢å­—æ®µç®¡ç†ã€‚
      */
     private AutoIncrementManager autoIncrementManager = null;
     /**
-     * Åú´¦ÀíµÄ´óĞ¡¡£
+     * æ‰¹å¤„ç†çš„å¤§å°ã€‚
      */
     private int batchSize = 0;
     /**
-     * Êı¾İ¿âÀàĞÍ¡£
+     * æ•°æ®åº“ç±»å‹ã€‚
      */
     private DatabaseType databaseType = null;
     /**
-     * Êı¾İÔ´¡£
+     * æ•°æ®æºã€‚
      */
     private DataSource dataSource;
     /**
-     * Óï·¨½âÊÍÆ÷¡£
+     * è¯­æ³•è§£é‡Šå™¨ã€‚
      */
     private SqlSyntaxHelper sqlSyntaxHelper = null;
 
@@ -58,7 +58,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * ¹Ø±ÕÁ¬½Ó
+     * å…³é—­è¿æ¥
      */
     @Override
     protected void close(Connection connection) {
@@ -121,7 +121,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * Åú´¦ÀíµÄ´óĞ¡¡£
+     * æ‰¹å¤„ç†çš„å¤§å°ã€‚
      */
     public int getBatchSize() {
         if (this.batchSize == 0)
@@ -130,7 +130,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * Êı¾İ¿âÀàĞÍ¡£
+     * æ•°æ®åº“ç±»å‹ã€‚
      */
     public DatabaseType getDatabaseType() {
         return this.databaseType;
@@ -150,7 +150,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * ³õÊ¼»¯Á¬½Ó³Ø¡£
+     * åˆå§‹åŒ–è¿æ¥æ± ã€‚
      *
      * @throws SessionException
      */
@@ -180,7 +180,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * Ê¹ÓÃÍâ²¿ÊÂÎï¡£
+     * ä½¿ç”¨å¤–éƒ¨äº‹ç‰©ã€‚
      */
     public boolean isUseExtendTransaction() {
         return this.getParamAsBoolean(DatabaseParams.UseExtendTransaction, false);
@@ -207,7 +207,7 @@ public class DatabaseConnectionPool extends ConnectionPool<Connection> {
     }
 
     /**
-     * ·µ»ØÁ¬½Ó³ØÖĞµÄÒ»¸öÊı¾İ¿âÁ¬½Ó¡£
+     * è¿”å›è¿æ¥æ± ä¸­çš„ä¸€ä¸ªæ•°æ®åº“è¿æ¥ã€‚
      */
     @Override
     public Connection poll() {

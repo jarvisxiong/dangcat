@@ -7,39 +7,39 @@ import org.dangcat.framework.service.annotation.JndiName;
 import org.dangcat.framework.service.annotation.MethodId;
 
 /**
- * °²È«·şÎñ½Ó¿Ú¡£
+ * å®‰å…¨æœåŠ¡æ¥å£ã€‚
  *
  * @author dangcat
  */
 @JndiName(module = "System", name = "Security")
 public interface SecurityLoginService extends ServiceProvider {
     /**
-     * ÒÔÖ¸¶¨ÓÃ»§ºÍÃÜÂëµÇÂ½¡£
+     * ä»¥æŒ‡å®šç”¨æˆ·å’Œå¯†ç ç™»é™†ã€‚
      *
-     * @param no       ÓÃ»§Ãû¡£
-     * @param password ÃÜÂë¡£
-     * @return µÇÂ½ĞÅÏ¢¡£
-     * @throws SecurityLoginException µÇÂ½Òì³£¡£
+     * @param no       ç”¨æˆ·åã€‚
+     * @param password å¯†ç ã€‚
+     * @return ç™»é™†ä¿¡æ¯ã€‚
+     * @throws SecurityLoginException ç™»é™†å¼‚å¸¸ã€‚
      */
     @MethodId(1)
     ServicePrincipal login(String no, String password) throws SecurityLoginException;
 
     /**
-     * µÇ³öÖ¸¶¨ÓÃ»§¡£
+     * ç™»å‡ºæŒ‡å®šç”¨æˆ·ã€‚
      *
-     * @param servicePrincipal ÓÃ»§ĞÅÏ¢¡£
-     * @return µÇ³ö½á¹û¡£
-     * @throws SecurityLoginException µÇÂ½Òì³£¡£
+     * @param servicePrincipal ç”¨æˆ·ä¿¡æ¯ã€‚
+     * @return ç™»å‡ºç»“æœã€‚
+     * @throws SecurityLoginException ç™»é™†å¼‚å¸¸ã€‚
      */
     @MethodId(2)
     boolean logout(ServicePrincipal servicePrincipal) throws SecurityLoginException;
 
     /**
-     * ÒÔÇ©Ãû·½Ê½µÇÂ¼¡£
+     * ä»¥ç­¾åæ–¹å¼ç™»å½•ã€‚
      *
-     * @param signId µÇÂ¼Ç©Ãû¡£
-     * @return µÇÂ½ĞÅÏ¢¡£
-     * @throws SecurityLoginException µÇÂ½Òì³£¡£
+     * @param signId ç™»å½•ç­¾åã€‚
+     * @return ç™»é™†ä¿¡æ¯ã€‚
+     * @throws SecurityLoginException ç™»é™†å¼‚å¸¸ã€‚
      */
     @MethodId(3)
     ServicePrincipal signin(String signId) throws SecurityLoginException;

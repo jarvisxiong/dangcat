@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
- * JsonÎÄµµÊäÈëÊä³ö¡£
+ * Jsonæ–‡æ¡£è¾“å…¥è¾“å‡ºã€‚
  *
  * @author dangcat
  */
@@ -23,10 +23,10 @@ public class JsonDocument extends DocumentBase {
     protected static final String JSON_ENCODING = "UTF-8";
 
     /**
-     * ´ÓÊı¾İÁ÷¼ÓÔØÊı¾İ¡£
+     * ä»æ•°æ®æµåŠ è½½æ•°æ®ã€‚
      *
-     * @param dataWriter Êı¾İÊä³ö½Ó¿Ú¡£
-     * @return ¶ÁÈëµÄĞĞÊı¡£
+     * @param dataWriter æ•°æ®è¾“å‡ºæ¥å£ã€‚
+     * @return è¯»å…¥çš„è¡Œæ•°ã€‚
      */
     @Override
     public int read(DataWriter dataWriter) {
@@ -71,10 +71,10 @@ public class JsonDocument extends DocumentBase {
     }
 
     /**
-     * µ¼³öÊı¾İµ½Êı¾İÁ÷¡£
+     * å¯¼å‡ºæ•°æ®åˆ°æ•°æ®æµã€‚
      *
-     * @param dataReader Êı¾İÊäÈë½Ó¿Ú¡£
-     * @return Ğ´ÈëµÄĞĞÊı¡£
+     * @param dataReader æ•°æ®è¾“å…¥æ¥å£ã€‚
+     * @return å†™å…¥çš„è¡Œæ•°ã€‚
      */
     @Override
     public int write(DataReader dataReader) {

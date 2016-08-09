@@ -7,7 +7,7 @@ import org.dangcat.framework.event.Event;
 import org.dangcat.framework.service.ServiceProvider;
 
 /**
- * ÏûÏ¢ÕìÌıÆ÷¡£
+ * æ¶ˆæ¯ä¾¦å¬å™¨ã€‚
  *
  * @author dangcat
  */

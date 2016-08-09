@@ -7,7 +7,7 @@ import org.dangcat.persistence.validator.LogicValidator;
 import org.dangcat.persistence.validator.exception.DataValidateException;
 
 /**
- * ÓÊ¼þÐ£ÑéÆ÷¡£
+ * é‚®ä»¶æ ¡éªŒå™¨ã€‚
  *
  * @author dangcat
  */

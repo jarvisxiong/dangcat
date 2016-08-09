@@ -29,7 +29,7 @@ public class Environment {
     }
 
     /**
-     * ¶ÁÈ¡µ±Ç°µÄ½ø³ÌID¡£
+     * è¯»å–å½“å‰çš„è¿›ç¨‹IDã€‚
      */
     public static Integer getCurrentPID() {
         String name = ManagementFactory.getRuntimeMXBean().getName();
@@ -37,7 +37,7 @@ public class Environment {
     }
 
     /**
-     * »ñÈ¡±¾µØÉè¶¨¡£
+     * è·å–æœ¬åœ°è®¾å®šã€‚
      */
     public static Locale getDefaultLocale() {
         if (currentLocale == null)
@@ -51,7 +51,7 @@ public class Environment {
     }
 
     /**
-     * »ñÈ¡±¾µØÉè¶¨¡£
+     * è·å–æœ¬åœ°è®¾å®šã€‚
      */
     public static String getHomePath() {
         if (homePath == null)
@@ -60,7 +60,7 @@ public class Environment {
     }
 
     /**
-     * ÉèÖÃ±¾µØÉè¶¨¡£
+     * è®¾ç½®æœ¬åœ°è®¾å®šã€‚
      */
     public static void setHomePath(Class<?> classType) {
         try {
@@ -84,10 +84,10 @@ public class Environment {
                         currentDirectory = new File(".");
                 }
             }
-            // Èç¹ûÀàĞÍÒÑ¾­´òÈëJarĞèÒªÈ¡ÉÏÃæÄ¿Â¼¡£
+            // å¦‚æœç±»å‹å·²ç»æ‰“å…¥Jaréœ€è¦å–ä¸Šé¢ç›®å½•ã€‚
             if (currentDirectory.getName().endsWith(".jar") || currentDirectory.getName().endsWith("classes"))
                 currentDirectory = currentDirectory.getParentFile();
-            // ÔËĞĞ»·¾³¿ÉÄÜÊÇÔÚlibÏÂ¡£
+            // è¿è¡Œç¯å¢ƒå¯èƒ½æ˜¯åœ¨libä¸‹ã€‚
             if (currentDirectory.getName().endsWith("lib"))
                 currentDirectory = currentDirectory.getParentFile();
             if (currentDirectory.exists()) {
@@ -101,7 +101,7 @@ public class Environment {
     }
 
     /**
-     * ÊÇ·ñµ÷ÊÔÄ£Ê½¡£
+     * æ˜¯å¦è°ƒè¯•æ¨¡å¼ã€‚
      *
      * @return
      */
@@ -110,7 +110,7 @@ public class Environment {
     }
 
     /**
-     * Ä£¿éÊÇ·ñÄ£Ê½¿ªÆô¡£
+     * æ¨¡å—æ˜¯å¦æ¨¡å¼å¼€å¯ã€‚
      */
     public static boolean isModuleEnabled(String module, Boolean defaultValue) {
         String value = System.getProperty("dangcat." + module + ".enabled");
@@ -118,7 +118,7 @@ public class Environment {
     }
 
     /**
-     * ÊÇ·ñ²âÊÔÄ£Ê½¡£
+     * æ˜¯å¦æµ‹è¯•æ¨¡å¼ã€‚
      *
      * @return
      */
@@ -135,7 +135,7 @@ public class Environment {
     }
 
     /**
-     * ÉèÖÃÄ£¿é²ÎÊı¡£
+     * è®¾ç½®æ¨¡å—å‚æ•°ã€‚
      */
     public static void setModuleEnabled(String module, boolean enabled) {
         System.setProperty("dangcat." + module + ".enabled", enabled ? "true" : "false");

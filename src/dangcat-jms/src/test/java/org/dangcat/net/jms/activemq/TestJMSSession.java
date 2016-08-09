@@ -96,7 +96,7 @@ public class TestJMSSession {
     }
 
     /**
-     * ²âÊÔJMSµÄQueueÏûÏ¢¹¦ÄÜ¡£
+     * æµ‹è¯•JMSçš„Queueæ¶ˆæ¯åŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */
@@ -106,7 +106,7 @@ public class TestJMSSession {
     }
 
     /**
-     * ²âÊÔJMSµÄTopicÏûÏ¢¹¦ÄÜ¡£
+     * æµ‹è¯•JMSçš„Topicæ¶ˆæ¯åŠŸèƒ½ã€‚
      *
      * @throws FTPSessionException
      */

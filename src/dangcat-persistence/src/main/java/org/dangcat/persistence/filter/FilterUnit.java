@@ -3,30 +3,30 @@ package org.dangcat.persistence.filter;
 import org.dangcat.commons.utils.CloneAble;
 
 /**
- * ¹ıÂË±í´ïÊ½¡£
+ * è¿‡æ»¤è¡¨è¾¾å¼ã€‚
  *
  * @author dangcat
  */
 public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterExpress> {
     private static final long serialVersionUID = 1L;
     /**
-     * ×Ö¶ÎÃû¡£
+     * å­—æ®µåã€‚
      */
     private String fieldName = null;
     /**
-     * ¹ıÂËÀàĞÍ¡£
+     * è¿‡æ»¤ç±»å‹ã€‚
      */
     private FilterType filterType = null;
     /**
-     * ÊÇ·ñÊÇNOTÔËËã¡£
+     * æ˜¯å¦æ˜¯NOTè¿ç®—ã€‚
      */
     private boolean not = false;
     /**
-     * ¹ıÂËÖµ¡£
+     * è¿‡æ»¤å€¼ã€‚
      */
     private Object[] params;
     /**
-     * ¹ıÂËÃû³Æ¡£
+     * è¿‡æ»¤åç§°ã€‚
      */
     private Object value;
 
@@ -34,12 +34,12 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
     }
 
     /**
-     * ¹¹Ôì¹ıÂË±í´ïÊ½¡£
+     * æ„é€ è¿‡æ»¤è¡¨è¾¾å¼ã€‚
      *
-     * @param fieldName  ×Ö¶ÎÃû¡£
-     * @param filterType ¹ıÂËÀàĞÍ¡£
-     * @param not        È¡·´¹ıÂË¡£
-     * @param params     ¹ıÂË²ÎÊı¡£
+     * @param fieldName  å­—æ®µåã€‚
+     * @param filterType è¿‡æ»¤ç±»å‹ã€‚
+     * @param not        å–åè¿‡æ»¤ã€‚
+     * @param params     è¿‡æ»¤å‚æ•°ã€‚
      */
     public FilterUnit(String fieldName, FilterType filterType, Object... values) {
         this.fieldName = fieldName;
@@ -97,10 +97,10 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
     }
 
     /**
-     * ÅĞ¶ÏÊı¾İÊÇ·ñÂú×ãÒªÇó¡£
+     * åˆ¤æ–­æ•°æ®æ˜¯å¦æ»¡è¶³è¦æ±‚ã€‚
      *
-     * @param instance Êı¾İ¶ÔÏó¡£
-     * @return Âú×ãÔòÎªtrue£¬·ñÔòÎªfalse¡£
+     * @param instance æ•°æ®å¯¹è±¡ã€‚
+     * @return æ»¡è¶³åˆ™ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
      */
     public boolean isValid(Object instance) {
         Object value = FilterUtils.getValue(instance, this.getFieldName());
@@ -110,10 +110,10 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
     }
 
     /**
-     * ÅĞ¶ÏÊı¾İĞĞÊÇ·ñÂú×ãÒªÇó¡£
+     * åˆ¤æ–­æ•°æ®è¡Œæ˜¯å¦æ»¡è¶³è¦æ±‚ã€‚
      *
-     * @param field Êı¾İ×Ö¶Î¡£
-     * @return Âú×ãÔòÎªtrue£¬·ñÔòÎªfalse¡£
+     * @param field æ•°æ®å­—æ®µã€‚
+     * @return æ»¡è¶³åˆ™ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
      */
     private boolean isValidData(Object value) {
         Filter filter = FilterFactory.getInstance().getFilter(this);
@@ -123,7 +123,7 @@ public class FilterUnit implements FilterExpress, ValueObject, CloneAble<FilterE
     }
 
     /**
-     * ×ª³ÉSQL±í´ïÓï¾ä¡£
+     * è½¬æˆSQLè¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public String toString() {

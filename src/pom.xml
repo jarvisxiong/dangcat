@@ -25,7 +25,7 @@
     <properties>
         <ant.version>1.7.1</ant.version>
         <jetty.version>8.1.15.v20140411</jetty.version>
-        <project.build.sourceEncoding>GBK</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
@@ -237,9 +237,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <encoding>GBK</encoding>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
                         <compilerArgument>-g</compilerArgument>
                     </configuration>
                 </plugin>
@@ -289,12 +289,12 @@
                 <repository>
                     <id>releases</id>
                     <name>Nexus Releases Repository</name>
-                    <url>http://10.46.60.135:9999/nexus/content/repositories/releases</url>
+                    <url>http://127.0.0.1:9999/nexus/content/repositories/releases</url>
                 </repository>
                 <snapshotRepository>
                     <id>snapshots</id>
                     <name>Nexus Snapshots Repository</name>
-                    <url>http://10.46.60.135:9999/nexus/content/repositories/snapshots</url>
+                    <url>http://127.0.0.1:9999/nexus/content/repositories/snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>

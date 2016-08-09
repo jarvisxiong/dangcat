@@ -9,48 +9,48 @@ import org.dangcat.persistence.tablename.TableName;
 import java.util.ArrayList;
 
 /**
- * Êı¾İĞĞ¶ÔÏó¡£
+ * æ•°æ®è¡Œå¯¹è±¡ã€‚
  *
  * @author dangcat
  */
 public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, java.io.Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * Êı¾İĞĞ×´Ì¬£ºĞÂÔö¡¢É¾³ı»ò±»ĞŞ¸Ä¡£
+     * æ•°æ®è¡ŒçŠ¶æ€ï¼šæ–°å¢ã€åˆ é™¤æˆ–è¢«ä¿®æ”¹ã€‚
      */
     private DataState dataState = DataState.Browse;
     /**
-     * ´íÎóĞÅÏ¢¡£
+     * é”™è¯¯ä¿¡æ¯ã€‚
      */
     private String error;
     /**
-     * Êı¾İĞĞ´íÎó¼¶±ğ¡£
+     * æ•°æ®è¡Œé”™è¯¯çº§åˆ«ã€‚
      */
     private String errorLevel;
     /**
-     * ËùÊô¸¸±í¶ÔÏó¡£
+     * æ‰€å±çˆ¶è¡¨å¯¹è±¡ã€‚
      */
     private Table parent;
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      *
-     * @param parent ¸¸±í¶ÔÏó¡£
+     * @param parent çˆ¶è¡¨å¯¹è±¡ã€‚
      */
     public Row() {
     }
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      *
-     * @param parent ¸¸±í¶ÔÏó¡£
+     * @param parent çˆ¶è¡¨å¯¹è±¡ã€‚
      */
     public Row(Table parent) {
         this.parent = parent;
     }
 
     /**
-     * ½¨Á¢ĞÂµÄÊµÀı¡£
+     * å»ºç«‹æ–°çš„å®ä¾‹ã€‚
      *
      * @return
      */
@@ -76,9 +76,9 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * ´ÓÄ¿±êĞĞ¿½±´ÏàÍ¬Ãû×ÖµÄÀ¸Î»¡£
+     * ä»ç›®æ ‡è¡Œæ‹·è´ç›¸åŒåå­—çš„æ ä½ã€‚
      *
-     * @param dstRow Ä¿±êÊı¾İĞĞ¡£
+     * @param dstRow ç›®æ ‡æ•°æ®è¡Œã€‚
      */
     public void copy(Row srcRow) {
         for (Column column : this.parent.getColumns()) {
@@ -144,10 +144,10 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * Í¨¹ıÀ¸Î»Ë÷ÒıÖµ»ñµÃµ¥ÔªÊı¾İ¶ÔÏó¡£
+     * é€šè¿‡æ ä½ç´¢å¼•å€¼è·å¾—å•å…ƒæ•°æ®å¯¹è±¡ã€‚
      *
-     * @param index À¸Î»Ë÷ÒıÖµ¡£
-     * @return µ¥ÔªÊı¾İ¶ÔÏó¡£
+     * @param index æ ä½ç´¢å¼•å€¼ã€‚
+     * @return å•å…ƒæ•°æ®å¯¹è±¡ã€‚
      */
     public Field getField(int index) {
         if (index >= 0 && index < this.size())
@@ -156,10 +156,10 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * Í¨¹ıÀ¸Î»Ãû»ñµÃµ¥ÔªÊı¾İ¶ÔÏó¡£
+     * é€šè¿‡æ ä½åè·å¾—å•å…ƒæ•°æ®å¯¹è±¡ã€‚
      *
-     * @param fieldName À¸Î»Ãû¡£
-     * @return µ¥ÔªÊı¾İ¶ÔÏó¡£
+     * @param fieldName æ ä½åã€‚
+     * @return å•å…ƒæ•°æ®å¯¹è±¡ã€‚
      */
     public Field getField(String fieldName) {
         int index = this.getParent().getColumns().indexOf(fieldName);
@@ -169,10 +169,10 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * ¶ÁÈ¡×Ö¶Î¶ÔÏóµÄ×Ö¶ÎÃû¡£¡£
+     * è¯»å–å­—æ®µå¯¹è±¡çš„å­—æ®µåã€‚ã€‚
      *
-     * @param field ×Ö¶Î¶ÔÏó¡£
-     * @return ×Ö¶ÎÃû¡£
+     * @param field å­—æ®µå¯¹è±¡ã€‚
+     * @return å­—æ®µåã€‚
      */
     public String getFieldName(Field field) {
         int index = this.indexOf(field);
@@ -203,9 +203,9 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * ¶ÁÈ¡Ö÷¼ü×Ö¶ÎÊıÖµ¡£
+     * è¯»å–ä¸»é”®å­—æ®µæ•°å€¼ã€‚
      *
-     * @return ÊıÖµÊı×é¡£
+     * @return æ•°å€¼æ•°ç»„ã€‚
      */
     public Object[] getPrimaryKeyValues() {
         Column[] primaryKeys = this.getParent().getColumns().getPrimaryKeys();
@@ -248,7 +248,7 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * Í¨ÖªÊı¾İĞĞ£¬Êı¾İ¶ÔÏó·¢ÉúÁË¸Ä±ä¡£
+     * é€šçŸ¥æ•°æ®è¡Œï¼Œæ•°æ®å¯¹è±¡å‘ç”Ÿäº†æ”¹å˜ã€‚
      */
     public void notify(Field field) {
         if (field.getDataState() == DataState.Modified) {
@@ -272,7 +272,7 @@ public class Row extends ArrayList<Field> implements ValueWriter, ValueReader, j
     }
 
     /**
-     * Êä³öÊı¾İĞĞÄÚÈİ¡£
+     * è¾“å‡ºæ•°æ®è¡Œå†…å®¹ã€‚
      */
     public String toString() {
         StringBuffer info = new StringBuffer();

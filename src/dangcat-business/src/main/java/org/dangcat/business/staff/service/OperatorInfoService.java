@@ -21,81 +21,81 @@ import java.util.Map;
 @JndiName(module = "Staff", name = "OperatorInfo")
 public interface OperatorInfoService {
     /**
-     * ĞŞ¸ÄÖ¸¶¨ÕËºÅµÄÃÜÂë¡£
+     * ä¿®æ”¹æŒ‡å®šè´¦å·çš„å¯†ç ã€‚
      *
-     * @param orgPassword Ô­Ê¼ÃÜÂë¡£
-     * @param newPassword ĞÂÃÜÂë¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param orgPassword åŸå§‹å¯†ç ã€‚
+     * @param newPassword æ–°å¯†ç ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean changePassword(@Parameter(name = "orgPassword") String orgPassword, @Parameter(name = "newPassword") String newPassword) throws ServiceException;
 
     /**
-     * ±£´æ²ÎÊıÅäÖÃ¡£
+     * ä¿å­˜å‚æ•°é…ç½®ã€‚
      */
     StaffSetup config(@Parameter(name = "config") StaffSetup staffSetup) throws ServiceException;
 
     /**
-     * ĞÂÔöÊµÌåÊı¾İ¡£
+     * æ–°å¢å®ä½“æ•°æ®ã€‚
      *
-     * @param operatorInfo ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param operatorInfo å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     OperatorInfo create(@Parameter(name = "operatorInfo") OperatorInfoCreate operatorInfo) throws ServiceException;
 
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼ü¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param id ä¸»é”®ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean delete(@Parameter(name = "id") Integer id) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄ»ù±¾²Ù×÷Ô±ĞÅÏ¢¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åŸºæœ¬æ“ä½œå‘˜ä¿¡æ¯ã€‚
      *
-     * @param operatorInfoFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorInfoFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Collection<OperatorInfoBase> pick(OperatorInfoFilter operatorInfoFilter) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÊı¾İ¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„æ•°æ®ã€‚
      *
-     * @param operatorInfoFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorInfoFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     QueryResult<OperatorInfo> query(@Parameter(name = "operatorInfoFilter") OperatorInfoFilter operatorInfoFilter) throws ServiceException;
 
     /**
-     * ÖØÖÃÖ¸¶¨ÕËºÅµÄÃÜÂë¡£
+     * é‡ç½®æŒ‡å®šè´¦å·çš„å¯†ç ã€‚
      *
-     * @param no       ²Ù×÷Ô±ÕËºÅ¡£
-     * @param password ĞÂÃÜÂë¡£
-     * @return Ö´ĞĞ½á¹û¡£
+     * @param no       æ“ä½œå‘˜è´¦å·ã€‚
+     * @param password æ–°å¯†ç ã€‚
+     * @return æ‰§è¡Œç»“æœã€‚
      */
     boolean resetPassword(@Parameter(name = "no") String no, @Parameter(name = "password") String password) throws ServiceException;
 
     /**
-     * ±£´æÊµÌåÊı¾İ¡£
+     * ä¿å­˜å®ä½“æ•°æ®ã€‚
      *
-     * @param operatorInfo ÊµÌå¶ÔÏó¡£
-     * @return ÔËĞĞ½á¹û¡£
+     * @param operatorInfo å®ä½“å¯¹è±¡ã€‚
+     * @return è¿è¡Œç»“æœã€‚
      */
     OperatorInfo save(@Parameter(name = "operatorInfo") OperatorInfo operatorInfo) throws ServiceException;
 
     /**
-     * ²éÑ¯Ö¸¶¨Ìõ¼şµÄÁĞ±í¡£
+     * æŸ¥è¯¢æŒ‡å®šæ¡ä»¶çš„åˆ—è¡¨ã€‚
      *
-     * @param operatorInfoFilter ²éÑ¯Ìõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param operatorInfoFilter æŸ¥è¯¢æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     Map<Integer, String> select(@Parameter(name = "operatorInfoFilter") OperatorInfoFilter operatorInfoFilter) throws ServiceException;
 
     /**
-     * ²é¿´Ö¸¶¨Ö÷¼üµÄÊı¾İ¡£
+     * æŸ¥çœ‹æŒ‡å®šä¸»é”®çš„æ•°æ®ã€‚
      *
-     * @param id Ö÷¼üÖµ¡£
-     * @return ²é¿´½á¹û¡£
+     * @param id ä¸»é”®å€¼ã€‚
+     * @return æŸ¥çœ‹ç»“æœã€‚
      */
     OperatorInfo view(@Parameter(name = "id") Integer id) throws ServiceException;
 }

@@ -7,17 +7,17 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 /**
- * ÊµÌåÊÂ¼ş¹ÜÀí¡£
+ * å®ä½“äº‹ä»¶ç®¡ç†ã€‚
  *
  * @author dangcat
  */
 class EntityEventManager {
     /**
-     * ÊÂÎïÌá½»ºóÊÂ¼ş¡£
+     * äº‹ç‰©æäº¤åäº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void afterCommit(SaveEntityContext saveEntityContext, Collection<Object> entityCollection) throws EntityException {
         if (entityCollection != null) {
@@ -30,11 +30,11 @@ class EntityEventManager {
     }
 
     /**
-     * É¾³ıºóÊÂ¼ş¡£
+     * åˆ é™¤åäº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void afterDelete(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
@@ -43,11 +43,11 @@ class EntityEventManager {
     }
 
     /**
-     * ĞÂÔöºóÊÂ¼ş¡£
+     * æ–°å¢åäº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void afterInsert(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         RelationManager.update(entity);
@@ -58,11 +58,11 @@ class EntityEventManager {
     }
 
     /**
-     * ÊµÌåÔØÈëÊÂ¼ş¡£
+     * å®ä½“è½½å…¥äº‹ä»¶ã€‚
      *
-     * @param loadEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param loadEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void afterLoad(LoadEntityContext loadEntityContext, Object entity) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
@@ -71,11 +71,11 @@ class EntityEventManager {
     }
 
     /**
-     * ´æ´¢ºóÊÂ¼ş¡£
+     * å­˜å‚¨åäº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void afterSave(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         RelationManager.update(entity);
@@ -86,11 +86,11 @@ class EntityEventManager {
     }
 
     /**
-     * É¾³ıÇ°ÊÂ¼ş¡£
+     * åˆ é™¤å‰äº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void beforeDelete(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
@@ -99,11 +99,11 @@ class EntityEventManager {
     }
 
     /**
-     * ĞÂÔöÇ°ÊÂ¼ş¡£
+     * æ–°å¢å‰äº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void beforeInsert(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());
@@ -112,11 +112,11 @@ class EntityEventManager {
     }
 
     /**
-     * ´æ´¢Ç°ÊÂ¼ş¡£
+     * å­˜å‚¨å‰äº‹ä»¶ã€‚
      *
-     * @param saveEntityContext ÊµÌå»á»°¶ÔÏó¡£
-     * @param entity            ÊµÌå¶ÔÏó¡£
-     * @throws EntityException Ö´ĞĞÒì³£¡£
+     * @param saveEntityContext å®ä½“ä¼šè¯å¯¹è±¡ã€‚
+     * @param entity            å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     protected static void beforeSave(SaveEntityContext saveEntityContext, Object entity) throws EntityException {
         EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entity.getClass());

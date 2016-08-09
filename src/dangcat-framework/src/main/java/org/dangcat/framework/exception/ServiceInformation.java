@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * ·şÎñĞÅÏ¢¡£
+ * æœåŠ¡ä¿¡æ¯ã€‚
  *
  * @author dangcat
  */
@@ -26,7 +26,7 @@ public class ServiceInformation implements java.io.Serializable {
 
     private List<ServiceInformation> informationList = null;
     /**
-     * ÏûÏ¢¹ú¼Ê»¯¡£
+     * æ¶ˆæ¯å›½é™…åŒ–ã€‚
      */
     private Locale locale = null;
     /**
@@ -38,7 +38,7 @@ public class ServiceInformation implements java.io.Serializable {
      */
     private String messageKey = null;
     /**
-     * Òì³£²ÎÊı¡£
+     * å¼‚å¸¸å‚æ•°ã€‚
      */
     private List<Object> paramList = null;
 
@@ -106,7 +106,7 @@ public class ServiceInformation implements java.io.Serializable {
     }
 
     /**
-     * ²ÎÊıÁĞ±í¡£
+     * å‚æ•°åˆ—è¡¨ã€‚
      */
     public Object[] getParams() {
         return this.paramList == null ? null : this.paramList.toArray();

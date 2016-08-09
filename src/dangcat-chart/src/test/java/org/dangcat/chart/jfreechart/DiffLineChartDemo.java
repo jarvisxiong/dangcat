@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class DiffLineChartDemo extends ChartDemoBase {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "对比线性统计图";
+    private static final String TITLE = "瀵规瘮绾挎�х粺璁″浘";
 
     public DiffLineChartDemo() {
         super(DiffLineChart.class.getSimpleName());
@@ -33,7 +33,7 @@ public class DiffLineChartDemo extends ChartDemoBase {
 
         DiffLineChart diffLineChart1 = new DiffLineChart();
         diffLineChart1.setTitle(TITLE);
-        diffLineChart1.setRangeTitle("流量");
+        diffLineChart1.setRangeTitle("娴侀噺");
         diffLineChart1.setDataModule(columnDataModule);
         this.initTimeChart(diffLineChart1, dates[0], dates[1]);
         diffLineChart1.initialize();
@@ -50,7 +50,7 @@ public class DiffLineChartDemo extends ChartDemoBase {
         DiffLineChart diffLineChart2 = new DiffLineChart();
         diffLineChart2.setLegendVisible(true);
         diffLineChart2.setTitle(TITLE);
-        diffLineChart2.setRangeTitle("流量");
+        diffLineChart2.setRangeTitle("娴侀噺");
         diffLineChart2.setDataModule(rowDataModule);
         this.initTimeChart(diffLineChart2, dates[0], dates[1]);
         diffLineChart2.initialize();

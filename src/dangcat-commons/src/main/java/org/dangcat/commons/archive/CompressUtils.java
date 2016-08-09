@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Ñ¹Ëõ¹¤¾ß¡£
+ * å‹ç¼©å·¥å…·ã€‚
  *
  * @author dangcat
  */
@@ -36,21 +36,21 @@ public class CompressUtils {
     }
 
     /**
-     * Ñ¹Ëõ×Ö½ÚÊı¾İ¡£
+     * å‹ç¼©å­—èŠ‚æ•°æ®ã€‚
      *
      * @param dataBytes
-     * @return Ñ¹ËõºóµÄÊı×é¡£
+     * @return å‹ç¼©åçš„æ•°ç»„ã€‚
      */
     public static byte[] compress(byte[] dataBytes) {
         return compress(gz, dataBytes);
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄËã·¨Ñ¹Ëõ×Ö½ÚÊı×é¡£
+     * æŒ‰ç…§æŒ‡å®šçš„ç®—æ³•å‹ç¼©å­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param name      Ëã·¨Ãû¡£
-     * @param dataBytes ×Ö½ÚÊı×é¡£
-     * @return Ñ¹ËõºóµÄ×Ö½Ú¡£
+     * @param name      ç®—æ³•åã€‚
+     * @param dataBytes å­—èŠ‚æ•°ç»„ã€‚
+     * @return å‹ç¼©åçš„å­—èŠ‚ã€‚
      */
     public static byte[] compress(String name, byte[] dataBytes) {
         byte[] content = null;
@@ -68,11 +68,11 @@ public class CompressUtils {
     }
 
     /**
-     * Ñ¹Ëõµ¥¸öÎÄ¼ş¡£
+     * å‹ç¼©å•ä¸ªæ–‡ä»¶ã€‚
      *
-     * @param name       Ä¿±êÀ©Õ¹Ãû¡£
-     * @param sourceFile À´Ô´ÎÄ¼ş¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param name       ç›®æ ‡æ‰©å±•åã€‚
+     * @param sourceFile æ¥æºæ–‡ä»¶ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static File compress(String name, File sourceFile) throws IOException {
         File destFile = new File(sourceFile.getAbsolutePath() + name);
@@ -82,12 +82,12 @@ public class CompressUtils {
     }
 
     /**
-     * Ñ¹ËõÎÄ¼ş¡£
+     * å‹ç¼©æ–‡ä»¶ã€‚
      *
-     * @param name       Ñ¹ËõÃû³Æ¡£
-     * @param sourceFile À´Ô´ÎÄ¼ş¡£
-     * @param destFile   Ä¿±êÎÄ¼ş¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param name       å‹ç¼©åç§°ã€‚
+     * @param sourceFile æ¥æºæ–‡ä»¶ã€‚
+     * @param destFile   ç›®æ ‡æ–‡ä»¶ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static void compress(String name, File sourceFile, File destFile) throws IOException {
         if (sourceFile.exists()) {
@@ -99,12 +99,12 @@ public class CompressUtils {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄËã·¨Ñ¹ËõÊı¾İÁ÷¡£
+     * æŒ‰ç…§æŒ‡å®šçš„ç®—æ³•å‹ç¼©æ•°æ®æµã€‚
      *
-     * @param name         Ëã·¨Ãû¡£
-     * @param inputStream  ÊäÈëÊı¾İÁ÷¡£
-     * @param outputStream Êä³öÊı¾İÁ÷¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param name         ç®—æ³•åã€‚
+     * @param inputStream  è¾“å…¥æ•°æ®æµã€‚
+     * @param outputStream è¾“å‡ºæ•°æ®æµã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static void compress(String name, InputStream inputStream, OutputStream outputStream) throws IOException {
         CompressorOutputStream compressorOutputStream = null;
@@ -152,20 +152,20 @@ public class CompressUtils {
     }
 
     /**
-     * ½âÑ¹Ëõ×Ö½ÚÊı¾İ¡£
+     * è§£å‹ç¼©å­—èŠ‚æ•°æ®ã€‚
      *
      * @param dataBytes
-     * @return ½âÑ¹ËõºóµÄÊı×é¡£
+     * @return è§£å‹ç¼©åçš„æ•°ç»„ã€‚
      */
     public static byte[] decompress(byte[] dataBytes) {
         return decompress(gz, dataBytes);
     }
 
     /**
-     * ½âÑ¹Ëõµ¥¸öÎÄ¼ş¡£
+     * è§£å‹ç¼©å•ä¸ªæ–‡ä»¶ã€‚
      *
-     * @param sourceFile À´Ô´ÎÄ¼ş¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param sourceFile æ¥æºæ–‡ä»¶ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static File decompress(File sourceFile) throws IOException {
         return decompress(sourceFile, null);
@@ -190,11 +190,11 @@ public class CompressUtils {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄËã·¨½âÑ¹Ëõ×Ö½ÚÊı×é¡£
+     * æŒ‰ç…§æŒ‡å®šçš„ç®—æ³•è§£å‹ç¼©å­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param name      Ëã·¨Ãû¡£
-     * @param dataBytes ×Ö½ÚÊı×é¡£
-     * @return Ñ¹ËõºóµÄ×Ö½Ú¡£
+     * @param name      ç®—æ³•åã€‚
+     * @param dataBytes å­—èŠ‚æ•°ç»„ã€‚
+     * @return å‹ç¼©åçš„å­—èŠ‚ã€‚
      */
     public static byte[] decompress(String name, byte[] dataBytes) {
         byte[] content = null;
@@ -212,12 +212,12 @@ public class CompressUtils {
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄËã·¨½âÑ¹ËõÊı¾İÁ÷¡£
+     * æŒ‰ç…§æŒ‡å®šçš„ç®—æ³•è§£å‹ç¼©æ•°æ®æµã€‚
      *
-     * @param name         Ëã·¨Ãû¡£
-     * @param inputStream  ÊäÈëÊı¾İÁ÷¡£
-     * @param outputStream Êä³öÊı¾İÁ÷¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param name         ç®—æ³•åã€‚
+     * @param inputStream  è¾“å…¥æ•°æ®æµã€‚
+     * @param outputStream è¾“å‡ºæ•°æ®æµã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public static void decompress(String name, InputStream inputStream, OutputStream outputStream) throws IOException {
         CompressorInputStream compressorInputStream = null;
@@ -236,12 +236,12 @@ public class CompressUtils {
     }
 
     /**
-     * ½âÑ¹ËõÎÄ¼ş¡£
+     * è§£å‹ç¼©æ–‡ä»¶ã€‚
      *
-     * @param name       Ñ¹ËõÃû³Æ¡£
-     * @param sourceFile À´Ô´ÎÄ¼ş¡£
-     * @param destFile   Ä¿±êÎÄ¼ş¡£
-     * @throws IOException ÔËĞĞÒì³£¡£
+     * @param name       å‹ç¼©åç§°ã€‚
+     * @param sourceFile æ¥æºæ–‡ä»¶ã€‚
+     * @param destFile   ç›®æ ‡æ–‡ä»¶ã€‚
+     * @throws IOException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected static void decompressFile(String name, File sourceFile, File destFile) throws IOException {
         if (sourceFile.exists() && sourceFile.isFile()) {

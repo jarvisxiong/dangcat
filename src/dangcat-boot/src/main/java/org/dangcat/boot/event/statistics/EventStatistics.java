@@ -17,7 +17,7 @@ public class EventStatistics extends ProcessStatistics<EventStatisticsData> {
     }
 
     /**
-     * Í³¼Æ´¦Àí´ÎÊı¡£
+     * ç»Ÿè®¡å¤„ç†æ¬¡æ•°ã€‚
      */
     public long increaseHandleCount(long handleCount) {
         return this.increase(EventStatisticsData.HandleCount, handleCount);

@@ -1,7 +1,7 @@
 package org.dangcat.commons.timer;
 
 /**
- * µ¥Ïß³ÌÔËĞĞ¡£
+ * å•çº¿ç¨‹è¿è¡Œã€‚
  *
  * @author dangcat
  */

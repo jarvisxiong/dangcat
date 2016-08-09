@@ -7,29 +7,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÕûÊıÀàĞÍÊôĞÔÄ£°å¡£
+ * æ•´æ•°ç±»å‹å±æ€§æ¨¡æ¿ã€‚
  *
  * @author dangcat
  */
 public abstract class NumberAttributeTemplate<T extends Number> extends AttributeTemplate {
     /**
-     * ÊôĞÔ³¤¶È¡£
+     * å±æ€§é•¿åº¦ã€‚
      */
     private Integer length;
     /**
-     * ×î´óÖµ¡£
+     * æœ€å¤§å€¼ã€‚
      */
     private T maxValue;
     /**
-     * ×îĞ¡Öµ¡£
+     * æœ€å°å€¼ã€‚
      */
     private T minValue;
     /**
-     * ÊôĞÔ¿ÉÑ¡ÁĞ±í¡£
+     * å±æ€§å¯é€‰åˆ—è¡¨ã€‚
      */
     private Map<T, String> options = new HashMap<T, String>();
     /**
-     * ÊÇ·ñ½øĞĞÑ¡ÏîĞ£Ñé¡£
+     * æ˜¯å¦è¿›è¡Œé€‰é¡¹æ ¡éªŒã€‚
      */
     private boolean optionValidate = true;
 
@@ -60,7 +60,7 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
     }
 
     /**
-     * ÊôĞÔ¿ÉÑ¡Ä£°å¡£
+     * å±æ€§å¯é€‰æ¨¡æ¿ã€‚
      */
     public Map<T, String> getOptions() {
         return this.options;
@@ -84,7 +84,7 @@ public abstract class NumberAttributeTemplate<T extends Number> extends Attribut
     }
 
     /**
-     * ÑéÖ¤ÊôĞÔÊÇ·ñÓĞĞ§¡£
+     * éªŒè¯å±æ€§æ˜¯å¦æœ‰æ•ˆã€‚
      */
     @Override
     public void validate(Object value) throws ProtocolValidateException {

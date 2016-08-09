@@ -5,29 +5,29 @@ import org.dangcat.framework.exception.ServiceException;
 import org.dangcat.framework.service.annotation.JndiName;
 
 /**
- * ·şÎñÆ÷¹ÜÀí¡£
+ * æœåŠ¡å™¨ç®¡ç†ã€‚
  *
  * @author
  */
 @JndiName(module = "Device", name = "ServerChart")
 public interface ServerChartService {
     /**
-     * ²úÉú×ÊÔ´¼àÊÓÈÈµãĞÅÏ¢¡£
+     * äº§ç”Ÿèµ„æºç›‘è§†çƒ­ç‚¹ä¿¡æ¯ã€‚
      *
-     * @param id     ·şÎñÆ÷ºÅ¡£
-     * @param width  Í¼Æ¬¿í¶È¡£
-     * @param height Í¼Æ¬¸ß¶È¡£
-     * @return Í¼Æ¬ÈÈµãĞÅÏ¢¡£
+     * @param id     æœåŠ¡å™¨å·ã€‚
+     * @param width  å›¾ç‰‡å®½åº¦ã€‚
+     * @param height å›¾ç‰‡é«˜åº¦ã€‚
+     * @return å›¾ç‰‡çƒ­ç‚¹ä¿¡æ¯ã€‚
      */
     String createActiveArea(@Parameter(name = "id") Integer id, @Parameter(name = "width") Integer width, @Parameter(name = "height") Integer height) throws ServiceException;
 
     /**
-     * ²úÉú×ÊÔ´¼àÊÓÍ¼±í¡£
+     * äº§ç”Ÿèµ„æºç›‘è§†å›¾è¡¨ã€‚
      *
-     * @param id     ·şÎñÆ÷ºÅ¡£
-     * @param width  Í¼Æ¬¿í¶È¡£
-     * @param height Í¼Æ¬¸ß¶È¡£
-     * @return Í¼Æ¬¡£
+     * @param id     æœåŠ¡å™¨å·ã€‚
+     * @param width  å›¾ç‰‡å®½åº¦ã€‚
+     * @param height å›¾ç‰‡é«˜åº¦ã€‚
+     * @return å›¾ç‰‡ã€‚
      */
     void renderChartImg(@Parameter(name = "id") Integer id, @Parameter(name = "width") Integer width, @Parameter(name = "height") Integer height) throws ServiceException;
 }

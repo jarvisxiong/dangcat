@@ -17,15 +17,15 @@ public class ExcelCellStyle {
     private static final short COLOR_TAIL_INDEX = HSSFColor.SKY_BLUE.index;
     private CellStyle cellStyle = null;
     /**
-     * Êı¾İÀàĞÍ¡£
+     * æ•°æ®ç±»å‹ã€‚
      */
     private Class<?> classType;
     /**
-     * ÄÚÈİÀàĞÍ£º0£ºheader£»1¡¢body£»2¡¢tail£»3¡¢primary
+     * å†…å®¹ç±»å‹ï¼š0ï¼šheaderï¼›1ã€bodyï¼›2ã€tailï¼›3ã€primary
      */
     private int logic;
     /**
-     * ¾Å¹¬Î»ÖÃ£º0-10
+     * ä¹å®«ä½ç½®ï¼š0-10
      */
     private int position;
 

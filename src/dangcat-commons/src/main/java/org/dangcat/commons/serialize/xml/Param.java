@@ -1,14 +1,14 @@
 package org.dangcat.commons.serialize.xml;
 
 /**
- * ²ÎÊı¶ÔÏó
+ * å‚æ•°å¯¹è±¡
  *
  * @author dangcat
  */
 public class Param extends Value {
     private static final long serialVersionUID = 1L;
     /**
-     * ²ÎÊıÃû¡£
+     * å‚æ•°åã€‚
      */
     private String name;
 

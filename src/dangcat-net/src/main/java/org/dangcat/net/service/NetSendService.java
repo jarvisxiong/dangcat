@@ -5,11 +5,11 @@ import java.net.InetAddress;
 
 public interface NetSendService {
     /**
-     * ÏòÖ¸¶¨µÄµØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ¡£
+     * å‘æŒ‡å®šçš„åœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ã€‚
      *
-     * @param remoteAddress Ä¿±êµØÖ·¡£
-     * @param remotePort    Ä¿±ê¶Ë¿Ú¡£
-     * @param dataBuffer    ·¢ËÍÊı¾İ¡£
+     * @param remoteAddress ç›®æ ‡åœ°å€ã€‚
+     * @param remotePort    ç›®æ ‡ç«¯å£ã€‚
+     * @param dataBuffer    å‘é€æ•°æ®ã€‚
      * @throws IOException
      */
     void send(InetAddress remoteAddress, Integer remotePort, byte[] dataBuffer) throws IOException;

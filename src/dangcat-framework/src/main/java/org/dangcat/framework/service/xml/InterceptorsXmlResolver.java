@@ -8,7 +8,7 @@ import org.dom4j.Element;
 import java.util.Collection;
 
 /**
- * À¹½ØÆ÷¶ÔÏó½âÎöÆ÷¡£
+ * æ‹¦æˆªå™¨å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -17,7 +17,7 @@ public class InterceptorsXmlResolver extends XmlResolver {
     private static final String CHILDELEMENT_NAME = "Interceptor";
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public InterceptorsXmlResolver() {
         super(RESOLVER_NAME);
@@ -29,9 +29,9 @@ public class InterceptorsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎö×ÓÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå­å…ƒç´ æ ‡ç­¾ã€‚
      *
-     * @param element ×ÓÔªËØÃû³Æ¡£
+     * @param element å­å…ƒç´ åç§°ã€‚
      */
     protected void resolveChildElement(Element element) {
         if (CHILDELEMENT_NAME.equalsIgnoreCase(element.getName()) && !ValueUtils.isEmpty(element.getText())) {

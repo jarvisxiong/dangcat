@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * ¶ÔÏó³Ø
+ * å¯¹è±¡æ± 
  *
  * @param <T>
  * @author dangcat
@@ -15,11 +15,11 @@ public abstract class ObjectPool<T> {
     protected final Logger logger = Logger.getLogger(this.getClass());
     private boolean isPoolEnabled = true;
     /**
-     * Á¬½Ó³Ø¶ÓÁĞ¡£
+     * è¿æ¥æ± é˜Ÿåˆ—ã€‚
      */
     private Queue<T> pooledObjectQueue = new LinkedList<T>();
     /**
-     * ÕıÔÚÊ¹ÓÃµÄÁ¬½Ó³Ø¶ÓÁĞ¡£
+     * æ­£åœ¨ä½¿ç”¨çš„è¿æ¥æ± é˜Ÿåˆ—ã€‚
      */
     private Queue<T> usedObjectPool = new LinkedList<T>();
 
@@ -37,7 +37,7 @@ public abstract class ObjectPool<T> {
     }
 
     /**
-     * ¹Ø±ÕÁ¬½Ó
+     * å…³é—­è¿æ¥
      */
     protected abstract void close(T pooledObject);
 
@@ -74,7 +74,7 @@ public abstract class ObjectPool<T> {
     }
 
     /**
-     * ·µ»ØÁ¬½Ó³ØÖĞµÄÒ»¸öÊı¾İ¿âÁ¬½Ó¡£
+     * è¿”å›è¿æ¥æ± ä¸­çš„ä¸€ä¸ªæ•°æ®åº“è¿æ¥ã€‚
      */
     public synchronized T poll() {
         T pooledObject = null;
@@ -88,7 +88,7 @@ public abstract class ObjectPool<T> {
     }
 
     /**
-     * ·µ»ØÁ¬½Óµ½Á¬½Ó³ØÖĞ¡£
+     * è¿”å›è¿æ¥åˆ°è¿æ¥æ± ä¸­ã€‚
      */
     public synchronized void release(T usedObject) {
         if (usedObject != null) {

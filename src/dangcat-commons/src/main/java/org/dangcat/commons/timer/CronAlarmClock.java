@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Cron¶¨Ê±Æ÷¡£
+ * Cronå®šæ—¶å™¨ã€‚
  *
  * @author dangcat
  */

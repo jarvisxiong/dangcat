@@ -9,23 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class FilterUnitXmlResolver extends XmlResolver {
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private FilterUnit filterUnit = null;
 
     /**
-     * À¸Î»¶ÔÏó¡£
+     * æ ä½å¯¹è±¡ã€‚
      */
     private List<Object> paramList = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public FilterUnitXmlResolver() {
         super(FilterUnit.class.getSimpleName());
@@ -33,10 +33,10 @@ public class FilterUnitXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @Override
     protected void afterChildCreate(String elementName, Object child) {
@@ -47,9 +47,9 @@ public class FilterUnitXmlResolver extends XmlResolver {
     }
 
     /**
-     * ½âÎöÔªËØ±êÇ©½áÊø¡£
+     * è§£æå…ƒç´ æ ‡ç­¾ç»“æŸã€‚
      *
-     * @return ½âÎö¶ÔÏó¡£
+     * @return è§£æå¯¹è±¡ã€‚
      */
     @Override
     protected Object endElement() {
@@ -58,7 +58,7 @@ public class FilterUnitXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

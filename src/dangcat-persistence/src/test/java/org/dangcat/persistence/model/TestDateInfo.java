@@ -84,7 +84,7 @@ public class TestDateInfo extends TestEntityBase {
         if (table.exists())
             table.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
     }
 

@@ -1,17 +1,17 @@
 package org.dangcat.persistence.orderby;
 
 /**
- * ÅÅĞò·½Ê½¡£
+ * æ’åºæ–¹å¼ã€‚
  *
  * @author dangcat
  */
 public enum OrderByType {
     /**
-     * ÕıĞò¡£
+     * æ­£åºã€‚
      */
     Asc,
     /**
-     * µ¹Ğò¡£
+     * å€’åºã€‚
      */
     Desc
 }

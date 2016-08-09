@@ -8,15 +8,15 @@ import java.text.MessageFormat;
 
 class LinuxSystemService extends SystemService {
     /**
-     * É¾³ı·şÎñ¡£
+     * åˆ é™¤æœåŠ¡ã€‚
      */
     private static final String CMD_DELETE_CMD = "chkconfig --del {0}";
     /**
-     * ÅĞ¶Ï·şÎñÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­æœåŠ¡æ˜¯å¦å­˜åœ¨ã€‚
      */
     private static final String CMD_EXISTS_CMD = "chkconfig --list {0}";
     /**
-     * ÅĞ¶Ï·şÎñÊÇ·ñÔÚÔËĞĞ¡£
+     * åˆ¤æ–­æœåŠ¡æ˜¯å¦åœ¨è¿è¡Œã€‚
      */
     private static final String CMD_RUNNING = "service {0} status";
     private static final Logger logger = Logger.getLogger(LinuxSystemService.class);

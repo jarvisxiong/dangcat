@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * ÊµÌå»á»°¡£
+ * å®ä½“ä¼šè¯ã€‚
  *
  * @author dangcat
  */
@@ -44,10 +44,10 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * Ìá½»»á»°¡£
+     * æäº¤ä¼šè¯ã€‚
      *
-     * @param session »á»°¶ÔÏó¡£
-     * @throws EntityException ÔËĞĞÒì³£¡£
+     * @param session ä¼šè¯å¯¹è±¡ã€‚
+     * @throws EntityException è¿è¡Œå¼‚å¸¸ã€‚
      * @throws SQLException
      */
     private void commit(Session session) throws EntityException, SQLException {
@@ -60,7 +60,7 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
                 if (deletedCollection != null && deletedCollection.size() > 0) {
                     EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entityPending.getEntityClass());
                     EntityStatement entityStatement = entityPending.getEntityStatement(this.saveEntityContext, databaseName);
-                    // É¾³ı»º´æÖĞµÄÊµÌå¡£
+                    // åˆ é™¤ç¼“å­˜ä¸­çš„å®ä½“ã€‚
                     this.executeDelete(session, entityMetaData, entityStatement, entityPending.getDeletedCollection());
                 }
             }
@@ -69,11 +69,11 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
                 if (modifyCollection != null && modifyCollection.size() > 0) {
                     EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entityPending.getEntityClass());
                     EntityStatement entityStatement = entityPending.getEntityStatement(this.saveEntityContext, databaseName);
-                    // ĞŞ¸Ä»º´æÖĞµÄÊµÌå¡£
+                    // ä¿®æ”¹ç¼“å­˜ä¸­çš„å®ä½“ã€‚
                     this.executeModified(session, entityMetaData, entityStatement, entityPending.getModifiedCollection());
                 }
 
-                // ²åÈë»º´æÖĞµÄÊµÌå¡£
+                // æ’å…¥ç¼“å­˜ä¸­çš„å®ä½“ã€‚
                 Collection<Object> insertCollection = entityPending.getInsertCollection();
                 if (insertCollection != null && insertCollection.size() > 0) {
                     EntityMetaData entityMetaData = EntityHelper.getEntityMetaData(entityPending.getEntityClass());
@@ -85,9 +85,9 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * Ö´ĞĞÌá½»»á»°¶ÔÏó¡£
+     * æ‰§è¡Œæäº¤ä¼šè¯å¯¹è±¡ã€‚
      *
-     * @throws EntityException ÔËĞĞÒì³£¡£
+     * @throws EntityException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public void execute() throws EntityException {
         this.prepare(this.saveEntityContext);
@@ -102,7 +102,7 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
                     this.commit(session);
                     this.saveEntityContext.afterSave();
 
-                    // »ØÌîÖ÷¼ü×ÔÔöÖµ¡£
+                    // å›å¡«ä¸»é”®è‡ªå¢å€¼ã€‚
                     for (InsertEntry insertEntry : this.insertEntityQueue)
                         insertEntry.writeSequenceValue();
                     this.commit();
@@ -124,9 +124,9 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * É¾³ı»º´æÖĞµÄÊµÌå¡£
+     * åˆ é™¤ç¼“å­˜ä¸­çš„å®ä½“ã€‚
      *
-     * @param entityObject ÊµÌå¶ÓÁĞ¡£
+     * @param entityObject å®ä½“é˜Ÿåˆ—ã€‚
      * @throws EntityException
      */
     private void executeDelete(Session session, EntityMetaData entityMetaData, EntityStatement entityStatement, Collection<Object> entities) throws SQLException, EntityException {
@@ -159,15 +159,15 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * ²åÈë»º´æÖĞµÄÊµÌå¡£
+     * æ’å…¥ç¼“å­˜ä¸­çš„å®ä½“ã€‚
      *
-     * @param entityObject ÊµÌå¶ÓÁĞ¡£
+     * @param entityObject å®ä½“é˜Ÿåˆ—ã€‚
      * @throws SQLException
      * @throws EntityException
      */
     private void executeInsert(Session session, EntityMetaData entityMetaData, EntityStatement entityStatement, Collection<Object> entityCollection) throws SQLException, EntityException {
         List<String> fieldNameList = entityStatement.getInsertFieldNameList();
-        // ×ÔÔöÖ÷¼üÁĞ±í¡£
+        // è‡ªå¢ä¸»é”®åˆ—è¡¨ã€‚
         List<String> generatedKeyList = entityStatement.getGeneratedKeyList();
         String[] primaryFieldNames = null;
         if (generatedKeyList != null && !generatedKeyList.isEmpty())
@@ -189,9 +189,9 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * ²åÈë»º´æÖĞµÄÊµÌå¡£
+     * æ’å…¥ç¼“å­˜ä¸­çš„å®ä½“ã€‚
      *
-     * @param entityObject ÊµÌå¶ÓÁĞ¡£
+     * @param entityObject å®ä½“é˜Ÿåˆ—ã€‚
      * @throws SQLException
      * @throws EntityException
      */
@@ -200,9 +200,9 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
         if (entityCollection == null || entityCollection.size() == 0)
             return;
 
-        // ×¼±¸±í´ï¶ÔÏó¡£
+        // å‡†å¤‡è¡¨è¾¾å¯¹è±¡ã€‚
         session.prepare(sql, primaryFieldNames);
-        // Åú´¦Àí¶ÓÁĞ¡£
+        // æ‰¹å¤„ç†é˜Ÿåˆ—ã€‚
         Queue<Object> batchUpdateQueue = new LinkedList<Object>();
         int count = entityCollection.size();
         Object currentEntity = null;
@@ -236,9 +236,9 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * ĞŞ¸Ä»º´æÖĞµÄÊµÌå¡£
+     * ä¿®æ”¹ç¼“å­˜ä¸­çš„å®ä½“ã€‚
      *
-     * @param entityObject ÊµÌå¶ÓÁĞ¡£
+     * @param entityObject å®ä½“é˜Ÿåˆ—ã€‚
      * @throws SQLException
      * @throws EntityException
      */
@@ -284,14 +284,14 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * ½âÎöÊı¾İ½á¹û¡£
+     * è§£ææ•°æ®ç»“æœã€‚
      *
-     * @param row       Êı¾İĞĞ¶ÔÏó¡£
-     * @param resultSet ²éÑ¯½á¹û¡£
+     * @param row       æ•°æ®è¡Œå¯¹è±¡ã€‚
+     * @param resultSet æŸ¥è¯¢ç»“æœã€‚
      * @throws SQLException
      */
     private void parseData(EntityMetaData entityMetaData, Queue<Object> batchUpdateQueue, ResultSet resultSet, String[] fieldNames) throws SQLException {
-        // »ñÈ¡ÔªÊı¾İ¡£
+        // è·å–å…ƒæ•°æ®ã€‚
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
         while (resultSet.next()) {
@@ -314,13 +314,13 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
     }
 
     /**
-     * ÉèÖÃ»á»°²ÎÊı¡£
+     * è®¾ç½®ä¼šè¯å‚æ•°ã€‚
      *
-     * @param session        »á»°¶ÔÏó¡£
-     * @param entityMetaData ÊµÌåÔªÊı¾İ¡£
-     * @param entity         ÊµÌå¶ÔÏó¡£
-     * @param fieldNameList  ×Ö¶ÎÁĞ±í¡£
-     * @param beginIndex     ²ÎÊıÆğÊ¼Ë÷Òı¡£
+     * @param session        ä¼šè¯å¯¹è±¡ã€‚
+     * @param entityMetaData å®ä½“å…ƒæ•°æ®ã€‚
+     * @param entity         å®ä½“å¯¹è±¡ã€‚
+     * @param fieldNameList  å­—æ®µåˆ—è¡¨ã€‚
+     * @param beginIndex     å‚æ•°èµ·å§‹ç´¢å¼•ã€‚
      * @return
      * @throws SQLException
      */
@@ -329,7 +329,7 @@ public class EntityManagerSaveImpl extends EntityManagerTransaction {
         for (String fieldName : fieldNameList) {
             EntityField entityField = entityMetaData.getEntityField(fieldName);
             Object value = entityField.getValue(entity);
-            // ×ÔÔö×Ö¶ÎĞèÒªÊÖ¶¯²úÉú
+            // è‡ªå¢å­—æ®µéœ€è¦æ‰‹åŠ¨äº§ç”Ÿ
             if (value == null && entityField.getColumn().isSequenceGeneration()) {
                 value = session.nextSequence(tableName, fieldName, entityField.getClassType(), entityField.getTableGenerator());
                 this.addInsertEntiry(entity, entityField, value);

@@ -11,7 +11,7 @@ import org.dangcat.framework.service.annotation.PermissionProvider;
 import org.dangcat.framework.service.annotation.Service;
 
 /**
- * ·şÎñÆ÷¹ÜÀí¡£
+ * æœåŠ¡å™¨ç®¡ç†ã€‚
  *
  * @author
  */

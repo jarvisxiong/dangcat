@@ -38,7 +38,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     private static final int TEST_COUNT = 100;
 
     private void createMembers(List<OperatorGroup> operatorGroupList, int count) throws ServiceException {
-        // Ôì³öÓĞ¹ØÁªµÄËÄ¸ö×é¡£
+        // é€ å‡ºæœ‰å…³è”çš„å››ä¸ªç»„ã€‚
         for (int i = 0; i < count; i++) {
             OperatorGroup operatorGroup = operatorGroupList.get(i);
             if (i == 0)
@@ -62,7 +62,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     @Before
     @Override
     public void initialize() {
-        // Ìí¼ÓÒª²âÊÔµÄ·şÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(OperatorGroupService.class, OperatorGroupServiceImpl.class);
         this.addService(OperatorInfoService.class, OperatorInfoServiceImpl.class);
         this.addService(RoleInfoService.class, RoleInfoServiceImpl.class);
@@ -83,11 +83,11 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜÉ¾³ıÒÑ°ó¶¨²Ù×÷Ô±µÄ²Ù×÷×é¡£
+     * ä¸èƒ½åˆ é™¤å·²ç»‘å®šæ“ä½œå‘˜çš„æ“ä½œç»„ã€‚
      */
     @Test
     public void testDeleteGroupWithOperator() throws ServiceException {
-        // ²âÊÔÉ¾³ıÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ²Ù×÷×é
+        // æµ‹è¯•åˆ é™¤å·²ç»ç»‘å®šæ“ä½œå‘˜çš„æ“ä½œç»„
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(operatorGroup);
@@ -101,7 +101,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜÉ¾³ıµÇÂ¼ÓÃ»§ËùÔÚµÄ×é»òÕß×Ó×éÒÔÍâµÄ²Ù×÷×é¡£
+     * ä¸èƒ½åˆ é™¤ç™»å½•ç”¨æˆ·æ‰€åœ¨çš„ç»„æˆ–è€…å­ç»„ä»¥å¤–çš„æ“ä½œç»„ã€‚
      */
     @Test
     public void testDeleteMembers() throws ServiceException {
@@ -120,13 +120,13 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜÉ¾³ıÒÑ°ó¶¨Îª¸¸×éµÄ²Ù×÷×é¡£
+     * ä¸èƒ½åˆ é™¤å·²ç»‘å®šä¸ºçˆ¶ç»„çš„æ“ä½œç»„ã€‚
      */
     @Test
     public void testDeleteParent() throws ServiceException {
         this.truncate(OperatorInfo.class);
         int count = 4;
-        // Ôì³öÓĞ¹ØÁªµÄËÄ¸ö×é¡£
+        // é€ å‡ºæœ‰å…³è”çš„å››ä¸ªç»„ã€‚
         List<OperatorGroup> operatorGroupList = this.getEntityManager().load(OperatorGroup.class);
         this.createMembers(operatorGroupList, count);
 
@@ -158,17 +158,17 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * Ö»ÄÜ²éÑ¯µÇÂ¼ÓÃ»§ËùÔÚµÄ×é»òÕß×Ó×éµÄÊı¾İ¡£
+     * åªèƒ½æŸ¥è¯¢ç™»å½•ç”¨æˆ·æ‰€åœ¨çš„ç»„æˆ–è€…å­ç»„çš„æ•°æ®ã€‚
      */
     @Test
     public void testLoadMembers() throws ServiceException {
         int count = 4;
-        // Ôì³öÓĞ¹ØÁªµÄËÄ¸ö×é¡£
+        // é€ å‡ºæœ‰å…³è”çš„å››ä¸ªç»„ã€‚
         List<OperatorGroup> operatorGroupList = this.getEntityManager().load(OperatorGroup.class);
         this.createMembers(operatorGroupList, count);
-        // Ôì³öËÄ¸ö²Ù×÷Ô±°ó¶¨ÉÏÃæÓÃ»§
+        // é€ å‡ºå››ä¸ªæ“ä½œå‘˜ç»‘å®šä¸Šé¢ç”¨æˆ·
         List<OperatorInfo> operatorInfoList = this.getEntityManager().load(OperatorInfo.class);
-        // Ôì³öËÄ¸ö²Ù×÷Ô±°ó¶¨ÉÏÃæÓÃ»§
+        // é€ å‡ºå››ä¸ªæ“ä½œå‘˜ç»‘å®šä¸Šé¢ç”¨æˆ·
         OperatorInfoService operatorInfoService = this.getService(OperatorInfoService.class);
         for (int i = 0; i < count; i++) {
             OperatorInfo operatorInfo = operatorInfoList.get(i);
@@ -176,7 +176,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
             operatorInfoService.save(operatorInfo);
             Assert.assertFalse(operatorInfo.hasError());
         }
-        // ÒÔµÚÒ»¸öÕËºÅµÇÂ¼¡£
+        // ä»¥ç¬¬ä¸€ä¸ªè´¦å·ç™»å½•ã€‚
         for (int i = 0; i < count; i++) {
             this.login(operatorInfoList.get(i).getNo());
             Map<Integer, String> members = this.getService().loadMembers();
@@ -189,7 +189,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜĞŞ¸ÄµÇÂ¼ÓÃ»§ËùÔÚµÄ×é»òÕß×Ó×éÒÔÍâµÄ²Ù×÷×é¡£
+     * ä¸èƒ½ä¿®æ”¹ç™»å½•ç”¨æˆ·æ‰€åœ¨çš„ç»„æˆ–è€…å­ç»„ä»¥å¤–çš„æ“ä½œç»„ã€‚
      */
     @Test
     public void testModifyMembers() throws ServiceException {
@@ -224,23 +224,23 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²Ù×÷×éµÄÃû³Æ²»ÄÜÖØ¸´¡£
+     * æ“ä½œç»„çš„åç§°ä¸èƒ½é‡å¤ã€‚
      */
     @Test
     public void testSaveGroupNameRepeat() throws ServiceException {
-        // ²Ù×÷Ô±×éµÄÃû³Æ²»ÄÜÖØ¸´¡£
+        // æ“ä½œå‘˜ç»„çš„åç§°ä¸èƒ½é‡å¤ã€‚
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup1 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(operatorGroup1);
 
-        // ĞŞ¸ÄÃû³ÆÖØ¸´
+        // ä¿®æ”¹åç§°é‡å¤
         OperatorGroup operatorGroup2 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 2);
         this.getEntityManager().save(operatorGroup2);
         operatorGroup2.setName(operatorGroup1.getName());
         this.getService().save(operatorGroup2);
         Assert.assertNotNull(operatorGroup2.findServiceException(OperatorGroupException.DATA_REPEAT));
 
-        // ĞÂÔöÃû³ÆÖØ¸´
+        // æ–°å¢åç§°é‡å¤
         OperatorGroup operatorGroup3 = new OperatorGroup();
         operatorGroup3.setName(operatorGroup1.getName());
         this.getService().create(operatorGroup3);
@@ -248,11 +248,11 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜ´æ´¢²»´æÔÚµÄ²Ù×÷×é¡£
+     * ä¸èƒ½å­˜å‚¨ä¸å­˜åœ¨çš„æ“ä½œç»„ã€‚
      */
     @Test
     public void testSaveGroupNotExists() throws ServiceException {
-        // ËùÊô²Ù×÷Ô±×é²»´æÔÚ¡£
+        // æ‰€å±æ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         operatorGroup.setId(-1);
@@ -261,7 +261,7 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜÑ­»·°ó¶¨²Ù×÷×é¡£
+     * ä¸èƒ½å¾ªç¯ç»‘å®šæ“ä½œç»„ã€‚
      */
     @Test
     public void testSaveGroupParentCycling() throws ServiceException {
@@ -269,12 +269,12 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
         OperatorGroup operatorGroup1 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         this.getEntityManager().save(operatorGroup1);
 
-        // ²âÊÔËùÊô×éµÈÓÚ±¾×é£¬Ôì³É°ó¶¨Ñ­»·¡£
+        // æµ‹è¯•æ‰€å±ç»„ç­‰äºæœ¬ç»„ï¼Œé€ æˆç»‘å®šå¾ªç¯ã€‚
         operatorGroup1.setParentId(operatorGroup1.getId());
         this.getService().save(operatorGroup1);
         Assert.assertNotNull(operatorGroup1.findServiceException(OperatorGroupException.BIND_CYCLING));
 
-        // ²âÊÔËùÊô×é°ó¶¨Ñ­»·¡£
+        // æµ‹è¯•æ‰€å±ç»„ç»‘å®šå¾ªç¯ã€‚
         OperatorGroup operatorGroup2 = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 2);
         operatorGroup2.setParentId(operatorGroup1.getId());
         this.getEntityManager().save(operatorGroup2);
@@ -284,11 +284,11 @@ public class TestOperatorGroupService extends BusinessServiceTestBase<OperatorGr
     }
 
     /**
-     * ²»ÄÜ°ó¶¨²»´æÔÚµÄ¸¸²Ù×÷×é¡£
+     * ä¸èƒ½ç»‘å®šä¸å­˜åœ¨çš„çˆ¶æ“ä½œç»„ã€‚
      */
     @Test
     public void testSaveParentGroupNotExists() throws ServiceException {
-        // ËùÊô²Ù×÷Ô±×é²»´æÔÚ¡£
+        // æ‰€å±æ“ä½œå‘˜ç»„ä¸å­˜åœ¨ã€‚
         EntitySimulator operatorGroupSimulator = this.getEntitySimulator(OperatorGroup.class);
         OperatorGroup operatorGroup = (OperatorGroup) operatorGroupSimulator.create(TEST_COUNT + 1);
         operatorGroup.setParentId(-1);

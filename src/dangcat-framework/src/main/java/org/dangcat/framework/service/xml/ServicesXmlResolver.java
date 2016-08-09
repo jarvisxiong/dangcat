@@ -10,23 +10,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ·şÎñ¶ÔÏó½âÎöÆ÷¡£
+ * æœåŠ¡å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class ServicesXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Services";
     /**
-     * À¹½ØÆ÷ÅäÖÃ¡£
+     * æ‹¦æˆªå™¨é…ç½®ã€‚
      */
     private Collection<Class<?>> interceptors = new LinkedHashSet<Class<?>>();
     /**
-     * ÅäÖÃµÄ×Ó·şÎñÁĞ±í¡£
+     * é…ç½®çš„å­æœåŠ¡åˆ—è¡¨ã€‚
      */
     private List<ServiceInfo> serviceInfos = new LinkedList<ServiceInfo>();
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public ServicesXmlResolver() {
         super(RESOLVER_NAME);
@@ -35,10 +35,10 @@ public class ServicesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @Override
     protected void afterChildCreate(String elementName, Object child) {
@@ -47,10 +47,10 @@ public class ServicesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ½âÎö×ÓÔªËØÖ®Ç°¡£
+     * è§£æå­å…ƒç´ ä¹‹å‰ã€‚
      *
-     * @param name        ÊôĞÔÃû³Æ¡£
-     * @param xmlResolver ½âÎöÆ÷¡£
+     * @param name        å±æ€§åç§°ã€‚
+     * @param xmlResolver è§£æå™¨ã€‚
      */
     @Override
     protected void beforeChildResolve(String elementName, XmlResolver xmlResolver) {

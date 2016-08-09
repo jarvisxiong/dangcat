@@ -3,7 +3,7 @@ package org.dangcat.business.code.service;
 import org.dangcat.business.code.DirectoryCodeGenerator;
 
 /**
- * ÒµÎñ²ã´úÂëÉú³ÉÆ÷¡£
+ * ä¸šåŠ¡å±‚ä»£ç ç”Ÿæˆå™¨ã€‚
  *
  * @author dangcat
  */

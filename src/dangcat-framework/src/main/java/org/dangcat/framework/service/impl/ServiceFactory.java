@@ -22,7 +22,7 @@ import java.lang.reflect.Proxy;
 import java.util.*;
 
 /**
- * ·şÎñ¹¤³§¡£
+ * æœåŠ¡å·¥å‚ã€‚
  *
  * @author dangcat
  */
@@ -33,19 +33,19 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator {
     private static final String SERVICE_NAME = "SERVICE-CLEAN";
     private static ServiceFactory instance = null;
     /**
-     * ·şÎñĞÅÏ¢Ó³Éä±í¡£
+     * æœåŠ¡ä¿¡æ¯æ˜ å°„è¡¨ã€‚
      */
     private Map<Class<?>, ServiceInfo> serviceInfoClassMap = new LinkedHashMap<Class<?>, ServiceInfo>();
     /**
-     * ·şÎñĞÅÏ¢Ó³Éä±í¡£
+     * æœåŠ¡ä¿¡æ¯æ˜ å°„è¡¨ã€‚
      */
     private Map<String, ServiceInfo> serviceInfoMap = new LinkedHashMap<String, ServiceInfo>();
     /**
-     * ¶ÔÏó³ØÁĞ±í¡£
+     * å¯¹è±¡æ± åˆ—è¡¨ã€‚
      */
     private List<ServicePool> servicePoolList = new ArrayList<ServicePool>();
     /**
-     * ¶¨Ê±ÇåÀí¡£
+     * å®šæ—¶æ¸…ç†ã€‚
      */
     private Timer timer = null;
 
@@ -193,30 +193,30 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator {
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param classType ·şÎñÀàĞÍ¡£
+     * @param classType æœåŠ¡ç±»å‹ã€‚
      */
     public void load(Class<?> classType) {
         this.load(this, classType, null, FILENAME_POSTFIX);
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param file ÅäÖÃÎÄ¼ş¡£
+     * @param file é…ç½®æ–‡ä»¶ã€‚
      */
     public void load(File file) {
         this.load(this, file);
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param parent      ËùÊô¸¸·şÎñ¡£
-     * @param classType   ·şÎñÀàĞÍ¡£
-     * @param namePreFix  ÅäÖÃÇ°×º¡£
-     * @param namePostFix ÅäÖÃºó×º¡£
+     * @param parent      æ‰€å±çˆ¶æœåŠ¡ã€‚
+     * @param classType   æœåŠ¡ç±»å‹ã€‚
+     * @param namePreFix  é…ç½®å‰ç¼€ã€‚
+     * @param namePostFix é…ç½®åç¼€ã€‚
      */
     public void load(ServiceBase parent, Class<?> classType, String namePreFix, String namePostFix) {
         ResourceLoader resourceLoader = new ResourceLoader(classType, namePreFix, namePostFix);
@@ -232,10 +232,10 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator {
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
-     * @param file   ÅäÖÃÎÄ¼ş¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
+     * @param file   é…ç½®æ–‡ä»¶ã€‚
      */
     public void load(ServiceBase parent, File file) {
         if (file == null || !file.exists()) {
@@ -255,10 +255,10 @@ public class ServiceFactory extends ServiceBase implements ServiceLocator {
     }
 
     /**
-     * ÔØÈëÅäÖÃÎÄ¼şÀïµÄ·şÎñÉè¶¨¡£
+     * è½½å…¥é…ç½®æ–‡ä»¶é‡Œçš„æœåŠ¡è®¾å®šã€‚
      *
-     * @param serviceBase ·şÎñÊµÀı¡£
-     * @param inputStream ÅäÖÃÊäÈëÁ÷¡£
+     * @param serviceBase æœåŠ¡å®ä¾‹ã€‚
+     * @param inputStream é…ç½®è¾“å…¥æµã€‚
      */
     private void load(ServiceBase parent, InputStream inputStream) {
         try {

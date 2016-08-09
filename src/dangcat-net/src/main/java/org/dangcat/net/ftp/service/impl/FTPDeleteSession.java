@@ -7,7 +7,7 @@ import org.dangcat.net.ftp.exceptions.FTPSessionException;
 import java.io.IOException;
 
 /**
- * FTPобть╩А╩╟║ё
+ * FTPД╦▀Х╫╫Д╪ Х╞²Ц─┌
  *
  * @author dangcat
  */
@@ -18,10 +18,10 @@ class FTPDeleteSession extends FTPSessionExecutor {
     }
 
     /**
-     * и╬ЁЩт╤╤кнд╪Ч║ё
+     * Е┬═И≥╓Х©°Г╚╞Ф√┤Д╩╤Ц─┌
      *
-     * @param ftpContext FTPиообнд║ё
-     * @param remotePath т╤Ёлб╥╬╤║ё
+     * @param ftpContext FTPД╦┼Д╦▀Ф√┤Ц─┌
+     * @param remotePath Х©°Г╗▀Х╥╞Е╬└Ц─┌
      * @throws IOException
      */
     private void delete(String remotePath) throws IOException {

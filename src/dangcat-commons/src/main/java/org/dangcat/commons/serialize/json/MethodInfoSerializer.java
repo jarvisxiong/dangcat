@@ -35,9 +35,9 @@ public class MethodInfoSerializer implements JsonSerialize {
     public static void serialize(JsonWriter jsonWriter, MethodInfo methodInfo) throws IOException {
         JsonWriter methodWriter = jsonWriter.name(methodInfo.getName());
         methodWriter.beginObject();
-        // ËùÓ¦ÓÃµ½µÄÀàÐÍ
+        // æ‰€åº”ç”¨åˆ°çš„ç±»åž‹
         List<Class<?>> usedClassTypeCollection = new LinkedList<Class<?>>();
-        // ²ÎÊýÐÅÏ¢¡£
+        // å‚æ•°ä¿¡æ¯ã€‚
         ParamInfo[] paramInfos = methodInfo.getParamInfos();
         if (paramInfos != null && paramInfos.length > 0) {
             JsonWriter paramsWriter = jsonWriter.name(PARAMS);
@@ -46,13 +46,13 @@ public class MethodInfoSerializer implements JsonSerialize {
                 ParamInfoSerializer.serializeParamInfo(paramsWriter, paramInfo, usedClassTypeCollection, false);
             paramsWriter.endObject();
         }
-        // ·µ»ØÖµ¡£
+        // è¿”å›žå€¼ã€‚
         List<Class<?>> returnClassTypeCollection = new LinkedList<Class<?>>();
         ParamInfo returnInfo = methodInfo.getReturnInfo();
         if (returnInfo != null && !void.class.equals(returnInfo.getClassType()))
             ParamInfoSerializer.serializeParamInfo(jsonWriter, returnInfo, returnClassTypeCollection, true);
         usedClassTypeCollection.addAll(returnClassTypeCollection);
-        // ËùÓÃµ½µÄ¹«ÓÃÀàÐÍ¡£
+        // æ‰€ç”¨åˆ°çš„å…¬ç”¨ç±»åž‹ã€‚
         if (usedClassTypeCollection.size() > 0) {
             JsonWriter typesWriter = jsonWriter.name(TYPES);
             typesWriter.beginObject();

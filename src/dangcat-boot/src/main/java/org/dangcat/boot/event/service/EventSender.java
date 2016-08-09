@@ -3,30 +3,30 @@ package org.dangcat.boot.event.service;
 import org.dangcat.framework.event.Event;
 
 /**
- * ÏûÏ¢·¢ËÍ½Ó¿Ú¡£
+ * æ¶ˆæ¯å‘é€æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface EventSender {
     /**
-     * ÏûÏ¢Ô´Ãû³Æ¡£
+     * æ¶ˆæ¯æºåç§°ã€‚
      */
     String getName();
 
     /**
-     * ·¢ËÍÏûÏ¢¡£
+     * å‘é€æ¶ˆæ¯ã€‚
      *
-     * @param event ÏûÏ¢¶ÔÏó¡£
+     * @param event æ¶ˆæ¯å¯¹è±¡ã€‚
      */
     void send(Event event);
 
     /**
-     * Æô¶¯·¢ËÍ¡£
+     * å¯åŠ¨å‘é€ã€‚
      */
     void start();
 
     /**
-     * Í£Ö¹·¢ËÍ¡£
+     * åœæ­¢å‘é€ã€‚
      */
     void stop();
 }

@@ -8,7 +8,7 @@ import org.dangcat.persistence.xml.SqlsXmlResolver;
 import org.dom4j.DocumentException;
 
 /**
- * ²éÑ¯ÅäÖÃÎÄ¼ş¶ÁÈ¡Æ÷¡£
+ * æŸ¥è¯¢é…ç½®æ–‡ä»¶è¯»å–å™¨ã€‚
  *
  * @author dangcat
  */
@@ -19,11 +19,11 @@ public class SqlsReader {
     private Sqls sqls = null;
 
     /**
-     * ¹¹½¨¶ÁÈ¡Æ÷¡£
+     * æ„å»ºè¯»å–å™¨ã€‚
      *
-     * @param classType  ×ÊÔ´ËùÔÚÎ»ÖÃ¡£
-     * @param namePrefix ÎÄ¼şÃûÇ°×º¡£
-     * @param sqls       ²éÑ¯Óï¾ä¼¯ºÏ¡£
+     * @param classType  èµ„æºæ‰€åœ¨ä½ç½®ã€‚
+     * @param namePrefix æ–‡ä»¶åå‰ç¼€ã€‚
+     * @param sqls       æŸ¥è¯¢è¯­å¥é›†åˆã€‚
      */
     public SqlsReader(Class<?> classType, String namePrefix, Sqls sqls) {
         this.classType = classType;
@@ -32,10 +32,10 @@ public class SqlsReader {
     }
 
     /**
-     * ¼ÆËãÊı¾İ¿âÀàĞÍ¡£
+     * è®¡ç®—æ•°æ®åº“ç±»å‹ã€‚
      *
-     * @param name ×ÊÔ´ÃüÃû¡£
-     * @return Êı¾İ¿âÀàĞÍ¡£
+     * @param name èµ„æºå‘½åã€‚
+     * @return æ•°æ®åº“ç±»å‹ã€‚
      */
     private DatabaseType getDatabaseType(String name) {
         String resourceName = name.toLowerCase();
@@ -50,7 +50,7 @@ public class SqlsReader {
     }
 
     /**
-     * ÓÉ×ÊÔ´ÎÄ¼ş¶ÁÈ¡²éÑ¯ÅäÖÃ¡£
+     * ç”±èµ„æºæ–‡ä»¶è¯»å–æŸ¥è¯¢é…ç½®ã€‚
      */
     public void read() {
         ResourceLoader resourceLoader = new ResourceLoader(this.classType, this.namePrefix, ".xml");

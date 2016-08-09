@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * ExcelÎÄµµ²Ù×÷¡£
+ * Excelæ–‡æ¡£æ“ä½œã€‚
  *
  * @author dangcat
  */
@@ -100,7 +100,7 @@ public abstract class ExcelWriter {
     }
 
     private void protectSheets() {
-        // ÉèÖÃ¹¤×÷±í±£»¤Ä£Ê½¡£
+        // è®¾ç½®å·¥ä½œè¡¨ä¿æŠ¤æ¨¡å¼ã€‚
         if (!ValueUtils.isEmpty(this.getPassword())) {
             for (int i = 0; i < this.workbook.getNumberOfSheets(); i++) {
                 Sheet sheet = this.workbook.getSheetAt(i);
@@ -110,11 +110,11 @@ public abstract class ExcelWriter {
     }
 
     /**
-     * °ÑÊı¾İĞ´ÈëÖ¸¶¨ÎÄ¼ş¡£
+     * æŠŠæ•°æ®å†™å…¥æŒ‡å®šæ–‡ä»¶ã€‚
      *
-     * @param file       Ä¿±êÎÄ¼ş¡£
-     * @param dataReader Êı¾İÀ´Ô´¡£
-     * @throws IOException ÎÄ¼ş·ÃÎÊÒì³£¡£
+     * @param file       ç›®æ ‡æ–‡ä»¶ã€‚
+     * @param dataReader æ•°æ®æ¥æºã€‚
+     * @throws IOException æ–‡ä»¶è®¿é—®å¼‚å¸¸ã€‚
      */
     public void write(File file) throws IOException {
         this.setFileExt(file.getName());
@@ -124,11 +124,11 @@ public abstract class ExcelWriter {
     }
 
     /**
-     * °ÑÊı¾İĞ´ÈëÖ¸¶¨Êä³öÁ÷¡£
+     * æŠŠæ•°æ®å†™å…¥æŒ‡å®šè¾“å‡ºæµã€‚
      *
-     * @param outputStream Êä³öÁ÷¡£
-     * @param dataReader   Êı¾İÀ´Ô´¡£
-     * @throws IOException ÎÄ¼ş·ÃÎÊÒì³£¡£
+     * @param outputStream è¾“å‡ºæµã€‚
+     * @param dataReader   æ•°æ®æ¥æºã€‚
+     * @throws IOException æ–‡ä»¶è®¿é—®å¼‚å¸¸ã€‚
      */
     public void write(OutputStream outputStream) throws IOException {
         this.writeContent();

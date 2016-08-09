@@ -127,7 +127,7 @@ public class ServiceUtils {
             }
         }
 
-        // ¹ıÂË²»´æÔÚµÄÈ¨ÏŞ¡£
+        // è¿‡æ»¤ä¸å­˜åœ¨çš„æƒé™ã€‚
         Integer[] permissionIds = permissionMap.keySet().toArray(new Integer[0]);
         for (Integer permissionId : permissionIds) {
             Permission permission = permissionMap.get(permissionId);

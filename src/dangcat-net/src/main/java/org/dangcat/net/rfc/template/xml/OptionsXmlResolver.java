@@ -5,7 +5,7 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import java.util.Map;
 
 /**
- * Ñ¡ÏîÁĞ±í¶ÔÏó½âÎöÆ÷¡£
+ * é€‰é¡¹åˆ—è¡¨å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -13,7 +13,7 @@ public class OptionsXmlResolver extends XmlResolver {
     public static final String RESOLVER_NAME = "Options";
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public OptionsXmlResolver() {
         super(RESOLVER_NAME);
@@ -21,10 +21,10 @@ public class OptionsXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     protected void afterChildCreate(String elementName, Object child) {
         Option option = (Option) child;

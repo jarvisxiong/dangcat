@@ -61,12 +61,12 @@ public class TestDivTable extends TestEntityBase {
     }
 
     private void testDelete(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException {
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table.getRows().removeAll();
         table.save();
 
         DateTimeTableName dateTimeTableName = (DateTimeTableName) table.getTableName();
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             Table operatorLogTable = operatorLogUtils.getTable();
@@ -96,11 +96,11 @@ public class TestDivTable extends TestEntityBase {
     }
 
     private void testInsert(Table table, Map<String, Collection<Row>> operatorLogMap) throws EntityException {
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table.save();
 
         DateTimeTableName dateTimeTableName = (DateTimeTableName) table.getTableName();
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         for (Entry<String, Collection<Row>> entry : operatorLogMap.entrySet()) {
             dateTimeTableName.setDateTime(dateTimeTableName.parse(entry.getKey()));
             Table operatorLogTable = operatorLogUtils.getTable();

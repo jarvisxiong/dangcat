@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * EntityÊı¾İ»ù±¾Ğ£Ñé¡£
+ * Entityæ•°æ®åŸºæœ¬æ ¡éªŒã€‚
  *
  * @author dangcat
  */

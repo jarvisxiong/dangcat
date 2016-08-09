@@ -11,46 +11,46 @@ import org.dangcat.persistence.entity.EntityBase;
 public class MonitorData extends EntityBase implements MonitorInfo {
     private static final long serialVersionUID = 1L;
     /**
-     * Ê£ÓàµÄ´ÅÅÌ¿Õ¼ä¡£
+     * å‰©ä½™çš„ç£ç›˜ç©ºé—´ã€‚
      */
     @Column(index = 9, logic = "octets")
     private long freeDiskSpace;
     /**
-     * °Ù·ÖÊı¸ñÊ½»¯¡£
+     * ç™¾åˆ†æ•°æ ¼å¼åŒ–ã€‚
      */
     private PercentFormator percentFormator = new PercentFormator();
     /**
-     * ½ø³ÌµÄCPUÕ¼ÓÃÂÊ¡£
+     * è¿›ç¨‹çš„CPUå ç”¨ç‡ã€‚
      */
     @Column(index = 19, logic = "percent")
     private double processCpuRatio;
     /**
-     * ½ø³ÌÕ¼ÓÃµÄÄÚ´æ¡£
+     * è¿›ç¨‹å ç”¨çš„å†…å­˜ã€‚
      */
     @Column(index = 16, logic = "octets")
     private long processUsageMemory;
     /**
-     * CPUÀûÓÃÂÊ¡£
+     * CPUåˆ©ç”¨ç‡ã€‚
      */
     @Column(index = 18, logic = "percent")
     private double totalCpuRatio;
     /**
-     * ´ÅÅÌ¿Õ¼ä¡£
+     * ç£ç›˜ç©ºé—´ã€‚
      */
     @Column(index = 10, logic = "octets")
     private long totalDiskSpace;
     /**
-     * ×ÜÎïÀíÄÚ´æ¡£
+     * æ€»ç‰©ç†å†…å­˜ã€‚
      */
     @Column(index = 13, logic = "octets")
     private long totalPhysicalMemory;
     /**
-     * ÒÑ¾­Ê¹ÓÃµÄÎïÀíÄÚ´æ¡£
+     * å·²ç»ä½¿ç”¨çš„ç‰©ç†å†…å­˜ã€‚
      */
     @Column(index = 14, logic = "octets")
     private long totalUsageMemory;
     /**
-     * Á÷Á¿¸ñÊ½»¯¡£
+     * æµé‡æ ¼å¼åŒ–ã€‚
      */
     private ValueFormator valueFormator = new OctetsFormator();
 
@@ -66,7 +66,7 @@ public class MonitorData extends EntityBase implements MonitorInfo {
     }
 
     /**
-     * ´ÅÅÌÕ¼ÓÃÂÊ¡£
+     * ç£ç›˜å ç”¨ç‡ã€‚
      */
     @Column(index = 12, logic = "percent", isCalculate = true)
     public double getDiskUsageSpaceRatio() {
@@ -98,7 +98,7 @@ public class MonitorData extends EntityBase implements MonitorInfo {
     }
 
     /**
-     * ½ø³ÌµÄÄÚ´æÀûÓÃÂÊ¡£
+     * è¿›ç¨‹çš„å†…å­˜åˆ©ç”¨ç‡ã€‚
      */
     @Column(index = 17, logic = "percent", isCalculate = true)
     public double getProcessUsageMemoryRatio() {
@@ -138,7 +138,7 @@ public class MonitorData extends EntityBase implements MonitorInfo {
     }
 
     /**
-     * ×ÜµÄÄÚ´æÀûÓÃÂÊ¡£
+     * æ€»çš„å†…å­˜åˆ©ç”¨ç‡ã€‚
      */
     @Column(index = 15, logic = "percent", isCalculate = true)
     public double getTotalUsageMemoryRatio() {

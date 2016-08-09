@@ -9,177 +9,177 @@ import org.dangcat.persistence.orm.Session;
 import java.util.List;
 
 /**
- * ÊµÌå¹ÜÀíÆ÷¡£
+ * å®ä½“ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
 public interface EntityManager {
     /**
-     * ¿ªÊ¼ÊÂÎñ¡£
+     * å¼€å§‹äº‹åŠ¡ã€‚
      */
     Session beginTransaction();
 
     /**
-     * Ìá½»ÊÂÎñ¡£
+     * æäº¤äº‹åŠ¡ã€‚
      */
     void commit();
 
     /**
-     * É¾³ıÖ¸¶¨¹ıÂËÌõ¼şµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šè¿‡æ»¤æ¡ä»¶çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     <T> int delete(Class<T> entityClass, FilterExpress filterExpress) throws EntityException;
 
     /**
-     * É¾³ıÖ¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>              ÊµÌåÀàĞÍ¡£
-     * @param entityClass      ÊµÌåÀàĞÍ¡£
-     * @param primaryKeyValues Ö÷¼üÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>              å®ä½“ç±»å‹ã€‚
+     * @param entityClass      å®ä½“ç±»å‹ã€‚
+     * @param primaryKeyValues ä¸»é”®å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     <T> int delete(Class<T> entityClass, Object... primaryKeyValues) throws EntityException;
 
     /**
-     * É¾³ıÖ¸¶¨ÊôĞÔµÄµÄÊµÌå¡£
+     * åˆ é™¤æŒ‡å®šå±æ€§çš„çš„å®ä½“ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param fieldNames  ×Ö¶ÎÃûÁĞ±í¡£
-     * @param values      ÊôĞÔÖµ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param fieldNames  å­—æ®µååˆ—è¡¨ã€‚
+     * @param values      å±æ€§å€¼ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     <T> int delete(Class<T> entityClass, String[] fieldNames, Object... values) throws EntityException;
 
     /**
-     * É¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>                 ÊµÌåÀàĞÍ¡£
-     * @param deleteEntityContext É¾³ıÊµÌåÉÏÏÂÎÄ¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>                 å®ä½“ç±»å‹ã€‚
+     * @param deleteEntityContext åˆ é™¤å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     int delete(DeleteEntityContext deleteEntityContext) throws EntityException;
 
     /**
-     * É¾³ıÖ¸¶¨µÄÊµÌå¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šçš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>     ÊµÌåÀàĞÍ¡£
-     * @param entites É¾³ıÊµÌå¶ÔÏó¡£
-     * @return ÊÇ·ñÉ¾³ı¡£
+     * @param <T>     å®ä½“ç±»å‹ã€‚
+     * @param entites åˆ é™¤å®ä½“å¯¹è±¡ã€‚
+     * @return æ˜¯å¦åˆ é™¤ã€‚
      * @throws EntityException
      */
     int delete(Object... entites) throws EntityException;
 
     /**
-     * ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¶ÔÏó¡£
+     * è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> List<T> load(Class<T> entityClass) throws EntityException;
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress) throws EntityException;
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress, Range range) throws EntityException;
 
     /**
-     * °´ÕÕ¹ıÂËÌõ¼ş¡¢·¶Î§¡¢ÅÅĞòÌõ¼şÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¡£
+     * æŒ‰ç…§è¿‡æ»¤æ¡ä»¶ã€èŒƒå›´ã€æ’åºæ¡ä»¶è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“ã€‚
      *
-     * @param <T>           ÊµÌåÀàĞÍ¡£
-     * @param entityClass   ÊµÌåÀàĞÍ¡£
-     * @param filterExpress ¹ıÂËÌõ¼ş¡£
-     * @param range         ÔØÈë·¶Î§¡£
-     * @param orderBy       ÅÅĞòÌõ¼ş¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>           å®ä½“ç±»å‹ã€‚
+     * @param entityClass   å®ä½“ç±»å‹ã€‚
+     * @param filterExpress è¿‡æ»¤æ¡ä»¶ã€‚
+     * @param range         è½½å…¥èŒƒå›´ã€‚
+     * @param orderBy       æ’åºæ¡ä»¶ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> List<T> load(Class<T> entityClass, FilterExpress filterExpress, Range range, OrderBy orderBy) throws EntityException;
 
     /**
-     * ÕÒµ½Ö¸¶¨Ö÷¼üµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šä¸»é”®çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param primaryKeys Ö÷¼ü²ÎÊı¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param primaryKeys ä¸»é”®å‚æ•°ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> T load(Class<T> entityClass, Object... primaryKeyValues) throws EntityException;
 
     /**
-     * ÕÒµ½Ö¸¶¨ÊôĞÔµÄÊµÌå¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šå±æ€§çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>         ÊµÌåÀàĞÍ¡£
-     * @param entityClass ÊµÌåÀàĞÍ¡£
-     * @param fieldNames  ×Ö¶ÎÃûÁĞ±í¡£
-     * @param values      ÊôĞÔÖµ¡£
-     * @return ÕÒµ½µÄÊµÌå¶ÔÏó¡£
+     * @param <T>         å®ä½“ç±»å‹ã€‚
+     * @param entityClass å®ä½“ç±»å‹ã€‚
+     * @param fieldNames  å­—æ®µååˆ—è¡¨ã€‚
+     * @param values      å±æ€§å€¼ã€‚
+     * @return æ‰¾åˆ°çš„å®ä½“å¯¹è±¡ã€‚
      */
     <T> List<T> load(Class<T> entityClass, String[] fieldNames, Object... values) throws EntityException;
 
     /**
-     * ÔØÈëÖ¸¶¨ÀàĞÍµÄÊµÌå¶ÔÏó¡£
+     * è½½å…¥æŒ‡å®šç±»å‹çš„å®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>               ÊµÌåÀàĞÍ¡£
-     * @param loadEntityContext ÔØÈëÊµÌåÉÏÏÂÎÄ¡£
-     * @return ²éÑ¯½á¹û¡£
+     * @param <T>               å®ä½“ç±»å‹ã€‚
+     * @param loadEntityContext è½½å…¥å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @return æŸ¥è¯¢ç»“æœã€‚
      */
     <T> List<T> load(LoadEntityContext loadEntityContext) throws EntityException;
 
     /**
-     * ÓÉÊı¾İ¿âË¢ĞÂÊµÌåÊµÀıÄÚÈİ¡£
+     * ç”±æ•°æ®åº“åˆ·æ–°å®ä½“å®ä¾‹å†…å®¹ã€‚
      *
      * @param <T>
-     * @param entity ÊµÌå¶ÔÏó¡£
-     * @throws EntityException ²Ù×÷Òì³£¡£
+     * @param entity å®ä½“å¯¹è±¡ã€‚
+     * @throws EntityException æ“ä½œå¼‚å¸¸ã€‚
      */
     <T> T refresh(T entity) throws EntityException;
 
     /**
-     * »Ø¹öÊÂÎñ¡£
+     * å›æ»šäº‹åŠ¡ã€‚
      */
     void rollback();
 
     /**
-     * ±£´æÖ¸¶¨ÊµÌå¶ÔÏó¡£
+     * ä¿å­˜æŒ‡å®šå®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>      ÊµÌåÀàĞÍ¡£
-     * @param entities ±£´æÊµÌå¶ÔÏó¡£
-     * @return ±£´æ½á¹û¡£
+     * @param <T>      å®ä½“ç±»å‹ã€‚
+     * @param entities ä¿å­˜å®ä½“å¯¹è±¡ã€‚
+     * @return ä¿å­˜ç»“æœã€‚
      */
     void save(Object... entities) throws EntityException;
 
     /**
-     * ±£´æÖ¸¶¨ÊµÌå¶ÔÏó¡£
+     * ä¿å­˜æŒ‡å®šå®ä½“å¯¹è±¡ã€‚
      *
-     * @param <T>               ÊµÌåÀàĞÍ¡£
-     * @param saveEntityContext ±£´æÊµÌåÉÏÏÂÎÄ¡£
-     * @param entities          ±£´æÊµÌå¶ÔÏó¡£
-     * @return ±£´æ½á¹û¡£
+     * @param <T>               å®ä½“ç±»å‹ã€‚
+     * @param saveEntityContext ä¿å­˜å®ä½“ä¸Šä¸‹æ–‡ã€‚
+     * @param entities          ä¿å­˜å®ä½“å¯¹è±¡ã€‚
+     * @return ä¿å­˜ç»“æœã€‚
      */
     void save(SaveEntityContext saveEntityContext, Object... entities) throws EntityException;
 }

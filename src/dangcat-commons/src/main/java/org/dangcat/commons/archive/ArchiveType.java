@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ¹éµµÑ¹ËõÀàĞÍ¡£
+ * å½’æ¡£å‹ç¼©ç±»å‹ã€‚
  *
  * @author dangcat
  */
@@ -37,7 +37,7 @@ public class ArchiveType {
     }
 
     /**
-     * ËùÓĞµÄ¹éµµÀàĞÍ¡£
+     * æ‰€æœ‰çš„å½’æ¡£ç±»å‹ã€‚
      */
     public static String[] getAllArchiveTypes() {
         List<String> fileExtNameList = new ArrayList<String>();
@@ -47,10 +47,10 @@ public class ArchiveType {
     }
 
     /**
-     * ¸ù¾İÎÄ¼şÃû¶ÁÈ¡¹éµµÀàĞÍ¡£
+     * æ ¹æ®æ–‡ä»¶åè¯»å–å½’æ¡£ç±»å‹ã€‚
      *
-     * @param fileName ÎÄ¼şÃû¡£
-     * @return ¹éµµĞÅÏ¢¡£
+     * @param fileName æ–‡ä»¶åã€‚
+     * @return å½’æ¡£ä¿¡æ¯ã€‚
      */
     protected static ArchiveInfo getArchiveInfo(String fileName) {
         fileName = fileName.toLowerCase();

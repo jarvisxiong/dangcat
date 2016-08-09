@@ -13,25 +13,25 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ×ª»»¸¨Öú¹¤¾ß¡£
+ * è½¬æ¢è¾…åŠ©å·¥å…·ã€‚
  */
 public class ReflectUtils {
     protected static final Logger logger = Logger.getLogger(ReflectUtils.class);
 
     /**
-     * Ôö¼ÓÀà¼ÓÔØÆ÷¡£
+     * å¢åŠ ç±»åŠ è½½å™¨ã€‚
      *
-     * @param classLoader Àà¼ÓÔØÆ÷¡£
+     * @param classLoader ç±»åŠ è½½å™¨ã€‚
      */
     public static void addClassLoader(ClassLoader classLoader) {
         InstanceBuilder.addClassLoader(classLoader);
     }
 
     /**
-     * ¶ÔÁ½¸ö¶ÔÏó¿½±´ÊôĞÔ¡£
+     * å¯¹ä¸¤ä¸ªå¯¹è±¡æ‹·è´å±æ€§ã€‚
      *
-     * @param srcObject À´Ô´¶ÔÏó¡£
-     * @param dstObject Ä¿±ê¶ÔÏó¡£
+     * @param srcObject æ¥æºå¯¹è±¡ã€‚
+     * @param dstObject ç›®æ ‡å¯¹è±¡ã€‚
      */
     public static void copyProperties(Object srcObject, Object dstObject) {
         if (srcObject == null || dstObject == null)
@@ -61,41 +61,41 @@ public class ReflectUtils {
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄ×¢ÊÍ¶ÔÏó¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ³¨é‡Šå¯¹è±¡ã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static <T extends Annotation> T findAnnotation(Class<?> classType, Class<T> annotationType) {
         return BeanUtils.findAnnotation(classType, annotationType);
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄËùÓĞ×¢ÊÍ¶ÔÏó¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ‰€æœ‰æ³¨é‡Šå¯¹è±¡ã€‚
      *
-     * @param annotationList ×¢ÊÍÁĞ±í¡£
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param annotationList æ³¨é‡Šåˆ—è¡¨ã€‚
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static void findAnnotations(Class<?> classType, Class<? extends Annotation> annotationType, List<Annotation> annotationList) {
         BeanUtils.findAnnotations(classType, annotationType, annotationList);
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄ×Ö¶Î¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„å­—æ®µã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static Field findField(Class<?> classType, Class<? extends Annotation> annotationType) {
         return BeanUtils.findField(classType, annotationType);
     }
 
     /**
-     * ´ÓÒ»¸öÀàÖĞÕÒµ½°üº¬Ö¸¶¨×¢ÊÍµÄËùÓĞ×Ö¶Î¡£
+     * ä»ä¸€ä¸ªç±»ä¸­æ‰¾åˆ°åŒ…å«æŒ‡å®šæ³¨é‡Šçš„æ‰€æœ‰å­—æ®µã€‚
      *
-     * @param classType      Ö¸¶¨ÀàĞÍ¡£
-     * @param annotationType ×¢ÊÍÀàĞÍ¡£
+     * @param classType      æŒ‡å®šç±»å‹ã€‚
+     * @param annotationType æ³¨é‡Šç±»å‹ã€‚
      */
     public static List<Field> findFields(Class<?> classType, Class<? extends Annotation> annotationType) {
         List<Field> fieldList = new LinkedList<Field>();
@@ -104,10 +104,10 @@ public class ReflectUtils {
     }
 
     /**
-     * Í¨¹ı·´Éä¶ÁÈ¡¶ÔÏó×Ö¶ÎµÄÖµ¡£
+     * é€šè¿‡åå°„è¯»å–å¯¹è±¡å­—æ®µçš„å€¼ã€‚
      *
-     * @param instance  ¶ÔÏóÊµÀı¡£
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
+     * @param instance  å¯¹è±¡å®ä¾‹ã€‚
+     * @param fieldName å­—æ®µåç§°ã€‚
      */
     public static Object getFieldValue(Object instance, String fieldName) {
         return BeanUtils.getFieldValue(instance, fieldName);
@@ -118,10 +118,10 @@ public class ReflectUtils {
     }
 
     /**
-     * ¶ÁÈ¡¶ÔÏóÊôĞÔ¡£
+     * è¯»å–å¯¹è±¡å±æ€§ã€‚
      *
-     * @param instance     ¶ÔÏóÊµÀı¡£
-     * @param propertyName ÊôĞÔÃû¡£
+     * @param instance     å¯¹è±¡å®ä¾‹ã€‚
+     * @param propertyName å±æ€§åã€‚
      */
     public static Object getProperty(Object instance, String propertyName) {
         return BeanUtils.getProperty(instance, propertyName);
@@ -142,59 +142,59 @@ public class ReflectUtils {
     }
 
     /**
-     * ÊÇ·ñÊÇ³£¹æÀàĞÍ¡£
+     * æ˜¯å¦æ˜¯å¸¸è§„ç±»å‹ã€‚
      */
     public static boolean isConstClassType(Class<?> classType) {
         return InstanceBuilder.getConstClassList().contains(classType);
     }
 
     /**
-     * ÔØÈëÀàĞÍ¶ÔÏó¡£
+     * è½½å…¥ç±»å‹å¯¹è±¡ã€‚
      */
     public static Class<?> loadClass(String className) {
         return InstanceBuilder.loadClass(className.trim());
     }
 
     /**
-     * ¸ù¾İÃû³Æ²úÉúÊµÀı¡£
+     * æ ¹æ®åç§°äº§ç”Ÿå®ä¾‹ã€‚
      */
     public static Object newInstance(Class<?> classType) {
         return InstanceBuilder.newInstance(classType);
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨ÀàÃû¡¢²ÎÊıÀàĞÍºÍ²ÎÊı¹¹½¨¶ÔÏóÊµÀı¡£
+     * æ ¹æ®æŒ‡å®šç±»åã€å‚æ•°ç±»å‹å’Œå‚æ•°æ„å»ºå¯¹è±¡å®ä¾‹ã€‚
      *
-     * @param classType      ÀàĞÍÃû³Æ¡£
-     * @param parameterTypes ²ÎÊıÀàĞÍ¡£
-     * @param parameters     ¹¹½¨²ÎÊı¡£
-     * @return ¹¹½¨µÄ¶ÔÏóÊµÀı¡£
+     * @param classType      ç±»å‹åç§°ã€‚
+     * @param parameterTypes å‚æ•°ç±»å‹ã€‚
+     * @param parameters     æ„å»ºå‚æ•°ã€‚
+     * @return æ„å»ºçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     public static Object newInstance(Class<?> classType, Class<?>[] parameterTypes, Object[] parameters) {
         return InstanceBuilder.newInstance(classType, parameterTypes, parameters);
     }
 
     /**
-     * ¸ù¾İÃû³Æ²úÉúÊµÀı¡£
+     * æ ¹æ®åç§°äº§ç”Ÿå®ä¾‹ã€‚
      */
     public static Object newInstance(String className) {
         return InstanceBuilder.newInstance(className);
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨ÀàÃû¡¢²ÎÊıÀàĞÍºÍ²ÎÊı¹¹½¨¶ÔÏóÊµÀı¡£
+     * æ ¹æ®æŒ‡å®šç±»åã€å‚æ•°ç±»å‹å’Œå‚æ•°æ„å»ºå¯¹è±¡å®ä¾‹ã€‚
      *
-     * @param className      ÀàĞÍÃû³Æ¡£
-     * @param parameterTypes ²ÎÊıÀàĞÍ¡£
-     * @param parameters     ¹¹½¨²ÎÊı¡£
-     * @return ¹¹½¨µÄ¶ÔÏóÊµÀı¡£
+     * @param className      ç±»å‹åç§°ã€‚
+     * @param parameterTypes å‚æ•°ç±»å‹ã€‚
+     * @param parameters     æ„å»ºå‚æ•°ã€‚
+     * @return æ„å»ºçš„å¯¹è±¡å®ä¾‹ã€‚
      */
     public static Object newInstance(String className, Class<?>[] parameterTypes, Object[] parameters) {
         return InstanceBuilder.newInstance(className, parameterTypes, parameters);
     }
 
     /**
-     * ÎÄ×ÖÖµ×ª»»³ÉÊµ¼ÊÖµ¶ÔÏó¡£
+     * æ–‡å­—å€¼è½¬æ¢æˆå®é™…å€¼å¯¹è±¡ã€‚
      */
     public static Object parseValue(Class<?> classType, String value) {
         Object result = null;
@@ -214,21 +214,21 @@ public class ReflectUtils {
     }
 
     /**
-     * Í¨¹ı·´Éä¶ÁÈ¡¶ÔÏó×Ö¶ÎµÄÖµ¡£
+     * é€šè¿‡åå°„è¯»å–å¯¹è±¡å­—æ®µçš„å€¼ã€‚
      *
-     * @param instance  ¶ÔÏóÊµÀı¡£
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
+     * @param instance  å¯¹è±¡å®ä¾‹ã€‚
+     * @param fieldName å­—æ®µåç§°ã€‚
      */
     public static void setFieldValue(Object instance, String fieldName, Object value) {
         BeanUtils.setFieldValue(instance, fieldName, value);
     }
 
     /**
-     * ÉèÖÃ¶ÔÏóÊôĞÔ¡£
+     * è®¾ç½®å¯¹è±¡å±æ€§ã€‚
      *
-     * @param instance     ¶ÔÏóÊµÀı¡£
-     * @param propertyName ÊôĞÔÃû¡£
-     * @param value        ÊôĞÔÖµ¡£
+     * @param instance     å¯¹è±¡å®ä¾‹ã€‚
+     * @param propertyName å±æ€§åã€‚
+     * @param value        å±æ€§å€¼ã€‚
      */
     public static void setProperty(Object instance, String propertyName, Object value) {
         BeanUtils.setProperty(instance, propertyName, value);

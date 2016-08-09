@@ -17,7 +17,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 
 /**
- * Ïß³Ì³Ø·şÎñ¡£
+ * çº¿ç¨‹æ± æœåŠ¡ã€‚
  *
  * @author dangcat
  */
@@ -25,22 +25,22 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     private static final String SERVICE_NAME = "ThreadPoolWork";
     private static ThreadPoolFactory instance = null;
     /**
-     * ¾Ü¾øÊÂ¼şÁĞ±í¡£
+     * æ‹’ç»äº‹ä»¶åˆ—è¡¨ã€‚
      */
     private List<RejectedExecutionHandler> rejectedExecutionHandlerList = new ArrayList<RejectedExecutionHandler>();
     /**
-     * Ïß³Ì³Ø
+     * çº¿ç¨‹æ± 
      */
     private ThreadPoolExecutor threadPoolExecutor = null;
     /**
-     * ´¦ÓÚ×èÈûµÄÈÎÎñ¶ÓÁĞ¡£
+     * å¤„äºé˜»å¡çš„ä»»åŠ¡é˜Ÿåˆ—ã€‚
      */
     private BlockingQueue<Runnable> workQueue = null;
 
     /**
-     * ¹¹½¨·şÎñ
+     * æ„å»ºæœåŠ¡
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      */
     private ThreadPoolFactory(ServiceProvider parent) {
         super(parent);
@@ -55,9 +55,9 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * ½¨Á¢·şÎñÊµÀı¡£
+     * å»ºç«‹æœåŠ¡å®ä¾‹ã€‚
      *
-     * @param parent ËùÊô¸¸·şÎñ¡£
+     * @param parent æ‰€å±çˆ¶æœåŠ¡ã€‚
      * @return
      */
     public static synchronized ThreadPoolService createInstance(ServiceProvider parent) {
@@ -69,7 +69,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * ¶ÁÈ¡·şÎñÊµÀı¡£
+     * è¯»å–æœåŠ¡å®ä¾‹ã€‚
      *
      * @return
      */
@@ -78,9 +78,9 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * Ìí¼Ó¾Ü¾ø´¦ÀíÕìÌıÆ÷¡£
+     * æ·»åŠ æ‹’ç»å¤„ç†ä¾¦å¬å™¨ã€‚
      *
-     * @param rejectedExecutionHandler ´¦ÀíÆ÷¡£
+     * @param rejectedExecutionHandler å¤„ç†å™¨ã€‚
      */
     public void addRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
         if (rejectedExecutionHandler != null && !this.rejectedExecutionHandlerList.contains(rejectedExecutionHandler))
@@ -88,7 +88,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * Ö´ĞĞ¶àÏß³ÌÈÎÎñ¡£
+     * æ‰§è¡Œå¤šçº¿ç¨‹ä»»åŠ¡ã€‚
      */
     @Override
     public void execute(Runnable runnable) {
@@ -102,7 +102,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * µ±Ç°ÕıÔÚÖ´ĞĞµÄÈÎÎñÊı¡£
+     * å½“å‰æ­£åœ¨æ‰§è¡Œçš„ä»»åŠ¡æ•°ã€‚
      */
     @Override
     public int getActiveCount() {
@@ -113,7 +113,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * µ±Ç°´¦ÓÚ×èÈûµÄÈÎÎñÊı¡£
+     * å½“å‰å¤„äºé˜»å¡çš„ä»»åŠ¡æ•°ã€‚
      */
     @Override
     public int getBlockCount() {
@@ -124,7 +124,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * Ìí¼ÓÏß³ÌÖ´ĞĞ¶ÔÏó¡£
+     * æ·»åŠ çº¿ç¨‹æ‰§è¡Œå¯¹è±¡ã€‚
      */
     @Override
     public boolean isShutdown() {
@@ -135,10 +135,10 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * ´¥·¢¾Ü¾ø´¦ÀíÕìÌıÆ÷¡£
+     * è§¦å‘æ‹’ç»å¤„ç†ä¾¦å¬å™¨ã€‚
      *
-     * @param runnable ´¦ÀíÆ÷¡£
-     * @param executor Ïß³Ì³Ø¶ÔÏó¡£
+     * @param runnable å¤„ç†å™¨ã€‚
+     * @param executor çº¿ç¨‹æ± å¯¹è±¡ã€‚
      */
     @Override
     public void rejectedExecution(Runnable runnable, java.util.concurrent.ThreadPoolExecutor threadPoolExecutor) {
@@ -147,9 +147,9 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * É¾³ı¾Ü¾ø´¦ÀíÕìÌıÆ÷¡£
+     * åˆ é™¤æ‹’ç»å¤„ç†ä¾¦å¬å™¨ã€‚
      *
-     * @param rejectedExecutionHandler ´¦ÀíÆ÷¡£
+     * @param rejectedExecutionHandler å¤„ç†å™¨ã€‚
      */
     @Override
     public void removeRejectedExecutionHandler(RejectedExecutionHandler rejectedExecutionHandler) {
@@ -158,7 +158,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * Æô¶¯·şÎñ¡£
+     * å¯åŠ¨æœåŠ¡ã€‚
      */
     @Override
     public synchronized void start() {
@@ -175,7 +175,7 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * Í£Ö¹·şÎñ¡£
+     * åœæ­¢æœåŠ¡ã€‚
      */
     @Override
     public void stop() {
@@ -191,9 +191,9 @@ public class ThreadPoolFactory extends ServiceControlBase implements ThreadPoolS
     }
 
     /**
-     * ÏòÏµÍ³Ìá½»È«¾ÖÊÂ¼ş¡£
+     * å‘ç³»ç»Ÿæäº¤å…¨å±€äº‹ä»¶ã€‚
      *
-     * @param event ÊÂ¼ş¶ÔÏó¡£
+     * @param event äº‹ä»¶å¯¹è±¡ã€‚
      */
     public void submitEvent(final Event event) {
         this.execute(new Runnable() {

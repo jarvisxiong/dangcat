@@ -113,11 +113,11 @@ public class ServiceCaller {
         Class<?> classType = paramInfo.getClassType();
         Object value = this.parseUploadContentValue(classType);
 
-        // ×ÊÔ´±êÊ¶Ó³Éä¡£
+        // èµ„æºæ ‡è¯†æ˜ å°„ã€‚
         if (value == null && Integer.class.isAssignableFrom(classType) && (this.getResourceId() != null || (this.getParamsData() == null && this.getContentData() == null)))
             value = this.getResourceId();
 
-        // Ê¹ÓÃ²éÑ¯×Ö´®Ó³Éä¼òµ¥¶ÔÏó²ÎÊı¡£
+        // ä½¿ç”¨æŸ¥è¯¢å­—ä¸²æ˜ å°„ç®€å•å¯¹è±¡å‚æ•°ã€‚
         if (value == null && !ReflectUtils.isConstClassType(classType)) {
             Object instance = ReflectUtils.newInstance(classType);
             Reader reader = this.getReader();
@@ -139,7 +139,7 @@ public class ServiceCaller {
                 return new Object[]{value};
         }
 
-        // ²ÎÊıÓ³Éä±í²úÉú²ÎÊıÊµÀı¡£
+        // å‚æ•°æ˜ å°„è¡¨äº§ç”Ÿå‚æ•°å®ä¾‹ã€‚
         Map<String, Class<?>[]> paramClassTypeMap = methodInfo.getParamClassTypeMap();
         Map<String, Object> paramValuesMap = JsonDeserializer.deserialize(this.getReader(), paramClassTypeMap);
         if (this.resourceId != null)

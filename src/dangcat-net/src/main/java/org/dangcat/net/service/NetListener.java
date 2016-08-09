@@ -62,7 +62,7 @@ public abstract class NetListener extends Thread {
     }
 
     /**
-     * Æô¶¯ÕìÌıÏß³Ì¡£
+     * å¯åŠ¨ä¾¦å¬çº¿ç¨‹ã€‚
      */
     @Override
     public void run() {
@@ -93,7 +93,7 @@ public abstract class NetListener extends Thread {
     }
 
     /**
-     * Í£Ö¹ÕìÌıÏß³Ì¡£
+     * åœæ­¢ä¾¦å¬çº¿ç¨‹ã€‚
      */
     public void stopListener() {
         if (!this.isRunning())

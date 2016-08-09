@@ -17,7 +17,7 @@ import org.dangcat.persistence.tablename.TableName;
 import java.util.Map;
 
 /**
- * ÊµÌåSQLÓï¾ä¹¹½¨Æ÷¡£
+ * å®ä½“SQLè¯­å¥æ„å»ºå™¨ã€‚
  *
  * @author dangcat
  */
@@ -94,11 +94,11 @@ public class EntitySqlBuilder extends SqlBuilderBase {
             for (JoinTable joinTable : this.entityMetaData.getJoinTableCollection())
                 sqlFom.append(joinTable);
             sqlBuilder.append(sqlFom.toString());
-            // ¹ıÂËÌõ¼ş¡£
+            // è¿‡æ»¤æ¡ä»¶ã€‚
             sqlBuilder.append(SEPERATE_LINE);
             sqlBuilder.append("WHERE 1=1 ");
             sqlBuilder.append(SqlBuilder.FILTER_FLAG);
-            // ¼ÓÈëÅÅĞòÌõ¼ş¡£
+            // åŠ å…¥æ’åºæ¡ä»¶ã€‚
             OrderBy orderBy = this.getOrderBy();
             if (orderBy != null && orderBy.size() > 0) {
                 sqlBuilder.append(SEPERATE_LINE);
@@ -113,13 +113,13 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * ¹¹½¨²éÑ¯Êı¾İ±í¼ÇÂ¼ÊıµÄ±í´ïÊ½¡£
+     * æ„å»ºæŸ¥è¯¢æ•°æ®è¡¨è®°å½•æ•°çš„è¡¨è¾¾å¼ã€‚
      *
-     * @return ¼ÆËãµÄ±í´ïÓï¾ä¡£
+     * @return è®¡ç®—çš„è¡¨è¾¾è¯­å¥ã€‚
      */
     @Override
     public SqlBuilder buildTotalSizeStatement() {
-        // ²éÑ¯·¶Î§
+        // æŸ¥è¯¢èŒƒå›´
         SqlBuilder sqlBuilder = this.getSql(Sql.TOTALSIZE);
         if (sqlBuilder == null) {
             sqlBuilder = this.getSql(Sql.QUERY);
@@ -141,7 +141,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
                 sqlBuilder.append(SEPERATE_LINE);
                 sqlBuilder.append("FROM ");
                 sqlBuilder.append(sqlFom.toString());
-                // ¹ıÂËÌõ¼ş¡£
+                // è¿‡æ»¤æ¡ä»¶ã€‚
                 sqlBuilder.append(SEPERATE_LINE);
                 sqlBuilder.append("WHERE 1=1 ");
                 sqlBuilder.append(SqlBuilder.FILTER_FLAG);
@@ -152,9 +152,9 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * ×ª»»×Ö¶ÎÃû¡£
+     * è½¬æ¢å­—æ®µåã€‚
      *
-     * @param fieldName Ô­Ê¼×Ö¶ÎÃû¡£
+     * @param fieldName åŸå§‹å­—æ®µåã€‚
      * @return
      */
     private String getFieldName(String fieldName) {
@@ -165,7 +165,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * µ±Ç°µÄ¹ıÂËÌõ¼ş¡£
+     * å½“å‰çš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
      * @return
      */
@@ -182,7 +182,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
 
     @Override
     protected String getFilterSql() {
-        // ¹ıÂËÌõ¼ş¡£
+        // è¿‡æ»¤æ¡ä»¶ã€‚
         StringBuilder sqlFilter = new StringBuilder();
         FilterExpress filterExpress = this.getFilterExpress();
         if (filterExpress != null && !ValueUtils.isEmpty(filterExpress.toString())) {
@@ -193,7 +193,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * µ±Ç°µÄÅÅĞòÌõ¼ş¡£
+     * å½“å‰çš„æ’åºæ¡ä»¶ã€‚
      *
      * @return
      */
@@ -222,7 +222,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ±í¶¨Òå¡£
+     * æ•°æ®è¡¨å®šä¹‰ã€‚
      */
     @Override
     public Table getTable() {
@@ -230,7 +230,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * Êı¾İ±íÃû¡£
+     * æ•°æ®è¡¨åã€‚
      */
     @Override
     protected TableName getTableName() {
@@ -243,7 +243,7 @@ public class EntitySqlBuilder extends SqlBuilderBase {
     }
 
     /**
-     * µ±Ç°µÄ¹ıÂËÌõ¼ş¡£
+     * å½“å‰çš„è¿‡æ»¤æ¡ä»¶ã€‚
      *
      * @return
      */

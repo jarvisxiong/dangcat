@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * ×ÊÔ´°ïÖú¡£
+ * èµ„æºå¸®åŠ©ã€‚
  *
  * @author dangcat
  */
@@ -48,7 +48,7 @@ public class ResourceHelper {
     }
 
     /**
-     * ¶ÁÈ¡×ÊÔ´¶ÔÏó¡£
+     * è¯»å–èµ„æºå¯¹è±¡ã€‚
      */
     public Object getObject(String key) {
         Object value = null;
@@ -77,7 +77,7 @@ public class ResourceHelper {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü¶ÁÈ¡×ÊÔ´ÎÄ×Ö¡£
+     * æ ¹æ®ä¸»é”®è¯»å–èµ„æºæ–‡å­—ã€‚
      */
     public String getText(String key) {
         String value = null;
@@ -94,7 +94,7 @@ public class ResourceHelper {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü¶ÁÈ¡×ÊÔ´ÁĞ±í¡£
+     * æ ¹æ®ä¸»é”®è¯»å–èµ„æºåˆ—è¡¨ã€‚
      */
     public Map<Integer, String> getValueMap(String key) {
         return ResourceUtils.createValueMap(this.getText(key + VALUE_MAP));

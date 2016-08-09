@@ -47,11 +47,11 @@ public class TestEntityData extends TestEntityBase {
 
     private void testEntityDelete() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<EntityData> entityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
 
-        // É¾³ıµÚËÄĞĞÊı¾İ¡£
+        // åˆ é™¤ç¬¬å››è¡Œæ•°æ®ã€‚
         EntityData entityData = entityDataList.get(4);
         entityDataList.remove(entityData);
         entityManager.delete(entityData);
@@ -59,17 +59,17 @@ public class TestEntityData extends TestEntityBase {
         Assert.assertEquals(2, entityData.getBeforeDeleteCount());
         Assert.assertEquals(2, entityData.getAfterDeleteCount());
 
-        // É¾³ıµÚÎåĞĞÊı¾İ¡£
+        // åˆ é™¤ç¬¬äº”è¡Œæ•°æ®ã€‚
         entityData = entityDataList.get(4);
         entityDataList.remove(entityData);
         entityManager.delete(entityData);
         Assert.assertEquals(TEST_COUNT - 2, entityDataList.size());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         entityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(TEST_COUNT - 2, entityDataList.size());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         entityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(TEST_COUNT - 2, entityDataList.size());
         OrderBy orderBy = new OrderBy(new OrderByUnit("FieldC", OrderByType.Desc), new OrderByUnit("FieldD"));
@@ -82,14 +82,14 @@ public class TestEntityData extends TestEntityBase {
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.save(entityDataList.toArray());
         EntityData entityData = entityDataList.get(0);
         Assert.assertEquals(2, entityData.getBeforeInsertCount());
         Assert.assertEquals(2, entityData.getAfterInsertCount());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<EntityData> saveEntityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(entityDataList.size(), saveEntityDataList.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(entityDataList, saveEntityDataList));
@@ -99,33 +99,33 @@ public class TestEntityData extends TestEntityBase {
 
     private void testEntityModify() throws EntityException {
         EntityManager entityManager = this.getEntityManager();
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<EntityData> entityDataList = entityManager.load(EntityData.class);
         EntityDataUtils.modifyEntityDataList(entityDataList);
         Assert.assertEquals(TEST_COUNT, entityDataList.size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         entityManager.save(entityDataList.toArray());
         EntityData entityData = entityDataList.get(0);
         Assert.assertEquals(2, entityData.getBeforeSaveCount());
         Assert.assertEquals(2, entityData.getAfterSaveCount());
         Assert.assertEquals(2, entityData.getAfterCommitCount());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<EntityData> saveEntityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(entityDataList.size(), saveEntityDataList.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(entityDataList, saveEntityDataList));
 
-        // ²âÊÔÈ«²¿É¾³ı¹¦ÄÜ¡£
+        // æµ‹è¯•å…¨éƒ¨åˆ é™¤åŠŸèƒ½ã€‚
         entityManager.delete(saveEntityDataList.toArray());
         entityDataList = entityManager.load(EntityData.class);
         Assert.assertNull(entityDataList);
 
-        // ²âÊÔĞŞ¸Ä±íÎª²åÈë×´Ì¬£¬ÖØĞÂ²åÈëµÄ¹¦ÄÜ¡£
+        // æµ‹è¯•ä¿®æ”¹è¡¨ä¸ºæ’å…¥çŠ¶æ€ï¼Œé‡æ–°æ’å…¥çš„åŠŸèƒ½ã€‚
         EntityUtils.resetAutoIncrement(saveEntityDataList);
         entityManager.save(saveEntityDataList.toArray());
 
-        // ÅĞ¶ÏÖØĞÂ²åÈë³É¹¦·ñ¡£
+        // åˆ¤æ–­é‡æ–°æ’å…¥æˆåŠŸå¦ã€‚
         entityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(saveEntityDataList.size(), entityDataList.size());
         Assert.assertTrue(SimulateUtils.compareDataCollection(saveEntityDataList, entityDataList));
@@ -133,7 +133,7 @@ public class TestEntityData extends TestEntityBase {
 
     private void testEntityRange() throws EntityException {
         OrderBy orderBy = OrderBy.parse("id");
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         Range range = new Range(1);
         range.setCalculateTotalSize(true);
@@ -168,23 +168,23 @@ public class TestEntityData extends TestEntityBase {
         int index = TEST_COUNT + 1;
         EntityData srcEntityData = EntityDataUtils.createEntityData(index);
 
-        // ²âÊÔ±£´æÊı¾İ¡£
+        // æµ‹è¯•ä¿å­˜æ•°æ®ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.save(srcEntityData);
         EntityData dstEntityData = entityManager.load(EntityData.class, srcEntityData.getId());
         Assert.assertNotNull(dstEntityData);
 
-        // ĞŞ¸ÄÊı¾İ¡£
+        // ä¿®æ”¹æ•°æ®ã€‚
         EntityDataUtils.modifyEntityData(dstEntityData, index);
         entityManager.save(dstEntityData);
         EntityData modifyEntityData = entityManager.load(EntityData.class, srcEntityData.getId());
 
-        // Ë¢ĞÂÊı¾İ¡£
+        // åˆ·æ–°æ•°æ®ã€‚
         entityManager.refresh(srcEntityData);
 
         Assert.assertTrue(SimulateUtils.compareData(modifyEntityData, srcEntityData));
 
-        // ²âÊÔÉ¾³ıÊı¾İ
+        // æµ‹è¯•åˆ é™¤æ•°æ®
         entityManager.delete(modifyEntityData);
         Assert.assertNull(entityManager.refresh(srcEntityData));
     }
@@ -195,7 +195,7 @@ public class TestEntityData extends TestEntityBase {
         if (table.exists())
             table.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
     }
 

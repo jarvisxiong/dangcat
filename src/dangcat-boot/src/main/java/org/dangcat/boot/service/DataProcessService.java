@@ -3,17 +3,17 @@ package org.dangcat.boot.service;
 import org.dangcat.framework.exception.ServiceException;
 
 /**
- * Êı¾İ´¦ÀíÁ÷³Ì·şÎñ½Ó¿Ú¡£
+ * æ•°æ®å¤„ç†æµç¨‹æœåŠ¡æ¥å£ã€‚
  *
  * @param <T>
  * @author dangcat
  */
 public interface DataProcessService<T> {
     /**
-     * ´¦ÀíÊı¾İ½Ó¿Ú¡£
+     * å¤„ç†æ•°æ®æ¥å£ã€‚
      *
-     * @param data Êı¾İ¶ÔÏó¡£
-     * @throws ServiceException ´¦ÀíÒì³£¡£
+     * @param data æ•°æ®å¯¹è±¡ã€‚
+     * @throws ServiceException å¤„ç†å¼‚å¸¸ã€‚
      */
     void process(T data) throws ServiceException;
 }

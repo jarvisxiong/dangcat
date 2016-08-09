@@ -8,7 +8,7 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 
 /**
- * JMS»á»°¶ÔÏó¡£
+ * JMSä¼šè¯å¯¹è±¡ã€‚
  */
 public class JMSSession {
     protected static final Logger logger = Logger.getLogger(JMSSession.class);
@@ -38,9 +38,9 @@ public class JMSSession {
     }
 
     /**
-     * ½¨Á¢ÏûÏ¢Ïû·Ñ¶ÔÏó¡£
+     * å»ºç«‹æ¶ˆæ¯æ¶ˆè´¹å¯¹è±¡ã€‚
      *
-     * @throws JMSException ÔËĞĞÒì³£¡£
+     * @throws JMSException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public JMSConsumer createJMSConsumer() throws JMSException {
         JMSConsumer jmsConsumer = new JMSConsumer(this);
@@ -49,9 +49,9 @@ public class JMSSession {
     }
 
     /**
-     * ½¨Á¢ÏûÏ¢Éú²ú¶ÔÏó¡£
+     * å»ºç«‹æ¶ˆæ¯ç”Ÿäº§å¯¹è±¡ã€‚
      *
-     * @throws JMSException ÔËĞĞÒì³£¡£
+     * @throws JMSException è¿è¡Œå¼‚å¸¸ã€‚
      */
     public JMSProducer createJMSProducer() throws JMSException {
         JMSProducer jmsProducer = new JMSProducer(this);
@@ -78,7 +78,7 @@ public class JMSSession {
     }
 
     /**
-     * ³õÊ¼»¯»á»°¶ÔÏó¡£
+     * åˆå§‹åŒ–ä¼šè¯å¯¹è±¡ã€‚
      */
     private void initialize() throws JMSException {
         this.connection = this.jmsConnectionPool.poll();
@@ -90,7 +90,7 @@ public class JMSSession {
     }
 
     /**
-     * ÊÍ·Å»á»°¶ÔÏó¡£
+     * é‡Šæ”¾ä¼šè¯å¯¹è±¡ã€‚
      */
     public void release() {
         this.close();

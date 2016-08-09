@@ -1,7 +1,7 @@
 package org.dangcat.persistence.filter;
 
 /**
- * Öµ¶ÔÏó¡£
+ * å€¼å¯¹è±¡ã€‚
  *
  * @author dangcat
  */

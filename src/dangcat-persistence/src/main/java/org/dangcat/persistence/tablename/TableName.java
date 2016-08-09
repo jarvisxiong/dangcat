@@ -3,7 +3,7 @@ package org.dangcat.persistence.tablename;
 import org.dangcat.commons.utils.ValueUtils;
 
 /**
- * ±íÃû¶ÔÏó¡£
+ * è¡¨åå¯¹è±¡ã€‚
  *
  * @author dangcat
  */

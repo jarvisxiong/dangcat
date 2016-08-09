@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ÕË»§¹ÜÀí·şÎñ²âÊÔ¡£
+ * è´¦æˆ·ç®¡ç†æœåŠ¡æµ‹è¯•ã€‚
  *
  * @author dangcat
  */
@@ -22,7 +22,7 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     private static final int TEST_COUNT = 100;
 
     /**
-     * ³õÊ¼»¯ĞèÒªÊ¹ÓÃµÄÊı¾İ¿âÅäÖÃ¡£
+     * åˆå§‹åŒ–éœ€è¦ä½¿ç”¨çš„æ•°æ®åº“é…ç½®ã€‚
      */
     @Override
     protected void initDatabaseSimulator(DatabaseSimulator databaseSimulator) {
@@ -36,7 +36,7 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     @Before
     @Override
     public void initialize() {
-        // Ìí¼ÓÒª²âÊÔµÄ·şÎñ¡£
+        // æ·»åŠ è¦æµ‹è¯•çš„æœåŠ¡ã€‚
         this.addService(AccountService.class, AccountServiceImpl.class);
 
         super.initialize();
@@ -46,7 +46,7 @@ public class TestAccountService extends BusinessServiceTestBase<AccountService, 
     public void testDefaultNew() throws ServiceException {
         AccountInfo accountInfo = new AccountInfo();
         accountInfo.setName("Monkey hou");
-        accountInfo.setAddress("ÖĞ¹úÉîÛÚ");
+        accountInfo.setAddress("ä¸­å›½æ·±åœ³");
         accountInfo.setEmail("houxx@h3c.com.cn");
         accountInfo.setBalance(100.0);
         accountInfo.setGroupId(0);

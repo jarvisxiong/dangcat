@@ -8,34 +8,34 @@ import org.dangcat.net.rfc.template.AttributeTemplate;
 import org.dangcat.net.rfc.template.ValueParser;
 
 /**
- * ÊôĞÔ¶¨Òå½Ó¿Ú¡£
+ * å±æ€§å®šä¹‰æ¥å£ã€‚
  *
  * @author dangcat
  */
 public class AttributeData implements Comparable<AttributeData> {
     protected static final Logger logger = Logger.getLogger(AttributeData.class);
     /**
-     * ÊôĞÔÄ£°å¡£
+     * å±æ€§æ¨¡æ¿ã€‚
      */
     private AttributeTemplate attributeTemplate = null;
     /**
-     * ½âÎöºóµÄ×Ö½ÚÊı×é¡£
+     * è§£æåçš„å­—èŠ‚æ•°ç»„ã€‚
      */
     private byte[] bytes = null;
     /**
-     * ÊôĞÔ³¤¶È¡£
+     * å±æ€§é•¿åº¦ã€‚
      */
     private int length = 0;
     /**
-     * ËùÊôÊôĞÔ¼¯ºÏ¡£
+     * æ‰€å±å±æ€§é›†åˆã€‚
      */
     private AttributeCollection parent = null;
     /**
-     * ÊôĞÔÖµ¡£
+     * å±æ€§å€¼ã€‚
      */
     private Integer type = null;
     /**
-     * ÊôĞÔÖµ¡£
+     * å±æ€§å€¼ã€‚
      */
     private Object value = null;
 
@@ -49,7 +49,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ±È½ÏÁ½¸öÊôĞÔÄÚÈİ¡£
+     * æ¯”è¾ƒä¸¤ä¸ªå±æ€§å†…å®¹ã€‚
      */
     @Override
     public int compareTo(AttributeData attributeData) {
@@ -75,7 +75,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ÊôĞÔÄ£°å¡£
+     * å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate() {
         return this.attributeTemplate;
@@ -110,7 +110,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ¶ÁÈ¡ÊôĞÔÖµ¡£
+     * è¯»å–å±æ€§å€¼ã€‚
      */
     @SuppressWarnings("unchecked")
     public <T> T getValue() {
@@ -118,7 +118,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ÉèÖÃÊôĞÔÖµ¡£
+     * è®¾ç½®å±æ€§å€¼ã€‚
      */
     public void setValue(Object value) {
         this.value = value;
@@ -145,7 +145,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ÊôĞÔÖµ¡£
+     * å±æ€§å€¼ã€‚
      */
     public byte[] toBytes() {
         if (this.bytes == null) {
@@ -168,7 +168,7 @@ public class AttributeData implements Comparable<AttributeData> {
     }
 
     /**
-     * ÊôĞÔÊÇ·ñÓĞĞ§¡£
+     * å±æ€§æ˜¯å¦æœ‰æ•ˆã€‚
      */
     public void validate() throws ProtocolValidateException {
         try {

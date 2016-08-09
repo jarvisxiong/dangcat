@@ -3,26 +3,26 @@ package org.dangcat.framework.service;
 import org.dangcat.framework.service.impl.ServiceInfo;
 
 /**
- * ·şÎñBeanµÄÌá¹©Õß¡£
+ * æœåŠ¡Beançš„æä¾›è€…ã€‚
  *
  * @author dangcat
  */
 public interface ServiceLocator extends ServiceProvider {
     /**
-     * ¸ù¾İ°ó¶¨Ãû¶ÁÈ¡·şÎñĞÅÏ¢¡£
+     * æ ¹æ®ç»‘å®šåè¯»å–æœåŠ¡ä¿¡æ¯ã€‚
      *
      * @param <T>
-     * @param jndiName °ó¶¨Ãû¡£
-     * @return ·şÎñĞÅÏ¢¡£
+     * @param jndiName ç»‘å®šåã€‚
+     * @return æœåŠ¡ä¿¡æ¯ã€‚
      */
     ServiceInfo getServiceInfo(String jndiName);
 
     /**
-     * ¸ù¾İ°ó¶¨Ãû¶ÁÈ¡·şÎñÊµÀı¡£
+     * æ ¹æ®ç»‘å®šåè¯»å–æœåŠ¡å®ä¾‹ã€‚
      *
      * @param <T>
-     * @param jndiName °ó¶¨Ãû¡£
-     * @return ·şÎñÊµÀı¡£
+     * @param jndiName ç»‘å®šåã€‚
+     * @return æœåŠ¡å®ä¾‹ã€‚
      */
     <T> T lookup(String jndiName);
 }

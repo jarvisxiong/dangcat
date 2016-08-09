@@ -7,7 +7,7 @@ import java.util.HashMap;
 class AttributeXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Attribute";
     /**
-     * ½âÎö¶ÔÏó¡£
+     * è§£æå¯¹è±¡ã€‚
      */
     private Attribute attribute = null;
 
@@ -17,10 +17,10 @@ class AttributeXmlResolver extends XmlResolver {
     }
 
     /**
-     * ½âÎö×ÓÔªËØÖ®Ç°¡£
+     * è§£æå­å…ƒç´ ä¹‹å‰ã€‚
      *
-     * @param name        ÊôĞÔÃû³Æ¡£
-     * @param xmlResolver ½âÎöÆ÷¡£
+     * @param name        å±æ€§åç§°ã€‚
+     * @param xmlResolver è§£æå™¨ã€‚
      */
     protected void beforeChildResolve(String elementName, XmlResolver xmlResolver) {
         if (OptionsXmlResolver.RESOLVER_NAME.equalsIgnoreCase(elementName)) {
@@ -30,7 +30,7 @@ class AttributeXmlResolver extends XmlResolver {
     }
 
     /**
-     * ¿ªÊ¼½âÎöÔªËØ±êÇ©¡£
+     * å¼€å§‹è§£æå…ƒç´ æ ‡ç­¾ã€‚
      */
     @Override
     protected void startElement() {

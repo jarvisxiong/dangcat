@@ -7,7 +7,7 @@
 	<properties>
 		<service.name>${serverName}-service</service.name>
 		<database.name>${serverName}-database</database.name>
-		<project.build.sourceEncoding>GBK</project.build.sourceEncoding> 
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<assembly.os>windows</assembly.os>
 		<assembly.arch>x86</assembly.arch>
         <jdk.version>7u51</jdk.version>
@@ -74,13 +74,14 @@
 					<configuration>
 						<source>1.6</source>
 						<target>1.6</target>
-						<encoding>GBK</encoding> 
+						<encoding>UTF-8</encoding>
 						<compilerArgument>-g</compilerArgument>
 					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
 					<configuration>
 						<encoding>UTF-8</encoding>
 					</configuration>
@@ -123,12 +124,12 @@
 		<repository>
 			<id>releases</id>
 			<name>Nexus Releases Repository</name>
-			<url>http://10.46.60.135:9999/nexus/content/repositories/releases</url>
+			<url>http://127.0.0.1:9999/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Nexus Snapshots Repository</name>
-			<url>http://10.46.60.135:9999/nexus/content/repositories/snapshots</url>
+			<url>http://127.0.0.1:9999/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

@@ -1,7 +1,7 @@
 package org.dangcat.persistence.exception;
 
 /**
- * Êı¾İ±í²úÉúµÄÒì³£¡£
+ * æ•°æ®è¡¨äº§ç”Ÿçš„å¼‚å¸¸ã€‚
  *
  * @author dangcat
  */

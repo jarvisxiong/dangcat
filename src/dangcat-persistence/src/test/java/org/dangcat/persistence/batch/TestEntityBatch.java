@@ -68,11 +68,11 @@ public class TestEntityBatch extends TestEntityBase {
         List<EntityData> entityDataList = new LinkedList<EntityData>();
         EntityDataUtils.createEntityDataList(entityDataList, TEST_COUNT);
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         EntityManager entityManager = this.getEntityManager();
         entityManager.save(entityDataList.toArray());
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         List<EntityData> saveEntityDataList = entityManager.load(EntityData.class);
         Assert.assertEquals(entityDataList.size(), saveEntityDataList.size());
     }
@@ -83,7 +83,7 @@ public class TestEntityBatch extends TestEntityBase {
         if (table.exists())
             table.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table.create();
     }
 

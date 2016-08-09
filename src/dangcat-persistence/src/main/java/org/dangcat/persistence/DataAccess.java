@@ -4,36 +4,36 @@ import org.dangcat.persistence.model.Column;
 import org.dangcat.persistence.model.Columns;
 
 /**
- * Êı¾İ·ÃÎÊ½Ó¿Ú¡£
+ * æ•°æ®è®¿é—®æ¥å£ã€‚
  *
  * @author dangcat
  */
 public interface DataAccess {
     /**
-     * Ìí¼ÓÖ¸¶¨ÊäÈëÊä³öÀ¸Î»¡£
+     * æ·»åŠ æŒ‡å®šè¾“å…¥è¾“å‡ºæ ä½ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû¡£
-     * @return À¸Î»¶ÔÏó¡£
+     * @param fieldName å­—æ®µåã€‚
+     * @return æ ä½å¯¹è±¡ã€‚
      */
     Column addColumn(String fieldName);
 
     /**
-     * Òª¶ÁÈ¡µÄÀ¸Î»¼¯ºÏ¡£
+     * è¦è¯»å–çš„æ ä½é›†åˆã€‚
      *
      * @return
      */
     Columns getColumns();
 
     /**
-     * ¶ÁÈ¡×Ö¶Î±êÌâ¡£
+     * è¯»å–å­—æ®µæ ‡é¢˜ã€‚
      *
-     * @param fieldName ×Ö¶ÎÃû³Æ¡£
-     * @return ×Ö¶Î±êÌâ¡£
+     * @param fieldName å­—æ®µåç§°ã€‚
+     * @return å­—æ®µæ ‡é¢˜ã€‚
      */
     String getTitle(String fieldName);
 
     /**
-     * Êı¾İĞĞÊı¡£
+     * æ•°æ®è¡Œæ•°ã€‚
      *
      * @return
      */

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ϵͳ��Ϣ��
+ * 系统信息。
  *
  * @author dangcat
  */

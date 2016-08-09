@@ -7,41 +7,41 @@ import org.dangcat.net.rfc.exceptions.ProtocolParseException;
 import org.dangcat.net.udp.conf.ListenerConfig;
 
 /**
- * Packet ÉÏÏÂÎÄ¡£
+ * Packet ä¸Šä¸‹æ–‡ã€‚
  *
  * @author dangcat
  */
 public abstract class PacketSession<T extends Packet> extends SessionBase {
     /**
-     * Ê¶±ğºÅ¡£
+     * è¯†åˆ«å·ã€‚
      */
     private Long id = null;
     /**
-     * ·¢ËÍ±¨ÎÄÊÇ·ñĞèÒª»ØÓ¦¡£
+     * å‘é€æŠ¥æ–‡æ˜¯å¦éœ€è¦å›åº”ã€‚
      */
     private boolean isNeedReply = false;
     /**
-     * »ØÓ¦µÄÔ­Ê¼±¨ÎÄ¡£
+     * å›åº”çš„åŸå§‹æŠ¥æ–‡ã€‚
      */
     private DatagramEvent replyEvent = null;
     /**
-     * »Ø¸´µÄ±¨ÎÄ¶ÔÏó¡£
+     * å›å¤çš„æŠ¥æ–‡å¯¹è±¡ã€‚
      */
     private T replyPacket = null;
     /**
-     * ÊÕµ½µÄÔ­Ê¼±¨ÎÄ¡£
+     * æ”¶åˆ°çš„åŸå§‹æŠ¥æ–‡ã€‚
      */
     private DatagramEvent requestEvent = null;
     /**
-     * ÊÕµ½µÄ±¨ÎÄ¶ÔÏó¡£
+     * æ”¶åˆ°çš„æŠ¥æ–‡å¯¹è±¡ã€‚
      */
     private T requestPacket = null;
     /**
-     * »Ø¸´µÄÔ­Ê¼±¨ÎÄ¡£
+     * å›å¤çš„åŸå§‹æŠ¥æ–‡ã€‚
      */
     private DatagramEvent responseEvent = null;
     /**
-     * »ØÓ¦µÄ±¨ÎÄ¶ÔÏó¡£
+     * å›åº”çš„æŠ¥æ–‡å¯¹è±¡ã€‚
      */
     private T responsePacket = null;
 

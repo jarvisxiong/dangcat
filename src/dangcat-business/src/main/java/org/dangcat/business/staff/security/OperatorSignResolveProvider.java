@@ -15,7 +15,7 @@ import org.dangcat.commons.utils.ValueUtils;
 import java.util.Date;
 
 /**
- * ²Ù×÷Ô±ÈÏÖ¤Ç©Ãû¼ÆËãÆ÷¡£
+ * æ“ä½œå‘˜è®¤è¯ç­¾åè®¡ç®—å™¨ã€‚
  */
 public class OperatorSignResolveProvider implements SignResolveProvider {
     private static final String SECURITY_NAME = "OperatorSecurity";

@@ -4,7 +4,7 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import org.dangcat.persistence.orm.SqlBuilder;
 
 /**
- * À¸Î»¶ÔÏó½âÎöÆ÷¡£
+ * æ ä½å¯¹è±¡è§£æå™¨ã€‚
  *
  * @author dangcat
  */
@@ -12,16 +12,16 @@ public class SqlBuilderXmlResolver extends XmlResolver {
     public static final String RESOLVER_NAME = "Sql";
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public SqlBuilderXmlResolver() {
         super(RESOLVER_NAME);
     }
 
     /**
-     * ÊôĞÔÎÄ±¾¡£
+     * å±æ€§æ–‡æœ¬ã€‚
      *
-     * @param value ÎÄ±¾Öµ¡£
+     * @param value æ–‡æœ¬å€¼ã€‚
      */
     @Override
     protected void resolveElementText(String value) {

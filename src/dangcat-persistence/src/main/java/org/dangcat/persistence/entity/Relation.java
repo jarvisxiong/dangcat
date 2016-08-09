@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * ¹ØÁª¶ÔÏó¡£
+ * å…³è”å¯¹è±¡ã€‚
  *
  * @author dangcat
  */
@@ -34,12 +34,12 @@ public class Relation {
     }
 
     /**
-     * ½¨Á¢¹ØÁª¹ØÏµ¡£
+     * å»ºç«‹å…³è”å…³ç³»ã€‚
      *
-     * @param fieldName           ×Ö¶ÎÃû¡£
-     * @param parentFieldNames    ¸¸±í×Ö¶Î¹ØÏµ¡£
-     * @param childEntityMetaData ×ÓÊµÌåÔªÊı¾İ¡£
-     * @param childFieldNames     ×Ó±íÓ³Éä¹ØÏµ¡£
+     * @param fieldName           å­—æ®µåã€‚
+     * @param parentFieldNames    çˆ¶è¡¨å­—æ®µå…³ç³»ã€‚
+     * @param childEntityMetaData å­å®ä½“å…ƒæ•°æ®ã€‚
+     * @param childFieldNames     å­è¡¨æ˜ å°„å…³ç³»ã€‚
      */
     public Relation(EntityField entityField, String[] parentFieldNames, String[] childFieldNames, boolean associateLoad, boolean associateSave, boolean associateDelete, String sortBy) {
         this.entityField = entityField;
@@ -62,10 +62,10 @@ public class Relation {
     }
 
     /**
-     * ÓÉ¸¸±íÊµÌå²úÉú×Ó±í¹ıÂËÌõ¼ş¡£
+     * ç”±çˆ¶è¡¨å®ä½“äº§ç”Ÿå­è¡¨è¿‡æ»¤æ¡ä»¶ã€‚
      *
-     * @param parentEntity ¸¸ÊµÌå¶ÔÏó¡£
-     * @return ¹ıÂËÌõ¼ş¡£
+     * @param parentEntity çˆ¶å®ä½“å¯¹è±¡ã€‚
+     * @return è¿‡æ»¤æ¡ä»¶ã€‚
      * @throws EntityException
      */
     public FilterExpress getChildFilterExpress(Object parentEntity) throws EntityException {
@@ -94,9 +94,9 @@ public class Relation {
     }
 
     /**
-     * ¶ÁÈ¡Ã÷Ï¸Êı¾İµÄ¹ØÁª¶ÔÏó¡£
+     * è¯»å–æ˜ç»†æ•°æ®çš„å…³è”å¯¹è±¡ã€‚
      *
-     * @param instance ¸¸ÊµÀı¶ÔÏó¡£
+     * @param instance çˆ¶å®ä¾‹å¯¹è±¡ã€‚
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -118,11 +118,11 @@ public class Relation {
     }
 
     /**
-     * ¶ÁÈ¡×Ö¶ÎµÄ·ºĞÍÀàĞÍ¡£
+     * è¯»å–å­—æ®µçš„æ³›å‹ç±»å‹ã€‚
      *
-     * @param field ×Ö¶Î¶ÔÏó¡£
-     * @param index ·ºĞÍÎ»ÖÃ¡£
-     * @return ·ºĞÍÀàĞÍ
+     * @param field å­—æ®µå¯¹è±¡ã€‚
+     * @param index æ³›å‹ä½ç½®ã€‚
+     * @return æ³›å‹ç±»å‹
      */
     public Class<?> getMemberType() {
         if (this.memberType == null) {
@@ -181,10 +181,10 @@ public class Relation {
     }
 
     /**
-     * ÔØÈë¹ØÁªÊôĞÔ¡£
+     * è½½å…¥å…³è”å±æ€§ã€‚
      *
-     * @param entity     ¸¸ÊµÌå¡£
-     * @param entityList ×ÓÊµÌåÁĞ±í¡£
+     * @param entity     çˆ¶å®ä½“ã€‚
+     * @param entityList å­å®ä½“åˆ—è¡¨ã€‚
      * @throws EntityException
      */
     @SuppressWarnings("unchecked")
@@ -194,15 +194,15 @@ public class Relation {
 
         try {
             Object value = this.entityField.getValue(entity);
-            // ·ºĞÍ¼¯ºÏ±£´æ¶à¸öÃ÷Ï¸¶ÔÏó¡£
+            // æ³›å‹é›†åˆä¿å­˜å¤šä¸ªæ˜ç»†å¯¹è±¡ã€‚
             if (Collection.class.isAssignableFrom(entityField.getClassType())) {
-                if (value != null) // ±ØĞëÄÚ½¨ÊµÀı¶ÔÏó¡£
+                if (value != null) // å¿…é¡»å†…å»ºå®ä¾‹å¯¹è±¡ã€‚
                 {
                     Collection entityCollection = (Collection) value;
                     entityCollection.clear();
                     entityCollection.addAll(entityList);
                 }
-            } else if (entityList.size() == 1) // ·Ç¼¯ºÏÖ»ÄÜÓĞÒ»¸ö¶ÔÏó¡£
+            } else if (entityList.size() == 1) // éé›†åˆåªèƒ½æœ‰ä¸€ä¸ªå¯¹è±¡ã€‚
             {
                 if (this.entityField.getClassType().isAssignableFrom(entityList.get(0).getClass()))
                     this.entityField.setValue(entity, entityList.get(0));
@@ -245,10 +245,10 @@ public class Relation {
     }
 
     /**
-     * Í¬²½¸¸ÊµÌåºÍ×ÓÊµÌå¹ØÁªÊı¾İ¡£
+     * åŒæ­¥çˆ¶å®ä½“å’Œå­å®ä½“å…³è”æ•°æ®ã€‚
      *
-     * @param parentEntity ¸¸ÊµÌå¡£
-     * @param childEntity  ×ÓÊµÌå¡£
+     * @param parentEntity çˆ¶å®ä½“ã€‚
+     * @param childEntity  å­å®ä½“ã€‚
      * @throws EntityException
      */
     public void update(Object parentEntity, Collection<Object> members) throws EntityException {

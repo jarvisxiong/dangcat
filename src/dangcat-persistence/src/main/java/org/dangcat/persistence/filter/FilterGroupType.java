@@ -1,17 +1,17 @@
 package org.dangcat.persistence.filter;
 
 /**
- * ¹ıÂË¹ØÏµ¡£
+ * è¿‡æ»¤å…³ç³»ã€‚
  *
  * @author dangcat
  */
 public enum FilterGroupType {
     /**
-     * ºÍÔËËã¡£
+     * å’Œè¿ç®—ã€‚
      */
     and,
     /**
-     * »òÔËËã¡£
+     * æˆ–è¿ç®—ã€‚
      */
     or
 }

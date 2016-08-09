@@ -4,19 +4,19 @@ import org.dangcat.commons.reflect.MethodInfo;
 import org.dangcat.framework.service.ServiceContext;
 
 /**
- * Ö´ĞĞºóÀ¹½ØÆ÷¡£
+ * æ‰§è¡Œåæ‹¦æˆªå™¨ã€‚
  *
  * @author dangcat
  */
 public interface AfterInterceptor {
     /**
-     * ·şÎñÖ´ĞĞ·½·¨Ç°À¹½ØÆ÷¡£
+     * æœåŠ¡æ‰§è¡Œæ–¹æ³•å‰æ‹¦æˆªå™¨ã€‚
      *
-     * @param service        ·şÎñ¶ÔÏó¡£
-     * @param serviceContext ÉÏÏÂÎÄ¡£
-     * @param methodInfo     Ö´ĞĞ·½·¨¡£
-     * @param args           Ö´ĞĞ²ÎÊı¡£
-     * @param result         Ö´ĞĞ½á¹û¡£
+     * @param service        æœåŠ¡å¯¹è±¡ã€‚
+     * @param serviceContext ä¸Šä¸‹æ–‡ã€‚
+     * @param methodInfo     æ‰§è¡Œæ–¹æ³•ã€‚
+     * @param args           æ‰§è¡Œå‚æ•°ã€‚
+     * @param result         æ‰§è¡Œç»“æœã€‚
      */
     void afterInvoke(Object service, ServiceContext serviceContext, MethodInfo methodInfo, Object[] args, Object result);
 }

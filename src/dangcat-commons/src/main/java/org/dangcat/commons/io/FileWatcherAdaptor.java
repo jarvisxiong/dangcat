@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 /**
- * ÎÄ¼şĞĞÎªÊÂ¼şÊÊÅäÆ÷¡£
+ * æ–‡ä»¶è¡Œä¸ºäº‹ä»¶é€‚é…å™¨ã€‚
  *
  * @author dangcat
  */

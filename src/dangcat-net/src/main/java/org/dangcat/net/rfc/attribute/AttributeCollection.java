@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * ÊôĞÔ¼¯ºÏ¡£
+ * å±æ€§é›†åˆã€‚
  *
  * @author dangcat
  */
@@ -24,15 +24,15 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     protected static final Logger logger = Logger.getLogger(AttributeCollection.class);
     private static final long serialVersionUID = 1L;
     /**
-     * ½âÎöºóµÄ×Ö½ÚÊı×é¡£
+     * è§£æåçš„å­—èŠ‚æ•°ç»„ã€‚
      */
     private byte[] attributeBytes = null;
     /**
-     * ÊôĞÔ±ä»¯Í¨Öª¡£
+     * å±æ€§å˜åŒ–é€šçŸ¥ã€‚
      */
     private NotifyAttributeChanged notifyAttributeChanged = null;
     /**
-     * ³§ÉÌÊôĞÔÄ£°å¹ÜÀí¡£
+     * å‚å•†å±æ€§æ¨¡æ¿ç®¡ç†ã€‚
      */
     private VendorAttributeTemplateManager vendorAttributeTemplateManager = null;
 
@@ -44,10 +44,10 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * Ìí¼ÓÊôĞÔ¡£
+     * æ·»åŠ å±æ€§ã€‚
      *
-     * @param type  ÊôĞÔÀàĞÍ¡£
-     * @param value ÊôĞÔÖµ¡£
+     * @param type  å±æ€§ç±»å‹ã€‚
+     * @param value å±æ€§å€¼ã€‚
      * @throws ProtocolParseException
      */
     public boolean addAttribute(Integer type, Object value) throws ProtocolParseException {
@@ -59,7 +59,7 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ±È½ÏÊôĞÔ¼¯ºÏ¡£
+     * æ¯”è¾ƒå±æ€§é›†åˆã€‚
      */
     public int compare(AttributeCollection attributeCollection) {
         if (attributeCollection == null)
@@ -90,9 +90,9 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨ÀàĞÍµÄÊôĞÔ¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šç±»å‹çš„å±æ€§å¯¹è±¡ã€‚
      *
-     * @param type ÊôĞÔÀàĞÍ¡£
+     * @param type å±æ€§ç±»å‹ã€‚
      */
     public AttributeData findAttribute(Integer type) {
         AttributeData findAttributeData = null;
@@ -106,10 +106,10 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ÕÒµ½Ö¸¶¨ÀàĞÍµÄÊôĞÔ¶ÔÏó¡£
+     * æ‰¾åˆ°æŒ‡å®šç±»å‹çš„å±æ€§å¯¹è±¡ã€‚
      *
-     * @param vendorId ³§ÉÌ±àºÅ¡£
-     * @param type     ÊôĞÔÀàĞÍ¡£
+     * @param vendorId å‚å•†ç¼–å·ã€‚
+     * @param type     å±æ€§ç±»å‹ã€‚
      */
     public List<AttributeData> findAttributes(Integer type) {
         List<AttributeData> attributeDataList = null;
@@ -124,9 +124,9 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ¸ù¾İ³§ÉÌÀàĞÍ·ÖÀà¡£
+     * æ ¹æ®å‚å•†ç±»å‹åˆ†ç±»ã€‚
      *
-     * @return °´³§ÉÌÀàĞÍ·ÖÀà¡£
+     * @return æŒ‰å‚å•†ç±»å‹åˆ†ç±»ã€‚
      */
     public Map<Integer, List<AttributeData>> getAttributeDataMap() {
         List<AttributeData> attributeDataList = null;
@@ -155,11 +155,11 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ×ª»»³É×Ö½ÚÊı×é¡£
+     * è½¬æ¢æˆå­—èŠ‚æ•°ç»„ã€‚
      *
-     * @param outputStream  Êä³öÁ÷¶ÔÏó¡£
-     * @param AttributeData ÊôĞÔÖµ¡£
-     * @return ×ª»»ºóµÄ×Ö½Ú¡£
+     * @param outputStream  è¾“å‡ºæµå¯¹è±¡ã€‚
+     * @param AttributeData å±æ€§å€¼ã€‚
+     * @return è½¬æ¢åçš„å­—èŠ‚ã€‚
      * @throws IOException
      */
     public byte[] getAttributesBytes() throws IOException {
@@ -207,7 +207,7 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ÊÇ·ñÊÇ³§ÉÌÊôĞÔ¡£
+     * æ˜¯å¦æ˜¯å‚å•†å±æ€§ã€‚
      */
     public boolean isVendor() {
         return this.getVendorId() != AttributeTemplateManager.DEFAULT_VENDORID;
@@ -220,16 +220,16 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * ÓÉ±¨ÎÄ½âÎöÊôĞÔ¶ÔÏó¡£
+     * ç”±æŠ¥æ–‡è§£æå±æ€§å¯¹è±¡ã€‚
      *
      * @throws ProtocolParseException
      */
     public void parse(byte[] bytes, int beginIndex, int length) throws ProtocolParseException {
         int index = 0;
         while (index < length) {
-            // ÊôĞÔÀàĞÍ¡£
+            // å±æ€§ç±»å‹ã€‚
             int attributeType = bytes[beginIndex++];
-            // ÊôĞÔ³¤¶È¡£
+            // å±æ€§é•¿åº¦ã€‚
             int attributeLength = bytes[beginIndex++];
             AttributeTemplate attributeTemplate = this.getVendorAttributeTemplateManager().getAttributeTemplate(attributeType);
             if (attributeTemplate != null) {
@@ -261,9 +261,9 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * É¾³ıÖ¸¶¨ÀàĞÍµÄÊôĞÔ¶ÔÏó¡£
+     * åˆ é™¤æŒ‡å®šç±»å‹çš„å±æ€§å¯¹è±¡ã€‚
      *
-     * @param type ÊôĞÔÀàĞÍ¡£
+     * @param type å±æ€§ç±»å‹ã€‚
      */
     public int removeAttribute(Integer type) {
         int result = 0;
@@ -278,9 +278,9 @@ public class AttributeCollection extends ArrayList<AttributeData> {
     }
 
     /**
-     * É¾³ıÊôĞÔ¶ÔÏó¡£
+     * åˆ é™¤å±æ€§å¯¹è±¡ã€‚
      *
-     * @param attributeDatas ÊôĞÔ¶ÔÏó¡£
+     * @param attributeDatas å±æ€§å¯¹è±¡ã€‚
      */
     public void removeAttributes(AttributeData[] attributeDatas) {
         for (AttributeData destAttributeData : attributeDatas) {

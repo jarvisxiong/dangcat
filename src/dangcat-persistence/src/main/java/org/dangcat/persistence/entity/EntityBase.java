@@ -14,7 +14,7 @@ import org.dangcat.persistence.tablename.DynamicTable;
 import org.dangcat.persistence.tablename.TableName;
 
 /**
- * ÒµÎñÊµÌå»ù´¡¡£
+ * ä¸šåŠ¡å®ä½“åŸºç¡€ã€‚
  *
  * @author dangcat
  */
@@ -22,7 +22,7 @@ public abstract class EntityBase extends ServiceFeedback implements java.io.Seri
     private static final long serialVersionUID = 1L;
     protected transient Logger logger = Logger.getLogger(this.getClass());
     /**
-     * ÊµÌåÊı¾İ×´Ì¬¡£
+     * å®ä½“æ•°æ®çŠ¶æ€ã€‚
      */
     private DataState dataState = null;
     @Column(index = 0, isCalculate = true, displaySize = 4)

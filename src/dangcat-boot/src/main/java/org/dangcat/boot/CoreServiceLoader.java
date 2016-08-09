@@ -22,62 +22,62 @@ import org.dangcat.persistence.entity.EntityManagerFactory;
 
 class CoreServiceLoader {
     protected static void load(ServiceBase serviceBase) {
-        // ·şÎñ¹¤³§
+        // æœåŠ¡å·¥å‚
         ServiceFactory serviceFactory = ServiceFactory.createInstance(serviceBase);
         serviceBase.addService(ServiceLocator.class, serviceFactory);
         serviceBase.addService(ServiceFactory.class, serviceFactory);
 
-        // Ïß³Ì³Ø·şÎñ¡£
+        // çº¿ç¨‹æ± æœåŠ¡ã€‚
         ThreadPoolService threadPoolService = ThreadPoolFactory.createInstance(serviceBase);
         serviceBase.addService(ThreadPoolService.class, threadPoolService);
 
-        // ¶¨Ê±Æ÷·şÎñ¡£
+        // å®šæ—¶å™¨æœåŠ¡ã€‚
         TimerService timerService = TimerServiceImpl.createInstance(serviceBase);
         serviceBase.addService(TimerService.class, timerService);
 
-        // Í³¼Æ·şÎñ¡£
+        // ç»Ÿè®¡æœåŠ¡ã€‚
         StatisticsServiceImpl statisticsService = new StatisticsServiceImpl(serviceBase);
         serviceBase.addService(StatisticsService.class, statisticsService);
         statisticsService.initialize();
 
-        // ·şÎñ¹ÜÀí¡£
+        // æœåŠ¡ç®¡ç†ã€‚
         ServerManager serverManager = ServerManager.createInstance(serviceBase);
         serviceBase.addService(ServerManager.class, serverManager);
         serverManager.initialize();
 
-        // ÏµÍ³¼à¿Ø·şÎñ¡£
+        // ç³»ç»Ÿç›‘æ§æœåŠ¡ã€‚
         ServerMonitorServiceImpl systemMonitorService = new ServerMonitorServiceImpl(serviceBase);
         serviceBase.addService(ServerMonitorServiceImpl.class, systemMonitorService);
         systemMonitorService.initialize();
 
-        // Êı¾İ»º´æ·şÎñ¡£
+        // æ•°æ®ç¼“å­˜æœåŠ¡ã€‚
         EntityManagerFactory.getInstance();
         EntityCacheServiceImpl entityCacheService = new EntityCacheServiceImpl(serviceBase);
         serviceBase.addService(EntityCacheServiceImpl.class, entityCacheService);
         entityCacheService.initialize();
 
-        // Êı¾İÅúÁ¿²Ù×÷·şÎñ¡£
+        // æ•°æ®æ‰¹é‡æ“ä½œæœåŠ¡ã€‚
         EntityBatchService entityBatchService = EntityBatchServiceImpl.createInstance(serviceBase);
         serviceBase.addService(EntityBatchService.class, entityBatchService);
 
-        // Web·şÎñ
+        // WebæœåŠ¡
         if (WebServiceConfig.getInstance().isEnabled()) {
             WebService webService = new WebService(serviceBase);
             serviceBase.addService(WebService.class, webService);
             webService.initialize();
         }
 
-        // ÏûÏ¢·¢ËÍ·şÎñ¡£
+        // æ¶ˆæ¯å‘é€æœåŠ¡ã€‚
         EventSendServiceImpl eventSendService = new EventSendServiceImpl(serviceBase);
         serviceBase.addService(EventSendService.class, eventSendService);
         eventSendService.initialize();
 
-        // ÏûÏ¢ÕìÌı·şÎñ¡£
+        // æ¶ˆæ¯ä¾¦å¬æœåŠ¡ã€‚
         EventListenServiceImpl eventListenService = new EventListenServiceImpl(serviceBase);
         serviceBase.addService(EventListenService.class, eventListenService);
         eventListenService.initialize();
 
-        // °²È«·şÎñ
+        // å®‰å…¨æœåŠ¡
         SecurityLoginService securityLoginService = new SecurityLoginServiceImpl(serviceBase);
         serviceFactory.addService(SecurityLoginService.class, securityLoginService);
     }

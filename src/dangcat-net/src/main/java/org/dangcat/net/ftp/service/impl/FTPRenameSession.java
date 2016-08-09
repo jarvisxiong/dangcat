@@ -5,7 +5,7 @@ import org.dangcat.net.ftp.exceptions.FTPSessionException;
 import java.io.IOException;
 
 /**
- * FTPÏÂÔØ»á»°¡£
+ * FTPä¸‹è½½ä¼šè¯ã€‚
  *
  * @author dangcat
  */

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Ö´ÐÐ½ø¶È²éÑ¯¡£
+ * æ‰§è¡Œè¿›åº¦æŸ¥è¯¢ã€‚
  *
  * @author dangcat
  */

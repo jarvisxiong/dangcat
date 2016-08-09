@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * ·şÎñÖ´ĞĞ´úÀí¡£
+ * æœåŠ¡æ‰§è¡Œä»£ç†ã€‚
  *
  * @author dangcat
  */

@@ -3,40 +3,40 @@ package org.dangcat.net.rfc.service;
 import java.net.InetAddress;
 
 /**
- * °üÊ¶±ğºÅ·şÎñ¡£
+ * åŒ…è¯†åˆ«å·æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface PacketIdentifierService {
     /**
-     * Ìí¼Ó°üÀàĞÍµÄÊ¶±ğºÅ¡£
+     * æ·»åŠ åŒ…ç±»å‹çš„è¯†åˆ«å·ã€‚
      *
-     * @param radiusPacketType °üÀàĞÍ¡£
+     * @param radiusPacketType åŒ…ç±»å‹ã€‚
      */
     void addPacketType(Integer... packetTypes);
 
     /**
-     * Ìí¼ÓÖ¸¶¨°üµÄ´¦ÀíÊ¶±ğºÅ¡£¡£
+     * æ·»åŠ æŒ‡å®šåŒ…çš„å¤„ç†è¯†åˆ«å·ã€‚ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @param identifier Ê¶±ğºÅ¡£
-     * @return ÊÇ·ñ¿ÉÒÔ½øĞĞ´¦Àí¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @param identifier è¯†åˆ«å·ã€‚
+     * @return æ˜¯å¦å¯ä»¥è¿›è¡Œå¤„ç†ã€‚
      */
     boolean addProcess(InetAddress inetAddress, Integer packetType, Integer identifier);
 
     /**
-     * ÌáÈ¡°üÀàĞÍµÄÊ¶±ğºÅ¡£
+     * æå–åŒ…ç±»å‹çš„è¯†åˆ«å·ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @return Ê¶±ğºÅ¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return è¯†åˆ«å·ã€‚
      */
     int nextIdentifier(Integer packetType);
 
     /**
-     * É¾³ıÖ¸¶¨°üµÄ´¦ÀíÊ¶±ğºÅ¡£¡£
+     * åˆ é™¤æŒ‡å®šåŒ…çš„å¤„ç†è¯†åˆ«å·ã€‚ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @param identifier Ê¶±ğºÅ¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @param identifier è¯†åˆ«å·ã€‚
      */
     void removeProcess(InetAddress inetAddress, Integer packetType, Integer identifier);
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * ÎÄ¼ş¿½±´½ø³Ì¡£
+ * æ–‡ä»¶æ‹·è´è¿›ç¨‹ã€‚
  */
 public class FileCopyProcess extends FileProcessBase {
     private FileCopyCallback fileCopyCallback = null;

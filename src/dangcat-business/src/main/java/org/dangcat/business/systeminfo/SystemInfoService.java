@@ -7,29 +7,29 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * ÏµÍ³·şÎñ¡£
+ * ç³»ç»ŸæœåŠ¡ã€‚
  *
  * @author Administrator
  */
 @JndiName(module = "System", name = "SystemInfo")
 public interface SystemInfoService {
     /**
-     * ¼ÓÔØÏµÍ³²Ëµ¥Ïî¡£
+     * åŠ è½½ç³»ç»Ÿèœå•é¡¹ã€‚
      */
     Collection<Menu> loadMenus();
 
     /**
-     * ²ÎÊıÓ³Éä±í¡£
+     * å‚æ•°æ˜ å°„è¡¨ã€‚
      */
     Map<Integer, String> loadParamMap(String name);
 
     /**
-     * ËùÓĞÈ¨ÏŞĞÅÏ¢¡£
+     * æ‰€æœ‰æƒé™ä¿¡æ¯ã€‚
      */
     Collection<PermissionInfo> loadPermissions();
 
     /**
-     * ÏµÍ³ĞÅÏ¢¡£
+     * ç³»ç»Ÿä¿¡æ¯ã€‚
      */
     SystemInfo loadSystemInfo();
 }

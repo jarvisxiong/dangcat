@@ -5,7 +5,7 @@ import org.dangcat.commons.utils.DateUtils;
 import java.util.Date;
 
 /**
- * Ê±¼ä·¶Î§¡£
+ * æ—¶é—´èŒƒå›´ã€‚
  *
  * @author Administrator
  */
@@ -17,31 +17,31 @@ public class TimeRange {
     private static final int TIMESTEP_WEEK = 3 * 24 * 60 * 1000;
     private static final int TIMESTEP_YEAR = 3 * 24 * 60 * 60 * 1000;
     /**
-     * Ê±¼ä²½³¤¡£
+     * æ—¶é—´æ­¥é•¿ã€‚
      */
     private Date baseTime = null;
     /**
-     * ÆðÊ¼Ê±¼ä¡£
+     * èµ·å§‹æ—¶é—´ã€‚
      */
     private Date beginTime = null;
     /**
-     * ½ØÖ¹Ê±¼ä¡£
+     * æˆªæ­¢æ—¶é—´ã€‚
      */
     private Date endTime = null;
     /**
-     * Ê±³¤¡£
+     * æ—¶é•¿ã€‚
      */
     private long timeLength = 0;
     /**
-     * Ê±¼äÖÜÆÚ¡£
+     * æ—¶é—´å‘¨æœŸã€‚
      */
     private Integer timePeriod = null;
     /**
-     * Ê±¼ä²½³¤¡£
+     * æ—¶é—´æ­¥é•¿ã€‚
      */
     private long timeStep = 0;
     /**
-     * Ê±¼äÀàÐÍ¡£
+     * æ—¶é—´ç±»åž‹ã€‚
      */
     private TimeType timeType = null;
 

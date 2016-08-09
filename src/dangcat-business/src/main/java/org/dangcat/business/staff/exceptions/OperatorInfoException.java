@@ -10,31 +10,31 @@ import org.dangcat.business.staff.domain.OperatorInfoCreate;
  */
 public class OperatorInfoException extends BusinessException {
     /**
-     * Ö»ÄÜĞÂÔö±¾×éºÍ×Ó×é³ÉÔ±ĞÅÏ¢¡£
+     * åªèƒ½æ–°å¢æœ¬ç»„å’Œå­ç»„æˆå‘˜ä¿¡æ¯ã€‚
      */
     public static final Integer INSERT_VALIDATEGROUP = 103;
     /**
-     * ²Ù×÷Ô±²»ÄÜÉ¾³ı×Ô¼ºµÄÕËºÅ¡£
+     * æ“ä½œå‘˜ä¸èƒ½åˆ é™¤è‡ªå·±çš„è´¦å·ã€‚
      */
     public static final Integer KILL_HIMSELFUL = 100;
     /**
-     * Ö»ÄÜÉ¾³ı±¾×éºÍ×Ó×é³ÉÔ±ÕËºÅ¡£
+     * åªèƒ½åˆ é™¤æœ¬ç»„å’Œå­ç»„æˆå‘˜è´¦å·ã€‚
      */
     public static final Integer KILL_VALIDATEGROUP = 101;
     /**
-     * ²»ÄÜĞŞ¸Ä²Ù×÷Ô±ÕËºÅ¡£
+     * ä¸èƒ½ä¿®æ”¹æ“ä½œå‘˜è´¦å·ã€‚
      */
     public static final Integer MODIFY_NO_DENY = 106;
     /**
-     * Ö»ÄÜĞŞ¸Ä±¾×éºÍ×Ó×é³ÉÔ±ĞÅÏ¢¡£
+     * åªèƒ½ä¿®æ”¹æœ¬ç»„å’Œå­ç»„æˆå‘˜ä¿¡æ¯ã€‚
      */
     public static final Integer MODIFY_VALIDATEGROUP = 102;
     /**
-     * ÃÜÂëÎŞĞ§¡£
+     * å¯†ç æ— æ•ˆã€‚
      */
     public static final Integer PASSWORD_INVALID = 105;
     /**
-     * Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ¡£
+     * ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´ã€‚
      */
     public static final Integer PASSWORD_NOTEQUALS = 104;
 

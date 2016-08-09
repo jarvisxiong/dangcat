@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Êı¾İ¿âÄ£ÄâÆ÷¡£
+ * æ•°æ®åº“æ¨¡æ‹Ÿå™¨ã€‚
  *
  * @author dangcat
  */
@@ -31,7 +31,7 @@ public class DatabaseSimulator {
     }
 
     /**
-     * ²úÉúÄ£ÄâÊı¾İ¡£
+     * äº§ç”Ÿæ¨¡æ‹Ÿæ•°æ®ã€‚
      */
     public void create() {
         for (SimulateData simulateData : this.simulateDataMap.values())
@@ -43,7 +43,7 @@ public class DatabaseSimulator {
     }
 
     /**
-     * ³õÊ¼»¯Êı¾İ¿â¡£
+     * åˆå§‹åŒ–æ•°æ®åº“ã€‚
      *
      * @throws SessionException
      */

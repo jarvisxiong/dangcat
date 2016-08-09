@@ -10,7 +10,7 @@ import org.dangcat.framework.service.ServicePrincipal;
 import org.dangcat.framework.service.interceptor.BeforeInterceptor;
 
 /**
- * ÒµÎñ°²È«¿ØÖÆÆ÷¡£
+ * ä¸šåŠ¡å®‰å…¨æŽ§åˆ¶å™¨ã€‚
  *
  * @author dangcat
  */

@@ -1323,7 +1323,7 @@ public class TestsCsvAll {
     public void test47() throws Exception {
         byte[] buffer;
 
-        String test = "München";
+        String test = "Mé»±chen";
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));
@@ -1341,7 +1341,7 @@ public class TestsCsvAll {
 
     @Test
     public void test48() throws Exception {
-        String test = "München";
+        String test = "Mé»±chen";
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(stream, Charset.forName("UTF-8")));

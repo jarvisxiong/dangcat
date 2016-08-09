@@ -27,19 +27,19 @@ public class WebServer extends MainServiceBase {
     }
 
     /**
-     * ³õÊ¼»¯·şÎñ¡£
+     * åˆå§‹åŒ–æœåŠ¡ã€‚
      */
     @Override
     public void initialize() {
         super.initialize();
 
-        // ½áËã·şÎñ¡£
+        // ç»“ç®—æœåŠ¡ã€‚
         SettleServiceImpl settleService = new SettleServiceImpl(this);
         settleService.addSettleUnit(new OperateLogSettle());
         this.addService(SettleService.class, settleService);
         settleService.initialize();
 
-        // ·şÎñÆ÷ĞÄÌø¹ÜÀí¡£
+        // æœåŠ¡å™¨å¿ƒè·³ç®¡ç†ã€‚
         ServerKeepLiveServiceImpl serverKeepLiveService = new ServerKeepLiveServiceImpl(this);
         this.addService(ServerKeepLiveServiceImpl.class, serverKeepLiveService);
         serverKeepLiveService.initialize();

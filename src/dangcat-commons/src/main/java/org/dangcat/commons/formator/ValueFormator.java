@@ -4,35 +4,35 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
- * ÊıÖµ¸ñÊ½»¯¡£
+ * æ•°å€¼æ ¼å¼åŒ–ã€‚
  */
 public class ValueFormator implements DataFormator {
     /**
-     * Ä¬ÈÏÊı×Ö¸ñÊ½»¯Ä£°å
+     * é»˜è®¤æ•°å­—æ ¼å¼åŒ–æ¨¡æ¿
      */
     private static final String DEFAULT_NUMBER_FORMAT = "#.###";
     /**
-     * ×ª»»³£Á¿¡£
+     * è½¬æ¢å¸¸é‡ã€‚
      */
     private final static int[] UNIT_TRANSCONSTS = new int[]{1, 1000, 1000, 1000};
     /**
-     * ÊıÖµµ¥Î»¡£
+     * æ•°å€¼å•ä½ã€‚
      */
     private final static String[] UNITS = new String[]{"", "K", "M", "G"};
     /**
-     * Êı×Ö¸ñÊ½»¯Ä£°å
+     * æ•°å­—æ ¼å¼åŒ–æ¨¡æ¿
      */
     private String format = null;
     /**
-     * Êı×Ö¸ñÊ½Ä£°æ¡£
+     * æ•°å­—æ ¼å¼æ¨¡ç‰ˆã€‚
      */
     private NumberFormat numberFormat = null;
 
     /**
-     * È¡µÃ×î¼Ñµ¥Î»
+     * å–å¾—æœ€ä½³å•ä½
      *
-     * @param longValue ×ª»»Öµ¡£
-     * @return ×î¼Ñµ¥Î»¡£
+     * @param longValue è½¬æ¢å€¼ã€‚
+     * @return æœ€ä½³å•ä½ã€‚
      */
     public String calculatePerfectUnit(long longValue) {
         int[] transConsts = this.getTransConsts();
@@ -60,10 +60,10 @@ public class ValueFormator implements DataFormator {
     }
 
     /**
-     * ¼ÆËãÖ¸¶¨µ¥Î»ÏÂµÄ×ª»»ÂÊ¡£
+     * è®¡ç®—æŒ‡å®šå•ä½ä¸‹çš„è½¬æ¢ç‡ã€‚
      *
-     * @param perfectUnit Ö¸¶¨µ¥Î»¡£
-     * @return ×ª»»ÂÊ
+     * @param perfectUnit æŒ‡å®šå•ä½ã€‚
+     * @return è½¬æ¢ç‡
      */
     public double calculateTransRate(String perfectUnit) {
         int[] transConsts = this.getTransConsts();

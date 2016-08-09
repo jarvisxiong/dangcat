@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * ÊôĞÔÄ£°å¹ÜÀíÆ÷¡£
+ * å±æ€§æ¨¡æ¿ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
@@ -28,11 +28,11 @@ public class AttributeTemplateManager {
     private static final String RFC_PREFIX = "rfc-";
 
     /**
-     * °üÔªÊı¾İ¡£
+     * åŒ…å…ƒæ•°æ®ã€‚
      */
     private PacketMetaInfo packetMetaInfo = null;
     /**
-     * ³§ÉÌÊôĞÔÓëÄ£°å¹ÜÀíÆ÷Ó³Éä±í¡£
+     * å‚å•†å±æ€§ä¸æ¨¡æ¿ç®¡ç†å™¨æ˜ å°„è¡¨ã€‚
      */
     private Map<Integer, VendorAttributeTemplateManager> vendorAttributeTemplateManagerMap = new HashMap<Integer, VendorAttributeTemplateManager>();
 
@@ -41,21 +41,21 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * Í¨¹ıÊôĞÔÀàĞÍºÅ¶ÁÈ¡ÊôĞÔÄ£°å¡£
+     * é€šè¿‡å±æ€§ç±»å‹å·è¯»å–å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param type ÊôĞÔºÅ¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param type å±æ€§å·ã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate(Integer type) {
         return this.getAttributeTemplate(DEFAULT_VENDORID, type);
     }
 
     /**
-     * Í¨¹ı³§ÉÌ¡¢ÊôĞÔÀàĞÍºÅ¶ÁÈ¡ÊôĞÔÄ£°å¡£
+     * é€šè¿‡å‚å•†ã€å±æ€§ç±»å‹å·è¯»å–å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param vendorId ³§ÉÌºÅ¡£
-     * @param type     ÊôĞÔºÅ¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param vendorId å‚å•†å·ã€‚
+     * @param type     å±æ€§å·ã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate(Integer vendorId, Integer type) {
         VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getVendorAttributeTemplateManager(vendorId);
@@ -63,11 +63,11 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * Í¨¹ı³§ÉÌ¡¢ÊôĞÔÀàĞÍºÅ¶ÁÈ¡ÊôĞÔÄ£°å¡£
+     * é€šè¿‡å‚å•†ã€å±æ€§ç±»å‹å·è¯»å–å±æ€§æ¨¡æ¿ã€‚
      *
-     * @param vendorId ³§ÉÌºÅ¡£
-     * @param name     ÊôĞÔÃû¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param vendorId å‚å•†å·ã€‚
+     * @param name     å±æ€§åã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public AttributeTemplate getAttributeTemplate(Integer vendorId, String name) {
         VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getVendorAttributeTemplateManager(vendorId);
@@ -97,10 +97,10 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * ¸ù¾İ°üÀàĞÍµÃµ½µ±Ç°°üµÄĞ£ÑéÆ÷¡£
+     * æ ¹æ®åŒ…ç±»å‹å¾—åˆ°å½“å‰åŒ…çš„æ ¡éªŒå™¨ã€‚
      *
-     * @param packetType °üÀàĞÍ¡£
-     * @return Ğ£ÑéÆ÷¡£
+     * @param packetType åŒ…ç±»å‹ã€‚
+     * @return æ ¡éªŒå™¨ã€‚
      */
     public PacketRuleValidator getPacketRuleValidator(Integer vendorId, String packetType) {
         VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getVendorAttributeTemplateManager(vendorId);
@@ -108,10 +108,10 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * ¶ÁÈ¡ÊôĞÔºÍÄ£°å¹ÜÀíÆ÷¡£
+     * è¯»å–å±æ€§å’Œæ¨¡æ¿ç®¡ç†å™¨ã€‚
      *
-     * @param vendorId ³§ÉÌºÅ¡£
-     * @return ÊôĞÔÄ£°å¡£
+     * @param vendorId å‚å•†å·ã€‚
+     * @return å±æ€§æ¨¡æ¿ã€‚
      */
     public VendorAttributeTemplateManager getVendorAttributeTemplateManager(Integer vendorId) {
         return this.vendorAttributeTemplateManagerMap.get(vendorId == null ? DEFAULT_VENDORID : vendorId);
@@ -126,17 +126,17 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * ´ÓÎÄ¼şÃû»ñÈ¡³§ÉÌÃû¡£
+     * ä»æ–‡ä»¶åè·å–å‚å•†åã€‚
      *
-     * @param file ÎÄ¼ş¶ÔÏó¡£
-     * @return ³§ÉÌÃû¡£
+     * @param file æ–‡ä»¶å¯¹è±¡ã€‚
+     * @return å‚å•†åã€‚
      */
     private String getVendorName(String resourceName) {
         return resourceName.replace(this.packetMetaInfo.getFileNamePrefix(), "").replace(this.packetMetaInfo.getFileNamePostfix(), "");
     }
 
     /**
-     * ³õÊ¼»¯ÊôĞÔÄ£°å¡£
+     * åˆå§‹åŒ–å±æ€§æ¨¡æ¿ã€‚
      */
     public void initialize() {
         String fileNamePreFix = this.packetMetaInfo.getFileNamePrefix();
@@ -163,10 +163,10 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * ´ÓÎÄ¼şÔØÈëÅäÖÃ×ÊÔ´¡£¡£
+     * ä»æ–‡ä»¶è½½å…¥é…ç½®èµ„æºã€‚ã€‚
      *
-     * @param inputStream ÊäÈëÁ÷¡£
-     * @param vendorId    ³§ÉÌºÅ¡£
+     * @param inputStream è¾“å…¥æµã€‚
+     * @param vendorId    å‚å•†å·ã€‚
      */
     public void load(File file) {
         if (file == null || !file.exists() || !file.isFile())
@@ -189,10 +189,10 @@ public class AttributeTemplateManager {
     }
 
     /**
-     * ´ÓÊı¾İÁ÷ÔØÈëÅäÖÃ×ÊÔ´¡£¡£
+     * ä»æ•°æ®æµè½½å…¥é…ç½®èµ„æºã€‚ã€‚
      *
-     * @param inputStream ÊäÈëÁ÷¡£
-     * @param vendorId    ³§ÉÌºÅ¡£
+     * @param inputStream è¾“å…¥æµã€‚
+     * @param vendorId    å‚å•†å·ã€‚
      */
     private void load(InputStream inputStream, Integer vendorId) {
         VendorAttributeTemplateManager vendorAttributeTemplateManager = this.getVendorAttributeTemplateManager(vendorId);

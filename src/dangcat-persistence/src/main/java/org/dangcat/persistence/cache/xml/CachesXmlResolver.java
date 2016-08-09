@@ -5,19 +5,19 @@ import org.dangcat.commons.serialize.xml.XmlResolver;
 import java.util.List;
 
 /**
- * »º´æÅäÖÃ½âÎöÆ÷¡£
+ * ç¼“å­˜é…ç½®è§£æå™¨ã€‚
  *
  * @author dangcat
  */
 public class CachesXmlResolver extends XmlResolver {
     private static final String RESOLVER_NAME = "Caches";
     /**
-     * »º´æ¼¯ºÏ¡£
+     * ç¼“å­˜é›†åˆã€‚
      */
     private List<Cache> cacheList = null;
 
     /**
-     * ¹¹½¨½âÎöÆ÷¡£
+     * æ„å»ºè§£æå™¨ã€‚
      */
     public CachesXmlResolver() {
         super(RESOLVER_NAME);
@@ -25,10 +25,10 @@ public class CachesXmlResolver extends XmlResolver {
     }
 
     /**
-     * ²úÉú×ÓÔªËØ¶ÔÏó¡£
+     * äº§ç”Ÿå­å…ƒç´ å¯¹è±¡ã€‚
      *
-     * @param elementName ×ÓÔªËØÃû³Æ¡£
-     * @param child       ×ÓÔªËØ¶ÔÏó¡£
+     * @param elementName å­å…ƒç´ åç§°ã€‚
+     * @param child       å­å…ƒç´ å¯¹è±¡ã€‚
      */
     @Override
     protected void afterChildCreate(String elementName, Object child) {

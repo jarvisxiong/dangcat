@@ -13,7 +13,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient> {
     private static final int DEFAULT_CONNECTMODE = FTPClient.PASSIVE_LOCAL_DATA_CONNECTION_MODE;
     private static final int DEFAULT_CONNECTTIMEOUT = 30000;
     private static final Boolean DEFAULT_CONTINUELOAD = Boolean.FALSE;
-    private static final String DEFAULT_CONTROLENCODING = "GBK";
+    private static final String DEFAULT_CONTROLENCODING = "UTF-8";
     private static final int DEFAULT_DATATIMEOUT = 30000;
     private static final int DEFAULT_EXECUTETIMEOUT = 60000;
     private static final int DEFAULT_FILETYPE = FTP.BINARY_FILE_TYPE;
@@ -42,7 +42,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient> {
     }
 
     /**
-     * πÿ±’¡¨Ω”
+     * ÂÖ≥Èó≠ËøûÊé•
      */
     @Override
     protected void close(FTPClient ftpClient) {
@@ -144,7 +144,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient> {
             }
             if (this.logger.isDebugEnabled())
                 this.logger.debug("initialize the ftpClient.");
-            // ≥ı ºªØøÕªß∂À
+            // ÂàùÂßãÂåñÂÆ¢Êà∑Á´Ø
             ftpClient.enterInit();
             if (this.logger.isDebugEnabled())
                 this.logger.debug("Get ftpClient suceseful.");
@@ -201,7 +201,7 @@ public class FTPClientPool extends ConnectionPool<FTPClient> {
     }
 
     /**
-     * ≥ı ºªØ¡¨Ω”≥ÿ°£
+     * ÂàùÂßãÂåñËøûÊé•Ê±†„ÄÇ
      *
      * @throws SessionException
      */

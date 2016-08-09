@@ -10,23 +10,23 @@ import org.dangcat.business.staff.domain.OperatorGroup;
  */
 public class OperatorGroupException extends BusinessException {
     /**
-     * ËùÊô²Ù×÷Ô±×é²»ÄÜÑ­»·°ó¶¨¡£
+     * æ‰€å±æ“ä½œå‘˜ç»„ä¸èƒ½å¾ªç¯ç»‘å®šã€‚
      */
     public static final Integer BIND_CYCLING = 100;
     /**
-     * ÒÑ¾­°ó¶¨²Ù×÷Ô±µÄ×é²»ÄÜÉ¾³ı¡£
+     * å·²ç»ç»‘å®šæ“ä½œå‘˜çš„ç»„ä¸èƒ½åˆ é™¤ã€‚
      */
     public static final Integer CHILE_OPERATOR_EXISTS = 101;
     /**
-     * ²»ÄÜÉ¾³ı¸¸²Ù×÷Ô±×é¡£
+     * ä¸èƒ½åˆ é™¤çˆ¶æ“ä½œå‘˜ç»„ã€‚
      */
     public static final Integer DELETE_DENY_FOR_ISPARENT = 103;
     /**
-     * Ö»ÄÜÉ¾³ı×Ó³ÉÔ±×é¡£
+     * åªèƒ½åˆ é™¤å­æˆå‘˜ç»„ã€‚
      */
     public static final Integer DELETE_DENY_FOR_NOTMEMBER = 102;
     /**
-     * Ö»ÄÜĞŞ¸Ä±¾×é»ò×Ó³ÉÔ±×é¡£
+     * åªèƒ½ä¿®æ”¹æœ¬ç»„æˆ–å­æˆå‘˜ç»„ã€‚
      */
     public static final Integer MODIFY_DENY_FOR_NOTMEMBER = 104;
     private static final long serialVersionUID = 1L;

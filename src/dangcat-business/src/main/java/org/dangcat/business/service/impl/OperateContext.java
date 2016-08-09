@@ -3,7 +3,7 @@ package org.dangcat.business.service.impl;
 import org.dangcat.persistence.entity.EntityManager;
 
 /**
- * ÒµÎñ²Ù×÷ÉÏÏÂÎÄ¡£
+ * ä¸šåŠ¡æ“ä½œä¸Šä¸‹æ–‡ã€‚
  *
  * @param <T>
  * @author dangcat

@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import javax.jms.*;
 
 /**
- * JMSÉú²ú¶ÔÏó¡£
+ * JMSç”Ÿäº§å¯¹è±¡ã€‚
  */
 public class JMSProducer {
     protected static final Logger logger = Logger.getLogger(JMSProducer.class);
@@ -29,19 +29,19 @@ public class JMSProducer {
     }
 
     /**
-     * ³õÊ¼»¯ÏûÏ¢Éú²ú¶ÔÏó¡£
+     * åˆå§‹åŒ–æ¶ˆæ¯ç”Ÿäº§å¯¹è±¡ã€‚
      */
     protected void initialize() throws JMSException {
         JMSConnectionPool jmsConnectionPool = this.jmsSession.getJMSConnectionPool();
         try {
             Session session = this.jmsSession.getSession();
             this.messageProducer = session.createProducer(this.jmsSession.getDestination());
-            // ÊÇ·ñ³Ö¾Ã»¯ÏûÏ¢¡£
+            // æ˜¯å¦æŒä¹…åŒ–æ¶ˆæ¯ã€‚
             if (jmsConnectionPool.isPersistent())
                 this.messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
             else
                 this.messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-            // ÏûÏ¢´æ»îÊ±¼ä¡£
+            // æ¶ˆæ¯å­˜æ´»æ—¶é—´ã€‚
             if (jmsConnectionPool.getTimeToLive() != 0)
                 this.messageProducer.setTimeToLive(jmsConnectionPool.getTimeToLive());
         } catch (JMSException e) {
@@ -54,7 +54,7 @@ public class JMSProducer {
     }
 
     /**
-     * ÊÍ·Å»á»°¶ÔÏó¡£
+     * é‡Šæ”¾ä¼šè¯å¯¹è±¡ã€‚
      */
     public void release() {
         this.close();
@@ -62,10 +62,10 @@ public class JMSProducer {
     }
 
     /**
-     * ·¢ËÍJMSÏûÏ¢¡£
+     * å‘é€JMSæ¶ˆæ¯ã€‚
      *
-     * @param message ÏûÏ¢¶ÔÏó¡£
-     * @throws JMSException ·¢ËÍÒì³£¡£
+     * @param message æ¶ˆæ¯å¯¹è±¡ã€‚
+     * @throws JMSException å‘é€å¼‚å¸¸ã€‚
      */
     public void send(Message message) throws JMSException {
         if (message != null) {

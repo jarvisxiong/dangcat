@@ -1,27 +1,27 @@
 package org.dangcat.business.settle;
 
 /**
- * ½áËã·şÎñ¡£
+ * ç»“ç®—æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public interface SettleService {
     /**
-     * Ìí¼Ó½áËã¶ÔÏó¡£
+     * æ·»åŠ ç»“ç®—å¯¹è±¡ã€‚
      *
-     * @param SettleUnit ½áËã¶ÔÏó¡£
+     * @param SettleUnit ç»“ç®—å¯¹è±¡ã€‚
      */
     void addSettleUnit(SettleUnit settleUnit);
 
     /**
-     * Ö´ĞĞ½áËã¡£
+     * æ‰§è¡Œç»“ç®—ã€‚
      */
     void execute();
 
     /**
-     * É¾³ı½áËã¶ÔÏó¡£
+     * åˆ é™¤ç»“ç®—å¯¹è±¡ã€‚
      *
-     * @param settleUnit ½áËã¶ÔÏó¡£
+     * @param settleUnit ç»“ç®—å¯¹è±¡ã€‚
      */
     void removeSettleUnit(SettleUnit settleUnit);
 }

@@ -3,26 +3,26 @@ package org.dangcat.boot.service;
 import org.apache.log4j.Logger;
 
 /**
- * ¼à¿ØÏß³ÌÖ´ĞĞ½Ó¿Ú¡£
+ * ç›‘æ§çº¿ç¨‹æ‰§è¡Œæ¥å£ã€‚
  */
 public interface WatchRunnable extends Runnable {
     /**
-     * ×îºóÏìÓ¦Ê±¼ä£¬µ¥Î»ºÁÃë¡£
+     * æœ€åå“åº”æ—¶é—´ï¼Œå•ä½æ¯«ç§’ã€‚
      */
     long getLastResponseTime();
 
     /**
-     * Ö´ĞĞÈÕÖ¾¡£
+     * æ‰§è¡Œæ—¥å¿—ã€‚
      */
     Logger getLogger();
 
     /**
-     * ³¬Ê±Ê±³¤£¬µ¥Î»ºÁÃë¡£
+     * è¶…æ—¶æ—¶é•¿ï¼Œå•ä½æ¯«ç§’ã€‚
      */
     long getTimeOutLength();
 
     /**
-     * ³¬Ê±ÖÕÖ¹½Ó¿Ú¡£
+     * è¶…æ—¶ç»ˆæ­¢æ¥å£ã€‚
      */
     void terminate();
 }

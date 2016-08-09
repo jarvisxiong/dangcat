@@ -18,9 +18,9 @@ class BusinessServiceDelete<Q extends EntityBase, V extends EntityBase, K extend
     }
 
     /**
-     * ´¥·¢É¾³ýºóÊÂ¼þ¡£
+     * è§¦å‘åˆ é™¤åŽäº‹ä»¶ã€‚
      *
-     * @param deleteContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param deleteContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void afterDelete(LoadContext<V> deleteContext) {
         if (this.isExtendEventEnabled())
@@ -28,9 +28,9 @@ class BusinessServiceDelete<Q extends EntityBase, V extends EntityBase, K extend
     }
 
     /**
-     * ´¥·¢É¾³ýÇ°ÊÂ¼þ¡£
+     * è§¦å‘åˆ é™¤å‰äº‹ä»¶ã€‚
      *
-     * @param deleteContext ²Ù×÷ÉÏÏÂÎÄ¡£
+     * @param deleteContext æ“ä½œä¸Šä¸‹æ–‡ã€‚
      */
     private void beforeDelete(LoadContext<V> deleteContext) throws ServiceException {
         if (this.isExtendEventEnabled())

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ²éÑ¯¼¯ºÏ¡£
+ * æŸ¥è¯¢é›†åˆã€‚
  *
  * @author dangcat
  */
@@ -19,7 +19,7 @@ public class Sqls {
     private Map<String, Sql> sqlNameMap = new HashMap<String, Sql>();
 
     /**
-     * Ìí¼Ó²éÑ¯¶ÔÏó¡£
+     * æ·»åŠ æŸ¥è¯¢å¯¹è±¡ã€‚
      */
     public void add(Sql sql) {
         String sqlName = this.getSqlName(sql.getDatabaseType(), sql.getName());
@@ -27,21 +27,21 @@ public class Sqls {
     }
 
     /**
-     * ²éÕÒÖ¸¶¨µÄ²éÑ¯¶ÔÏó¡£
+     * æŸ¥æ‰¾æŒ‡å®šçš„æŸ¥è¯¢å¯¹è±¡ã€‚
      *
-     * @param databaseType Êı¾İ¿âÀàĞÍ¡£
-     * @return ²éÑ¯¶ÔÏó¡£
+     * @param databaseType æ•°æ®åº“ç±»å‹ã€‚
+     * @return æŸ¥è¯¢å¯¹è±¡ã€‚
      */
     public SqlBuilder find(DatabaseType databaseType) {
         return find(databaseType, null);
     }
 
     /**
-     * ²éÕÒÖ¸¶¨µÄ²éÑ¯¶ÔÏó¡£
+     * æŸ¥æ‰¾æŒ‡å®šçš„æŸ¥è¯¢å¯¹è±¡ã€‚
      *
-     * @param databaseType Êı¾İ¿âÀàĞÍ¡£
-     * @param name         ÃüÃûÓï¾ä¡£
-     * @return ²éÑ¯¶ÔÏó¡£
+     * @param databaseType æ•°æ®åº“ç±»å‹ã€‚
+     * @param name         å‘½åè¯­å¥ã€‚
+     * @return æŸ¥è¯¢å¯¹è±¡ã€‚
      */
     public SqlBuilder find(DatabaseType databaseType, String name) {
         SqlBuilder found = null;
@@ -90,19 +90,19 @@ public class Sqls {
     }
 
     /**
-     * ÅäÖÃµÄ²éÑ¯Óï¾ä¡£
+     * é…ç½®çš„æŸ¥è¯¢è¯­å¥ã€‚
      *
-     * @param classType ×ÊÔ´ËùÔÚÎ»ÖÃ¡£
+     * @param classType èµ„æºæ‰€åœ¨ä½ç½®ã€‚
      */
     public void read(Class<?> classType) {
         this.read(classType, null);
     }
 
     /**
-     * ÅäÖÃµÄ²éÑ¯Óï¾ä¡£
+     * é…ç½®çš„æŸ¥è¯¢è¯­å¥ã€‚
      *
-     * @param classType  ×ÊÔ´ËùÔÚÎ»ÖÃ¡£
-     * @param namePrefix ÎÄ¼şÃûÇ°×º¡£
+     * @param classType  èµ„æºæ‰€åœ¨ä½ç½®ã€‚
+     * @param namePrefix æ–‡ä»¶åå‰ç¼€ã€‚
      */
     public void read(Class<?> classType, String namePrefix) {
         if (classType == null || Object.class.equals(classType))

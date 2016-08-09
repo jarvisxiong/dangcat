@@ -5,70 +5,70 @@ import org.dangcat.persistence.filter.FilterExpress;
 import java.util.Collection;
 
 /**
- * ÊµÌå»º´æ¡£
+ * å®ä½“ç¼“å­˜ã€‚
  *
  * @param <T>
  * @author dangcat
  */
 public interface EntityCache<T> extends MemCache<T> {
     /**
-     * É¾³ıÖ¸¶¨Ìõ¼şµÄ»º´æÊı¾İºÍÊı¾İ¿âÊı¾İ¡£
+     * åˆ é™¤æŒ‡å®šæ¡ä»¶çš„ç¼“å­˜æ•°æ®å’Œæ•°æ®åº“æ•°æ®ã€‚
      */
     void delete(FilterExpress filterExpress);
 
     /**
-     * É¾³ı»º´æÊı¾İ¡£
+     * åˆ é™¤ç¼“å­˜æ•°æ®ã€‚
      */
     void delete(T data);
 
     /**
-     * °´ÕÕÖ¸¶¨µÄÌõ¼şÔÚË÷ÒıÉÏ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„æ¡ä»¶åœ¨ç´¢å¼•ä¸ŠæŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param filterExpress Ë÷ÒıÌõ¼ş¡£
-     * @return Êı¾İ¼¯ºÏ¡£
+     * @param filterExpress ç´¢å¼•æ¡ä»¶ã€‚
+     * @return æ•°æ®é›†åˆã€‚
      */
     Collection<T> load(FilterExpress filterExpress);
 
     /**
-     * ¸ù¾İÖ÷¼üÖµÕÒµ½¼ÇÂ¼ĞĞ¡£
+     * æ ¹æ®ä¸»é”®å€¼æ‰¾åˆ°è®°å½•è¡Œã€‚
      *
-     * @param params Ö÷¼ü²ÎÊıÖµ¡£
-     * @return ÕÒµ½µÄÊı¾İĞĞ¡£
+     * @param params ä¸»é”®å‚æ•°å€¼ã€‚
+     * @return æ‰¾åˆ°çš„æ•°æ®è¡Œã€‚
      */
     T load(Object... params);
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ×Ö¶ÎÖµ²éÕÒÊı¾İ¡£
+     * æŒ‰ç…§æŒ‡å®šçš„å­—æ®µå€¼æŸ¥æ‰¾æ•°æ®ã€‚
      *
-     * @param fieldNames ×Ö¶ÎÃû£¬¶à×Ö¶ÎÒÔ·ÖºÅ¼ä¸ô¡£
-     * @param values     ×Ö¶ÎÊıÖµ£¬±ØĞëÓë×Ö¶Î¶ÔÓ¦¡£
-     * @return ÕÒµ½µÄ¼ÇÂ¼ĞĞ¡£
+     * @param fieldNames å­—æ®µåï¼Œå¤šå­—æ®µä»¥åˆ†å·é—´éš”ã€‚
+     * @param values     å­—æ®µæ•°å€¼ï¼Œå¿…é¡»ä¸å­—æ®µå¯¹åº”ã€‚
+     * @return æ‰¾åˆ°çš„è®°å½•è¡Œã€‚
      */
     Collection<T> load(String[] fieldNames, Object... values);
 
     /**
-     * ¼ÓÔØ»º´æÊı¾İ¡£
+     * åŠ è½½ç¼“å­˜æ•°æ®ã€‚
      */
     void loadData();
 
     /**
-     * Ë¢ĞÂÄÚ´æÊı¾İ¡£
+     * åˆ·æ–°å†…å­˜æ•°æ®ã€‚
      *
-     * @param data Ä¿±êÊı¾İ¡£
-     * @return Ë¢ĞÂºóÊı¾İ¡£
+     * @param data ç›®æ ‡æ•°æ®ã€‚
+     * @return åˆ·æ–°åæ•°æ®ã€‚
      */
     T refresh(T data);
 
     /**
-     * Ë¢ĞÂÖ¸¶¨Ö÷¼üµÄÄÚ´æÊı¾İ¡£
+     * åˆ·æ–°æŒ‡å®šä¸»é”®çš„å†…å­˜æ•°æ®ã€‚
      *
-     * @param primaryKeys Ä¿±êÖ÷¼üÊı¾İ¡£
-     * @return Ë¢ĞÂºóÊı¾İ¡£
+     * @param primaryKeys ç›®æ ‡ä¸»é”®æ•°æ®ã€‚
+     * @return åˆ·æ–°åæ•°æ®ã€‚
      */
     T refreshEntity(Object... primaryKeys);
 
     /**
-     * Ìí¼Ó»º´æÊı¾İ¡£
+     * æ·»åŠ ç¼“å­˜æ•°æ®ã€‚
      */
     void save(T data);
 }

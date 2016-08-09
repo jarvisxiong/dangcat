@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * ¶ÓÁĞ¶àÏß³Ì·şÎñ»ù´¡Àà¡£
+ * é˜Ÿåˆ—å¤šçº¿ç¨‹æœåŠ¡åŸºç¡€ç±»ã€‚
  *
  * @author dangcat
  */
@@ -15,50 +15,50 @@ public class QueueThreadService<T> extends ServiceControlBase implements Runnabl
     private static final int DEFAULT_CONCURRENT_SIZE = 1;
     private static final int DEFAULT_MAX_QUEUECAPACITY = 10000;
     /**
-     * ÕıÔÚÖ´ĞĞµÄÈÎÎñ¶ÓÁĞ¡£
+     * æ­£åœ¨æ‰§è¡Œçš„ä»»åŠ¡é˜Ÿåˆ—ã€‚
      */
     private Queue<T> executingCache = new LinkedList<T>();
     /**
-     * ×î´ó²¢·¢ÊıÁ¿¡£
+     * æœ€å¤§å¹¶å‘æ•°é‡ã€‚
      */
     private int maxConcurrentSize = DEFAULT_CONCURRENT_SIZE;
     /**
-     * ×î´ó¶ÓÁĞÈİÁ¿¡£
+     * æœ€å¤§é˜Ÿåˆ—å®¹é‡ã€‚
      */
     private int maxQueueCapacity = DEFAULT_MAX_QUEUECAPACITY;
     /**
-     * ¶ÓÁĞÖ´ĞĞ½Ó¿Ú¡£
+     * é˜Ÿåˆ—æ‰§è¡Œæ¥å£ã€‚
      */
     private QueueExecuteor<T> queueExecuteor = null;
     /**
-     * µÈ´ıÖ´ĞĞµÄÈÎÎñ¶ÓÁĞ¡£
+     * ç­‰å¾…æ‰§è¡Œçš„ä»»åŠ¡é˜Ÿåˆ—ã€‚
      */
     private Queue<T> waitingCache = new LinkedList<T>();
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public QueueThreadService(ServiceProvider parent) {
         super(parent);
     }
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent ËùÊô·şÎñ¡£
+     * @param parent æ‰€å±æœåŠ¡ã€‚
      */
     public QueueThreadService(ServiceProvider parent, String serviceName) {
         super(parent, serviceName);
     }
 
     /**
-     * ¹¹Ôì·şÎñ¡£
+     * æ„é€ æœåŠ¡ã€‚
      *
-     * @param parent         ËùÊô·şÎñ¡£
-     * @param name           ·şÎñÃû³Æ¡£
-     * @param queueExecuteor ¶ÓÁĞÖ´ĞĞ½Ó¿Ú¡£
+     * @param parent         æ‰€å±æœåŠ¡ã€‚
+     * @param name           æœåŠ¡åç§°ã€‚
+     * @param queueExecuteor é˜Ÿåˆ—æ‰§è¡Œæ¥å£ã€‚
      */
     public QueueThreadService(ServiceProvider parent, String serviceName, QueueExecuteor<T> queueExecuteor) {
         this(parent, serviceName);
@@ -66,7 +66,7 @@ public class QueueThreadService<T> extends ServiceControlBase implements Runnabl
     }
 
     /**
-     * »º³å³Ø¡£
+     * ç¼“å†²æ± ã€‚
      */
     public void addTask(T... tasks) {
         if (tasks != null) {
@@ -136,27 +136,27 @@ public class QueueThreadService<T> extends ServiceControlBase implements Runnabl
     }
 
     /**
-     * Ö´ĞĞ¶ÓÁĞÊÇ·ñÒÑ¾­Âú¸ººÉ¡£
+     * æ‰§è¡Œé˜Ÿåˆ—æ˜¯å¦å·²ç»æ»¡è´Ÿè·ã€‚
      */
     public boolean isExecuteQueueFull() {
         return this.getExecuteSize() >= this.getMaxConcurrentSize();
     }
 
     /**
-     * µÈ´ı¶ÓÁĞÊÇ·ñÒÑ¾­Âú¸ººÉ¡£
+     * ç­‰å¾…é˜Ÿåˆ—æ˜¯å¦å·²ç»æ»¡è´Ÿè·ã€‚
      */
     public boolean isWaitingQueueFull() {
         return this.getWaitingSize() >= this.getMaxQueueCapacity();
     }
 
     /**
-     * ÕıÔÚÒòÎª´¦ÀíÄÜÁ¦²»×ãºöÂÔµÄÊı¾İ¡£
+     * æ­£åœ¨å› ä¸ºå¤„ç†èƒ½åŠ›ä¸è¶³å¿½ç•¥çš„æ•°æ®ã€‚
      */
     protected void onIgnoreProcess(T data) {
     }
 
     /**
-     * ¶ÀÁ¢Ïß³ÌÖ´ĞĞ½Ó¿Ú¡£
+     * ç‹¬ç«‹çº¿ç¨‹æ‰§è¡Œæ¥å£ã€‚
      */
     @Override
     public void run() {

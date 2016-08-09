@@ -17,13 +17,13 @@ import org.dangcat.persistence.model.DataState;
 import java.util.Collection;
 
 /**
- * »º´æ¹ÜÀí·şÎñ¡£
+ * ç¼“å­˜ç®¡ç†æœåŠ¡ã€‚
  *
  * @author dangcat
  */
 public class EntityCacheServiceImpl extends ServiceControlBase implements Runnable, EntityUpdateNotifier {
     /**
-     * ËùÊô¸¸·şÎñ¡£
+     * æ‰€å±çˆ¶æœåŠ¡ã€‚
      *
      * @param parent
      */
@@ -43,14 +43,14 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
                 return !Environment.isTestEnabled() && EntityCacheConfig.getInstance().isEnabled();
             }
         };
-        // ×¢²á¶¨Ê±Æ÷¡£
+        // æ³¨å†Œå®šæ—¶å™¨ã€‚
         if (cronAlarmClock.isValidExpression())
             TimerServiceImpl.getInstance().createTimer(cronAlarmClock);
     }
 
     @Override
     public Object handle(Event event) {
-        // ÆäËüÏµÍ³¸üĞÂ±íÊ±Í¨ÖªÏµÍ³Áª¶¯¡£
+        // å…¶å®ƒç³»ç»Ÿæ›´æ–°è¡¨æ—¶é€šçŸ¥ç³»ç»Ÿè”åŠ¨ã€‚
         if (event instanceof TableEvent) {
             TableEvent tableEvent = (TableEvent) event;
             if (DataState.Insert.equals(tableEvent.getDataState()) || DataState.Modified.equals(tableEvent.getDataState()))
@@ -75,7 +75,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
         });
         this.createAlarmClock();
 
-        // ¼ÓÔØ»º´æÅäÖÃ
+        // åŠ è½½ç¼“å­˜é…ç½®
         EntityCacheManager.getInstance().load(this.getClass(), entityCacheConfig.getConfigFile());
         if (!ValueUtils.isEmpty(entityCacheConfig.getMessageName()))
             EntityCacheManager.getInstance().addEntityUpdateNotifier(this);
@@ -113,7 +113,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     private void remove(TableEvent tableEvent) {
         String tableName = tableEvent.getTableName();
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
-        // Í¨¹ıÖ÷¼üË¢ĞÂ»º´æ
+        // é€šè¿‡ä¸»é”®åˆ·æ–°ç¼“å­˜
         if (tableEvent.getPrimaryKeys() != null) {
             for (Object value : tableEvent.getPrimaryKeys()) {
                 if (value.getClass().isArray())
@@ -124,7 +124,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
             if (this.logger.isDebugEnabled())
                 this.logger.debug("The table " + tableName + " cache remove range : " + tableEvent.getPrimaryKeys());
         }
-        // Í¨¹ıÊµÌåË¢ĞÂ»º´æ
+        // é€šè¿‡å®ä½“åˆ·æ–°ç¼“å­˜
         if (tableEvent.getValues() != null) {
             Object[] entities = tableEvent.getValues().toArray();
             if (entities.length > 0) {
@@ -133,7 +133,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
                     this.logger.debug("The table " + tableName + " cache update range : " + entities);
             }
         }
-        // Í¨¹ı¹ıÂËÌõ¼şË¢ĞÂ»º´æ
+        // é€šè¿‡è¿‡æ»¤æ¡ä»¶åˆ·æ–°ç¼“å­˜
         if (tableEvent.getFilterExpress() != null) {
             entityCacheManager.remove(tableName, tableEvent.getFilterExpress());
             if (this.logger.isDebugEnabled())
@@ -142,7 +142,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     }
 
     /**
-     * ¶¨Ê±ÇåÀí¹ıÆÚµÄ»º´æÊı¾İ¡£
+     * å®šæ—¶æ¸…ç†è¿‡æœŸçš„ç¼“å­˜æ•°æ®ã€‚
      */
     @Override
     public void run() {
@@ -152,7 +152,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
     private void update(TableEvent tableEvent) {
         String tableName = tableEvent.getTableName();
         EntityCacheManager entityCacheManager = EntityCacheManager.getInstance();
-        // Í¨¹ıÖ÷¼üË¢ĞÂ»º´æ
+        // é€šè¿‡ä¸»é”®åˆ·æ–°ç¼“å­˜
         if (tableEvent.getPrimaryKeys() != null) {
             for (Object value : tableEvent.getPrimaryKeys()) {
                 if (value.getClass().isArray())
@@ -163,7 +163,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
             if (this.logger.isDebugEnabled())
                 this.logger.debug("The table " + tableName + " cache update range : " + tableEvent.getPrimaryKeys());
         }
-        // Í¨¹ıÊµÌåË¢ĞÂ»º´æ
+        // é€šè¿‡å®ä½“åˆ·æ–°ç¼“å­˜
         if (tableEvent.getValues() != null) {
             Object[] entities = tableEvent.getValues().toArray();
             if (entities.length > 0) {
@@ -172,7 +172,7 @@ public class EntityCacheServiceImpl extends ServiceControlBase implements Runnab
                     this.logger.debug("The table " + tableName + " cache update range : " + entities);
             }
         }
-        // Í¨¹ı¹ıÂËÌõ¼şË¢ĞÂ»º´æ
+        // é€šè¿‡è¿‡æ»¤æ¡ä»¶åˆ·æ–°ç¼“å­˜
         if (tableEvent.getFilterExpress() != null) {
             entityCacheManager.update(tableName, tableEvent.getFilterExpress());
             if (this.logger.isDebugEnabled())

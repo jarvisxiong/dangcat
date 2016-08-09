@@ -23,10 +23,10 @@ public class TestModelNameBatch extends TestEntityBase {
         if (table1.exists())
             table1.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table1.create();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         Table table2 = TableDataUtils.getTable();
         Assert.assertTrue(table2.exists());
 
@@ -44,7 +44,7 @@ public class TestModelNameBatch extends TestEntityBase {
         table1.setSqlName(Sql.DELETE);
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(DataState.Browse, table2.getDataState());
@@ -66,11 +66,11 @@ public class TestModelNameBatch extends TestEntityBase {
         table1.setTableState(TableState.Normal);
         Assert.assertEquals(TEST_COUNT, table1.getRows().size());
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.setSqlName(Sql.INSERT);
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table1.getRows().size(), table2.getRows().size());
@@ -85,11 +85,11 @@ public class TestModelNameBatch extends TestEntityBase {
         TableDataUtils.modifyTableData(table1);
         table1.setTableState(TableState.Normal);
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.setSqlName(Sql.UPDATE);
         table1.execute();
 
-        // ¼ì²éÊı¾İ´æ´¢ÕıÈ··ñ
+        // æ£€æŸ¥æ•°æ®å­˜å‚¨æ­£ç¡®å¦
         Table table2 = TableDataUtils.getTable();
         table2.load();
         Assert.assertEquals(table2.getRows().size(), table1.getRows().size());
@@ -102,10 +102,10 @@ public class TestModelNameBatch extends TestEntityBase {
         if (table1.exists())
             table1.drop();
 
-        // ²úÉúĞÂµÄÊı¾İ±í
+        // äº§ç”Ÿæ–°çš„æ•°æ®è¡¨
         table1.create();
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         table1.setSqlName(useName ? Sql.EXECUTE : null);
         table1.execute();
 

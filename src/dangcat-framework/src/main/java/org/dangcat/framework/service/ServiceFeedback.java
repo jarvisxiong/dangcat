@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ·şÎñĞÅÏ¢·´À¡¡£
+ * æœåŠ¡ä¿¡æ¯åé¦ˆã€‚
  *
  * @author dangcat
  */
 public class ServiceFeedback {
     /**
-     * Òì³£ĞÅÏ¢±í¡£
+     * å¼‚å¸¸ä¿¡æ¯è¡¨ã€‚
      */
     private List<ServiceException> serviceExceptionList = null;
     /**
-     * ÌáÊ¾ĞÅÏ¢±í¡£
+     * æç¤ºä¿¡æ¯è¡¨ã€‚
      */
     private List<ServiceInformation> serviceInformationList = null;
 

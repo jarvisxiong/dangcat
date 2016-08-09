@@ -83,7 +83,7 @@ public abstract class NetSender {
     }
 
     /**
-     * ÏòÖ¸¶¨µØÖ·ºÍ¶Ë¿Ú·¢ËÍ±¨ÎÄ¡£
+     * å‘æŒ‡å®šåœ°å€å’Œç«¯å£å‘é€æŠ¥æ–‡ã€‚
      *
      * @throws IOException
      */
@@ -94,7 +94,7 @@ public abstract class NetSender {
     }
 
     /**
-     * µÈ´ı½ÓÊÕ»ØÓ¦±¨ÎÄ¡£
+     * ç­‰å¾…æ¥æ”¶å›åº”æŠ¥æ–‡ã€‚
      *
      * @throws IOException
      */

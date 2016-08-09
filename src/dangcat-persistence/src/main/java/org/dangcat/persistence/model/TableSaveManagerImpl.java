@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * ±í¹ÜÀíÆ÷¡£
+ * è¡¨ç®¡ç†å™¨ã€‚
  *
  * @author dangcat
  */
@@ -29,9 +29,9 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * Ö´ĞĞÉ¾³ıÃüÁî¡£
+     * æ‰§è¡Œåˆ é™¤å‘½ä»¤ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
      * @throws SQLException
      */
     private void executeDelete(Session session, Table table) throws SQLException {
@@ -67,19 +67,19 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * Ö´ĞĞ²åÈëÃüÁî¡£
+     * æ‰§è¡Œæ’å…¥å‘½ä»¤ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
      * @throws SQLException
      */
     private void executeInsert(Session session, Table table) throws SQLException {
         Collection<Row> insertRows = table.getRows().getInsertedRows();
         if (insertRows.size() > 0) {
             List<String> fieldNameList = new LinkedList<String>();
-            // ¹¹½¨²éÑ¯Óï¾ä
+            // æ„å»ºæŸ¥è¯¢è¯­å¥
             TableSqlBuilder tableSqlBuilder = new TableSqlBuilder(table, this.databaseName);
             String sql = tableSqlBuilder.buildInsertStatement(fieldNameList);
-            // ×ÔÔöÖ÷¼üÁĞ±í¡£
+            // è‡ªå¢ä¸»é”®åˆ—è¡¨ã€‚
             Column[] primaryKeys = table.getColumns().getPrimaryKeys();
             List<String> primaryFieldNameList = new ArrayList<String>();
             for (Column column : primaryKeys) {
@@ -103,9 +103,9 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     private void executeInsert(Session session, Table table, Collection<Row> insertRows, List<String> fieldNameList, String sql, String[] primaryFieldNames) throws SQLException {
-        // ×¼±¸±í´ï¶ÔÏó¡£
+        // å‡†å¤‡è¡¨è¾¾å¯¹è±¡ã€‚
         session.prepare(sql, primaryFieldNames);
-        // Åú´¦Àí¶ÓÁĞ¡£
+        // æ‰¹å¤„ç†é˜Ÿåˆ—ã€‚
         Queue<Row> batchUpdateQueue = new LinkedList<Row>();
         int count = 0;
         for (Row row : insertRows) {
@@ -122,9 +122,9 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * Ö´ĞĞ¸üĞÂÃüÁî¡£
+     * æ‰§è¡Œæ›´æ–°å‘½ä»¤ã€‚
      *
-     * @param table Êı¾İ±í¶ÔÏó¡£
+     * @param table æ•°æ®è¡¨å¯¹è±¡ã€‚
      * @throws SQLException
      */
     private void executeModified(Session session, Table table) throws SQLException {
@@ -176,12 +176,12 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * Ö´ĞĞĞĞ¸üĞÂ¡£
+     * æ‰§è¡Œè¡Œæ›´æ–°ã€‚
      *
-     * @param session       »á»°¶ÔÏó¡£
-     * @param row           ĞĞ¶ÔÏó¡£
-     * @param fieldNameList ×Ö¶ÎÁĞ±í¡£
-     * @throws SQLException Ö´ĞĞÒì³£¡£
+     * @param session       ä¼šè¯å¯¹è±¡ã€‚
+     * @param row           è¡Œå¯¹è±¡ã€‚
+     * @param fieldNameList å­—æ®µåˆ—è¡¨ã€‚
+     * @throws SQLException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     private int executeRowUpdate(Session session, Table table, Row row, List<String> fieldNameList, boolean isInsert, boolean submit) throws SQLException {
         Columns columns = table.getColumns();
@@ -204,14 +204,14 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ½âÎöÊı¾İ½á¹û¡£
+     * è§£ææ•°æ®ç»“æœã€‚
      *
-     * @param row       Êı¾İĞĞ¶ÔÏó¡£
-     * @param resultSet ²éÑ¯½á¹û¡£
+     * @param row       æ•°æ®è¡Œå¯¹è±¡ã€‚
+     * @param resultSet æŸ¥è¯¢ç»“æœã€‚
      * @throws SQLException
      */
     private void parseData(Table table, Queue<Row> batchUpdateQueue, ResultSet resultSet, String[] fieldNames) throws SQLException {
-        // »ñÈ¡ÔªÊı¾İ¡£
+        // è·å–å…ƒæ•°æ®ã€‚
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
         Columns columns = table.getColumns();
@@ -231,7 +231,7 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ´æ´¢³ö´íÊ±£¬»Ø¹ö×ÔÔö×Ö¶ÎÊıÖµ¡£
+     * å­˜å‚¨å‡ºé”™æ—¶ï¼Œå›æ»šè‡ªå¢å­—æ®µæ•°å€¼ã€‚
      */
     private void resetAutoIncrement(Queue<Field> fieldQueue) {
         try {
@@ -246,10 +246,10 @@ class TableSaveManagerImpl extends TableManagerBase {
     }
 
     /**
-     * ´æ´¢Ö¸¶¨±íµÄÊı¾İ¡£
+     * å­˜å‚¨æŒ‡å®šè¡¨çš„æ•°æ®ã€‚
      *
-     * @param table ±í¶ÔÏó¡£
-     * @throws TableException ÔËĞĞÒì³£¡£
+     * @param table è¡¨å¯¹è±¡ã€‚
+     * @throws TableException è¿è¡Œå¼‚å¸¸ã€‚
      */
     protected void save(Table table) throws TableException {
         Session session = null;
@@ -258,28 +258,28 @@ class TableSaveManagerImpl extends TableManagerBase {
             if (logger.isDebugEnabled())
                 logger.debug("Begin save the table: " + table.getTableName().getName());
 
-            // ´æ´¢Ç°ÊÂ¼ş¡£
+            // å­˜å‚¨å‰äº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList()) {
                 if (!tableEventAdapter.beforeSave(table))
                     return;
             }
 
             table.setTableState(TableState.Saving);
-            // »ñÈ¡»á»°¶ÔÏó¡£
+            // è·å–ä¼šè¯å¯¹è±¡ã€‚
             session = this.openSession(this.databaseName);
 
             session.beginTransaction();
-            // ´æ´¢ÒÑ¾­É¾³ıµÄÊı¾İĞĞ¡£
+            // å­˜å‚¨å·²ç»åˆ é™¤çš„æ•°æ®è¡Œã€‚
             this.executeDelete(session, table);
-            // ´æ´¢±»ĞŞ¸ÄµÄÊı¾İĞĞ¡£
+            // å­˜å‚¨è¢«ä¿®æ”¹çš„æ•°æ®è¡Œã€‚
             this.executeModified(session, table);
-            // ´æ´¢ĞÂ²åÈëµÄÊı¾İĞĞ¡£
+            // å­˜å‚¨æ–°æ’å…¥çš„æ•°æ®è¡Œã€‚
             this.executeInsert(session, table);
 
             session.commit();
             table.getRows().setDataState(DataState.Browse);
 
-            // ´æ´¢ºóÊÂ¼ş¡£
+            // å­˜å‚¨åäº‹ä»¶ã€‚
             for (TableEventAdapter tableEventAdapter : table.getTableEventAdapterList())
                 tableEventAdapter.afterSave(table);
 

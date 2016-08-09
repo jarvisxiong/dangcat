@@ -25,7 +25,7 @@ public class TestModelTablePerformance extends TestEntityBase {
 
         logger.info("Begin test database: " + databaseName);
 
-        // ´æ´¢Êı¾İ±í¡£
+        // å­˜å‚¨æ•°æ®è¡¨ã€‚
         this.table.setTableState(TableState.Insert);
         long beginTime = DateUtils.currentTimeMillis();
         this.table.save();

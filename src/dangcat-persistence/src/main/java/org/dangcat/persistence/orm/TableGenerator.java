@@ -3,7 +3,7 @@ package org.dangcat.persistence.orm;
 import java.sql.*;
 
 /**
- * ×ÔÔöĞòºÅ¼ÇÂ¼±í¡£
+ * è‡ªå¢åºå·è®°å½•è¡¨ã€‚
  *
  * @author dangcat
  */
@@ -61,10 +61,10 @@ public class TableGenerator {
     }
 
     /**
-     * ²éÑ¯²ßÂÔ±íµ±Ç°Öµ¡£
+     * æŸ¥è¯¢ç­–ç•¥è¡¨å½“å‰å€¼ã€‚
      *
-     * @param connection Êı¾İ¿âÁ¬½Ó¡£
-     * @throws SQLException Ö´ĞĞÒì³£¡£
+     * @param connection æ•°æ®åº“è¿æ¥ã€‚
+     * @throws SQLException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     public Long query(Connection connection, String tableName) throws SQLException {
         Long value = null;
@@ -83,10 +83,10 @@ public class TableGenerator {
     }
 
     /**
-     * ¸üĞÂĞòºÅ²ßÂÔ±íµÄÖµ¡£
+     * æ›´æ–°åºå·ç­–ç•¥è¡¨çš„å€¼ã€‚
      *
-     * @param connection Êı¾İ¿âÁ¬½Ó¡£
-     * @throws SQLException Ö´ĞĞÒì³£¡£
+     * @param connection æ•°æ®åº“è¿æ¥ã€‚
+     * @throws SQLException æ‰§è¡Œå¼‚å¸¸ã€‚
      */
     public void update(Connection connection, String tableName, long value) throws SQLException {
         PreparedStatement preparedStatement = null;

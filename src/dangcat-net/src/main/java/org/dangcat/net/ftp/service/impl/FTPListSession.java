@@ -9,7 +9,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 
 /**
- * FTPÏÂÔØ»á»°¡£
+ * FTPä¸‹è½½ä¼šè¯ã€‚
  *
  * @author dangcat
  */
