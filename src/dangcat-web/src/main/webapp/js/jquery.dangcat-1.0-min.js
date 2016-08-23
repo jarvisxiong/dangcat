@@ -827,10 +827,12 @@ if((a>="0"&&a<="9")||(a>="a"&&a<="f")||(a>="A"&&a<="F")||a=="."||a==":"){continu
 }}}};
 function ValueFormator(){this.units=["","K","M","G"];
 this.transConsts=[1,1000,1000,1000]
-}ValueFormator.prototype.calculatePerfectUnit=function(d){if(d==undefined||d==null||typeof(d)!="number"){return this.units[0]
-}var c=d;
-var b=this.units[0];
-for(var a=1;
+}ValueFormator.prototype.calculatePerfectUnit=function(e){var d=this.actualUnit;
+if(e==undefined||e==null||typeof(e)!="number"){if($.defined(d)){return this.units[d]
+}else{return this.units[0]
+}}var c=e;
+var b=this.units[d];
+for(var a=d+1;
 a<this.units.length;
 a++){if(Math.floor(c/this.transConsts[a])==0){break
 }c/=this.transConsts[a];
@@ -847,13 +849,14 @@ a++){if(Math.floor(b/this.transConsts[a])==0){break
 };
 ValueFormator.prototype.calculateTransRate=function(a){return 1/this.getTransRate(a)
 };
-ValueFormator.prototype.getTransRate=function(b){if(b==undefined||b==null){return 1
-}var c=1;
-for(var a=0;
+ValueFormator.prototype.getTransRate=function(b){var c=this.actualUnit;
+if(b==undefined||b==null||c==undefined){return 1
+}var d=1;
+for(var a=c;
 a<this.units.length;
-a++){c*=this.transConsts[a];
+a++){d*=this.transConsts[a];
 if(this.units[a]==b){break
-}}return c
+}}return d/this.transConsts[c]
 };
 ValueFormator.prototype.format=function(d,c){var a=this.calculatePerfectUnit(d);
 var b=d*this.calculateTransRate(a);
@@ -892,10 +895,12 @@ function TimeLengthFormator(){ValueFormator.call(this);
 this.units=["ms","Sec","Min","Hour"];
 this.transConsts=[1,1000,60,60]
 }TimeLengthFormator.prototype=new ValueFormator();
-var DataFormatorFactory={octetsFormator:new OctetsFormator(),octetsVelocityFormator:new OctetsVelocityFormator(),timeLengthFormator:new TimeLengthFormator(),velocityFormator:new VelocityFormator(),percentFormator:new PercentFormator(),valueFormator:new ValueFormator(),getDataFormator:function(a){var b;
-if(a!=undefined||a!=null){b=this[a+"Formator"]
-}if(b==undefined||b==null){b=this.valueFormator
-}return b
+var DataFormatorFactory={octetsFormator:new OctetsFormator(),octetsVelocityFormator:new OctetsVelocityFormator(),timeLengthFormator:new TimeLengthFormator(),velocityFormator:new VelocityFormator(),percentFormator:new PercentFormator(),valueFormator:new ValueFormator(),getDataFormator:function(a,b){if(!$.defined(b)){b=0
+}var c;
+if(a!=undefined||a!=null){c=this[a+"Formator"]
+}if(c==undefined||c==null){c=this.valueFormator
+}c.actualUnit=b;
+return c
 }};
 function TimeRange(b,a){this.timeType=b;
 this.timePeriod=a

@@ -276,7 +276,7 @@ this.areaPath=h.concat(f)
 d.wrap(d.Series.prototype,"drawGraph",function(f){f.apply(this,Array.prototype.slice.call(arguments,1));
 if(this.chart.options.chart.type=="areaspline"){a.call(this)
 }});
-d.Axis.prototype.getDataFormator=function(){return DataFormatorFactory.getDataFormator(this.options.logic)
+d.Axis.prototype.getDataFormator=function(){return DataFormatorFactory.getDataFormator(this.options.logic,this.options.originalUnit)
 };
 d.Axis.prototype.formatValue=function(f){if($.defined(this.transRate)){f*=this.transRate
 }return f.format(this.pattern)
@@ -484,6 +484,7 @@ if($.defined(d)&&d.series){for(var c in d.series){var f=d.series[c];
 var a=this.getYAxisProperties(b,f);
 a.logic=(f.logic||"value");
 if(f.baseTitle){a.baseTitle=f.baseTitle
+}if(f.originalUnit){a.originalUnit=f.originalUnit
 }if($.defined(f.visible)&&!f.visible){continue
 }this.createYAxisMaxValue(a,f)
 }}if(b.length==0){var a=this.getYAxisProperties(b,{});

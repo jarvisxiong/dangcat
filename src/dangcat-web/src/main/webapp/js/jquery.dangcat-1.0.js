@@ -2131,11 +2131,16 @@ function ValueFormator() {
 }
 
 ValueFormator.prototype.calculatePerfectUnit = function (value) {
+    var actualUnit = this.actualUnit;
     if (value == undefined || value == null || typeof (value) != "number")
-        return this.units[0];
+        if($.defined(actualUnit))
+            return this.units[actualUnit];
+        else
+            return this.units[0];
+
     var perfectValue = value;
-    var perfectUnit = this.units[0];
-    for (var i = 1; i < this.units.length; i++) {
+    var perfectUnit = this.units[actualUnit];
+    for (var i = actualUnit + 1; i < this.units.length; i++) {
         if (Math.floor(perfectValue / this.transConsts[i]) == 0)
             break;
         perfectValue /= this.transConsts[i];
@@ -2161,15 +2166,16 @@ ValueFormator.prototype.calculateTransRate = function (unit) {
 };
 
 ValueFormator.prototype.getTransRate = function (unit) {
-    if (unit == undefined || unit == null)
+    var actualUnit = this.actualUnit;
+    if (unit == undefined || unit == null || actualUnit == undefined)
         return 1;
     var transRate = 1;
-    for (var i = 0; i < this.units.length; i++) {
+    for (var i = actualUnit; i < this.units.length; i++) {
         transRate *= this.transConsts[i];
         if (this.units[i] == unit)
             break;
     }
-    return transRate;
+    return transRate / this.transConsts[actualUnit];
 };
 
 ValueFormator.prototype.format = function (value, pattern) {
@@ -2243,12 +2249,16 @@ var DataFormatorFactory = {
     percentFormator: new PercentFormator(),
     valueFormator: new ValueFormator(),
 
-    getDataFormator: function (logic) {
+    getDataFormator: function (logic, actualUnit) {
+        if(!$.defined(actualUnit))
+            actualUnit = 0;
+
         var dataFormator;
         if (logic != undefined || logic != null)
             dataFormator = this[logic + "Formator"];
         if (dataFormator == undefined || dataFormator == null)
             dataFormator = this.valueFormator;
+        dataFormator["actualUnit"] = actualUnit;
         return dataFormator;
     }
 };

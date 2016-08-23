@@ -717,7 +717,7 @@ var DataModuleFactory = {
     });
 
     H.Axis.prototype.getDataFormator = function () {
-        return DataFormatorFactory.getDataFormator(this.options.logic);
+        return DataFormatorFactory.getDataFormator(this.options.logic, this.options.originalUnit);
     };
 
     H.Axis.prototype.formatValue = function (value) {
@@ -1270,6 +1270,8 @@ var DefaultAxisChartProperties = {
                 yAxisProperties.logic = (series.logic || "value");
                 if (series.baseTitle)
                     yAxisProperties.baseTitle = series.baseTitle;
+                if (series.originalUnit)
+                    yAxisProperties.originalUnit = series.originalUnit;
                 if ($.defined(series.visible) && !series.visible)
                     continue;
                 this.createYAxisMaxValue(yAxisProperties, series);
