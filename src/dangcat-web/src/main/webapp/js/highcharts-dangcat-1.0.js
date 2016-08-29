@@ -474,7 +474,7 @@ var DataModuleFactory = {
                             data.splice(index, 0, [currentTime + timeStep, emptyValue]);
                             index++;
                             if (diff >= timeStep * 3) {
-                                data.splice(index + 1, 0, [currentTime + timeStep, [nextTime - timeStep, emptyValue]]);
+                                data.splice(index + 1, 0, [nextTime - timeStep, emptyValue]);
                                 index++;
                             }
                         }

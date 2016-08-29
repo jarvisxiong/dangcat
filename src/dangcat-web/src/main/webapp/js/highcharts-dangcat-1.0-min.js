@@ -156,7 +156,7 @@ continue
 k=c-a;
 if(k>=g*2){e.splice(i,0,[a+g,b]);
 i++;
-if(k>=g*3){e.splice(i+1,0,[a+g,[c-g,b]]);
+if(k>=g*3){e.splice(i+1,0,[c-g,b]);
 i++
 }}}if(!$.defined(this.lastTime)){this.lastTime=a
 }else{this.lastTime=Math.max(this.lastTime,a)
