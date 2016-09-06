@@ -164,7 +164,7 @@ public class WebService extends ServiceControlBase {
             String[] paths = resources.split(";");
             if (paths != null) {
                 for (String path : paths) {
-                    File resourcePath = new File(path);
+                    File resourcePath = new File(ApplicationContext.getInstance().getContextPath().getHome() + File.separator + path);
                     if (resourcePath.exists() && resourcePath.isDirectory())
                         resourceDirs.add(resourcePath);
                 }

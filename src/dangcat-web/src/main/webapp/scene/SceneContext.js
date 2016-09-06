@@ -1,6 +1,6 @@
 ﻿var servicePrincipal = {
     no: isc.params.user,
-    name: "质数科技",
+    name: "软件技术",
     roleName: "管理员",
     loginTime: new Date(2014, 11, 21, 12, 21, 12, 21),
     type: "OperatorSecurity",
