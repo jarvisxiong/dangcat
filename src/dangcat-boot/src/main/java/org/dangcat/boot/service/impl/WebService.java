@@ -8,14 +8,15 @@ import org.dangcat.commons.utils.ValueUtils;
 import org.dangcat.framework.event.Event;
 import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.framework.service.impl.ServiceControlBase;
-import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
-import org.eclipse.jetty.server.ssl.SslSelectChannelConnector;
+import org.eclipse.jetty.server.handler.gzip.GzipHandler;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.eclipse.jetty.util.thread.ThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.xml.XmlConfiguration;
 
@@ -50,24 +51,26 @@ public class WebService extends ServiceControlBase {
             if (!NetUtils.isPortValid(port))
                 throw new SocketException("The port " + port + " is invalid.");
 
-            SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
-            selectChannelConnector.setPort(WebServiceConfig.getInstance().getPort());
-            server.addConnector(selectChannelConnector);
+            ServerConnector serverConnector = new ServerConnector(server);
+            serverConnector.setPort(WebServiceConfig.getInstance().getPort());
+            server.addConnector(serverConnector);
         }
     }
 
     private Server createServerFromConfig() throws Exception {
-        Server server = new Server();
+        Server server = new Server(this.createThreadPool());
 
-        this.createThreadPool(server);
         this.createSelectChannelConnector(server);
         this.createSslConnector(server);
 
         HandlerList handlers = new HandlerList();
         if (!this.createWebAppHandler(handlers))
             this.createWebAppsHandlers(handlers);
-        if (handlers.getChildHandlers().length > 0)
-            server.setHandler(handlers);
+        if (handlers.getChildHandlers().length > 0) {
+            GzipHandler gzipHandler = new GzipHandler();
+            gzipHandler.setHandler(handlers);
+            server.setHandler(gzipHandler);
+        }
 
         return server;
     }
@@ -90,25 +93,35 @@ public class WebService extends ServiceControlBase {
             if (!NetUtils.isPortValid(sslPort))
                 throw new SocketException("The sslPort " + sslPort + " is invalid.");
 
-            SslSelectChannelConnector sslSelectChannelConnector = new SslSelectChannelConnector();
-            sslSelectChannelConnector.setPort(webServiceConfig.getSslPort());
 
-            SslContextFactory sslContextFactory = sslSelectChannelConnector.getSslContextFactory();
+            SslContextFactory sslContextFactory = new SslContextFactory();
             sslContextFactory.setKeyStorePath(ApplicationContext.getInstance().getContextPath().getBaseDir() + File.separator + webServiceConfig.getKeyStore());
             sslContextFactory.setKeyStorePassword(webServiceConfig.getKeyStorePassword());
             sslContextFactory.setKeyManagerPassword(webServiceConfig.getKeyManagerPassword());
 
-            server.addConnector(sslSelectChannelConnector);
+            HttpConfiguration http_config = new HttpConfiguration();
+            http_config.setSecurePort(webServiceConfig.getSslPort());
+            HttpConfiguration https_config = new HttpConfiguration(http_config);
+            SecureRequestCustomizer src = new SecureRequestCustomizer();
+            src.setStsMaxAge(2000);
+            src.setStsIncludeSubDomains(true);
+            https_config.addCustomizer(src);
+
+            ServerConnector serverConnector = new ServerConnector(server,
+                    new SslConnectionFactory(sslContextFactory, HttpVersion.HTTP_1_1.asString()),
+                    new HttpConnectionFactory(https_config));
+            serverConnector.setPort(webServiceConfig.getSslPort());
+            server.addConnector(serverConnector);
         }
     }
 
-    private void createThreadPool(Server server) throws Exception {
+    private ThreadPool createThreadPool() throws Exception {
         WebServiceConfig webServiceConfig = WebServiceConfig.getInstance();
         QueuedThreadPool queuedThreadPool = new QueuedThreadPool();
         queuedThreadPool.setName(SERVICE_NAME);
         queuedThreadPool.setMinThreads(webServiceConfig.getThreadPoolSize());
         queuedThreadPool.setMaxThreads(webServiceConfig.getThreadPoolSize());
-        server.setThreadPool(queuedThreadPool);
+        return queuedThreadPool;
     }
 
     private boolean createWebAppHandler(HandlerList handlers) {
@@ -164,7 +177,7 @@ public class WebService extends ServiceControlBase {
             String[] paths = resources.split(";");
             if (paths != null) {
                 for (String path : paths) {
-                    File resourcePath = new File(path);
+                    File resourcePath = new File(ApplicationContext.getInstance().getContextPath().getHome() + File.separator + path);
                     if (resourcePath.exists() && resourcePath.isDirectory())
                         resourceDirs.add(resourcePath);
                 }

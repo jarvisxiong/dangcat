@@ -63,6 +63,11 @@ public class TestHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
+    public long getContentLengthLong() {
+        return 0;
+    }
+
+    @Override
     public String getContentType() {
 
         return null;
@@ -180,6 +185,11 @@ public class TestHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
+    public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) throws IOException, ServletException {
+        return null;
+    }
+
+    @Override
     public Collection<Part> getParts() throws IOException, ServletException {
         return null;
     }
@@ -292,6 +302,11 @@ public class TestHttpServletRequest implements HttpServletRequest {
 
     @Override
     public HttpSession getSession() {
+        return null;
+    }
+
+    @Override
+    public String changeSessionId() {
         return null;
     }
 
