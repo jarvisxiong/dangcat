@@ -59,7 +59,7 @@ public class ApplicationContext extends ServiceControlBase {
     /**
      * 添加侦听对象。
      *
-     * @param changedListener
+     * @param changeEventAdaptor
      */
     public void addChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && !this.changeEventAdaptorList.contains(changeEventAdaptor))
@@ -280,7 +280,7 @@ public class ApplicationContext extends ServiceControlBase {
     /**
      * 删除侦听对象。
      *
-     * @param changedListener 侦听对象。
+     * @param changeEventAdaptor 侦听对象。
      */
     public void removeChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && this.changeEventAdaptorList.contains(changeEventAdaptor))
