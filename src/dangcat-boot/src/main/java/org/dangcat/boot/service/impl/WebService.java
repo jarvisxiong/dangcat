@@ -1,5 +1,7 @@
 package org.dangcat.boot.service.impl;
 
+import org.apache.tomcat.InstanceManager;
+import org.apache.tomcat.SimpleInstanceManager;
 import org.dangcat.boot.ApplicationContext;
 import org.dangcat.boot.config.WebServiceConfig;
 import org.dangcat.boot.event.ChangeEventAdaptor;
@@ -8,7 +10,10 @@ import org.dangcat.commons.utils.ValueUtils;
 import org.dangcat.framework.event.Event;
 import org.dangcat.framework.service.ServiceProvider;
 import org.dangcat.framework.service.impl.ServiceControlBase;
+import org.eclipse.jetty.annotations.ServletContainerInitializersStarter;
+import org.eclipse.jetty.apache.jsp.JettyJasperInitializer;
 import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.plus.annotation.ContainerInitializer;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.gzip.GzipHandler;
@@ -163,10 +168,23 @@ public class WebService extends ServiceControlBase {
             webAppContext.setDescriptor(webXmlFile.getAbsolutePath());
             webAppContext.setDefaultsDescriptor(webXmlFile.getParent() + File.separator + "webdefault.xml");
             webAppContext.setBaseResource(this.getResourceCollection(resourceDirs));
+            webAppContext.setAttribute("org.eclipse.jetty.containerInitializers", this.jspInitializers());
+            webAppContext.setAttribute(InstanceManager.class.getName(),
+                    new SimpleInstanceManager());
+            webAppContext.addBean(new ServletContainerInitializersStarter(webAppContext),
+                    true);
+
             handlers.addHandler(webAppContext);
+
             this.logger.info("Create WebAppContext from " + webXmlFile.getAbsolutePath());
         }
         return webXmlFile != null && webXmlFile.exists();
+    }
+
+    private List<ContainerInitializer> jspInitializers() {
+        List<ContainerInitializer> initializers = new ArrayList<ContainerInitializer>();
+        initializers.add(new ContainerInitializer(new JettyJasperInitializer(), null));
+        return initializers;
     }
 
     private Collection<File> findResourceDirs(File webAppPath) {

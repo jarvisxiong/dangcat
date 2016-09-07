@@ -61,6 +61,11 @@
     </servlet>
 
     <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>RESTService</servlet-name>
         <url-pattern>/REST/*</url-pattern>
     </servlet-mapping>

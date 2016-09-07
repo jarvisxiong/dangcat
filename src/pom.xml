@@ -140,17 +140,10 @@
                 <artifactId>xz</artifactId>
                 <version>1.1</version>
             </dependency>
-            <!--
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.1</version>
-            </dependency>
-            -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
@@ -159,24 +152,12 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-http</artifactId>
+                <artifactId>jetty-webapp</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
-            <!--
-            <dependency>
-                <groupId>org.eclipse.jetty.orbit</groupId>
-                <artifactId>javax.servlet</artifactId>
-                <version>3.0.0.v201112011016</version>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.jetty.orbit</groupId>
-                <artifactId>javax.servlet.jsp</artifactId>
-                <version>2.2.0.v201112011158</version>
-            </dependency>
-            -->
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-webapp</artifactId>
+                <artifactId>jetty-xml</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
@@ -196,30 +177,23 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-xml</artifactId>
+                <artifactId>apache-jsp</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-util</artifactId>
+                <artifactId>jetty-plus</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-io</artifactId>
+                <artifactId>jetty-annotations</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
-            <!--
             <dependency>
-                <groupId>org.eclipse.jetty.orbit</groupId>
-                <artifactId>org.apache.jasper.glassfish</artifactId>
-                <version>2.2.2.v201112011158</version>
-            </dependency>
-            -->
-            <dependency>
-                <groupId>org.freemarker</groupId>
-                <artifactId>freemarker</artifactId>
-                <version>2.3.13</version>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

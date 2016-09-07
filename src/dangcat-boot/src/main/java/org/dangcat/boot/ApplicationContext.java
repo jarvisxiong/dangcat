@@ -59,7 +59,7 @@ public class ApplicationContext extends ServiceControlBase {
     /**
      * 添加侦听对象。
      *
-     * @param changedListener
+     * @param changeEventAdaptor
      */
     public void addChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && !this.changeEventAdaptorList.contains(changeEventAdaptor))
@@ -167,8 +167,6 @@ public class ApplicationContext extends ServiceControlBase {
      * 载入扩展目录。
      */
     private void loadExtension() {
-        this.getContextPath().initSystemProperties();
-
         PropertiesManager propertiesManager = PropertiesManager.getInstance();
         String classPathConfig = this.getConfigureReader().getXmlValue("ClassPath");
         propertiesManager.setSystemProperty(ContextPath.DANGCAT_CLASSPATH, classPathConfig);
@@ -186,6 +184,8 @@ public class ApplicationContext extends ServiceControlBase {
      * 初始化日志配置。
      */
     private void loadLogger() {
+        this.getContextPath().initSystemProperties();
+
         String logConfigFileName = this.configureReader.getLogConfigFileName();
         if (ValueUtils.isEmpty(logConfigFileName))
             logConfigFileName = this.getName() + ".log4j.properties";
@@ -280,7 +280,7 @@ public class ApplicationContext extends ServiceControlBase {
     /**
      * 删除侦听对象。
      *
-     * @param changedListener 侦听对象。
+     * @param changeEventAdaptor 侦听对象。
      */
     public void removeChangeEventAdaptor(ChangeEventAdaptor changeEventAdaptor) {
         if (changeEventAdaptor != null && this.changeEventAdaptorList.contains(changeEventAdaptor))
